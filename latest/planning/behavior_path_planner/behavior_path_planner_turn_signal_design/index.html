@@ -12346,6 +12346,8 @@
 - Required section cannot be longer than desired section.
 </code></pre></div>
 
+<p>When turning on the blinker, it decides whether or not to turn on the specified blinker based on the distance from the front of the ego vehicle to the start point of each section. Conversely, when turning off the blinker, it calculates the distance from the base link of the ego vehicle to the end point of each section and decide whether or not to turn it off based on that.</p>
+<p><img alt="activation_distance" src="../image/turn_signal_decider/activation_distance.drawio.svg" /></p>
 <p>For left turn, right turn, avoidance, lane change, pull over and pull out, we define these two sections, which are elaborated in the following part.</p>
 <h4 id="1-left-and-right-turn">1. Left and Right turn<a class="headerlink" href="#1-left-and-right-turn" title="Permanent link">#</a></h4>
 <p>Turn signal decider checks each lanelet on the map if it has <code>turn_direction</code> information. If a lanelet has this information, it activates necessary blinker based on this information.</p>
