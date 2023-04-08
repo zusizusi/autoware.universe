@@ -12427,7 +12427,6 @@ This planner data is created first, and then sent to the planning algorithm.</p>
 <span class="w">  </span><span class="n">ObjectClassification</span><span class="w"> </span><span class="n">classification</span><span class="p">;</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">uuid</span><span class="p">;</span>
 <span class="w">  </span><span class="n">Shape</span><span class="w"> </span><span class="n">shape</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">rough_lat_dist_to_traj</span><span class="p">;</span><span class="w">  </span><span class="c1">// for efficient calculation</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PredictedPath</span><span class="o">&gt;</span><span class="w"> </span><span class="n">predicted_paths</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div>
@@ -12492,7 +12491,7 @@ The roughly selected obstacles inside the detection area are considered as insid
 <p><img alt="detection_area" src="image/detection_area.png" /></p>
 <p>This two-step detection is used for calculation efficiency since collision checking of polygons is heavy.
 Boost.Geometry is used as a library to check collision among polygons.</p>
-<p>In the <code>obstacle_filtering</code> namespace,</p>
+<p>In the <code>behavior_determination</code> namespace,</p>
 <table>
 <thead>
 <tr>
@@ -12534,7 +12533,7 @@ t_1 - t_2 &gt; \mathrm{margin\_for\_collision\_time}
 t_1 - t_2 > \mathrm{margin\_for\_collision\_time}
 </script>
 </div>
-<p>In the <code>obstacle_filtering</code> namespace,</p>
+<p>In the <code>behavior_determination</code> namespace,</p>
 <table>
 <thead>
 <tr>
@@ -12566,7 +12565,7 @@ t_1 - t_2 > \mathrm{margin\_for\_collision\_time}
 <ul>
 <li>whose predicted path's footprints from the current time to <code>max_prediction_time_for_collision_check</code> overlap with the detection area longer than <code>ego_obstacle_overlap_time_threshold</code>.</li>
 </ul>
-<p>In the <code>obstacle_filtering</code> namespace,</p>
+<p>In the <code>behavior_determination</code> namespace,</p>
 <table>
 <thead>
 <tr>
@@ -12865,7 +12864,7 @@ Note that if a new stop obstacle appears and the previous closest obstacle remov
 </thead>
 <tbody>
 <tr>
-<td><code>obstacle_filtering.stop_obstacle_hold_time_threshold</code></td>
+<td><code>behavior_determination.stop_obstacle_hold_time_threshold</code></td>
 <td>double</td>
 <td>maximum time for holding closest stop obstacle [s]</td>
 </tr>
