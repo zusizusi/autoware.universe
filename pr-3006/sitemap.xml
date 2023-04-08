@@ -841,6 +841,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3006/planning/obstacle_cruise_planner/docs/debug/</loc>
+         <lastmod>2023-04-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3006/planning/obstacle_stop_planner/</loc>
          <lastmod>2023-04-08</lastmod>
          <changefreq>daily</changefreq>
