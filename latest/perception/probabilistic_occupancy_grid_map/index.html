@@ -12074,6 +12074,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#referencesexternal-links" class="md-nav__link">
+    References/External links
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#settings" class="md-nav__link">
     Settings
   </a>
@@ -12094,8 +12101,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#referencesexternal-links" class="md-nav__link">
-    References/External links
+  <a href="#other-parameters" class="md-nav__link">
+    Other parameters
   </a>
   
 </li>
@@ -12122,6 +12129,11 @@
 <h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
 <p>This package outputs the probability of having an obstacle as occupancy grid map.
 <img alt="pointcloud_based_occupancy_grid_map_sample_image" src="image/pointcloud_based_occupancy_grid_map_sample_image.gif" /></p>
+<h2 id="referencesexternal-links">References/External links<a class="headerlink" href="#referencesexternal-links" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="pointcloud-based-occupancy-grid-map/">Pointcloud based occupancy grid map</a></li>
+<li><a href="laserscan-based-occupancy-grid-map/">Laserscan based occupancy grid map</a></li>
+</ul>
 <h2 id="settings">Settings<a class="headerlink" href="#settings" title="Permanent link">#</a></h2>
 <p>Occupancy grid map is generated on <code>map_frame</code>, and grid orientation is fixed.</p>
 <p>You may need to choose <code>scan_origin_frame</code> and <code>gridmap_origin_frame</code> which means sensor origin and gridmap origin respectively. Especially, set your main LiDAR sensor frame (e.g. <code>velodyne_top</code> in sample_vehicle) as a <code>scan_origin_frame</code> would result in better performance.</p>
@@ -12230,11 +12242,69 @@
 </tr>
 </tbody>
 </table>
-<h2 id="referencesexternal-links">References/External links<a class="headerlink" href="#referencesexternal-links" title="Permanent link">#</a></h2>
-<ul>
-<li><a href="pointcloud-based-occupancy-grid-map/">Pointcloud based occupancy grid map</a></li>
-<li><a href="laserscan-based-occupancy-grid-map/">Laserscan based occupancy grid map</a></li>
-</ul>
+<h2 id="other-parameters">Other parameters<a class="headerlink" href="#other-parameters" title="Permanent link">#</a></h2>
+<p>Additional argument is shown below:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>use_multithread</code></td>
+<td><code>false</code></td>
+<td>whether to use multithread</td>
+</tr>
+<tr>
+<td><code>use_intra_process</code></td>
+<td><code>false</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>map_origin</code></td>
+<td>``</td>
+<td>parameter to override <code>map_origin_frame</code> which means grid map origin</td>
+</tr>
+<tr>
+<td><code>scan_origin</code></td>
+<td>``</td>
+<td>parameter to override <code>scan_origin_frame</code> which means scanning center</td>
+</tr>
+<tr>
+<td><code>output</code></td>
+<td><code>occupancy_grid</code></td>
+<td>output name</td>
+</tr>
+<tr>
+<td><code>use_pointcloud_container</code></td>
+<td><code>false</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>container_name</code></td>
+<td><code>occupancy_grid_map_container</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>filter_obstacle_pointcloud_by_raw_pointcloud_</code></td>
+<td><code>false</code></td>
+<td>only for pointcloud based method. If true, the node use raw pointcloud to filter obstacle pointcloud. Options for the limited FOV sensor.</td>
+</tr>
+<tr>
+<td><code>input_obstacle_pointcloud</code></td>
+<td><code>false</code></td>
+<td>only for laserscan based method. If true, the node subscribe obstacle pointcloud</td>
+</tr>
+<tr>
+<td><code>input_obstacle_and_raw_pointcloud</code></td>
+<td><code>true</code></td>
+<td>only for laserscan based method. If true, the node subscribe both obstacle and raw pointcloud</td>
+</tr>
+</tbody>
+</table>
 
 
 
