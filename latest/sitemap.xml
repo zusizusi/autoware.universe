@@ -536,11 +536,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/perception/lidar_apollo_instance_segmentation/lib/</loc>
-         <lastmod>2023-04-12</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/perception/lidar_apollo_segmentation_tvm/design/lidar-segmentation-design/</loc>
          <lastmod>2023-04-12</lastmod>
          <changefreq>daily</changefreq>
