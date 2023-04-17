@@ -12211,8 +12211,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#trun-signal-decision-logic" class="md-nav__link">
-    Trun signal decision logic
+  <a href="#turn-signal-decision-logic" class="md-nav__link">
+    Turn signal decision logic
   </a>
   
 </li>
@@ -12357,17 +12357,17 @@
 <tbody>
 <tr>
 <td align="left">Behavior Tree based manager (default)</td>
-<td align="left">this manager launches scene modules based on Behavior Tree. all scene modules run execlusively.</td>
+<td align="left">this manager launches scene modules based on Behavior Tree. all scene modules run exclusively.</td>
 <td align="left">LINK(WIP)</td>
 </tr>
 <tr>
 <td align="left">BT-free manager (unstable)</td>
-<td align="left">this manager is developed in order to achive complex scenario, and launches scene modules without Behavior Tree. multiple modules can run simultaneously on this manager.</td>
+<td align="left">this manager is developed in order to achieve complex scenario, and launches scene modules without Behavior Tree. multiple modules can run simultaneously on this manager.</td>
 <td align="left">LINK(WIP)</td>
 </tr>
 </tbody>
 </table>
-<p>The manager is switched by flag <code>COMPILE_WITH_OLD_ARCHITECTURE</code> in Cmakefiles.txt of <code>behavior_path_planner</code> package. Please set the flag <strong>FALSE</strong> if you try to use BT-free manager.</p>
+<p>The manager is switched by flag <code>COMPILE_WITH_OLD_ARCHITECTURE</code> in CmakeLists.txt of <code>behavior_path_planner</code> package. Please set the flag <strong>FALSE</strong> if you try to use BT-free manager.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.14</span><span class="p">)</span>
 <span class="nb">project</span><span class="p">(</span><span class="s">behavior_path_planner</span><span class="p">)</span>
 
@@ -12513,8 +12513,8 @@ Expansion parameters are defined for each module of the <code>behavior_path_plan
 </tbody>
 </table>
 <p>Click <a href="docs/behavior_path_planner_drivable_area_design/">here</a> for details.</p>
-<h3 id="trun-signal-decision-logic">Trun signal decision logic<a class="headerlink" href="#trun-signal-decision-logic" title="Permanent link">#</a></h3>
-<p>The behavior path planner outputs turn signal infomation as <code>autoware_auto_vehicle_msgs::msg::TurnIndicatorsCommand</code>. It uses rule-based algorithm to determine blinkers.</p>
+<h3 id="turn-signal-decision-logic">Turn signal decision logic<a class="headerlink" href="#turn-signal-decision-logic" title="Permanent link">#</a></h3>
+<p>The behavior path planner outputs turn signal information as <code>autoware_auto_vehicle_msgs::msg::TurnIndicatorsCommand</code>. It uses rule-based algorithm to determine blinkers.</p>
 <div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">autoware_auto_vehicle_msgs</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">module</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">module</span><span class="w"> </span><span class="n">TurnIndicatorsCommand_Constants</span><span class="w"> </span><span class="p">{</span>
