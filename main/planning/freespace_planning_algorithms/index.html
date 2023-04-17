@@ -12108,6 +12108,9 @@ better than RRT* for solution quality given the same computational time budget. 
 <div class="highlight"><pre><span></span><code>colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>freespace_planning_algorithms
 colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--packages-select<span class="w"> </span>freespace_planning_algorithms
 </code></pre></div>
+<!-- cspell: ignore fpalgos -->
+<!-- "fpalgos" means Free space Planning ALGOrithmS -->
+
 <p>Inside the test, simulation results are stored in <code>/tmp/fpalgos-{algorithm_type}-case{scenario_number}</code> as a rosbag.
 Loading these resulting files, by using <a href="test/debug_plot.py">test/debug_plot.py</a>,
 one can create plots visualizing the path and obstacles as shown

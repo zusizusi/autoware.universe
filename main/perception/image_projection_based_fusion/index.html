@@ -12081,8 +12081,8 @@ Otherwise, fuse the matched roi msgs and cache the pointcloud.
 | | pointcloud | roi msg 1 | roi msg 2 | roi msg 3 |
 | :-----------------: | :--------: | :-------: | :-------: | :-------: |
 | subscription status | O | O | O | |</p>
-<p>If the roi msg 3 is subscribed before the next pointcloud messge coming or timeout, fuse it if matched, otherwise wait for the next roi msg 3.
-If the roi msg 3 is not subscribed before the next pointcloud messge coming or timeout, postprocess the pointcloud messege as it is.</p>
+<p>If the roi msg 3 is subscribed before the next pointcloud message coming or timeout, fuse it if matched, otherwise wait for the next roi msg 3.
+If the roi msg 3 is not subscribed before the next pointcloud message coming or timeout, postprocess the pointcloud message as it is.</p>
 <p>The timeout threshold should be set according to the postprocessing time.
 E.g, if the postprocessing time is around 50ms, the timeout threshold should be set smaller than 50ms, so that the whole processing time could be less than 100ms.
 current default value at autoware.universe for XX1: - timeout_ms: 50.0</p>
