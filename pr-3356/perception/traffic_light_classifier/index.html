@@ -6205,18 +6205,12 @@
             
           
         
-          
-        
       
       
         
         
         <div class="md-nav__link md-nav__link--index ">
           <a href="../lidar_apollo_instance_segmentation/">Lidar apollo instance segmentation</a>
-          
-            <label for="__nav_11_13">
-              <span class="md-nav__icon md-icon"></span>
-            </label>
           
         </div>
       
@@ -6227,52 +6221,6 @@
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
-            
-          
-            
-              
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11_13_2" >
-      
-      
-        
-          
-            
-          
-        
-      
-      
-        
-        
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../lidar_apollo_instance_segmentation/lib/">Lib</a>
-          
-        </div>
-      
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_11_13_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_11_13_2">
-          <span class="md-nav__icon md-icon"></span>
-          Lib
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
             
           
         </ul>
@@ -7852,6 +7800,8 @@
         
           
         
+          
+        
       
       
         
@@ -7966,6 +7916,20 @@
     <li class="md-nav__item">
       <a href="../../planning/behavior_velocity_planner/occlusion-spot-design/" class="md-nav__link">
         Occlusion spot design
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planning/behavior_velocity_planner/out-of-lane-design/" class="md-nav__link">
+        Out of lane design
       </a>
     </li>
   
@@ -8540,12 +8504,18 @@
             
           
         
+          
+        
       
       
         
         
         <div class="md-nav__link md-nav__link--index ">
           <a href="../../planning/obstacle_cruise_planner/">Obstacle cruise planner</a>
+          
+            <label for="__nav_12_10">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
           
         </div>
       
@@ -8556,6 +8526,60 @@
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_10_2" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_12_10_2" id="__nav_12_10_2_label" tabindex="0">
+          Docs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_12_10_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_12_10_2">
+          <span class="md-nav__icon md-icon"></span>
+          Docs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planning/obstacle_cruise_planner/docs/debug/" class="md-nav__link">
+        Debug
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
             
           
         </ul>
@@ -12508,7 +12532,7 @@ Totally 37600 (26300 for training, 6800 for evaluation and 4500 for test) TIER I
 </tbody>
 </table>
 <h2 id="customization-of-cnn-model">Customization of CNN model<a class="headerlink" href="#customization-of-cnn-model" title="Permanent link">#</a></h2>
-<p>Currently, in Autoware, <a href="https://arxiv.org/abs/1801.04381v3">MobileNetV2</a> is used as CNN classifier by default. The corresponding onnx file is <a href="./data/traffic_light_classifier_mobilenetv2.onnx">data/traffic_light_classifier_mobilenetv2.onnx</a>.
+<p>Currently, in Autoware, <a href="https://arxiv.org/abs/1801.04381v3">MobileNetV2</a> is used as CNN classifier by default. The corresponding onnx file is <code>data/traffic_light_classifier_mobilenetv2.onnx</code>(This file will be downloaded during the build process).
 Also, you can apply the following models shown as below, for example.</p>
 <ul>
 <li><a href="https://arxiv.org/abs/1905.11946v5">EfficientNet</a></li>
@@ -12544,7 +12568,7 @@ $<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </sp
 $<span class="w"> </span>mim<span class="w"> </span>train<span class="w"> </span>mmcls<span class="w"> </span>YOUR_CONFIG.py<span class="w"> </span><span class="o">[</span>--resume-from<span class="w"> </span>YOUR_CHECKPOINT.pth<span class="o">]</span>
 </code></pre></div>
 <h3 id="step-3-export-onnx-model">step 3. Export onnx model<a class="headerlink" href="#step-3-export-onnx-model" title="Permanent link">#</a></h3>
-<p>In exporting onnx, use <code>mmclassificatoin/tools/deployment/pytorch2onnx.py</code> or <a href="https://github.com/open-mmlab/mmdeploy.git">open-mmlab/mmdeploy</a>.</p>
+<p>In exporting onnx, use <code>mmclassification/tools/deployment/pytorch2onnx.py</code> or <a href="https://github.com/open-mmlab/mmdeploy.git">open-mmlab/mmdeploy</a>.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/mmclassification/tools/deployment
 python3<span class="w"> </span>pytorch2onnx.py<span class="w"> </span>YOUR_CONFIG.py<span class="w"> </span>...
 </code></pre></div>
