@@ -12313,9 +12313,9 @@
 <p>In this first step, the ego footprint is projected at each path point and are eventually inflated based on the <code>extra_..._offset</code> parameters.</p>
 <h4 id="2-other-lanes">2. Other lanes<a class="headerlink" href="#2-other-lanes" title="Permanent link">#</a></h4>
 <p>In the second step, the set of lanes to consider for overlaps is generated.
-This set is built by selecting all lanelets within some distance from the ego vehicle, and then removing non-relevent lanelets.
-The selection distance is choosen as the maximum between the <code>slowdown.distance_threshold</code> and the <code>stop.distance_threshold</code>.</p>
-<p>A lanelet is deemed non-relevent if it meets one of the following conditions.</p>
+This set is built by selecting all lanelets within some distance from the ego vehicle, and then removing non-relevant lanelets.
+The selection distance is chosen as the maximum between the <code>slowdown.distance_threshold</code> and the <code>stop.distance_threshold</code>.</p>
+<p>A lanelet is deemed non-relevant if it meets one of the following conditions.</p>
 <ul>
 <li>It is part of the lanelets followed by the ego path.</li>
 <li>It contains the rear point of the ego footprint.</li>
