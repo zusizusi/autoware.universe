@@ -12417,13 +12417,13 @@ To calculate <code>route_lanelets</code>,</p>
 <li><code>change_route_points</code></li>
 <li><code>change_route</code></li>
 </ul>
-<p>This is route change that the application makes using the API. It is used when changing the destination while driving or when driving a divided loop route. When the vehicle is driving on a mrm route, normal rerouting by this api is not allowed.</p>
+<p>This is route change that the application makes using the API. It is used when changing the destination while driving or when driving a divided loop route. When the vehicle is driving on a MRM route, normal rerouting by this interface is not allowed.</p>
 <h4 id="emergency-route">Emergency route<a class="headerlink" href="#emergency-route" title="Permanent link">#</a></h4>
 <ul>
 <li><code>set_mrm_route</code></li>
 <li><code>clear_mrm_route</code></li>
 </ul>
-<p>This API for the MRM that pulls over the road shoulder. It has to be stopped as soon as possible, so a reroute is required. The mrm route has priority over the normal route. And if mrm route is cleared, try to return to the normal route also with a rerouting safety check.</p>
+<p>This interface for the MRM that pulls over the road shoulder. It has to be stopped as soon as possible, so a reroute is required. The MRM route has priority over the normal route. And if MRM route is cleared, try to return to the normal route also with a rerouting safety check.</p>
 <h5 id="goal-modification">Goal modification<a class="headerlink" href="#goal-modification" title="Permanent link">#</a></h5>
 <ul>
 <li><code>modified_goal</code></li>
