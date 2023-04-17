@@ -206,17 +206,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/tvm_utility/</loc>
+         <lastmod>2023-04-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/tvm_utility/tvm-utility-yolo-v2-tiny-tests/</loc>
+         <lastmod>2023-04-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/tvm_utility/artifacts/</loc>
-         <lastmod>2023-04-17</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/tvm_utility/design/tvm-utility-design/</loc>
-         <lastmod>2023-04-17</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/tvm_utility/design/tvm-utility-yolo-v2-tiny-tests/</loc>
          <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -536,12 +536,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/perception/lidar_apollo_segmentation_tvm/design/lidar-segmentation-design/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/perception/lidar_apollo_segmentation_tvm/</loc>
          <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/perception/lidar_apollo_segmentation_tvm_nodes/design/lidar-segmentation-nodes-design/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/perception/lidar_apollo_segmentation_tvm_nodes/</loc>
          <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
