@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/pr-3356/perception/lidar_apollo_segmentation_tvm_nodes/design/lidar-segmentation-nodes-design/">
+        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/pr-3356/planning/behavior_path_planner/docs/behavior_path_planner_turn_signal_design/">
       
       
-        <link rel="prev" href="../../../lidar_apollo_segmentation_tvm/design/lidar-segmentation-design/">
+        <link rel="prev" href="../behavior_path_planner_side_shift_design/">
       
       
-        <link rel="next" href="../../../lidar_centerpoint/">
+        <link rel="next" href="../../../behavior_velocity_planner/">
       
       <link rel="icon" href="../../../../docs/assets/images/autoware-foundation.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
-        <title>lidar_apollo_segmentation_tvm_nodes {#lidar-apollo-segmentation-tvm-nodes-design} - Autoware Universe Documentation</title>
+        <title>Turn Signal design - Autoware Universe Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#macro-syntax-error" class="md-skip">
+        <a href="#turn-signal-design" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              lidar_apollo_segmentation_tvm_nodes {#lidar-apollo-segmentation-tvm-nodes-design}
+              Turn Signal design
             
           </span>
         </div>
@@ -395,8 +395,6 @@
         
   
   
-    
-  
 
 
   
@@ -408,7 +406,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../bytetrack/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../../../perception/bytetrack/" class="md-tabs__link">
         Perception
       </a>
     </li>
@@ -420,6 +418,8 @@
         
   
   
+    
+  
 
 
   
@@ -431,7 +431,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../planning/behavior_path_planner/" class="md-tabs__link">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
         Planning
       </a>
     </li>
@@ -2896,15 +2896,25 @@
       
         
           
+            
+          
+        
+          
         
           
         
       
       
-        <label class="md-nav__link" for="__nav_5_34" id="__nav_5_34_label" tabindex="0">
-          Tvm utility
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../../common/tvm_utility/">Tvm utility</a>
+          
+            <label for="__nav_5_34">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_34_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_5_34">
@@ -2912,6 +2922,22 @@
           Tvm utility
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../common/tvm_utility/tvm-utility-yolo-v2-tiny-tests/" class="md-nav__link">
+        YOLOv2 Tiny Example Pipeline
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -2926,7 +2952,7 @@
       
         
       
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_34_1" >
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_34_3" >
       
       
         
@@ -2943,83 +2969,13 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_34_1_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_5_34_1">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_34_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_34_3">
           <span class="md-nav__icon md-icon"></span>
           Artifacts
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_34_2" >
-      
-      
-        
-          
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_5_34_2" id="__nav_5_34_2_label" tabindex="0">
-          Design
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_34_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_5_34_2">
-          <span class="md-nav__icon md-icon"></span>
-          Design
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../../common/tvm_utility/design/tvm-utility-design/" class="md-nav__link">
-        TVM Utility {#tvm-utility-design}
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../../common/tvm_utility/design/tvm-utility-yolo-v2-tiny-tests/" class="md-nav__link">
-        YOLOv2 Tiny Example Pipeline {#tvm-utility-yolo-v2-tiny-tests}
-      </a>
-    </li>
-  
-
             
           
         </ul>
@@ -5261,16 +5217,16 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
       
       
         
@@ -5347,7 +5303,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_11">
           <span class="md-nav__icon md-icon"></span>
           Perception
@@ -5382,7 +5338,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../bytetrack/">Bytetrack</a>
+          <a href="../../../../perception/bytetrack/">Bytetrack</a>
           
         </div>
       
@@ -5430,7 +5386,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../compare_map_segmentation/">Compare map segmentation</a>
+          <a href="../../../../perception/compare_map_segmentation/">Compare map segmentation</a>
           
         </div>
       
@@ -5478,7 +5434,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../crosswalk_traffic_light_estimator/">Crosswalk traffic light estimator</a>
+          <a href="../../../../perception/crosswalk_traffic_light_estimator/">Crosswalk traffic light estimator</a>
           
         </div>
       
@@ -5526,7 +5482,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../detected_object_feature_remover/">Detected object feature remover</a>
+          <a href="../../../../perception/detected_object_feature_remover/">Detected object feature remover</a>
           
         </div>
       
@@ -5582,7 +5538,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../detected_object_validation/">Detected object validation</a>
+          <a href="../../../../perception/detected_object_validation/">Detected object validation</a>
           
             <label for="__nav_11_5">
               <span class="md-nav__icon md-icon"></span>
@@ -5605,7 +5561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../detected_object_validation/object-lanelet-filter/" class="md-nav__link">
+      <a href="../../../../perception/detected_object_validation/object-lanelet-filter/" class="md-nav__link">
         object_lanelet_filter
       </a>
     </li>
@@ -5619,7 +5575,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../detected_object_validation/object-position-filter/" class="md-nav__link">
+      <a href="../../../../perception/detected_object_validation/object-position-filter/" class="md-nav__link">
         object_position_filter
       </a>
     </li>
@@ -5633,7 +5589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../detected_object_validation/obstacle-pointcloud-based-validator/" class="md-nav__link">
+      <a href="../../../../perception/detected_object_validation/obstacle-pointcloud-based-validator/" class="md-nav__link">
         obstacle pointcloud based validator
       </a>
     </li>
@@ -5647,7 +5603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../detected_object_validation/occupancy-grid-based-validator/" class="md-nav__link">
+      <a href="../../../../perception/detected_object_validation/occupancy-grid-based-validator/" class="md-nav__link">
         occupancy grid based validator
       </a>
     </li>
@@ -5690,7 +5646,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../detection_by_tracker/">Detection by tracker</a>
+          <a href="../../../../perception/detection_by_tracker/">Detection by tracker</a>
           
         </div>
       
@@ -5738,7 +5694,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../elevation_map_loader/">Elevation map loader</a>
+          <a href="../../../../perception/elevation_map_loader/">Elevation map loader</a>
           
         </div>
       
@@ -5786,7 +5742,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../euclidean_cluster/">Euclidean cluster</a>
+          <a href="../../../../perception/euclidean_cluster/">Euclidean cluster</a>
           
         </div>
       
@@ -5834,7 +5790,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../front_vehicle_velocity_estimator/">Front vehicle velocity estimator</a>
+          <a href="../../../../perception/front_vehicle_velocity_estimator/">Front vehicle velocity estimator</a>
           
         </div>
       
@@ -5884,7 +5840,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../ground_segmentation/">Ground segmentation</a>
+          <a href="../../../../perception/ground_segmentation/">Ground segmentation</a>
           
             <label for="__nav_11_10">
               <span class="md-nav__icon md-icon"></span>
@@ -5944,7 +5900,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ground_segmentation/docs/ransac-ground-filter/" class="md-nav__link">
+      <a href="../../../../perception/ground_segmentation/docs/ransac-ground-filter/" class="md-nav__link">
         RANSAC Ground Filter
       </a>
     </li>
@@ -5958,7 +5914,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ground_segmentation/docs/ray-ground-filter/" class="md-nav__link">
+      <a href="../../../../perception/ground_segmentation/docs/ray-ground-filter/" class="md-nav__link">
         Ray Ground Filter
       </a>
     </li>
@@ -5972,7 +5928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ground_segmentation/docs/scan-ground-filter/" class="md-nav__link">
+      <a href="../../../../perception/ground_segmentation/docs/scan-ground-filter/" class="md-nav__link">
         Scan Ground Filter
       </a>
     </li>
@@ -6022,7 +5978,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../heatmap_visualizer/">Heatmap visualizer</a>
+          <a href="../../../../perception/heatmap_visualizer/">Heatmap visualizer</a>
           
         </div>
       
@@ -6072,7 +6028,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../image_projection_based_fusion/">Image projection based fusion</a>
+          <a href="../../../../perception/image_projection_based_fusion/">Image projection based fusion</a>
           
             <label for="__nav_11_12">
               <span class="md-nav__icon md-icon"></span>
@@ -6132,7 +6088,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../image_projection_based_fusion/docs/pointpainting-fusion/" class="md-nav__link">
+      <a href="../../../../perception/image_projection_based_fusion/docs/pointpainting-fusion/" class="md-nav__link">
         pointpainting_fusion
       </a>
     </li>
@@ -6146,7 +6102,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../image_projection_based_fusion/docs/roi-cluster-fusion/" class="md-nav__link">
+      <a href="../../../../perception/image_projection_based_fusion/docs/roi-cluster-fusion/" class="md-nav__link">
         roi_cluster_fusion
       </a>
     </li>
@@ -6160,7 +6116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../image_projection_based_fusion/docs/roi-detected-object-fusion/" class="md-nav__link">
+      <a href="../../../../perception/image_projection_based_fusion/docs/roi-detected-object-fusion/" class="md-nav__link">
         roi_detected_object_fusion
       </a>
     </li>
@@ -6210,7 +6166,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../lidar_apollo_instance_segmentation/">Lidar apollo instance segmentation</a>
+          <a href="../../../../perception/lidar_apollo_instance_segmentation/">Lidar apollo instance segmentation</a>
           
         </div>
       
@@ -6250,13 +6206,17 @@
       
         
           
+            
+          
         
       
       
-        <label class="md-nav__link" for="__nav_11_14" id="__nav_11_14_label" tabindex="0">
-          Lidar apollo segmentation tvm
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../../perception/lidar_apollo_segmentation_tvm/">Lidar apollo segmentation tvm</a>
+          
+        </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_14_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_11_14">
@@ -6266,58 +6226,6 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
-              
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11_14_1" >
-      
-      
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_11_14_1" id="__nav_11_14_1_label" tabindex="0">
-          Design
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_11_14_1_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_11_14_1">
-          <span class="md-nav__icon md-icon"></span>
-          Design
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../lidar_apollo_segmentation_tvm/design/lidar-segmentation-design/" class="md-nav__link">
-        lidar_apollo_segmentation_tvm {#lidar-apollo-segmentation-tvm-design}
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
           
         </ul>
       </nav>
@@ -6330,99 +6238,41 @@
               
   
   
-    
-  
   
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_15" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11_15" >
       
       
         
           
+            
+          
         
       
       
-        <label class="md-nav__link" for="__nav_11_15" id="__nav_11_15_label" tabindex="0">
-          Lidar apollo segmentation tvm nodes
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../../perception/lidar_apollo_segmentation_tvm_nodes/">Lidar apollo segmentation tvm nodes</a>
+          
+        </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_15_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_15_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_11_15">
           <span class="md-nav__icon md-icon"></span>
           Lidar apollo segmentation tvm nodes
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
-            
-              
-  
-  
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-      
-      
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_15_1" checked>
-      
-      
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_11_15_1" id="__nav_11_15_1_label" tabindex="0">
-          Design
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_11_15_1_label" aria-expanded="true">
-        <label class="md-nav__title" for="__nav_11_15_1">
-          <span class="md-nav__icon md-icon"></span>
-          Design
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        lidar_apollo_segmentation_tvm_nodes {#lidar-apollo-segmentation-tvm-nodes-design}
-      </a>
-      
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
             
           
         </ul>
@@ -6462,7 +6312,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../lidar_centerpoint/">Lidar centerpoint</a>
+          <a href="../../../../perception/lidar_centerpoint/">Lidar centerpoint</a>
           
             <label for="__nav_11_16">
               <span class="md-nav__icon md-icon"></span>
@@ -6538,7 +6388,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../lidar_centerpoint/launch/centerpoint_vs_centerpoint-tiny/">Centerpoint vs centerpoint tiny</a>
+          <a href="../../../../perception/lidar_centerpoint/launch/centerpoint_vs_centerpoint-tiny/">Centerpoint vs centerpoint tiny</a>
           
         </div>
       
@@ -6600,7 +6450,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../lidar_centerpoint_tvm/">Lidar centerpoint tvm</a>
+          <a href="../../../../perception/lidar_centerpoint_tvm/">Lidar centerpoint tvm</a>
           
         </div>
       
@@ -6648,7 +6498,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../map_based_prediction/">Map based prediction</a>
+          <a href="../../../../perception/map_based_prediction/">Map based prediction</a>
           
         </div>
       
@@ -6696,7 +6546,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../multi_object_tracker/">Multi object tracker</a>
+          <a href="../../../../perception/multi_object_tracker/">Multi object tracker</a>
           
         </div>
       
@@ -6744,7 +6594,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../object_merger/">Object merger</a>
+          <a href="../../../../perception/object_merger/">Object merger</a>
           
         </div>
       
@@ -6792,7 +6642,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../object_range_splitter/">Object range splitter</a>
+          <a href="../../../../perception/object_range_splitter/">Object range splitter</a>
           
         </div>
       
@@ -6840,7 +6690,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../occupancy_grid_map_outlier_filter/">Occupancy grid map outlier filter</a>
+          <a href="../../../../perception/occupancy_grid_map_outlier_filter/">Occupancy grid map outlier filter</a>
           
         </div>
       
@@ -6892,7 +6742,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../probabilistic_occupancy_grid_map/">Probabilistic occupancy grid map</a>
+          <a href="../../../../perception/probabilistic_occupancy_grid_map/">Probabilistic occupancy grid map</a>
           
             <label for="__nav_11_23">
               <span class="md-nav__icon md-icon"></span>
@@ -6915,7 +6765,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../probabilistic_occupancy_grid_map/laserscan-based-occupancy-grid-map/" class="md-nav__link">
+      <a href="../../../../perception/probabilistic_occupancy_grid_map/laserscan-based-occupancy-grid-map/" class="md-nav__link">
         laserscan based occupancy grid map
       </a>
     </li>
@@ -6929,7 +6779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../probabilistic_occupancy_grid_map/pointcloud-based-occupancy-grid-map/" class="md-nav__link">
+      <a href="../../../../perception/probabilistic_occupancy_grid_map/pointcloud-based-occupancy-grid-map/" class="md-nav__link">
         pointcloud based occupancy grid map
       </a>
     </li>
@@ -6974,7 +6824,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../radar_fusion_to_detected_object/">Radar fusion to detected object</a>
+          <a href="../../../../perception/radar_fusion_to_detected_object/">Radar fusion to detected object</a>
           
             <label for="__nav_11_24">
               <span class="md-nav__icon md-icon"></span>
@@ -7030,7 +6880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../radar_fusion_to_detected_object/docs/algorithm/" class="md-nav__link">
+      <a href="../../../../perception/radar_fusion_to_detected_object/docs/algorithm/" class="md-nav__link">
         Algorithm
       </a>
     </li>
@@ -7080,7 +6930,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../radar_tracks_msgs_converter/">Radar tracks msgs converter</a>
+          <a href="../../../../perception/radar_tracks_msgs_converter/">Radar tracks msgs converter</a>
           
         </div>
       
@@ -7128,7 +6978,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../shape_estimation/">Shape estimation</a>
+          <a href="../../../../perception/shape_estimation/">Shape estimation</a>
           
         </div>
       
@@ -7176,7 +7026,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../tensorrt_yolo/">Tensorrt yolo</a>
+          <a href="../../../../perception/tensorrt_yolo/">Tensorrt yolo</a>
           
         </div>
       
@@ -7224,7 +7074,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../tensorrt_yolox/">Tensorrt yolox</a>
+          <a href="../../../../perception/tensorrt_yolox/">Tensorrt yolox</a>
           
         </div>
       
@@ -7272,7 +7122,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../traffic_light_classifier/">Traffic light classifier</a>
+          <a href="../../../../perception/traffic_light_classifier/">Traffic light classifier</a>
           
         </div>
       
@@ -7320,7 +7170,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../traffic_light_map_based_detector/">Traffic light map based detector</a>
+          <a href="../../../../perception/traffic_light_map_based_detector/">Traffic light map based detector</a>
           
         </div>
       
@@ -7368,7 +7218,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../traffic_light_selector/">Traffic light selector</a>
+          <a href="../../../../perception/traffic_light_selector/">Traffic light selector</a>
           
         </div>
       
@@ -7416,7 +7266,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../traffic_light_ssd_fine_detector/">Traffic light ssd fine detector</a>
+          <a href="../../../../perception/traffic_light_ssd_fine_detector/">Traffic light ssd fine detector</a>
           
         </div>
       
@@ -7464,7 +7314,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../traffic_light_visualization/">Traffic light visualization</a>
+          <a href="../../../../perception/traffic_light_visualization/">Traffic light visualization</a>
           
         </div>
       
@@ -7496,16 +7346,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" checked>
       
       
         
@@ -7560,7 +7410,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_12">
           <span class="md-nav__icon md-icon"></span>
           Planning
@@ -7571,18 +7421,18 @@
               
   
   
+    
+  
   
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_12_1" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_1" checked>
       
       
         
@@ -7592,28 +7442,12 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
       
       
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/behavior_path_planner/">Behavior path planner</a>
+          <a href="../../">Behavior path planner</a>
           
             <label for="__nav_12_1">
               <span class="md-nav__icon md-icon"></span>
@@ -7621,7 +7455,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_1_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_1_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_12_1">
           <span class="md-nav__icon md-icon"></span>
           Behavior path planner
@@ -7634,9 +7468,58 @@
               
   
   
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_1_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_12_1_2" id="__nav_12_1_2_label" tabindex="0">
+          Docs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_12_1_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_12_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Docs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_path_planner/behavior_path_planner_avoidance_design/" class="md-nav__link">
+      <a href="../behavior_path_planner_avoidance_design/" class="md-nav__link">
         Avoidance design
       </a>
     </li>
@@ -7650,7 +7533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_path_planner/behavior_path_planner_drivable_area_design/" class="md-nav__link">
+      <a href="../behavior_path_planner_drivable_area_design/" class="md-nav__link">
         Drivable Area design
       </a>
     </li>
@@ -7664,7 +7547,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_path_planner/behavior_path_planner_lane_change_design/" class="md-nav__link">
+      <a href="../behavior_path_planner_lane_change_design/" class="md-nav__link">
         Lane Change design
       </a>
     </li>
@@ -7678,7 +7561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_path_planner/behavior_path_planner_limitations/" class="md-nav__link">
+      <a href="../behavior_path_planner_limitations/" class="md-nav__link">
         Limitations
       </a>
     </li>
@@ -7692,7 +7575,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_path_planner/behavior_path_planner_path_generation_design/" class="md-nav__link">
+      <a href="../behavior_path_planner_path_generation_design/" class="md-nav__link">
         Path Generation design
       </a>
     </li>
@@ -7706,7 +7589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_path_planner/behavior_path_planner_pull_out_design/" class="md-nav__link">
+      <a href="../behavior_path_planner_pull_out_design/" class="md-nav__link">
         Pull Out design
       </a>
     </li>
@@ -7720,7 +7603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_path_planner/behavior_path_planner_pull_over_design/" class="md-nav__link">
+      <a href="../behavior_path_planner_pull_over_design/" class="md-nav__link">
         Pull Over design
       </a>
     </li>
@@ -7734,7 +7617,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_path_planner/behavior_path_planner_side_shift_design/" class="md-nav__link">
+      <a href="../behavior_path_planner_side_shift_design/" class="md-nav__link">
         Side Shift design
       </a>
     </li>
@@ -7746,11 +7629,182 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../../../planning/behavior_path_planner/behavior_path_planner_turn_signal_design/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Turn Signal design
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Turn Signal design
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose-role" class="md-nav__link">
+    Purpose / Role
+  </a>
+  
+    <nav class="md-nav" aria-label="Purpose / Role">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    Assumptions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    Limitations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters-for-turn-signal-decider" class="md-nav__link">
+    Parameters for turn signal decider
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inner-workings-algorithms" class="md-nav__link">
+    Inner-workings / Algorithms
+  </a>
+  
+    <nav class="md-nav" aria-label="Inner-workings / Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-desired-section" class="md-nav__link">
+    - Desired Section
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-required-section" class="md-nav__link">
+    - Required Section
+  </a>
+  
+    <nav class="md-nav" aria-label="- Required Section">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-left-and-right-turn" class="md-nav__link">
+    1. Left and Right turn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-avoidance" class="md-nav__link">
+    2. Avoidance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-lane-change" class="md-nav__link">
+    3. Lane Change
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-pull-out" class="md-nav__link">
+    4. Pull out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-pull-over" class="md-nav__link">
+    5. Pull over
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-several-right-and-left-turns-on-short-sections" class="md-nav__link">
+    - Several right and left turns on short sections
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-avoidance-with-left-turn-1" class="md-nav__link">
+    - Avoidance with left turn (1)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-avoidance-with-left-turn-2" class="md-nav__link">
+    - Avoidance with left turn (2)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-lane-change-and-left-turn" class="md-nav__link">
+    - Lane change and left turn
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -7817,7 +7871,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/behavior_velocity_planner/">Behavior velocity planner</a>
+          <a href="../../../behavior_velocity_planner/">Behavior velocity planner</a>
           
             <label for="__nav_12_2">
               <span class="md-nav__icon md-icon"></span>
@@ -7840,7 +7894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_velocity_planner/blind-spot-design/" class="md-nav__link">
+      <a href="../../../behavior_velocity_planner/blind-spot-design/" class="md-nav__link">
         Blind spot design
       </a>
     </li>
@@ -7854,7 +7908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_velocity_planner/crosswalk-design/" class="md-nav__link">
+      <a href="../../../behavior_velocity_planner/crosswalk-design/" class="md-nav__link">
         Crosswalk design
       </a>
     </li>
@@ -7868,7 +7922,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_velocity_planner/detection-area-design/" class="md-nav__link">
+      <a href="../../../behavior_velocity_planner/detection-area-design/" class="md-nav__link">
         Detection area design
       </a>
     </li>
@@ -7882,7 +7936,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_velocity_planner/intersection-design/" class="md-nav__link">
+      <a href="../../../behavior_velocity_planner/intersection-design/" class="md-nav__link">
         Intersection design
       </a>
     </li>
@@ -7896,7 +7950,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_velocity_planner/merge-from-private-design/" class="md-nav__link">
+      <a href="../../../behavior_velocity_planner/merge-from-private-design/" class="md-nav__link">
         Merge from private design
       </a>
     </li>
@@ -7910,7 +7964,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_velocity_planner/no-stopping-area-design/" class="md-nav__link">
+      <a href="../../../behavior_velocity_planner/no-stopping-area-design/" class="md-nav__link">
         No stopping area design
       </a>
     </li>
@@ -7924,7 +7978,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_velocity_planner/occlusion-spot-design/" class="md-nav__link">
+      <a href="../../../behavior_velocity_planner/occlusion-spot-design/" class="md-nav__link">
         Occlusion spot design
       </a>
     </li>
@@ -7938,7 +7992,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_velocity_planner/out-of-lane-design/" class="md-nav__link">
+      <a href="../../../behavior_velocity_planner/out-of-lane-design/" class="md-nav__link">
         Out of lane design
       </a>
     </li>
@@ -7952,7 +8006,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_velocity_planner/run-out-design/" class="md-nav__link">
+      <a href="../../../behavior_velocity_planner/run-out-design/" class="md-nav__link">
         Run out design
       </a>
     </li>
@@ -7966,7 +8020,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_velocity_planner/speed-bump-design/" class="md-nav__link">
+      <a href="../../../behavior_velocity_planner/speed-bump-design/" class="md-nav__link">
         Speed bump design
       </a>
     </li>
@@ -7980,7 +8034,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_velocity_planner/stop-line-design/" class="md-nav__link">
+      <a href="../../../behavior_velocity_planner/stop-line-design/" class="md-nav__link">
         Stop line design
       </a>
     </li>
@@ -7994,7 +8048,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_velocity_planner/traffic-light-design/" class="md-nav__link">
+      <a href="../../../behavior_velocity_planner/traffic-light-design/" class="md-nav__link">
         Traffic light design
       </a>
     </li>
@@ -8008,7 +8062,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/behavior_velocity_planner/virtual-traffic-light-design/" class="md-nav__link">
+      <a href="../../../behavior_velocity_planner/virtual-traffic-light-design/" class="md-nav__link">
         Virtual traffic light design
       </a>
     </li>
@@ -8051,7 +8105,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/costmap_generator/">Costmap generator</a>
+          <a href="../../../costmap_generator/">Costmap generator</a>
           
         </div>
       
@@ -8099,7 +8153,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/external_velocity_limit_selector/">External velocity limit selector</a>
+          <a href="../../../external_velocity_limit_selector/">External velocity limit selector</a>
           
         </div>
       
@@ -8147,7 +8201,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/freespace_planner/">Freespace planner</a>
+          <a href="../../../freespace_planner/">Freespace planner</a>
           
         </div>
       
@@ -8197,7 +8251,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/freespace_planning_algorithms/">Freespace planning algorithms</a>
+          <a href="../../../freespace_planning_algorithms/">Freespace planning algorithms</a>
           
             <label for="__nav_12_6">
               <span class="md-nav__icon md-icon"></span>
@@ -8220,7 +8274,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/freespace_planning_algorithms/rrtstar/" class="md-nav__link">
+      <a href="../../../freespace_planning_algorithms/rrtstar/" class="md-nav__link">
         Rrtstar
       </a>
     </li>
@@ -8263,7 +8317,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/mission_planner/">Mission planner</a>
+          <a href="../../../mission_planner/">Mission planner</a>
           
         </div>
       
@@ -8313,7 +8367,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/motion_velocity_smoother/">Motion velocity smoother</a>
+          <a href="../../../motion_velocity_smoother/">Motion velocity smoother</a>
           
             <label for="__nav_12_8">
               <span class="md-nav__icon md-icon"></span>
@@ -8336,7 +8390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/motion_velocity_smoother/README.ja/" class="md-nav__link">
+      <a href="../../../motion_velocity_smoother/README.ja/" class="md-nav__link">
         Motion Velocity Smoother
       </a>
     </li>
@@ -8381,7 +8435,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/obstacle_avoidance_planner/">Obstacle avoidance planner</a>
+          <a href="../../../obstacle_avoidance_planner/">Obstacle avoidance planner</a>
           
             <label for="__nav_12_9">
               <span class="md-nav__icon md-icon"></span>
@@ -8441,7 +8495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/obstacle_avoidance_planner/docs/debug/" class="md-nav__link">
+      <a href="../../../obstacle_avoidance_planner/docs/debug/" class="md-nav__link">
         Debug
       </a>
     </li>
@@ -8455,7 +8509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/obstacle_avoidance_planner/docs/eb/" class="md-nav__link">
+      <a href="../../../obstacle_avoidance_planner/docs/eb/" class="md-nav__link">
         Elastic band
       </a>
     </li>
@@ -8469,7 +8523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/obstacle_avoidance_planner/docs/mpt/" class="md-nav__link">
+      <a href="../../../obstacle_avoidance_planner/docs/mpt/" class="md-nav__link">
         Model predictive trajectory
       </a>
     </li>
@@ -8521,7 +8575,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/obstacle_cruise_planner/">Obstacle cruise planner</a>
+          <a href="../../../obstacle_cruise_planner/">Obstacle cruise planner</a>
           
             <label for="__nav_12_10">
               <span class="md-nav__icon md-icon"></span>
@@ -8577,7 +8631,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/obstacle_cruise_planner/docs/debug/" class="md-nav__link">
+      <a href="../../../obstacle_cruise_planner/docs/debug/" class="md-nav__link">
         Debug
       </a>
     </li>
@@ -8627,7 +8681,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/obstacle_stop_planner/">Obstacle stop planner</a>
+          <a href="../../../obstacle_stop_planner/">Obstacle stop planner</a>
           
         </div>
       
@@ -8675,7 +8729,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/obstacle_velocity_limiter/">Obstacle velocity limiter</a>
+          <a href="../../../obstacle_velocity_limiter/">Obstacle velocity limiter</a>
           
         </div>
       
@@ -8738,7 +8792,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/planning_debug_tools/Readme/" class="md-nav__link">
+      <a href="../../../planning_debug_tools/Readme/" class="md-nav__link">
         Planning Debug Tools
       </a>
     </li>
@@ -8752,7 +8806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/planning_debug_tools/doc-stop-reason-visualizer/" class="md-nav__link">
+      <a href="../../../planning_debug_tools/doc-stop-reason-visualizer/" class="md-nav__link">
         Doc stop reason visualizer
       </a>
     </li>
@@ -8795,7 +8849,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/planning_test_utils/">Planning test utils</a>
+          <a href="../../../planning_test_utils/">Planning test utils</a>
           
         </div>
       
@@ -8843,7 +8897,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/planning_validator/">Planning validator</a>
+          <a href="../../../planning_validator/">Planning validator</a>
           
         </div>
       
@@ -8891,7 +8945,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/route_handler/">Route handler</a>
+          <a href="../../../route_handler/">Route handler</a>
           
         </div>
       
@@ -8939,7 +8993,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/rtc_auto_mode_manager/">Rtc auto mode manager</a>
+          <a href="../../../rtc_auto_mode_manager/">Rtc auto mode manager</a>
           
         </div>
       
@@ -8987,7 +9041,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/rtc_interface/">Rtc interface</a>
+          <a href="../../../rtc_interface/">Rtc interface</a>
           
         </div>
       
@@ -9035,7 +9089,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/rtc_replayer/">Rtc replayer</a>
+          <a href="../../../rtc_replayer/">Rtc replayer</a>
           
         </div>
       
@@ -9083,7 +9137,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/scenario_selector/">Scenario selector</a>
+          <a href="../../../scenario_selector/">Scenario selector</a>
           
         </div>
       
@@ -9131,7 +9185,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/static_centerline_optimizer/">Static centerline optimizer</a>
+          <a href="../../../static_centerline_optimizer/">Static centerline optimizer</a>
           
         </div>
       
@@ -9181,7 +9235,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../../../planning/surround_obstacle_checker/">Surround obstacle checker</a>
+          <a href="../../../surround_obstacle_checker/">Surround obstacle checker</a>
           
             <label for="__nav_12_22">
               <span class="md-nav__icon md-icon"></span>
@@ -9204,7 +9258,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../planning/surround_obstacle_checker/surround_obstacle_checker-design.ja/" class="md-nav__link">
+      <a href="../../../surround_obstacle_checker/surround_obstacle_checker-design.ja/" class="md-nav__link">
         Surround Obstacle Checker
       </a>
     </li>
@@ -12078,6 +12132,144 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose-role" class="md-nav__link">
+    Purpose / Role
+  </a>
+  
+    <nav class="md-nav" aria-label="Purpose / Role">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    Assumptions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    Limitations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters-for-turn-signal-decider" class="md-nav__link">
+    Parameters for turn signal decider
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inner-workings-algorithms" class="md-nav__link">
+    Inner-workings / Algorithms
+  </a>
+  
+    <nav class="md-nav" aria-label="Inner-workings / Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-desired-section" class="md-nav__link">
+    - Desired Section
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-required-section" class="md-nav__link">
+    - Required Section
+  </a>
+  
+    <nav class="md-nav" aria-label="- Required Section">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-left-and-right-turn" class="md-nav__link">
+    1. Left and Right turn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-avoidance" class="md-nav__link">
+    2. Avoidance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-lane-change" class="md-nav__link">
+    3. Lane Change
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-pull-out" class="md-nav__link">
+    4. Pull out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-pull-over" class="md-nav__link">
+    5. Pull over
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-several-right-and-left-turns-on-short-sections" class="md-nav__link">
+    - Several right and left turns on short sections
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-avoidance-with-left-turn-1" class="md-nav__link">
+    - Avoidance with left turn (1)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-avoidance-with-left-turn-2" class="md-nav__link">
+    - Avoidance with left turn (2)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-lane-change-and-left-turn" class="md-nav__link">
+    - Lane change and left turn
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -12094,10 +12286,238 @@
   
 
 
-<h1 id="macro-syntax-error"><em>Macro Syntax Error</em><a class="headerlink" href="#macro-syntax-error" title="Permanent link">#</a></h1>
-<p><em>Line 1 in Markdown file:</em> <strong>Missing end of comment tag</strong> 
-<div class="highlight"><pre><span></span><code><span class="c1"># lidar_apollo_segmentation_tvm_nodes {#lidar-apollo-segmentation-tvm-nodes-design}</span>
-</code></pre></div></p>
+<h1 id="turn-signal-design">Turn Signal design<a class="headerlink" href="#turn-signal-design" title="Permanent link">#</a></h1>
+<p>Turn Signal decider determines necessary blinkers.</p>
+<h2 id="purpose-role">Purpose / Role<a class="headerlink" href="#purpose-role" title="Permanent link">#</a></h2>
+<p>This module is responsible for activating a necessary blinker during driving. It uses rule-based algorithm to determine blinkers, and the details of this algorithm are described in the following sections. Note that this algorithm is strictly based on the Japanese Road Traffic Raw.</p>
+<h3 id="assumptions">Assumptions<a class="headerlink" href="#assumptions" title="Permanent link">#</a></h3>
+<p>Autoware has following order of priorities for turn signals.</p>
+<ol>
+<li>Activate turn signal to safely navigate ego vehicle and protect other road participants</li>
+<li>Follow traffic laws</li>
+<li>Follow human driving practices</li>
+</ol>
+<h3 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">#</a></h3>
+<p>Currently, this algorithm can sometimes give unnatural (not wrong) blinkers in a complicated situations. This is because it tries to follow the road traffic raw and cannot solve <code>blinker conflicts</code> clearly in that environment.</p>
+<h2 id="parameters-for-turn-signal-decider">Parameters for turn signal decider<a class="headerlink" href="#parameters-for-turn-signal-decider" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">turn_signal_intersection_search_distance</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">constant search distance to decide activation of blinkers at intersections</td>
+<td align="left">30</td>
+</tr>
+<tr>
+<td align="left">turn_signal_intersection_angle_threshold_degree</td>
+<td align="left">deg</td>
+<td align="left">double</td>
+<td align="left">angle threshold to determined the end point of intersection required section</td>
+<td align="left">15</td>
+</tr>
+<tr>
+<td align="left">turn_signal_minimum_search_distance</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">minimum search distance for avoidance and lane change</td>
+<td align="left">10</td>
+</tr>
+<tr>
+<td align="left">turn_signal_search_time</td>
+<td align="left">[s]</td>
+<td align="left">double</td>
+<td align="left">search time for to decide activation of blinkers</td>
+<td align="left">3.0</td>
+</tr>
+<tr>
+<td align="left">turn_signal_shift_length_threshold</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">shift length threshold to decide activation of blinkers</td>
+<td align="left">0.3</td>
+</tr>
+<tr>
+<td align="left">turn_signal_on_swerving</td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to activate blinkers when swerving</td>
+<td align="left">true</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the default values for <code>turn_signal_intersection_search_distance</code> and <code>turn_signal_search_time</code> is strictly followed by <a href="https://www.japaneselawtranslation.go.jp/ja/laws/view/2962">Japanese Road Traffic Laws</a>. So if your country does not allow to use these default values, you should change these values in configuration files.</p>
+<h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
+<p>In this algorithm, it assumes that each blinker has two sections, which are <code>desired section</code> and <code>required section</code>. The image of these two sections are depicted in the following diagram.</p>
+<p><img alt="section_definition" src="../../image/turn_signal_decider/sections_definition.drawio.svg" /></p>
+<p>These two sections have the following meanings.</p>
+<h3 id="-desired-section">- Desired Section<a class="headerlink" href="#-desired-section" title="Permanent link">#</a></h3>
+<div class="codehilite"><pre><span></span><code>- This section is defined by road traffic laws. It cannot be longer or shorter than the designated length defined by the law.
+- In this section, you do not have to activate the designated blinkers if it is dangerous to do so.
+</code></pre></div>
+
+<h3 id="-required-section">- Required Section<a class="headerlink" href="#-required-section" title="Permanent link">#</a></h3>
+<div class="codehilite"><pre><span></span><code>- In this section, ego vehicle must activate designated blinkers. However, if there are blinker conflicts, it must solve them based on the algorithm we mention later in this document.
+- Required section cannot be longer than desired section.
+</code></pre></div>
+
+<p>When turning on the blinker, it decides whether or not to turn on the specified blinker based on the distance from the front of the ego vehicle to the start point of each section. Conversely, when turning off the blinker, it calculates the distance from the base link of the ego vehicle to the end point of each section and decide whether or not to turn it off based on that.</p>
+<p><img alt="activation_distance" src="../../image/turn_signal_decider/activation_distance.drawio.svg" /></p>
+<p>For left turn, right turn, avoidance, lane change, pull over and pull out, we define these two sections, which are elaborated in the following part.</p>
+<h4 id="1-left-and-right-turn">1. Left and Right turn<a class="headerlink" href="#1-left-and-right-turn" title="Permanent link">#</a></h4>
+<p>Turn signal decider checks each lanelet on the map if it has <code>turn_direction</code> information. If a lanelet has this information, it activates necessary blinker based on this information.</p>
+<ul>
+<li>desired start point<br />
+  The <code>search_distance</code> for blinkers at intersections is <code>v * turn_signal_search_time + turn_signal_intersection_search_distance</code>. Then the start point becomes <code>search_distance</code> meters before the start point of the intersection lanelet(depicted in gree in the following picture), where <code>v</code> is the velocity of the ego vehicle. However, if we set <code>turn_signal_distance</code> in the lanelet, we use that length as search distance.</li>
+</ul>
+<ul>
+<li>desired end point<br />
+  Terminal point of the intersection lanelet.</li>
+</ul>
+<ul>
+<li>required start point<br />
+  Initial point of the intersection lanelet.</li>
+</ul>
+<ul>
+<li>required end point<br />
+  The earliest point that satisfies the following condition. <span class="arithmatex"><span class="MathJax_Preview">\theta - \theta_{\textrm{end}} &lt; \delta</span><script type="math/tex">\theta - \theta_{\textrm{end}} < \delta</script></span>, where <span class="arithmatex"><span class="MathJax_Preview">\theta_{\textrm{end}}</span><script type="math/tex">\theta_{\textrm{end}}</script></span> is yaw angle of the terminal point of the lanelet, <span class="arithmatex"><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span> is the angle of a required end point and <span class="arithmatex"><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script></span> is the threshold defined by the user.</li>
+</ul>
+<p><img alt="section_turn_signal" src="../../image/turn_signal_decider/left_right_turn.drawio.svg" /></p>
+<h4 id="2-avoidance">2. Avoidance<a class="headerlink" href="#2-avoidance" title="Permanent link">#</a></h4>
+<p>Avoidance can be separated into two sections, first section and second section. The first section is from the start point of the path shift to the end of the path shift. The second section is from the end of shift point to the end of avoidance. Note that avoidance module will not activate turn signal when its shift length is below <code>turn_signal_shift_length_threshold</code>.</p>
+<p>First section</p>
+<ul>
+<li>desired start point<br />
+<code>v * turn_signal_search_time</code> meters before the start point of the avoidance shift path.</li>
+</ul>
+<ul>
+<li>desired end point<br />
+  Shift complete point where the path shift is completed.</li>
+</ul>
+<ul>
+<li>required start point<br />
+  Avoidance start point.</li>
+</ul>
+<ul>
+<li>required end point<br />
+  Shift complete point same as the desired end point.</li>
+</ul>
+<p><img alt="section_first_avoidance" src="../../image/turn_signal_decider/avoidance_first_section.drawio.svg" /></p>
+<p>Second section</p>
+<ul>
+<li>desired start point<br />
+  Shift complete point.</li>
+</ul>
+<ul>
+<li>desired end point<br />
+  Avoidance terminal point</li>
+</ul>
+<ul>
+<li>required start point<br />
+  Shift complete point.</li>
+</ul>
+<ul>
+<li>required end point<br />
+  Avoidance terminal point.</li>
+</ul>
+<p><img alt="section_second_avoidance" src="../../image/turn_signal_decider/avoidance_second_section.drawio.svg" /></p>
+<h4 id="3-lane-change">3. Lane Change<a class="headerlink" href="#3-lane-change" title="Permanent link">#</a></h4>
+<ul>
+<li>desired start point<br />
+<code>v * turn_signal_search_time</code> meters before the start point of the lane change path.</li>
+</ul>
+<ul>
+<li>desired end point<br />
+  Terminal point of the lane change path.</li>
+</ul>
+<ul>
+<li>required start point<br />
+  Initial point of the lane change path.</li>
+</ul>
+<ul>
+<li>required end point<br />
+  Cross point with lane change path and boundary line of the adjacent lane.</li>
+</ul>
+<p><img alt="section_lane_change" src="../../image/turn_signal_decider/lane_change.drawio.svg" /></p>
+<h4 id="4-pull-out">4. Pull out<a class="headerlink" href="#4-pull-out" title="Permanent link">#</a></h4>
+<ul>
+<li>desired start point<br />
+  Start point of the path of pull out.</li>
+</ul>
+<ul>
+<li>desired end point<br />
+  Terminal point of the path of pull out.</li>
+</ul>
+<ul>
+<li>required start point<br />
+  Start point of the path pull out.</li>
+</ul>
+<ul>
+<li>required end point<br />
+  Terminal point of the path of pull out.</li>
+</ul>
+<p><img alt="section_pull_out" src="../../image/turn_signal_decider/pull_out.drawio.svg" /></p>
+<h4 id="5-pull-over">5. Pull over<a class="headerlink" href="#5-pull-over" title="Permanent link">#</a></h4>
+<ul>
+<li>desired start point<br />
+<code>v * turn_signal_search_time</code> meters before the start point of the pull over path.</li>
+</ul>
+<ul>
+<li>desired end point<br />
+  Terminal point of the path of pull over.</li>
+</ul>
+<ul>
+<li>required start point<br />
+  Start point of the path of pull over.</li>
+</ul>
+<ul>
+<li>required end point<br />
+  Terminal point of the path of pull over.</li>
+</ul>
+<p><img alt="section_pull_over" src="../../image/turn_signal_decider/pull_over.drawio.svg" /></p>
+<p>When it comes to handle several blinkers, it gives priority to the first blinker that comes first. However, this rule sometimes activate unnatural blinkers, so turn signal decider uses the following five rules to decide the necessary turn signal.</p>
+<ul>
+<li>pattern1<br />
+<img alt="pattern1" src="../../image/turn_signal_decider/pattern1.drawio.svg" /></li>
+</ul>
+<ul>
+<li>pattern2<br />
+<img alt="pattern2" src="../../image/turn_signal_decider/pattern2.drawio.svg" /></li>
+</ul>
+<ul>
+<li>pattern3<br />
+<img alt="pattern3" src="../../image/turn_signal_decider/pattern3.drawio.svg" /></li>
+</ul>
+<ul>
+<li>pattern4<br />
+<img alt="pattern4" src="../../image/turn_signal_decider/pattern4.drawio.svg" /></li>
+</ul>
+<ul>
+<li>pattern5<br />
+<img alt="pattern5" src="../../image/turn_signal_decider/pattern5.drawio.svg" /></li>
+</ul>
+<p>Based on these five rules, turn signal decider can solve <code>blinker conflicts</code>. The following pictures show some examples of this kind of conflicts.</p>
+<h4 id="-several-right-and-left-turns-on-short-sections">- Several right and left turns on short sections<a class="headerlink" href="#-several-right-and-left-turns-on-short-sections" title="Permanent link">#</a></h4>
+<p>In this scenario, ego vehicle has to pass several turns that are close each other. Since this pattern can be solved by the pattern1 rule, the overall result is depicted in the following picture.</p>
+<p><img alt="continuous_turns" src="../../image/turn_signal_decider/continuous_turns.drawio.svg" /></p>
+<h4 id="-avoidance-with-left-turn-1">- Avoidance with left turn (1)<a class="headerlink" href="#-avoidance-with-left-turn-1" title="Permanent link">#</a></h4>
+<p>In this scene, ego vehicle has to deal with the obstacle that is on its original path as well as make a left turn. The overall result can be varied by the position of the obstacle, but the image of the result is described in the following picture.</p>
+<p><img alt="avoidance_and_turn" src="../../image/turn_signal_decider/avoidance_and_turn.drawio.svg" /></p>
+<h4 id="-avoidance-with-left-turn-2">- Avoidance with left turn (2)<a class="headerlink" href="#-avoidance-with-left-turn-2" title="Permanent link">#</a></h4>
+<p>Same as the previous scenario, ego vehicle has to avoid the obstacle as well as make a turn left. However, in this scene, the obstacle is parked after the intersection. Similar to the previous one, the overall result can be varied by the position of the obstacle, but the image of the result is described in the following picture.</p>
+<p><img alt="avoidance_and_turn" src="../../image/turn_signal_decider/avoidance_and_turn2.drawio.svg" /></p>
+<h4 id="-lane-change-and-left-turn">- Lane change and left turn<a class="headerlink" href="#-lane-change-and-left-turn" title="Permanent link">#</a></h4>
+<p>In this scenario, ego vehicle has to do lane change before making a left turn. In the following example, ego vehicle does not activate left turn signal until it reaches the end point of the lane change path.</p>
+<p><img alt="avoidance_and_turn" src="../../image/turn_signal_decider/lane_change_and_turn.drawio.svg" /></p>
 
 
 
@@ -12124,7 +12544,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../../lidar_apollo_segmentation_tvm/design/lidar-segmentation-design/" class="md-footer__link md-footer__link--prev" aria-label="Previous: lidar_apollo_segmentation_tvm {#lidar-apollo-segmentation-tvm-design}" rel="prev">
+          <a href="../behavior_path_planner_side_shift_design/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Side Shift design" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -12133,20 +12553,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                lidar_apollo_segmentation_tvm {#lidar-apollo-segmentation-tvm-design}
+                Side Shift design
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../../lidar_centerpoint/" class="md-footer__link md-footer__link--next" aria-label="Next: lidar_centerpoint" rel="next">
+          <a href="../../../behavior_velocity_planner/" class="md-footer__link md-footer__link--next" aria-label="Next: Behavior Velocity Planner" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                lidar_centerpoint
+                Behavior Velocity Planner
               </div>
             </div>
             <div class="md-footer__button md-icon">
