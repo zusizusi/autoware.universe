@@ -782,12 +782,12 @@
               <div
                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(255, 255, 0); line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; overflow-wrap: normal;"
               >
-                ※ Witihin the margin, but not meet other cruise condition.
+                ※ Within the margin, but not meet other cruise condition.
               </div>
             </div>
           </div>
         </foreignObject>
-        <text x="657" y="427" fill="#FFFF00" font-family="Helvetica" font-size="12px" text-anchor="middle" font-weight="bold">※ Witihin the margin, but not...</text>
+        <text x="657" y="427" fill="#FFFF00" font-family="Helvetica" font-size="12px" text-anchor="middle" font-weight="bold">※ Within the margin, but not...</text>
       </switch>
     </g>
     <rect x="393" y="1415.5" width="3" height="49" fill="#e6e600" stroke="none" pointer-events="all"/>

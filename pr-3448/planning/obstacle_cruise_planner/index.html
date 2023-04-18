@@ -12066,8 +12066,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#far-crossing-vehicles" class="md-nav__link">
-    Far crossing vehicles
+  <a href="#2-enough-collision-time-margin" class="md-nav__link">
+    *2: Enough collision time margin
   </a>
   
 </li>
@@ -12374,12 +12374,29 @@ This planner data is created first, and then sent to the planning algorithm.</p>
 <span class="p">};</span>
 </code></pre></div>
 <h3 id="behavior-determination-against-obstacles">Behavior determination against obstacles<a class="headerlink" href="#behavior-determination-against-obstacles" title="Permanent link">#</a></h3>
-<p>Obstacles for cruising, stopping and slowing down are selected in this order based on their pose and velocity.</p>
+<p>Obstacles for cruising, stopping and slowing down are selected in this order based on their pose and velocity.
+The obstacles not in front of the ego will be ignored.</p>
 <p><img alt="determine_cruise_stop_slow_down" src="media/determine_cruise_stop_slow_down.drawio.svg" /></p>
 <h4 id="determine-cruise-vehicles">Determine cruise vehicles<a class="headerlink" href="#determine-cruise-vehicles" title="Permanent link">#</a></h4>
 <p>The obstacles meeting the following condition are determined as obstacles for cruising.</p>
 <ul>
+<li>The lateral distance from the object to the ego's trajectory is smaller than <code>behavior_determination.cruise.max_lat_margin</code>.</li>
+</ul>
+<ul>
 <li>The object type is for cruising according to <code>cruise_obstacle_type.*</code>.</li>
+<li>The object is not crossing the ego's trajectory (*1).</li>
+<li>If the object is inside the trajectory.<ul>
+<li>The object type is for inside cruising according to <code>cruise_obstacle_type.inside.*</code>.</li>
+<li>The object velocity is larger than <code>behavior_determination.obstacle_velocity_threshold_from_cruise_to_stop</code>.</li>
+</ul>
+</li>
+<li>If the object is outside the trajectory.<ul>
+<li>The object type is for outside cruising according to <code>cruise_obstacle_type.outside.*</code>.</li>
+<li>The object velocity is larger than <code>behavior_determination.cruise.outside_obstacle.obstacle_velocity_threshold</code>.</li>
+<li>The highest confident predicted path collides with the ego's trajectory.</li>
+<li>Its collision's period is larger than <code>behavior_determination.cruise.outside_obstacle.ego_obstacle_overlap_time_threshold</code>.</li>
+</ul>
+</li>
 </ul>
 <table>
 <thead>
@@ -12391,17 +12408,17 @@ This planner data is created first, and then sent to the planning algorithm.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>cruise_obstacle_type.unknown</code></td>
+<td><code>cruise_obstacle_type.inside.unknown</code></td>
 <td>bool</td>
 <td>flag to consider unknown objects for cruising</td>
 </tr>
 <tr>
-<td><code>cruise_obstacle_type.car</code></td>
+<td><code>cruise_obstacle_type.inside.car</code></td>
 <td>bool</td>
 <td>flag to consider unknown objects for cruising</td>
 </tr>
 <tr>
-<td><code>cruise_obstacle_type.truck</code></td>
+<td><code>cruise_obstacle_type.inside.truck</code></td>
 <td>bool</td>
 <td>flag to consider unknown objects for cruising</td>
 </tr>
@@ -12409,6 +12426,46 @@ This planner data is created first, and then sent to the planning algorithm.</p>
 <td>...</td>
 <td>bool</td>
 <td>...</td>
+</tr>
+<tr>
+<td><code>cruise_obstacle_type.outside.unknown</code></td>
+<td>bool</td>
+<td>flag to consider unknown objects for cruising</td>
+</tr>
+<tr>
+<td><code>cruise_obstacle_type.outside.car</code></td>
+<td>bool</td>
+<td>flag to consider unknown objects for cruising</td>
+</tr>
+<tr>
+<td><code>cruise_obstacle_type.outside.truck</code></td>
+<td>bool</td>
+<td>flag to consider unknown objects for cruising</td>
+</tr>
+<tr>
+<td>...</td>
+<td>bool</td>
+<td>...</td>
+</tr>
+<tr>
+<td><code>behavior_determination.cruise.max_lat_margin</code></td>
+<td>double</td>
+<td>maximum lateral margin for cruise obstacles</td>
+</tr>
+<tr>
+<td><code>behavior_determination.obstacle_velocity_threshold_from_cruise_to_stop</code></td>
+<td>double</td>
+<td>maximum obstacle velocity for cruise obstacle inside the trajectory</td>
+</tr>
+<tr>
+<td><code>behavior_determination.cruise.outside_obstacle.obstacle_velocity_threshold</code></td>
+<td>double</td>
+<td>maximum obstacle velocity for cruise obstacle outside the trajectory</td>
+</tr>
+<tr>
+<td><code>behavior_determination.cruise.outside_obstacle.ego_obstacle_overlap_time_threshold</code></td>
+<td>double</td>
+<td>maximum overlap time of the collision between the ego and obstacle</td>
 </tr>
 </tbody>
 </table>
@@ -12416,12 +12473,12 @@ This planner data is created first, and then sent to the planning algorithm.</p>
 <p>Among obstacles which are not for cruising, the obstacles meeting the following condition are determined as obstacles for stopping.</p>
 <ul>
 <li>The object type is for stopping according to <code>stop_obstacle_type.*</code>.</li>
-<li>The distance from the object to the ego's trajectory is smaller than <code>behavior_determination.stop.max_lat_margin</code>.</li>
+<li>The lateral distance from the object to the ego's trajectory is smaller than <code>behavior_determination.stop.max_lat_margin</code>.</li>
 <li>The object velocity along the ego's trajectory is smaller than <code>behavior_determination.obstacle_velocity_threshold_from_stop_to_cruise</code>.</li>
 <li>The object<ul>
 <li>does not cross the ego's trajectory (*1)</li>
 <li>with the velocity smaller than <code>behavior_determination.crossing_obstacle.obstacle_velocity_threshold</code></li>
-<li>and its collision time margin is smaller than <code>behavior_determination.stop.crossing_obstacle.collision_time_margin</code>.</li>
+<li>and its collision time margin is large enough (*2).</li>
 </ul>
 </li>
 </ul>
@@ -12475,7 +12532,7 @@ This planner data is created first, and then sent to the planning algorithm.</p>
 <p>Among obstacles which are not for cruising and stopping, the obstacles meeting the following condition are determined as obstacles for slowing down.</p>
 <ul>
 <li>The object type is for slowing down according to <code>slow_down_obstacle_type.*</code>.</li>
-<li>The distance from the object to the ego's trajectory is smaller than <code>behavior_determination.slow_down.max_lat_margin</code>.</li>
+<li>The lateral distance from the object to the ego's trajectory is smaller than <code>behavior_determination.slow_down.max_lat_margin</code>.</li>
 </ul>
 <table>
 <thead>
@@ -12591,22 +12648,10 @@ By default, unknown and vehicles are obstacles to cruise and stop, and non vehic
 </tr>
 </tbody>
 </table>
-<h4 id="far-crossing-vehicles">Far crossing vehicles<a class="headerlink" href="#far-crossing-vehicles" title="Permanent link">#</a></h4>
-<p>Near crossing vehicles (= not far crossing vehicles) are defined as vehicle objects realizing either of following conditions.</p>
-<ul>
-<li>whose yaw angle against the nearest trajectory point is greater than <code>crossing_obstacle_traj_angle_threshold</code></li>
-<li>whose velocity is less than <code>crossing_obstacle_velocity_threshold</code>.</li>
-</ul>
-<p>Assuming <code>t_1</code> to be the time for the ego to reach the current crossing obstacle position with the constant velocity motion, and <code>t_2</code> to be the time for the crossing obstacle to go outside the detection area, if the following condition is realized, the crossing vehicle will be ignored.</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">
-t_1 - t_2 &gt; \mathrm{margin\_for\_collision\_time}
-</div>
-<script type="math/tex; mode=display">
-t_1 - t_2 > \mathrm{margin\_for\_collision\_time}
-</script>
-</div>
-<p>In the <code>behavior_determination</code> namespace,</p>
+<h4 id="2-enough-collision-time-margin">*2: Enough collision time margin<a class="headerlink" href="#2-enough-collision-time-margin" title="Permanent link">#</a></h4>
+<p>We predict the collision area and its time by the ego with a constant velocity motion and the obstacle with its predicted path.
+Then, we calculate a collision time margin which is the difference of the time when the ego will be inside the collision area and the obstacle will be inside the collision area.
+When this time margin is smaller than <code>behavior_determination.stop.crossing_obstacle.collision_time_margin</code>, the margin is not enough.</p>
 <table>
 <thead>
 <tr>
@@ -12617,19 +12662,9 @@ t_1 - t_2 > \mathrm{margin\_for\_collision\_time}
 </thead>
 <tbody>
 <tr>
-<td><code>crossing_obstacle_velocity_threshold</code></td>
+<td><code>behavior_determination.stop.crossing_obstacle.collision_time_margin</code></td>
 <td>double</td>
-<td>velocity threshold to decide crossing obstacle [m/s]</td>
-</tr>
-<tr>
-<td><code>crossing_obstacle_traj_angle_threshold</code></td>
-<td>double</td>
-<td>yaw threshold of crossing obstacle against the nearest trajectory point [rad]</td>
-</tr>
-<tr>
-<td><code>collision_time_margin</code></td>
-<td>double</td>
-<td>time threshold of collision between obstacle and ego [s]</td>
+<td>maximum collision time margin of the ego and obstacle</td>
 </tr>
 </tbody>
 </table>
