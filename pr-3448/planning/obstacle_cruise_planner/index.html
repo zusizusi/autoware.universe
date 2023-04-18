@@ -12919,9 +12919,9 @@ The target velocity and acceleration is respectively calculated with the PID con
 <h4 id="distance-calculation-between-obstacle-and-trajectory">Distance calculation between obstacle and trajectory<a class="headerlink" href="#distance-calculation-between-obstacle-and-trajectory" title="Permanent link">#</a></h4>
 <p>To calculate obstacles inside the, firstly, obstacles whose distance to the trajectory is less than <code>rough_max_lat_margin</code> are selected.
 Then, the detection area, which is a trajectory with some lateral margin, is calculated as shown in the figure.
-The detection area width is a vehicle's width + <code>max_lat_margin</code>, and it is represented as a polygon resampled with <code>decimate_trajectory_step_length</code> longitudinally.
+The detection area width is a vehicle's width + <code>max_lat_margin</code>, and it is represented as a polygon resampled with <code>behavior_determination.decimate_trajectory_step_length</code> longitudinally.
 The roughly selected obstacles inside the detection area are considered as inside the detection area.</p>
-<p><img alt="detection_area" src="image/detection_area.png" /></p>
+<p><img alt="detection_area" src="./image/detection_area.png" /></p>
 <p>This two-step detection is used for calculation efficiency since collision checking of polygons is heavy.
 Boost.Geometry is used as a library to check collision among polygons.</p>
 <p>In the <code>behavior_determination</code> namespace,</p>
@@ -12945,7 +12945,7 @@ Boost.Geometry is used as a library to check collision among polygons.</p>
 <td>lateral margin for precise detection area expansion [m]</td>
 </tr>
 <tr>
-<td><code>decimate_trajectory_step_length</code></td>
+<td><code>behavior_determination.decimate_trajectory_step_length</code></td>
 <td>double</td>
 <td>longitudinal step length to calculate trajectory polygon for collision checking [m]</td>
 </tr>
