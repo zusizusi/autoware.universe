@@ -12164,6 +12164,19 @@
     Optimization-based planner
   </a>
   
+    <nav class="md-nav" aria-label="Optimization-based planner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#slow-down-planning_1" class="md-nav__link">
+    Slow down planning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -12364,6 +12377,10 @@ This planner data is created first, and then sent to the planning algorithm.</p>
 <p>Obstacles for cruising, stopping and slowing down are selected in this order based on their pose and velocity.</p>
 <p><img alt="determine_cruise_stop_slow_down" src="media/determine_cruise_stop_slow_down.drawio.svg" /></p>
 <h4 id="determine-cruise-vehicles">Determine cruise vehicles<a class="headerlink" href="#determine-cruise-vehicles" title="Permanent link">#</a></h4>
+<p>The obstacles meeting the following condition are determined as obstacles for cruising.</p>
+<ul>
+<li>The object type is for cruising according to <code>cruise_obstacle_type.*</code>.</li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -12387,6 +12404,11 @@ This planner data is created first, and then sent to the planning algorithm.</p>
 <td><code>cruise_obstacle_type.truck</code></td>
 <td>bool</td>
 <td>flag to consider unknown objects for cruising</td>
+</tr>
+<tr>
+<td>...</td>
+<td>bool</td>
+<td>...</td>
 </tr>
 </tbody>
 </table>
@@ -12445,7 +12467,7 @@ This planner data is created first, and then sent to the planning algorithm.</p>
 <tr>
 <td><code>behavior_determination.obstacle_velocity_threshold_from_stop_to_cruise</code></td>
 <td>double</td>
-<td>maximum obstacle velocity for stop considering preventing determination chattering</td>
+<td>maximum obstacle velocity for stop</td>
 </tr>
 </tbody>
 </table>
@@ -12821,8 +12843,9 @@ v_{target} & = max(v_{ego} + v_{add}, v_{min, cruise})
 </tr>
 </tbody>
 </table>
-<p>The role of the slow down planning is inserting slow down velocity in the trajectory where the trajectory points are close to the obstacles.
-The slow down velocity is calculated by linear interpolation as follows.</p>
+<p>The role of the slow down planning is inserting slow down velocity in the trajectory where the trajectory points are close to the obstacles.</p>
+<p>The closest point on the obstacle to the ego's trajectory is calculated.
+Then, the slow down velocity is calculated by linear interpolation with the distance between the point and trajectory as follows.</p>
 <p><img alt="slow_down_velocity_calculation" src="media/slow_down_velocity_calculation.svg" /></p>
 <table>
 <thead>
@@ -12858,6 +12881,8 @@ The slow down velocity is calculated by linear interpolation as follows.</p>
 </tr>
 </tbody>
 </table>
+<p>The calculated velocity is inserted in the trajectory where the obstacle is inside the area with <code>behavior_determination.slow_down.max_lat_margin</code>.</p>
+<p><img alt="slow_down_planning" src="media/slow_down_planning.drawio.svg" /></p>
 <h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">#</a></h2>
 <h3 id="flowchart">Flowchart<a class="headerlink" href="#flowchart" title="Permanent link">#</a></h3>
 <p>Successive functions consist of <code>obstacle_cruise_planner</code> as follows.</p>
@@ -12952,6 +12977,7 @@ It is the obstacle among obstacle candidates whose velocity is less than <code>o
 The target velocity and acceleration is respectively calculated with the PID controller according to the error between the reference safe distance and the actual distance.</p>
 <h3 id="optimization-based-planner">Optimization-based planner<a class="headerlink" href="#optimization-based-planner" title="Permanent link">#</a></h3>
 <p>under construction</p>
+<h4 id="slow-down-planning_1">Slow down planning<a class="headerlink" href="#slow-down-planning_1" title="Permanent link">#</a></h4>
 <h3 id="others">Others<a class="headerlink" href="#others" title="Permanent link">#</a></h3>
 <h4 id="distance-calculation-between-obstacle-and-trajectory">Distance calculation between obstacle and trajectory<a class="headerlink" href="#distance-calculation-between-obstacle-and-trajectory" title="Permanent link">#</a></h4>
 <p>To calculate obstacles inside the, firstly, obstacles whose distance to the trajectory is less than <code>rough_max_lat_margin</code> are selected.
