@@ -12174,6 +12174,16 @@ In current Autoware.universe, only Lanelet2 map format is supported.</p>
 <td>autoware_adapi_v1_msgs/srv/SetRoute</td>
 <td>route change request with lanelet waypoints</td>
 </tr>
+<tr>
+<td><code>~/srv/set_mrm_route</code></td>
+<td>autoware_adapi_v1_msgs/srv/SetRoutePoints</td>
+<td>set emergency route</td>
+</tr>
+<tr>
+<td><code>~/srv/clear_mrm_route</code></td>
+<td>std_srvs/srv/Trigger</td>
+<td>clear emergency route</td>
+</tr>
 </tbody>
 </table>
 <h3 id="subscriptions">Subscriptions<a class="headerlink" href="#subscriptions" title="Permanent link">#</a></h3>
@@ -12209,12 +12219,12 @@ In current Autoware.universe, only Lanelet2 map format is supported.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>/planning/routing/route_state</code></td>
+<td><code>/planning/mission_planning/route_state</code></td>
 <td>autoware_adapi_v1_msgs/msg/RouteState</td>
 <td>route state</td>
 </tr>
 <tr>
-<td><code>/planning/routing/route</code></td>
+<td><code>/planning/mission_planning/route</code></td>
 <td>autoware_planning_msgs/LaneletRoute</td>
 <td>route</td>
 </tr>
