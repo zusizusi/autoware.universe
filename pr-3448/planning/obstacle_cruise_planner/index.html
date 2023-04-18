@@ -12072,13 +12072,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#near-cut-in-vehicles" class="md-nav__link">
-    Near Cut-in vehicles
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -12383,15 +12376,15 @@ The obstacles not in front of the ego will be ignored.</p>
 <li>The lateral distance from the object to the ego's trajectory is smaller than <code>behavior_determination.cruise.max_lat_margin</code>.</li>
 </ul>
 <ul>
-<li>The object type is for cruising according to <code>cruise_obstacle_type.*</code>.</li>
+<li>The object type is for cruising according to <code>common.cruise_obstacle_type.*</code>.</li>
 <li>The object is not crossing the ego's trajectory (*1).</li>
 <li>If the object is inside the trajectory.<ul>
-<li>The object type is for inside cruising according to <code>cruise_obstacle_type.inside.*</code>.</li>
+<li>The object type is for inside cruising according to <code>common.cruise_obstacle_type.inside.*</code>.</li>
 <li>The object velocity is larger than <code>behavior_determination.obstacle_velocity_threshold_from_cruise_to_stop</code>.</li>
 </ul>
 </li>
 <li>If the object is outside the trajectory.<ul>
-<li>The object type is for outside cruising according to <code>cruise_obstacle_type.outside.*</code>.</li>
+<li>The object type is for outside cruising according to <code>common.cruise_obstacle_type.outside.*</code>.</li>
 <li>The object velocity is larger than <code>behavior_determination.cruise.outside_obstacle.obstacle_velocity_threshold</code>.</li>
 <li>The highest confident predicted path collides with the ego's trajectory.</li>
 <li>Its collision's period is larger than <code>behavior_determination.cruise.outside_obstacle.ego_obstacle_overlap_time_threshold</code>.</li>
@@ -12408,17 +12401,17 @@ The obstacles not in front of the ego will be ignored.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>cruise_obstacle_type.inside.unknown</code></td>
+<td><code>common.cruise_obstacle_type.inside.unknown</code></td>
 <td>bool</td>
 <td>flag to consider unknown objects for cruising</td>
 </tr>
 <tr>
-<td><code>cruise_obstacle_type.inside.car</code></td>
+<td><code>common.cruise_obstacle_type.inside.car</code></td>
 <td>bool</td>
 <td>flag to consider unknown objects for cruising</td>
 </tr>
 <tr>
-<td><code>cruise_obstacle_type.inside.truck</code></td>
+<td><code>common.cruise_obstacle_type.inside.truck</code></td>
 <td>bool</td>
 <td>flag to consider unknown objects for cruising</td>
 </tr>
@@ -12428,17 +12421,17 @@ The obstacles not in front of the ego will be ignored.</p>
 <td>...</td>
 </tr>
 <tr>
-<td><code>cruise_obstacle_type.outside.unknown</code></td>
+<td><code>common.cruise_obstacle_type.outside.unknown</code></td>
 <td>bool</td>
 <td>flag to consider unknown objects for cruising</td>
 </tr>
 <tr>
-<td><code>cruise_obstacle_type.outside.car</code></td>
+<td><code>common.cruise_obstacle_type.outside.car</code></td>
 <td>bool</td>
 <td>flag to consider unknown objects for cruising</td>
 </tr>
 <tr>
-<td><code>cruise_obstacle_type.outside.truck</code></td>
+<td><code>common.cruise_obstacle_type.outside.truck</code></td>
 <td>bool</td>
 <td>flag to consider unknown objects for cruising</td>
 </tr>
@@ -12472,7 +12465,7 @@ The obstacles not in front of the ego will be ignored.</p>
 <h4 id="determine-stop-vehicles">Determine stop vehicles<a class="headerlink" href="#determine-stop-vehicles" title="Permanent link">#</a></h4>
 <p>Among obstacles which are not for cruising, the obstacles meeting the following condition are determined as obstacles for stopping.</p>
 <ul>
-<li>The object type is for stopping according to <code>stop_obstacle_type.*</code>.</li>
+<li>The object type is for stopping according to <code>common.stop_obstacle_type.*</code>.</li>
 <li>The lateral distance from the object to the ego's trajectory is smaller than <code>behavior_determination.stop.max_lat_margin</code>.</li>
 <li>The object velocity along the ego's trajectory is smaller than <code>behavior_determination.obstacle_velocity_threshold_from_stop_to_cruise</code>.</li>
 <li>The object<ul>
@@ -12531,7 +12524,7 @@ The obstacles not in front of the ego will be ignored.</p>
 <h4 id="determine-slow-down-vehicles">Determine slow down vehicles<a class="headerlink" href="#determine-slow-down-vehicles" title="Permanent link">#</a></h4>
 <p>Among obstacles which are not for cruising and stopping, the obstacles meeting the following condition are determined as obstacles for slowing down.</p>
 <ul>
-<li>The object type is for slowing down according to <code>slow_down_obstacle_type.*</code>.</li>
+<li>The object type is for slowing down according to <code>common.slow_down_obstacle_type.*</code>.</li>
 <li>The lateral distance from the object to the ego's trajectory is smaller than <code>behavior_determination.slow_down.max_lat_margin</code>.</li>
 </ul>
 <table>
@@ -12567,65 +12560,6 @@ The obstacles not in front of the ego will be ignored.</p>
 <td><code>behavior_determination.slow_down.max_lat_margin</code></td>
 <td>double</td>
 <td>maximum lateral margin for slow down obstacles</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Vehicle objects "inside the detection area" other than "far crossing vehicles".</li>
-<li>non vehicle objects "inside the detection area"</li>
-<li>"Near cut-in vehicles" outside the detection area</li>
-</ul>
-<p>Note that currently the obstacle candidates selection algorithm is for autonomous driving.
-However, we have following parameters as well for stop and cruise respectively so that we can extend the obstacles candidates selection algorithm for non vehicle robots.
-By default, unknown and vehicles are obstacles to cruise and stop, and non vehicles are obstacles just to stop.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>cruise_obstacle_type.unknown</code></td>
-<td>bool</td>
-<td>flag to consider unknown objects for cruising</td>
-</tr>
-<tr>
-<td><code>cruise_obstacle_type.car</code></td>
-<td>bool</td>
-<td>flag to consider unknown objects for cruising</td>
-</tr>
-<tr>
-<td><code>cruise_obstacle_type.truck</code></td>
-<td>bool</td>
-<td>flag to consider unknown objects for cruising</td>
-</tr>
-<tr>
-<td>...</td>
-<td>bool</td>
-<td>...</td>
-</tr>
-<tr>
-<td><code>stop_obstacle_type.unknown</code></td>
-<td>bool</td>
-<td>flag to consider unknown objects for stopping</td>
-</tr>
-<tr>
-<td>...</td>
-<td>bool</td>
-<td>...</td>
-</tr>
-<tr>
-<td><code>slow_down_obstacle_type.unknown</code></td>
-<td>bool</td>
-<td>flag to consider unknown objects for slowing down</td>
-</tr>
-<tr>
-<td>...</td>
-<td>bool</td>
-<td>...</td>
 </tr>
 </tbody>
 </table>
@@ -12665,38 +12599,6 @@ When this time margin is smaller than <code>behavior_determination.stop.crossing
 <td><code>behavior_determination.stop.crossing_obstacle.collision_time_margin</code></td>
 <td>double</td>
 <td>maximum collision time margin of the ego and obstacle</td>
-</tr>
-</tbody>
-</table>
-<h4 id="near-cut-in-vehicles">Near Cut-in vehicles<a class="headerlink" href="#near-cut-in-vehicles" title="Permanent link">#</a></h4>
-<p>Near Cut-in vehicles are defined as vehicle objects</p>
-<ul>
-<li>whose predicted path's footprints from the current time to <code>max_prediction_time_for_collision_check</code> overlap with the detection area longer than <code>ego_obstacle_overlap_time_threshold</code>.</li>
-</ul>
-<p>In the <code>behavior_determination</code> namespace,</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>ego_obstacle_overlap_time_threshold</code></td>
-<td>double</td>
-<td>time threshold to decide cut-in obstacle for cruise or stop [s]</td>
-</tr>
-<tr>
-<td><code>max_prediction_time_for_collision_check</code></td>
-<td>double</td>
-<td>prediction time to check collision between obstacle and ego [s]</td>
-</tr>
-<tr>
-<td><code>outside_obstacle_min_velocity_threshold</code></td>
-<td>double</td>
-<td>minimum velocity threshold of target obstacle for cut-in detection [m/s]</td>
 </tr>
 </tbody>
 </table>
