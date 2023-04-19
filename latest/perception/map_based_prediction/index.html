@@ -12038,16 +12038,23 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#lane-change-detection-logic" class="md-nav__link">
-    Lane change detection logic
+  <a href="#tuning-lane-change-detection-logic" class="md-nav__link">
+    Tuning lane change detection logic
   </a>
   
-    <nav class="md-nav" aria-label="Lane change detection logic">
+    <nav class="md-nav" aria-label="Tuning lane change detection logic">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#limitations" class="md-nav__link">
-    Limitations
+  <a href="#tuning-threshold-parameters" class="md-nav__link">
+    Tuning threshold parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tuning-lateral-velocity-calculation" class="md-nav__link">
+    Tuning lateral velocity calculation
   </a>
   
 </li>
@@ -12172,53 +12179,110 @@
 </ul>
 <h4 id="get-predicted-reference-path">Get predicted reference path<a class="headerlink" href="#get-predicted-reference-path" title="Permanent link">#</a></h4>
 <ul>
-<li>Get reference path<ul>
+<li>Get reference path:<ul>
 <li>Create a reference path for the object from the associated lanelet.</li>
 </ul>
 </li>
-<li>Predict Object Maneuver<ul>
+<li>Predict object maneuver:<ul>
 <li>Generate predicted paths for the object.</li>
-<li>The probability is assigned to each maneuver of <code>Lane Follow</code>, <code>Left Lane Change</code>, and <code>Right Lane Change</code> based on the object history and the reference path obtained in the first step.</li>
-<li>The following information is used to determine the maneuver.<ul>
-<li>The distance between the current center of gravity of the object and the left and right boundaries of the lane</li>
-<li>The lateral velocity (distance moved to the lateral direction in <code>t</code> seconds)</li>
+<li>Assign probability to each maneuver of <code>Lane Follow</code>, <code>Left Lane Change</code>, and <code>Right Lane Change</code> based on the object history and the reference path obtained in the first step.</li>
+<li>Lane change decision is based on two domains:<ul>
+<li>Geometric domain: the lateral distance between the center of gravity of the object and left/right boundaries of the lane.</li>
+<li>Time domain: estimated time margin for the object to reach the left/right bound.</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p>The conditions for the lane change detection then becomes</p>
-<div class="highlight"><pre><span></span><code><span class="c1">//  Left Lane Change Detection</span>
-<span class="p">(</span><span class="n">d_current_left</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">d_lane</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">dl_ratio_threshold</span><span class="w"> </span><span class="o">&amp;&amp;</span>
-<span class="p">(</span><span class="n">d_current_left</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">d_previous_left</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ddl_threshold</span>
-
-<span class="c1">// Right Lane Change Detection</span>
-<span class="p">(</span><span class="n">d_current_right</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">d_lane</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dr_ratio_threshold</span><span class="w"> </span><span class="o">&amp;&amp;</span>
-<span class="p">(</span><span class="n">d_current_right</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">d_previous_right</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ddr_threshold</span>
-</code></pre></div>
-<p>where the parameter is explained in the picture below. An example of how to tune the parameters is described later.</p>
+<p>The conditions for left lane change detection are:</p>
+<ul>
+<li>Check if the distance to the left lane boundary is less than the distance to the right lane boundary.</li>
+<li>Check if the distance to the left lane boundary is less than a <code>dist_threshold_to_bound_</code>.</li>
+<li>Check if the lateral velocity direction is towards the left lane boundary.</li>
+<li>Check if the time to reach the left lane boundary is less than <code>time_threshold_to_bound_</code>.</li>
+</ul>
+<p>Lane change logics is illustrated in the figure below.An example of how to tune the parameters is described later.</p>
 <p><img alt="lane change detection" src="media/lane_change_detection.drawio.svg" /></p>
 <ul>
-<li>Calculate Object Probability<ul>
+<li>Calculate object probability:<ul>
 <li>The path probability obtained above is calculated based on the current position and angle of the object.</li>
 </ul>
 </li>
-<li>Refine predicted paths for smooth movement<ul>
+<li>Refine predicted paths for smooth movement:<ul>
 <li>The generated predicted paths are recomputed to take the vehicle dynamics into account.</li>
-<li>The path is calculated with minimum jerk trajectory implemented by 4th/5th order spline for lateral/longitudinal motion.引く。</li>
+<li>The path is calculated with minimum jerk trajectory implemented by 4th/5th order spline for lateral/longitudinal motion.</li>
 </ul>
 </li>
 </ul>
-<h3 id="lane-change-detection-logic">Lane change detection logic<a class="headerlink" href="#lane-change-detection-logic" title="Permanent link">#</a></h3>
-<p>This is an example to tune the parameters for lane change detection.
-The default parameters are set so that the lane change can be detected 1 second before the vehicle crosses the lane boundary. Here, 15 data in the lane change / non lane change cases are plotted.</p>
-<p><img alt="right change data" src="media/lanechange_detection_right_to_left.png" /></p>
-<p>On the top plot, blue dots are the distance from the lane boundary one second before the lane change, and red dots are the average distance from the lane boundary when driving straight. From this plot, the most conservative value where lane change can be detected for all of these data can be seen as <code>-1.1</code>. Note that the larger number makes the decision conservative (lane change may not be detected) and the lower number makes the decision aggressive (many false positive occurs).</p>
-<p>On the bottom plot, blue dots are the lateral velocity one second before the lane change, and red dots are the average of the (absolute) lateral velocity when driving straight. In the same policy above, the parameter can be set as <code>0.5</code>.</p>
-<h4 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">#</a></h4>
+<h3 id="tuning-lane-change-detection-logic">Tuning lane change detection logic<a class="headerlink" href="#tuning-lane-change-detection-logic" title="Permanent link">#</a></h3>
+<p>Currently we provide two parameters to tune lane change detection:</p>
 <ul>
-<li>This plot shows only for one environment data. The parameter/algorithm must consider lane width. (The default parameters are set roughly considering the generalization of the lane width for other environments.)</li>
+<li><code>dist_threshold_to_bound_</code>: maximum distance from lane boundary allowed for lane changing vehicle</li>
+<li><code>time_threshold_to_bound_</code>: maximum time allowed for lane change vehicle to reach the boundary</li>
+<li><code>cutoff_freq_of_velocity_lpf_</code>: cutoff frequency of low pass filter for lateral velocity</li>
 </ul>
+<p>You can change these parameters in rosparam in the table below.</p>
+<table>
+<thead>
+<tr>
+<th>param name</th>
+<th>default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dist_threshold_for_lane_change_detection</code></td>
+<td><code>1.0</code> [m]</td>
+</tr>
+<tr>
+<td><code>time_threshold_for_lane_change_detection</code></td>
+<td><code>5.0</code> [s]</td>
+</tr>
+<tr>
+<td><code>cutoff_freq_of_velocity_for_lane_change_detection</code></td>
+<td><code>0.1</code> [Hz]</td>
+</tr>
+</tbody>
+</table>
+<h4 id="tuning-threshold-parameters">Tuning threshold parameters<a class="headerlink" href="#tuning-threshold-parameters" title="Permanent link">#</a></h4>
+<p>Increasing these two parameters will slow down and stabilize the lane change estimation.</p>
+<p>Normally, we recommend tuning only <code>time_threshold_for_lane_change_detection</code> because it is the more important factor for lane change decision.</p>
+<h4 id="tuning-lateral-velocity-calculation">Tuning lateral velocity calculation<a class="headerlink" href="#tuning-lateral-velocity-calculation" title="Permanent link">#</a></h4>
+<p>Lateral velocity calculation is also a very important factor for lane change decision because it is used in the time domain decision.</p>
+<p>The predicted time to reach the lane boundary is calculated by</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+t_{predicted} = \dfrac{d_{lat}}{v_{lat}}
+</div>
+<script type="math/tex; mode=display">
+t_{predicted} = \dfrac{d_{lat}}{v_{lat}}
+</script>
+</div>
+<p>where <span class="arithmatex"><span class="MathJax_Preview">d_{lat}</span><script type="math/tex">d_{lat}</script></span> and <span class="arithmatex"><span class="MathJax_Preview">v_{lat}</span><script type="math/tex">v_{lat}</script></span> represent the lateral distance to the lane boundary and the lateral velocity, respectively.</p>
+<p>Lowering the cutoff frequency of the low-pass filter for lateral velocity will make the lane change decision more stable but slower. Our setting is very conservative, so you may increase this parameter if you want to make the lane change decision faster.</p>
+<p>For the additional information, here we show how we calculate lateral velocity.</p>
+<table>
+<thead>
+<tr>
+<th>lateral velocity calculation method</th>
+<th>equation</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[<strong>applied</strong>] time derivative of lateral distance</td>
+<td><span class="arithmatex"><span class="MathJax_Preview">\dfrac{\Delta d_{lat}}{\Delta t}</span><script type="math/tex">\dfrac{\Delta d_{lat}}{\Delta t}</script></span></td>
+<td>Currently, we use this method to deal with winding roads. Since this time differentiation easily becomes noisy, we also use a low-pass filter to get smoothed velocity.</td>
+</tr>
+<tr>
+<td>[not applied] Object Velocity Projection to Lateral Direction</td>
+<td><span class="arithmatex"><span class="MathJax_Preview">v_{obj} \sin(\theta)</span><script type="math/tex">v_{obj} \sin(\theta)</script></span></td>
+<td>Normally, object velocities are less noisy than the time derivative of lateral distance. But the yaw difference <span class="arithmatex"><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span> between the lane and object directions sometimes becomes discontinuous, so we did not adopt this method.</td>
+</tr>
+</tbody>
+</table>
+<p>Currently, we use the upper method with a low-pass filter to calculate lateral velocity.</p>
 <h3 id="path-prediction-for-crosswalk-users">Path prediction for crosswalk users<a class="headerlink" href="#path-prediction-for-crosswalk-users" title="Permanent link">#</a></h3>
 <p>This module treats <strong>Pedestrians</strong> and <strong>Bicycles</strong> as objects using the crosswalk, and outputs prediction path based on map and estimated object's velocity, assuming the object has intention to cross the crosswalk, if the objects satisfies at least one of the following conditions:</p>
 <ul>
