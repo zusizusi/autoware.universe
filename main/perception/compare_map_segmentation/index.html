@@ -12280,6 +12280,11 @@
 <td><code>geometry_msgs::msg::PoseWithCovarianceStamped</code></td>
 <td>current ego-vehicle pose (in case dynamic map loading)</td>
 </tr>
+<tr>
+<td><code>/localization/initialization_state</code></td>
+<td><code>localization_interface::InitializationState</code></td>
+<td>Ego-vehicle pose initialization state (in dynamic map loading)</td>
+</tr>
 </tbody>
 </table>
 <h4 id="output_1">Output<a class="headerlink" href="#output_1" title="Permanent link">#</a></h4>
@@ -12319,13 +12324,13 @@
 <tr>
 <td align="left"><code>distance_threshold</code></td>
 <td align="left">float</td>
-<td align="left">VoxelGrid's leaf_size also the threshold to check distance between input point and map point</td>
+<td align="left">Threshold distance to compare input points with map points [m]</td>
 <td align="left">0.5</td>
 </tr>
 <tr>
 <td align="left"><code>map_update_distance_threshold</code></td>
 <td align="left">float</td>
-<td align="left">Threshold of vehicle movement distance when map update is necessary [m]</td>
+<td align="left">Threshold of vehicle movement distance when map update is necessary (in dynamic map loading) [m]</td>
 <td align="left">10.0</td>
 </tr>
 <tr>
@@ -12337,8 +12342,14 @@
 <tr>
 <td align="left"><code>timer_interval_ms</code></td>
 <td align="left">int</td>
-<td align="left">time interval of timer to check if update the map is necessary (in dynamic map loading) [ms]</td>
+<td align="left">Timer interval to check if the map update is necessary (in dynamic map loading) [ms]</td>
 <td align="left">100</td>
+</tr>
+<tr>
+<td align="left"><code>publish_debug_pcd</code></td>
+<td align="left">bool</td>
+<td align="left">Enable to publish voxelized updated map in <code>debug/downsampled_map/pointcloud</code> for debugging. It might cause additional computation cost</td>
+<td align="left">false</td>
 </tr>
 </tbody>
 </table>
