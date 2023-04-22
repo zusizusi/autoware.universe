@@ -8516,8 +8516,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#collision-point" class="md-nav__link">
-    Collision point
+  <a href="#collision-points" class="md-nav__link">
+    Collision points
   </a>
   
 </li>
@@ -8537,15 +8537,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#obstacle-cruise-wall" class="md-nav__link">
-    Obstacle cruise wall
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#obstacle-stop-wall" class="md-nav__link">
-    Obstacle stop wall
+  <a href="#obstacle-for-slow-down" class="md-nav__link">
+    Obstacle for slow down
   </a>
   
 </li>
@@ -12079,8 +12072,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#collision-point" class="md-nav__link">
-    Collision point
+  <a href="#collision-points" class="md-nav__link">
+    Collision points
   </a>
   
 </li>
@@ -12100,15 +12093,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#obstacle-cruise-wall" class="md-nav__link">
-    Obstacle cruise wall
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#obstacle-stop-wall" class="md-nav__link">
-    Obstacle stop wall
+  <a href="#obstacle-for-slow-down" class="md-nav__link">
+    Obstacle for slow down
   </a>
   
 </li>
@@ -12139,29 +12125,29 @@
 <h1 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">#</a></h1>
 <h2 id="debug-visualization">Debug visualization<a class="headerlink" href="#debug-visualization" title="Permanent link">#</a></h2>
 <h3 id="detection-area">Detection area<a class="headerlink" href="#detection-area" title="Permanent link">#</a></h3>
-<p>Green polygons which is a detection area is visualized by <code>detection_polygons</code> in the <code>~/debug/marker</code> topic.</p>
-<p><img alt="detection_area" src="../../image/detection_area.png" /></p>
-<h3 id="collision-point">Collision point<a class="headerlink" href="#collision-point" title="Permanent link">#</a></h3>
-<p>Red point which is a collision point with obstacle is visualized by <code>collision_points</code> in the <code>~/debug/marker</code> topic.</p>
-<p><img alt="collision_point" src="../../image/collision_point.png" /></p>
+<p>Green polygons which is a detection area is visualized by <code>detection_polygons</code> in the <code>~/debug/marker</code> topic.
+To determine each behavior (cruise, stop, and slow down), if <code>behavior_determination.*.max_lat_margin</code> is not zero, the polygons are expanded with the additional width.</p>
+<p><img alt="detection_area" src="../../media/detection_area.png" /></p>
+<h3 id="collision-points">Collision points<a class="headerlink" href="#collision-points" title="Permanent link">#</a></h3>
+<p>Red points which are collision points with obstacle are visualized by <code>*_collision_points</code> for each behavior in the <code>~/debug/marker</code> topic.</p>
+<p><img alt="collision_point" src="../../media/collision_point.png" /></p>
 <h3 id="obstacle-for-cruise">Obstacle for cruise<a class="headerlink" href="#obstacle-for-cruise" title="Permanent link">#</a></h3>
-<p>Yellow sphere which is a obstacle for cruise is visualized by <code>obstacles_to_cruise</code> in the <code>~/debug/marker</code> topic.</p>
-<p><img alt="obstacle_to_cruise" src="../../image/obstacle_to_cruise.png" /></p>
+<p>Orange sphere which is an obstacle for cruise is visualized by <code>obstacles_to_cruise</code> in the <code>~/debug/marker</code> topic.</p>
+<p>Orange wall which means a safe distance to cruise if the ego's front meets the wall is visualized in the <code>~/debug/cruise/virtual_wall</code> topic.</p>
+<p><img alt="cruise_visualization" src="../../media/cruise_visualization.png" /></p>
 <h3 id="obstacle-for-stop">Obstacle for stop<a class="headerlink" href="#obstacle-for-stop" title="Permanent link">#</a></h3>
-<p>Red sphere which is a obstacle for stop is visualized by <code>obstacles_to_stop</code> in the <code>~/debug/marker</code> topic.</p>
-<p><img alt="obstacle_to_stop" src="../../image/obstacle_to_stop.png" /></p>
+<p>Red sphere which is an obstacle for stop is visualized by <code>obstacles_to_stop</code> in the <code>~/debug/marker</code> topic.</p>
+<p>Red wall which means a safe distance to stop if the ego's front meets the wall is visualized in the <code>~/virtual_wall</code> topic.</p>
+<p><img alt="stop_visualization" src="../../media/stop_visualization.png" /></p>
+<h3 id="obstacle-for-slow-down">Obstacle for slow down<a class="headerlink" href="#obstacle-for-slow-down" title="Permanent link">#</a></h3>
+<p>Yellow sphere which is an obstacle for slow_down is visualized by <code>obstacles_to_slow_down</code> in the <code>~/debug/marker</code> topic.</p>
+<p>Yellow wall which means a safe distance to slow_down if the ego's front meets the wall is visualized in the <code>~/debug/slow_down/virtual_wall</code> topic.</p>
+<p><img alt="slow_down_visualization" src="../../media/slow_down_visualization.png" /></p>
 <!-- ### Obstacle ignored to cruise or stop intentionally -->
 
 <!-- Green sphere which is a obstacle ignored intentionally to cruise or stop is visualized by `intentionally_ignored_obstacles` in the `~/debug/marker` topic. -->
 
 <!-- ![intentionally_ignored_obstacle](../image/intentionally_ignored_obstacle.png) -->
-
-<h3 id="obstacle-cruise-wall">Obstacle cruise wall<a class="headerlink" href="#obstacle-cruise-wall" title="Permanent link">#</a></h3>
-<p>Yellow wall which means a safe distance to cruise if the ego's front meets the wall is visualized in the <code>~/debug/cruise_wall_marker</code> topic.</p>
-<p><img alt="obstacle_to_cruise" src="../../image/obstacle_to_cruise.png" /></p>
-<h3 id="obstacle-stop-wall">Obstacle stop wall<a class="headerlink" href="#obstacle-stop-wall" title="Permanent link">#</a></h3>
-<p>Red wall which means a safe distance to stop if the ego's front meets the wall is visualized in the <code>~/debug/stop_wall_marker</code> topic.</p>
-<p><img alt="obstacle_to_stop" src="../../image/obstacle_to_stop.png" /></p>
 
 
 
