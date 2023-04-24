@@ -12474,12 +12474,12 @@
 <tr>
 <td align="left">candidate modules</td>
 <td align="left">Not approved</td>
-<td align="left">The candidate modules whose modified path has not been approved by <a href="https://github.com/autowarefoundation/autoware.universe/blob/main/planning/rtc_interface/README.md">RTC</a> is stored in vector <code>candidate_module_ptrs_</code> in the manager. The candidate modules stack is updated in the following order. 1. The manager selects only those modules that can be executed based on the configuration of the sub-manager whose scene module requests execution. 2. Determines the execution priority. 3. Executes them as candidate module. All of these modules receive the decided (approved) path from approved modules stack and <strong>RUN in PARALLEL</strong>. <img alt="candidate_modules_stack" src="../../image/manager/candidate_modules_stack.svg" /></td>
+<td align="left">The candidate modules whose modified path has not been approved by <a href="https://github.com/autowarefoundation/autoware.universe/blob/main/planning/rtc_interface/README.md">RTC</a> is stored in vector <code>candidate_module_ptrs_</code> in the manager. The candidate modules stack is updated in the following order. 1. The manager selects only those modules that can be executed based on the configuration of the sub-manager whose scene module requests execution. 2. Determines the execution priority. 3. Executes them as candidate module. All of these modules receive the decided (approved) path from approved modules stack and <strong>RUN in PARALLEL</strong>. <br><img alt="candidate_modules_stack" src="../../image/manager/candidate_modules_stack.svg" /></td>
 </tr>
 <tr>
 <td align="left">approved modules</td>
 <td align="left">Already approved</td>
-<td align="left">When the path modification is approved via RTC commands, the manager moves the candidate module to approved modules stack. These modules are stored in <code>approved_module_ptrs_</code>. In this stack, all scene modules <strong>RUN in SERIES</strong>. <img alt="approved_modules_stack" src="../../image/manager/approved_modules_stack.svg" /></td>
+<td align="left">When the path modification is approved via RTC commands, the manager moves the candidate module to approved modules stack. These modules are stored in <code>approved_module_ptrs_</code>. In this stack, all scene modules <strong>RUN in SERIES</strong>. <br><img alt="approved_modules_stack" src="../../image/manager/approved_modules_stack.svg" /></td>
 </tr>
 </tbody>
 </table>
