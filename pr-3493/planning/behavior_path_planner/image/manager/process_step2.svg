@@ -345,12 +345,12 @@
               <div
                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; overflow-wrap: normal;"
               >
-                The manager recieves module's execution request and pointer.
+                The manager receives module's execution request and pointer.
               </div>
             </div>
           </div>
         </foreignObject>
-        <text x="1027" y="521" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle" font-weight="bold">The manager recieves module'...</text>
+        <text x="1027" y="521" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle" font-weight="bold">The manager receives module'...</text>
       </switch>
     </g>
     <path d="M 1002 542 L 1142 542 L 1142 572 L 1082.2 572 L 1052.4 592 L 1062.2 572 L 1002 572 Z" fill="#990000" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>

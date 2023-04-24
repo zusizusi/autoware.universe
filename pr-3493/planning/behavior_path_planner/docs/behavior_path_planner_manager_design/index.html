@@ -12338,6 +12338,7 @@
 <li>delete scene expired modules.</li>
 </ul>
 <p>Additionally, the manager generates root reference path, and if any other modules don't request execution, the path is used as the planning result of <code>behavior_path_planner</code>.</p>
+<p><img alt="manager_overview" src="../../image/manager/manager_overview.svg" /></p>
 <h3 id="sub-managers">Sub-managers<a class="headerlink" href="#sub-managers" title="Permanent link">#</a></h3>
 <p>The sub-manager's main task is</p>
 <ul>
@@ -12347,6 +12348,7 @@
 <li>delete expired scene module instance from <code>registered_modules_</code>.</li>
 <li>publish debug markers.</li>
 </ul>
+<p><img alt="sub_managers" src="../../image/manager/sub_managers.svg" /></p>
 <p>Sub-manager is registered on the manager with the following function.</p>
 <div class="highlight"><pre><span></span><code><span class="cm">/**</span>
 <span class="cm"> * @brief register managers.</span>
@@ -12407,6 +12409,7 @@
 </table>
 <h3 id="scene-modules">Scene modules<a class="headerlink" href="#scene-modules" title="Permanent link">#</a></h3>
 <p>Scene modules receives necessary data and RTC command, and outputs candidate path(s), reference path and RTC cooperate status. When multiple modules run in series, the output of the previous module is received as input and the information is used to generate a new modified path, as shown in the following figure. And, when one module is running alone, it receives a reference path generated from the centerline of the lane in which Ego is currently driving as previous module output.</p>
+<p><img alt="scene_module" src="../../image/manager/scene_module.svg" /></p>
 <table>
 <thead>
 <tr>
@@ -12471,23 +12474,28 @@
 <tr>
 <td align="left">candidate modules</td>
 <td align="left">Not approved</td>
-<td align="left">The candidate modules whose modified path has not been approved by <a href="https://github.com/autowarefoundation/autoware.universe/blob/main/planning/rtc_interface/README.md">RTC</a> is stored in vector <code>candidate_module_ptrs_</code> in the manager. The candidate modules stack is updated in the following order. 1. The manager selects only those modules that can be executed based on the configuration of the sub-manager whose scene module requests execution. 2. Determines the execution priority. 3. Executes them as candidate module. All of these modules receive the decided (approved) path from approved modules stack and <strong>RUN in PARALLEL</strong>.</td>
+<td align="left">The candidate modules whose modified path has not been approved by <a href="https://github.com/autowarefoundation/autoware.universe/blob/main/planning/rtc_interface/README.md">RTC</a> is stored in vector <code>candidate_module_ptrs_</code> in the manager. The candidate modules stack is updated in the following order. 1. The manager selects only those modules that can be executed based on the configuration of the sub-manager whose scene module requests execution. 2. Determines the execution priority. 3. Executes them as candidate module. All of these modules receive the decided (approved) path from approved modules stack and <strong>RUN in PARALLEL</strong>. <img alt="candidate_modules_stack" src="../../image/manager/candidate_modules_stack.svg" /></td>
 </tr>
 <tr>
 <td align="left">approved modules</td>
 <td align="left">Already approved</td>
-<td align="left">When the path modification is approved via RTC commands, the manager moves the candidate module to approved modules stack. These modules are stored in <code>approved_module_ptrs_</code>. In this stack, all scene modules <strong>RUN in SERIES</strong>.</td>
+<td align="left">When the path modification is approved via RTC commands, the manager moves the candidate module to approved modules stack. These modules are stored in <code>approved_module_ptrs_</code>. In this stack, all scene modules <strong>RUN in SERIES</strong>. <img alt="approved_modules_stack" src="../../image/manager/approved_modules_stack.svg" /></td>
 </tr>
 </tbody>
 </table>
 <h2 id="process-flow">Process flow<a class="headerlink" href="#process-flow" title="Permanent link">#</a></h2>
 <p>There are 5 steps in one process:</p>
 <p><strong>Step1.</strong> At first, the manager set latest planner data, and run all approved modules and get output path. At this time, the manager checks module status and removes expired modules from approved modules stack.</p>
+<p><img alt="process_step1" src="../../image/manager/process_step1.svg" /></p>
 <p><strong>Step2.</strong> Input approved modules output and necessary data to all registered modules, and the modules judge the necessity of path modification based on it. The manager checks which module makes execution request.</p>
+<p><img alt="process_step2" src="../../image/manager/process_step2.svg" /></p>
 <p><strong>Step3.</strong> Check request module existence.</p>
 <p><strong>Step4.</strong> The manager decides which module to execute as candidate modules from the modules that requested to execute path modification.</p>
+<p><img alt="process_step4" src="../../image/manager/process_step4.svg" /></p>
 <p><strong>Step5.</strong> Decides the priority order of execution among candidate modules. And, run all candidate modules. Each modules outputs reference path and RTC cooperate status.</p>
+<p><img alt="process_step5" src="../../image/manager/process_step5.svg" /></p>
 <p><strong>Step6.</strong> Move approved module to approved modules stack from candidate modules stack.</p>
+<p><img alt="process_step6" src="../../image/manager/process_step6.svg" /></p>
 <p>and, within a single planning cycle, these steps are repeated until the following conditions are satisfied.</p>
 <ul>
 <li><strong>Any modules don't make a request of path modification.</strong></li>
@@ -12735,12 +12743,18 @@
 <p>If one module requests multiple path changes, the module may be back to waiting approval condition again. In this case, the manager moves the module to candidate modules stack. If there are some modules that was pushed back to approved modules stack later than the waiting approved module, it is also removed from approved modules stack.</p>
 <p>This is because module C is planning output path with the output of module B as input, and if module B is removed from approved modules stack and the input of module C changes, the output path of module C may also change greatly, and the output path will be unstable.</p>
 <p>As a result, the module A's output is used as approved modules stack.</p>
+<p><img alt="waiting_approve" src="../../image/manager/waiting_approve.svg" /></p>
 <h3 id="failure-modules">Failure modules<a class="headerlink" href="#failure-modules" title="Permanent link">#</a></h3>
 <p>The failure modules return the status <code>ModuleStatus::FAILURE</code>. The manager removes the module from approved modules stack as well as waiting approval modules, but the failure module is not moved to candidate modules stack.</p>
 <p>As a result, the module A's output is used as approved modules stack.</p>
+<p><img alt="failure_modules" src="../../image/manager/failure_modules.svg" /></p>
 <h3 id="succeeded-modules">Succeeded modules<a class="headerlink" href="#succeeded-modules" title="Permanent link">#</a></h3>
 <p>The succeeded modules return the status <code>ModuleStatus::SUCCESS</code>. The manager removes those modules based on <strong>Last In First Out</strong> policy. In other words, if a module added later to approved modules stack is still running (is in <code>ModuleStatus::RUNNING</code>), the manager doesn't remove the succeeded module. The reason for this is the same as in removal for waiting approval modules, and is to prevent sudden changes of the running module's output.</p>
+<p><img alt="success_modules_remove" src="../../image/manager/success_modules_remove.svg" /></p>
+<p><img alt="success_modules_skip" src="../../image/manager/success_modules_skip.svg" /></p>
 <p>As an exception, if <strong>Lane Change</strong> module returns status <code>ModuleStatus::SUCCESS</code>, the manager doesn't remove any modules until all modules is in status <code>ModuleStatus::SUCCESS</code>. This is because when the manager removes the <strong>Lane Change</strong> (normal LC, external LC, avoidance by LC) module as succeeded module, the manager updates the information of the lane Ego is currently driving in, so root reference path (= module A's input path) changes significantly at that moment.</p>
+<p><img alt="lane_change_remove" src="../../image/manager/lane_change_remove.svg" /></p>
+<p><img alt="lane_change_skip" src="../../image/manager/lane_change_skip.svg" /></p>
 <p>When the manager removes succeeded modules, the last added module's output is used as approved modules stack.</p>
 <h2 id="reference-path-generation">Reference path generation<a class="headerlink" href="#reference-path-generation" title="Permanent link">#</a></h2>
 <p>The manager generates root reference path from the centerline of the ego driving lanes. The root reference path is not only used as an input to the first added module of approved modules stack, but also used as the output of <code>behavior_path_planner</code> if none of the modules are running.</p>
