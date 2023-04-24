@@ -12178,14 +12178,14 @@
 </p>
 
 <h3 id="distance-based-compare-map-filter">Distance Based Compare Map Filter<a class="headerlink" href="#distance-based-compare-map-filter" title="Permanent link">#</a></h3>
-<p>WIP</p>
+<p>This filter compares the input pointcloud with the map pointcloud using the <code>nearestKSearch</code> function of <code>kdtree</code> and removes points that are close to the map point cloud. The map pointcloud can be loaded statically at once at the beginning or dynamically as the vehicle moves.</p>
 <h3 id="voxel-based-approximate-compare-map-filter">Voxel Based Approximate Compare Map Filter<a class="headerlink" href="#voxel-based-approximate-compare-map-filter" title="Permanent link">#</a></h3>
-<p>WIP</p>
+<p>The filter loads the map point cloud, which can be loaded statically at the beginning or dynamically during vehicle movement, and creates a voxel grid of the map point cloud. The filter uses the getCentroidIndexAt function in combination with the getGridCoordinates function from the VoxelGrid class to find input points that are inside the voxel grid and removes them.</p>
 <h3 id="voxel-based-compare-map-filter">Voxel Based Compare Map Filter<a class="headerlink" href="#voxel-based-compare-map-filter" title="Permanent link">#</a></h3>
 <p>The filter loads the map pointcloud (static loading whole map at once at beginning or dynamic loading during vehicle moving) and utilizes VoxelGrid to downsample map pointcloud.</p>
 <p>For each point of input pointcloud, the filter use <code>getCentroidIndexAt</code> combine with <code>getGridCoordinates</code> function from VoxelGrid class to check if the downsampled map point existing surrounding input points. Remove the input point which has downsampled map point in voxels containing or being close to the point.</p>
 <h3 id="voxel-distance-based-compare-map-filter">Voxel Distance based Compare Map Filter<a class="headerlink" href="#voxel-distance-based-compare-map-filter" title="Permanent link">#</a></h3>
-<p>WIP</p>
+<p>This filter is a combination of the distance_based_compare_map_filter and voxel_based_approximate_compare_map_filter. The filter loads the map point cloud, which can be loaded statically at the beginning or dynamically during vehicle movement, and creates a voxel grid and a k-d tree of the map point cloud. The filter uses the getCentroidIndexAt function in combination with the getGridCoordinates function from the VoxelGrid class to find input points that are inside the voxel grid and removes them. For points that do not belong to any voxel grid, they are compared again with the map point cloud using the radiusSearch function of the k-d tree and are removed if they are close enough to the map.</p>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
 <h3 id="compare-elevation-map-filter_1">Compare Elevation Map Filter<a class="headerlink" href="#compare-elevation-map-filter_1" title="Permanent link">#</a></h3>
 <h4 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h4>
