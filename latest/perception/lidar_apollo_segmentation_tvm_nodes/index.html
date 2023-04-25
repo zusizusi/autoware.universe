@@ -21,7 +21,7 @@
     
     
       
-        <title>lidar_apollo_segmentation_tvm_nodes - Autoware Universe Documentation</title>
+        <title>Index - Autoware Universe Documentation</title>
       
     
     
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              lidar_apollo_segmentation_tvm_nodes
+              Index
             
           </span>
         </div>
@@ -12031,13 +12031,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    Parameters
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -12094,6 +12087,22 @@
   
 
 
+<!--
+  Copyright 2021-2023 Arm Ltd., the Autoware Foundation
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
 <h1 id="lidar_apollo_segmentation_tvm_nodes">lidar_apollo_segmentation_tvm_nodes<a class="headerlink" href="#lidar_apollo_segmentation_tvm_nodes" title="Permanent link">#</a></h1>
 <h2 id="purpose-use-cases">Purpose / Use cases<a class="headerlink" href="#purpose-use-cases" title="Permanent link">#</a></h2>
 <p>An alternative to Euclidean clustering.
@@ -12115,79 +12124,6 @@ Not having this filter may negatively impact performance.</p>
 <p>The input are non-ground points as a PointCloud2 message from the sensor_msgs package.</p>
 <h4 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">#</a></h4>
 <p>The output is a <a href="https://github.com/tier4/tier4_autoware_msgs/blob/tier4/universe/tier4_perception_msgs/msg/object_recognition/DetectedObjectsWithFeature.msg">DetectedObjectsWithFeature</a>.</p>
-<h4 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>range</code></td>
-<td><em>int</em></td>
-<td>The range of the 2D grid with respect to the origin (the LiDAR sensor). Unit: meter</td>
-<td><code>70</code></td>
-</tr>
-<tr>
-<td><code>score_threshold</code></td>
-<td><em>float</em></td>
-<td>The detection confidence score threshold for filtering out the candidate clusters in the post-processing step.</td>
-<td><code>0.8</code></td>
-</tr>
-<tr>
-<td><code>use_intensity_feature</code></td>
-<td><em>bool</em></td>
-<td>Enable input channel intensity feature.</td>
-<td><code>true</code></td>
-</tr>
-<tr>
-<td><code>use_constant_feature</code></td>
-<td><em>bool</em></td>
-<td>Enable input channel constant feature.</td>
-<td><code>false</code></td>
-</tr>
-<tr>
-<td><code>z_offset</code></td>
-<td><em>float</em></td>
-<td>The offset to translate up the input pointcloud before the inference. Unit: meter</td>
-<td><code>0.0</code></td>
-</tr>
-<tr>
-<td><code>min_height</code></td>
-<td><em>float</em></td>
-<td>The minimum height with respect to the origin (the LiDAR sensor). Unit: meter</td>
-<td><code>-5.0</code></td>
-</tr>
-<tr>
-<td><code>max_height</code></td>
-<td><em>float</em></td>
-<td>The maximum height with respect to the origin (the LiDAR sensor). Unit: meter</td>
-<td><code>5.0</code></td>
-</tr>
-<tr>
-<td><code>objectness_thresh</code></td>
-<td><em>float</em></td>
-<td>The threshold of objectness for filtering out non-object cells in the obstacle clustering step.</td>
-<td><code>0.5</code></td>
-</tr>
-<tr>
-<td><code>min_pts_num</code></td>
-<td><em>int</em></td>
-<td>In the post-processing step, the candidate clusters with less than min_pts_num points are removed.</td>
-<td><code>3</code></td>
-</tr>
-<tr>
-<td><code>height_thresh</code></td>
-<td><em>float</em></td>
-<td>If it is non-negative, the points that are higher than the predicted object height by height_thresh are filtered out in the post-processing step. Unit: meter</td>
-<td><code>0.5</code></td>
-</tr>
-</tbody>
-</table>
 <h3 id="error-detection-and-handling">Error detection and handling<a class="headerlink" href="#error-detection-and-handling" title="Permanent link">#</a></h3>
 <p>Abort and warn when the input frame can't be converted to <code>base_link</code>.</p>
 <h3 id="security-considerations">Security considerations<a class="headerlink" href="#security-considerations" title="Permanent link">#</a></h3>
