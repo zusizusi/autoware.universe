@@ -14,7 +14,7 @@
         <link rel="prev" href="../behavior_path_planner_avoidance_design/">
       
       
-        <link rel="next" href="../behavior_path_planner_lane_change_design/">
+        <link rel="next" href="../behavior_path_planner_goal_planner_design/">
       
       <link rel="icon" href="../../../../docs/assets/images/autoware-foundation.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
@@ -7676,6 +7676,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../behavior_path_planner_goal_planner_design/" class="md-nav__link">
+        Goal Planner design
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../behavior_path_planner_lane_change_design/" class="md-nav__link">
         Lane Change design
       </a>
@@ -7720,20 +7734,6 @@
     <li class="md-nav__item">
       <a href="../behavior_path_planner_pull_out_design/" class="md-nav__link">
         Pull Out design
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../behavior_path_planner_pull_over_design/" class="md-nav__link">
-        Pull Over design
       </a>
     </li>
   
@@ -12405,7 +12405,7 @@
 <h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
 <p>This section gives details of the generation of the drivable area (<code>left_bound</code> and <code>right_bound</code>).</p>
 <h3 id="drivable-lanes-generation">Drivable Lanes Generation<a class="headerlink" href="#drivable-lanes-generation" title="Permanent link">#</a></h3>
-<p>Before generating drivable areas, drivable lanes need to be sorted. Drivable Lanes are selected in each module (<code>Lane Follow</code>, <code>Avoidance</code>, <code>Lane Change</code>, <code>Pull Over</code>, <code>Pull Out</code> and etc.), so more details about selection of drivable lanes can be found in each module's document. We use the following structure to define the drivable lanes.</p>
+<p>Before generating drivable areas, drivable lanes need to be sorted. Drivable Lanes are selected in each module (<code>Lane Follow</code>, <code>Avoidance</code>, <code>Lane Change</code>, <code>Goal Planner</code>, <code>Pull Out</code> and etc.), so more details about selection of drivable lanes can be found in each module's document. We use the following structure to define the drivable lanes.</p>
 <div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">DrivalbleLanes</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">lanelet</span><span class="o">::</span><span class="n">ConstLanelet</span><span class="w"> </span><span class="n">right_lanelet</span><span class="p">;</span><span class="w"> </span><span class="c1">// right most lane</span>
@@ -12513,13 +12513,13 @@ This expansion can be summarized with the following steps:</p>
         
         
           
-          <a href="../behavior_path_planner_lane_change_design/" class="md-footer__link md-footer__link--next" aria-label="Next: Lane Change design" rel="next">
+          <a href="../behavior_path_planner_goal_planner_design/" class="md-footer__link md-footer__link--next" aria-label="Next: Goal Planner design" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Lane Change design
+                Goal Planner design
               </div>
             </div>
             <div class="md-footer__button md-icon">

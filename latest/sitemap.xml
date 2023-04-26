@@ -671,6 +671,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_planner/docs/behavior_path_planner_goal_planner_design/</loc>
+         <lastmod>2023-04-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_planner/docs/behavior_path_planner_lane_change_design/</loc>
          <lastmod>2023-04-26</lastmod>
          <changefreq>daily</changefreq>
@@ -687,11 +692,6 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_planner/docs/behavior_path_planner_pull_out_design/</loc>
-         <lastmod>2023-04-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_planner/docs/behavior_path_planner_pull_over_design/</loc>
          <lastmod>2023-04-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
