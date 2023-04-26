@@ -12146,6 +12146,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -12312,7 +12319,12 @@ The node projects lan/lon coordinates into MGRS coordinates.</p>
 <hr />
 <h2 id="lanelet2_map_visualization">lanelet2_map_visualization<a class="headerlink" href="#lanelet2_map_visualization" title="Permanent link">#</a></h2>
 <h3 id="feature_2">Feature<a class="headerlink" href="#feature_2" title="Permanent link">#</a></h3>
-<p>lanelet2_map_visualization visualizes autoware_auto_mapping_msgs/HADMapBin messages into visualization_msgs/MarkerArray.</p>
+<p>lanelet2_map_visualization visualizes autoware_auto_mapping_msgs/HADMapBin messages into visualization_msgs/MarkerArray. There are 3 types of map can be loaded in autoware. Please makesure you selected the correct lanelet2_map_projector_type when you launch this package.</p>
+<ul>
+<li>MGRS</li>
+<li>UTM</li>
+<li>local</li>
+</ul>
 <h3 id="how-to-run_1">How to Run<a class="headerlink" href="#how-to-run_1" title="Permanent link">#</a></h3>
 <p><code>ros2 run map_loader lanelet2_map_visualization</code></p>
 <h3 id="subscribed-topics">Subscribed Topics<a class="headerlink" href="#subscribed-topics" title="Permanent link">#</a></h3>
@@ -12323,6 +12335,49 @@ The node projects lan/lon coordinates into MGRS coordinates.</p>
 <ul>
 <li>~output/lanelet2_map_marker (visualization_msgs/MarkerArray) : visualization messages for RViz</li>
 </ul>
+<h3 id="parameters_1">Parameters<a class="headerlink" href="#parameters_1" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">lanelet2_map_projector_type</td>
+<td align="left">std::string</td>
+<td align="left">The type of the map projector using, can be MGRS, UTM, local</td>
+<td align="left">MGRS</td>
+</tr>
+<tr>
+<td align="left">latitude</td>
+<td align="left">double</td>
+<td align="left">Latitude of map_origin, only using in UTM map projector</td>
+<td align="left">0.0</td>
+</tr>
+<tr>
+<td align="left">longitude</td>
+<td align="left">double</td>
+<td align="left">Longitude of map_origin, only using in UTM map projector</td>
+<td align="left">0.0</td>
+</tr>
+<tr>
+<td align="left">center_line_resolution</td>
+<td align="left">double</td>
+<td align="left">Define the reolution of the lanelet center line</td>
+<td align="left">5.0</td>
+</tr>
+<tr>
+<td align="left">lanelet2_map_path</td>
+<td align="left">std::string</td>
+<td align="left">The lanelet2 map path</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
 
 
 
