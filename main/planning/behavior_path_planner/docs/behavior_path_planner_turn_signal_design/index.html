@@ -7553,6 +7553,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../behavior_path_planner_goal_planner_design/" class="md-nav__link">
+        Goal Planner design
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../behavior_path_planner_lane_change_design/" class="md-nav__link">
         Lane Change design
       </a>
@@ -7597,20 +7611,6 @@
     <li class="md-nav__item">
       <a href="../behavior_path_planner_pull_out_design/" class="md-nav__link">
         Pull Out design
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../behavior_path_planner_pull_over_design/" class="md-nav__link">
-        Pull Over design
       </a>
     </li>
   
@@ -7756,8 +7756,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-pull-over" class="md-nav__link">
-    5. Pull over
+  <a href="#5-goal-planner" class="md-nav__link">
+    5. Goal Planner
   </a>
   
 </li>
@@ -12230,8 +12230,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-pull-over" class="md-nav__link">
-    5. Pull over
+  <a href="#5-goal-planner" class="md-nav__link">
+    5. Goal Planner
   </a>
   
 </li>
@@ -12378,7 +12378,7 @@
 
 <p>When turning on the blinker, it decides whether or not to turn on the specified blinker based on the distance from the front of the ego vehicle to the start point of each section. Conversely, when turning off the blinker, it calculates the distance from the base link of the ego vehicle to the end point of each section and decide whether or not to turn it off based on that.</p>
 <p><img alt="activation_distance" src="../../image/turn_signal_decider/activation_distance.drawio.svg" /></p>
-<p>For left turn, right turn, avoidance, lane change, pull over and pull out, we define these two sections, which are elaborated in the following part.</p>
+<p>For left turn, right turn, avoidance, lane change, goal planner and pull out, we define these two sections, which are elaborated in the following part.</p>
 <h4 id="1-left-and-right-turn">1. Left and Right turn<a class="headerlink" href="#1-left-and-right-turn" title="Permanent link">#</a></h4>
 <p>Turn signal decider checks each lanelet on the map if it has <code>turn_direction</code> information. If a lanelet has this information, it activates necessary blinker based on this information.</p>
 <ul>
@@ -12472,7 +12472,7 @@
   Terminal point of the path of pull out.</li>
 </ul>
 <p><img alt="section_pull_out" src="../../image/turn_signal_decider/pull_out.drawio.svg" /></p>
-<h4 id="5-pull-over">5. Pull over<a class="headerlink" href="#5-pull-over" title="Permanent link">#</a></h4>
+<h4 id="5-goal-planner">5. Goal Planner<a class="headerlink" href="#5-goal-planner" title="Permanent link">#</a></h4>
 <ul>
 <li>desired start point<br />
 <code>v * turn_signal_search_time</code> meters before the start point of the pull over path.</li>
