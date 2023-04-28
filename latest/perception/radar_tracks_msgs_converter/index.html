@@ -12131,7 +12131,7 @@
 
 
 <h1 id="radar_tracks_msgs_converter">radar_tracks_msgs_converter<a class="headerlink" href="#radar_tracks_msgs_converter" title="Permanent link">#</a></h1>
-<p>This package convert from <a href="https://github.com/ros-perception/radar_msgs/blob/ros2/msg/RadarTracks.msg">radar_msgs/msg/RadarTracks</a> into <a href="https://gitlab.com/autowarefoundation/autoware.auto/autoware_auto_msgs/-/blob/master/autoware_auto_perception_msgs/msg/TrackedObject.idl">autoware_auto_perception_msgs/msg/TrackedObject</a>.</p>
+<p>This package convert from <a href="https://github.com/ros-perception/radar_msgs/blob/ros2/msg/RadarTracks.msg">radar_msgs/msg/RadarTracks</a> into <a href="https://gitlab.com/autowarefoundation/autoware.auto/autoware_auto_msgs/-/blob/master/autoware_auto_perception_msgs/msg/DetectedObject.idl">autoware_auto_perception_msgs/msg/DetectedObject</a> and <a href="https://gitlab.com/autowarefoundation/autoware.auto/autoware_auto_msgs/-/blob/master/autoware_auto_perception_msgs/msg/TrackedObject.idl">autoware_auto_perception_msgs/msg/TrackedObject</a>.</p>
 <ul>
 <li>Calculation cost is O(n).<ul>
 <li>n: The number of radar objects</li>
@@ -12147,7 +12147,8 @@
 </ul>
 </li>
 <li>Output<ul>
-<li><code>~/output/radar_objects</code> (autoware_auto_perception_msgs/msg/TrackedObject.msg): The topic converted to Autoware's message</li>
+<li><code>~/output/radar_detected_objects</code> (autoware_auto_perception_msgs/msg/DetectedObject.idl): The topic converted to Autoware's message</li>
+<li><code>~/output/radar_tracked_objects</code> (autoware_auto_perception_msgs/msg/TrackedObject.idl): The topic converted to Autoware's message</li>
 </ul>
 </li>
 </ul>
