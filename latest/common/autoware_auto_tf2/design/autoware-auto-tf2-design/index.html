@@ -17,7 +17,7 @@
         <link rel="next" href="../../../autoware_testing/design/autoware_testing-design/">
       
       <link rel="icon" href="../../../../docs/assets/images/autoware-foundation.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.9">
     
     
       
@@ -25,10 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ded33207.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.85bb2934.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.a6bdf11c.min.css">
       
       
 
@@ -12249,7 +12249,7 @@
 frame transforms. This is true even to the extent that the tf2 contains the packages
 <code>tf2_geometry_msgs</code> and <code>tf2_sensor_msgs</code> which allow for easy conversion to and from the message
 types defined in <code>geometry_msgs</code> and <code>sensor_msgs</code>, respectively. However, AutowareAuto contains
-some specialized message types which are not transformable between frames using the ROS2 library.
+some specialized message types which are not transformable between frames using the ROS 2 library.
 The <code>autoware_auto_tf2</code> package aims to provide developers with tools to transform applicable
 <code>autoware_auto_msgs</code> types. In addition to this, this package also provides transform tools for
 messages types in <code>geometry_msgs</code> missing in <code>tf2_geometry_msgs</code>.</p>
@@ -12278,7 +12278,7 @@ intent was ensured with the following files in the existing tf2 framework:</p>
 <span class="k">const</span><span class="w"> </span><span class="n">ros</span><span class="o">::</span><span class="n">Time</span><span class="o">&amp;</span><span class="w"> </span><span class="n">tf2</span><span class="o">::</span><span class="n">getTimestamp</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="current-implementation-of-tf2_geometry_msgs">Current Implementation of tf2_geometry_msgs<a class="headerlink" href="#current-implementation-of-tf2_geometry_msgs" title="Permanent link">#</a></h2>
-<p>In both ROS1 and ROS2 stamped msgs like <code>Vector3Stamped</code>, <code>QuaternionStamped</code> have associated
+<p>In both ROS 1 and ROS 2 stamped msgs like <code>Vector3Stamped</code>, <code>QuaternionStamped</code> have associated
 functions like:</p>
 <ul>
 <li><code>getTimestamp</code></li>
@@ -12287,13 +12287,13 @@ functions like:</p>
 <li><code>toMsg</code></li>
 <li><code>fromMsg</code></li>
 </ul>
-<p>In ROS1, to support <code>tf2::convert</code> and need in <code>doTransform</code> of the stamped data, non-stamped
+<p>In ROS 1, to support <code>tf2::convert</code> and need in <code>doTransform</code> of the stamped data, non-stamped
 underlying data like <code>Vector3</code>, <code>Point</code>, have implementations of the following functions:</p>
 <ul>
 <li><code>toMsg</code></li>
 <li><code>fromMsg</code></li>
 </ul>
-<p>In ROS2, much of the <code>doTransform</code> method is not using <code>toMsg</code> and <code>fromMsg</code> as data types from tf2
+<p>In ROS 2, much of the <code>doTransform</code> method is not using <code>toMsg</code> and <code>fromMsg</code> as data types from tf2
 are not used. Instead <code>doTransform</code> is done using <code>KDL</code>, thus functions relating to underlying data
 were not added; such as <code>Vector3</code>, <code>Point</code>, or ported in this commit ros/geometry2/commit/6f2a82.
 The non-stamped data with <code>toMsg</code> and <code>fromMsg</code> are <code>Quaternion</code>, <code>Transform</code>. <code>Pose</code> has the
@@ -12481,7 +12481,7 @@ for the following data types:</p>
     <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.expand", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.footer"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.51198bba.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.fac441b0.min.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       
