@@ -12596,7 +12596,11 @@
 <li>delete expired scene module instance from <code>registered_modules_</code>.</li>
 <li>publish debug markers.</li>
 </ul>
-<p><img alt="sub_managers" src="../../image/manager/sub_managers.svg" width="1000" /> sub-managers</p>
+<figure>
+<p><img alt="sub_managers" src="../../image/manager/sub_managers.svg" width="1000" />
+  </p>
+<figcaption>sub-managers</figcaption>
+</figure>
 <p>Sub-manager is registered on the manager with the following function.</p>
 <div class="highlight"><pre><span></span><code><span class="cm">/**</span>
 <span class="cm"> * @brief register managers.</span>
@@ -12659,7 +12663,11 @@
 </table>
 <h3 id="scene-modules">Scene modules<a class="headerlink" href="#scene-modules" title="Permanent link">#</a></h3>
 <p>Scene modules receives necessary data and RTC command, and outputs candidate path(s), reference path and RTC cooperate status. When multiple modules run in series, the output of the previous module is received as input and the information is used to generate a new modified path, as shown in the following figure. And, when one module is running alone, it receives a reference path generated from the centerline of the lane in which Ego is currently driving as previous module output.</p>
-<p><img alt="scene_module" src="../../image/manager/scene_module.svg" width="1000" /> scene module</p>
+<figure>
+<p><img alt="scene_module" src="../../image/manager/scene_module.svg" width="1000" />
+  </p>
+<figcaption>scene module</figcaption>
+</figure>
 <table>
 <thead>
 <tr>
@@ -13045,7 +13053,11 @@
 <p class="admonition-title">Note</p>
 <p>The smaller the number is, the higher the priority is.</p>
 </div>
-<p><img alt="module_select" src="../../image/manager/module_select.svg" width="1000" /> module priority</p>
+<figure>
+<p><img alt="module_select" src="../../image/manager/module_select.svg" width="1000" />
+  </p>
+<figcaption>module priority</figcaption>
+</figure>
 <p><img alt="output_module" src="../../image/manager/output_module.svg" /></p>
 <p>Additionally, the manager moves the highest priority module to approved modules stack if it is already approved.</p>
 <h2 id="scene-module-unregister-process">Scene module unregister process<a class="headerlink" href="#scene-module-unregister-process" title="Permanent link">#</a></h2>
