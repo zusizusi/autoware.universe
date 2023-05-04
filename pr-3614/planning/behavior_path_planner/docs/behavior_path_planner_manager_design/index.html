@@ -13080,9 +13080,24 @@
 <p><img alt="lane_change_skip" src="../../image/manager/lane_change_skip.svg" /></p>
 <p>When the manager removes succeeded modules, the last added module's output is used as approved modules stack.</p>
 <h2 id="reference-path-generation">Reference path generation<a class="headerlink" href="#reference-path-generation" title="Permanent link">#</a></h2>
-<p>The manager generates root reference path from the centerline of the ego driving lanes. The root reference path is not only used as an input to the first added module of approved modules stack, but also used as the output of <code>behavior_path_planner</code> if none of the modules are running.</p>
-<p>Additionally, the manager samples Ego's closest lanelet when removing a succeeded <strong>Lane Change</strong> module from approved modules stack.</p>
-<p>This closest lanelet is used for root reference path generation.</p>
+<p>The root reference path is generated from the centerline of the <strong>lanelet sequence</strong> that obtained from the <strong>root lanelet</strong>, and it is not only used as an input to the first added module of approved modules stack, but also used as the output of <code>behavior_path_planner</code> if none of the modules are running.</p>
+<figure>
+<p><img alt="root_generation" src="../../image/manager/root_generation.svg" width="500" />
+  </p>
+<figcaption>root reference path generation</figcaption>
+</figure>
+<p>The root lanelet is the closest lanelet within the route, and the update timing is based on Ego's operation mode state.</p>
+<ul>
+<li>the state is <code>OperationModeState::AUTONOMOUS</code>: Update only when the ego moves to right or left lane by lane change module.</li>
+<li>the state is <strong>NOT</strong> <code>OperationModeState::AUTONOMOUS</code>: Update at the beginning of every planning cycle.</li>
+</ul>
+<p><img alt="root_lanelet" src="../../image/manager/root_lanelet.svg" /></p>
+<p>The manager needs to know the ego behavior and then generate a root reference path from the lanes that Ego should follow.</p>
+<p>For example, during autonomous driving, even if Ego moves into the next lane in order to avoid a parked vehicle, the target lanes that Ego should follow will <strong>NOT</strong> change because Ego will return to the original lane after the avoidance maneuver. Therefore, the manager does <strong>NOT</strong> update <strong>root lanelet</strong> even if the avoidance maneuver is finished.</p>
+<p><img alt="avoidance" src="../../image/manager/avoidance.svg" /></p>
+<p>On the other hand, if the lane change is successful, the manager updates <strong>root lanelet</strong> because the lane that Ego should follow changes.</p>
+<p><img alt="lane_change" src="../../image/manager/lane_change.svg" /></p>
+<p>In addition, while manual driving, the manager always updates <strong>root lanelet</strong> because the pilot may move to an adjacent lane regardless of the decision of the autonomous driving system.</p>
 <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="cm">/**</span>
 <span class="cm">   * @brief get reference path from root_lanelet_ centerline.</span>
 <span class="cm">   * @param planner data.</span>
