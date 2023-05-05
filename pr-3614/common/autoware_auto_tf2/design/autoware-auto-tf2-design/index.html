@@ -7728,7 +7728,7 @@
   
     <li class="md-nav__item">
       <a href="../../../../planning/behavior_path_planner/docs/behavior_path_planner_interface_design/" class="md-nav__link">
-        Behavior path planner interface design
+        Interface design
       </a>
     </li>
   
@@ -12242,14 +12242,14 @@
   
 
 
-<h1 id="autoware_auto_tf2">autoware_auto_tf2<a class="headerlink" href="#autoware_auto_tf2" title="Permanent link">#</a></h1>
+<div><h1 id="autoware_auto_tf2">autoware_auto_tf2<a class="headerlink" href="#autoware_auto_tf2" title="Permanent link">#</a></h1>
 <p>This is the design document for the <code>autoware_auto_tf2</code> package.</p>
 <h2 id="purpose-use-cases">Purpose / Use cases<a class="headerlink" href="#purpose-use-cases" title="Permanent link">#</a></h2>
 <p>In general, users of ROS rely on tf (and its successor, tf2) for publishing and utilizing coordinate
 frame transforms. This is true even to the extent that the tf2 contains the packages
 <code>tf2_geometry_msgs</code> and <code>tf2_sensor_msgs</code> which allow for easy conversion to and from the message
 types defined in <code>geometry_msgs</code> and <code>sensor_msgs</code>, respectively. However, AutowareAuto contains
-some specialized message types which are not transformable between frames using the ROS2 library.
+some specialized message types which are not transformable between frames using the ROS 2 library.
 The <code>autoware_auto_tf2</code> package aims to provide developers with tools to transform applicable
 <code>autoware_auto_msgs</code> types. In addition to this, this package also provides transform tools for
 messages types in <code>geometry_msgs</code> missing in <code>tf2_geometry_msgs</code>.</p>
@@ -12278,7 +12278,7 @@ intent was ensured with the following files in the existing tf2 framework:</p>
 <span class="k">const</span><span class="w"> </span><span class="n">ros</span><span class="o">::</span><span class="n">Time</span><span class="o">&amp;</span><span class="w"> </span><span class="n">tf2</span><span class="o">::</span><span class="n">getTimestamp</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="current-implementation-of-tf2_geometry_msgs">Current Implementation of tf2_geometry_msgs<a class="headerlink" href="#current-implementation-of-tf2_geometry_msgs" title="Permanent link">#</a></h2>
-<p>In both ROS1 and ROS2 stamped msgs like <code>Vector3Stamped</code>, <code>QuaternionStamped</code> have associated
+<p>In both ROS 1 and ROS 2 stamped msgs like <code>Vector3Stamped</code>, <code>QuaternionStamped</code> have associated
 functions like:</p>
 <ul>
 <li><code>getTimestamp</code></li>
@@ -12287,13 +12287,13 @@ functions like:</p>
 <li><code>toMsg</code></li>
 <li><code>fromMsg</code></li>
 </ul>
-<p>In ROS1, to support <code>tf2::convert</code> and need in <code>doTransform</code> of the stamped data, non-stamped
+<p>In ROS 1, to support <code>tf2::convert</code> and need in <code>doTransform</code> of the stamped data, non-stamped
 underlying data like <code>Vector3</code>, <code>Point</code>, have implementations of the following functions:</p>
 <ul>
 <li><code>toMsg</code></li>
 <li><code>fromMsg</code></li>
 </ul>
-<p>In ROS2, much of the <code>doTransform</code> method is not using <code>toMsg</code> and <code>fromMsg</code> as data types from tf2
+<p>In ROS 2, much of the <code>doTransform</code> method is not using <code>toMsg</code> and <code>fromMsg</code> as data types from tf2
 are not used. Instead <code>doTransform</code> is done using <code>KDL</code>, thus functions relating to underlying data
 were not added; such as <code>Vector3</code>, <code>Point</code>, or ported in this commit ros/geometry2/commit/6f2a82.
 The non-stamped data with <code>toMsg</code> and <code>fromMsg</code> are <code>Quaternion</code>, <code>Transform</code>. <code>Pose</code> has the
@@ -12393,7 +12393,7 @@ for the following data types:</p>
   implemented? It may not be simple to template.</li>
 </ul>
 <!-- # Related issues -->
-<!-- Required -->
+<!-- Required --></div>
 
 
 
@@ -12458,7 +12458,7 @@ for the following data types:</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2022 The Autoware Foundation
+      Copyright &copy; 2023 The Autoware Foundation
     </div>
   
   
