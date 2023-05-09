@@ -12247,11 +12247,20 @@
 <td>double</td>
 <td>additional buffer for z axis filtering [m]]</td>
 </tr>
+<tr>
+<td><code>use_predicted_objects</code></td>
+<td>bool</td>
+<td>whether to use predicted objects for collision and slowdown detection [-]]</td>
+</tr>
 </tbody>
 </table>
 <h2 id="obstacle-stop-planner_1">Obstacle Stop Planner<a class="headerlink" href="#obstacle-stop-planner_1" title="Permanent link">#</a></h2>
 <h3 id="role">Role<a class="headerlink" href="#role" title="Permanent link">#</a></h3>
-<p>This module inserts the stop point before the obstacle with margin. In nominal case, the margin is the sum of <code>baselink_to_front</code> and <code>max_longitudinal_margin</code>. The <code>baselink_to_front</code> means the distance between <code>baselink</code>(center of rear-wheel axis) and front of the car. The detection area is generated along the processed trajectory as following figure. (This module cut off the input trajectory behind the ego position and decimates the trajectory points for reducing computational costs.)</p>
+<p>This module inserts the stop point before the obstacle with margin. In nominal case, the margin is the sum
+of <code>baselink_to_front</code> and <code>max_longitudinal_margin</code>. The <code>baselink_to_front</code> means the distance between <code>baselink</code>(
+center of rear-wheel axis) and front of the car. The detection area is generated along the processed trajectory as
+following figure. (This module cut off the input trajectory behind the ego position and decimates the trajectory points
+for reducing computational costs.)</p>
 <figure>
 <p><img alt="example" src="docs/collision_parameters.svg" width="1000">
   </p>
@@ -12262,16 +12271,25 @@
   </p>
 <figcaption>target for obstacle stop planner</figcaption>
 </figure>
-<p>If another stop point has already been inserted by other modules within <code>max_longitudinal_margin</code>, the margin is the sum of <code>baselink_to_front</code> and <code>min_longitudinal_margin</code>. This feature exists to avoid stopping unnaturally position. (For example, the ego stops unnaturally far away from stop line of crosswalk that pedestrians cross to without this feature.)</p>
+<p>If another stop point has already been inserted by other modules within <code>max_longitudinal_margin</code>, the margin is the sum
+of <code>baselink_to_front</code> and <code>min_longitudinal_margin</code>. This feature exists to avoid stopping unnaturally position. (For
+example, the ego stops unnaturally far away from stop line of crosswalk that pedestrians cross to without this feature.)</p>
 <figure>
 <p><img alt="example" src="docs/min_longitudinal_margin.svg" width="1000">
   </p>
 <figcaption>minimum longitudinal margin</figcaption>
 </figure>
-<p>The module searches the obstacle pointcloud within detection area. When the pointcloud is found, <code>Adaptive Cruise Controller</code> modules starts to work. only when <code>Adaptive Cruise Controller</code> modules does not insert target velocity, the stop point is inserted to the trajectory. The stop point means the point with 0 velocity.</p>
+<p>The module searches the obstacle pointcloud within detection area. When the pointcloud is
+found, <code>Adaptive Cruise Controller</code> modules starts to work. only when <code>Adaptive Cruise Controller</code> modules does not
+insert target velocity, the stop point is inserted to the trajectory. The stop point means the point with 0 velocity.</p>
 <h3 id="restart-prevention">Restart prevention<a class="headerlink" href="#restart-prevention" title="Permanent link">#</a></h3>
-<p>If it needs X meters (e.g. 0.5 meters) to stop once the vehicle starts moving due to the poor vehicle control performance, the vehicle goes over the stopping position that should be strictly observed when the vehicle starts to moving in order to approach the near stop point (e.g. 0.3 meters away).</p>
-<p>This module has parameter <code>hold_stop_margin_distance</code> in order to prevent from these redundant restart. If the vehicle is stopped within <code>hold_stop_margin_distance</code> meters from stop point of the module, the module judges that the vehicle has already stopped for the module's stop point and plans to keep stopping current position even if the vehicle is stopped due to other factors.</p>
+<p>If it needs X meters (e.g. 0.5 meters) to stop once the vehicle starts moving due to the poor vehicle control
+performance, the vehicle goes over the stopping position that should be strictly observed when the vehicle starts to
+moving in order to approach the near stop point (e.g. 0.3 meters away).</p>
+<p>This module has parameter <code>hold_stop_margin_distance</code> in order to prevent from these redundant restart. If the vehicle
+is stopped within <code>hold_stop_margin_distance</code> meters from stop point of the module, the module judges that the vehicle
+has already stopped for the module's stop point and plans to keep stopping current position even if the vehicle is
+stopped due to other factors.</p>
 <figure>
 <p><img alt="example" src="docs/restart_prevention.svg" width="1000">
   </p>
@@ -12351,7 +12369,10 @@
 <p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSI1MDFweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjQyOHB4O2hlaWdodDo1MDFweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA0MjggNTAxIiB3aWR0aD0iNDI4cHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTI5IiB4PSIxNDgiIHk9IjMyLjk5NTEiPmluc2VydFN0b3BQb2ludDwvdGV4dD48ZWxsaXBzZSBjeD0iMTc1IiBjeT0iNTcuMjk2OSIgZmlsbD0iIzIyMjIyMiIgcng9IjEwIiByeT0iMTAiIHN0eWxlPSJzdHJva2U6IzIyMjIyMjtzdHJva2Utd2lkdGg6MS4wOyIvPjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxMzEiIHg9IjEwOS41IiB5PSI4Ny4yOTY5Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTExIiB4PSIxMTkuNSIgeT0iMTA4LjQzNTUiPmNhbGxiYWNrIHRyYWplY3Rvcnk8L3RleHQ+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjE5OSIgeD0iNzUuNSIgeT0iMTQxLjI2NTYiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNzkiIHg9Ijg1LjUiIHk9IjE2Mi40MDQzIj50cmltIHRyYWplY3RvcnkgZnJvbSBzZWxmLXBvc2U8L3RleHQ+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjEzOCIgeD0iMTA2IiB5PSIxOTUuMjM0NCIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjExOCIgeD0iMTE2IiB5PSIyMTYuMzczIj5kZWNpbWF0ZSB0cmFqZWN0b3J5PC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxNjciIHg9IjkxLjUiIHk9IjI0OS4yMDMxIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTQ3IiB4PSIxMDEuNSIgeT0iMjcwLjM0MTgiPmdlbmVyYXRlIGRldGVjdGlvbiBhcmVhPC90ZXh0Pjxwb2x5Z29uIGZpbGw9IiNGMUYxRjEiIHBvaW50cz0iNDMsMzAzLjE3MTksMzA3LDMwMy4xNzE5LDMxOSwzMTUuMTcxOSwzMDcsMzI3LjE3MTksNDMsMzI3LjE3MTksMzEsMzE1LjE3MTksNDMsMzAzLjE3MTkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjUwIiB4PSIxNzkiIHk9IjMzNy4zODIzIj55ZXMoZmluZCk8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjYwIiB4PSI0NyIgeT0iMzE4Ljk4Ij5zZWFyY2ggb2JzdGFjbGUgcG9pbnRjbG91ZCBpbiBkZXRlY3Rpb24gYXJlYT88L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNjUiIHg9IjMxOSIgeT0iMzEyLjU3NzYiPm5vKG5vdCBmaW5kKTwvdGV4dD48ZWxsaXBzZSBjeD0iNDA2IiBjeT0iMzE1LjE3MTkiIGZpbGw9Im5vbmUiIHJ4PSIxMSIgcnk9IjExIiBzdHlsZT0ic3Ryb2tlOiMyMjIyMjI7c3Ryb2tlLXdpZHRoOjEuMDsiLz48ZWxsaXBzZSBjeD0iNDA2IiBjeT0iMzE1LjE3MTkiIGZpbGw9IiMyMjIyMjIiIHJ4PSI2IiByeT0iNiIgc3R5bGU9InN0cm9rZTojMTExMTExO3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSIzMiwzNTguODgyMywzMTgsMzU4Ljg4MjMsMzMwLDM3MC44ODIzLDMxOCwzODIuODgyMywzMiwzODIuODgyMywyMCwzNzAuODgyMywzMiwzNTguODgyMyIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTQiIHg9IjE3OSIgeT0iMzkzLjA5MjgiPm5vPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjI4MiIgeD0iMzYiIHk9IjM3NC42OTA0Ij5pbnNlcnQgdGFyZ2V0IHZlbG9jaXR5IGJ5IGFkYXB0aXZlIGNydWlzZSBtb2R1bGU/PC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjIxIiB4PSIzMzAiIHk9IjM2OC4yODgxIj55ZXM8L3RleHQ+PGVsbGlwc2UgY3g9IjM3MyIgY3k9IjM3MC44ODIzIiBmaWxsPSJub25lIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PGVsbGlwc2UgY3g9IjM3MyIgY3k9IjM3MC44ODIzIiBmaWxsPSIjMjIyMjIyIiByeD0iNiIgcnk9IjYiIHN0eWxlPSJzdHJva2U6IzExMTExMTtzdHJva2Utd2lkdGg6MS4wOyIvPjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxMTkiIHg9IjExNS41IiB5PSI0MTQuNTkyOCIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9Ijk5IiB4PSIxMjUuNSIgeT0iNDM1LjczMTQiPmluc2VydCBzdG9wIHBvaW50PC90ZXh0PjxlbGxpcHNlIGN4PSIxNzUiIGN5PSI0NzkuNTYxNSIgZmlsbD0ibm9uZSIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzIyMjIyMjtzdHJva2Utd2lkdGg6MS4wOyIvPjxlbGxpcHNlIGN4PSIxNzUiIGN5PSI0NzkuNTYxNSIgZmlsbD0iIzIyMjIyMiIgcng9IjYiIHJ5PSI2IiBzdHlsZT0ic3Ryb2tlOiMxMTExMTE7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxNzUiIHgyPSIxNzUiIHkxPSI2Ny4yOTY5IiB5Mj0iODcuMjk2OSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMTcxLDc3LjI5NjksMTc1LDg3LjI5NjksMTc5LDc3LjI5NjksMTc1LDgxLjI5NjkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjE3NSIgeDI9IjE3NSIgeTE9IjEyMS4yNjU2IiB5Mj0iMTQxLjI2NTYiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjE3MSwxMzEuMjY1NiwxNzUsMTQxLjI2NTYsMTc5LDEzMS4yNjU2LDE3NSwxMzUuMjY1NiIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMTc1IiB4Mj0iMTc1IiB5MT0iMTc1LjIzNDQiIHkyPSIxOTUuMjM0NCIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMTcxLDE4NS4yMzQ0LDE3NSwxOTUuMjM0NCwxNzksMTg1LjIzNDQsMTc1LDE4OS4yMzQ0IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxNzUiIHgyPSIxNzUiIHkxPSIyMjkuMjAzMSIgeTI9IjI0OS4yMDMxIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIxNzEsMjM5LjIwMzEsMTc1LDI0OS4yMDMxLDE3OSwyMzkuMjAzMSwxNzUsMjQzLjIwMzEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjE3NSIgeDI9IjE3NSIgeTE9IjMyNy4xNzE5IiB5Mj0iMzU4Ljg4MjMiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjE3MSwzNDguODgyMywxNzUsMzU4Ljg4MjMsMTc5LDM0OC44ODIzLDE3NSwzNTIuODgyMyIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMzE5IiB4Mj0iMzk1IiB5MT0iMzE1LjE3MTkiIHkyPSIzMTUuMTcxOSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMzg1LDMxMS4xNzE5LDM5NSwzMTUuMTcxOSwzODUsMzE5LjE3MTksMzg5LDMxNS4xNzE5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxNzUiIHgyPSIxNzUiIHkxPSIyODMuMTcxOSIgeTI9IjMwMy4xNzE5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIxNzEsMjkzLjE3MTksMTc1LDMwMy4xNzE5LDE3OSwyOTMuMTcxOSwxNzUsMjk3LjE3MTkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjE3NSIgeDI9IjE3NSIgeTE9IjM4Mi44ODIzIiB5Mj0iNDE0LjU5MjgiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjE3MSw0MDQuNTkyOCwxNzUsNDE0LjU5MjgsMTc5LDQwNC41OTI4LDE3NSw0MDguNTkyOCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMzMwIiB4Mj0iMzYyIiB5MT0iMzcwLjg4MjMiIHkyPSIzNzAuODgyMyIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMzUyLDM2Ni44ODIzLDM2MiwzNzAuODgyMywzNTIsMzc0Ljg4MjMsMzU2LDM3MC44ODIzIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxNzUiIHgyPSIxNzUiIHkxPSI0NDguNTYxNSIgeTI9IjQ2OC41NjE1Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIxNzEsNDU4LjU2MTUsMTc1LDQ2OC41NjE1LDE3OSw0NTguNTYxNSwxNzUsNDYyLjU2MTUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjwhLS1TUkM9W05PeXpSaUNtMzhMdGRPQVpGVkcyd1QwaDVFVzlRRWFmT0lrQlhhRzd5RXJCOEl1UTFEMllaLUp4Q1I0MmFqaEh4Q2pxLXJJZjVoZm5pbjMyOU44ZjJ5U1ZpaVJWWUFSalU3VGlKVE9kSEJkZklYcWJsc3RRQ0pPSWVnbmlVM2N5ZWc4RGQ2MUVISWpuMF9qOENhcWttSXRVSTFTRjQzdE5EakI0ZWRsb1kyeXQ3cEZQM1BNYzB0dEFLakN5MXZHRWNnaHdDcGVQS1ZUVTBKTDlGY3FVVFNiQk5jNXFIejRlVGoxbzQyVlVKRXdXczdQbmhMTkpObDFpekl6dVVpcl9xZlRKVGFtVm9Sck02QnpWXS0tPjwvZz48L3N2Zz4=" class="uml" alt="uml diagram" title=""></p>
 <h2 id="slow-down-planner">Slow Down Planner<a class="headerlink" href="#slow-down-planner" title="Permanent link">#</a></h2>
 <h3 id="role_1">Role<a class="headerlink" href="#role_1" title="Permanent link">#</a></h3>
-<p>This module inserts the slow down section before the obstacle with forward margin and backward margin. The forward margin is the sum of <code>baselink_to_front</code> and <code>longitudinal_forward_margin</code>, and the backward margin is the sum of <code>baselink_to_front</code> and <code>longitudinal_backward_margin</code>. The ego keeps slow down velocity in slow down section. The velocity is calculated the following equation.</p>
+<p>This module inserts the slow down section before the obstacle with forward margin and backward margin. The forward
+margin is the sum of <code>baselink_to_front</code> and <code>longitudinal_forward_margin</code>, and the backward margin is the sum
+of <code>baselink_to_front</code> and <code>longitudinal_backward_margin</code>. The ego keeps slow down velocity in slow down section. The
+velocity is calculated the following equation.</p>
 <p><span class="arithmatex"><span class="MathJax_Preview">v_{target} = v_{min} + \frac{l_{ld} - l_{vw}/2}{l_{margin}} (v_{max} - v_{min} )</span><script type="math/tex">v_{target} = v_{min} + \frac{l_{ld} - l_{vw}/2}{l_{margin}} (v_{max} - v_{min} )</script></span></p>
 <ul>
 <li><span class="arithmatex"><span class="MathJax_Preview">v_{target}</span><script type="math/tex">v_{target}</script></span> : slow down target velocity [m/s]</li>
@@ -12361,7 +12382,8 @@
 <li><span class="arithmatex"><span class="MathJax_Preview">l_{margin}</span><script type="math/tex">l_{margin}</script></span> : <code>lateral_margin</code> [m]</li>
 <li><span class="arithmatex"><span class="MathJax_Preview">l_{vw}</span><script type="math/tex">l_{vw}</script></span> : width of the ego footprint [m]</li>
 </ul>
-<p>The above equation means that the smaller the lateral deviation of the pointcloud, the lower the velocity of the slow down section.</p>
+<p>The above equation means that the smaller the lateral deviation of the pointcloud, the lower the velocity of the slow
+down section.</p>
 <figure>
 <p><img alt="example" src="docs/slow_down_parameters.svg" width="1000">
   </p>
@@ -12438,7 +12460,9 @@
 <p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSI0NDVweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjQxN3B4O2hlaWdodDo0NDVweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA0MTcgNDQ1IiB3aWR0aD0iNDE3cHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTkzIiB4PSIxMTAuNSIgeT0iMzIuOTk1MSI+aW5zZXJ0RGVjZWxlcmF0aW9uUG9pbnQ8L3RleHQ+PGVsbGlwc2UgY3g9IjE2NCIgY3k9IjU3LjI5NjkiIGZpbGw9IiMyMjIyMjIiIHJ4PSIxMCIgcnk9IjEwIiBzdHlsZT0ic3Ryb2tlOiMyMjIyMjI7c3Ryb2tlLXdpZHRoOjEuMDsiLz48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMTMxIiB4PSI5OC41IiB5PSI4Ny4yOTY5Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTExIiB4PSIxMDguNSIgeT0iMTA4LjQzNTUiPmNhbGxiYWNrIHRyYWplY3Rvcnk8L3RleHQ+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjE5OSIgeD0iNjQuNSIgeT0iMTQxLjI2NTYiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNzkiIHg9Ijc0LjUiIHk9IjE2Mi40MDQzIj50cmltIHRyYWplY3RvcnkgZnJvbSBzZWxmLXBvc2U8L3RleHQ+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjEzOCIgeD0iOTUiIHk9IjE5NS4yMzQ0Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTE4IiB4PSIxMDUiIHk9IjIxNi4zNzMiPmRlY2ltYXRlIHRyYWplY3Rvcnk8L3RleHQ+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjE2NyIgeD0iODAuNSIgeT0iMjQ5LjIwMzEiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNDciIHg9IjkwLjUiIHk9IjI3MC4zNDE4Ij5nZW5lcmF0ZSBkZXRlY3Rpb24gYXJlYTwvdGV4dD48cG9seWdvbiBmaWxsPSIjRjFGMUYxIiBwb2ludHM9IjMyLDMwMy4xNzE5LDI5NiwzMDMuMTcxOSwzMDgsMzE1LjE3MTksMjk2LDMyNy4xNzE5LDMyLDMyNy4xNzE5LDIwLDMxNS4xNzE5LDMyLDMwMy4xNzE5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI1MCIgeD0iMTY4IiB5PSIzMzcuMzgyMyI+eWVzKGZpbmQpPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjI2MCIgeD0iMzYiIHk9IjMxOC45OCI+c2VhcmNoIG9ic3RhY2xlIHBvaW50Y2xvdWQgaW4gZGV0ZWN0aW9uIGFyZWE/PC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjY1IiB4PSIzMDgiIHk9IjMxMi41Nzc2Ij5ubyhub3QgZmluZCk8L3RleHQ+PGVsbGlwc2UgY3g9IjM5NSIgY3k9IjMxNS4xNzE5IiBmaWxsPSJub25lIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PGVsbGlwc2UgY3g9IjM5NSIgY3k9IjMxNS4xNzE5IiBmaWxsPSIjMjIyMjIyIiByeD0iNiIgcnk9IjYiIHN0eWxlPSJzdHJva2U6IzExMTExMTtzdHJva2Utd2lkdGg6MS4wOyIvPjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxNjgiIHg9IjgwIiB5PSIzNTguODgyMyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE0OCIgeD0iOTAiIHk9IjM4MC4wMjEiPmluc2VydCBkZWNlbGVyYXRpb24gcG9pbnQ8L3RleHQ+PGVsbGlwc2UgY3g9IjE2NCIgY3k9IjQyMy44NTExIiBmaWxsPSJub25lIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PGVsbGlwc2UgY3g9IjE2NCIgY3k9IjQyMy44NTExIiBmaWxsPSIjMjIyMjIyIiByeD0iNiIgcnk9IjYiIHN0eWxlPSJzdHJva2U6IzExMTExMTtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjE2NCIgeDI9IjE2NCIgeTE9IjY3LjI5NjkiIHkyPSI4Ny4yOTY5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIxNjAsNzcuMjk2OSwxNjQsODcuMjk2OSwxNjgsNzcuMjk2OSwxNjQsODEuMjk2OSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMTY0IiB4Mj0iMTY0IiB5MT0iMTIxLjI2NTYiIHkyPSIxNDEuMjY1NiIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMTYwLDEzMS4yNjU2LDE2NCwxNDEuMjY1NiwxNjgsMTMxLjI2NTYsMTY0LDEzNS4yNjU2IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxNjQiIHgyPSIxNjQiIHkxPSIxNzUuMjM0NCIgeTI9IjE5NS4yMzQ0Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIxNjAsMTg1LjIzNDQsMTY0LDE5NS4yMzQ0LDE2OCwxODUuMjM0NCwxNjQsMTg5LjIzNDQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjE2NCIgeDI9IjE2NCIgeTE9IjIyOS4yMDMxIiB5Mj0iMjQ5LjIwMzEiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjE2MCwyMzkuMjAzMSwxNjQsMjQ5LjIwMzEsMTY4LDIzOS4yMDMxLDE2NCwyNDMuMjAzMSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMTY0IiB4Mj0iMTY0IiB5MT0iMzI3LjE3MTkiIHkyPSIzNTguODgyMyIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMTYwLDM0OC44ODIzLDE2NCwzNTguODgyMywxNjgsMzQ4Ljg4MjMsMTY0LDM1Mi44ODIzIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIzMDgiIHgyPSIzODQiIHkxPSIzMTUuMTcxOSIgeTI9IjMxNS4xNzE5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIzNzQsMzExLjE3MTksMzg0LDMxNS4xNzE5LDM3NCwzMTkuMTcxOSwzNzgsMzE1LjE3MTkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjE2NCIgeDI9IjE2NCIgeTE9IjI4My4xNzE5IiB5Mj0iMzAzLjE3MTkiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjE2MCwyOTMuMTcxOSwxNjQsMzAzLjE3MTksMTY4LDI5My4xNzE5LDE2NCwyOTcuMTcxOSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMTY0IiB4Mj0iMTY0IiB5MT0iMzkyLjg1MTEiIHkyPSI0MTIuODUxMSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMTYwLDQwMi44NTExLDE2NCw0MTIuODUxMSwxNjgsNDAyLjg1MTEsMTY0LDQwNi44NTExIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48IS0tU1JDPVtOT3luaFc4bjM0SnhkQ0JiUmk0NWVBM1gwRnlBOWZjMC1UYnV2UFkycy1GTDhscWw5NVRaVS1RRFlwVUd6MDdwMnA4UVo1c3Ffd1hxSnlGUEZBTHFwRHBRYlZDbGtWNDNzVExVZnYzVFBGYWRLSkxUUUEzTG13ZTNzcUwxYmVLVE51eXR6MnE4TEUyWEhZMm5XTUNiYlFRbU9DanRxY2kwdkUxUkR2aFN6NWEyelVsZEY5RlZxTWJ3T0tuTFVmZGRYM1AwS3pTT2Z1ejZENXBOWDV3YTFpNVVFUnAtRWt5bm1QMnNvcFMwXS0tPjwvZz48L3N2Zz4=" class="uml" alt="uml diagram" title=""></p>
 <h2 id="adaptive-cruise-controller">Adaptive Cruise Controller<a class="headerlink" href="#adaptive-cruise-controller" title="Permanent link">#</a></h2>
 <h3 id="role_2">Role<a class="headerlink" href="#role_2" title="Permanent link">#</a></h3>
-<p><code>Adaptive Cruise Controller</code> module embeds maximum velocity in trajectory when there is a dynamic point cloud on the trajectory. The value of maximum velocity depends on the own velocity, the velocity of the point cloud ( = velocity of the front car), and the distance to the point cloud (= distance to the front car).</p>
+<p><code>Adaptive Cruise Controller</code> module embeds maximum velocity in trajectory when there is a dynamic point cloud on the
+trajectory. The value of maximum velocity depends on the own velocity, the velocity of the point cloud ( = velocity of
+the front car), and the distance to the point cloud (= distance to the front car).</p>
 <table>
 <thead>
 <tr>
@@ -12451,12 +12475,12 @@
 <tr>
 <td><code>adaptive_cruise_control.use_object_to_estimate_vel</code></td>
 <td>bool</td>
-<td>use dynamic objects for estimating object velocity or not</td>
+<td>use dynamic objects for estimating object velocity or not (valid only if osp.use_predicted_objects false)</td>
 </tr>
 <tr>
 <td><code>adaptive_cruise_control.use_pcl_to_estimate_vel</code></td>
 <td>bool</td>
-<td>use raw pointclouds for estimating object velocity or not</td>
+<td>use raw pointclouds for estimating object velocity or not (valid only if osp.use_predicted_objects false)</td>
 </tr>
 <tr>
 <td><code>adaptive_cruise_control.consider_obj_velocity</code></td>
@@ -12591,7 +12615,7 @@
 <tr>
 <td><code>adaptive_cruise_control.use_rough_velocity_estimation:</code></td>
 <td>bool</td>
-<td>Use rough estimated velocity if the velocity estimation is failed</td>
+<td>Use rough estimated velocity if the velocity estimation is failed (valid only if osp.use_predicted_objects false)</td>
 </tr>
 <tr>
 <td><code>adaptive_cruise_control.rough_velocity_rate</code></td>
@@ -12609,45 +12633,81 @@
 <li><code>adaptive_cruise_control.use_pcl_to_estimate_vel</code></li>
 </ul>
 <p>This module works only when the target point is found in the detection area of the <code>Obstacle stop planner</code> module.</p>
-<p>The first process of this module is to estimate the velocity of the target vehicle point. The velocity estimation uses the velocity information of dynamic objects or the travel distance of the target vehicle point from the previous step. The dynamic object information is primal, and the travel distance estimation is used as a backup in case of the perception failure.
-If the target vehicle point is contained in the bounding box of a dynamic object geometrically, the velocity of the dynamic object is used as the target point velocity.
-Otherwise, the target point velocity is calculated by the travel distance of the target point from the previous step; that is <code>(current_position - previous_position) / dt</code>. Note that this travel distance based estimation fails when the target point is detected in the first time (it mainly happens in the cut-in situation). To improve the stability of the estimation, the median of the calculation result for several steps is used.</p>
+<p>The first process of this module is to estimate the velocity of the target vehicle point. The velocity estimation uses
+the velocity information of dynamic objects or the travel distance of the target vehicle point from the previous step.
+The dynamic object information is primal, and the travel distance estimation is used as a backup in case of the
+perception failure.
+If the target vehicle point is contained in the bounding box of a dynamic object geometrically, the velocity of the
+dynamic object is used as the target point velocity.
+Otherwise, the target point velocity is calculated by the travel distance of the target point from the previous step;
+that is <code>(current_position - previous_position) / dt</code>. Note that this travel distance based estimation fails when the
+target point is detected in the first time (it mainly happens in the cut-in situation). To improve the stability of the
+estimation, the median of the calculation result for several steps is used.</p>
 <p>If the calculated velocity is within the threshold range, it is used as the target point velocity.</p>
-<p>Only when the estimation is succeeded and the estimated velocity exceeds the value of <code>obstacle_stop_velocity_thresh_*</code>, the distance to the pointcloud from self-position is calculated. For prevent chattering in the mode transition, <code>obstacle_velocity_thresh_to_start_acc</code> is used for the threshold to start adaptive cruise, and <code>obstacle_velocity_thresh_to_stop_acc</code> is used for the threshold to stop adaptive cruise. When the calculated distance value exceeds the emergency distance <span class="arithmatex"><span class="MathJax_Preview">d\_{emergency}</span><script type="math/tex">d\_{emergency}</script></span> calculated by emergency_stop parameters, target velocity to insert is calculated.</p>
+<p>Only when the estimation is succeeded and the estimated velocity exceeds the value of <code>obstacle_stop_velocity_thresh_*</code>,
+the distance to the pointcloud from self-position is calculated. For prevent chattering in the mode
+transition, <code>obstacle_velocity_thresh_to_start_acc</code> is used for the threshold to start adaptive cruise,
+and <code>obstacle_velocity_thresh_to_stop_acc</code> is used for the threshold to stop adaptive cruise. When the calculated
+distance value exceeds the emergency distance <span class="arithmatex"><span class="MathJax_Preview">d\_{emergency}</span><script type="math/tex">d\_{emergency}</script></span> calculated by emergency_stop parameters, target velocity
+to insert is calculated.</p>
 <p>The emergency distance <span class="arithmatex"><span class="MathJax_Preview">d\_{emergency}</span><script type="math/tex">d\_{emergency}</script></span> is calculated as follows.</p>
-<p><span class="arithmatex"><span class="MathJax_Preview">d_{emergency} = d_{margin_{emergency}} + t_{idling_{emergency}} \cdot v_{ego} + (-\frac{v_{ego}^2}{2 \cdot  a_{ego_{emergency}}}) - (-\frac{v_{obj}^2}{2 \cdot a_{obj_{emergency}}})</span><script type="math/tex">d_{emergency} = d_{margin_{emergency}} + t_{idling_{emergency}} \cdot v_{ego} + (-\frac{v_{ego}^2}{2 \cdot  a_{ego_{emergency}}}) - (-\frac{v_{obj}^2}{2 \cdot a_{obj_{emergency}}})</script></span></p>
+<p><span class="arithmatex"><span class="MathJax_Preview">d_{emergency} = d_{margin_{emergency}} + t_{idling_{emergency}} \cdot v_{ego} + (-\frac{v_{ego}^2}{2 \cdot a_{ego_
+{emergency}}}) - (-\frac{v_{obj}^2}{2 \cdot a_{obj_{emergency}}})</span><script type="math/tex">d_{emergency} = d_{margin_{emergency}} + t_{idling_{emergency}} \cdot v_{ego} + (-\frac{v_{ego}^2}{2 \cdot a_{ego_
+{emergency}}}) - (-\frac{v_{obj}^2}{2 \cdot a_{obj_{emergency}}})</script></span></p>
 <ul>
-<li><span class="arithmatex"><span class="MathJax_Preview">d_{margin_{emergency}}</span><script type="math/tex">d_{margin_{emergency}}</script></span> is a minimum margin to the obstacle pointcloud. The value of <span class="arithmatex"><span class="MathJax_Preview">d_{margin_{emergency}}</span><script type="math/tex">d_{margin_{emergency}}</script></span> depends on the parameter <code>min_dist_stop</code></li>
-<li><span class="arithmatex"><span class="MathJax_Preview">t_{idling_{emergency}}</span><script type="math/tex">t_{idling_{emergency}}</script></span> is a supposed idling time. The value of <span class="arithmatex"><span class="MathJax_Preview">t_{idling_{emergency}}</span><script type="math/tex">t_{idling_{emergency}}</script></span> depends on the parameter <code>emergency_stop_idling_time</code></li>
+<li><span class="arithmatex"><span class="MathJax_Preview">d_{margin_{emergency}}</span><script type="math/tex">d_{margin_{emergency}}</script></span> is a minimum margin to the obstacle pointcloud. The value of <span class="arithmatex"><span class="MathJax_Preview">d_{margin_{emergency}}</span><script type="math/tex">d_{margin_{emergency}}</script></span> depends
+  on the parameter <code>min_dist_stop</code></li>
+<li><span class="arithmatex"><span class="MathJax_Preview">t_{idling_{emergency}}</span><script type="math/tex">t_{idling_{emergency}}</script></span> is a supposed idling time. The value of <span class="arithmatex"><span class="MathJax_Preview">t_{idling_{emergency}}</span><script type="math/tex">t_{idling_{emergency}}</script></span> depends on the
+  parameter <code>emergency_stop_idling_time</code></li>
 <li><span class="arithmatex"><span class="MathJax_Preview">v_{ego}</span><script type="math/tex">v_{ego}</script></span> is a current velocity of own vehicle</li>
-<li><span class="arithmatex"><span class="MathJax_Preview">a_{ego_{_{emergency}}}</span><script type="math/tex">a_{ego_{_{emergency}}}</script></span> is a minimum acceleration (maximum deceleration) of own vehicle. The value of <span class="arithmatex"><span class="MathJax_Preview">a_{ego_{_{emergency}}}</span><script type="math/tex">a_{ego_{_{emergency}}}</script></span> depends on the parameter <code>emergency_stop_acceleration</code></li>
+<li><span class="arithmatex"><span class="MathJax_Preview">a_{ego_{_{emergency}}}</span><script type="math/tex">a_{ego_{_{emergency}}}</script></span> is a minimum acceleration (maximum deceleration) of own vehicle. The value of <span class="arithmatex"><span class="MathJax_Preview">a_{ego_{_
+  {emergency}}}</span><script type="math/tex">a_{ego_{_
+  {emergency}}}</script></span> depends on the parameter <code>emergency_stop_acceleration</code></li>
 <li><span class="arithmatex"><span class="MathJax_Preview">v_{obj}</span><script type="math/tex">v_{obj}</script></span> is a current velocity of obstacle pointcloud.</li>
-<li><span class="arithmatex"><span class="MathJax_Preview">a_{obj_{_{emergency}}}</span><script type="math/tex">a_{obj_{_{emergency}}}</script></span> is a supposed minimum acceleration of obstacle pointcloud. The value of <span class="arithmatex"><span class="MathJax_Preview">a_{obj_{_{emergency}}}</span><script type="math/tex">a_{obj_{_{emergency}}}</script></span> depends on the parameter <code>obstacle_emergency_stop_acceleration</code></li>
+<li><span class="arithmatex"><span class="MathJax_Preview">a_{obj_{_{emergency}}}</span><script type="math/tex">a_{obj_{_{emergency}}}</script></span> is a supposed minimum acceleration of obstacle pointcloud. The value of <span class="arithmatex"><span class="MathJax_Preview">a_{obj_{_
+  {emergency}}}</span><script type="math/tex">a_{obj_{_
+  {emergency}}}</script></span> depends on the parameter <code>obstacle_emergency_stop_acceleration</code></li>
 <li>*Above <span class="arithmatex"><span class="MathJax_Preview">X_{_{emergency}}</span><script type="math/tex">X_{_{emergency}}</script></span> parameters are used only in emergency situation.</li>
 </ul>
-<p>The target velocity is determined to keep the distance to the obstacle pointcloud from own vehicle at the standard distance <span class="arithmatex"><span class="MathJax_Preview">d\_{standard}</span><script type="math/tex">d\_{standard}</script></span> calculated as following. Therefore, if the distance
-to the obstacle pointcloud is longer than standard distance, The target velocity becomes higher than the current velocity, and vice versa. For keeping the distance, a PID controller is used.</p>
-<p><span class="arithmatex"><span class="MathJax_Preview">d_{standard} = d_{margin_{standard}} + t_{idling_{standard}} \cdot v_{ego} + (-\frac{v_{ego}^2}{2 \cdot  a_{ego_{standard}}}) - (-\frac{v_{obj}^2}{2 \cdot a_{obj_{standard}}})</span><script type="math/tex">d_{standard} = d_{margin_{standard}} + t_{idling_{standard}} \cdot v_{ego} + (-\frac{v_{ego}^2}{2 \cdot  a_{ego_{standard}}}) - (-\frac{v_{obj}^2}{2 \cdot a_{obj_{standard}}})</script></span></p>
+<p>The target velocity is determined to keep the distance to the obstacle pointcloud from own vehicle at the standard
+distance <span class="arithmatex"><span class="MathJax_Preview">d\_{standard}</span><script type="math/tex">d\_{standard}</script></span> calculated as following. Therefore, if the distance
+to the obstacle pointcloud is longer than standard distance, The target velocity becomes higher than the current
+velocity, and vice versa. For keeping the distance, a PID controller is used.</p>
+<p><span class="arithmatex"><span class="MathJax_Preview">d_{standard} = d_{margin_{standard}} + t_{idling_{standard}} \cdot v_{ego} + (-\frac{v_{ego}^2}{2 \cdot a_{ego_
+{standard}}}) - (-\frac{v_{obj}^2}{2 \cdot a_{obj_{standard}}})</span><script type="math/tex">d_{standard} = d_{margin_{standard}} + t_{idling_{standard}} \cdot v_{ego} + (-\frac{v_{ego}^2}{2 \cdot a_{ego_
+{standard}}}) - (-\frac{v_{obj}^2}{2 \cdot a_{obj_{standard}}})</script></span></p>
 <ul>
-<li><span class="arithmatex"><span class="MathJax_Preview">d_{margin_{standard}}</span><script type="math/tex">d_{margin_{standard}}</script></span> is a minimum margin to the obstacle pointcloud. The value of <span class="arithmatex"><span class="MathJax_Preview">d_{margin_{standard}}</span><script type="math/tex">d_{margin_{standard}}</script></span> depends on the parameter <code>min_dist_stop</code></li>
-<li><span class="arithmatex"><span class="MathJax_Preview">t_{idling_{standard}}</span><script type="math/tex">t_{idling_{standard}}</script></span> is a supposed idling time. The value of <span class="arithmatex"><span class="MathJax_Preview">t_{idling_{standard}}</span><script type="math/tex">t_{idling_{standard}}</script></span> depends on the parameter <code>standard_stop_idling_time</code></li>
+<li><span class="arithmatex"><span class="MathJax_Preview">d_{margin_{standard}}</span><script type="math/tex">d_{margin_{standard}}</script></span> is a minimum margin to the obstacle pointcloud. The value of <span class="arithmatex"><span class="MathJax_Preview">d_{margin_{standard}}</span><script type="math/tex">d_{margin_{standard}}</script></span> depends
+  on the parameter <code>min_dist_stop</code></li>
+<li><span class="arithmatex"><span class="MathJax_Preview">t_{idling_{standard}}</span><script type="math/tex">t_{idling_{standard}}</script></span> is a supposed idling time. The value of <span class="arithmatex"><span class="MathJax_Preview">t_{idling_{standard}}</span><script type="math/tex">t_{idling_{standard}}</script></span> depends on the
+  parameter <code>standard_stop_idling_time</code></li>
 <li><span class="arithmatex"><span class="MathJax_Preview">v_{ego}</span><script type="math/tex">v_{ego}</script></span> is a current velocity of own vehicle</li>
-<li><span class="arithmatex"><span class="MathJax_Preview">a_{ego_{_{standard}}}</span><script type="math/tex">a_{ego_{_{standard}}}</script></span> is a minimum acceleration (maximum deceleration) of own vehicle. The value of <span class="arithmatex"><span class="MathJax_Preview">a_{ego_{_{standard}}}</span><script type="math/tex">a_{ego_{_{standard}}}</script></span> depends on the parameter <code>min_standard_acceleration</code></li>
+<li><span class="arithmatex"><span class="MathJax_Preview">a_{ego_{_{standard}}}</span><script type="math/tex">a_{ego_{_{standard}}}</script></span> is a minimum acceleration (maximum deceleration) of own vehicle. The value of <span class="arithmatex"><span class="MathJax_Preview">a_{ego_{_
+  {standard}}}</span><script type="math/tex">a_{ego_{_
+  {standard}}}</script></span> depends on the parameter <code>min_standard_acceleration</code></li>
 <li><span class="arithmatex"><span class="MathJax_Preview">v_{obj}</span><script type="math/tex">v_{obj}</script></span> is a current velocity of obstacle pointcloud.</li>
-<li><span class="arithmatex"><span class="MathJax_Preview">a_{obj_{_{standard}}}</span><script type="math/tex">a_{obj_{_{standard}}}</script></span> is a supposed minimum acceleration of obstacle pointcloud. The value of <span class="arithmatex"><span class="MathJax_Preview">a_{obj_{_{standard}}}</span><script type="math/tex">a_{obj_{_{standard}}}</script></span> depends on the parameter <code>obstacle_min_standard_acceleration</code></li>
+<li><span class="arithmatex"><span class="MathJax_Preview">a_{obj_{_{standard}}}</span><script type="math/tex">a_{obj_{_{standard}}}</script></span> is a supposed minimum acceleration of obstacle pointcloud. The value of <span class="arithmatex"><span class="MathJax_Preview">a_{obj_{_
+  {standard}}}</span><script type="math/tex">a_{obj_{_
+  {standard}}}</script></span> depends on the parameter <code>obstacle_min_standard_acceleration</code></li>
 <li>*Above <span class="arithmatex"><span class="MathJax_Preview">X_{_{standard}}</span><script type="math/tex">X_{_{standard}}</script></span> parameters are used only in non-emergency situation.</li>
 </ul>
 <p><img alt="adaptive_cruise" src="docs/adaptive_cruise.drawio.svg"></p>
 <p>If the target velocity exceeds the value of <code>thresh_vel_to_stop</code>, the target velocity is embedded in the trajectory.</p>
 <h2 id="known-limits">Known Limits<a class="headerlink" href="#known-limits" title="Permanent link">#</a></h2>
 <ul>
-<li>It is strongly depends on velocity planning module whether or not it moves according to the target speed embedded by <code>Adaptive Cruise Controller</code> module. If the velocity planning module is updated, please take care of the vehicle's behavior as much as possible and always be ready for overriding.</li>
+<li>It is strongly depends on velocity planning module whether or not it moves according to the target speed embedded
+  by <code>Adaptive Cruise Controller</code> module. If the velocity planning module is updated, please take care of the vehicle's
+  behavior as much as possible and always be ready for overriding.</li>
 </ul>
 <ul>
-<li>The velocity estimation algorithm in <code>Adaptive Cruise Controller</code> is depend on object tracking module. Please note that if the object-tracking fails or the tracking result is incorrect, it the possibility that the vehicle behaves dangerously.</li>
+<li>The velocity estimation algorithm in <code>Adaptive Cruise Controller</code> is depend on object tracking module. Please note
+  that if the object-tracking fails or the tracking result is incorrect, it the possibility that the vehicle behaves
+  dangerously.</li>
 </ul>
 <ul>
-<li>It does not work for backward driving, but publishes the path of the input as it is. Please use <a href="../obstacle_cruise_planner/">obstacle_cruise_planner</a> if you want to stop against an obstacle when backward driving.</li>
+<li>It does not work for backward driving, but publishes the path of the input as it is. Please
+  use <a href="../obstacle_cruise_planner/">obstacle_cruise_planner</a> if you want to stop against an obstacle when
+  backward driving.</li>
 </ul></div>
 
 
