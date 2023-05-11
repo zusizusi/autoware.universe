@@ -12240,11 +12240,11 @@ Please see <a href="https://github.com/autowarefoundation/autoware_msgs/tree/mai
 <p>If you have multiple rosbags, an example directory structure would be as follows. Note that you need to have a metadata when you have multiple pointcloud map files.</p>
 <div class="highlight"><pre><span></span><code>sample-map-rosbag
 ├──<span class="w"> </span>lanelet2_map.osm
-├──<span class="w"> </span>pointcloud_map
-├──<span class="w"> </span>pcd_00.pcd
-├──<span class="w"> </span>pcd_01.pcd
-├──<span class="w"> </span>pcd_02.pcd
-├──<span class="w"> </span>...
+├──<span class="w"> </span>pointcloud_map.pcd
+│<span class="w"> </span>├──<span class="w"> </span>A.pcd
+│<span class="w"> </span>├──<span class="w"> </span>B.pcd
+│<span class="w"> </span>├──<span class="w"> </span>C.pcd
+│<span class="w"> </span>└──<span class="w"> </span>...
 └──<span class="w"> </span>pointcloud_map_metadata.yaml
 </code></pre></div>
 <hr>
