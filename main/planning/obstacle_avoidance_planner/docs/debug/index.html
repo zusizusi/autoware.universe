@@ -12403,11 +12403,11 @@ onPath:<span class="o">=</span><span class="w"> </span><span class="m">20</span>
 </code></pre></div>
 <h3 id="plot">Plot<a class="headerlink" href="#plot" title="Permanent link">#</a></h3>
 <p>With the following script, any calculation time of the above functions can be plot.</p>
-<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>run<span class="w"> </span>obstacle_avoidance_planner<span class="w"> </span>calclation_time_plotter.py
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>run<span class="w"> </span>obstacle_avoidance_planner<span class="w"> </span>calculation_time_plotter.py
 </code></pre></div>
 <p><img alt="calculation_time_plot" src="../../media/debug/calculation_time_plot.png"></p>
 <p>You can specify functions to plot with the <code>-f</code> option.</p>
-<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>run<span class="w"> </span>obstacle_avoidance_planner<span class="w"> </span>calclation_time_plotter.py<span class="w"> </span>-f<span class="w"> </span><span class="s2">"onPath, generateOptimizedTrajectory, calcReferencePoints"</span>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>run<span class="w"> </span>obstacle_avoidance_planner<span class="w"> </span>calculation_time_plotter.py<span class="w"> </span>-f<span class="w"> </span><span class="s2">"onPath, generateOptimizedTrajectory, calcReferencePoints"</span>
 </code></pre></div>
 <h2 id="qa-for-debug">Q&amp;A for Debug<a class="headerlink" href="#qa-for-debug" title="Permanent link">#</a></h2>
 <h3 id="the-output-frequency-is-low">The output frequency is low<a class="headerlink" href="#the-output-frequency-is-low" title="Permanent link">#</a></h3>
