@@ -7641,18 +7641,39 @@
     Purpose / Role
   </a>
   
-    <nav class="md-nav" aria-label="Purpose / Role">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-drivable-area-modification" class="md-nav__link">
+    Overview of drivable area modification
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview of drivable area modification">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    Parameters
+  <a href="#filtering-obstacles-to-avoid" class="md-nav__link">
+    Filtering obstacles to avoid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drivable-area-modification" class="md-nav__link">
+    Drivable area modification
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
   
 </li>
       
@@ -12377,18 +12398,39 @@
     Purpose / Role
   </a>
   
-    <nav class="md-nav" aria-label="Purpose / Role">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview-of-drivable-area-modification" class="md-nav__link">
+    Overview of drivable area modification
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview of drivable area modification">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    Parameters
+  <a href="#filtering-obstacles-to-avoid" class="md-nav__link">
+    Filtering obstacles to avoid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drivable-area-modification" class="md-nav__link">
+    Drivable area modification
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
   
 </li>
       
@@ -12417,7 +12459,31 @@ Static obstacles such as parked vehicles are dealt with by the avoidance module.
 <p>This module is under development.
 In the current implementation, the dynamic obstacles to avoid is extracted from the drivable area.
 Then the motion planner, in detail obstacle_avoidance_planner, will generate an avoiding trajectory.</p>
-<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h3>
+<h2 id="overview-of-drivable-area-modification">Overview of drivable area modification<a class="headerlink" href="#overview-of-drivable-area-modification" title="Permanent link">#</a></h2>
+<h3 id="filtering-obstacles-to-avoid">Filtering obstacles to avoid<a class="headerlink" href="#filtering-obstacles-to-avoid" title="Permanent link">#</a></h3>
+<p>The dynamics obstacles meeting the following condition will be avoided.</p>
+<ul>
+<li>The type is designated as <code>target_object.*</code>.</li>
+<li>The norm of the obstacle's velocity projected to the ego's path is smaller than <code>target_object.min_obstacle_vel</code>.</li>
+<li>The obstacle is in the next lane to the ego's lane, which will not cut-into the ego's lane according to the highest-prioritized predicted path.</li>
+</ul>
+<h3 id="drivable-area-modification">Drivable area modification<a class="headerlink" href="#drivable-area-modification" title="Permanent link">#</a></h3>
+<p>To realize dynamic obstacles for avoidance, the time dimension should be take into an account considering the dynamics.
+However, it will make the planning problem much harder to solve.
+Therefore, we project the time dimension to the 2D pose dimension.</p>
+<p>Currently, the predicted paths of predicted objects are not so stable.
+Therefore, instead of using the predicted paths, we assume that the obstacle will run parallel to the ego's path.</p>
+<p>First, a maximum lateral offset to avoid is calculated as follows.
+The polygon's width to extract from the drivable area is the obstacle width and double <code>drivable_area_generation.lat_offset_from_obstacle</code>.
+We can limit the lateral shift offset by <code>drivable_area_generation.max_lat_offset_to_avoid</code>.</p>
+<p><img alt="drivable_area_extraction_width" src="../../image/dynamic_avoidance/drivable_area_extraction_width.drawio.svg"></p>
+<p>Then, extracting the same directional and opposite directional obstacles from the drivable area will work as follows considering TTC (time to collision).
+Regarding the same directional obstacles, obstacles whose TTC is negative will be ignored (e.g. The obstacle is in front of the ego, and the obstacle's velocity is larger than the ego's velocity.).</p>
+<p>Same directional obstacles
+<img alt="same_directional_object" src="../../image/dynamic_avoidance/same_directional_object.svg"></p>
+<p>Opposite directional obstacles
+<img alt="opposite_directional_object" src="../../image/dynamic_avoidance/opposite_directional_object.svg"></p>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
 <table>
 <thead>
 <tr>
