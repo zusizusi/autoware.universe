@@ -12402,6 +12402,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#rerouting" class="md-nav__link">
+    Rerouting
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -12480,6 +12487,16 @@ In current Autoware.universe, only Lanelet2 map format is supported.</p>
 <td><code>enable_correct_goal_pose</code></td>
 <td>bool</td>
 <td>Enabling correction of goal pose according to the closest lanelet orientation</td>
+</tr>
+<tr>
+<td><code>enable_correct_goal_pose</code></td>
+<td>bool</td>
+<td>Enabling correction of goal pose according to the closest lanelet orientation</td>
+</tr>
+<tr>
+<td><code>reroute_time_threshold</code></td>
+<td>double</td>
+<td>If the time to the rerouting point at the current velocity is greater than this threshold, rerouting is possible</td>
 </tr>
 </tbody>
 </table>
@@ -12623,6 +12640,39 @@ To calculate <code>route_lanelets</code>,</p>
 </ol>
 <p><code>get preferred lanelets</code> extracts <code>preferred_primitive</code> from <code>route_lanelets</code> with the route handler.</p>
 <p><code>create route sections</code> extracts <code>primitives</code> from <code>route_lanelets</code> for each route section with the route handler, and creates route sections.</p>
+<h3 id="rerouting">Rerouting<a class="headerlink" href="#rerouting" title="Permanent link">#</a></h3>
+<p>Reroute here means changing the route while driving. Unlike route setting, it is required to keep a certain distance from vehicle to the point where the route is changed.</p>
+<p><img alt="rerouting_safety" src="media/rerouting_safety.svg"></p>
+<p>And there are three use cases that require reroute.</p>
+<ul>
+<li>Route change API</li>
+<li>Emergency route</li>
+<li>Goal modification</li>
+</ul>
+<p><img alt="rerouting_interface" src="media/rerouting_interface.svg"></p>
+<h4 id="route-change-api">Route change API<a class="headerlink" href="#route-change-api" title="Permanent link">#</a></h4>
+<ul>
+<li><code>change_route_points</code></li>
+<li><code>change_route</code></li>
+</ul>
+<p>This is route change that the application makes using the API. It is used when changing the destination while driving or when driving a divided loop route. When the vehicle is driving on a MRM route, normal rerouting by this interface is not allowed.</p>
+<h4 id="emergency-route">Emergency route<a class="headerlink" href="#emergency-route" title="Permanent link">#</a></h4>
+<ul>
+<li><code>set_mrm_route</code></li>
+<li><code>clear_mrm_route</code></li>
+</ul>
+<p>This interface for the MRM that pulls over the road shoulder. It has to be stopped as soon as possible, so a reroute is required. The MRM route has priority over the normal route. And if MRM route is cleared, try to return to the normal route also with a rerouting safety check.</p>
+<h5 id="goal-modification">Goal modification<a class="headerlink" href="#goal-modification" title="Permanent link">#</a></h5>
+<ul>
+<li><code>modified_goal</code></li>
+</ul>
+<p>This is a goal change to pull over, avoid parked vehicles, and so on by a planning component. If the modified goal is outside the calculated route, a reroute is required. This goal modification is executed by checking the local environment and path safety as the vehicle actually approaches the destination. And this modification is allowed for both normal_route and mrm_route.
+The new route generated here is sent to the AD API so that it can also be referenced by the application. Note, however, that the specifications here are subject to change in the future.</p>
+<h4 id="rerouting-limitations">Rerouting Limitations<a class="headerlink" href="#rerouting-limitations" title="Permanent link">#</a></h4>
+<ul>
+<li>The safety judgment of rerouting is not guaranteed to the level of trajectory or control. Therefore, the distance to the reroute change must be large for the safety.</li>
+<li>The validity of the <code>modified_goal</code> needs to be guaranteed by the behavior_path_planner, e.g., that it is not placed in the wrong lane, that it can be safely rerouted, etc.</li>
+</ul>
 <h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">#</a></h2>
 <ul>
 <li>Dynamic objects (e.g. pedestrians and other vehicles) and dynamic map information (e.g. road construction which blocks some lanes) are not considered during route planning.</li>
