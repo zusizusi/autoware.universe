@@ -12463,16 +12463,11 @@
 <p>After the overlap check, it starts to perform the safety check for the broader range. In this step, it judges if ego or target object is in front of the other vehicle. We use arc length of the front point of each object along the given path to judge which one is in front of the other. In the following example, target object (red rectangle) is running in front of the ego vehicle (black rectangle).</p>
 <p><img alt="front_object" src="../../image/safety_check/front_object.drawio.svg"></p>
 <h4 id="4-calculate-rss-distance">4. Calculate RSS distance<a class="headerlink" href="#4-calculate-rss-distance" title="Permanent link">#</a></h4>
-<p>After we find which vehicle is running ahead of the other vehicle, we start to compute the RSS distance. With the reaction time <span class="arithmatex"><span class="MathJax_Preview">t_{reaction}</span><script type="math/tex">t_{reaction}</script></span> and safety time margin <span class="arithmatex"><span class="MathJax_Preview">t_{margin}</span><script type="math/tex">t_{margin}</script></span>, RSS distance can be described as:</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">
+<p>After we find which vehicle is running ahead of the other vehicle, we start to compute the RSS distance. With the reaction time <span class="arithmatex">\(t_{reaction}\)</span> and safety time margin <span class="arithmatex">\(t_{margin}\)</span>, RSS distance can be described as:</p>
+<div class="arithmatex">\[
 rss_{dist} = v_{rear} (t_{reaction} + t_{margin}) + \frac{v_{rear}^2}{2|a_{rear, decel}|} - \frac{v_{front}^2}{2|a_{front, decel|}}
-</div>
-<script type="math/tex; mode=display">
-rss_{dist} = v_{rear} (t_{reaction} + t_{margin}) + \frac{v_{rear}^2}{2|a_{rear, decel}|} - \frac{v_{front}^2}{2|a_{front, decel|}}
-</script>
-</div>
-<p>where <span class="arithmatex"><span class="MathJax_Preview">V_{front}</span><script type="math/tex">V_{front}</script></span>, <span class="arithmatex"><span class="MathJax_Preview">v_{rear}</span><script type="math/tex">v_{rear}</script></span> are front and rear vehicle velocity respectively and <span class="arithmatex"><span class="MathJax_Preview">a_{rear, front}</span><script type="math/tex">a_{rear, front}</script></span>, <span class="arithmatex"><span class="MathJax_Preview">a_{rear, decel}</span><script type="math/tex">a_{rear, decel}</script></span> are front and rear vehicle deceleration.</p>
+\]</div>
+<p>where <span class="arithmatex">\(V_{front}\)</span>, <span class="arithmatex">\(v_{rear}\)</span> are front and rear vehicle velocity respectively and <span class="arithmatex">\(a_{rear, front}\)</span>, <span class="arithmatex">\(a_{rear, decel}\)</span> are front and rear vehicle deceleration.</p>
 <h4 id="5-create-extended-ego-and-target-object-polygons">5. Create extended ego and target object polygons<a class="headerlink" href="#5-create-extended-ego-and-target-object-polygons" title="Permanent link">#</a></h4>
 <p>In this step, we compute extended ego and target object polygons. The extended polygons can be described as:</p>
 <p><img alt="extended_polygons" src="../../image/safety_check/extended_polygons.drawio.svg"></p>
@@ -12568,7 +12563,11 @@ rss_{dist} = v_{rear} (t_{reaction} + t_{margin}) + \frac{v_{rear}^2}{2|a_{rear,
     
       <script src="../../../../assets/javascripts/bundle.b4d07000.min.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../../docs/assets/js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

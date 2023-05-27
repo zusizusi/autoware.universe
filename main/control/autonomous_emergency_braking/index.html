@@ -12585,19 +12585,12 @@
 </ul>
 <h3 id="2-generate-a-predicted-path-of-the-ego-vehicle">2. Generate a predicted path of the ego vehicle<a class="headerlink" href="#2-generate-a-predicted-path-of-the-ego-vehicle" title="Permanent link">#</a></h3>
 <p>AEB generates a predicted path based on current velocity and current angular velocity obtained from attached sensors. Note that if <code>use_imu_path</code> is <code>false</code>, it skips this step. This predicted path is generated as:</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">
+<div class="arithmatex">\[
 x_{k+1} = x_k + v cos(\theta_k) dt \\
 y_{k+1} = y_k + v sin(\theta_k) dt \\
 \theta_{k+1} = \theta_k + \omega dt
-</div>
-<script type="math/tex; mode=display">
-x_{k+1} = x_k + v cos(\theta_k) dt \\
-y_{k+1} = y_k + v sin(\theta_k) dt \\
-\theta_{k+1} = \theta_k + \omega dt
-</script>
-</div>
-<p>where <span class="arithmatex"><span class="MathJax_Preview">v</span><script type="math/tex">v</script></span> and <span class="arithmatex"><span class="MathJax_Preview">\omega</span><script type="math/tex">\omega</script></span> are current longitudinal velocity and angular velocity respectively. <span class="arithmatex"><span class="MathJax_Preview">dt</span><script type="math/tex">dt</script></span> is time interval that users can define in advance.</p>
+\]</div>
+<p>where <span class="arithmatex">\(v\)</span> and <span class="arithmatex">\(\omega\)</span> are current longitudinal velocity and angular velocity respectively. <span class="arithmatex">\(dt\)</span> is time interval that users can define in advance.</p>
 <h3 id="3-get-target-obstacles-from-the-input-point-cloud">3. Get target obstacles from the input point cloud<a class="headerlink" href="#3-get-target-obstacles-from-the-input-point-cloud" title="Permanent link">#</a></h3>
 <p>After generating the ego predicted path, we select target obstacles from the input point cloud. This obstacle filtering has two major steps, which are rough filtering and rigorous filtering.</p>
 <h4 id="rough-filtering">Rough filtering<a class="headerlink" href="#rough-filtering" title="Permanent link">#</a></h4>
@@ -12608,15 +12601,10 @@ y_{k+1} = y_k + v sin(\theta_k) dt \\
 <p><img alt="rigorous_filtering" src="image/obstacle_filtering_2.drawio.svg"></p>
 <h3 id="4-collision-check-with-target-obstacles">4. Collision check with target obstacles<a class="headerlink" href="#4-collision-check-with-target-obstacles" title="Permanent link">#</a></h3>
 <p>In the fourth step, it checks the collision with filtered obstacles using RSS distance. RSS is formulated as:</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">
+<div class="arithmatex">\[
 d = v_{ego}*t_{response} + v_{ego}^2/(2*a_{min}) - v_{obj}^2/(2*a_{obj_{min}}) + offset
-</div>
-<script type="math/tex; mode=display">
-d = v_{ego}*t_{response} + v_{ego}^2/(2*a_{min}) - v_{obj}^2/(2*a_{obj_{min}}) + offset
-</script>
-</div>
-<p>where <span class="arithmatex"><span class="MathJax_Preview">v_{ego}</span><script type="math/tex">v_{ego}</script></span> and <span class="arithmatex"><span class="MathJax_Preview">v_{obj}</span><script type="math/tex">v_{obj}</script></span> is current ego and obstacle velocity, <span class="arithmatex"><span class="MathJax_Preview">a_{min}</span><script type="math/tex">a_{min}</script></span> and <span class="arithmatex"><span class="MathJax_Preview">a_{obj_{min}}</span><script type="math/tex">a_{obj_{min}}</script></span> is ego and object minimum acceleration (maximum deceleration), <span class="arithmatex"><span class="MathJax_Preview">t_{response}</span><script type="math/tex">t_{response}</script></span> is response time of the ego vehicle to start deceleration. Therefore the distance from the ego vehicle to the obstacle is smaller than this RSS distance <span class="arithmatex"><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>, the ego vehicle send emergency stop signals. This is illustrated in the following picture.</p>
+\]</div>
+<p>where <span class="arithmatex">\(v_{ego}\)</span> and <span class="arithmatex">\(v_{obj}\)</span> is current ego and obstacle velocity, <span class="arithmatex">\(a_{min}\)</span> and <span class="arithmatex">\(a_{obj_{min}}\)</span> is ego and object minimum acceleration (maximum deceleration), <span class="arithmatex">\(t_{response}\)</span> is response time of the ego vehicle to start deceleration. Therefore the distance from the ego vehicle to the obstacle is smaller than this RSS distance <span class="arithmatex">\(d\)</span>, the ego vehicle send emergency stop signals. This is illustrated in the following picture.</p>
 <p><img alt="rss_check" src="image/rss_check.drawio.svg"></p>
 <h3 id="5-send-emergency-stop-signals-to-diagnostics">5. Send emergency stop signals to <code>/diagnostics</code><a class="headerlink" href="#5-send-emergency-stop-signals-to-diagnostics" title="Permanent link">#</a></h3>
 <p>If AEB detects collision with point cloud obstacles in the previous step, it sends emergency signal to <code>/diagnostics</code> in this step. Note that in order to enable emergency stop, it has to send ERROR level emergency. Moreover, AEB user should modify the setting file to keep the emergency level, otherwise Autoware does not hold the emergency state.</p></div>
@@ -12709,7 +12697,11 @@ d = v_{ego}*t_{response} + v_{ego}^2/(2*a_{min}) - v_{obj}^2/(2*a_{obj_{min}}) +
     
       <script src="../../assets/javascripts/bundle.b4d07000.min.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../docs/assets/js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

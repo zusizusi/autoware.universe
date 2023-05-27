@@ -12540,10 +12540,10 @@ Finally, the image is converted to an image and obstacle linestrings are extract
 Points from the pointcloud are then directly used as obstacles.</p>
 <h3 id="velocity-adjustment">Velocity Adjustment<a class="headerlink" href="#velocity-adjustment" title="Permanent link">#</a></h3>
 <p>If a collision is found, the velocity at the trajectory point is adjusted such that the resulting footprint would no longer collide with an obstacle:
-<span class="arithmatex"><span class="MathJax_Preview">velocity = \frac{dist\_to\_collision}{min\_ttc}</span><script type="math/tex">velocity = \frac{dist\_to\_collision}{min\_ttc}</script></span></p>
+<span class="arithmatex">\(velocity = \frac{dist\_to\_collision}{min\_ttc}\)</span></p>
 <p>To prevent sudden deceleration of the ego vehicle, the parameter <code>max_deceleration</code> limits the deceleration relative to the current ego velocity.
 For a trajectory point occurring at a duration <code>t</code> in the future (calculated from the original velocity profile),
-the adjusted velocity cannot be set lower than <span class="arithmatex"><span class="MathJax_Preview">v_{current} - t * max\_deceleration</span><script type="math/tex">v_{current} - t * max\_deceleration</script></span>.</p>
+the adjusted velocity cannot be set lower than <span class="arithmatex">\(v_{current} - t * max\_deceleration\)</span>.</p>
 <p>Furthermore, a parameter <code>min_adjusted_velocity</code>
 provides a lower bound on the modified velocity.</p>
 <h3 id="trajectory-preprocessing">Trajectory preprocessing<a class="headerlink" href="#trajectory-preprocessing" title="Permanent link">#</a></h3>
@@ -12831,7 +12831,11 @@ Parameter <code>max_deceleration</code> allow to set a maximum deceleration (rel
     
       <script src="../../assets/javascripts/bundle.b4d07000.min.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../docs/assets/js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

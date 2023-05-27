@@ -12577,12 +12577,12 @@ This module is designed for rule-based intersection velocity decision that is ea
 <h4 id="collision-check-and-crossing-judgement">Collision Check and Crossing Judgement<a class="headerlink" href="#collision-check-and-crossing-judgement" title="Permanent link">#</a></h4>
 <p>The following process is performed for the attention targets to determine whether the ego vehicle can cross the intersection safely. If it is judged that the ego vehicle cannot pass through the intersection with enough margin, it will insert the stopping speed on the stop line of the intersection.</p>
 <ol>
-<li>calculate the passing time and the time that the ego vehicle is in the intersection. This time is set as <span class="arithmatex"><span class="MathJax_Preview">t_s</span><script type="math/tex">t_s</script></span> ~ <span class="arithmatex"><span class="MathJax_Preview">t_e</span><script type="math/tex">t_e</script></span></li>
+<li>calculate the passing time and the time that the ego vehicle is in the intersection. This time is set as <span class="arithmatex">\(t_s\)</span> ~ <span class="arithmatex">\(t_e\)</span></li>
 <li>extract the predicted path of the target object whose confidence is greater than <code>min_predicted_path_confidence</code>.</li>
 <li>detect collision between the extracted predicted path and ego's predicted path in the following process.<ol>
-<li>obtain the passing area of the ego vehicle <span class="arithmatex"><span class="MathJax_Preview">A_{ego}</span><script type="math/tex">A_{ego}</script></span> in <span class="arithmatex"><span class="MathJax_Preview">t_s</span><script type="math/tex">t_s</script></span> ~ <span class="arithmatex"><span class="MathJax_Preview">t_e</span><script type="math/tex">t_e</script></span>.</li>
-<li>calculate the passing area of the target object <span class="arithmatex"><span class="MathJax_Preview">A_{target}</span><script type="math/tex">A_{target}</script></span> at <span class="arithmatex"><span class="MathJax_Preview">t_s</span><script type="math/tex">t_s</script></span> - <code>collision_start_margin_time</code> ~ <span class="arithmatex"><span class="MathJax_Preview">t_e</span><script type="math/tex">t_e</script></span> + <code>collision_end_margin_time</code> for each predicted path (*1).</li>
-<li>check if <span class="arithmatex"><span class="MathJax_Preview">A_{ego}</span><script type="math/tex">A_{ego}</script></span> and <span class="arithmatex"><span class="MathJax_Preview">A_{target}</span><script type="math/tex">A_{target}</script></span> regions are overlapped (has collision).</li>
+<li>obtain the passing area of the ego vehicle <span class="arithmatex">\(A_{ego}\)</span> in <span class="arithmatex">\(t_s\)</span> ~ <span class="arithmatex">\(t_e\)</span>.</li>
+<li>calculate the passing area of the target object <span class="arithmatex">\(A_{target}\)</span> at <span class="arithmatex">\(t_s\)</span> - <code>collision_start_margin_time</code> ~ <span class="arithmatex">\(t_e\)</span> + <code>collision_end_margin_time</code> for each predicted path (*1).</li>
+<li>check if <span class="arithmatex">\(A_{ego}\)</span> and <span class="arithmatex">\(A_{target}\)</span> regions are overlapped (has collision).</li>
 </ol>
 </li>
 <li>when a collision is detected, the module inserts a stop velocity in front of the intersection. Note that there is a time margin for the stop release (*2).</li>
@@ -12811,7 +12811,11 @@ To prevent going over the pass judge line before the traffic light stop line, th
     
       <script src="../../../assets/javascripts/bundle.b4d07000.min.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../docs/assets/js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

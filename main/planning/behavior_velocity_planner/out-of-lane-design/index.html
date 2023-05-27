@@ -12477,12 +12477,12 @@ The selection distance is chosen as the maximum between the <code>slowdown.dista
 </ul>
 <h4 id="3-overlapping-ranges">3. Overlapping ranges<a class="headerlink" href="#3-overlapping-ranges" title="Permanent link">#</a></h4>
 <p>In the third step, overlaps between the ego path footprints and the other lanes are calculated.
-For each pair of other lane <span class="arithmatex"><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span> and ego path footprint <span class="arithmatex"><span class="MathJax_Preview">f</span><script type="math/tex">f</script></span>, we calculate the overlapping polygons using <code>boost::geometry::intersection</code>.
-For each overlapping polygon found, if the distance inside the other lane <span class="arithmatex"><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span> is above the <code>overlap.minimum_distance</code> threshold, then the overlap is ignored.
+For each pair of other lane <span class="arithmatex">\(l\)</span> and ego path footprint <span class="arithmatex">\(f\)</span>, we calculate the overlapping polygons using <code>boost::geometry::intersection</code>.
+For each overlapping polygon found, if the distance inside the other lane <span class="arithmatex">\(l\)</span> is above the <code>overlap.minimum_distance</code> threshold, then the overlap is ignored.
 Otherwise, the arc length range (relative to the ego path) and corresponding points of the overlapping polygons are stored.
-Ultimately, for each other lane <span class="arithmatex"><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span>, overlapping ranges of successive overlaps are built with the following information:</p>
+Ultimately, for each other lane <span class="arithmatex">\(l\)</span>, overlapping ranges of successive overlaps are built with the following information:</p>
 <ul>
-<li>overlapped other lane <span class="arithmatex"><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span>.</li>
+<li>overlapped other lane <span class="arithmatex">\(l\)</span>.</li>
 <li>start and end ego path indexes.</li>
 <li>start and end ego path arc lengths.</li>
 <li>start and end overlap points.</li>
@@ -12531,10 +12531,10 @@ Otherwise, the lanelet map is used to estimate the distance between the object a
 <h4 id="5-path-update">5. Path update<a class="headerlink" href="#5-path-update" title="Permanent link">#</a></h4>
 <p>Finally, for each decision to stop or slow down before an overlapping range,
 a point is inserted in the path.
-For a decision taken for an overlapping range with a lane <span class="arithmatex"><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span> starting at ego path point index <span class="arithmatex"><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>,
-a point is inserted in the path between index <span class="arithmatex"><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> and <span class="arithmatex"><span class="MathJax_Preview">i-1</span><script type="math/tex">i-1</script></span> such that the ego footprint projected at the inserted point does not overlap <span class="arithmatex"><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span>.
+For a decision taken for an overlapping range with a lane <span class="arithmatex">\(l\)</span> starting at ego path point index <span class="arithmatex">\(i\)</span>,
+a point is inserted in the path between index <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(i-1\)</span> such that the ego footprint projected at the inserted point does not overlap <span class="arithmatex">\(l\)</span>.
 Such point with no overlap must exist since, by definition of the overlapping range,
-we know that there is no overlap at <span class="arithmatex"><span class="MathJax_Preview">i-1</span><script type="math/tex">i-1</script></span>.</p>
+we know that there is no overlap at <span class="arithmatex">\(i-1\)</span>.</p>
 <p>If the point would cause a higher deceleration than allowed by the <code>max_accel</code> parameter (node parameter),
 it is skipped.</p>
 <p>Moreover, parameter <code>action.distance_buffer</code> adds an extra distance between the ego footprint and the overlap when possible.</p>
@@ -12816,7 +12816,11 @@ it is skipped.</p>
     
       <script src="../../../assets/javascripts/bundle.b4d07000.min.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../docs/assets/js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

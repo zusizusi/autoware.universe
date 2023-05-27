@@ -12804,22 +12804,13 @@ ros2<span class="w"> </span>run<span class="w"> </span>accel_brake_map_calibrato
 | velocity_diff_threshold | 0.556 |
 | pedal_diff_threshold | 0.03 |</p>
 <h4 id="update-formula">Update formula<a class="headerlink" href="#update-formula" title="Permanent link">#</a></h4>
-<div class="arithmatex">
-<div class="MathJax_Preview">
+<div class="arithmatex">\[
 \begin{align}
     \theta[n]=&amp;
     \theta[n-1]+\frac{p[n-1]x^{(n)}}{\lambda+p[n-1]{(x^{(n)})}^2}(y^{(n)}-\theta[n-1]x^{(n)})\\
     p[n]=&amp;\frac{p[n-1]}{\lambda+p[n-1]{(x^{(n)})}^2}
 \end{align}
-</div>
-<script type="math/tex; mode=display">
-\begin{align}
-    \theta[n]=&
-    \theta[n-1]+\frac{p[n-1]x^{(n)}}{\lambda+p[n-1]{(x^{(n)})}^2}(y^{(n)}-\theta[n-1]x^{(n)})\\
-    p[n]=&\frac{p[n-1]}{\lambda+p[n-1]{(x^{(n)})}^2}
-\end{align}
-</script>
-</div>
+\]</div>
 <h4 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">#</a></h4>
 <table>
 <thead>
@@ -12831,30 +12822,30 @@ ros2<span class="w"> </span>run<span class="w"> </span>accel_brake_map_calibrato
 <tbody>
 <tr>
 <td>covariance</td>
-<td><span class="arithmatex"><span class="MathJax_Preview">p[n-1]</span><script type="math/tex">p[n-1]</script></span></td>
+<td><span class="arithmatex">\(p[n-1]\)</span></td>
 </tr>
 <tr>
 <td>map_offset</td>
-<td><span class="arithmatex"><span class="MathJax_Preview">\theta[n]</span><script type="math/tex">\theta[n]</script></span></td>
+<td><span class="arithmatex">\(\theta[n]\)</span></td>
 </tr>
 <tr>
 <td>forgetting<em>factor</em></td>
-<td><span class="arithmatex"><span class="MathJax_Preview">\lambda</span><script type="math/tex">\lambda</script></span></td>
+<td><span class="arithmatex">\(\lambda\)</span></td>
 </tr>
 <tr>
 <td>phi</td>
-<td><span class="arithmatex"><span class="MathJax_Preview">x(=1)</span><script type="math/tex">x(=1)</script></span></td>
+<td><span class="arithmatex">\(x(=1)\)</span></td>
 </tr>
 <tr>
 <td>measured_acc</td>
-<td><span class="arithmatex"><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span></td>
+<td><span class="arithmatex">\(y\)</span></td>
 </tr>
 </tbody>
 </table>
 <h3 id="update_offset_four_cell_around-1">update_offset_four_cell_around [1]<a class="headerlink" href="#update_offset_four_cell_around-1" title="Permanent link">#</a></h3>
 <p>Update the offsets by RLS in four grids around newly obtained data. By considering linear interpolation, the update takes into account appropriate weights. Therefore, there is no need to remove data by thresholding.</p>
 <p><strong>Advantage</strong> : No data is wasted because updates are performed on the 4 grids around the data with appropriate weighting.
-<strong>Disadvantage</strong> : Accuracy may be degraded due to extreme bias of the data. For example, if data <span class="arithmatex"><span class="MathJax_Preview">z(k)</span><script type="math/tex">z(k)</script></span> is biased near <span class="arithmatex"><span class="MathJax_Preview">Z_{RR}</span><script type="math/tex">Z_{RR}</script></span> in Fig. 2, updating is performed at the four surrounding points ( <span class="arithmatex"><span class="MathJax_Preview">Z_{RR}</span><script type="math/tex">Z_{RR}</script></span>, <span class="arithmatex"><span class="MathJax_Preview">Z_{RL}</span><script type="math/tex">Z_{RL}</script></span>, <span class="arithmatex"><span class="MathJax_Preview">Z_{LR}</span><script type="math/tex">Z_{LR}</script></span>, and <span class="arithmatex"><span class="MathJax_Preview">Z_{LL}</span><script type="math/tex">Z_{LL}</script></span>), but accuracy at <span class="arithmatex"><span class="MathJax_Preview">Z_{LL}</span><script type="math/tex">Z_{LL}</script></span> is not expected.</p>
+<strong>Disadvantage</strong> : Accuracy may be degraded due to extreme bias of the data. For example, if data <span class="arithmatex">\(z(k)\)</span> is biased near <span class="arithmatex">\(Z_{RR}\)</span> in Fig. 2, updating is performed at the four surrounding points ( <span class="arithmatex">\(Z_{RR}\)</span>, <span class="arithmatex">\(Z_{RL}\)</span>, <span class="arithmatex">\(Z_{LR}\)</span>, and <span class="arithmatex">\(Z_{LL}\)</span>), but accuracy at <span class="arithmatex">\(Z_{LL}\)</span> is not expected.</p>
 <!-- cspell: ignore fourcell -->
 <p align="center">
   <img src="./media/fourcell_RLS.png" width="600">
@@ -12955,7 +12946,11 @@ ros2<span class="w"> </span>run<span class="w"> </span>accel_brake_map_calibrato
     
       <script src="../../../assets/javascripts/bundle.b4d07000.min.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../docs/assets/js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

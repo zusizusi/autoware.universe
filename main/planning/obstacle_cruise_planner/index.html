@@ -12892,15 +12892,10 @@ If the acceleration is less than <code>common.min_strong_accel</code>, the stop 
 <p>The role of the cruise planning is keeping a safe distance with dynamic vehicle objects with smoothed velocity transition.
 This includes not only cruising a front vehicle, but also reacting a cut-in and cut-out vehicle.</p>
 <p>The safe distance is calculated dynamically based on the Responsibility-Sensitive Safety (RSS) by the following equation.</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">
+<div class="arithmatex">\[
 d_{rss} = v_{ego} t_{idling} + \frac{1}{2} a_{ego} t_{idling}^2 + \frac{v_{ego}^2}{2 a_{ego}} - \frac{v_{obstacle}^2}{2 a_{obstacle}},
-</div>
-<script type="math/tex; mode=display">
-d_{rss} = v_{ego} t_{idling} + \frac{1}{2} a_{ego} t_{idling}^2 + \frac{v_{ego}^2}{2 a_{ego}} - \frac{v_{obstacle}^2}{2 a_{obstacle}},
-</script>
-</div>
-<p>assuming that <span class="arithmatex"><span class="MathJax_Preview">d_rss</span><script type="math/tex">d_rss</script></span> is the calculated safe distance, <span class="arithmatex"><span class="MathJax_Preview">t_{idling}</span><script type="math/tex">t_{idling}</script></span> is the idling time for the ego to detect the front vehicle's deceleration, <span class="arithmatex"><span class="MathJax_Preview">v_{ego}</span><script type="math/tex">v_{ego}</script></span> is the ego's current velocity, <span class="arithmatex"><span class="MathJax_Preview">v_{obstacle}</span><script type="math/tex">v_{obstacle}</script></span> is the front obstacle's current velocity, <span class="arithmatex"><span class="MathJax_Preview">a_{ego}</span><script type="math/tex">a_{ego}</script></span> is the ego's acceleration, and <span class="arithmatex"><span class="MathJax_Preview">a_{obstacle}</span><script type="math/tex">a_{obstacle}</script></span> is the obstacle's acceleration.
+\]</div>
+<p>assuming that <span class="arithmatex">\(d_rss\)</span> is the calculated safe distance, <span class="arithmatex">\(t_{idling}\)</span> is the idling time for the ego to detect the front vehicle's deceleration, <span class="arithmatex">\(v_{ego}\)</span> is the ego's current velocity, <span class="arithmatex">\(v_{obstacle}\)</span> is the front obstacle's current velocity, <span class="arithmatex">\(a_{ego}\)</span> is the ego's acceleration, and <span class="arithmatex">\(a_{obstacle}\)</span> is the obstacle's acceleration.
 These values are parameterized as follows. Other common values such as ego's minimum acceleration is defined in <code>common.param.yaml</code>.</p>
 <table>
 <thead>
@@ -12929,8 +12924,7 @@ These values are parameterized as follows. Other common values such as ego's min
 </tbody>
 </table>
 <p>The detailed formulation is as follows.</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">
+<div class="arithmatex">\[
 \begin{align}
 d_{error} &amp; = d - d_{rss} \\
 d_{normalized} &amp; = lpf(d_{error} / d_{obstacle}) \\
@@ -12939,18 +12933,7 @@ v_{pid} &amp; = pid(d_{quad, normalized}) \\
 v_{add} &amp; = v_{pid} &gt; 0 ? v_{pid}* w_{acc} : v_{pid} \\
 v_{target} &amp; = max(v_{ego} + v_{add}, v_{min, cruise})
 \end{align}
-</div>
-<script type="math/tex; mode=display">
-\begin{align}
-d_{error} & = d - d_{rss} \\
-d_{normalized} & = lpf(d_{error} / d_{obstacle}) \\
-d_{quad, normalized} & = sign(d_{normalized}) *d_{normalized}*d_{normalized} \\
-v_{pid} & = pid(d_{quad, normalized}) \\
-v_{add} & = v_{pid} > 0 ? v_{pid}* w_{acc} : v_{pid} \\
-v_{target} & = max(v_{ego} + v_{add}, v_{min, cruise})
-\end{align}
-</script>
-</div>
+\]</div>
 <table>
 <thead>
 <tr>
@@ -13297,7 +13280,11 @@ Note that if a new stop obstacle appears and the previous closest obstacle remov
     
       <script src="../../assets/javascripts/bundle.b4d07000.min.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../docs/assets/js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

@@ -12515,10 +12515,10 @@ While ego is cruising from safe margin to collision path point, ego vehicle keep
 <h5 id="maximum-slowdown-velocity">Maximum Slowdown Velocity<a class="headerlink" href="#maximum-slowdown-velocity" title="Permanent link">#</a></h5>
 <p>The maximum slowdown velocity is calculated from the below parameters of ego current velocity and acceleration with maximum slowdown jerk and maximum slowdown acceleration in order not to slowdown too much.</p>
 <ul>
-<li><span class="arithmatex"><span class="MathJax_Preview">j_{max}</span><script type="math/tex">j_{max}</script></span> slowdown jerk limit[m/s^3]</li>
-<li><span class="arithmatex"><span class="MathJax_Preview">a_{max}</span><script type="math/tex">a_{max}</script></span> slowdown deceleration limit[m/s2]</li>
-<li><span class="arithmatex"><span class="MathJax_Preview">v_{0}</span><script type="math/tex">v_{0}</script></span> current velocity[m/s]</li>
-<li><span class="arithmatex"><span class="MathJax_Preview">a_{0}</span><script type="math/tex">a_{0}</script></span> current acceleration[m/s]</li>
+<li><span class="arithmatex">\(j_{max}\)</span> slowdown jerk limit[m/s^3]</li>
+<li><span class="arithmatex">\(a_{max}\)</span> slowdown deceleration limit[m/s2]</li>
+<li><span class="arithmatex">\(v_{0}\)</span> current velocity[m/s]</li>
+<li><span class="arithmatex">\(a_{0}\)</span> current acceleration[m/s]</li>
 </ul>
 <p><img alt="brief" src="../docs/occlusion_spot/maximum_slowdown_velocity.drawio.svg"></p>
 <h4 id="module-parameters">Module Parameters<a class="headerlink" href="#module-parameters" title="Permanent link">#</a></h4>
@@ -12805,7 +12805,11 @@ While ego is cruising from safe margin to collision path point, ego vehicle keep
     
       <script src="../../../assets/javascripts/bundle.b4d07000.min.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../docs/assets/js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>
