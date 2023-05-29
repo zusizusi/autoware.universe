@@ -141,6 +141,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/tier4_adapi_rviz_plugin/</loc>
+         <lastmod>2023-05-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/tier4_automatic_goal_rviz_plugin/</loc>
          <lastmod>2023-05-29</lastmod>
          <changefreq>daily</changefreq>
