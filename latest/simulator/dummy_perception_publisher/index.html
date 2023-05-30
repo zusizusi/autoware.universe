@@ -12501,12 +12501,17 @@
 <tr>
 <td><code>output/dynamic_object</code></td>
 <td><code>tier4_perception_msgs::msg::DetectedObjectsWithFeature</code></td>
-<td>Publishes objects</td>
+<td>dummy detection objects</td>
 </tr>
 <tr>
 <td><code>output/points_raw</code></td>
 <td><code>sensor_msgs::msg::PointCloud2</code></td>
 <td>point cloud of objects</td>
+</tr>
+<tr>
+<td><code>output/debug/ground_truth_objects</code></td>
+<td><code>autoware_auto_perception_msgs::msg::TrackedObjects</code></td>
+<td>ground truth objects</td>
 </tr>
 </tbody>
 </table>
@@ -12550,6 +12555,24 @@
 <td>bool</td>
 <td>true</td>
 <td>if True, node uses z coordinate of ego base_link</td>
+</tr>
+<tr>
+<td><code>publish_ground_truth</code></td>
+<td>bool</td>
+<td>false</td>
+<td>if True, publish ground truth objects</td>
+</tr>
+<tr>
+<td><code>use_fixed_random_seed</code></td>
+<td>bool</td>
+<td>false</td>
+<td>if True, use fixed random seed</td>
+</tr>
+<tr>
+<td><code>random_seed</code></td>
+<td>int</td>
+<td>0</td>
+<td>random seed</td>
 </tr>
 </tbody>
 </table>
