@@ -13747,32 +13747,32 @@ In current Autoware.universe, only Lanelet2 map format is supported.</p>
 <tr>
 <td><code>/planning/mission_planning/set_route_points</code></td>
 <td>autoware_adapi_v1_msgs/srv/SetRoutePoints</td>
-<td>route request with pose waypoints</td>
+<td>route request with pose waypoints. Assumed the vehicle is stopped.</td>
 </tr>
 <tr>
 <td><code>/planning/mission_planning/set_route</code></td>
 <td>autoware_adapi_v1_msgs/srv/SetRoute</td>
-<td>route request with lanelet waypoints</td>
+<td>route request with lanelet waypoints. Assumed the vehicle is stopped.</td>
 </tr>
 <tr>
 <td><code>/planning/mission_planning/change_route_points</code></td>
 <td>autoware_adapi_v1_msgs/srv/SetRoutePoints</td>
-<td>route change request with pose waypoints</td>
+<td>route change request with pose waypoints. This can be called when the vehicle is moving.</td>
 </tr>
 <tr>
 <td><code>/planning/mission_planning/change_route</code></td>
 <td>autoware_adapi_v1_msgs/srv/SetRoute</td>
-<td>route change request with lanelet waypoints</td>
+<td>route change request with lanelet waypoints. This can be called when the vehicle is moving.</td>
 </tr>
 <tr>
 <td><code>~/srv/set_mrm_route</code></td>
 <td>autoware_adapi_v1_msgs/srv/SetRoutePoints</td>
-<td>set emergency route</td>
+<td>set emergency route. This can be called when the vehicle is moving.</td>
 </tr>
 <tr>
 <td><code>~/srv/clear_mrm_route</code></td>
 <td>std_srvs/srv/Trigger</td>
-<td>clear emergency route</td>
+<td>clear emergency route.</td>
 </tr>
 </tbody>
 </table>
