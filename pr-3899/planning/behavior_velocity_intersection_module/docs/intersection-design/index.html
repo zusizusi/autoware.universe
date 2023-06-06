@@ -13868,11 +13868,12 @@
 
 <div><h2 id="role">Role<a class="headerlink" href="#role" title="Permanent link">#</a></h2>
 <p>The <em>intersection</em> module is responsible for safely going through junctions by (1)checking collisions with upcoming vehicles (2)recognizing the occluded area in the intersection (3)responding to arrow signals of associated traffic lights.</p>
+<p><img alt="topology" src="../intersection-topology.drawio.svg"></p>
 <h2 id="activation-condition">Activation condition<a class="headerlink" href="#activation-condition" title="Permanent link">#</a></h2>
 <p>This module is activated when the path contains the lanes with <code>turn_direction</code> tag. More precisely, if the <code>lane_ids</code> of the path contains the ids of those lanes, corresponding instances of intersection module are activated on each lanes respectively.</p>
 <h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">#</a></h2>
 <ul>
-<li>The HDMap needs to have the information of <code>turn_direction</code> (which should be one of <code>straight</code>, <code>left</code>, <code>right</code>) for all the lanes in junctions and <code>right_of_way</code> for specific lanes (refer to <a href="./#right-of-way">RightOfWay</a> section for more details).</li>
+<li>The HDMap needs to have the information of <code>turn_direction</code> tag (which should be one of <code>straight</code>, <code>left</code>, <code>right</code>) for all the lanes in intersections and <code>right_of_way</code> tag for specific lanes (refer to <a href="./#right-of-way">RightOfWay</a> section for more details).</li>
 <li>WIP(perception requirements/limitations)</li>
 <li>WIP(sensor visibility requirements/limitations)</li>
 </ul>
@@ -13880,7 +13881,7 @@
 <p>For <a href="./#stuck-vehicle-detection">stuck vehicle detection</a> and <a href="./#collision-detection">collision detection</a>, this module checks <strong>car</strong>, <strong>bus</strong>, <strong>truck</strong>, <strong>trailer</strong>, <strong>motor cycle</strong>, and <strong>bicycle</strong> type objects.</p>
 <h2 id="attention-area">Attention area<a class="headerlink" href="#attention-area" title="Permanent link">#</a></h2>
 <p>The <code>Attention Area</code> in the intersection are defined as the set of lanes that are conflicting with ego vehicle's path and their preceding lanes up to <code>detection_area_length</code> meters. <code>RightOfWay</code> tag is used to rule out the lanes that each lane has priority given the traffic light relation and <code>turn_direction</code> priority.</p>
-<p><code>Intersection Area</code>, which is supposed to be defined on the HDMap, is an area convering the entire intersection.</p>
+<p><code>Intersection Area</code>, which is supposed to be defined on the HDMap, is an area convering the entire intersection. </p>
 <p><img alt="attention_area" src="../intersection-attention.drawio.svg"></p>
 <h3 id="right-of-way">Right Of Way<a class="headerlink" href="#right-of-way" title="Permanent link">#</a></h3>
 <p>Following table shows an example of how to assign <code>right_of_way</code> tag and set <code>yield_lanes</code> to each lane in intersections.</p>
