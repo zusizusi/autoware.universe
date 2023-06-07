@@ -9826,13 +9826,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#calculate-bound-from-drivable-area" class="md-nav__link">
-    Calculate bound from drivable area
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#keep-minimum-boundary-width" class="md-nav__link">
     Keep minimum boundary width
   </a>
@@ -13818,13 +13811,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#calculate-bound-from-drivable-area" class="md-nav__link">
-    Calculate bound from drivable area
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#keep-minimum-boundary-width" class="md-nav__link">
     Keep minimum boundary width
   </a>
@@ -14246,28 +14232,36 @@ Instead, if we use L-infinity norm where slack variables are shared by enabling 
 \]</div>
 <h2 id="tips-for-stable-trajectory-planning">Tips for stable trajectory planning<a class="headerlink" href="#tips-for-stable-trajectory-planning" title="Permanent link">#</a></h2>
 <p>In order to make the trajectory optimization problem stabler to solve, the boundary constraint which the trajectory footprints should be inside and optimization weights are modified.</p>
-<h3 id="calculate-bound-from-drivable-area">Calculate bound from drivable area<a class="headerlink" href="#calculate-bound-from-drivable-area" title="Permanent link">#</a></h3>
-<p>From the drivable area, raw boundary is calculated.</p>
 <h3 id="keep-minimum-boundary-width">Keep minimum boundary width<a class="headerlink" href="#keep-minimum-boundary-width" title="Permanent link">#</a></h3>
-<p>Since we cannot distinguish the boundary by roads from the boundary by obstacles for avoidance,</p>
+<p>The drivable area's width is sometimes smaller than the vehicle width since the behavior module does not consider the width.
+To realize the stable trajectory optimization, the drivable area's width is guaranteed to be larger than the vehicle wdith and an additional margin in a rule-based way.</p>
+<p>We cannot distinguish the boundary by roads from the boundary by obstacles for avoidance in the motion planner, the drivable area is modified in the following multi steps assuming that <span class="arithmatex">\(l_{width}\)</span> is the vehicle width and <span class="arithmatex">\(l_{margin}\)</span> is an additional margin.</p>
 <p><img alt="keep_minimum_boundary_width" src="../../media/keep_minimum_boundary_width.drawio.svg"></p>
 <h3 id="extend-violated-boundary">Extend violated boundary<a class="headerlink" href="#extend-violated-boundary" title="Permanent link">#</a></h3>
 <h3 id="avoid-sudden-steering">Avoid sudden steering<a class="headerlink" href="#avoid-sudden-steering" title="Permanent link">#</a></h3>
 <p>When the obstacle suddenly appears which is determined to avoid by the behavior module, the drivable area's shape just in front of the ego will change, resulting in the sudden steering.
-To prevent this, the forward drivable area's shape from the ego is fixed as previous drivable area's shape.</p>
+To prevent this, the drivable area's shape close to the ego is fixed as previous drivable area's shape.</p>
+<p>Assume that <span class="arithmatex">\(v_{ego}\)</span> is the ego velocity, and <span class="arithmatex">\(t_{fix}\)</span> is the time to fix the forward drivable area's shape.</p>
 <p><img alt="avoid_sudden_steering" src="../../media/avoid_sudden_steering.drawio.svg"></p>
 <h3 id="calculate-avoidance-cost">Calculate avoidance cost<a class="headerlink" href="#calculate-avoidance-cost" title="Permanent link">#</a></h3>
-<p>A raw normalized avoidance cost is calculated as follows.
-min(- d<em cost="cost">{lower_bound} - d</em>, d<em cost="cost">{upper_bound} + d</em>)</p>
 <p><img alt="avoidance_cost" src="../../media/avoidance_cost.drawio.svg"></p>
 <h3 id="change-optimization-weights">Change optimization weights<a class="headerlink" href="#change-optimization-weights" title="Permanent link">#</a></h3>
 <div class="arithmatex">\[
 \begin{align}
-r &amp; = \mathrm{lerp}(w^{steer}_{normal}, w^{steer}_{avoidance}, c) \\
-w^{lat} &amp; = \mathrm{lerp}(w^{lat}_{normal}, w^{lat}_{avoidance}, c) \\
-w^{yaw} &amp; = \mathrm{lerp}(w^{yaw}_{normal}, w^{yaw}_{avoidance}, c)
+r &amp; = \mathrm{lerp}(w^{\mathrm{steer}}_{\mathrm{normal}}, w^{\mathrm{steer}}_{\mathrm{avoidance}}, c) \\
+w^{\mathrm{lat}} &amp; = \mathrm{lerp}(w^{\mathrm{lat}}_{\mathrm{normal}}, w^{\mathrm{lat}}_{\mathrm{avoidance}}, r) \\
+w^{\mathrm{yaw}} &amp; = \mathrm{lerp}(w^{\mathrm{yaw}}_{\mathrm{normal}}, w^{\mathrm{yaw}}_{\mathrm{avoidance}}, r)
 \end{align}
-\]</div></div>
+\]</div>
+<p>Assume that <span class="arithmatex">\(c\)</span> is the normalized avoidance cost, <span class="arithmatex">\(w^{\mathrm{lat}}\)</span> is the weight for lateral error, <span class="arithmatex">\(w^{\mathrm{yaw}}\)</span> is the weight for yaw error, and other variables are as follows.
+| Parameter | Type | Description |
+| ------------------------------------------------------------------------------------ | ------ | -------------------------------------------------------------------- |
+| <span class="arithmatex">\(w^{\mathrm{steer}}_{\mathrm{normal}}\)</span> | double | weight for steering minimization in normal cases |
+| <span class="arithmatex">\(w^{\mathrm{steer}}_{\mathrm{avoidance}}\)</span> | double | weight for steering minimization in avoidance cases |
+| <span class="arithmatex">\(w^{\mathrm{lat}}_{\mathrm{normal}}\)</span> | double | weight for lateral error minimization in normal cases |
+| <span class="arithmatex">\(w^{\mathrm{lat}}_{\mathrm{avoidance}}\)</span> | double | weight for lateral error minimization in avoidance cases |
+| <span class="arithmatex">\(w^{\mathrm{yaw}}_{\mathrm{normal}}\)</span> | double | weight for yaw error minimization in normal cases |
+| <span class="arithmatex">\(w^{\mathrm{yaw}}_{\mathrm{avoidance}}\)</span> | double | weight for yaw error minimization in avoidance cases |</p></div>
 
 
 
