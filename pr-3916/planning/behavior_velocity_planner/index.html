@@ -12858,19 +12858,19 @@
 It loads modules as plugins. Please refer to the links listed below for detail on each module.</p>
 <p><img alt="Architecture" src="docs/BehaviorVelocityPlanner-Architecture.drawio.svg"></p>
 <ul>
-<li><a href="../behavior_velocity_blind_spot_module/docs/blind-spot-design.md">Blind Spot</a></li>
-<li><a href="../behavior_velocity_crosswalk_module/docs/crosswalk-design.md">Crosswalk</a></li>
-<li><a href="../behavior_velocity_detection_area_module/docs/detection-area-design.md">Detection Area</a></li>
-<li><a href="../behavior_velocity_intersection_module/docs/intersection-design.md">Intersection</a></li>
-<li><a href="../behavior_velocity_intersection_module/docs/merge-from-private-design.md">MergeFromPrivate</a></li>
-<li><a href="../behavior_velocity_stop_line_module/docs/stop-line-design.md">Stop Line</a></li>
-<li><a href="../behavior_velocity_virtual_traffic_light_module/docs/virtual-traffic-light-design.md">Virtual Traffic Light</a></li>
-<li><a href="../behavior_velocity_traffic_light_module/docs/traffic-light-design.md">Traffic Light</a></li>
-<li><a href="../behavior_velocity_occlusion_spot_module/docs/occlusion-spot-design.md">Occlusion Spot</a></li>
-<li><a href="../behavior_velocity_no_stopping_area_module/docs/no-stopping-area-design.md">No Stopping Area</a></li>
-<li><a href="../behavior_velocity_run_out_module/docs/run-out-design.md">Run Out</a></li>
-<li><a href="../behavior_velocity_speed_bump_module/docs/speed-bump-design.md">Speed Bump</a></li>
-<li><a href="../behavior_velocity_out_of_lane_module/docs/out-of-lane-design.md">Out of Lane</a></li>
+<li><a href="../behavior_velocity_blind_spot_module/">Blind Spot</a></li>
+<li><a href="../behavior_velocity_crosswalk_module/">Crosswalk</a></li>
+<li><a href="../behavior_velocity_detection_area_module/">Detection Area</a></li>
+<li><a href="../behavior_velocity_intersection_module/">Intersection</a></li>
+<li><a href="../behavior_velocity_intersection_module/#merge-from-private">MergeFromPrivate</a></li>
+<li><a href="../behavior_velocity_stop_line_module/">Stop Line</a></li>
+<li><a href="../behavior_velocity_virtual_traffic_light_module/">Virtual Traffic Light</a></li>
+<li><a href="../behavior_velocity_traffic_light_module/">Traffic Light</a></li>
+<li><a href="../behavior_velocity_occlusion_spot_module/">Occlusion Spot</a></li>
+<li><a href="../behavior_velocity_no_stopping_area_module/">No Stopping Area</a></li>
+<li><a href="../behavior_velocity_run_out_module/">Run Out</a></li>
+<li><a href="../behavior_velocity_speed_bump_module/">Speed Bump</a></li>
+<li><a href="../behavior_velocity_out_of_lane_module/">Out of Lane</a></li>
 </ul>
 <p>When each module plans velocity, it considers based on <code>base_link</code>(center of rear-wheel axis) pose.
 So for example, in order to stop at a stop line with the vehicles' front on the stop line, it calculates <code>base_link</code> position from the distance between <code>base_link</code> to front and modifies path velocity from the <code>base_link</code> position.</p>

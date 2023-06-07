@@ -12986,9 +12986,9 @@ This module is designed for rule-based intersection velocity decision that is ea
 <li>The lane has high priority for the driving lane of the ego-vehicle (priority tags are needed to be configured in Lanelet-map according to the situation).</li>
 </ul>
 <p>See the following figures to know how to create an attention area and its rationale.</p>
-<p><img alt="intersection_straight" src="intersection_straight.png"></p>
-<p><img alt="intersection_turn_right" src="intersection_turn_right.png"></p>
-<p><img alt="intersection_turn_left" src="intersection_turn_left.png"></p>
+<p><img alt="intersection_straight" src="docs/intersection_straight.png"></p>
+<p><img alt="intersection_turn_right" src="docs/intersection_turn_right.png"></p>
+<p><img alt="intersection_turn_left" src="docs/intersection_turn_left.png"></p>
 <p>Note: the case <code>traffic light, turn right only</code> is not currently implemented.</p>
 <h4 id="collision-check-and-crossing-judgement">Collision Check and Crossing Judgement<a class="headerlink" href="#collision-check-and-crossing-judgement" title="Permanent link">#</a></h4>
 <p>The following process is performed for the attention targets to determine whether the ego vehicle can cross the intersection safely. If it is judged that the ego vehicle cannot pass through the intersection with enough margin, it will insert the stopping speed on the stop line of the intersection.</p>
@@ -13128,7 +13128,7 @@ To prevent going over the pass judge line before the traffic light stop line, th
 </ul>
 <hr>
 <h3 id="how-to-set-lanelet-map-fot-intersection">How to Set Lanelet Map fot Intersection<a class="headerlink" href="#how-to-set-lanelet-map-fot-intersection" title="Permanent link">#</a></h3>
-<p><img alt="intersection_fig" src="intersection_fig.png"></p>
+<p><img alt="intersection_fig" src="docs/intersection_fig.png"></p>
 <h4 id="set-a-turn_direction-tag-fig-1">Set a turn_direction tag (Fig. 1)<a class="headerlink" href="#set-a-turn_direction-tag-fig-1" title="Permanent link">#</a></h4>
 <p>IntersectionModule will be activated by this tag. If this tag is not set, ego-vehicle don’t recognize the lane as an intersection. Even if it’s a straight lane, this tag is mandatory if it is located within intersection.</p>
 <p>Set a value in <code>turn_direction</code> tag to light up turn signals.</p>
