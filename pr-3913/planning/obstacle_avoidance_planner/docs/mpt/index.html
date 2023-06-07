@@ -14257,7 +14257,17 @@ Instead, if we use L-infinity norm where slack variables are shared by enabling 
 To prevent this, the forward drivable area's shape from the ego is fixed as previous drivable area's shape.</p>
 <p><img alt="avoid_sudden_steering" src="../../media/avoid_sudden_steering.drawio.svg"></p>
 <h3 id="calculate-avoidance-cost">Calculate avoidance cost<a class="headerlink" href="#calculate-avoidance-cost" title="Permanent link">#</a></h3>
-<h3 id="change-optimization-weights">Change optimization weights<a class="headerlink" href="#change-optimization-weights" title="Permanent link">#</a></h3></div>
+<p>A raw normalized avoidance cost is calculated as follows.
+min(- d<em cost="cost">{lower_bound} - d</em>, d<em cost="cost">{upper_bound} + d</em>)</p>
+<p><img alt="avoidance_cost" src="../../media/avoidance_cost.drawio.svg"></p>
+<h3 id="change-optimization-weights">Change optimization weights<a class="headerlink" href="#change-optimization-weights" title="Permanent link">#</a></h3>
+<div class="arithmatex">\[
+\begin{align}
+r &amp; = \mathrm{lerp}(w^{steer}_{normal}, w^{steer}_{avoidance}, c) \\
+w^{lat} &amp; = \mathrm{lerp}(w^{lat}_{normal}, w^{lat}_{avoidance}, c) \\
+w^{yaw} &amp; = \mathrm{lerp}(w^{yaw}_{normal}, w^{yaw}_{avoidance}, c)
+\end{align}
+\]</div></div>
 
 
 
