@@ -8056,18 +8056,12 @@
             
           
         
-          
-        
       
       
         
         
         <div class="md-nav__link md-nav__link--index ">
           <a href="../behavior_velocity_intersection_module/">Behavior velocity intersection module</a>
-          
-            <label for="__nav_8_5">
-              <span class="md-nav__icon md-icon"></span>
-            </label>
           
         </div>
       
@@ -8078,60 +8072,6 @@
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
-            
-          
-            
-              
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_5_2" >
-      
-      
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_8_5_2" id="__nav_8_5_2_label" tabindex="0">
-          Docs
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_8_5_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_8_5_2">
-          <span class="md-nav__icon md-icon"></span>
-          Docs
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../behavior_velocity_intersection_module/docs/merge-from-private-design/" class="md-nav__link">
-        Merge from private design
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
             
           
         </ul>
@@ -12911,11 +12851,11 @@
 <ol>
 <li>
 <p>Traffic control by traffic lights with V2X support
-   <img alt="traffic_light" src="V2X_support_traffic_light.png"></p>
+   <img alt="traffic_light" src="docs/V2X_support_traffic_light.png"></p>
 </li>
 <li>
 <p>Intersection coordination of multiple vehicles by FMS.
-   <img alt="FMS" src="intersection-coordination.png"></p>
+   <img alt="FMS" src="docs/intersection-coordination.png"></p>
 </li>
 </ol>
 <p>It's possible to make each function individually, however, the use cases can be generalized with these three elements.</p>
@@ -12994,17 +12934,17 @@
 <p>If it needs X meters (e.g. 0.5 meters) to stop once the vehicle starts moving due to the poor vehicle control performance, the vehicle goes over the stopping position that should be strictly observed when the vehicle starts to moving in order to approach the near stop point (e.g. 0.3 meters away).</p>
 <p>This module has parameter <code>hold_stop_margin_distance</code> in order to prevent from these redundant restart. If the vehicle is stopped within <code>hold_stop_margin_distance</code> meters from stop point of the module (_front_to_stop_line &lt; hold_stop_margin_distance), the module judges that the vehicle has already stopped for the module's stop point and plans to keep stopping current position even if the vehicle is stopped due to other factors.</p>
 <figure>
-<p><img alt="example" src="restart_prevention.svg" width="1000">
+<p><img alt="example" src="docs/restart_prevention.svg" width="1000">
   </p>
 <figcaption>parameters</figcaption>
 </figure>
 <figure>
-<p><img alt="example" src="restart.svg" width="1000">
+<p><img alt="example" src="docs/restart.svg" width="1000">
   </p>
 <figcaption>outside the hold_stop_margin_distance</figcaption>
 </figure>
 <figure>
-<p><img alt="example" src="keep_stopping.svg" width="1000">
+<p><img alt="example" src="docs/keep_stopping.svg" width="1000">
   </p>
 <figcaption>inside the hold_stop_margin_distance</figcaption>
 </figure>

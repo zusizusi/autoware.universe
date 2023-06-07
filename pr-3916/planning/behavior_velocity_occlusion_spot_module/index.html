@@ -8056,18 +8056,12 @@
             
           
         
-          
-        
       
       
         
         
         <div class="md-nav__link md-nav__link--index ">
           <a href="../behavior_velocity_intersection_module/">Behavior velocity intersection module</a>
-          
-            <label for="__nav_8_5">
-              <span class="md-nav__icon md-icon"></span>
-            </label>
           
         </div>
       
@@ -8078,60 +8072,6 @@
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
-            
-          
-            
-              
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_5_2" >
-      
-      
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_8_5_2" id="__nav_8_5_2_label" tabindex="0">
-          Docs
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_8_5_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_8_5_2">
-          <span class="md-nav__icon md-icon"></span>
-          Docs
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../behavior_velocity_intersection_module/docs/merge-from-private-design/" class="md-nav__link">
-        Merge from private design
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
             
           
         </ul>
@@ -12928,7 +12868,7 @@
 <div><h2 id="occlusion-spot">Occlusion Spot<a class="headerlink" href="#occlusion-spot" title="Permanent link">#</a></h2>
 <h3 id="role">Role<a class="headerlink" href="#role" title="Permanent link">#</a></h3>
 <p>This module plans safe velocity to slow down before reaching collision point that hidden object is darting out from <code>occlusion spot</code> where driver can't see clearly because of obstacles.</p>
-<p><img alt="brief" src="./occlusion_spot.drawio.svg"></p>
+<p><img alt="brief" src="docs/occlusion_spot.drawio.svg"></p>
 <h3 id="activation-timing">Activation Timing<a class="headerlink" href="#activation-timing" title="Permanent link">#</a></h3>
 <p>This module is activated if <code>launch_occlusion_spot</code> becomes true. To make pedestrian first zone map tag is one of the TODOs.</p>
 <h3 id="limitation-and-todos">Limitation and TODOs<a class="headerlink" href="#limitation-and-todos" title="Permanent link">#</a></h3>
@@ -12947,24 +12887,24 @@
 <p>This module considers TTV from pedestrian velocity and lateral distance to occlusion spot.
 TTC is calculated from ego velocity and acceleration and longitudinal distance until collision point using motion velocity smoother.
 To compute fast this module only consider occlusion spot whose TTV is less than TTC and only consider area within "max lateral distance".</p>
-<p><img alt="brief" src="./da.drawio.svg"></p>
+<p><img alt="brief" src="docs/da.drawio.svg"></p>
 <h4 id="occlusion-spot-occupancy-grid-base">Occlusion Spot Occupancy Grid Base<a class="headerlink" href="#occlusion-spot-occupancy-grid-base" title="Permanent link">#</a></h4>
 <p>This module considers any occlusion spot around ego path computed from the occupancy grid.
 Due to the computational cost occupancy grid is not high resolution and this will make occupancy grid noisy so this module add information of occupancy to occupancy grid map.</p>
 <p>TODO: consider hight of obstacle point cloud to generate occupancy grid.</p>
 <h5 id="collision-free-judgement">Collision Free Judgement<a class="headerlink" href="#collision-free-judgement" title="Permanent link">#</a></h5>
 <p>obstacle that can run out from occlusion should have free space until intersection from ego vehicle</p>
-<p><img alt="brief" src="./collision_free.drawio.svg"></p>
+<p><img alt="brief" src="docs/collision_free.drawio.svg"></p>
 <h5 id="partition-lanelet">Partition Lanelet<a class="headerlink" href="#partition-lanelet" title="Permanent link">#</a></h5>
 <p>By using lanelet information of "guard_rail", "fence", "wall" tag, it's possible to remove unwanted occlusion spot.</p>
 <p>By using static object information, it is possible to make occupancy grid more accurate.</p>
 <p>To make occupancy grid for planning is one of the TODOs.</p>
-<p><img alt="brief" src="./object_info_partition.drawio.svg"></p>
+<p><img alt="brief" src="docs/object_info_partition.drawio.svg"></p>
 <h5 id="possible-collision">Possible Collision<a class="headerlink" href="#possible-collision" title="Permanent link">#</a></h5>
 <p>obstacle that can run out from occlusion is interrupted by moving vehicle.</p>
-<p><img alt="brief" src="./raycast_shadow.drawio.svg"></p>
+<p><img alt="brief" src="docs/raycast_shadow.drawio.svg"></p>
 <h4 id="about-safe-motion">About safe motion<a class="headerlink" href="#about-safe-motion" title="Permanent link">#</a></h4>
-<p><img alt="brief" src="./velocity_planning.drawio.svg"></p>
+<p><img alt="brief" src="docs/velocity_planning.drawio.svg"></p>
 <h5 id="the-concept-of-safe-velocity-and-margin">The Concept of Safe Velocity and Margin<a class="headerlink" href="#the-concept-of-safe-velocity-and-margin" title="Permanent link">#</a></h5>
 <p>The safe slowdown velocity is calculated from the below parameters of ego emergency braking system and time to collision.
 Below calculation is included but change velocity dynamically is not recommended for planner.</p>
@@ -12975,12 +12915,12 @@ Below calculation is included but change velocity dynamically is not recommended
 <li>
 <p>time to collision of pedestrian[s]
   with these parameters we can briefly define safe motion before occlusion spot for ideal environment.</p>
-<p><img alt="occupancy_grid" src="./safe_motion.drawio.svg"></p>
+<p><img alt="occupancy_grid" src="docs/safe_motion.drawio.svg"></p>
 </li>
 </ul>
 <p>This module defines safe margin to consider ego distance to stop and collision path point geometrically.
 While ego is cruising from safe margin to collision path point, ego vehicle keeps the same velocity as occlusion spot safe velocity.</p>
-<p><img alt="brief" src="./behavior_after_safe_margin.drawio.svg"></p>
+<p><img alt="brief" src="docs/behavior_after_safe_margin.drawio.svg"></p>
 <p>Note: This logic assumes high-precision vehicle speed tracking and margin for decel point might not be the best solution, and override with manual driver is considered if pedestrian really run out from occlusion spot.</p>
 <p>TODO: consider one of the best choices</p>
 <ol>
@@ -12997,7 +12937,7 @@ While ego is cruising from safe margin to collision path point, ego vehicle keep
 <li><span class="arithmatex">\(v_{0}\)</span> current velocity[m/s]</li>
 <li><span class="arithmatex">\(a_{0}\)</span> current acceleration[m/s]</li>
 </ul>
-<p><img alt="brief" src="./maximum_slowdown_velocity.drawio.svg"></p>
+<p><img alt="brief" src="docs/maximum_slowdown_velocity.drawio.svg"></p>
 <h4 id="module-parameters">Module Parameters<a class="headerlink" href="#module-parameters" title="Permanent link">#</a></h4>
 <table>
 <thead>

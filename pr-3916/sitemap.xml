@@ -766,11 +766,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3916/planning/behavior_velocity_intersection_module/docs/merge-from-private-design/</loc>
-         <lastmod>2023-06-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3916/planning/behavior_velocity_no_stopping_area_module/</loc>
          <lastmod>2023-06-07</lastmod>
          <changefreq>daily</changefreq>

@@ -8056,18 +8056,12 @@
             
           
         
-          
-        
       
       
         
         
         <div class="md-nav__link md-nav__link--index ">
           <a href="../behavior_velocity_intersection_module/">Behavior velocity intersection module</a>
-          
-            <label for="__nav_8_5">
-              <span class="md-nav__icon md-icon"></span>
-            </label>
           
         </div>
       
@@ -8078,60 +8072,6 @@
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
-            
-          
-            
-              
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_5_2" >
-      
-      
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_8_5_2" id="__nav_8_5_2_label" tabindex="0">
-          Docs
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_8_5_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_8_5_2">
-          <span class="md-nav__icon md-icon"></span>
-          Docs
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../behavior_velocity_intersection_module/docs/merge-from-private-design/" class="md-nav__link">
-        Merge from private design
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
             
           
         </ul>
@@ -12936,7 +12876,7 @@
 <h3 id="role">Role<a class="headerlink" href="#role" title="Permanent link">#</a></h3>
 <p>This module plans the velocity of the related part of the path in case there is speed bump
 regulatory element referring to it.</p>
-<p><img alt="speed_bump_design.svg" src="speed_bump_design.svg"></p>
+<p><img alt="speed_bump_design.svg" src="docs/speed_bump_design.svg"></p>
 <h3 id="activation-timing">Activation Timing<a class="headerlink" href="#activation-timing" title="Permanent link">#</a></h3>
 <p>The manager launch speed bump scene module when there is speed bump regulatory element referring to
 the reference path.</p>
@@ -13008,7 +12948,7 @@ the reference path.</p>
 <li>Calculate <code>slow_down_speed</code> wrt to <code>speed_bump_height</code> specified in regulatory element or
   read <code>slow_down_speed</code> tag from speed bump annotation if available</li>
 </ul>
-<p><img alt="speed_bump_vel_calc" src="speed_bump_vel_calc.png"></p>
+<p><img alt="speed_bump_vel_calc" src="docs/speed_bump_vel_calc.png"></p>
 <p><strong>Note:</strong> If in speed bump annotation <code>slow_down_speed</code> tag is used then calculating the speed wrt
 the speed bump height will be ignored. In such case, specified <code>slow_down_speed</code> value in <strong>[kph]</strong>
 is being used.</p>
@@ -13019,13 +12959,13 @@ is being used.</p>
 <li>If <code>slow_start_point</code> or <code>slow_end_point</code> can not be inserted with given/calculated offset values
   check if any path point can be virtually assigned as <code>slow_start_point</code> or <code>slow_end_point</code></li>
 </ul>
-<p><img alt="speed_bump_scenarios.svg" src="speed_bump_scenarios.svg"></p>
+<p><img alt="speed_bump_scenarios.svg" src="docs/speed_bump_scenarios.svg"></p>
 <ul>
 <li>Assign <code>slow_down_speed</code> to the path points between <code>slow_start_point</code> or <code>slow_end_point</code></li>
 </ul>
 <h3 id="future-work">Future Work<a class="headerlink" href="#future-work" title="Permanent link">#</a></h3>
 <ul>
-<li>In an article <a href="https://journals.sagepub.com/doi/10.1155/2014/736576">here</a>, a bump modeling method
+<li>In an article <a href="docs/&lt;https://journals.sagepub.com/doi/10.1155/2014/736576">here</a>&gt;, a bump modeling method
   is proposed. Simply it is based on fitting the bump in a circle and a radius calculation is done
   with it. Although the velocity calculation is based on just the height of the bump in the recent
   implementation, applying this method is intended in the future which will yield more realistic

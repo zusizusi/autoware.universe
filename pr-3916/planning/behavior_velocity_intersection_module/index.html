@@ -14,7 +14,7 @@
         <link rel="prev" href="../behavior_velocity_detection_area_module/">
       
       
-        <link rel="next" href="docs/merge-from-private-design/">
+        <link rel="next" href="../behavior_velocity_no_stopping_area_module/">
       
       <link rel="icon" href="../../docs/assets/images/autoware-foundation.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
@@ -8056,18 +8056,12 @@
             
           
         
-          
-        
       
       
         
         
         <div class="md-nav__link md-nav__link--index md-nav__link--active">
           <a href="./">Behavior velocity intersection module</a>
-          
-            <label for="__nav_8_5">
-              <span class="md-nav__icon md-icon"></span>
-            </label>
           
         </div>
       
@@ -8078,60 +8072,6 @@
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
-            
-          
-            
-              
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_5_2" >
-      
-      
-        
-          
-        
-      
-      
-        <label class="md-nav__link" for="__nav_8_5_2" id="__nav_8_5_2_label" tabindex="0">
-          Docs
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_8_5_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_8_5_2">
-          <span class="md-nav__icon md-icon"></span>
-          Docs
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="docs/merge-from-private-design/" class="md-nav__link">
-        Merge from private design
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
             
           
         </ul>
@@ -12947,6 +12887,47 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#merge-from-private" class="md-nav__link">
+    Merge From Private
+  </a>
+  
+    <nav class="md-nav" aria-label="Merge From Private">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#role_1" class="md-nav__link">
+    Role
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activation-timing_1" class="md-nav__link">
+    Activation Timing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-parameters_1" class="md-nav__link">
+    Module Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issue" class="md-nav__link">
+    Known Issue
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -12972,7 +12953,7 @@
 <p>Judgement whether a vehicle can go into an intersection or not by a dynamic object information, and planning a velocity of the low-down/stop.
 This module is designed for rule-based intersection velocity decision that is easy for developers to design its behavior. It generates proper velocity for intersection scene.</p>
 <p>In addition, the external users / modules (e.g. remote operation) to can intervene the STOP/GO decision for the vehicle behavior. The override interface is expected to be used, for example, for remote intervention in emergency situations or gathering information on operator decisions during development.</p>
-<p><img alt="brief" src="./intersection.drawio.svg"></p>
+<p><img alt="brief" src="docs/intersection.drawio.svg"></p>
 <h3 id="activation-timing">Activation Timing<a class="headerlink" href="#activation-timing" title="Permanent link">#</a></h3>
 <p>This function is activated when the attention lane conflicts with the ego vehicle's lane.</p>
 <h3 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">#</a></h3>
@@ -13156,7 +13137,37 @@ To prevent going over the pass judge line before the traffic light stop line, th
 <h4 id="explicitly-describe-a-stop-position-roadmarking-optional-fig-2">Explicitly describe a stop position [RoadMarking] (Optional) (Fig. 2)<a class="headerlink" href="#explicitly-describe-a-stop-position-roadmarking-optional-fig-2" title="Permanent link">#</a></h4>
 <p>As a default, IntersectionModule estimates a stop position by the crossing point of driving lane and attention lane. But there are some cases like Fig.2 in which we would like to set a stop position explicitly. When a <code>stop_line</code> is defined as a <code>RoadMarking</code> item in the intersection lane, it overwrites the stop position. (Not only creating <code>stop_line</code>, but also defining as a <code>RoadMaking</code> item are needed.)</p>
 <h3 id="exclusion-setting-of-attention-lanes-rightofway-fig3">Exclusion setting of attention lanes [RightOfWay] (Fig.3)<a class="headerlink" href="#exclusion-setting-of-attention-lanes-rightofway-fig3" title="Permanent link">#</a></h3>
-<p>By default, IntersectionModule treats all lanes crossing with the registered lane as attention targets (yellow and green lanelets). But in some cases (e.g. when driving lane is priority lane or traffic light is green for the driving lane), we want to ignore some of the yield lanes. By setting <code>RightOfWay</code> of the <code>RegulatoryElement</code> item, we can define lanes to be ignored. Register ignored lanes as “yield” and register the attention lanes and driving lane as “right_of_way” lanelets in <code>RightOfWay</code> RegulatoryElement (For an intersection with traffic lights, we need to create items for each lane in the intersection. Please note that it needs a lot of man-hours.)</p></div>
+<p>By default, IntersectionModule treats all lanes crossing with the registered lane as attention targets (yellow and green lanelets). But in some cases (e.g. when driving lane is priority lane or traffic light is green for the driving lane), we want to ignore some of the yield lanes. By setting <code>RightOfWay</code> of the <code>RegulatoryElement</code> item, we can define lanes to be ignored. Register ignored lanes as “yield” and register the attention lanes and driving lane as “right_of_way” lanelets in <code>RightOfWay</code> RegulatoryElement (For an intersection with traffic lights, we need to create items for each lane in the intersection. Please note that it needs a lot of man-hours.)</p>
+<h2 id="merge-from-private">Merge From Private<a class="headerlink" href="#merge-from-private" title="Permanent link">#</a></h2>
+<h3 id="role_1">Role<a class="headerlink" href="#role_1" title="Permanent link">#</a></h3>
+<p>When an ego vehicle enters a public road from a private road (e.g. a parking lot), it needs to face and stop before entering the public road to make sure it is safe.</p>
+<p>This module is activated when there is an intersection at the private area from which the vehicle enters the public road. The stop line is generated both when the goal is in the intersection lane and when the path goes beyond the intersection lane. The basic behavior is the same as the intersection module, but the ego vehicle must stop once at the stop line.</p>
+<p><img alt="merge-from-private" src="docs/merge_from_private.png"></p>
+<h3 id="activation-timing_1">Activation Timing<a class="headerlink" href="#activation-timing_1" title="Permanent link">#</a></h3>
+<p>This module is activated when the following conditions are met:</p>
+<ul>
+<li>ego-lane has a <code>private</code> tag</li>
+<li>ego-lane has a conflict with other no-private lanelets</li>
+</ul>
+<h3 id="module-parameters_1">Module Parameters<a class="headerlink" href="#module-parameters_1" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>merge_from_private_road/stop_duration_sec</code></td>
+<td>double</td>
+<td>[m] time margin to change state</td>
+</tr>
+</tbody>
+</table>
+<h3 id="known-issue">Known Issue<a class="headerlink" href="#known-issue" title="Permanent link">#</a></h3>
+<p>If ego vehicle go over the stop line for a certain distance, then ego vehicle will not transit from STOP.</p></div>
 
 
 
@@ -13199,13 +13210,13 @@ To prevent going over the pass judge line before the traffic light stop line, th
         
         
           
-          <a href="docs/merge-from-private-design/" class="md-footer__link md-footer__link--next" aria-label="Next: Merge from private design" rel="next">
+          <a href="../behavior_velocity_no_stopping_area_module/" class="md-footer__link md-footer__link--next" aria-label="Next: Index" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Merge from private design
+                Index
               </div>
             </div>
             <div class="md-footer__button md-icon">
