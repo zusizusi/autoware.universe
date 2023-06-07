@@ -14253,15 +14253,48 @@ w^{\mathrm{lat}} &amp; = \mathrm{lerp}(w^{\mathrm{lat}}_{\mathrm{normal}}, w^{\m
 w^{\mathrm{yaw}} &amp; = \mathrm{lerp}(w^{\mathrm{yaw}}_{\mathrm{normal}}, w^{\mathrm{yaw}}_{\mathrm{avoidance}}, r)
 \end{align}
 \]</div>
-<p>Assume that <span class="arithmatex">\(c\)</span> is the normalized avoidance cost, <span class="arithmatex">\(w^{\mathrm{lat}}\)</span> is the weight for lateral error, <span class="arithmatex">\(w^{\mathrm{yaw}}\)</span> is the weight for yaw error, and other variables are as follows.
-| Parameter | Type | Description |
-| ------------------------------------------------------------------------------------ | ------ | -------------------------------------------------------------------- |
-| <span class="arithmatex">\(w^{\mathrm{steer}}_{\mathrm{normal}}\)</span> | double | weight for steering minimization in normal cases |
-| <span class="arithmatex">\(w^{\mathrm{steer}}_{\mathrm{avoidance}}\)</span> | double | weight for steering minimization in avoidance cases |
-| <span class="arithmatex">\(w^{\mathrm{lat}}_{\mathrm{normal}}\)</span> | double | weight for lateral error minimization in normal cases |
-| <span class="arithmatex">\(w^{\mathrm{lat}}_{\mathrm{avoidance}}\)</span> | double | weight for lateral error minimization in avoidance cases |
-| <span class="arithmatex">\(w^{\mathrm{yaw}}_{\mathrm{normal}}\)</span> | double | weight for yaw error minimization in normal cases |
-| <span class="arithmatex">\(w^{\mathrm{yaw}}_{\mathrm{avoidance}}\)</span> | double | weight for yaw error minimization in avoidance cases |</p></div>
+<p>Assume that <span class="arithmatex">\(c\)</span> is the normalized avoidance cost, <span class="arithmatex">\(w^{\mathrm{lat}}\)</span> is the weight for lateral error, <span class="arithmatex">\(w^{\mathrm{yaw}}\)</span> is the weight for yaw error, and other variables are as follows.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(w^{\mathrm{steer}}_{\mathrm{normal}}\)</span></td>
+<td>double</td>
+<td>weight for steering minimization in normal cases</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w^{\mathrm{steer}}_{\mathrm{avoidance}}\)</span></td>
+<td>double</td>
+<td>weight for steering minimization in avoidance cases</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w^{\mathrm{lat}}_{\mathrm{normal}}\)</span></td>
+<td>double</td>
+<td>weight for lateral error minimization in normal cases</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w^{\mathrm{lat}}_{\mathrm{avoidance}}\)</span></td>
+<td>double</td>
+<td>weight for lateral error minimization in avoidance cases</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w^{\mathrm{yaw}}_{\mathrm{normal}}\)</span></td>
+<td>double</td>
+<td>weight for yaw error minimization in normal cases</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(w^{\mathrm{yaw}}_{\mathrm{avoidance}}\)</span></td>
+<td>double</td>
+<td>weight for yaw error minimization in avoidance cases</td>
+</tr>
+</tbody>
+</table></div>
 
 
 
