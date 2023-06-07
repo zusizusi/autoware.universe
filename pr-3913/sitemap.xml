@@ -726,17 +726,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3913/planning/behavior_path_planner/docs/behavior_path_planner_pull_out_design/</loc>
-         <lastmod>2023-06-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3913/planning/behavior_path_planner/docs/behavior_path_planner_safety_check/</loc>
          <lastmod>2023-06-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3913/planning/behavior_path_planner/docs/behavior_path_planner_side_shift_design/</loc>
+         <lastmod>2023-06-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3913/planning/behavior_path_planner/docs/behavior_path_planner_start_planner_design/</loc>
          <lastmod>2023-06-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -787,6 +787,11 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3913/planning/behavior_velocity_intersection_module/docs/merge-from-private-design/</loc>
+         <lastmod>2023-06-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3913/planning/behavior_velocity_no_drivable_lane_module/docs/no-drivable-lane-design/</loc>
          <lastmod>2023-06-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
