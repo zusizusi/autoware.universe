@@ -726,17 +726,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_path_planner/docs/behavior_path_planner_pull_out_design/</loc>
-         <lastmod>2023-06-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_path_planner/docs/behavior_path_planner_safety_check/</loc>
          <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_path_planner/docs/behavior_path_planner_side_shift_design/</loc>
+         <lastmod>2023-06-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_path_planner/docs/behavior_path_planner_start_planner_design/</loc>
          <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -751,17 +751,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_blind_spot_module/docs/blind-spot-design/</loc>
-         <lastmod>2023-06-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_crosswalk_module/</loc>
-         <lastmod>2023-06-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_crosswalk_module/docs/crosswalk-design/</loc>
          <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -771,22 +761,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_detection_area_module/docs/detection-area-design/</loc>
-         <lastmod>2023-06-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_intersection_module/</loc>
          <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_intersection_module/docs/intersection-design/</loc>
-         <lastmod>2023-06-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_intersection_module/docs/merge-from-private-design/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_no_drivable_lane_module/docs/no-drivable-lane-design/</loc>
          <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -796,27 +776,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_no_stopping_area_module/docs/no-stopping-area-design/</loc>
-         <lastmod>2023-06-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_occlusion_spot_module/</loc>
          <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_occlusion_spot_module/docs/occlusion-spot-design/</loc>
-         <lastmod>2023-06-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_out_of_lane_module/</loc>
-         <lastmod>2023-06-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_out_of_lane_module/docs/out-of-lane-design/</loc>
          <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -831,17 +796,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_run_out_module/docs/run-out-design/</loc>
-         <lastmod>2023-06-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_speed_bump_module/</loc>
-         <lastmod>2023-06-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_speed_bump_module/docs/speed-bump-design/</loc>
          <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -851,27 +806,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_stop_line_module/docs/stop-line-design/</loc>
-         <lastmod>2023-06-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_traffic_light_module/</loc>
          <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_traffic_light_module/docs/traffic-light-design/</loc>
-         <lastmod>2023-06-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_virtual_traffic_light_module/</loc>
-         <lastmod>2023-06-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-3899/planning/behavior_velocity_virtual_traffic_light_module/docs/virtual-traffic-light-design/</loc>
          <lastmod>2023-06-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
