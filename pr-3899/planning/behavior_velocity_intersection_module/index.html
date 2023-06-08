@@ -13041,7 +13041,7 @@
 <li>reacting to arrow signals of associated traffic lights</li>
 </ol>
 <p>The module is desinged to be agnositc to left-hand/right-hand traffic rules and works on crossroads, T-shape junctions, etc.</p>
-<p><img alt="topology" src="./intersection-topology.drawio.svg"></p>
+<p><img alt="topology" src="docs/intersection-topology.drawio.svg"></p>
 <h3 id="activation-condition">Activation condition<a class="headerlink" href="#activation-condition" title="Permanent link">#</a></h3>
 <p>This module is activated when the path contains the lanes with <code>turn_direction</code> tag. More precisely, if the <code>lane_ids</code> of the path contains the ids of those lanes, corresponding instances of intersection module are activated on each lanes respectively.</p>
 <h3 id="requirementslimitations">Requirements/Limitations<a class="headerlink" href="#requirementslimitations" title="Permanent link">#</a></h3>
@@ -13053,7 +13053,7 @@
 <h3 id="attention-area">Attention area<a class="headerlink" href="#attention-area" title="Permanent link">#</a></h3>
 <p>The <code>Attention Area</code> in the intersection are defined as the set of lanes that are conflicting with ego vehicle's path and their preceding lanes up to <code>attention_area_length</code> meters. <code>RightOfWay</code> tag is used to rule out the lanes that each lane has priority given the traffic light relation and <code>turn_direction</code> priority.</p>
 <p><code>Intersection Area</code>, which is supposed to be defined on the HDMap, is an area convering the entire intersection.</p>
-<p><img alt="attention_area" src="./intersection-attention.drawio.svg"></p>
+<p><img alt="attention_area" src="docs/intersection-attention.drawio.svg"></p>
 <h4 id="right-of-way">Right Of Way<a class="headerlink" href="#right-of-way" title="Permanent link">#</a></h4>
 <p>Following table shows an example of how to assign <code>right_of_way</code> tag and set <code>yield_lanes</code> to each lane in intersections.</p>
 <table>
@@ -13093,9 +13093,9 @@
 </tbody>
 </table>
 <p>This setting gives the following <code>attention_area</code> configurations.</p>
-<p><img alt="attention_area_straight" src="./intersection-attention-straight.drawio.svg">
-<img alt="attention_area_ll_rr" src="./intersection-attention-ll-rr.drawio.svg">
-<img alt="attention_area_lr_rl" src="./intersection-attention-lr-rl.drawio.svg"></p>
+<p><img alt="attention_area_straight" src="docs/intersection-attention-straight.drawio.svg">
+<img alt="attention_area_ll_rr" src="docs/intersection-attention-ll-rr.drawio.svg">
+<img alt="attention_area_lr_rl" src="docs/intersection-attention-lr-rl.drawio.svg"></p>
 <h3 id="target-objects">Target objects<a class="headerlink" href="#target-objects" title="Permanent link">#</a></h3>
 <p>For <a href="intersection-design.md#stuck-vehicle-detection">stuck vehicle detection</a> and <a href="intersection-design.md#collision-detection">collision detection</a>, this module checks <strong>car</strong>, <strong>bus</strong>, <strong>truck</strong>, <strong>trailer</strong>, <strong>motor cycle</strong>, and <strong>bicycle</strong> type objects.</p>
 <p>Objects that satisfy all of the following conditions are considered as target objects (possible collision objects):</p>
@@ -13112,7 +13112,7 @@
 </ul>
 <h4 id="stuck-vehicle-detection">Stuck Vehicle Detection<a class="headerlink" href="#stuck-vehicle-detection" title="Permanent link">#</a></h4>
 <p>If there is any object in a certain distance (<code>stuck_vehicle_ignore_dist</code> and <code>stuck_vehicle_detect_dist</code>) before and after the exit of the intersection lane and the object velocity is less than a threshold (=<code>stuck_vehicle_vel_thr</code>), the object is regarded as a stuck vehicle. If stuck vehicles exist, this module inserts a stopline a certain distance (=<code>stop_line_margin</code>) before the overlapped region with other lanes. The stuck vehicle detection area is generated based on the vehicle path, so the stuck vehicle stopline is not inserted if the upstream module generated avoidance path</p>
-<p><img alt="stuck_vehicle_detection" src="./stuck-vehicle.drawio.svg"></p>
+<p><img alt="stuck_vehicle_detection" src="docs/stuck-vehicle.drawio.svg"></p>
 <h4 id="collision-detection">Collision detection<a class="headerlink" href="#collision-detection" title="Permanent link">#</a></h4>
 <p>The following process is performed for the targets objects to determine whether the ego vehicle can pass the intersection safely. If it is judged that the ego vehicle cannot pass through the intersection with enough <em>margin</em>, it will insert a stopline on the <em>path</em>.</p>
 <ol>
