@@ -13063,7 +13063,26 @@
 
 <p>Note that, due to the rarity of the <span class="arithmatex">\(T_v\)</span> in almost all cases of lane change and avoidance, <span class="arithmatex">\(T_v\)</span> is not considered in the current implementation.</p>
 <h2 id="mathematical-derivation">Mathematical Derivation<a class="headerlink" href="#mathematical-derivation" title="Permanent link">#</a></h2>
-<p>By applying simple integral operations, the following analytical equations can be derived to describe the shift distance <span class="arithmatex">\(l(t)\)</span> at each time under lateral jerk, acceleration, and velocity constraints.</p>
+<p>With initial longitudinal velocity <span class="arithmatex">\(v_0^{\rm lon}\)</span> and longitudinal acceleration <span class="arithmatex">\(a^{\rm lon}\)</span>, longitudinal position <span class="arithmatex">\(s(t)\)</span> and longitudinal velocity at each time <span class="arithmatex">\(v^{\rm lon}(t)\)</span> can be derived as:</p>
+<div class="arithmatex">\[
+\begin{align}
+s_1&amp;= v^{\rm lon}_0 T_j + \frac{1}{2} a^{\rm lon} T_j^2 \\
+v_1&amp;= v^{\rm lon}_0 + a^{\rm lon} T_j \\
+s_2&amp;= v^{\rm lon}_1 T_a + \frac{1}{2} a^{\rm lon} T_a^2 \\
+v_2&amp;= v^{\rm lon}_1 + a^{\rm lon} T_a \\
+s_3&amp;= v^{\rm lon}_2 T_j + \frac{1}{2} a^{\rm lon} T_j^2 \\
+v_3&amp;= v^{\rm lon}_2 + a^{\rm lon} T_j \\
+s_4&amp;= v^{\rm lon}_3 T_v + \frac{1}{2} a^{\rm lon} T_v^2 \\
+v_4&amp;= v^{\rm lon}_3 + a^{\rm lon} T_v \\
+s_5&amp;= v^{\rm lon}_4 T_j + \frac{1}{2} a^{\rm lon} T_j^2 \\
+v_5&amp;= v^{\rm lon}_4 + a^{\rm lon} T_j \\
+s_6&amp;= v^{\rm lon}_5 T_a + \frac{1}{2} a^{\rm lon} T_a^2 \\
+v_6&amp;= v^{\rm lon}_5 + a^{\rm lon} T_a \\
+s_7&amp;= v^{\rm lon}_6 T_j + \frac{1}{2} a^{\rm lon} T_j^2 \\
+v_7&amp;= v^{\rm lon}_6 + a^{\rm lon} T_j
+\end{align}
+\]</div>
+<p>By applying simple integral operations, the following analytical equations can be derived to describe the shift distance <span class="arithmatex">\(l(t)\)</span> at each time under lateral jerk, lateral acceleration, and velocity constraints.</p>
 <div class="arithmatex">\[
 \begin{align}
 l_1&amp;= \frac{1}{6}jT_j^3\\[10pt]
@@ -13080,7 +13099,7 @@ l_7&amp;= 2 j T_j^3 + 3 j T_a T_j^2 + j T_a^2 T_j + j(T_a + T_j)T_j T_v
 <p>In the case where there are no limitations on lateral velocity and lateral acceleration, the maximum lateral acceleration during the shifting can be calculated as follows. The constant-jerk time is given by <span class="arithmatex">\(T_j = T_{\rm total}/4\)</span> because of its symmetric property. Since <span class="arithmatex">\(T_a=T_v=0\)</span>, the final shift length <span class="arithmatex">\(L=l_7=2jT_j^3\)</span> can be determined using the above equation. The maximum lateral acceleration is then given by <span class="arithmatex">\(a_{\rm max} =jT_j\)</span>. This results in the following expression for the maximum lateral acceleration:</p>
 <div class="arithmatex">\[
 \begin{align}
-a_{\rm max}  = \frac{8L}{T_{\rm total}^2}
+a_{\rm max}^{\rm lat}  = \frac{8L}{T_{\rm total}^2}
 \end{align}
 \]</div>
 <h3 id="calculation-of-ta-tj-and-jerk-from-acceleration-limit">Calculation of Ta, Tj and jerk from acceleration limit<a class="headerlink" href="#calculation-of-ta-tj-and-jerk-from-acceleration-limit" title="Permanent link">#</a></h3>
@@ -13093,29 +13112,29 @@ L = l_7 = 2 j T_j^3 + 3 j T_a T_j^2 + j T_a^2 T_j
 <p>Additionally, the velocity profile reveals the following relations:</p>
 <div class="arithmatex">\[
 \begin{align}
-a_{\rm lim} &amp;= j T_j\\
+a_{\rm lim}^{\rm lat} &amp;= j T_j\\
 T_{\rm total} &amp;= 4T_j + 2T_a
 \end{align}
 \]</div>
 <p>By solving these three equations, the following can be obtained:</p>
 <div class="arithmatex">\[
 \begin{align}
-T_j&amp;=\frac{T_{\rm total}}{2} - \frac{2L}{a_{\rm lim} T_{\rm total}}\\[10pt]
-T_a&amp;=\frac{4L}{a_{\rm lim} T_{\rm total}} - \frac{T_{\rm total}}{2}\\[10pt]
-jerk&amp;=\frac{2a_{\rm lim} ^2T_{\rm total}}{a_{\rm lim} T_{\rm total}^2-4L}
+T_j&amp;=\frac{T_{\rm total}}{2} - \frac{2L}{a_{\rm lim}^{\rm lat} T_{\rm total}}\\[10pt]
+T_a&amp;=\frac{4L}{a_{\rm lim}^{\rm lat} T_{\rm total}} - \frac{T_{\rm total}}{2}\\[10pt]
+jerk&amp;=\frac{2a_{\rm lim} ^2T_{\rm total}}{a_{\rm lim}^{\rm lat} T_{\rm total}^2-4L}
 \end{align}
 \]</div>
-<p>where <span class="arithmatex">\(T_j\)</span> is the constant-jerk time, <span class="arithmatex">\(T_a\)</span> is the constant acceleration time, <span class="arithmatex">\(j\)</span> is the required jerk, <span class="arithmatex">\(a_{\rm lim}\)</span> is the acceleration limit, and <span class="arithmatex">\(L\)</span> is the final shift length.</p>
+<p>where <span class="arithmatex">\(T_j\)</span> is the constant-jerk time, <span class="arithmatex">\(T_a\)</span> is the constant acceleration time, <span class="arithmatex">\(j\)</span> is the required jerk, <span class="arithmatex">\(a_{\rm lim}^{\rm lat}\)</span> is the lateral acceleration limit, and <span class="arithmatex">\(L\)</span> is the final shift length.</p>
 <h3 id="calculation-of-required-time-from-jerk-and-acceleration-constraint">Calculation of Required Time from Jerk and Acceleration Constraint<a class="headerlink" href="#calculation-of-required-time-from-jerk-and-acceleration-constraint" title="Permanent link">#</a></h3>
-<p>In the case where there are no limitations on lateral velocity, the total time required for shifting can be calculated from the jerk and acceleration limits and the final shift length as follows. By solving the two equations given above:</p>
+<p>In the case where there are no limitations on lateral velocity, the total time required for shifting can be calculated from the lateral jerk and lateral acceleration limits and the final shift length as follows. By solving the two equations given above:</p>
 <div class="arithmatex">\[
-L = l_7 = 2 j T_j^3 + 3 j T_a T_j^2 + j T_a^2 T_j,\quad a_{\rm lim} = j T_j
+L = l_7 = 2 j T_j^3 + 3 j T_a T_j^2 + j T_a^2 T_j,\quad a_{\rm lim}^{\rm lat} = j T_j
 \]</div>
 <p>we obtain the following expressions:</p>
 <div class="arithmatex">\[
 \begin{align}
-T_j &amp;= \frac{a_{\rm lim}}{j}\\[10pt]
-T_a &amp;= \frac{1}{2}\sqrt{\frac{a_{\rm lim}}{j}^2 + \frac{4L}{a_{\rm lim}}} - \frac{3a_{\rm lim}}{2j}
+T_j &amp;= \frac{a_{\rm lim}^{\rm lat}}{j}\\[10pt]
+T_a &amp;= \frac{1}{2}\sqrt{\frac{a_{\rm lim}^{\rm lat}}{j}^2 + \frac{4L}{a_{\rm lim}^{\rm lat}}} - \frac{3a_{\rm lim}^{\rm lat}}{2j}
 \end{align}
 \]</div>
 <p>The total time required for shifting can then be calculated as <span class="arithmatex">\(T_{\rm total}=4T_j+2T_a\)</span>.</p>
