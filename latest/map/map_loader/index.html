@@ -12920,6 +12920,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specific-features" class="md-nav__link">
+    Specific features
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
     Parameters
   </a>
@@ -12929,20 +12943,6 @@
           <li class="md-nav__item">
   <a href="#interfaces" class="md-nav__link">
     Interfaces
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#metadata" class="md-nav__link">
-    Metadata
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-to-store-map-related-files" class="md-nav__link">
-    How to store map-related files
   </a>
   
 </li>
@@ -13064,6 +13064,50 @@ Currently, it supports the following two types:</p>
 <li>Send partial pointcloud map loading via ROS 2 service</li>
 <li>Send differential pointcloud map loading via ROS 2 service</li>
 </ul>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">#</a></h3>
+<h4 id="prerequisites-on-pointcloud-map-files">Prerequisites on pointcloud map file(s)<a class="headerlink" href="#prerequisites-on-pointcloud-map-files" title="Permanent link">#</a></h4>
+<p>You may provide either a single .pcd file or multiple .pcd files. If you are using multiple PCD data and either of <code>enable_partial_load</code>, <code>enable_differential_load</code> or <code>enable_selected_load</code> are set true, it MUST obey the following rules:</p>
+<ol>
+<li><strong>It must be divided by straight lines parallel to the x-axis and y-axis</strong>. The system does not support division by diagonal lines or curved lines.</li>
+<li><strong>The division size along each axis should be equal.</strong></li>
+<li><strong>The division size should be about 20m x 20m.</strong> Particularly, care should be taken as using too large division size (for example, more than 100m) may have adverse effects on dynamic map loading features in <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/localization/ndt_scan_matcher">ndt_scan_matcher</a> and <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/compare_map_segmentation">compare_map_segmentation</a>.</li>
+<li><strong>All the split maps should not overlap with each other.</strong></li>
+<li><strong>Metadata file should also be provided.</strong> The metadata structure description is provided below.</li>
+</ol>
+<p>Note that these rules are not applicable when <code>enable_partial_load</code>, <code>enable_differential_load</code> and <code>enable_selected_load</code> are all set false. In this case, however, you also need to disable dynamic map loading mode for other nodes as well (<a href="https://github.com/autowarefoundation/autoware.universe/tree/main/localization/ndt_scan_matcher">ndt_scan_matcher</a> and <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/compare_map_segmentation">compare_map_segmentation</a> as of June 2023).</p>
+<h4 id="metadata-structure">Metadata structure<a class="headerlink" href="#metadata-structure" title="Permanent link">#</a></h4>
+<p>The metadata should look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">x_resolution</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
+<span class="nt">y_resolution</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
+<span class="nt">A.pcd</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1200</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2500</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># -&gt; 1200 &lt; x &lt; 1220, 2500 &lt; y &lt; 2520</span>
+<span class="nt">B.pcd</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1220</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2500</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># -&gt; 1220 &lt; x &lt; 1240, 2500 &lt; y &lt; 2520</span>
+<span class="nt">C.pcd</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1200</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2520</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># -&gt; 1200 &lt; x &lt; 1220, 2520 &lt; y &lt; 2540</span>
+<span class="nt">D.pcd</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1240</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2520</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># -&gt; 1240 &lt; x &lt; 1260, 2520 &lt; y &lt; 2540</span>
+</code></pre></div>
+<p>where,</p>
+<ul>
+<li><code>x_resolution</code> and <code>y_resolution</code></li>
+<li><code>A.pcd</code>, <code>B.pcd</code>, etc, are the names of PCD files.</li>
+<li>List such as <code>[1200, 2500]</code> are the values indicate that for this PCD file, x coordinates are between 1200 and 1220 (<code>x_resolution</code> + <code>x_coordinate</code>) and y coordinates are between 2500 and 2520 (<code>y_resolution</code> + <code>y_coordinate</code>).</li>
+</ul>
+<p>You may use <a href="https://github.com/MapIV/pointcloud_divider">pointcloud_divider</a> from MAP IV for dividing pointcloud map as well as generating the compatible metadata.yaml.</p>
+<h4 id="directory-structure-of-these-files">Directory structure of these files<a class="headerlink" href="#directory-structure-of-these-files" title="Permanent link">#</a></h4>
+<p>If you only have one pointcloud map, Autoware will assume the following directory structure by default.</p>
+<div class="highlight"><pre><span></span><code>sample-map-rosbag
+├──<span class="w"> </span>lanelet2_map.osm
+├──<span class="w"> </span>pointcloud_map.pcd
+</code></pre></div>
+<p>If you have multiple rosbags, an example directory structure would be as follows. Note that you need to have a metadata when you have multiple pointcloud map files.</p>
+<div class="highlight"><pre><span></span><code>sample-map-rosbag
+├──<span class="w"> </span>lanelet2_map.osm
+├──<span class="w"> </span>pointcloud_map.pcd
+│<span class="w"> </span>├──<span class="w"> </span>A.pcd
+│<span class="w"> </span>├──<span class="w"> </span>B.pcd
+│<span class="w"> </span>├──<span class="w"> </span>C.pcd
+│<span class="w"> </span>└──<span class="w"> </span>...
+└──<span class="w"> </span>pointcloud_map_metadata.yaml
+</code></pre></div>
+<h3 id="specific-features">Specific features<a class="headerlink" href="#specific-features" title="Permanent link">#</a></h3>
 <h4 id="publish-raw-pointcloud-map-ros-2-topic">Publish raw pointcloud map (ROS 2 topic)<a class="headerlink" href="#publish-raw-pointcloud-map-ros-2-topic" title="Permanent link">#</a></h4>
 <p>The node publishes the raw pointcloud map loaded from the <code>.pcd</code> file(s).</p>
 <h4 id="publish-downsampled-pointcloud-map-ros-2-topic">Publish downsampled pointcloud map (ROS 2 topic)<a class="headerlink" href="#publish-downsampled-pointcloud-map-ros-2-topic" title="Permanent link">#</a></h4>
@@ -13154,33 +13198,6 @@ Please see <a href="https://github.com/autowarefoundation/autoware_msgs/tree/mai
 <li>pointcloud map file(s) (.pcd)</li>
 <li>metadata of pointcloud map(s) (.yaml)</li>
 </ul>
-<h3 id="metadata">Metadata<a class="headerlink" href="#metadata" title="Permanent link">#</a></h3>
-<p>You must provide metadata in YAML format as well as pointcloud map files. Pointcloud map should be divided into one or more files with x-y grid.</p>
-<p>Metadata should look like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">x_resolution</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0</span>
-<span class="nt">y_resolution</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">150.0</span>
-<span class="nt">A.pcd</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1200</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2500</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># -&gt; 1200 &lt; x &lt; 1300, 2500 &lt; y &lt; 2650</span>
-<span class="nt">B.pcd</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1300</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2500</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># -&gt; 1300 &lt; x &lt; 1400, 2500 &lt; y &lt; 2650</span>
-<span class="nt">C.pcd</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1200</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2650</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># -&gt; 1200 &lt; x &lt; 1300, 2650 &lt; y &lt; 2800</span>
-<span class="nt">D.pcd</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1400</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2650</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># -&gt; 1400 &lt; x &lt; 1500, 2650 &lt; y &lt; 2800</span>
-</code></pre></div>
-<p>You may use <a href="https://github.com/MapIV/pointcloud_divider">pointcloud_divider</a> from MAP IV for dividing pointcloud map as well as generating the compatible metadata.yaml.</p>
-<h3 id="how-to-store-map-related-files">How to store map-related files<a class="headerlink" href="#how-to-store-map-related-files" title="Permanent link">#</a></h3>
-<p>If you only have one pointcloud map, Autoware will assume the following directory structure by default.</p>
-<div class="highlight"><pre><span></span><code>sample-map-rosbag
-├──<span class="w"> </span>lanelet2_map.osm
-├──<span class="w"> </span>pointcloud_map.pcd
-</code></pre></div>
-<p>If you have multiple rosbags, an example directory structure would be as follows. Note that you need to have a metadata when you have multiple pointcloud map files.</p>
-<div class="highlight"><pre><span></span><code>sample-map-rosbag
-├──<span class="w"> </span>lanelet2_map.osm
-├──<span class="w"> </span>pointcloud_map.pcd
-│<span class="w"> </span>├──<span class="w"> </span>A.pcd
-│<span class="w"> </span>├──<span class="w"> </span>B.pcd
-│<span class="w"> </span>├──<span class="w"> </span>C.pcd
-│<span class="w"> </span>└──<span class="w"> </span>...
-└──<span class="w"> </span>pointcloud_map_metadata.yaml
-</code></pre></div>
 <hr>
 <h2 id="lanelet2_map_loader">lanelet2_map_loader<a class="headerlink" href="#lanelet2_map_loader" title="Permanent link">#</a></h2>
 <h3 id="feature_1">Feature<a class="headerlink" href="#feature_1" title="Permanent link">#</a></h3>
