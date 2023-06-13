@@ -13046,7 +13046,7 @@
 <p>This module is activated when the path contains the lanes with <code>turn_direction</code> tag. More precisely, if the <code>lane_ids</code> of the path contains the ids of those lanes, corresponding instances of intersection module are activated on each lanes respectively.</p>
 <h3 id="requirementslimitations">Requirements/Limitations<a class="headerlink" href="#requirementslimitations" title="Permanent link">#</a></h3>
 <ul>
-<li>The HDMap needs to have the information of <code>turn_direction</code> tag (which should be one of <code>straight</code>, <code>left</code>, <code>right</code>) for all the lanes in intersections and <code>right_of_way</code> tag for specific lanes (refer to <a href="intersection-design.md#right-of-way">RightOfWay</a> section for more details). See <a href="https://github.com/autowarefoundation/autoware_common/blob/main/tmp/lanelet2_extension/docs/lanelet2_format_extension.md">lanelet2_extension document</a> for more detail.</li>
+<li>The HDMap needs to have the information of <code>turn_direction</code> tag (which should be one of <code>straight</code>, <code>left</code>, <code>right</code>) for all the lanes in intersections and <code>right_of_way</code> tag for specific lanes (refer to <a href="#right-of-way">RightOfWay</a> section for more details). See <a href="https://github.com/autowarefoundation/autoware_common/blob/main/tmp/lanelet2_extension/docs/lanelet2_format_extension.md">lanelet2_extension document</a> for more detail.</li>
 <li>WIP(perception requirements/limitations)</li>
 <li>WIP(sensor visibility requirements/limitations)</li>
 </ul>
@@ -13097,7 +13097,7 @@
 <img alt="attention_area_ll_rr" src="docs/intersection-attention-ll-rr.drawio.svg">
 <img alt="attention_area_lr_rl" src="docs/intersection-attention-lr-rl.drawio.svg"></p>
 <h3 id="target-objects">Target objects<a class="headerlink" href="#target-objects" title="Permanent link">#</a></h3>
-<p>For <a href="intersection-design.md#stuck-vehicle-detection">stuck vehicle detection</a> and <a href="intersection-design.md#collision-detection">collision detection</a>, this module checks <strong>car</strong>, <strong>bus</strong>, <strong>truck</strong>, <strong>trailer</strong>, <strong>motor cycle</strong>, and <strong>bicycle</strong> type objects.</p>
+<p>For <a href="#stuck-vehicle-detection">stuck vehicle detection</a> and <a href="#collision-detection">collision detection</a>, this module checks <strong>car</strong>, <strong>bus</strong>, <strong>truck</strong>, <strong>trailer</strong>, <strong>motor cycle</strong>, and <strong>bicycle</strong> type objects.</p>
 <p>Objects that satisfy all of the following conditions are considered as target objects (possible collision objects):</p>
 <ul>
 <li>The center of mass of the object is <strong>within a certain distance</strong> from the attention lane (threshold = <code>attention_area_margin</code>) .<ul>
