@@ -766,7 +766,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/planning/behavior_velocity_no_drivable_lane_module/docs/no-drivable-lane-design/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/planning/behavior_velocity_no_drivable_lane_module/</loc>
          <lastmod>2023-06-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
