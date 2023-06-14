@@ -13009,10 +13009,7 @@
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
 <p>The base idea of the path generation in lane change and avoidance is to smoothly shift the reference path, such as the center line, in the lateral direction. This is achieved by using a constant-jerk profile as in the figure below. More details on how it is used can be found in <a href="https://github.com/autowarefoundation/autoware.universe/blob/main/planning/behavior_path_planner/README.md">README</a>. It is assumed that the reference path is smooth enough for this algorithm.</p>
 <p>The figure below explains how the application of a constant lateral jerk <span class="arithmatex">\(l^{'''}(s)\)</span> can be used to induce lateral shifting. In order to comply with the limits on lateral acceleration and velocity, zero-jerk time is employed in the figure ( <span class="arithmatex">\(T_a\)</span> and <span class="arithmatex">\(T_v\)</span> ). In each interval where constant jerk is applied, the shift position <span class="arithmatex">\(l(s)\)</span> can be characterized by a third-degree polynomial. Therefore the shift length from the reference path can then be calculated by combining spline curves.</p>
-<p align="center">
-  <img src="../image/path_shifter.png" width="800">
-</p>
-
+<p><img alt="path-shifter" src="../../image/path_shifter.png"></p>
 <p>Note that, due to the rarity of the <span class="arithmatex">\(T_v\)</span> in almost all cases of lane change and avoidance, <span class="arithmatex">\(T_v\)</span> is not considered in the current implementation.</p>
 <h2 id="mathematical-derivation">Mathematical Derivation<a class="headerlink" href="#mathematical-derivation" title="Permanent link">#</a></h2>
 <p>With initial longitudinal velocity <span class="arithmatex">\(v_0^{\rm lon}\)</span> and longitudinal acceleration <span class="arithmatex">\(a^{\rm lon}\)</span>, longitudinal position <span class="arithmatex">\(s(t)\)</span> and longitudinal velocity at each time <span class="arithmatex">\(v^{\rm lon}(t)\)</span> can be derived as:</p>
