@@ -13115,21 +13115,59 @@
 <span class="n">lane_changing_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lane_change_prepare_velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">lane_changing_duration</span>
 </code></pre></div>
 <p>The <code>backward_length_buffer_for_end_of_lane</code> is added to allow some window for any possible delay, such as control or mechanical delay during brake lag.</p>
-<h4 id="multiple-candidate-path-samples">Multiple candidate path samples<a class="headerlink" href="#multiple-candidate-path-samples" title="Permanent link">#</a></h4>
+<h4 id="multiple-candidate-path-samples-longitudinal-acceleration">Multiple candidate path samples (longitudinal acceleration)<a class="headerlink" href="#multiple-candidate-path-samples-longitudinal-acceleration" title="Permanent link">#</a></h4>
 <p>Lane change velocity is affected by the ego vehicle's current velocity. High velocity requires longer preparation and lane changing distance. However we also need to plan lane changing trajectories in case ego vehicle slows down.
 Computing candidate paths that assumes ego vehicle's slows down is performed by substituting predetermined deceleration value into <code>prepare_length</code>, <code>prepare_velocity</code> and <code>lane_changing_length</code> equation.</p>
-<p>The predetermined acceleration values are a set of value that starts from <code>acceleration = maximum_acceleration</code>, and decrease by <code>acceleration_resolution</code> until it reaches <code>acceleration = -maximum_deceleration</code>. Both <code>maximum_acceleration</code> and <code>maximum_deceleration</code> are calculated as: defined in the <code>common.param</code> file as <code>normal.min_acc</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="n">maximum_acceleration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">common_param</span><span class="p">.</span><span class="n">max_acc</span><span class="p">,</span><span class="w"> </span><span class="n">lane_change_param</span><span class="p">.</span><span class="n">max_acc</span><span class="p">)</span>
-<span class="n">maximum_deceleration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">common_param</span><span class="p">.</span><span class="n">min_acc</span><span class="p">,</span><span class="w"> </span><span class="n">lane_change_param</span><span class="p">.</span><span class="n">min_acc</span><span class="p">)</span>
+<p>The predetermined longitudinal acceleration values are a set of value that starts from <code>longitudinal_acceleration = maximum_longitudinal_acceleration</code>, and decrease by <code>longitudinal_acceleration_resolution</code> until it reaches <code>longitudinal_acceleration = -maximum_longitudinal_deceleration</code>. Both <code>maximum_longitudinal_acceleration</code> and <code>maximum_longitudinal_deceleration</code> are calculated as: defined in the <code>common.param</code> file as <code>normal.min_acc</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">maximum_longitudinal_acceleration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">common_param</span><span class="p">.</span><span class="n">max_acc</span><span class="p">,</span><span class="w"> </span><span class="n">lane_change_param</span><span class="p">.</span><span class="n">max_acc</span><span class="p">)</span>
+<span class="n">maximum_longitudinal_deceleration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">common_param</span><span class="p">.</span><span class="n">min_acc</span><span class="p">,</span><span class="w"> </span><span class="n">lane_change_param</span><span class="p">.</span><span class="n">min_acc</span><span class="p">)</span>
 </code></pre></div>
-<p>where <code>common_param</code> is vehicle common parameter, which defines vehicle common maximum acceleration and deceleration. Whereas, <code>lane_change_param</code> has maximum acceleration and deceleration for the lane change module. For example, if a user set and <code>common_param.max_acc=1.0</code> and <code>lane_change_param.max_acc=0.0</code>, <code>maximum_acceleration</code> becomes <code>0.0</code>, and the lane change does not accelerate in the lane change phase.</p>
-<p>The <code>acceleration_resolution</code> is determine by the following</p>
-<div class="highlight"><pre><span></span><code><span class="n">acceleration_resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">maximum_acceleration</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">maximum_deceleration</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">lane_change_sampling_num</span>
+<p>where <code>common_param</code> is vehicle common parameter, which defines vehicle common maximum longitudinal acceleration and deceleration. Whereas, <code>lane_change_param</code> has maximum longitudinal acceleration and deceleration for the lane change module. For example, if a user set and <code>common_param.max_acc=1.0</code> and <code>lane_change_param.max_acc=0.0</code>, <code>maximum_longitudinal_acceleration</code> becomes <code>0.0</code>, and the lane change does not accelerate in the lane change phase.</p>
+<p>The <code>longitudinal_acceleration_resolution</code> is determine by the following</p>
+<div class="highlight"><pre><span></span><code><span class="n">longitudinal_acceleration_resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">maximum_longitudinal_acceleration</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">minimum_longitudinal_deceleration</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">longitudinal_acceleration_sampling_num</span>
 </code></pre></div>
-<p>Note that when the <code>current_velocity</code> is lower than <code>minimum_lane_changing_velocity</code>, the vehicle needs to accelerate its velocity to <code>minimum_lane_changing_velocity</code>. Therefore, the acceleration becomes positive value (not deceleration).</p>
+<p>Note that when the <code>current_velocity</code> is lower than <code>minimum_lane_changing_velocity</code>, the vehicle needs to accelerate its velocity to <code>minimum_lane_changing_velocity</code>. Therefore, longitudinal acceleration becomes positive value (not decelerate).</p>
 <p>The following figure illustrates when <code>lane_change_sampling_num = 4</code>. Assuming that <code>maximum_deceleration = 1.0</code> then <code>a0 == 0.0 == no deceleration</code>, <code>a1 == 0.25</code>, <code>a2 == 0.5</code>, <code>a3 == 0.75</code> and <code>a4 == 1.0 == maximum_deceleration</code>. <code>a0</code> is the expected lane change trajectories should ego vehicle do not decelerate, and <code>a1</code>'s path is the expected lane change trajectories should ego vehicle decelerate at <code>0.25 m/s^2</code>.</p>
 <p><img alt="path_samples" src="../../image/lane_change/lane_change-candidate_path_samples.png"></p>
 <p>Which path will be chosen will depend on validity and collision check.</p>
+<h4 id="multiple-candidate-path-samples-lateral-acceleration">Multiple candidate path samples (lateral acceleration)<a class="headerlink" href="#multiple-candidate-path-samples-lateral-acceleration" title="Permanent link">#</a></h4>
+<p>In addition to sampling longitudinal acceleration, we also sample lane change paths by adjusting the value of lateral acceleration. Since lateral acceleration influences the duration of a lane change, a lower lateral acceleration value results in a longer lane change path, while a higher lateral acceleration value leads to a shorter lane change path. This allows the lane change module to generate a shorter lane change path by increasing the lateral acceleration when there is limited space for the lane change.</p>
+<p>The maximum and minimum lateral accelerations are defined in the lane change parameter file as a map. The range of lateral acceleration is determined for each velocity by linearly interpolating the values in the map. Let's assume we have the following map</p>
+<table>
+<thead>
+<tr>
+<th align="left">Ego Velocity</th>
+<th>Minimum lateral acceleration</th>
+<th>Maximum lateral acceleration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">0.0</td>
+<td>0.2</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td align="left">2.0</td>
+<td>0.2</td>
+<td>0.4</td>
+</tr>
+<tr>
+<td align="left">4.0</td>
+<td>0.3</td>
+<td>0.4</td>
+</tr>
+<tr>
+<td align="left">6.0</td>
+<td>0.3</td>
+<td>0.5</td>
+</tr>
+</tbody>
+</table>
+<p>In this case, when the current velocity of the ego vehicle is 3.0, the minimum and maximum lateral accelerations are 0.2 and 0.35 respectively. These values are obtained by linearly interpolating the second and third rows of the map, which provide the minimum and maximum lateral acceleration values.</p>
+<p>Within this range, we sample the lateral acceleration for the ego vehicle. Similar to the method used for sampling longitudinal acceleration, the resolution of lateral acceleration (lateral_acceleration_resolution) is determined by the following:</p>
+<div class="highlight"><pre><span></span><code><span class="n">lateral_acceleration_resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">maximum_lateral_acceleration</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">minimum_lateral_deceleration</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">lateral_acceleration_sampling_num</span>
+</code></pre></div>
 <h4 id="candidate-paths-validity-check">Candidate Path's validity check<a class="headerlink" href="#candidate-paths-validity-check" title="Permanent link">#</a></h4>
 <p>A candidate path is valid if the total lane change distance is less than</p>
 <ol>
