@@ -13508,7 +13508,6 @@ AutonomouStuff Lexus RX 450h for under 40 km/h driving.</p>
 </ol>
 <p>If you want to adjust the effect only in the high-speed range, you can use <code>weight_steering_input_squared_vel</code>. This parameter corresponds to the steering weight in the high-speed range.</p>
 <h4 id="descriptions-for-weights">Descriptions for weights<a class="headerlink" href="#descriptions-for-weights" title="Permanent link">#</a></h4>
-<p>Here are some tips for adjusting other parameters:</p>
 <ul>
 <li><code>weight_lat_error</code>: Reduce lateral tracking error. This acts like P gain in PID.</li>
 <li><code>weight_heading_error</code>: Make a drive straight. This acts like D gain in PID.</li>
@@ -13522,6 +13521,7 @@ AutonomouStuff Lexus RX 450h for under 40 km/h driving.</p>
   for stability.</li>
 </ul>
 <h4 id="other-tips-for-tuning">Other tips for tuning<a class="headerlink" href="#other-tips-for-tuning" title="Permanent link">#</a></h4>
+<p>Here are some tips for adjusting other parameters:</p>
 <ul>
 <li>In theory, increasing terminal weights, <code>weight_terminal_lat_error</code> and <code>weight_terminal_heading_error</code>, can enhance the tracking stability. This method sometimes proves effective.</li>
 <li>A larger <code>prediction_horizon</code> and a smaller <code>prediction_sampling_time</code> are efficient for tracking performance. However, these come at the cost of higher computational costs.</li>
