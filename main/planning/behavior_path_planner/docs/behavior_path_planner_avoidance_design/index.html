@@ -14128,7 +14128,7 @@ SHIFT_{current} &gt; L_{threshold}
 <p>namespace: <code>avoidance.target_object.</code></p>
 <p>This module supports all object classes, and it can set following parameters independently.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">car</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">enable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># [-]</span>
+<span class="w">  </span><span class="nt">is_target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># [-]</span>
 <span class="w">  </span><span class="nt">moving_speed_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w"> </span><span class="c1"># [m/s]</span>
 <span class="w">  </span><span class="nt">moving_time_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span><span class="w"> </span><span class="c1"># [s]</span>
 <span class="w">  </span><span class="nt">max_expand_ratio</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span><span class="w"> </span><span class="c1"># [-]</span>
@@ -14149,10 +14149,10 @@ SHIFT_{current} &gt; L_{threshold}
 </thead>
 <tbody>
 <tr>
-<td align="left">enable</td>
+<td align="left">is_target</td>
 <td>[-]</td>
 <td>bool</td>
-<td>Allow avoidance for object type CAR</td>
+<td>By setting this flag <code>true</code>, this module avoid those class objects.</td>
 <td>false</td>
 </tr>
 <tr>
@@ -14173,7 +14173,7 @@ SHIFT_{current} &gt; L_{threshold}
 <td align="left">envelope_buffer_margin</td>
 <td>[m]</td>
 <td>double</td>
-<td>Allow avoidance for object type TRAILER</td>
+<td>The buffer between raw boundary box of detected objects and enveloped polygon that is used for avoidance path generation.</td>
 <td>0.3</td>
 </tr>
 <tr>
@@ -14254,21 +14254,21 @@ SHIFT_{current} &gt; L_{threshold}
 <td align="left">1.0</td>
 </tr>
 <tr>
-<td align="left">object_ignore_distance_traffic_light</td>
+<td align="left">object_ignore_section_traffic_light_in_front_distance</td>
 <td align="left">[m]</td>
 <td align="left">double</td>
 <td align="left">If the distance between traffic light and vehicle is less than this parameter, this module will ignore it.</td>
 <td align="left">30.0</td>
 </tr>
 <tr>
-<td align="left">object_ignore_distance_crosswalk_forward</td>
+<td align="left">object_ignore_section_crosswalk_in_front_distance</td>
 <td align="left">[m]</td>
 <td align="left">double</td>
 <td align="left">If the front distance between crosswalk and vehicle is less than this parameter, this module will ignore it.</td>
 <td align="left">30.0</td>
 </tr>
 <tr>
-<td align="left">object_ignore_distance_crosswalk_backward</td>
+<td align="left">object_ignore_section_crosswalk_behind_distance</td>
 <td align="left">[m]</td>
 <td align="left">double</td>
 <td align="left">If the back distance between crosswalk and vehicle is less than this parameter, this module will ignore it.</td>
