@@ -13759,8 +13759,25 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 </tbody>
 </table>
 <h2 id="debug-marker-visualization">Debug Marker &amp; Visualization<a class="headerlink" href="#debug-marker-visualization" title="Permanent link">#</a></h2>
-<p>To enable the debug marker, execute <code>ros2 param set /planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner lane_change.publish_debug_marker true</code> (no restart is needed) or simply set the <code>publish_debug_marker</code> to <code>true</code> in the <code>lane_change.param.yaml</code> for permanent effect (restart is needed). Then add the marker <code>/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/debug/lanechange</code> in <code>rviz2</code>.</p>
-<p><img alt="debug" src="../../image/lane_change/lane_change-debug.png"></p></div>
+<p>To enable the debug marker, execute (no restart is needed)</p>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>param<span class="w"> </span><span class="nb">set</span><span class="w"> </span>/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner<span class="w"> </span>lane_change.publish_debug_marker<span class="w"> </span><span class="nb">true</span>
+</code></pre></div>
+<p>or simply set the <code>publish_debug_marker</code> to <code>true</code> in the <code>lane_change.param.yaml</code> for permanent effect (restart is needed).</p>
+<p>Then add the marker</p>
+<div class="highlight"><pre><span></span><code>/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/debug/lane_change_left
+</code></pre></div>
+<p>in <code>rviz2</code>.</p>
+<p><img alt="debug" src="../../image/lane_change/lane_change-debug-1.png"></p>
+<p><img alt="debug2" src="../../image/lane_change/lane_change-debug-2.png"></p>
+<p><img alt="debug3" src="../../image/lane_change/lane_change-debug-3.png"></p>
+<p>Available information</p>
+<ol>
+<li>Ego to object relation, plus safety check information</li>
+<li>Ego vehicle interpolated pose up to the latest safety check position.</li>
+<li>Object is safe or not, shown by the color of the polygon (Green = Safe, Red = unsafe)</li>
+<li>Valid candidate paths.</li>
+<li>Position when lane changing start and end.</li>
+</ol></div>
 
 
 
