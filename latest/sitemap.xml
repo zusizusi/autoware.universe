@@ -706,6 +706,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_planner/docs/behavior_path_planner_avoidance_by_lane_change_design/</loc>
+         <lastmod>2023-06-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_planner/docs/behavior_path_planner_avoidance_design/</loc>
          <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
