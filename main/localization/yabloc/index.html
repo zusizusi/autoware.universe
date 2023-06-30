@@ -13247,6 +13247,47 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#principle" class="md-nav__link">
+    Principle
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualization" class="md-nav__link">
+    Visualization
+  </a>
+  
+    <nav class="md-nav" aria-label="Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-visualization-topics" class="md-nav__link">
+    Core visualization topics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#image-topics-for-debug" class="md-nav__link">
+    Image topics for debug
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitation" class="md-nav__link">
+    Limitation
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -13268,6 +13309,9 @@
 <div><h1 id="yabloc">YabLoc<a class="headerlink" href="#yabloc" title="Permanent link">#</a></h1>
 <p><strong>YabLoc</strong> is vision-based localization with vector map. <a href="https://youtu.be/Eaf6r_BNFfk">https://youtu.be/Eaf6r_BNFfk</a></p>
 <p><a href="https://youtu.be/Eaf6r_BNFfk"><img alt="thumbnail" src="docs/yabloc_thumbnail.jpg"></a></p>
+<p>It estimates position by matching road surface markings extracted from images with a vector map.
+Point cloud maps and LiDAR are not required.
+YabLoc enables users localize vehicles that are not equipped with LiDAR and in environments where point cloud maps are not available.</p>
 <h2 id="packages">Packages<a class="headerlink" href="#packages" title="Permanent link">#</a></h2>
 <ul>
 <li><a href="yabloc_common/">yabloc_common</a></li>
@@ -13276,17 +13320,108 @@
 <li><a href="yabloc_pose_initializer/">yabloc_pose_initializer</a></li>
 </ul>
 <h2 id="how-to-launch-yabloc-instead-of-ndt">How to launch YabLoc instead of NDT<a class="headerlink" href="#how-to-launch-yabloc-instead-of-ndt" title="Permanent link">#</a></h2>
-<p>When launching autoware, if you set <code>localization_mode:=yabloc</code> as an argument, YabLoc will be launched instead of NDT.
-By default, <code>localization_mode</code> is <code>ndt</code>.</p>
+<p>When launching autoware, if you set <code>localization_mode:=camera</code> as an argument, YabLoc will be launched instead of NDT.
+By default, <code>localization_mode</code> is <code>lidar</code>.</p>
 <p>A sample command to run YabLoc is as follows</p>
 <div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>launch<span class="w"> </span>autoware_launch<span class="w"> </span>logging_simulator.launch.xml<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>map_path:<span class="o">=</span><span class="nv">$HOME</span>/autoware_map/sample-map-rosbag<span class="se">\</span>
 <span class="w">  </span>vehicle_model:<span class="o">=</span>sample_vehicle<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>sensor_model:<span class="o">=</span>sample_sensor_kit<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>localization_mode:<span class="o">=</span>yabloc
+<span class="w">  </span>localization_mode:<span class="o">=</span>camera
 </code></pre></div>
 <h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">#</a></h2>
-<p><img alt="node_diagram" src="docs/yabloc_architecture.drawio.svg"></p></div>
+<p><img alt="node_diagram" src="docs/yabloc_architecture.drawio.svg"></p>
+<h2 id="principle">Principle<a class="headerlink" href="#principle" title="Permanent link">#</a></h2>
+<p>The diagram below illustrates the basic principle of YabLoc.
+It extracts road surface markings by extracting the line segments using the road area obtained from graph-based segmentation.
+The red line at the center-top of the diagram represents the line segments identified as road surface markings.
+YabLoc transforms these segments for each particle and determines the particle's weight by comparing them with the cost map generated from Lanelet2.</p>
+<p><img alt="principle" src="docs/yabloc_principle.png"></p>
+<h2 id="visualization">Visualization<a class="headerlink" href="#visualization" title="Permanent link">#</a></h2>
+<h3 id="core-visualization-topics">Core visualization topics<a class="headerlink" href="#core-visualization-topics" title="Permanent link">#</a></h3>
+<p>These topics are not visualized by default.</p>
+<p><img src="docs/yabloc_rviz_description.png" width="800"></p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>topic name</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>/localization/yabloc/pf/predicted_particle_marker</code></td>
+<td>particle distribution of particle filter. Red particles are probable candidate.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>/localization/yabloc/pf/scored_cloud</code></td>
+<td>3D projected line segments. the color indicates how well they match the map.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>/localization/yabloc/image_processing/lanelet2_overlay_image</code></td>
+<td>overlay of lanelet2 (yellow lines) onto image based on estimated pose. If they match well with the actual road markings, it means that the localization performs well.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="image-topics-for-debug">Image topics for debug<a class="headerlink" href="#image-topics-for-debug" title="Permanent link">#</a></h3>
+<p>These topics are not visualized by default.</p>
+<p><img src="docs/yabloc_image_description.png" width="800"></p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>topic name</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>/localization/yabloc/pf/cost_map_image</code></td>
+<td>cost map made from lanelet2</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>/localization/yabloc/pf/match_image</code></td>
+<td>projected line segments</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>/localization/yabloc/image_processing/image_with_colored_line_segment</code></td>
+<td>classified line segments. green line segments are used in particle correction</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>/localization/yabloc/image_processing/lanelet2_overlay_image</code></td>
+<td>overlay of lanelet2</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>/localization/yabloc/image_processing/segmented_image</code></td>
+<td>graph based segmentation result</td>
+</tr>
+</tbody>
+</table>
+<h2 id="limitation">Limitation<a class="headerlink" href="#limitation" title="Permanent link">#</a></h2>
+<ul>
+<li>Running YabLoc and NDT simultaneously is not supported.<ul>
+<li>This is because running both at the same time may be computationally too expensive.</li>
+<li>Also, in most cases, NDT is superior to YabLoc, so there is less benefit to running them at the same time.</li>
+</ul>
+</li>
+<li>It does not estimate roll and pitch, therefore some of the perception nodes may not work well.</li>
+<li>It does not support multiple cameras now. But it will in the future.</li>
+<li>In places where there are few road surface markings, such as intersections, the estimation heavily relies on GNSS, IMU, and vehicle's wheel odometry.</li>
+<li>If the road boundary or road surface markings are not included in the Lanelet2, the estimation is likely to fail.</li>
+<li>The sample rosbag provided in the autoware tutorial does not include images, so it is not possible to run YabLoc with it.<ul>
+<li>If you want to test the functionality of YabLoc, the sample test data provided in this <a href="https://github.com/autowarefoundation/autoware.universe/pull/3946">PR</a> is useful.</li>
+</ul>
+</li>
+</ul></div>
 
 
 
