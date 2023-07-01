@@ -21,7 +21,7 @@
     
     
       
-        <title>Model Predictive Control Algorithm - Autoware Universe Documentation</title>
+        <title>MPC Algorithm - Autoware Universe Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#model-predictive-control-algorithm" class="md-skip">
+        <a href="#mpc-algorithm" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Model Predictive Control Algorithm
+              MPC Algorithm
             
           </span>
         </div>
@@ -3406,12 +3406,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Model Predictive Control Algorithm
+          MPC Algorithm
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Model Predictive Control Algorithm
+        MPC Algorithm
       </a>
       
         
@@ -13050,7 +13050,7 @@
   
 
 
-<div><h1 id="model-predictive-control-algorithm">Model Predictive Control Algorithm<a class="headerlink" href="#model-predictive-control-algorithm" title="Permanent link">#</a></h1>
+<div><h1 id="mpc-algorithm">MPC Algorithm<a class="headerlink" href="#mpc-algorithm" title="Permanent link">#</a></h1>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">#</a></h2>
 <p>Model Predictive Control (MPC) is a control method that solves an optimization problem during each control cycle to determine an optimal control sequence based on a given vehicle model. The calculated sequence of control inputs is used to control the system.</p>
 <p>In simpler terms, an MPC controller calculates a series of control inputs that optimize the state and output trajectories to achieve the desired behavior. The key characteristics of an MPC control system can be summarized as follows:</p>
@@ -13256,31 +13256,29 @@ x_{k+1} = A_{k}x_{k} + B_{k}u_{k}+w_{k}
 \]</div>
 <p>Comparing equation (1), <span class="arithmatex">\(A \rightarrow A_{k}\)</span>. This means that the <span class="arithmatex">\(A\)</span> matrix is a linear approximation in the vicinity of the trajectory after <span class="arithmatex">\(k\)</span> steps (i.e., <span class="arithmatex">\(k* \text{d}t\)</span> seconds), and it can be obtained if the trajectory is known in advance.</p>
 <p>Using this equation, write down the update equation likewise (2) ~ (6)</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{align}
-<script type="math/tex; mode=display">\begin{bmatrix}
+\begin{bmatrix}
  x_{1} \\ x_{2} \\ x_{3} \\ \vdots \\ x_{n}
-\end{bmatrix}</script>
-  =</p>
-<p>
-<script type="math/tex; mode=display">\begin{bmatrix}
+\end{bmatrix}
+= \begin{bmatrix}
  A_{1} \\ A_{1}A_{0} \\ A_{2}A_{1}A_{0} \\ \vdots \\ \prod_{i=0}^{n-1} A_{k}
-\end{bmatrix}</script>
+\end{bmatrix}
 x_{0} +
-<script type="math/tex; mode=display">\begin{bmatrix}
- B_{0} & 0 & \dots & & 0 \\ A_{1}B_{0} & B_{1} & 0 & \dots & 0 \\ A_{2}A_{1}B_{0} & A_{2}B_{1} & B_{2} & \dots & 0 \\ \vdots & \vdots & &\ddots & 0 \\ \prod_{i=1}^{n-1} A_{k}B_{0} & \prod_{i=2}^{n-1} A_{k}B_{1} & \dots & A_{n-1}B_{n-1} & B_{n-1}
-\end{bmatrix}</script>
-<script type="math/tex; mode=display">\begin{bmatrix}
+\begin{bmatrix}
+ B_{0} &amp; 0 &amp; \dots &amp; &amp; 0 \\ A_{1}B_{0} &amp; B_{1} &amp; 0 &amp; \dots &amp; 0 \\ A_{2}A_{1}B_{0} &amp; A_{2}B_{1} &amp; B_{2} &amp; \dots &amp; 0 \\ \vdots &amp; \vdots &amp; &amp;\ddots &amp; 0 \\ \prod_{i=1}^{n-1} A_{k}B_{0} &amp; \prod_{i=2}^{n-1} A_{k}B_{1} &amp; \dots &amp; A_{n-1}B_{n-1} &amp; B_{n-1}
+\end{bmatrix}
+\begin{bmatrix}
  u_{0} \\ u_{1} \\ u_{2} \\ \vdots \\ u_{n-1}
-\end{bmatrix}</script> +
-<script type="math/tex; mode=display">\begin{bmatrix}
-I & 0 & \dots & & 0 \\ A_{1} & I & 0 & \dots & 0 \\ A_{2}A_{1} & A_{2} & I & \dots & 0 \\ \vdots & \vdots & &\ddots & 0 \\ \prod_{i=1}^{n-1} A_{k} & \prod_{i=2}^{n-1} A_{k} & \dots & A_{n-1} & I
-\end{bmatrix}</script>
-<script type="math/tex; mode=display">\begin{bmatrix}
+\end{bmatrix} +
+\begin{bmatrix}
+I &amp; 0 &amp; \dots &amp; &amp; 0 \\ A_{1} &amp; I &amp; 0 &amp; \dots &amp; 0 \\ A_{2}A_{1} &amp; A_{2} &amp; I &amp; \dots &amp; 0 \\ \vdots &amp; \vdots &amp; &amp;\ddots &amp; 0 \\ \prod_{i=1}^{n-1} A_{k} &amp; \prod_{i=2}^{n-1} A_{k} &amp; \dots &amp; A_{n-1} &amp; I
+\end{bmatrix}
+\begin{bmatrix}
  w_{0} \\ w_{1} \\ w_{2} \\ \vdots \\ w_{n-1}
-\end{bmatrix}</script>
+\end{bmatrix}
 \end{align}
-$$</p>
+\]</div>
 <p>As it has the same form as equation (6), convex optimization is applicable for as much as the model in the former section.</p>
 <h2 id="the-cost-functions-and-constraints">The cost functions and constraints<a class="headerlink" href="#the-cost-functions-and-constraints" title="Permanent link">#</a></h2>
 <p>In this section, we give the details on how to set up the cost function and constraint conditions.</p>
@@ -13347,14 +13345,16 @@ u_{min} &lt; u &lt; u_{max}
 \end{align}
 \]</div>
 <p>and aligning the inequality signs</p>
-<div class="arithmatex">\[
+<p>$$
 \begin{align}
-u_{1} - u_{0} &amp;&lt; \dot{u}_{max}\text{d}t \\
-+ u_{1} + u_{0} &amp;&lt; -\dot{u}_{min}\text{d}t \\
-u_{2} - u_{1} &amp;&lt; \dot{u}_{max}\text{d}t \\
-+ u_{2} + u_{1} &amp;&lt; - \dot{u}_{min}\text{d}t
+u_{1} - u_{0} &amp;&lt; \dot{u}_{max}\text{d}t \</p>
+<ul>
+<li>u_{1} + u_{0} &amp;&lt; -\dot{u}<em>{min}\text{d}t \
+u</em> - u_{1} &amp;&lt; \dot{u}_{max}\text{d}t \</li>
+<li>u_{2} + u_{1} &amp;&lt; - \dot{u}_{min}\text{d}t
 \end{align}
-\]</div>
+$$</li>
+</ul>
 <p>We can obtain a matrix expression for the resulting constraint equation in the form of</p>
 <div class="arithmatex">\[
 \begin{align}
