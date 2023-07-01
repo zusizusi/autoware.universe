@@ -266,6 +266,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/control/mpc_lateral_controller/model_predictive_control_algorithm/</loc>
+         <lastmod>2023-07-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/control/obstacle_collision_checker/</loc>
          <lastmod>2023-07-01</lastmod>
          <changefreq>daily</changefreq>
