@@ -13576,16 +13576,28 @@
 <td>false</td>
 </tr>
 <tr>
-<td>map_length</td>
-<td>100.0 [m]</td>
+<td>filter_obstacle_pointcloud_by_raw_pointcloud</td>
+<td>false</td>
 </tr>
 <tr>
-<td>map_width</td>
-<td>100.0 [m]</td>
+<td>map_length</td>
+<td>150.0 [m]</td>
 </tr>
 <tr>
 <td>map_resolution</td>
 <td>0.5 [m]</td>
+</tr>
+<tr>
+<td>use_projection</td>
+<td>false</td>
+</tr>
+<tr>
+<td>projection_dz_threshold</td>
+<td>0.01</td>
+</tr>
+<tr>
+<td>obstacle_separation_threshold</td>
+<td>1.0</td>
 </tr>
 <tr>
 <td>input_obstacle_pointcloud</td>
@@ -13610,7 +13622,11 @@
 <tbody>
 <tr>
 <td>map_length</td>
-<td>100 [m]</td>
+<td>150 [m]</td>
+</tr>
+<tr>
+<td>map_width</td>
+<td>150 [m]</td>
 </tr>
 <tr>
 <td>map_resolution</td>
@@ -13687,11 +13703,6 @@
 <td><code>container_name</code></td>
 <td><code>occupancy_grid_map_container</code></td>
 <td></td>
-</tr>
-<tr>
-<td><code>filter_obstacle_pointcloud_by_raw_pointcloud_</code></td>
-<td><code>false</code></td>
-<td>only for pointcloud based method. If true, the node use raw pointcloud to filter obstacle pointcloud. Options for the limited FOV sensor.</td>
 </tr>
 <tr>
 <td><code>input_obstacle_pointcloud</code></td>

@@ -7424,6 +7424,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#how-to-debug" class="md-nav__link">
+    How to debug
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -13732,6 +13739,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#how-to-debug" class="md-nav__link">
+    How to debug
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -13754,8 +13768,8 @@
 <p><img alt="pointcloud_based_occupancy_grid_map_sample_image" src="../image/pointcloud_based_occupancy_grid_map_sample_image.gif"></p>
 <h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
 <h3 id="1st-step">1st step<a class="headerlink" href="#1st-step" title="Permanent link">#</a></h3>
-<p>First of all, obstacle and raw pointcloud as input are transformed into a polar coordinate system and divided into bin per angle_increment.
-At this time, each point belonging to each bin is stored as range data. In addition, the x,y information in the map coordinate is also stored for ray trace on map coordinate.
+<p>First of all, input obstacle/raw pointcloud are transformed into the polar coordinate centered around <code>scan_origin</code> and divided int ocircular bins per angle_increment respectively.
+At this time, each point belonging to each bin is stored as range data. In addition, the x,y information in the map coordinate is also stored for raytracing on the map coordinate.
 The bin contains the following information for each point</p>
 <ul>
 <li>range data from origin of raytrace</li>
@@ -13776,8 +13790,7 @@ The ray trace is done by Bresenham's line algorithm.
 </li>
 <li>
 <p>Fill in the unknown cells.
-   Assume that unknown is behind the obstacle, since the back of the obstacle is a blind spot.
-   Therefore, the unknown are assumed to be the cells that are more than a distance margin from each obstacle point.</p>
+   Based on the assumption that <code>UNKNOWN</code> is behind the obstacle, the cells that are more than a distance margin from each obstacle point are filled with <code>UNKOWN</code></p>
 <p><img alt="pointcloud_based_occupancy_grid_map_side_view_2nd" src="../image/pointcloud_based_occupancy_grid_map_side_view_2nd.svg"></p>
 <p>There are three reasons for setting a distance margin.</p>
 <ul>
@@ -13785,11 +13798,13 @@ The ray trace is done by Bresenham's line algorithm.
 <li>The obstacle point cloud is processed and may not match the raw pointcloud.</li>
 <li>The input may be inaccurate and obstacle points may not be determined as obstacles.</li>
 </ul>
+<p>When the parameter <code>grid_map_type</code> is "OccupancyGridMapProjectiveBlindSpot" and the <code>scan_origin</code> is a sensor frame like <code>velodyne_top</code> for instance, for each obstacle pointcloud, if there are no <em>visible</em> raw pointclouds that are located above the projected ray from the <code>scan_origin</code> to that obstacle pointcloud, the cells between the obstacle pointcloud and the <code>projected point</code> are filled with <code>UNKNOWN</code>. Note that the <code>scan_origin</code> should not be <code>base_link</code> if this flag is true because otherwise all the cells behind the obstacle point clouds would be filled with <code>UNKNOWN</code>.</p>
+<p><img alt="pointcloud_based_occupancy_grid_map_side_view_2nd_projection" src="../image/pointcloud_based_occupancy_grid_map_side_view_2nd_projection.drawio.svg"></p>
 </li>
 <li>
 <p>Fill in the occupied cells.
    Fill in the point where the obstacle point is located with occupied.
-   In addition, If the distance between obstacle points is less than or equal to the distance margin, it is filled with occupied because the input may be inaccurate and obstacle points may not be determined as obstacles.</p>
+   In addition, If the distance between obstacle points is less than or equal to the distance margin, that interval is filled with <code>OCCUPIED</code> because the input may be inaccurate and obstacle points may not be determined as obstacles.</p>
 <p><img alt="pointcloud_based_occupancy_grid_map_side_view_3rd" src="../image/pointcloud_based_occupancy_grid_map_side_view_3rd.svg"></p>
 </li>
 </ol>
@@ -13877,6 +13892,11 @@ The ray trace is done by Bresenham's line algorithm.
 <td>double</td>
 <td>The map cell resolution [m]</td>
 </tr>
+<tr>
+<td><code>grid_map_type</code></td>
+<td>string</td>
+<td>The type of grid map for estimating <code>UNKNOWN</code> region behind obstacle point clouds</td>
+</tr>
 </tbody>
 </table>
 <h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
@@ -13893,6 +13913,16 @@ The ray trace is done by Bresenham's line algorithm.
 <ul>
 <li>The update probability of the binary Bayesian filter is currently hard-coded and requires a code change to be modified.</li>
 <li>Since there is no special support for moving objects, the probability of existence is not increased for fast objects.</li>
+</ul>
+<h2 id="how-to-debug">How to debug<a class="headerlink" href="#how-to-debug" title="Permanent link">#</a></h2>
+<p>If <code>grid_map_type</code> is "OccupancyGridMapProjectiveBlindSpot" and <code>pub_debug_grid</code> is <code>true</code>, it is possible to check the each process of grid map generation by running</p>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>launch<span class="w"> </span>probabilistic_occupancy_grid_map<span class="w"> </span>debug.launch.xml
+</code></pre></div>
+<p>and visualizing the following occupancy grid map topics (which are listed in config/grid_map_param.yaml):</p>
+<ul>
+<li><code>/perception/occupancy_grid_map/grid_1st_step</code>: <code>FREE</code> cells are filled</li>
+<li><code>/perception/occupancy_grid_map/grid_2nd_step</code>: <code>UNKNOWN</code> cells are filled</li>
+<li><code>/perception/occupancy_grid_map/grid_3rd_step</code>: <code>OCCUPIED</code> cells are filled</li>
 </ul></div>
 
 
