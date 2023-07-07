@@ -13748,7 +13748,7 @@ The ray trace is done by Bresenham's line algorithm.
 <li>The obstacle point cloud is processed and may not match the raw pointcloud.</li>
 <li>The input may be inaccurate and obstacle points may not be determined as obstacles.</li>
 </ul>
-<p>When the parameter <code>use_projeciton</code> is true, for each obstacle pointcloud, if there are no <em>visible</em> raw pointclouds that are located above the projected ray from the <code>scan_origin</code> to that obstacle pointcloud, the cells between the obstacle pointcloud and the <code>projected point</code> are filled with <code>UNKNOWN</code>. Note that the <code>scan_origin</code> should not be <code>base_link</code> if this flag is true because otherwise all the cells behind the obstacle point clouds would be filled with <code>UNKNOWN</code>.</p>
+<p>When the parameter <code>grid_map_type</code> is "OccupancyGridMapProjectiveBlindSpot" and the <code>scan_origin</code> is a sensor frame like <code>velodyne_top</code> for instance, for each obstacle pointcloud, if there are no <em>visible</em> raw pointclouds that are located above the projected ray from the <code>scan_origin</code> to that obstacle pointcloud, the cells between the obstacle pointcloud and the <code>projected point</code> are filled with <code>UNKNOWN</code>. Note that the <code>scan_origin</code> should not be <code>base_link</code> if this flag is true because otherwise all the cells behind the obstacle point clouds would be filled with <code>UNKNOWN</code>.</p>
 <p><img alt="pointcloud_based_occupancy_grid_map_side_view_2nd_projection" src="../image/pointcloud_based_occupancy_grid_map_side_view_2nd_projection.drawio.svg"></p>
 </li>
 <li>
@@ -13842,6 +13842,11 @@ The ray trace is done by Bresenham's line algorithm.
 <td>double</td>
 <td>The map cell resolution [m]</td>
 </tr>
+<tr>
+<td><code>grid_map_type</code></td>
+<td>string</td>
+<td>The type of grid map for estimating <code>UNKNOWN</code> region behind obstacle point clouds</td>
+</tr>
 </tbody>
 </table>
 <h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
@@ -13860,9 +13865,15 @@ The ray trace is done by Bresenham's line algorithm.
 <li>Since there is no special support for moving objects, the probability of existence is not increased for fast objects.</li>
 </ul>
 <h2 id="how-to-debug">How to debug<a class="headerlink" href="#how-to-debug" title="Permanent link">#</a></h2>
-<p>set <code>pub_debug_grid</code> to <code>true</code> and</p>
-<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>launch<span class="w"> </span>autoware_launch<span class="w"> </span>logging_simulator.launch.xml<span class="w"> </span>vehicle_model:<span class="o">=</span>sample_vehicle<span class="w"> </span>sensor_model:<span class="o">=</span>sample_sensor_kit<span class="w"> </span>map_path:<span class="o">=</span>&lt;sample-map-rosbag&gt;<span class="w"> </span>rviz_config:<span class="o">=</span><span class="k">$(</span>ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>--share<span class="w"> </span>probabilistic_occupancy_grid_map<span class="k">)</span>/config/debug.rviz<span class="w"> </span>planning:<span class="o">=</span><span class="nb">false</span><span class="w"> </span>control:<span class="o">=</span><span class="nb">false</span><span class="w"> </span>api:<span class="o">=</span><span class="nb">false</span><span class="w"> </span>system:<span class="o">=</span><span class="nb">false</span>
-</code></pre></div></div>
+<p>If <code>grid_map_type</code> is "OccupancyGridMapProjectiveBlindSpot" and <code>pub_debug_grid</code> is <code>true</code>, it is possible to check the each process of grid map generation by running</p>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>launch<span class="w"> </span>probabilistic_occupancy_grid_map<span class="w"> </span>debug.launch.xml
+</code></pre></div>
+<p>and visualizing the following occupancy grid map topics (which are listed in config/grid_map_param.yaml):</p>
+<ul>
+<li><code>/perception/occupancy_grid_map/grid_1st_step</code>: <code>FREE</code> cells are filled</li>
+<li><code>/perception/occupancy_grid_map/grid_2nd_step</code>: <code>UNKNOWN</code> cells are filled</li>
+<li><code>/perception/occupancy_grid_map/grid_3rd_step</code>: <code>OCCUPIED</code> cells are filled</li>
+</ul></div>
 
 
 
