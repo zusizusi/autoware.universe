@@ -15352,6 +15352,13 @@ SHIFT_{current} &gt; L_{threshold}
 <td align="left">Avoidance path gets sharp up to this jerk limit when there is not enough distance from ego.</td>
 <td align="left">1.0</td>
 </tr>
+<tr>
+<td align="left">max_lateral_acceleration</td>
+<td align="left">[m/s3]</td>
+<td align="left">double</td>
+<td align="left">Avoidance path gets sharp up to this accel limit when there is not enough distance from ego.</td>
+<td align="left">0.5</td>
+</tr>
 </tbody>
 </table>
 <p>namespace: <code>avoidance.constraints.longitudinal.</code></p>
@@ -15395,18 +15402,11 @@ SHIFT_{current} &gt; L_{threshold}
 <td align="left">1.0</td>
 </tr>
 <tr>
-<td align="left">min_avoidance_speed_for_acc_prevention</td>
-<td align="left">[m]</td>
-<td align="left">double</td>
-<td align="left">Minimum speed limit to be applied to prevent acceleration during avoidance.</td>
-<td align="left">3.0</td>
-</tr>
-<tr>
-<td align="left">max_avoidance_acceleration</td>
+<td align="left">max_acceleration</td>
 <td align="left">[m/ss]</td>
 <td align="left">double</td>
 <td align="left">Maximum acceleration during avoidance.</td>
-<td align="left">0.5</td>
+<td align="left">1.0</td>
 </tr>
 </tbody>
 </table>
