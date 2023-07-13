@@ -14578,8 +14578,16 @@ This module is activated when a new route is received.</p>
 <td align="left">minimum shift pull out distance. if calculated pull out distance is shorter than this, use this for path generation.</td>
 <td align="left">0.0</td>
 </tr>
+<tr>
+<td align="left">maximum_curvature</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">maximum curvature. The pull out distance is calculated so that the curvature is smaller than this value.</td>
+<td align="left"></td>
+</tr>
 </tbody>
 </table>
+<p>| 0.07 |</p>
 <h3 id="geometric-pull-out"><strong>geometric pull out</strong><a class="headerlink" href="#geometric-pull-out" title="Permanent link">#</a></h3>
 <p>Generate two arc paths with discontinuous curvature. Ego-vehicle stops once in the middle of the path to control the steer on the spot.
 See also <a href="https://www.sciencedirect.com/science/article/pii/S1474667015347431">[1]</a> for details of the algorithm.</p>
