@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/main/planning/route_handler/">
+        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/main/perception/tensorrt_classifier/">
       
       
-        <link rel="prev" href="../planning_validator/">
+        <link rel="prev" href="../shape_estimation/">
       
       
-        <link rel="next" href="../rtc_auto_mode_manager/">
+        <link rel="next" href="../tensorrt_yolo/">
       
       <link rel="icon" href="../../docs/assets/images/autoware-foundation.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
-        <title>route handler - Autoware Universe Documentation</title>
+        <title>TensorRT Classification for Efficient Dynamic Batched Inference - Autoware Universe Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#route-handler" class="md-skip">
+        <a href="#tensorrt-classification-for-efficient-dynamic-batched-inference" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              route handler
+              TensorRT Classification for Efficient Dynamic Batched Inference
             
           </span>
         </div>
@@ -346,6 +346,8 @@
         
   
   
+    
+  
 
 
   
@@ -357,7 +359,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../perception/bytetrack/" class="md-tabs__link">
+      <a href="../bytetrack/" class="md-tabs__link md-tabs__link--active">
         Perception
       </a>
     </li>
@@ -369,8 +371,6 @@
         
   
   
-    
-  
 
 
   
@@ -382,7 +382,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../behavior_path_planner/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../planning/behavior_path_planner/" class="md-tabs__link">
         Planning
       </a>
     </li>
@@ -6180,16 +6180,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
       
       
         
@@ -6278,7 +6278,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_7">
           <span class="md-nav__icon md-icon"></span>
           Perception
@@ -6313,7 +6313,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/bytetrack/">Bytetrack</a>
+          <a href="../bytetrack/">Bytetrack</a>
           
         </div>
       
@@ -6361,7 +6361,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/compare_map_segmentation/">Compare map segmentation</a>
+          <a href="../compare_map_segmentation/">Compare map segmentation</a>
           
         </div>
       
@@ -6409,7 +6409,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/crosswalk_traffic_light_estimator/">Crosswalk traffic light estimator</a>
+          <a href="../crosswalk_traffic_light_estimator/">Crosswalk traffic light estimator</a>
           
         </div>
       
@@ -6457,7 +6457,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/detected_object_feature_remover/">Detected object feature remover</a>
+          <a href="../detected_object_feature_remover/">Detected object feature remover</a>
           
         </div>
       
@@ -6513,7 +6513,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/detected_object_validation/">Detected object validation</a>
+          <a href="../detected_object_validation/">Detected object validation</a>
           
             <label for="__nav_7_5">
               <span class="md-nav__icon md-icon"></span>
@@ -6536,7 +6536,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/detected_object_validation/object-lanelet-filter/" class="md-nav__link">
+      <a href="../detected_object_validation/object-lanelet-filter/" class="md-nav__link">
         object_lanelet_filter
       </a>
     </li>
@@ -6550,7 +6550,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/detected_object_validation/object-position-filter/" class="md-nav__link">
+      <a href="../detected_object_validation/object-position-filter/" class="md-nav__link">
         object_position_filter
       </a>
     </li>
@@ -6564,7 +6564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/detected_object_validation/obstacle-pointcloud-based-validator/" class="md-nav__link">
+      <a href="../detected_object_validation/obstacle-pointcloud-based-validator/" class="md-nav__link">
         obstacle pointcloud based validator
       </a>
     </li>
@@ -6578,7 +6578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/detected_object_validation/occupancy-grid-based-validator/" class="md-nav__link">
+      <a href="../detected_object_validation/occupancy-grid-based-validator/" class="md-nav__link">
         occupancy grid based validator
       </a>
     </li>
@@ -6621,7 +6621,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/detection_by_tracker/">Detection by tracker</a>
+          <a href="../detection_by_tracker/">Detection by tracker</a>
           
         </div>
       
@@ -6669,7 +6669,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/elevation_map_loader/">Elevation map loader</a>
+          <a href="../elevation_map_loader/">Elevation map loader</a>
           
         </div>
       
@@ -6717,7 +6717,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/euclidean_cluster/">Euclidean cluster</a>
+          <a href="../euclidean_cluster/">Euclidean cluster</a>
           
         </div>
       
@@ -6765,7 +6765,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/front_vehicle_velocity_estimator/">Front vehicle velocity estimator</a>
+          <a href="../front_vehicle_velocity_estimator/">Front vehicle velocity estimator</a>
           
         </div>
       
@@ -6815,7 +6815,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/ground_segmentation/">Ground segmentation</a>
+          <a href="../ground_segmentation/">Ground segmentation</a>
           
             <label for="__nav_7_10">
               <span class="md-nav__icon md-icon"></span>
@@ -6875,7 +6875,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/ground_segmentation/docs/ransac-ground-filter/" class="md-nav__link">
+      <a href="../ground_segmentation/docs/ransac-ground-filter/" class="md-nav__link">
         RANSAC Ground Filter
       </a>
     </li>
@@ -6889,7 +6889,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/ground_segmentation/docs/ray-ground-filter/" class="md-nav__link">
+      <a href="../ground_segmentation/docs/ray-ground-filter/" class="md-nav__link">
         Ray Ground Filter
       </a>
     </li>
@@ -6903,7 +6903,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/ground_segmentation/docs/scan-ground-filter/" class="md-nav__link">
+      <a href="../ground_segmentation/docs/scan-ground-filter/" class="md-nav__link">
         Scan Ground Filter
       </a>
     </li>
@@ -6953,7 +6953,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/heatmap_visualizer/">Heatmap visualizer</a>
+          <a href="../heatmap_visualizer/">Heatmap visualizer</a>
           
         </div>
       
@@ -7003,7 +7003,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/image_projection_based_fusion/">Image projection based fusion</a>
+          <a href="../image_projection_based_fusion/">Image projection based fusion</a>
           
             <label for="__nav_7_12">
               <span class="md-nav__icon md-icon"></span>
@@ -7063,7 +7063,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/image_projection_based_fusion/docs/pointpainting-fusion/" class="md-nav__link">
+      <a href="../image_projection_based_fusion/docs/pointpainting-fusion/" class="md-nav__link">
         pointpainting_fusion
       </a>
     </li>
@@ -7077,7 +7077,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/image_projection_based_fusion/docs/roi-cluster-fusion/" class="md-nav__link">
+      <a href="../image_projection_based_fusion/docs/roi-cluster-fusion/" class="md-nav__link">
         roi_cluster_fusion
       </a>
     </li>
@@ -7091,7 +7091,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/image_projection_based_fusion/docs/roi-detected-object-fusion/" class="md-nav__link">
+      <a href="../image_projection_based_fusion/docs/roi-detected-object-fusion/" class="md-nav__link">
         roi_detected_object_fusion
       </a>
     </li>
@@ -7141,7 +7141,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/lidar_apollo_instance_segmentation/">Lidar apollo instance segmentation</a>
+          <a href="../lidar_apollo_instance_segmentation/">Lidar apollo instance segmentation</a>
           
         </div>
       
@@ -7189,7 +7189,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/lidar_apollo_segmentation_tvm/">Lidar apollo segmentation tvm</a>
+          <a href="../lidar_apollo_segmentation_tvm/">Lidar apollo segmentation tvm</a>
           
         </div>
       
@@ -7237,7 +7237,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/lidar_apollo_segmentation_tvm_nodes/">Lidar apollo segmentation tvm nodes</a>
+          <a href="../lidar_apollo_segmentation_tvm_nodes/">Lidar apollo segmentation tvm nodes</a>
           
         </div>
       
@@ -7287,7 +7287,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/lidar_centerpoint/">Lidar centerpoint</a>
+          <a href="../lidar_centerpoint/">Lidar centerpoint</a>
           
             <label for="__nav_7_16">
               <span class="md-nav__icon md-icon"></span>
@@ -7363,7 +7363,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/lidar_centerpoint/launch/centerpoint_vs_centerpoint-tiny/">Centerpoint vs centerpoint tiny</a>
+          <a href="../lidar_centerpoint/launch/centerpoint_vs_centerpoint-tiny/">Centerpoint vs centerpoint tiny</a>
           
         </div>
       
@@ -7425,7 +7425,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/lidar_centerpoint_tvm/">Lidar centerpoint tvm</a>
+          <a href="../lidar_centerpoint_tvm/">Lidar centerpoint tvm</a>
           
         </div>
       
@@ -7473,7 +7473,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/map_based_prediction/">Map based prediction</a>
+          <a href="../map_based_prediction/">Map based prediction</a>
           
         </div>
       
@@ -7523,7 +7523,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/multi_object_tracker/">Multi object tracker</a>
+          <a href="../multi_object_tracker/">Multi object tracker</a>
           
             <label for="__nav_7_19">
               <span class="md-nav__icon md-icon"></span>
@@ -7546,7 +7546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/multi_object_tracker/models/" class="md-nav__link">
+      <a href="../multi_object_tracker/models/" class="md-nav__link">
         Models used in this module
       </a>
     </li>
@@ -7589,7 +7589,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/object_merger/">Object merger</a>
+          <a href="../object_merger/">Object merger</a>
           
         </div>
       
@@ -7637,7 +7637,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/object_range_splitter/">Object range splitter</a>
+          <a href="../object_range_splitter/">Object range splitter</a>
           
         </div>
       
@@ -7685,7 +7685,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/object_velocity_splitter/">Object velocity splitter</a>
+          <a href="../object_velocity_splitter/">Object velocity splitter</a>
           
         </div>
       
@@ -7733,7 +7733,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/occupancy_grid_map_outlier_filter/">Occupancy grid map outlier filter</a>
+          <a href="../occupancy_grid_map_outlier_filter/">Occupancy grid map outlier filter</a>
           
         </div>
       
@@ -7785,7 +7785,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/probabilistic_occupancy_grid_map/">Probabilistic occupancy grid map</a>
+          <a href="../probabilistic_occupancy_grid_map/">Probabilistic occupancy grid map</a>
           
             <label for="__nav_7_24">
               <span class="md-nav__icon md-icon"></span>
@@ -7808,7 +7808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/probabilistic_occupancy_grid_map/laserscan-based-occupancy-grid-map/" class="md-nav__link">
+      <a href="../probabilistic_occupancy_grid_map/laserscan-based-occupancy-grid-map/" class="md-nav__link">
         laserscan based occupancy grid map
       </a>
     </li>
@@ -7822,7 +7822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/probabilistic_occupancy_grid_map/pointcloud-based-occupancy-grid-map/" class="md-nav__link">
+      <a href="../probabilistic_occupancy_grid_map/pointcloud-based-occupancy-grid-map/" class="md-nav__link">
         pointcloud based occupancy grid map
       </a>
     </li>
@@ -7867,7 +7867,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/radar_fusion_to_detected_object/">Radar fusion to detected object</a>
+          <a href="../radar_fusion_to_detected_object/">Radar fusion to detected object</a>
           
             <label for="__nav_7_25">
               <span class="md-nav__icon md-icon"></span>
@@ -7923,7 +7923,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../perception/radar_fusion_to_detected_object/docs/algorithm/" class="md-nav__link">
+      <a href="../radar_fusion_to_detected_object/docs/algorithm/" class="md-nav__link">
         Algorithm
       </a>
     </li>
@@ -7973,7 +7973,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/radar_object_clustering/">Radar object clustering</a>
+          <a href="../radar_object_clustering/">Radar object clustering</a>
           
         </div>
       
@@ -8021,7 +8021,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/radar_tracks_msgs_converter/">Radar tracks msgs converter</a>
+          <a href="../radar_tracks_msgs_converter/">Radar tracks msgs converter</a>
           
         </div>
       
@@ -8069,7 +8069,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/shape_estimation/">Shape estimation</a>
+          <a href="../shape_estimation/">Shape estimation</a>
           
         </div>
       
@@ -8093,18 +8093,18 @@
               
   
   
+    
+  
   
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_29" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_29" checked>
       
       
         
@@ -8116,12 +8116,12 @@
       
         
         
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/tensorrt_classifier/">Tensorrt classifier</a>
+        <div class="md-nav__link md-nav__link--index md-nav__link--active">
+          <a href="./">Tensorrt classifier</a>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_29_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_29_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_7_29">
           <span class="md-nav__icon md-icon"></span>
           Tensorrt classifier
@@ -8165,7 +8165,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/tensorrt_yolo/">Tensorrt yolo</a>
+          <a href="../tensorrt_yolo/">Tensorrt yolo</a>
           
         </div>
       
@@ -8213,7 +8213,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/tensorrt_yolox/">Tensorrt yolox</a>
+          <a href="../tensorrt_yolox/">Tensorrt yolox</a>
           
         </div>
       
@@ -8261,7 +8261,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/traffic_light_arbiter/">Traffic light arbiter</a>
+          <a href="../traffic_light_arbiter/">Traffic light arbiter</a>
           
         </div>
       
@@ -8309,7 +8309,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/traffic_light_classifier/">Traffic light classifier</a>
+          <a href="../traffic_light_classifier/">Traffic light classifier</a>
           
         </div>
       
@@ -8357,7 +8357,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/traffic_light_fine_detector/">Traffic light fine detector</a>
+          <a href="../traffic_light_fine_detector/">Traffic light fine detector</a>
           
         </div>
       
@@ -8405,7 +8405,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/traffic_light_map_based_detector/">Traffic light map based detector</a>
+          <a href="../traffic_light_map_based_detector/">Traffic light map based detector</a>
           
         </div>
       
@@ -8453,7 +8453,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/traffic_light_multi_camera_fusion/">Traffic light multi camera fusion</a>
+          <a href="../traffic_light_multi_camera_fusion/">Traffic light multi camera fusion</a>
           
         </div>
       
@@ -8501,7 +8501,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/traffic_light_occlusion_predictor/">Traffic light occlusion predictor</a>
+          <a href="../traffic_light_occlusion_predictor/">Traffic light occlusion predictor</a>
           
         </div>
       
@@ -8549,7 +8549,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/traffic_light_ssd_fine_detector/">Traffic light ssd fine detector</a>
+          <a href="../traffic_light_ssd_fine_detector/">Traffic light ssd fine detector</a>
           
         </div>
       
@@ -8597,7 +8597,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/traffic_light_visualization/">Traffic light visualization</a>
+          <a href="../traffic_light_visualization/">Traffic light visualization</a>
           
         </div>
       
@@ -8629,16 +8629,16 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
       
       
         
@@ -8725,7 +8725,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_8">
           <span class="md-nav__icon md-icon"></span>
           Planning
@@ -8762,7 +8762,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_path_planner/">Behavior path planner</a>
+          <a href="../../planning/behavior_path_planner/">Behavior path planner</a>
           
             <label for="__nav_8_1">
               <span class="md-nav__icon md-icon"></span>
@@ -8844,7 +8844,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_avoidance_by_lane_change_design/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_avoidance_by_lane_change_design/" class="md-nav__link">
         Avoidance by lane change design
       </a>
     </li>
@@ -8858,7 +8858,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_avoidance_design/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_avoidance_design/" class="md-nav__link">
         Avoidance design
       </a>
     </li>
@@ -8872,7 +8872,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_drivable_area_design/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_drivable_area_design/" class="md-nav__link">
         Drivable Area design
       </a>
     </li>
@@ -8886,7 +8886,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_dynamic_avoidance_design/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_dynamic_avoidance_design/" class="md-nav__link">
         Dynamic avoidance design
       </a>
     </li>
@@ -8900,7 +8900,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_goal_planner_design/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_goal_planner_design/" class="md-nav__link">
         Goal Planner design
       </a>
     </li>
@@ -8914,7 +8914,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_interface_design/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_interface_design/" class="md-nav__link">
         Interface design
       </a>
     </li>
@@ -8928,7 +8928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_lane_change_design/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_lane_change_design/" class="md-nav__link">
         Lane Change design
       </a>
     </li>
@@ -8942,7 +8942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_limitations/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_limitations/" class="md-nav__link">
         Limitations
       </a>
     </li>
@@ -8956,7 +8956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_manager_design/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_manager_design/" class="md-nav__link">
         Manager design
       </a>
     </li>
@@ -8970,7 +8970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_path_generation_design/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_path_generation_design/" class="md-nav__link">
         Path Generation design
       </a>
     </li>
@@ -8984,7 +8984,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_safety_check/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_safety_check/" class="md-nav__link">
         Safety Check Utils
       </a>
     </li>
@@ -8998,7 +8998,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_side_shift_design/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_side_shift_design/" class="md-nav__link">
         Side Shift design
       </a>
     </li>
@@ -9012,7 +9012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_start_planner_design/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_start_planner_design/" class="md-nav__link">
         Start Planner design
       </a>
     </li>
@@ -9026,7 +9026,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner/docs/behavior_path_planner_turn_signal_design/" class="md-nav__link">
+      <a href="../../planning/behavior_path_planner/docs/behavior_path_planner_turn_signal_design/" class="md-nav__link">
         Turn Signal design
       </a>
     </li>
@@ -9076,7 +9076,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_blind_spot_module/">Behavior velocity blind spot module</a>
+          <a href="../../planning/behavior_velocity_blind_spot_module/">Behavior velocity blind spot module</a>
           
         </div>
       
@@ -9124,7 +9124,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_crosswalk_module/">Behavior velocity crosswalk module</a>
+          <a href="../../planning/behavior_velocity_crosswalk_module/">Behavior velocity crosswalk module</a>
           
         </div>
       
@@ -9172,7 +9172,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_detection_area_module/">Behavior velocity detection area module</a>
+          <a href="../../planning/behavior_velocity_detection_area_module/">Behavior velocity detection area module</a>
           
         </div>
       
@@ -9220,7 +9220,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_intersection_module/">Behavior velocity intersection module</a>
+          <a href="../../planning/behavior_velocity_intersection_module/">Behavior velocity intersection module</a>
           
         </div>
       
@@ -9268,7 +9268,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_no_drivable_lane_module/">Behavior velocity no drivable lane module</a>
+          <a href="../../planning/behavior_velocity_no_drivable_lane_module/">Behavior velocity no drivable lane module</a>
           
         </div>
       
@@ -9316,7 +9316,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_no_stopping_area_module/">Behavior velocity no stopping area module</a>
+          <a href="../../planning/behavior_velocity_no_stopping_area_module/">Behavior velocity no stopping area module</a>
           
         </div>
       
@@ -9364,7 +9364,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_occlusion_spot_module/">Behavior velocity occlusion spot module</a>
+          <a href="../../planning/behavior_velocity_occlusion_spot_module/">Behavior velocity occlusion spot module</a>
           
         </div>
       
@@ -9412,7 +9412,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_out_of_lane_module/">Behavior velocity out of lane module</a>
+          <a href="../../planning/behavior_velocity_out_of_lane_module/">Behavior velocity out of lane module</a>
           
         </div>
       
@@ -9460,7 +9460,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_planner/">Behavior velocity planner</a>
+          <a href="../../planning/behavior_velocity_planner/">Behavior velocity planner</a>
           
         </div>
       
@@ -9508,7 +9508,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_planner_common/">Behavior velocity planner common</a>
+          <a href="../../planning/behavior_velocity_planner_common/">Behavior velocity planner common</a>
           
         </div>
       
@@ -9556,7 +9556,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_run_out_module/">Behavior velocity run out module</a>
+          <a href="../../planning/behavior_velocity_run_out_module/">Behavior velocity run out module</a>
           
         </div>
       
@@ -9604,7 +9604,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_speed_bump_module/">Behavior velocity speed bump module</a>
+          <a href="../../planning/behavior_velocity_speed_bump_module/">Behavior velocity speed bump module</a>
           
         </div>
       
@@ -9652,7 +9652,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_stop_line_module/">Behavior velocity stop line module</a>
+          <a href="../../planning/behavior_velocity_stop_line_module/">Behavior velocity stop line module</a>
           
         </div>
       
@@ -9700,7 +9700,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_traffic_light_module/">Behavior velocity traffic light module</a>
+          <a href="../../planning/behavior_velocity_traffic_light_module/">Behavior velocity traffic light module</a>
           
         </div>
       
@@ -9748,7 +9748,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../behavior_velocity_virtual_traffic_light_module/">Behavior velocity virtual traffic light module</a>
+          <a href="../../planning/behavior_velocity_virtual_traffic_light_module/">Behavior velocity virtual traffic light module</a>
           
         </div>
       
@@ -9796,7 +9796,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../costmap_generator/">Costmap generator</a>
+          <a href="../../planning/costmap_generator/">Costmap generator</a>
           
         </div>
       
@@ -9844,7 +9844,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../external_velocity_limit_selector/">External velocity limit selector</a>
+          <a href="../../planning/external_velocity_limit_selector/">External velocity limit selector</a>
           
         </div>
       
@@ -9892,7 +9892,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../freespace_planner/">Freespace planner</a>
+          <a href="../../planning/freespace_planner/">Freespace planner</a>
           
         </div>
       
@@ -9942,7 +9942,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../freespace_planning_algorithms/">Freespace planning algorithms</a>
+          <a href="../../planning/freespace_planning_algorithms/">Freespace planning algorithms</a>
           
             <label for="__nav_8_20">
               <span class="md-nav__icon md-icon"></span>
@@ -9965,7 +9965,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../freespace_planning_algorithms/rrtstar/" class="md-nav__link">
+      <a href="../../planning/freespace_planning_algorithms/rrtstar/" class="md-nav__link">
         Rrtstar
       </a>
     </li>
@@ -10008,7 +10008,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../mission_planner/">Mission planner</a>
+          <a href="../../planning/mission_planner/">Mission planner</a>
           
         </div>
       
@@ -10058,7 +10058,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../motion_velocity_smoother/">Motion velocity smoother</a>
+          <a href="../../planning/motion_velocity_smoother/">Motion velocity smoother</a>
           
             <label for="__nav_8_22">
               <span class="md-nav__icon md-icon"></span>
@@ -10081,7 +10081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../motion_velocity_smoother/README.ja/" class="md-nav__link">
+      <a href="../../planning/motion_velocity_smoother/README.ja/" class="md-nav__link">
         Motion Velocity Smoother
       </a>
     </li>
@@ -10126,7 +10126,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../obstacle_avoidance_planner/">Obstacle avoidance planner</a>
+          <a href="../../planning/obstacle_avoidance_planner/">Obstacle avoidance planner</a>
           
             <label for="__nav_8_23">
               <span class="md-nav__icon md-icon"></span>
@@ -10184,7 +10184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../obstacle_avoidance_planner/docs/debug/" class="md-nav__link">
+      <a href="../../planning/obstacle_avoidance_planner/docs/debug/" class="md-nav__link">
         Debug
       </a>
     </li>
@@ -10198,7 +10198,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../obstacle_avoidance_planner/docs/mpt/" class="md-nav__link">
+      <a href="../../planning/obstacle_avoidance_planner/docs/mpt/" class="md-nav__link">
         Model predictive trajectory
       </a>
     </li>
@@ -10250,7 +10250,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../obstacle_cruise_planner/">Obstacle cruise planner</a>
+          <a href="../../planning/obstacle_cruise_planner/">Obstacle cruise planner</a>
           
             <label for="__nav_8_24">
               <span class="md-nav__icon md-icon"></span>
@@ -10306,7 +10306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../obstacle_cruise_planner/docs/debug/" class="md-nav__link">
+      <a href="../../planning/obstacle_cruise_planner/docs/debug/" class="md-nav__link">
         Debug
       </a>
     </li>
@@ -10356,7 +10356,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../obstacle_stop_planner/">Obstacle stop planner</a>
+          <a href="../../planning/obstacle_stop_planner/">Obstacle stop planner</a>
           
         </div>
       
@@ -10404,7 +10404,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../obstacle_velocity_limiter/">Obstacle velocity limiter</a>
+          <a href="../../planning/obstacle_velocity_limiter/">Obstacle velocity limiter</a>
           
         </div>
       
@@ -10454,7 +10454,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../path_smoother/">Path smoother</a>
+          <a href="../../planning/path_smoother/">Path smoother</a>
           
             <label for="__nav_8_27">
               <span class="md-nav__icon md-icon"></span>
@@ -10510,7 +10510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../path_smoother/docs/eb/" class="md-nav__link">
+      <a href="../../planning/path_smoother/docs/eb/" class="md-nav__link">
         Elastic band
       </a>
     </li>
@@ -10575,7 +10575,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../planning_debug_tools/Readme/" class="md-nav__link">
+      <a href="../../planning/planning_debug_tools/Readme/" class="md-nav__link">
         Planning Debug Tools
       </a>
     </li>
@@ -10589,7 +10589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../planning_debug_tools/doc-stop-reason-visualizer/" class="md-nav__link">
+      <a href="../../planning/planning_debug_tools/doc-stop-reason-visualizer/" class="md-nav__link">
         Doc stop reason visualizer
       </a>
     </li>
@@ -10632,7 +10632,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../planning_test_utils/">Planning test utils</a>
+          <a href="../../planning/planning_test_utils/">Planning test utils</a>
           
         </div>
       
@@ -10680,7 +10680,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../planning_validator/">Planning validator</a>
+          <a href="../../planning/planning_validator/">Planning validator</a>
           
         </div>
       
@@ -10704,18 +10704,18 @@
               
   
   
-    
-  
   
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_31" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_31" >
       
       
         
@@ -10727,12 +10727,12 @@
       
         
         
-        <div class="md-nav__link md-nav__link--index md-nav__link--active">
-          <a href="./">Route handler</a>
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../planning/route_handler/">Route handler</a>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_31_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_31_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_8_31">
           <span class="md-nav__icon md-icon"></span>
           Route handler
@@ -10776,7 +10776,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../rtc_auto_mode_manager/">Rtc auto mode manager</a>
+          <a href="../../planning/rtc_auto_mode_manager/">Rtc auto mode manager</a>
           
         </div>
       
@@ -10824,7 +10824,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../rtc_interface/">Rtc interface</a>
+          <a href="../../planning/rtc_interface/">Rtc interface</a>
           
         </div>
       
@@ -10872,7 +10872,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../rtc_replayer/">Rtc replayer</a>
+          <a href="../../planning/rtc_replayer/">Rtc replayer</a>
           
         </div>
       
@@ -10959,7 +10959,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../sampling_based_planner/bezier_sampler/">Bezier sampler</a>
+          <a href="../../planning/sampling_based_planner/bezier_sampler/">Bezier sampler</a>
           
         </div>
       
@@ -11005,7 +11005,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../sampling_based_planner/frenet_planner/">Frenet planner</a>
+          <a href="../../planning/sampling_based_planner/frenet_planner/">Frenet planner</a>
           
         </div>
       
@@ -11051,7 +11051,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../sampling_based_planner/path_sampler/">Path sampler</a>
+          <a href="../../planning/sampling_based_planner/path_sampler/">Path sampler</a>
           
         </div>
       
@@ -11097,7 +11097,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../sampling_based_planner/sampler_common/">Sampler common</a>
+          <a href="../../planning/sampling_based_planner/sampler_common/">Sampler common</a>
           
         </div>
       
@@ -11152,7 +11152,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../scenario_selector/">Scenario selector</a>
+          <a href="../../planning/scenario_selector/">Scenario selector</a>
           
         </div>
       
@@ -11200,7 +11200,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../static_centerline_optimizer/">Static centerline optimizer</a>
+          <a href="../../planning/static_centerline_optimizer/">Static centerline optimizer</a>
           
         </div>
       
@@ -11250,7 +11250,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../surround_obstacle_checker/">Surround obstacle checker</a>
+          <a href="../../planning/surround_obstacle_checker/">Surround obstacle checker</a>
           
             <label for="__nav_8_38">
               <span class="md-nav__icon md-icon"></span>
@@ -11273,7 +11273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../surround_obstacle_checker/surround_obstacle_checker-design.ja/" class="md-nav__link">
+      <a href="../../planning/surround_obstacle_checker/surround_obstacle_checker-design.ja/" class="md-nav__link">
         Surround Obstacle Checker
       </a>
     </li>
@@ -14233,6 +14233,21 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    Purpose
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -14249,8 +14264,11 @@
   
 
 
-<div><h1 id="route-handler">route handler<a class="headerlink" href="#route-handler" title="Permanent link">#</a></h1>
-<p><code>route_handler</code> is a library for calculating driving route on the lanelet map.</p></div>
+<div><h1 id="tensorrt-classification-for-efficient-dynamic-batched-inference">TensorRT Classification for Efficient Dynamic Batched Inference<a class="headerlink" href="#tensorrt-classification-for-efficient-dynamic-batched-inference" title="Permanent link">#</a></h1>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
+<p>This package classifies arbitrary categories using TensorRT for efficient and faster inference.
+Specifically, this optimizes preprocessing for efficient inference on embedded platform.
+Moreover, we support dynamic batched inference in GPUs and DLAs.</p></div>
 
 
 
@@ -14277,7 +14295,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../planning_validator/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Planning Validator" rel="prev">
+          <a href="../shape_estimation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: shape_estimation" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -14286,20 +14304,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Planning Validator
+                shape_estimation
               </div>
             </div>
           </a>
         
         
           
-          <a href="../rtc_auto_mode_manager/" class="md-footer__link md-footer__link--next" aria-label="Next: RTC Auto Mode Manager" rel="next">
+          <a href="../tensorrt_yolo/" class="md-footer__link md-footer__link--next" aria-label="Next: tensorrt_yolo" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                RTC Auto Mode Manager
+                tensorrt_yolo
               </div>
             </div>
             <div class="md-footer__button md-icon">
