@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/latest/perception/elevation_map_loader/">
+        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/latest/perception/simple_object_merger/">
       
       
-        <link rel="prev" href="../detection_by_tracker/">
+        <link rel="prev" href="../shape_estimation/">
       
       
-        <link rel="next" href="../euclidean_cluster/">
+        <link rel="next" href="../tensorrt_classifier/">
       
       <link rel="icon" href="../../docs/assets/images/autoware-foundation.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
-        <title>elevation_map_loader - Autoware Universe Documentation</title>
+        <title>simple_object_merger - Autoware Universe Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#elevation_map_loader" class="md-skip">
+        <a href="#simple_object_merger" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              elevation_map_loader
+              simple_object_merger
             
           </span>
         </div>
@@ -6647,18 +6647,18 @@
               
   
   
-    
-  
   
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_7" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_7" >
       
       
         
@@ -6670,12 +6670,12 @@
       
         
         
-        <div class="md-nav__link md-nav__link--index md-nav__link--active">
-          <a href="./">Elevation map loader</a>
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../elevation_map_loader/">Elevation map loader</a>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_7_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_7_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_7_7">
           <span class="md-nav__icon md-icon"></span>
           Elevation map loader
@@ -8095,18 +8095,18 @@
               
   
   
+    
+  
   
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_29" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_29" checked>
       
       
         
@@ -8118,12 +8118,12 @@
       
         
         
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../simple_object_merger/">Simple object merger</a>
+        <div class="md-nav__link md-nav__link--index md-nav__link--active">
+          <a href="./">Simple object merger</a>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_29_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_29_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_7_29">
           <span class="md-nav__icon md-icon"></span>
           Simple object merger
@@ -14290,50 +14290,50 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#purpose" class="md-nav__link">
-    Purpose
+  <a href="#algorithm" class="md-nav__link">
+    Algorithm
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inner-workings-algorithms" class="md-nav__link">
-    Inner-workings / Algorithms
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inputs-outputs" class="md-nav__link">
-    Inputs / Outputs
-  </a>
-  
-    <nav class="md-nav" aria-label="Inputs / Outputs">
+    <nav class="md-nav" aria-label="Algorithm">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#input" class="md-nav__link">
-    Input
+  <a href="#background" class="md-nav__link">
+    Background
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#output" class="md-nav__link">
-    Output
+  <a href="#limitation" class="md-nav__link">
+    Limitation
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#service" class="md-nav__link">
-    Service
+  <a href="#use-case" class="md-nav__link">
+    Use case
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input" class="md-nav__link">
+    Input
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    Output
+  </a>
   
 </li>
       
@@ -14341,33 +14341,6 @@
   <a href="#parameters" class="md-nav__link">
     Parameters
   </a>
-  
-    <nav class="md-nav" aria-label="Parameters">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#node-parameters" class="md-nav__link">
-    Node parameters
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gridmap-parameters" class="md-nav__link">
-    GridMap parameters
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#point-cloud-pre-processing-parameters" class="md-nav__link">
-    Point Cloud Pre-processing Parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -14389,20 +14362,38 @@
   
 
 
-<div><h1 id="elevation_map_loader">elevation_map_loader<a class="headerlink" href="#elevation_map_loader" title="Permanent link">#</a></h1>
-<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
-<p>This package provides elevation map for compare_map_segmentation.</p>
-<h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
-<p>Generate elevation_map from subscribed pointcloud_map and vector_map and publish it.
-Save the generated elevation_map locally and load it from next time.</p>
-<p>The elevation value of each cell is the average value of z of the points of the lowest cluster.<br>
-Cells with No elevation value can be inpainted using the values of neighboring cells.</p>
-<p align="center">
-  <img src="./media/elevation_map.png" width="1500">
-</p>
-
-<h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
-<h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
+<div><h1 id="simple_object_merger">simple_object_merger<a class="headerlink" href="#simple_object_merger" title="Permanent link">#</a></h1>
+<p>This package can merge multiple topics of <a href="https://gitlab.com/autowarefoundation/autoware.auto/autoware_auto_msgs/-/blob/master/autoware_auto_perception_msgs/msg/DetectedObject.idl">autoware_auto_perception_msgs/msg/DetectedObject</a> without data association algorithm.</p>
+<h2 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">#</a></h2>
+<h3 id="background">Background<a class="headerlink" href="#background" title="Permanent link">#</a></h3>
+<p>This package can merge multiple DetectedObjects without matching processing.
+<a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/object_merger">Object_merger</a> solve data association algorithm like Hungarian algorithm for matching problem, but it needs computational cost.
+In addition, for now, <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/object_merger">object_merger</a> can handle only 2 DetectedObjects topics and cannot handle more than 2 topics in one node.
+To merge 6 DetectedObjects topics, 6 <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/object_merger">object_merger</a> nodes need to stand.</p>
+<p>So this package aim to merge DetectedObjects simply.
+This package do not use data association algorithm to reduce the computational cost, and it can handle more than 2 topics in one node to prevent launching a large number of nodes.</p>
+<h3 id="limitation">Limitation<a class="headerlink" href="#limitation" title="Permanent link">#</a></h3>
+<ul>
+<li>Sensor data drops and delay</li>
+</ul>
+<p>Merged objects will not be published until all topic data is received when initializing.
+In addition, to care sensor data drops and delayed, this package has a parameter to judge timeout.
+When the latest time of the data of a topic is older than the timeout parameter, it is not merged for output objects.
+For now specification of this package, if all topic data is received at first and after that the data drops, and the merged objects are published without objects which is judged as timeout.
+The timeout parameter should be determined by sensor cycle time.</p>
+<ul>
+<li>Post-processing</li>
+</ul>
+<p>Because this package does not have matching processing, so it can be used only when post-processing is used.
+For now, <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/radar_object_clustering">clustering processing</a> can be used as post-processing.</p>
+<h3 id="use-case">Use case<a class="headerlink" href="#use-case" title="Permanent link">#</a></h3>
+<p>Use case is as below.</p>
+<ul>
+<li>Multiple radar detection</li>
+</ul>
+<p>This package can be used for multiple radar detection.
+Since <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/radar_object_clustering">clustering processing</a> will be included later process in radar faraway detection, this package can be used.</p>
+<h2 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h2>
 <table>
 <thead>
 <tr>
@@ -14413,23 +14404,13 @@ Cells with No elevation value can be inpainted using the values of neighboring c
 </thead>
 <tbody>
 <tr>
-<td><code>input/pointcloud_map</code></td>
-<td><code>sensor_msgs::msg::PointCloud2</code></td>
-<td>The point cloud map</td>
-</tr>
-<tr>
-<td><code>input/vector_map</code></td>
-<td><code>autoware_auto_mapping_msgs::msg::HADMapBin</code></td>
-<td>(Optional) The binary data of lanelet2 map</td>
-</tr>
-<tr>
-<td><code>input/pointcloud_map_metadata</code></td>
-<td><code>autoware_map_msgs::msg::PointCloudMapMetaData</code></td>
-<td>(Optional) The metadata of point cloud map</td>
+<td></td>
+<td>std::vector<autoware_auto_perception_msgs></autoware_auto_perception_msgs></td>
+<td>3D detected objects. Topic names are set by parameters</td>
 </tr>
 </tbody>
 </table>
-<h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h3>
+<h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h2>
 <table>
 <thead>
 <tr>
@@ -14440,36 +14421,13 @@ Cells with No elevation value can be inpainted using the values of neighboring c
 </thead>
 <tbody>
 <tr>
-<td><code>output/elevation_map</code></td>
-<td><code>grid_map_msgs::msg::GridMap</code></td>
-<td>The elevation map</td>
-</tr>
-<tr>
-<td><code>output/elevation_map_cloud</code></td>
-<td><code>sensor_msgs::msg::PointCloud2</code></td>
-<td>(Optional) The point cloud generated from the value of elevation map</td>
-</tr>
-</tbody>
-</table>
-<h3 id="service">Service<a class="headerlink" href="#service" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>service/get_selected_pcd_map</code></td>
-<td><code>autoware_map_msgs::srv::GetSelectedPointCloudMap</code></td>
-<td>(Optional) service to request point cloud map. If pointcloud_map_loader uses selected pointcloud map loading via ROS 2 service, use this.</td>
+<td><code>~/output/objects</code></td>
+<td>autoware_auto_perception_msgs/msg/DetectedObjects.msg</td>
+<td>Merged objects</td>
 </tr>
 </tbody>
 </table>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
-<h3 id="node-parameters">Node parameters<a class="headerlink" href="#node-parameters" title="Permanent link">#</a></h3>
 <table>
 <thead>
 <tr>
@@ -14481,247 +14439,28 @@ Cells with No elevation value can be inpainted using the values of neighboring c
 </thead>
 <tbody>
 <tr>
-<td align="left">map_layer_name</td>
-<td align="left">std::string</td>
-<td align="left">elevation_map layer name</td>
-<td align="left">elevation</td>
+<td align="left"><code>update_rate_hz</code></td>
+<td align="left">double</td>
+<td align="left">Update rate. [hz]</td>
+<td align="left">20.0</td>
 </tr>
 <tr>
-<td align="left">param_file_path</td>
-<td align="left">std::string</td>
-<td align="left">GridMap parameters config</td>
-<td align="left">path_default</td>
+<td align="left"><code>new_frame_id</code></td>
+<td align="left">string</td>
+<td align="left">The header frame_id of output topic.</td>
+<td align="left">"base_link"</td>
 </tr>
 <tr>
-<td align="left">elevation_map_directory</td>
-<td align="left">std::string</td>
-<td align="left">elevation_map file (bag2)</td>
-<td align="left">path_default</td>
-</tr>
-<tr>
-<td align="left">map_frame</td>
-<td align="left">std::string</td>
-<td align="left">map_frame when loading elevation_map file</td>
-<td align="left">map</td>
-</tr>
-<tr>
-<td align="left">use_inpaint</td>
-<td align="left">bool</td>
-<td align="left">Whether to inpaint empty cells</td>
-<td align="left">true</td>
-</tr>
-<tr>
-<td align="left">inpaint_radius</td>
-<td align="left">float</td>
-<td align="left">Radius of a circular neighborhood of each point inpainted that is considered by the algorithm [m]</td>
-<td align="left">0.3</td>
-</tr>
-<tr>
-<td align="left">use_elevation_map_cloud_publisher</td>
-<td align="left">bool</td>
-<td align="left">Whether to publish <code>output/elevation_map_cloud</code></td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left">use_lane_filter</td>
-<td align="left">bool</td>
-<td align="left">Whether to filter elevation_map with vector_map</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left">lane_margin</td>
-<td align="left">float</td>
-<td align="left">Margin distance from the lane polygon of the area to be included in the inpainting mask [m]. Used only when use_lane_filter=True.</td>
-<td align="left">0.0</td>
-</tr>
-<tr>
-<td align="left">use_sequential_load</td>
-<td align="left">bool</td>
-<td align="left">Whether to get point cloud map by service</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left">sequential_map_load_num</td>
-<td align="left">int</td>
-<td align="left">The number of point cloud maps to load at once (only used when use_sequential_load is set true). This should not be larger than number of all point cloud map cells.</td>
-<td align="left">1</td>
-</tr>
-</tbody>
-</table>
-<h3 id="gridmap-parameters">GridMap parameters<a class="headerlink" href="#gridmap-parameters" title="Permanent link">#</a></h3>
-<p>The parameters are described on <code>config/elevation_map_parameters.yaml</code>.</p>
-<h4 id="general-parameters">General parameters<a class="headerlink" href="#general-parameters" title="Permanent link">#</a></h4>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">pcl_grid_map_extraction/num_processing_threads</td>
-<td align="left">int</td>
-<td align="left">Number of threads for processing grid map cells. Filtering of the raw input point cloud is not parallelized.</td>
-<td align="left">12</td>
-</tr>
-</tbody>
-</table>
-<h4 id="grid-map-parameters">Grid map parameters<a class="headerlink" href="#grid-map-parameters" title="Permanent link">#</a></h4>
-<p>See: <a href="https://github.com/ANYbotics/grid_map/tree/ros2/grid_map_pcl">https://github.com/ANYbotics/grid_map/tree/ros2/grid_map_pcl</a></p>
-<p>Resulting grid map parameters.</p>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">pcl_grid_map_extraction/grid_map/min_num_points_per_cell</td>
-<td align="left">int</td>
-<td align="left">Minimum number of points in the point cloud that have to fall within any of the grid map cells. Otherwise the cell elevation will be set to NaN.</td>
-<td align="left">3</td>
-</tr>
-<tr>
-<td align="left">pcl_grid_map_extraction/grid_map/resolution</td>
-<td align="left">float</td>
-<td align="left">Resolution of the grid map. Width and length are computed automatically.</td>
-<td align="left">0.3</td>
-</tr>
-<tr>
-<td align="left">pcl_grid_map_extraction/grid_map/height_type</td>
-<td align="left">int</td>
-<td align="left">The parameter that determine the elevation of a cell <code>0: Smallest value among the average values of each cluster</code>, <code>1: Mean value of the cluster with the most points</code></td>
-<td align="left">1</td>
-</tr>
-<tr>
-<td align="left">pcl_grid_map_extraction/grid_map/height_thresh</td>
-<td align="left">float</td>
-<td align="left">Height range from the smallest cluster (Only for height_type 1)</td>
+<td align="left"><code>timeout_threshold</code></td>
+<td align="left">double</td>
+<td align="left">Threshold for timeout judgement [s].</td>
 <td align="left">1.0</td>
 </tr>
-</tbody>
-</table>
-<h3 id="point-cloud-pre-processing-parameters">Point Cloud Pre-processing Parameters<a class="headerlink" href="#point-cloud-pre-processing-parameters" title="Permanent link">#</a></h3>
-<h4 id="rigid-body-transform-parameters">Rigid body transform parameters<a class="headerlink" href="#rigid-body-transform-parameters" title="Permanent link">#</a></h4>
-<p>Rigid body transform that is applied to the point cloud before computing elevation.</p>
-<table>
-<thead>
 <tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">pcl_grid_map_extraction/cloud_transform/translation</td>
-<td align="left">float</td>
-<td align="left">Translation (xyz) that is applied to the input point cloud before computing elevation.</td>
-<td align="left">0.0</td>
-</tr>
-<tr>
-<td align="left">pcl_grid_map_extraction/cloud_transform/rotation</td>
-<td align="left">float</td>
-<td align="left">Rotation (intrinsic rotation, convention X-Y'-Z'') that is applied to the input point cloud before computing elevation.</td>
-<td align="left">0.0</td>
-</tr>
-</tbody>
-</table>
-<h4 id="cluster-extraction-parameters">Cluster extraction parameters<a class="headerlink" href="#cluster-extraction-parameters" title="Permanent link">#</a></h4>
-<p>Cluster extraction is based on pcl algorithms. See <a href="https://pointclouds.org/documentation/tutorials/cluster_extraction.html">https://pointclouds.org/documentation/tutorials/cluster_extraction.html</a> for more details.</p>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">pcl_grid_map_extraction/cluster_extraction/cluster_tolerance</td>
-<td align="left">float</td>
-<td align="left">Distance between points below which they will still be considered part of one cluster.</td>
-<td align="left">0.2</td>
-</tr>
-<tr>
-<td align="left">pcl_grid_map_extraction/cluster_extraction/min_num_points</td>
-<td align="left">int</td>
-<td align="left">Min number of points that a cluster needs to have (otherwise it will be discarded).</td>
-<td align="left">3</td>
-</tr>
-<tr>
-<td align="left">pcl_grid_map_extraction/cluster_extraction/max_num_points</td>
-<td align="left">int</td>
-<td align="left">Max number of points that a cluster can have (otherwise it will be discarded).</td>
-<td align="left">1000000</td>
-</tr>
-</tbody>
-</table>
-<h4 id="outlier-removal-parameters">Outlier removal parameters<a class="headerlink" href="#outlier-removal-parameters" title="Permanent link">#</a></h4>
-<p>See <a href="https://pointclouds.org/documentation/tutorials/statistical_outlier.html">https://pointclouds.org/documentation/tutorials/statistical_outlier.html</a> for more explanation on outlier removal.</p>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">pcl_grid_map_extraction/outlier_removal/is_remove_outliers</td>
-<td align="left">float</td>
-<td align="left">Whether to perform statistical outlier removal.</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left">pcl_grid_map_extraction/outlier_removal/mean_K</td>
-<td align="left">float</td>
-<td align="left">Number of neighbors to analyze for estimating statistics of a point.</td>
-<td align="left">10</td>
-</tr>
-<tr>
-<td align="left">pcl_grid_map_extraction/outlier_removal/stddev_threshold</td>
-<td align="left">float</td>
-<td align="left">Number of standard deviations under which points are considered to be inliers.</td>
-<td align="left">1.0</td>
-</tr>
-</tbody>
-</table>
-<h4 id="subsampling-parameters">Subsampling parameters<a class="headerlink" href="#subsampling-parameters" title="Permanent link">#</a></h4>
-<p>See <a href="https://pointclouds.org/documentation/tutorials/voxel_grid.html">https://pointclouds.org/documentation/tutorials/voxel_grid.html</a> for more explanation on point cloud downsampling.</p>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">pcl_grid_map_extraction/downsampling/is_downsample_cloud</td>
-<td align="left">bool</td>
-<td align="left">Whether to perform downsampling or not.</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left">pcl_grid_map_extraction/downsampling/voxel_size</td>
-<td align="left">float</td>
-<td align="left">Voxel sizes (xyz) in meters.</td>
-<td align="left">0.02</td>
+<td align="left"><code>input_topics</code></td>
+<td align="left">List[string]</td>
+<td align="left">Input topics name.</td>
+<td align="left">"[]"</td>
 </tr>
 </tbody>
 </table></div>
@@ -14751,7 +14490,7 @@ Cells with No elevation value can be inpainted using the values of neighboring c
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../detection_by_tracker/" class="md-footer__link md-footer__link--prev" aria-label="Previous: detection_by_tracker" rel="prev">
+          <a href="../shape_estimation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: shape_estimation" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -14760,20 +14499,20 @@ Cells with No elevation value can be inpainted using the values of neighboring c
                 Previous
               </span>
               <div class="md-ellipsis">
-                detection_by_tracker
+                shape_estimation
               </div>
             </div>
           </a>
         
         
           
-          <a href="../euclidean_cluster/" class="md-footer__link md-footer__link--next" aria-label="Next: euclidean_cluster" rel="next">
+          <a href="../tensorrt_classifier/" class="md-footer__link md-footer__link--next" aria-label="Next: TensorRT Classification for Efficient Dynamic Batched Inference" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                euclidean_cluster
+                TensorRT Classification for Efficient Dynamic Batched Inference
               </div>
             </div>
             <div class="md-footer__button md-icon">
