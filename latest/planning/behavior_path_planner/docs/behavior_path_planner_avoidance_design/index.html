@@ -9099,6 +9099,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#drivable-area-expansion" class="md-nav__link">
+    Drivable area expansion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#safety-check" class="md-nav__link">
     Safety check
   </a>
@@ -14767,6 +14774,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#drivable-area-expansion" class="md-nav__link">
+    Drivable area expansion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#safety-check" class="md-nav__link">
     Safety check
   </a>
@@ -15006,7 +15020,7 @@ ratio =  \frac{l_d}{l_D}
 <li>The obstacles' current lane and position.</li>
 <li>The road shoulder with reference to the direction to avoid.</li>
 </ul>
-<p>These elements are used to compute the distance from the object to the road's shoulder (<code>to_road_shoulder_distance</code>). The parameters <code>enable_avoidance_over_same_direction</code> and <code>enable_avoidance_over_opposite_direction</code> allows further configuration of the to <code>to_road_shoulder_distance</code>. The following image illustrates the configuration.</p>
+<p>These elements are used to compute the distance from the object to the road's shoulder (<code>to_road_shoulder_distance</code>). The parameters <code>use_adjacent_lane</code> and <code>use_opposite_lane</code> allows further configuration of the to <code>to_road_shoulder_distance</code>. The following image illustrates the configuration.</p>
 <p><img alt="obstacle_to_road_shoulder_distance" src="../../image/avoidance/obstacle_to_road_shoulder_distance.drawio.svg"></p>
 <p>If one of the following conditions is <code>false</code>, then the shift point will not be generated.</p>
 <ul>
@@ -15076,6 +15090,24 @@ To solve that, this module provides a parameter for the minimum avoidance speed,
 <li>Remove momentary returns: For shift points that reduce the avoidance width (for going back to the center line), if there is enough long distance in the longitudinal direction, remove them.</li>
 </ul>
 <h2 id="other-features">Other features<a class="headerlink" href="#other-features" title="Permanent link">#</a></h2>
+<h3 id="drivable-area-expansion">Drivable area expansion<a class="headerlink" href="#drivable-area-expansion" title="Permanent link">#</a></h3>
+<p>This module has following parameters that sets which areas the path may extend into when generating an avoidance path.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># drivable area setting</span>
+<span class="nt">use_adjacent_lane</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">use_opposite_lane</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">use_intersection_areas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">use_hatched_road_markings</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div>
+<h4 id="adjacent-lane">adjacent lane<a class="headerlink" href="#adjacent-lane" title="Permanent link">#</a></h4>
+<p><img alt="fig1" src="../../image/avoidance/use_adjacent_lane.svg"></p>
+<h4 id="opposite-lane">opposite lane<a class="headerlink" href="#opposite-lane" title="Permanent link">#</a></h4>
+<p><img alt="fig1" src="../../image/avoidance/use_opposite_lane.svg"></p>
+<h4 id="intersection-areas">intersection areas<a class="headerlink" href="#intersection-areas" title="Permanent link">#</a></h4>
+<p>The intersection area is defined on Lanelet map. See <a href="https://github.com/autowarefoundation/autoware_common/blob/main/tmp/lanelet2_extension/docs/lanelet2_format_extension.md">here</a></p>
+<p><img alt="fig1" src="../../image/avoidance/use_intersection_areas.svg"></p>
+<h4 id="hatched-road-markings">hatched road markings<a class="headerlink" href="#hatched-road-markings" title="Permanent link">#</a></h4>
+<p>The hatched road marking is defined on Lanelet map. See <a href="https://github.com/autowarefoundation/autoware_common/blob/main/tmp/lanelet2_extension/docs/lanelet2_format_extension.md#hatched-road-markings-area">here</a></p>
+<p><img alt="fig1" src="../../image/avoidance/use_hatched_road_markings.svg"></p>
 <h3 id="safety-check">Safety check<a class="headerlink" href="#safety-check" title="Permanent link">#</a></h3>
 <p>The avoidance module has a safety check logic. The result of safe check is used for yield maneuver. It is enable by setting <code>enable_safety_check</code> as <code>true</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">enable_safety_check</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
@@ -15196,27 +15228,6 @@ SHIFT_{current} &gt; L_{threshold}
 <td align="left">1.0</td>
 </tr>
 <tr>
-<td align="left">enable_bound_clipping</td>
-<td align="left">[-]</td>
-<td align="left">bool</td>
-<td align="left">Enable clipping left and right bound of drivable area when obstacles are in the drivable area</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left">enable_avoidance_over_same_direction</td>
-<td align="left">[-]</td>
-<td align="left">bool</td>
-<td align="left">Extend avoidance trajectory to adjacent lanes that has same direction. If false, avoidance only happen in current lane.</td>
-<td align="left">true</td>
-</tr>
-<tr>
-<td align="left">enable_avoidance_over_opposite_direction</td>
-<td align="left">[-]</td>
-<td align="left">bool</td>
-<td align="left">Extend avoidance trajectory to adjacent lanes that has opposite direction. <code>enable_avoidance_over_same_direction</code> must be <code>true</code> to take effects</td>
-<td align="left">true</td>
-</tr>
-<tr>
 <td align="left">enable_update_path_when_object_is_gone</td>
 <td align="left">[-]</td>
 <td align="left">bool</td>
@@ -15244,23 +15255,84 @@ SHIFT_{current} &gt; L_{threshold}
 <td align="left">Flag to enable yield maneuver during shifting.</td>
 <td align="left">false</td>
 </tr>
-<tr>
-<td align="left">publish_debug_marker</td>
-<td align="left">[-]</td>
-<td align="left">bool</td>
-<td align="left">Flag to publish debug marker (set <code>false</code> as default since it takes considerable cost).</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left">print_debug_info</td>
-<td align="left">[-]</td>
-<td align="left">bool</td>
-<td align="left">Flag to print debug info (set <code>false</code> as default since it takes considerable cost).</td>
-<td align="left">false</td>
-</tr>
 </tbody>
 </table>
 <p><strong>NOTE:</strong> It has to set both <code>enable_safety_check</code> and <code>enable_yield_maneuver</code> to enable yield maneuver.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th>Unit</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">enable_bound_clipping</td>
+<td>[-]</td>
+<td>bool</td>
+<td>Enable clipping left and right bound of drivable area when obstacles are in the drivable area</td>
+<td>false</td>
+</tr>
+<tr>
+<td align="left">use_adjacent_lane</td>
+<td>[-]</td>
+<td>bool</td>
+<td>Extend avoidance trajectory to adjacent lanes that has same direction. If false, avoidance only happen in current lane.</td>
+<td>true</td>
+</tr>
+<tr>
+<td align="left">use_opposite_lane</td>
+<td>[-]</td>
+<td>bool</td>
+<td>Extend avoidance trajectory to opposite direction lane. <code>use_adjacent_lane</code> must be <code>true</code> to take effects</td>
+<td>true</td>
+</tr>
+<tr>
+<td align="left">use_intersection_areas</td>
+<td>[-]</td>
+<td>bool</td>
+<td>Extend drivable to intersection area.</td>
+<td>false</td>
+</tr>
+<tr>
+<td align="left">use_hatched_road_markings</td>
+<td>[-]</td>
+<td>bool</td>
+<td>Extend drivable to hatched road marking area.</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th>Unit</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">output_debug_marker</td>
+<td>[-]</td>
+<td>bool</td>
+<td>Flag to publish debug marker (set <code>false</code> as default since it takes considerable cost).</td>
+<td>false</td>
+</tr>
+<tr>
+<td align="left">output_debug_info</td>
+<td>[-]</td>
+<td>bool</td>
+<td>Flag to print debug info (set <code>false</code> as default since it takes considerable cost).</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
 <h3 id="avoidance-target-filtering-parameters">Avoidance target filtering parameters<a class="headerlink" href="#avoidance-target-filtering-parameters" title="Permanent link">#</a></h3>
 <p>namespace: <code>avoidance.target_object.</code></p>
 <p>This module supports all object classes, and it can set following parameters independently.</p>
@@ -15862,7 +15934,7 @@ SHIFT_{current} &gt; L_{threshold}
 <h3 id="publishing-visualization-marker">Publishing Visualization Marker<a class="headerlink" href="#publishing-visualization-marker" title="Permanent link">#</a></h3>
 <p>Developers can see what is going on in each process by visualizing all the avoidance planning process outputs. The example includes target vehicles, shift points for each object, shift points after each filtering process, etc.</p>
 <p><img alt="fig1" src="../../image/avoidance/avoidance-debug-marker.png"></p>
-<p>To enable the debug marker, execute <code>ros2 param set /planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner avoidance.publish_debug_marker true</code> (no restart is needed) or simply set the <code>publish_debug_marker</code> to <code>true</code> in the <code>avoidance.param.yaml</code> for permanent effect (restart is needed). Then add the marker <code>/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/debug/avoidance</code> in <code>rviz2</code>.</p>
+<p>To enable the debug marker, execute <code>ros2 param set /planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner avoidance.output_debug_marker true</code> (no restart is needed) or simply set the <code>output_debug_marker</code> to <code>true</code> in the <code>avoidance.param.yaml</code> for permanent effect (restart is needed). Then add the marker <code>/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/debug/avoidance</code> in <code>rviz2</code>.</p>
 <h3 id="echoing-debug-message-to-find-out-why-the-objects-were-ignored">Echoing debug message to find out why the objects were ignored<a class="headerlink" href="#echoing-debug-message-to-find-out-why-the-objects-were-ignored" title="Permanent link">#</a></h3>
 <p>If for some reason, no shift point is generated for your object, you can check for the failure reason via <code>ros2 topic echo</code>.</p>
 <p><img alt="avoidance_debug_message_array" src="../../image/avoidance/avoidance_debug_message_array.png"></p>
