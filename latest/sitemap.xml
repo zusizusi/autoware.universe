@@ -716,6 +716,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/perception/radar_crossing_objects_noise_filter/</loc>
+         <lastmod>2023-07-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/perception/radar_fusion_to_detected_object/</loc>
          <lastmod>2023-07-18</lastmod>
          <changefreq>daily</changefreq>
