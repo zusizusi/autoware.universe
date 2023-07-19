@@ -951,6 +951,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/planning/behavior_velocity_walkway_module/</loc>
+         <lastmod>2023-07-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/planning/costmap_generator/</loc>
          <lastmod>2023-07-19</lastmod>
          <changefreq>daily</changefreq>
