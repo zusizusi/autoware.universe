@@ -14722,7 +14722,7 @@ J = (Y - Y_{ref})^{T}Q(Y - Y_{ref}) + (U - U_{ref})^{T}R(U - U_{ref}) \tag{9}
 <div class="arithmatex">\[
 \begin{align}
 J(U) &amp;= (H(Fx_{0}+GU+SW)-Y_{ref})^{T}Q(H(Fx_{0}+GU+SW)-Y_{ref})+(U-U_{ref})^{T}R(U-U_{ref}) \\
-&amp; =U^{T}(G^{T}H^{T}QHG+R)U+2\left\{(H(Fx_{0}+SW)-Yref)^{T}QHG-U_{ref}^{T}R\right\}U +(\rm{constant}) \tag{10}
+&amp; =U^{T}(G^{T}H^{T}QHG+R)U+2\left\{(H(Fx_{0}+SW)-Y_{ref})^{T}QHG-U_{ref}^{T}R\right\}U +(\rm{constant}) \tag{10}
 \end{align}
 \]</div>
 <p>This equation is a quadratic form of <span class="arithmatex">\(U\)</span> (i.e. <span class="arithmatex">\(U^{T}AU+B^{T}U\)</span>)</p>
@@ -14788,7 +14788,7 @@ y_{k+1} &amp;= y_{k} + v\sin\theta_{k} \text{d}t \\
 \]</div>
 <p>Where <span class="arithmatex">\(\kappa_{r}\left(s\right)\)</span> is the curvature along the trajectory parametrized by the arc length.</p>
 <p>There are three expressions in the update equations that are subject to linear approximation: the lateral deviation (or lateral coordinate) <span class="arithmatex">\(y\)</span>, the heading angle (or the heading angle error) <span class="arithmatex">\(\theta\)</span>, and the steering <span class="arithmatex">\(\delta\)</span>. We can make a small angle assumption on the heading angle <span class="arithmatex">\(\theta\)</span>.</p>
-<p>In the path tracking problem, the curvature of the trajectory <span class="arithmatex">\(\kappa_{r}\)</span> is known in advance. At the lower speeds, the Ackermann formula approximates the reference steering angle <span class="arithmatex">\(\theta_{r}\)</span>(this value corresponds to the <span class="arithmatex">\(U_{ref}\)</span> mentioned above). The Ackerman steering expression can be written as;</p>
+<p>In the path tracking problem, the curvature of the trajectory <span class="arithmatex">\(\kappa_{r}\)</span> is known in advance. At the lower speeds, the Ackermann formula approximates the reference steering angle <span class="arithmatex">\(\theta_{r}\)</span>(this value corresponds to the <span class="arithmatex">\(U_{ref}\)</span> mentioned above). The Ackermann steering expression can be written as;</p>
 <div class="arithmatex">\[
 \begin{align}
 \delta_{r} = \arctan\left(L\kappa_{r}\right)
@@ -14907,7 +14907,7 @@ u_{min} &lt; u &lt; u_{max}
 \dot{u}_{min} &lt; \dot{u} &lt; \dot{u}_{max}
 \end{align}
 \]</div>
-<p>Discretizing <span class="arithmatex">\(\dot{u}\)</span> as <span class="arithmatex">\(\left(u_{k} - u_{k-1}\right)/\text{d}t\)</span> and multiply both sides by dt the resulting constraint become linear and convex</p>
+<p>We discretize <span class="arithmatex">\(\dot{u}\)</span> as <span class="arithmatex">\(\left(u_{k} - u_{k-1}\right)/\text{d}t\)</span> and multiply both sides by dt, and the resulting constraint become linear and convex</p>
 <div class="arithmatex">\[
 \begin{align}
 \dot{u}_{min}\text{d}t &lt; u_{k} - u_{k-1} &lt; \dot{u}_{max}\text{d}t
