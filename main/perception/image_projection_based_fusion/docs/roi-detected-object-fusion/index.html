@@ -14789,14 +14789,19 @@
 <td>If set to <code>true</code>, the node subscribes to the image topic and publishes an image with debug drawings.</td>
 </tr>
 <tr>
+<td><code>passthrough_lower_bound_probability_thresholds</code></td>
+<td>vector[double]</td>
+<td>If the <code>existence_probability</code> of a detected object is greater than the threshold, it is published in output.</td>
+</tr>
+<tr>
+<td><code>trust_distances</code></td>
+<td>vector[double]</td>
+<td>If the distance of a detected object from the origin of frame_id is greater than the threshold, it is published in output.</td>
+</tr>
+<tr>
 <td><code>min_iou_threshold</code></td>
 <td>double</td>
 <td>If the iou between detected objects and rois is greater than <code>min_iou_threshold</code>, the objects are classified as fused.</td>
-</tr>
-<tr>
-<td><code>passthrough_lower_bound_probability_threshold</code></td>
-<td>double</td>
-<td>If the <code>existence_probability</code> of a detected object is greater than the threshold, it is published in output.</td>
 </tr>
 <tr>
 <td><code>use_roi_probability</code></td>
@@ -14807,6 +14812,11 @@
 <td><code>roi_probability_threshold</code></td>
 <td>double</td>
 <td>If the <code>existence_probability</code> of ROIs is greater than the threshold, matched detected objects are published in <code>output</code>.</td>
+</tr>
+<tr>
+<td><code>can_assign_matrix</code></td>
+<td>vector[int]</td>
+<td>association matrix between rois and detected_objects to check that two rois on images can be match</td>
 </tr>
 </tbody>
 </table>
