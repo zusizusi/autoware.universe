@@ -10958,6 +10958,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#perception-replayer" class="md-nav__link">
+    Perception replayer
+  </a>
+  
+    <nav class="md-nav" aria-label="Perception replayer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use_2" class="md-nav__link">
+    How to use
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -14697,6 +14717,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#perception-replayer" class="md-nav__link">
+    Perception replayer
+  </a>
+  
+    <nav class="md-nav" aria-label="Perception replayer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use_2" class="md-nav__link">
+    How to use
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -14860,7 +14900,7 @@ add below example value to behavior velocity analyzer and set <code>is_publish_d
 <span class="n">PlotCurrentVelocity</span><span class="p">(</span><span class="s1">'localization_kinematic_state'</span><span class="p">,</span> <span class="s1">'/localization/kinematic_state'</span><span class="p">,</span> <span class="n">tracker_time</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="perception-reproducer">Perception reproducer<a class="headerlink" href="#perception-reproducer" title="Permanent link">#</a></h2>
-<p>This script can overlay the perception results from the rosbag on the planning simulator.</p>
+<p>This script can overlay the perception results from the rosbag on the planning simulator synchronized with the simulator's ego pose.</p>
 <p>In detail, the ego pose in the rosbag which is closest to the current ego pose in the simulator is calculated.
 The perception results at the timestamp of the closest ego pose is extracted, and published.</p>
 <h3 id="how-to-use_1">How to use<a class="headerlink" href="#how-to-use_1" title="Permanent link">#</a></h3>
@@ -14871,6 +14911,23 @@ Then, run the script according to the following command.</p>
 </code></pre></div>
 <p>You can designate multiple rosbags in the directory.</p>
 <div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>run<span class="w"> </span>planning_debug_tools<span class="w"> </span>perception_reproducer.py<span class="w"> </span>-b<span class="w"> </span>&lt;dir-to-bag-files&gt;
+</code></pre></div>
+<p>Instead of publishing predicted objects, you can publish detected/tracked objects by designating <code>-d</code> or <code>-t</code>, respectively.</p>
+<h2 id="perception-replayer">Perception replayer<a class="headerlink" href="#perception-replayer" title="Permanent link">#</a></h2>
+<p>A part of the feature is under development.</p>
+<p>This script can overlay the perception results from the rosbag on the planning simulator.</p>
+<p>In detail, this script publishes the data at a certain timestamp from the rosbag.
+The timestamp will increase according to the real time without any operation.
+By using the GUI, you can modify the timestamp by pausing, changing the rate or going back into the past.</p>
+<h3 id="how-to-use_2">How to use<a class="headerlink" href="#how-to-use_2" title="Permanent link">#</a></h3>
+<p>First, launch the planning simulator, and put the ego pose.
+Then, run the script according to the following command.</p>
+<p>By designating a rosbag, perception replayer can be launched.
+The GUI is launched as well with which a timestamp of rosbag can be managed.</p>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>run<span class="w"> </span>planning_debug_tools<span class="w"> </span>perception_replayer.py<span class="w"> </span>-b<span class="w"> </span>&lt;bag-file&gt;
+</code></pre></div>
+<p>You can designate multiple rosbags in the directory.</p>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>run<span class="w"> </span>planning_debug_tools<span class="w"> </span>perception_replayer.py<span class="w"> </span>-b<span class="w"> </span>&lt;dir-to-bag-files&gt;
 </code></pre></div>
 <p>Instead of publishing predicted objects, you can publish detected/tracked objects by designating <code>-d</code> or <code>-t</code>, respectively.</p></div>
 
