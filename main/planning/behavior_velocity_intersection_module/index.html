@@ -14635,7 +14635,7 @@
 <li>recognizing the occluded area in the intersection</li>
 <li>reacting to arrow signals of associated traffic lights</li>
 </ol>
-<p>The module is desinged to be agnositc to left-hand/right-hand traffic rules and works on crossroads, T-shape junctions, etc.</p>
+<p>The module is designed to be agnostic to left-hand/right-hand traffic rules and works on crossroads, T-shape junctions, etc.</p>
 <p><img alt="topology" src="docs/intersection-topology.drawio.svg"></p>
 <h3 id="activation-condition">Activation condition<a class="headerlink" href="#activation-condition" title="Permanent link">#</a></h3>
 <p>This module is activated when the path contains the lanes with <code>turn_direction</code> tag. More precisely, if the <code>lane_ids</code> of the path contains the ids of those lanes, corresponding instances of intersection module are activated on each lanes respectively.</p>
@@ -14647,7 +14647,7 @@
 </ul>
 <h3 id="attention-area">Attention area<a class="headerlink" href="#attention-area" title="Permanent link">#</a></h3>
 <p>The <code>Attention Area</code> in the intersection are defined as the set of lanes that are conflicting with ego vehicle's path and their preceding lanes up to <code>attention_area_length</code> meters. <code>RightOfWay</code> tag is used to rule out the lanes that each lane has priority given the traffic light relation and <code>turn_direction</code> priority.</p>
-<p><code>Intersection Area</code>, which is supposed to be defined on the HDMap, is an area convering the entire intersection.</p>
+<p><code>Intersection Area</code>, which is supposed to be defined on the HDMap, is an area converting the entire intersection.</p>
 <p><img alt="attention_area" src="docs/intersection-attention.drawio.svg"></p>
 <h4 id="right-of-way">Right Of Way<a class="headerlink" href="#right-of-way" title="Permanent link">#</a></h4>
 <p>Following table shows an example of how to assign <code>right_of_way</code> tag and set <code>yield_lanes</code> to each lane in intersections.</p>
@@ -14673,7 +14673,7 @@
 <tr>
 <td>right(Left hand traffic)</td>
 <td>Priority only over the other group</td>
-<td>priority only over the other gruop</td>
+<td>priority only over the other group</td>
 </tr>
 <tr>
 <td>left(Right hand traffic)</td>
@@ -14795,7 +14795,7 @@
 <tr>
 <td><code>stuck_vehicle.stuck_vehicle_vel_thr</code></td>
 <td>double</td>
-<td>[m/s] velocity threhsold for stuck vehicle detection</td>
+<td>[m/s] velocity threshold for stuck vehicle detection</td>
 </tr>
 <tr>
 <td><code>collision_detection.state_transit_margin_time</code></td>
