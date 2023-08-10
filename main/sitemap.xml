@@ -451,11 +451,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/localization/initial_pose_button_panel/</loc>
-         <lastmod>2023-08-10</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/localization/localization_error_monitor/</loc>
          <lastmod>2023-08-10</lastmod>
          <changefreq>daily</changefreq>
