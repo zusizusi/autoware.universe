@@ -526,6 +526,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/map/map_projection_loader/</loc>
+         <lastmod>2023-08-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/map/map_tf_generator/Readme/</loc>
          <lastmod>2023-08-10</lastmod>
          <changefreq>daily</changefreq>
