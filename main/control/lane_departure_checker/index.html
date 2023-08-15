@@ -14605,6 +14605,7 @@
 <ul>
 <li><strong>Lane Departure</strong>: Check if ego vehicle is going to be out of lane boundaries based on output from control module (predicted trajectory).</li>
 <li><strong>Trajectory Deviation</strong>: Check if ego vehicle's pose does not deviate from the trajectory. Checking lateral, longitudinal and yaw deviation.</li>
+<li><strong>Road Border Departure</strong>: Check if ego vehicle's footprint, generated from the control's output, extends beyond the road border.</li>
 </ul>
 <h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
 <h3 id="how-to-extend-footprint-by-covariance">How to extend footprint by covariance<a class="headerlink" href="#how-to-extend-footprint-by-covariance" title="Permanent link">#</a></h3>
@@ -14677,6 +14678,36 @@
 <td align="left">visualize_lanelet</td>
 <td align="left">bool</td>
 <td align="left">Flag for visualizing lanelet</td>
+<td align="left">False</td>
+</tr>
+<tr>
+<td align="left">include_right_lanes</td>
+<td align="left">bool</td>
+<td align="left">Flag for including right lanelet in borders</td>
+<td align="left">False</td>
+</tr>
+<tr>
+<td align="left">include_left_lanes</td>
+<td align="left">bool</td>
+<td align="left">Flag for including left lanelet in borders</td>
+<td align="left">False</td>
+</tr>
+<tr>
+<td align="left">include_opposite_lanes</td>
+<td align="left">bool</td>
+<td align="left">Flag for including opposite lanelet in borders</td>
+<td align="left">False</td>
+</tr>
+<tr>
+<td align="left">include_conflicting_lanes</td>
+<td align="left">bool</td>
+<td align="left">Flag for including conflicting lanelet in borders</td>
+<td align="left">False</td>
+</tr>
+<tr>
+<td align="left">road_border_departure_checker</td>
+<td align="left">bool</td>
+<td align="left">Flag for checking if the vehicle will departs the road border</td>
 <td align="left">False</td>
 </tr>
 </tbody>
