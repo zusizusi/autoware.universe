@@ -296,6 +296,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/control/control_validator/</loc>
+         <lastmod>2023-08-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/control/external_cmd_selector/</loc>
          <lastmod>2023-08-15</lastmod>
          <changefreq>daily</changefreq>
