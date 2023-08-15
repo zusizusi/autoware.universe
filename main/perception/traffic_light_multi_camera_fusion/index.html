@@ -14553,12 +14553,33 @@
 <li>Group-Fusion: performed on traffic light signals within the same group, which means traffic lights sharing the same regulatory element id defined in lanelet2 map.</li>
 </ol>
 <h2 id="input-topics">Input topics<a class="headerlink" href="#input-topics" title="Permanent link">#</a></h2>
-<p>For every camera, the following three topics are subscribed:<br>
-| Name | Type | |
-| ---------------------------------------| -------------------------------------------------------|----------------------------------------------------|
-| <code>~/&lt;camera_namespace&gt;/camera_info</code> | sensor_msgs::CameraInfo |camera info from traffic_light_map_based_detector |
-| <code>~/&lt;camera_namespace&gt;/rois</code> | tier4_perception_msgs::TrafficLightRoiArray |detection roi from traffic_light_fine_detector |
-| <code>~/&lt;camera_namespace&gt;/traffic_signals</code> | tier4_perception_msgs::TrafficLightSignalArray |classification result from traffic_light_classifier |</p>
+<p>For every camera, the following three topics are subscribed:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/&lt;camera_namespace&gt;/camera_info</code></td>
+<td>sensor_msgs::CameraInfo</td>
+<td>camera info from traffic_light_map_based_detector</td>
+</tr>
+<tr>
+<td><code>~/&lt;camera_namespace&gt;/rois</code></td>
+<td>tier4_perception_msgs::TrafficLightRoiArray</td>
+<td>detection roi from traffic_light_fine_detector</td>
+</tr>
+<tr>
+<td><code>~/&lt;camera_namespace&gt;/traffic_signals</code></td>
+<td>tier4_perception_msgs::TrafficLightSignalArray</td>
+<td>classification result from traffic_light_classifier</td>
+</tr>
+</tbody>
+</table>
 <p>You don't need to configure these topics manually. Just provide the <code>camera_namespaces</code> parameter and the node will automatically extract the <code>&lt;camera_namespace&gt;</code> and create the subscribers.</p>
 <h2 id="output-topics">Output topics<a class="headerlink" href="#output-topics" title="Permanent link">#</a></h2>
 <table>
