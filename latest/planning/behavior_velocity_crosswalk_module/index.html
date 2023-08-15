@@ -14627,7 +14627,7 @@
 <h4 id="parameters-for-stop-position">Parameters for stop position<a class="headerlink" href="#parameters-for-stop-position" title="Permanent link">#</a></h4>
 <p>The crosswalk module determines a stop position at least <code>stop_distance_from_object</code> away from the object.</p>
 <figure>
-<p><img alt="stop_distance_from_object" src="docs/stop_distance_from_object.svg" width="1000">
+<p><img alt="stop_distance_from_object" src="docs/stop_margin.svg" width="1000">
   </p>
 <figcaption>stop margin</figcaption>
 </figure>
@@ -14638,13 +14638,13 @@
 <figcaption>explicit stop line</figcaption>
 </figure>
 <figure>
-<p><img alt="stop_distance_from_crosswalk" src="docs/stop_distance_from_crosswalk.svg" width="700">
+<p><img alt="stop_distance_from_crosswalk" src="docs/stop_line_distance.svg" width="700">
   </p>
 <figcaption>virtual stop point</figcaption>
 </figure>
 <p>On the other hand, if pedestrian (bicycle) is crossing <strong>wide</strong> crosswalks seen in scramble intersections, and the pedestrian position is more than <code>far_object_threshold</code> meters away from the stop line, the actual stop position is determined to be <code>stop_distance_from_object</code> and pedestrian position, not at the stop line.</p>
 <figure>
-<p><img alt="far_object_threshold" src="docs/far_object_threshold.svg" width="1000">
+<p><img alt="far_object_threshold" src="docs/stop_line_margin.svg" width="1000">
   </p>
 <figcaption>stop at wide crosswalk</figcaption>
 </figure>
