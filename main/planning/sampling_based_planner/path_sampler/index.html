@@ -14814,7 +14814,7 @@
 
 <div><h1 id="path-sampler">Path Sampler<a class="headerlink" href="#path-sampler" title="Permanent link">#</a></h1>
 <h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
-<p>This package implements a node that uses sampling based planning to generate a drivable trajectry.</p>
+<p>This package implements a node that uses sampling based planning to generate a drivable trajectory.</p>
 <h2 id="feature">Feature<a class="headerlink" href="#feature" title="Permanent link">#</a></h2>
 <p>This package is able to:</p>
 <ul>
@@ -14870,7 +14870,7 @@
 </tbody>
 </table>
 <h2 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">#</a></h2>
-<p>Sampling based planning is decomposed into 3 successives steps:</p>
+<p>Sampling based planning is decomposed into 3 successive steps:</p>
 <ol>
 <li>Sampling: candidate trajectories are generated.</li>
 <li>Pruning: invalid candidates are discarded.</li>
@@ -14896,7 +14896,7 @@
 <p>Each soft constraint is associated with a weight to allow tuning of the preferences.</p>
 <h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">#</a></h2>
 <p>The quality of the candidates generated with polynomials in frenet frame greatly depend on the reference path.
-If the reference path is not smooth, the resulting candidates will probably be undrivable.</p>
+If the reference path is not smooth, the resulting candidates will probably be undriveable.</p>
 <p>Failure to find a valid trajectory current results in a suddenly stopping trajectory.</p>
 <h2 id="comparison-with-the-obstacle_avoidance_planner">Comparison with the <code>obstacle_avoidance_planner</code><a class="headerlink" href="#comparison-with-the-obstacle_avoidance_planner" title="Permanent link">#</a></h2>
 <p>The <code>obstacle_avoidance_planner</code> uses an optimization based approach,
