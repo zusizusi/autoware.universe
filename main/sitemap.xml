@@ -1146,11 +1146,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/sensing/geo_pos_conv/</loc>
-         <lastmod>2023-08-23</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/sensing/gnss_poser/</loc>
          <lastmod>2023-08-23</lastmod>
          <changefreq>daily</changefreq>
