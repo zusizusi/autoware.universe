@@ -14699,6 +14699,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#filter-function" class="md-nav__link">
+    Filter function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#assumptions-known-limits" class="md-nav__link">
     Assumptions / Known limits
   </a>
@@ -14932,24 +14939,29 @@
 <td>limit of longitudinal velocity (activated in AUTONOMOUS operation mode)</td>
 </tr>
 <tr>
+<td><code>nominal.reference_speed_point</code></td>
+<td><double></double></td>
+<td>velocity point used as a reference when calculate control command limit (activated in AUTONOMOUS operation mode). The size of this array must be equivalent to the size of the limit array.</td>
+</tr>
+<tr>
 <td><code>nominal.lon_acc_lim</code></td>
-<td>double</td>
-<td>limit of longitudinal acceleration (activated in AUTONOMOUS operation mode)</td>
+<td><double></double></td>
+<td>array of limits of longitudinal acceleration (activated in AUTONOMOUS operation mode)</td>
 </tr>
 <tr>
 <td><code>nominal.lon_jerk_lim</code></td>
-<td>double</td>
-<td>limit of longitudinal jerk (activated in AUTONOMOUS operation mode)</td>
+<td><double></double></td>
+<td>array of limits of longitudinal jerk (activated in AUTONOMOUS operation mode)</td>
 </tr>
 <tr>
 <td><code>nominal.lat_acc_lim</code></td>
-<td>double</td>
-<td>limit of lateral acceleration (activated in AUTONOMOUS operation mode)</td>
+<td><double></double></td>
+<td>array of limits of lateral acceleration (activated in AUTONOMOUS operation mode)</td>
 </tr>
 <tr>
 <td><code>nominal.lat_jerk_lim</code></td>
-<td>double</td>
-<td>limit of lateral jerk (activated in AUTONOMOUS operation mode)</td>
+<td><double></double></td>
+<td>array of limits of lateral jerk (activated in AUTONOMOUS operation mode)</td>
 </tr>
 <tr>
 <td><code>on_transition.vel_lim</code></td>
@@ -14957,27 +14969,37 @@
 <td>limit of longitudinal velocity (activated in TRANSITION operation mode)</td>
 </tr>
 <tr>
+<td><code>on_transition.reference_speed_point</code></td>
+<td><double></double></td>
+<td>velocity point used as a reference when calculate control command limit (activated in TRANSITION operation mode). The size of this array must be equivalent to the size of the limit array.</td>
+</tr>
+<tr>
 <td><code>on_transition.lon_acc_lim</code></td>
-<td>double</td>
-<td>limit of longitudinal acceleration (activated in TRANSITION operation mode)</td>
+<td><double></double></td>
+<td>array of limits of longitudinal acceleration (activated in TRANSITION operation mode)</td>
 </tr>
 <tr>
 <td><code>on_transition.lon_jerk_lim</code></td>
-<td>double</td>
-<td>limit of longitudinal jerk (activated in TRANSITION operation mode)</td>
+<td><double></double></td>
+<td>array of limits of longitudinal jerk (activated in TRANSITION operation mode)</td>
 </tr>
 <tr>
 <td><code>on_transition.lat_acc_lim</code></td>
-<td>double</td>
-<td>limit of lateral acceleration (activated in TRANSITION operation mode)</td>
+<td><double></double></td>
+<td>array of limits of lateral acceleration (activated in TRANSITION operation mode)</td>
 </tr>
 <tr>
 <td><code>on_transition.lat_jerk_lim</code></td>
-<td>double</td>
-<td>limit of lateral jerk (activated in TRANSITION operation mode)</td>
+<td><double></double></td>
+<td>array of limits of lateral jerk (activated in TRANSITION operation mode)</td>
 </tr>
 </tbody>
 </table>
+<h2 id="filter-function">Filter function<a class="headerlink" href="#filter-function" title="Permanent link">#</a></h2>
+<p>This module incorporates a limitation filter to the control command right before its published. Primarily for safety, this filter restricts the output range of all control commands published through Autoware.</p>
+<p>The limitation values are calculated based on the 1D interpolation of the limitation array parameters. Here is an example for the longitudinal jerk limit.</p>
+<p><img alt="filter-example" src="image/filter.png"></p>
+<p>Notation: this filter is not designed to enhance ride comfort. Its main purpose is to detect and remove abnormal values in the control outputs during the final stages of Autoware. If this filter is frequently active, it implies the control module may need tuning. If you're aiming to smoothen the signal via a low-pass filter or similar techniques, that should be handled in the control module. When the filter is activated, the topic <code>~/is_filter_activated</code> is published.</p>
 <h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
 <p>The parameter <code>check_external_emergency_heartbeat</code> (true by default) enables an emergency stop request from external modules.
 This feature requires a <code>~/input/external_emergency_stop_heartbeat</code> topic for health monitoring of the external module, and the vehicle_cmd_gate module will not start without the topic.
