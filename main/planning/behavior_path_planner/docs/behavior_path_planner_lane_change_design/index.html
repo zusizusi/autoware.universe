@@ -15030,18 +15030,18 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 </thead>
 <tbody>
 <tr>
+<td align="left"><code>backward_lane_length</code></td>
+<td>[m]</td>
+<td>double</td>
+<td>The backward length to check incoming objects in lane change target lane.</td>
+<td>200.0</td>
+</tr>
+<tr>
 <td align="left"><code>prepare_duration</code></td>
 <td>[m]</td>
 <td>double</td>
 <td>The preparation time for the ego vehicle to be ready to perform lane change.</td>
 <td>4.0</td>
-</tr>
-<tr>
-<td align="left"><code>lane_changing_safety_check_duration</code></td>
-<td>[m]</td>
-<td>double</td>
-<td>The total time that is taken to complete the lane-changing task.</td>
-<td>8.0</td>
 </tr>
 <tr>
 <td align="left"><code>backward_length_buffer_for_end_of_lane</code></td>
@@ -15056,6 +15056,13 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 <td>double</td>
 <td>The additional buffer used to confirm lane change process completion</td>
 <td>3.0</td>
+</tr>
+<tr>
+<td align="left"><code>finish_judge_lateral_threshold</code></td>
+<td>[m]</td>
+<td>double</td>
+<td>Lateral distance threshold to confirm lane change process completion</td>
+<td>0.2</td>
 </tr>
 <tr>
 <td align="left"><code>lane_changing_lateral_jerk</code></td>
@@ -15093,6 +15100,41 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 <td>3</td>
 </tr>
 <tr>
+<td align="left"><code>object_check_min_road_shoulder_width</code></td>
+<td>[m]</td>
+<td>double</td>
+<td>Vehicles around the center line within this distance will be excluded from parking objects</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td align="left"><code>object_shiftable_ratio_threshold</code></td>
+<td>[-]</td>
+<td>double</td>
+<td>Vehicles around the center line within this distance ratio will be excluded from parking objects</td>
+<td>0.6</td>
+</tr>
+<tr>
+<td align="left"><code>min_length_for_turn_signal_activation</code></td>
+<td>[m]</td>
+<td>double</td>
+<td>Turn signal will be acitvated if the ego vehicle approaches to this length from minimum lane change length</td>
+<td>10.0</td>
+</tr>
+<tr>
+<td align="left"><code>length_ratio_for_turn_signal_deactivation</code></td>
+<td>[-]</td>
+<td>double</td>
+<td>Turn signal will be deacitvated if the ego vehicle approaches to this length ratio for lane change finish point</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td align="left"><code>object_shiftable_ratio_threshold</code></td>
+<td>[-]</td>
+<td>double</td>
+<td>Vehicles around the center line within this distance ratio will be excluded from parking objects</td>
+<td>0.6</td>
+</tr>
+<tr>
 <td align="left"><code>max_longitudinal_acc</code></td>
 <td>[-]</td>
 <td>double</td>
@@ -15106,10 +15148,87 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 <td>maximum longitudinal deceleration for lane change</td>
 <td>-1.0</td>
 </tr>
+<tr>
+<td align="left"><code>lateral_acceleration.velocity</code></td>
+<td>[m/s]</td>
+<td>double</td>
+<td>Reference velocity for lateral acceleration calculation (look up table)</td>
+<td>[0.0, 4.0, 10.0]</td>
+</tr>
+<tr>
+<td align="left"><code>lateral_acceleration.min_values</code></td>
+<td>[m/ss]</td>
+<td>double</td>
+<td>Min lateral acceleration values corresponding to velocity (look up table)</td>
+<td>[0.15, 0.15, 0.15]</td>
+</tr>
+<tr>
+<td align="left"><code>lateral_acceleration.max_values</code></td>
+<td>[m/ss]</td>
+<td>double</td>
+<td>Max lateral acceleration values corresponding to velocity (look up table)</td>
+<td>[0.5, 0.5, 0.5]</td>
+</tr>
+<tr>
+<td align="left"><code>target_object.car</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Include car objects for safety check</td>
+<td>true</td>
+</tr>
+<tr>
+<td align="left"><code>target_object.truck</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Include truck objects for safety check</td>
+<td>true</td>
+</tr>
+<tr>
+<td align="left"><code>target_object.bus</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Include bus objects for safety check</td>
+<td>true</td>
+</tr>
+<tr>
+<td align="left"><code>target_object.trailer</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Include trailer objects for safety check</td>
+<td>true</td>
+</tr>
+<tr>
+<td align="left"><code>target_object.unknown</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Include unknown objects for safety check</td>
+<td>true</td>
+</tr>
+<tr>
+<td align="left"><code>target_object.bicycle</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Include bicycle objects for safety check</td>
+<td>true</td>
+</tr>
+<tr>
+<td align="left"><code>target_object.motorcycle</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Include motorcycle objects for safety check</td>
+<td>true</td>
+</tr>
+<tr>
+<td align="left"><code>target_object.pedestrian</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Include pedestrian objects for safety check</td>
+<td>true</td>
+</tr>
 </tbody>
 </table>
 <h3 id="collision-checks-during-lane-change">Collision checks during lane change<a class="headerlink" href="#collision-checks-during-lane-change" title="Permanent link">#</a></h3>
-<p>The following parameters are configurable in <code>behavior_path_planner.param.yaml</code>.</p>
+<p>The following parameters are configurable in <code>behavior_path_planner.param.yaml</code> and <code>lane_change.param.yaml</code>.</p>
 <table>
 <thead>
 <tr>
