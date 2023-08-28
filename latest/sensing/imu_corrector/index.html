@@ -14550,18 +14550,11 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#purpose" class="md-nav__link">
-    Purpose
+  <a href="#imu_corrector_1" class="md-nav__link">
+    imu_corrector
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inputs-outputs" class="md-nav__link">
-    Inputs / Outputs
-  </a>
-  
-    <nav class="md-nav" aria-label="Inputs / Outputs">
+    <nav class="md-nav" aria-label="imu_corrector">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -14578,24 +14571,11 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
     Parameters
   </a>
   
-    <nav class="md-nav" aria-label="Parameters">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-parameters" class="md-nav__link">
-    Core Parameters
-  </a>
-  
 </li>
         
       </ul>
@@ -14604,37 +14584,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#assumptions-known-limits" class="md-nav__link">
-    Assumptions / Known limits
+  <a href="#gyro_bias_estimator" class="md-nav__link">
+    gyro_bias_estimator
+  </a>
+  
+    <nav class="md-nav" aria-label="gyro_bias_estimator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input_1" class="md-nav__link">
+    Input
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#optional-error-detection-and-handling" class="md-nav__link">
-    (Optional) Error detection and handling
+        
+          <li class="md-nav__item">
+  <a href="#output_1" class="md-nav__link">
+    Output
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#optional-performance-characterization" class="md-nav__link">
-    (Optional) Performance characterization
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    Parameters
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#optional-referencesexternal-links" class="md-nav__link">
-    (Optional) References/External links
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#optional-future-extensions-unimplemented-parts" class="md-nav__link">
-    (Optional) Future extensions / Unimplemented parts
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -14657,7 +14636,7 @@
 
 
 <div><h1 id="imu_corrector">imu_corrector<a class="headerlink" href="#imu_corrector" title="Permanent link">#</a></h1>
-<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
+<h2 id="imu_corrector_1">imu_corrector<a class="headerlink" href="#imu_corrector_1" title="Permanent link">#</a></h2>
 <p><code>imu_corrector_node</code> is a node that correct imu data.</p>
 <ol>
 <li>Correct yaw rate offset <span class="arithmatex">\(b\)</span> by reading the parameter.</li>
@@ -14672,7 +14651,6 @@ We also assume that <span class="arithmatex">\(n\sim\mathcal{N}(0, \sigma^2)\)</
 <!-- TODO(TIER IV): Make this repository public or change the link. -->
 <!-- Use the value estimated by [deviation_estimator](https://github.com/tier4/calibration_tools/tree/main/localization/deviation_estimation_tools) as the parameters for this node. -->
 
-<h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
 <h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
 <table>
 <thead>
@@ -14707,8 +14685,7 @@ We also assume that <span class="arithmatex">\(n\sim\mathcal{N}(0, \sigma^2)\)</
 </tr>
 </tbody>
 </table>
-<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
-<h3 id="core-parameters">Core Parameters<a class="headerlink" href="#core-parameters" title="Permanent link">#</a></h3>
+<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h3>
 <table>
 <thead>
 <tr>
@@ -14755,11 +14732,95 @@ We also assume that <span class="arithmatex">\(n\sim\mathcal{N}(0, \sigma^2)\)</
 </tr>
 </tbody>
 </table>
-<h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
-<h2 id="optional-error-detection-and-handling">(Optional) Error detection and handling<a class="headerlink" href="#optional-error-detection-and-handling" title="Permanent link">#</a></h2>
-<h2 id="optional-performance-characterization">(Optional) Performance characterization<a class="headerlink" href="#optional-performance-characterization" title="Permanent link">#</a></h2>
-<h2 id="optional-referencesexternal-links">(Optional) References/External links<a class="headerlink" href="#optional-referencesexternal-links" title="Permanent link">#</a></h2>
-<h2 id="optional-future-extensions-unimplemented-parts">(Optional) Future extensions / Unimplemented parts<a class="headerlink" href="#optional-future-extensions-unimplemented-parts" title="Permanent link">#</a></h2></div>
+<h2 id="gyro_bias_estimator">gyro_bias_estimator<a class="headerlink" href="#gyro_bias_estimator" title="Permanent link">#</a></h2>
+<p><code>gyro_bias_validator</code> is a node that validates the bias of the gyroscope. It subscribes to the <code>sensor_msgs::msg::Imu</code> topic and validate if the bias of the gyroscope is within the specified range.</p>
+<p>Note that the node calculates bias from the gyroscope data by averaging the data only when the vehicle is stopped.</p>
+<h3 id="input_1">Input<a class="headerlink" href="#input_1" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/input/imu_raw</code></td>
+<td><code>sensor_msgs::msg::Imu</code></td>
+<td><strong>raw</strong> imu data</td>
+</tr>
+<tr>
+<td><code>~/input/twist</code></td>
+<td><code>geometry_msgs::msg::TwistWithCovarianceStamped</code></td>
+<td>vehicle velocity</td>
+</tr>
+</tbody>
+</table>
+<h3 id="output_1">Output<a class="headerlink" href="#output_1" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/output/gyro_bias</code></td>
+<td><code>geometry_msgs::msg::Vector3Stamped</code></td>
+<td>bias of the gyroscope [rad/s]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_1">Parameters<a class="headerlink" href="#parameters_1" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>angular_velocity_offset_x</code></td>
+<td>double</td>
+<td>roll rate offset in imu_link [rad/s]</td>
+</tr>
+<tr>
+<td><code>angular_velocity_offset_y</code></td>
+<td>double</td>
+<td>pitch rate offset imu_link [rad/s]</td>
+</tr>
+<tr>
+<td><code>angular_velocity_offset_z</code></td>
+<td>double</td>
+<td>yaw rate offset imu_link [rad/s]</td>
+</tr>
+<tr>
+<td><code>gyro_bias_threshold</code></td>
+<td>double</td>
+<td>threshold of the bias of the gyroscope [rad/s]</td>
+</tr>
+<tr>
+<td><code>velocity_threshold</code></td>
+<td>double</td>
+<td>threshold of the vehicle velocity to determine if the vehicle is stopped[m/s]</td>
+</tr>
+<tr>
+<td><code>timestamp_threshold</code></td>
+<td>double</td>
+<td>threshold of the timestamp diff between IMU and twist [s]</td>
+</tr>
+<tr>
+<td><code>data_num_threshold</code></td>
+<td>int</td>
+<td>number of data used to calculate bias</td>
+</tr>
+</tbody>
+</table></div>
 
 
 
