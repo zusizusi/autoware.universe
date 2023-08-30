@@ -14867,10 +14867,10 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 </code></pre></div>
 <p>where <code>common_param</code> is vehicle common parameter, which defines vehicle common maximum longitudinal acceleration and deceleration. Whereas, <code>lane_change_param</code> has maximum longitudinal acceleration and deceleration for the lane change module. For example, if a user set and <code>common_param.max_acc=1.0</code> and <code>lane_change_param.max_acc=0.0</code>, <code>maximum_longitudinal_acceleration</code> becomes <code>0.0</code>, and the lane change does not accelerate in the lane change phase.</p>
 <p>The <code>longitudinal_acceleration_resolution</code> is determine by the following</p>
-<div class="highlight"><pre><span></span><code><span class="n">longitudinal_acceleration_resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">maximum_longitudinal_acceleration</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">minimum_longitudinal_deceleration</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">longitudinal_acceleration_sampling_num</span>
+<div class="highlight"><pre><span></span><code><span class="n">longitudinal_acceleration_resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">maximum_longitudinal_acceleration</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">minimum_longitudinal_acceleration</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">longitudinal_acceleration_sampling_num</span>
 </code></pre></div>
 <p>Note that when the <code>current_velocity</code> is lower than <code>minimum_lane_changing_velocity</code>, the vehicle needs to accelerate its velocity to <code>minimum_lane_changing_velocity</code>. Therefore, longitudinal acceleration becomes positive value (not decelerate).</p>
-<p>The following figure illustrates when <code>lane_change_sampling_num = 4</code>. Assuming that <code>maximum_deceleration = 1.0</code> then <code>a0 == 0.0 == no deceleration</code>, <code>a1 == 0.25</code>, <code>a2 == 0.5</code>, <code>a3 == 0.75</code> and <code>a4 == 1.0 == maximum_deceleration</code>. <code>a0</code> is the expected lane change trajectories should ego vehicle do not decelerate, and <code>a1</code>'s path is the expected lane change trajectories should ego vehicle decelerate at <code>0.25 m/s^2</code>.</p>
+<p>The following figure illustrates when <code>longitudinal_acceleration_sampling_num = 4</code>. Assuming that <code>maximum_deceleration = 1.0</code> then <code>a0 == 0.0 == no deceleration</code>, <code>a1 == 0.25</code>, <code>a2 == 0.5</code>, <code>a3 == 0.75</code> and <code>a4 == 1.0 == maximum_deceleration</code>. <code>a0</code> is the expected lane change trajectories should ego vehicle do not decelerate, and <code>a1</code>'s path is the expected lane change trajectories should ego vehicle decelerate at <code>0.25 m/s^2</code>.</p>
 <p><img alt="path_samples" src="../../image/lane_change/lane_change-candidate_path_samples.png"></p>
 <p>Which path will be chosen will depend on validity and collision check.</p>
 <h4 id="multiple-candidate-path-samples-lateral-acceleration">Multiple candidate path samples (lateral acceleration)<a class="headerlink" href="#multiple-candidate-path-samples-lateral-acceleration" title="Permanent link">#</a></h4>
@@ -14907,9 +14907,9 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 </tr>
 </tbody>
 </table>
-<p>In this case, when the current velocity of the ego vehicle is 3.0, the minimum and maximum lateral accelerations are 0.2 and 0.35 respectively. These values are obtained by linearly interpolating the second and third rows of the map, which provide the minimum and maximum lateral acceleration values.</p>
+<p>In this case, when the current velocity of the ego vehicle is 3.0, the minimum and maximum lateral accelerations are 0.25 and 0.4 respectively. These values are obtained by linearly interpolating the second and third rows of the map, which provide the minimum and maximum lateral acceleration values.</p>
 <p>Within this range, we sample the lateral acceleration for the ego vehicle. Similar to the method used for sampling longitudinal acceleration, the resolution of lateral acceleration (lateral_acceleration_resolution) is determined by the following:</p>
-<div class="highlight"><pre><span></span><code><span class="n">lateral_acceleration_resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">maximum_lateral_acceleration</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">minimum_lateral_deceleration</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">lateral_acceleration_sampling_num</span>
+<div class="highlight"><pre><span></span><code><span class="n">lateral_acceleration_resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">maximum_lateral_acceleration</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">minimum_lateral_acceleration</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">lateral_acceleration_sampling_num</span>
 </code></pre></div>
 <h4 id="candidate-paths-validity-check">Candidate Path's validity check<a class="headerlink" href="#candidate-paths-validity-check" title="Permanent link">#</a></h4>
 <p>A candidate path is valid if the total lane change distance is less than</p>
@@ -15065,13 +15065,6 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 <td>double</td>
 <td>Turn signal will be deactivated if the ego vehicle approaches to this length ratio for lane change finish point</td>
 <td>0.8</td>
-</tr>
-<tr>
-<td align="left"><code>object_shiftable_ratio_threshold</code></td>
-<td>[-]</td>
-<td>double</td>
-<td>Vehicles around the center line within this distance ratio will be excluded from parking objects</td>
-<td>0.6</td>
 </tr>
 <tr>
 <td align="left"><code>max_longitudinal_acc</code></td>
