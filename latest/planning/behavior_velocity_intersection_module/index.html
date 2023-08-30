@@ -14756,7 +14756,7 @@
 <li>Not being <strong>in the adjacent lanes of the ego vehicle</strong>.</li>
 </ul>
 <h4 id="stuck-vehicle-detection">Stuck Vehicle Detection<a class="headerlink" href="#stuck-vehicle-detection" title="Permanent link">#</a></h4>
-<p>If there is any object in a certain distance (<code>stuck_vehicle_ignore_dist</code> and <code>stuck_vehicle_detect_dist</code>) before and after the exit of the intersection lane and the object velocity is less than a threshold (=<code>stuck_vehicle_vel_thr</code>), the object is regarded as a stuck vehicle. If stuck vehicles exist, this module inserts a stopline a certain distance (=<code>stop_line_margin</code>) before the overlapped region with other lanes. The stuck vehicle detection area is generated based on the vehicle path, so the stuck vehicle stopline is not inserted if the upstream module generated avoidance path</p>
+<p>If there is any object on the path in inside the intersection and at the exit of the intersection (up to <code>stuck_vehicle_detect_dist</code>) lane and its velocity is less than a threshold (<code>stuck_vehicle.stuck_vehicle_vel_thr</code>), the object is regarded as a stuck vehicle. If stuck vehicles exist, this module inserts a stopline a certain distance (=<code>stop_line_margin</code>) before the overlapped region with other lanes. The stuck vehicle detection area is generated based on the vehicle path, so the stuck vehicle stopline is not inserted if the upstream module generated avoidance path</p>
 <p><img alt="stuck_vehicle_detection" src="docs/stuck-vehicle.drawio.svg"></p>
 <h4 id="collision-detection">Collision detection<a class="headerlink" href="#collision-detection" title="Permanent link">#</a></h4>
 <p>The following process is performed for the targets objects to determine whether the ego vehicle can pass the intersection safely. If it is judged that the ego vehicle cannot pass through the intersection with enough <em>margin</em>, it will insert a stopline on the <em>path</em>.</p>
@@ -14836,11 +14836,6 @@
 <td><code>stuck_vehicle.stuck_vehicle_detect_dist</code></td>
 <td>double</td>
 <td>[m] length toward from the exit of intersection for stuck vehicle detection</td>
-</tr>
-<tr>
-<td><code>stuck_vehicle.stuck_vehicle_ignore_dist</code></td>
-<td>double</td>
-<td>[m] length behind the exit of intersection for stuck vehicle detection</td>
 </tr>
 <tr>
 <td><code>stuck_vehicle.stuck_vehicle_vel_thr</code></td>
