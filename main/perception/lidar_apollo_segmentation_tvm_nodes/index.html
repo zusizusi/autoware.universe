@@ -14707,6 +14707,90 @@ Not having this filter may negatively impact performance.</p>
 <p>The input are non-ground points as a PointCloud2 message from the sensor_msgs package.</p>
 <h4 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">#</a></h4>
 <p>The output is a <a href="https://github.com/tier4/tier4_autoware_msgs/blob/tier4/universe/tier4_perception_msgs/msg/object_recognition/DetectedObjectsWithFeature.msg">DetectedObjectsWithFeature</a>.</p>
+<h4 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>range</td>
+<td>integer</td>
+<td>The range of the 2D grid with respect to the origin.</td>
+<td>90</td>
+<td>&gt;0</td>
+</tr>
+<tr>
+<td>score_threshold</td>
+<td>float</td>
+<td>The detection confidence score threshold for filtering out the candidate clusters in the post-processing step.</td>
+<td>0.1</td>
+<td>≥0.0<br>≤1.0</td>
+</tr>
+<tr>
+<td>use_intensity_feature</td>
+<td>boolean</td>
+<td>Enable input channel intensity feature.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>use_constant_feature</td>
+<td>boolean</td>
+<td>Enable input channel constant feature.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>z_offset</td>
+<td>float</td>
+<td>Vertical translation of the pointcloud before inference.</td>
+<td>0.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_height</td>
+<td>float</td>
+<td>The minimum height with respect to the origin</td>
+<td>-5.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_height</td>
+<td>float</td>
+<td>The maximum height with respect to the origin.</td>
+<td>5.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>objectness_thresh</td>
+<td>float</td>
+<td>The threshold of objectness for filtering out non-object cells in the obstacle clustering step.</td>
+<td>0.5</td>
+<td>≥0.0<br>≤1.0</td>
+</tr>
+<tr>
+<td>min_pts_num</td>
+<td>integer</td>
+<td>In the post-processing step, the candidate clusters with less than min_pts_num points are removed.</td>
+<td>3</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>height_thresh</td>
+<td>float</td>
+<td>If it is non-negative, the points that are higher than the predicted object height by height_thresh are filtered out in the post-processing step.</td>
+<td>0.5</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
 <h3 id="error-detection-and-handling">Error detection and handling<a class="headerlink" href="#error-detection-and-handling" title="Permanent link">#</a></h3>
 <p>Abort and warn when the input frame can't be converted to <code>base_link</code>.</p>
 <h3 id="security-considerations">Security considerations<a class="headerlink" href="#security-considerations" title="Permanent link">#</a></h3>
