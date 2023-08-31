@@ -15276,7 +15276,7 @@
 <h3 id="parked-car-detection">Parked-car detection<a class="headerlink" href="#parked-car-detection" title="Permanent link">#</a></h3>
 <p>Not only the length from the centerline, but also the length from the road shoulder is calculated and used for the filtering process. It calculates the ratio of <em>the actual length between the the object's center and the center line</em> <code>shift_length</code> and <em>the maximum length the object can shift</em> <code>shiftable_length</code>.</p>
 <div class="arithmatex">\[
-l_D = l_a - \frac{width}{2} \\
+l_D = l_a - \frac{width}{2}, \\
 ratio =  \frac{l_d}{l_D}
 \]</div>
 <ul>
@@ -15285,7 +15285,7 @@ ratio =  \frac{l_d}{l_D}
 <li><span class="arithmatex">\(l_a\)</span> : distance between centerline and most left boundary.</li>
 <li><span class="arithmatex">\(width\)</span> : object width</li>
 </ul>
-<p>The closer the object is to the shoulder, the larger the value of <span class="arithmatex">\(ratio\)</span> (theoretical max value is 1.0), and it compares the value and <code>object_check_shiftable_ratio</code> to determine whether the object is a parked-car.</p>
+<p>The closer the object is to the shoulder, the larger the value of <span class="arithmatex">\(ratio\)</span> (theoretical max value is 1.0), and it compares the value and <code>object_check_shiftable_ratio</code> to determine whether the object is a parked-car. If the road has no road shoulders, it uses <code>object_check_min_road_shoulder_width</code> as a road shoulder width virtually.</p>
 <p><img alt="fig2" src="../../image/avoidance/parked-car-detection.svg"></p>
 <h3 id="compensation-for-detection-lost">Compensation for detection lost<a class="headerlink" href="#compensation-for-detection-lost" title="Permanent link">#</a></h3>
 <p>In order to prevent chattering of recognition results, once an obstacle is targeted, it is hold for a while even if it disappears. This is effective when recognition is unstable. However, since it will result in over-detection (increase a number of false-positive), it is necessary to adjust parameters according to the recognition accuracy (if <code>object_last_seen_threshold = 0.0</code>, the recognition result is 100% trusted).</p>
@@ -15824,7 +15824,7 @@ SHIFT_{current} &gt; L_{threshold}
 <td align="left">object_check_min_road_shoulder_width</td>
 <td align="left">[m]</td>
 <td align="left">double</td>
-<td align="left">Vehicles around the center line within this distance will be excluded from avoidance target.</td>
+<td align="left">Width considered as a road shoulder if the lane does not have a road shoulder target.</td>
 <td align="left">0.5</td>
 </tr>
 <tr>

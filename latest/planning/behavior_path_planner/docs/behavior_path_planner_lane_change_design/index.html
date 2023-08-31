@@ -14927,7 +14927,7 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 <h4 id="objects-selection-and-classification">Objects selection and classification<a class="headerlink" href="#objects-selection-and-classification" title="Permanent link">#</a></h4>
 <p>First, we divide the target objects into obstacles in the target lane, obstacles in the current lane, and obstacles in other lanes. Target lane indicates the lane that the ego vehicle is going to reach after the lane change and current lane mean the current lane where the ego vehicle is following before the lane change. Other lanes are lanes that do not belong to the target and current lanes. The following picture describes objects on each lane. Note that users can remove objects either on current and other lanes from safety check by changing the flag, which are <code>check_objects_on_current_lanes</code> and <code>check_objects_on_other_lanes</code>.</p>
 <p><img alt="object lanes" src="../../image/lane_change/lane_objects.drawio.svg"></p>
-<p>Furthermore, to change lanes behind a vehicle waiting at a traffic light, we skip the safety check for the stopping vehicles near the traffic light.</p>
+<p>Furthermore, to change lanes behind a vehicle waiting at a traffic light, we skip the safety check for the stopping vehicles near the traffic light.　The explanation for parked car detection is written in <a href="../behavior_path_planner_avoidance_design/">documentation for avoidance module</a>.</p>
 <h5 id="collision-check-in-prepare-phase">Collision check in prepare phase<a class="headerlink" href="#collision-check-in-prepare-phase" title="Permanent link">#</a></h5>
 <p>The ego vehicle may need to secure ample inter-vehicle distance ahead of the target vehicle before attempting a lane change. The flag <code>enable_collision_check_at_prepare_phase</code> can be enabled to gain this behavior. The following image illustrates the differences between the <code>false</code> and <code>true</code> cases.</p>
 <p><img alt="enable collision check at prepare phase" src="../../image/lane_change/lane_change-enable_collision_check_at_prepare_phase.png"></p>
@@ -15042,7 +15042,7 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 <td align="left"><code>object_check_min_road_shoulder_width</code></td>
 <td>[m]</td>
 <td>double</td>
-<td>Vehicles around the center line within this distance will be excluded from parking objects</td>
+<td>Width considered as a road shoulder if the lane does not have a road shoulder</td>
 <td>0.5</td>
 </tr>
 <tr>
