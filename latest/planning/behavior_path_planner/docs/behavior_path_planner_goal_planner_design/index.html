@@ -9456,11 +9456,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#path-generation" class="md-nav__link">
-    Path Generation
+  <a href="#pull-over" class="md-nav__link">
+    Pull Over
   </a>
   
-    <nav class="md-nav" aria-label="Path Generation">
+    <nav class="md-nav" aria-label="Pull Over">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -14922,11 +14922,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#path-generation" class="md-nav__link">
-    Path Generation
+  <a href="#pull-over" class="md-nav__link">
+    Pull Over
   </a>
   
-    <nav class="md-nav" aria-label="Path Generation">
+    <nav class="md-nav" aria-label="Pull Over">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -14988,14 +14988,14 @@ When allowed, park in accordance with the specified policy(e.g pull over on left
 <p>Either one is activated when all conditions are met.</p>
 <h3 id="fixed_goal_planner">fixed_goal_planner<a class="headerlink" href="#fixed_goal_planner" title="Permanent link">#</a></h3>
 <ul>
-<li>The distance between the goal and ego-vehicle is shorter than <code>minimum_request_length</code>.</li>
 <li>Route is set with <code>allow_goal_modification=false</code> by default.</li>
+<li>ego-vehicle is in the same lane as the goal.</li>
 </ul>
 <p><img src="https://user-images.githubusercontent.com/39142679/237929955-c0adf01b-9e3c-45e3-848d-98cf11e52b65.png" width="600"></p>
 <h3 id="rough_goal_planner">rough_goal_planner<a class="headerlink" href="#rough_goal_planner" title="Permanent link">#</a></h3>
 <h4 id="pull-over-on-road-lane">pull over on road lane<a class="headerlink" href="#pull-over-on-road-lane" title="Permanent link">#</a></h4>
 <ul>
-<li>The distance between the goal and ego-vehicle is shorter than <code>minimum_request_length</code>.</li>
+<li>The distance between the goal and ego-vehicle is shorter than <code>pull_over_minimum_request_length</code>.</li>
 <li>Route is set with <code>allow_goal_modification=true</code> .<ul>
 <li>We can set this option with <a href="https://github.com/autowarefoundation/autoware_adapi_msgs/blob/main/autoware_adapi_v1_msgs/routing/srv/SetRoute.srv#L2">SetRoute</a> api service.</li>
 <li>We support <code>2D Rough Goal Pose</code> with the key bind <code>r</code> in RViz, but in the future there will be a panel of tools to manipulate various Route API from RViz.</li>
@@ -15006,7 +15006,7 @@ When allowed, park in accordance with the specified policy(e.g pull over on left
 <p><img src="https://user-images.githubusercontent.com/39142679/237929950-989ca6c3-d48c-4bb5-81e5-e8d6a38911aa.png" width="600"></p>
 <h4 id="pull-over-on-shoulder-lane">pull over on shoulder lane<a class="headerlink" href="#pull-over-on-shoulder-lane" title="Permanent link">#</a></h4>
 <ul>
-<li>The distance between the goal and ego-vehicle is shorter than <code>minimum_request_length</code>.</li>
+<li>The distance between the goal and ego-vehicle is shorter than <code>pull_over_minimum_request_length</code>.</li>
 <li>Goal is set in the <code>road_shoulder</code>.</li>
 </ul>
 <p><img src="https://user-images.githubusercontent.com/39142679/237929941-2ce26ea5-c84d-4d17-8cdc-103f5246db90.png" width="600"></p>
@@ -15031,13 +15031,6 @@ When allowed, park in accordance with the specified policy(e.g pull over on left
 </thead>
 <tbody>
 <tr>
-<td align="left">minimum_request_length</td>
-<td align="left">[m]</td>
-<td align="left">double</td>
-<td align="left">when the ego-vehicle approaches the goal by this distance or a safe distance to stop, the module is activated.</td>
-<td align="left">100.0</td>
-</tr>
-<tr>
 <td align="left">th_arrived_distance</td>
 <td align="left">[m]</td>
 <td align="left">double</td>
@@ -15057,41 +15050,6 @@ When allowed, park in accordance with the specified policy(e.g pull over on left
 <td align="left">double</td>
 <td align="left">time threshold for arrival of path termination</td>
 <td align="left">2.0</td>
-</tr>
-<tr>
-<td align="left">pull_over_velocity</td>
-<td align="left">[m/s]</td>
-<td align="left">double</td>
-<td align="left">decelerate to this speed by the goal search area</td>
-<td align="left">3.0</td>
-</tr>
-<tr>
-<td align="left">pull_over_minimum_velocity</td>
-<td align="left">[m/s]</td>
-<td align="left">double</td>
-<td align="left">speed of pull_over after stopping once. this prevents excessive acceleration.</td>
-<td align="left">1.38</td>
-</tr>
-<tr>
-<td align="left">margin_from_boundary</td>
-<td align="left">[m]</td>
-<td align="left">double</td>
-<td align="left">distance margin from edge of the shoulder lane</td>
-<td align="left">0.5</td>
-</tr>
-<tr>
-<td align="left">decide_path_distance</td>
-<td align="left">[m]</td>
-<td align="left">double</td>
-<td align="left">decide path if it approaches this distance relative to the parking position. after that, no path planning and goal search are performed</td>
-<td align="left">10.0</td>
-</tr>
-<tr>
-<td align="left">maximum_deceleration</td>
-<td align="left">[m/s2]</td>
-<td align="left">double</td>
-<td align="left">maximum deceleration. it prevents sudden deceleration when a parking path cannot be found suddenly</td>
-<td align="left">1.0</td>
 </tr>
 </tbody>
 </table>
@@ -15255,11 +15213,73 @@ searched for in certain range of the shoulder lane.</p>
 <td align="left">distance from start of pull over lanes for ignoring goal candidates</td>
 <td align="left">0.0</td>
 </tr>
+<tr>
+<td align="left">ignore_distance_from_lane_start</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">distance from start of pull over lanes for ignoring goal candidates</td>
+<td align="left">0.0</td>
+</tr>
+<tr>
+<td align="left">margin_from_boundary</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">distance margin from edge of the shoulder lane</td>
+<td align="left">0.5</td>
+</tr>
 </tbody>
 </table>
-<h2 id="path-generation"><strong>Path Generation</strong><a class="headerlink" href="#path-generation" title="Permanent link">#</a></h2>
+<h2 id="pull-over"><strong>Pull Over</strong><a class="headerlink" href="#pull-over" title="Permanent link">#</a></h2>
 <p>There are three path generation methods.
-The path is generated with a certain margin (default: <code>0.5 m</code>) from left boundary of shoulder lane.</p>
+The path is generated with a certain margin (default: <code>0.5 m</code>) from the boundary of shoulder lane.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">pull_over_minimum_request_length</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">when the ego-vehicle approaches the goal by this distance or a safe distance to stop, pull over is activated.</td>
+<td align="left">100.0</td>
+</tr>
+<tr>
+<td align="left">pull_over_velocity</td>
+<td align="left">[m/s]</td>
+<td align="left">double</td>
+<td align="left">decelerate to this speed by the goal search area</td>
+<td align="left">3.0</td>
+</tr>
+<tr>
+<td align="left">pull_over_minimum_velocity</td>
+<td align="left">[m/s]</td>
+<td align="left">double</td>
+<td align="left">speed of pull_over after stopping once. this prevents excessive acceleration.</td>
+<td align="left">1.38</td>
+</tr>
+<tr>
+<td align="left">decide_path_distance</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">decide path if it approaches this distance relative to the parking position. after that, no path planning and goal search are performed</td>
+<td align="left">10.0</td>
+</tr>
+<tr>
+<td align="left">maximum_deceleration</td>
+<td align="left">[m/s2]</td>
+<td align="left">double</td>
+<td align="left">maximum deceleration. it prevents sudden deceleration when a parking path cannot be found suddenly</td>
+<td align="left">1.0</td>
+</tr>
+</tbody>
+</table>
 <h3 id="shift-parking"><strong>shift parking</strong><a class="headerlink" href="#shift-parking" title="Permanent link">#</a></h3>
 <p>Pull over distance is calculated by the speed, lateral deviation, and the lateral jerk.
 The lateral jerk is searched for among the predetermined minimum and maximum values, and the one satisfies ready conditions described above is output.</p>
