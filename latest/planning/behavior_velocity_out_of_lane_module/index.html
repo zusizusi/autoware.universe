@@ -14885,17 +14885,17 @@ it is skipped.</p>
 <tr>
 <td><code>minimum_velocity</code></td>
 <td>double</td>
-<td>[m/s] consider objects with an estimated time to collision bellow this value while on the overlap</td>
-</tr>
-<tr>
-<td><code>use_predicted_paths</code></td>
-<td>bool</td>
-<td>[-] if true, use the predicted paths to estimate future positions; if false, assume the object moves at constant velocity along <em>all</em> lanelets it currently is located in</td>
+<td>[m/s] ignore objects with a velocity lower than this value</td>
 </tr>
 <tr>
 <td><code>predicted_path_min_confidence</code></td>
 <td>double</td>
 <td>[-] minimum confidence required for a predicted path to be considered</td>
+</tr>
+<tr>
+<td><code>use_predicted_paths</code></td>
+<td>bool</td>
+<td>[-] if true, use the predicted paths to estimate future positions; if false, assume the object moves at constant velocity along <em>all</em> lanelets it currently is located in</td>
 </tr>
 </tbody>
 </table>
@@ -14952,7 +14952,7 @@ it is skipped.</p>
 <tr>
 <td><code>slowdown.velocity</code></td>
 <td>double</td>
-<td>[m] slow down velocity</td>
+<td>[m/s] slow down velocity</td>
 </tr>
 <tr>
 <td><code>stop.distance_threshold</code></td>
