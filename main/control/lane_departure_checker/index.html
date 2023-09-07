@@ -14808,6 +14808,7 @@
 </ul>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
 <h3 id="node-parameters">Node Parameters<a class="headerlink" href="#node-parameters" title="Permanent link">#</a></h3>
+<h4 id="general-parameters">General Parameters<a class="headerlink" href="#general-parameters" title="Permanent link">#</a></h4>
 <table>
 <thead>
 <tr>
@@ -14818,6 +14819,24 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td align="left">will_out_of_lane_checker</td>
+<td align="left">bool</td>
+<td align="left">Enable checker whether ego vehicle footprint will depart from lane</td>
+<td align="left">True</td>
+</tr>
+<tr>
+<td align="left">out_of_lane_checker</td>
+<td align="left">bool</td>
+<td align="left">Enable checker whether ego vehicle footprint is out of lane</td>
+<td align="left">True</td>
+</tr>
+<tr>
+<td align="left">boundary_departure_checker</td>
+<td align="left">bool</td>
+<td align="left">Enable checker whether ego vehicle footprint wil depart from boundary specified by boundary_types_to_detect</td>
+<td align="left">False</td>
+</tr>
 <tr>
 <td align="left">update_rate</td>
 <td align="left">double</td>
@@ -14830,6 +14849,19 @@
 <td align="left">Flag for visualizing lanelet</td>
 <td align="left">False</td>
 </tr>
+</tbody>
+</table>
+<h4 id="parameters-for-lane-departure">Parameters For Lane Departure<a class="headerlink" href="#parameters-for-lane-departure" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td align="left">include_right_lanes</td>
 <td align="left">bool</td>
@@ -14854,11 +14886,24 @@
 <td align="left">Flag for including conflicting lanelet in borders</td>
 <td align="left">False</td>
 </tr>
+</tbody>
+</table>
+<h4 id="parameters-for-road-border-departure">Parameters For Road Border Departure<a class="headerlink" href="#parameters-for-road-border-departure" title="Permanent link">#</a></h4>
+<table>
+<thead>
 <tr>
-<td align="left">road_border_departure_checker</td>
-<td align="left">bool</td>
-<td align="left">Flag for checking if the vehicle will departs the road border</td>
-<td align="left">False</td>
+<th align="left">Name</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">boundary_types_to_detect</td>
+<td align="left">std::vector\&lt;std::string&gt;</td>
+<td align="left">line_string types to detect with boundary_departure_checker</td>
+<td align="left">[road_border]</td>
 </tr>
 </tbody>
 </table>
