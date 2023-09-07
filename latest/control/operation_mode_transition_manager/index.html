@@ -14711,6 +14711,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#engage-check-behavior-on-each-parameter-setting" class="md-nav__link">
+    Engage check behavior on each parameter setting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#future-extensions-unimplemented-parts" class="md-nav__link">
     Future extensions / Unimplemented parts
   </a>
@@ -14819,8 +14826,14 @@
 <td align="left">10.0</td>
 </tr>
 <tr>
+<td align="left"><code>enable_engage_on_driving</code></td>
+<td align="left"><code>bool</code></td>
+<td align="left">Set true if you want to engage the autonomous driving mode while the vehicle is driving. If set to false, it will deny Engage in any situation where the vehicle speed is not zero. Note that if you use this feature without adjusting the parameters, it may cause issues like sudden deceleration. Before using, please ensure the engage condition and the vehicle_cmd_gate transition filter are appropriately adjusted.</td>
+<td align="left">0.1</td>
+</tr>
+<tr>
 <td align="left"><code>check_engage_condition</code></td>
-<td align="left"><code>double</code></td>
+<td align="left"><code>bool</code></td>
 <td align="left">If false, autonomous transition is always available</td>
 <td align="left">0.1</td>
 </tr>
@@ -14939,6 +14952,68 @@
 <td align="left"><code>double</code></td>
 <td align="left">the velocity deviation between control command and ego vehicle must be within this threshold to complete <code>Autonomous</code> transition.</td>
 <td align="left">2.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="engage-check-behavior-on-each-parameter-setting">Engage check behavior on each parameter setting<a class="headerlink" href="#engage-check-behavior-on-each-parameter-setting" title="Permanent link">#</a></h2>
+<p>This matrix describes the scenarios in which the vehicle can be engaged based on the combinations of parameter settings:</p>
+<table>
+<thead>
+<tr>
+<th align="center"><code>enable_engage_on_driving</code></th>
+<th align="center"><code>check_engage_condition</code></th>
+<th align="center"><code>allow_autonomous_in_stopped</code></th>
+<th align="left">Scenarios where engage is permitted</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">x</td>
+<td align="center">x</td>
+<td align="center">x</td>
+<td align="left">Only when the vehicle is stationary.</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td align="center">x</td>
+<td align="center">o</td>
+<td align="left">Only when the vehicle is stationary.</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td align="center">o</td>
+<td align="center">x</td>
+<td align="left">When the vehicle is stationary and all engage conditions are met.</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td align="center">o</td>
+<td align="center">o</td>
+<td align="left">Only when the vehicle is stationary.</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td align="center">x</td>
+<td align="center">x</td>
+<td align="left">At any time (Caution: Not recommended).</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td align="center">x</td>
+<td align="center">o</td>
+<td align="left">At any time (Caution: Not recommended).</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td align="center">o</td>
+<td align="center">x</td>
+<td align="left">When all engage conditions are met, regardless of vehicle status.</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td align="center">o</td>
+<td align="center">o</td>
+<td align="left">When all engage conditions are met or the vehicle is stationary.</td>
 </tr>
 </tbody>
 </table>
