@@ -14762,8 +14762,30 @@
 <li>Verify that the transition is complete.</li>
 </ul>
 <h2 id="design">Design<a class="headerlink" href="#design" title="Permanent link">#</a></h2>
-<!-- ## Assumptions / Known limits -->
-
+<p>A rough design of the relationship between `operation_mode_transition_manager`` and the other nodes is shown below.</p>
+<p><img alt="transition_rough_structure" src="image/transition_rough_structure.drawio.svg"></p>
+<p>A more detailed structure is below.</p>
+<p><img alt="transition_detailed_structure" src="image/transition_detailed_structure.drawio.svg"></p>
+<p>Here we see that <code>operation_mode_transition_manager</code> has multiple state transitions as follows</p>
+<ul>
+<li><strong>AUTOWARE ENABLED &lt;---&gt; DISABLED</strong><ul>
+<li><strong>ENABLED</strong>: the vehicle is controlled by Autoware.</li>
+<li><strong>DISABLED</strong>: the vehicle is out of Autoware control, expecting the e.g. manual driving.</li>
+</ul>
+</li>
+<li><strong>AUTOWARE ENABLED &lt;---&gt; AUTO/LOCAL/REMOTE/NONE</strong><ul>
+<li><strong>AUTO</strong>: the vehicle is controlled by Autoware, with the autonomous control command calculated by the planning/control component.</li>
+<li><strong>LOCAL</strong>: the vehicle is controlled by Autoware, with the locally connected operator, e.g. joystick controller.</li>
+<li><strong>REMOTE</strong>: the vehicle is controlled by Autoware, with the remotely connected operator.</li>
+<li><strong>NONE</strong>: the vehicle is not controlled by any operator.</li>
+</ul>
+</li>
+<li><strong>IN TRANSITION &lt;---&gt; COMPLETED</strong><ul>
+<li><strong>IN TRANSITION</strong>: the mode listed above is in the transition process, expecting the former operator to have a responsibility to confirm the transition is completed.</li>
+<li><strong>COMPLETED</strong>: the mode transition is completed.</li>
+</ul>
+</li>
+</ul>
 <h2 id="inputs-outputs-api">Inputs / Outputs / API<a class="headerlink" href="#inputs-outputs-api" title="Permanent link">#</a></h2>
 <h3 id="inputs">Inputs<a class="headerlink" href="#inputs" title="Permanent link">#</a></h3>
 <p>For the mode transition:</p>
