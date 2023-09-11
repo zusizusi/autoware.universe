@@ -8395,6 +8395,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#noise-filtering" class="md-nav__link">
+    Noise filtering
+  </a>
+  
+    <nav class="md-nav" aria-label="Noise filtering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minimum-range-filter" class="md-nav__link">
+    minimum range filter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanelet-based-filter" class="md-nav__link">
+    lanelet based filter
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -14707,6 +14734,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#noise-filtering" class="md-nav__link">
+    Noise filtering
+  </a>
+  
+    <nav class="md-nav" aria-label="Noise filtering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#minimum-range-filter" class="md-nav__link">
+    minimum range filter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanelet-based-filter" class="md-nav__link">
+    lanelet based filter
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -14805,7 +14859,28 @@ v_{k+1} &amp;= v_k \\
 \theta_{k+1} &amp;= \theta_k + \omega_k dt \\
 \omega_{k+1} &amp;= \omega_k
 \end{align}
-\]</div></div>
+\]</div>
+<h2 id="noise-filtering">Noise filtering<a class="headerlink" href="#noise-filtering" title="Permanent link">#</a></h2>
+<p>Radar sensors often have noisy measurement. So we use the following filter to reduce the false positive objects.</p>
+<p>The figure below shows the current noise filtering process.</p>
+<p><img alt="noise_filter" src="../image/noise_filtering.drawio.svg"></p>
+<h3 id="minimum-range-filter">minimum range filter<a class="headerlink" href="#minimum-range-filter" title="Permanent link">#</a></h3>
+<p>In most cases, Radar sensors are used with other sensors such as LiDAR and Camera, and Radar sensors are used to detect objects far away. So we can filter out objects that are too close to the sensor.</p>
+<p><code>use_distance_based_noise_filtering</code> parameter is used to enable/disable this filter, and <code>minimum_range_threshold</code> parameter is used to set the threshold.</p>
+<h3 id="lanelet-based-filter">lanelet based filter<a class="headerlink" href="#lanelet-based-filter" title="Permanent link">#</a></h3>
+<p>With lanelet map information, We can filter out false positive objects that are not likely important obstacles.</p>
+<p>We filter out objects that satisfy the following conditions:</p>
+<ul>
+<li>too large lateral distance from lane</li>
+<li>velocity direction is too different from lane direction</li>
+<li>too large lateral velocity</li>
+</ul>
+<p>Each condition can be set by the following parameters:</p>
+<ul>
+<li><code>max_distance_from_lane</code></li>
+<li><code>max_angle_diff_from_lane</code></li>
+<li><code>max_lateral_velocity</code></li>
+</ul></div>
 
 
 
