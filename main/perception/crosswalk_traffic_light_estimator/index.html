@@ -14810,6 +14810,12 @@
 <td align="left">If this parameter is <code>true</code>, this module estimates pedestrian's traffic signal as RED not only when vehicle's traffic signal is detected as GREEN/AMBER but also when detection results change GREEN/AMBER to UNKNOWN. (If detection results change RED or AMBER to UNKNOWN, this module estimates pedestrian's traffic signal as UNKNOWN.) If this parameter is <code>false</code>, this module use only latest detection results for estimation. (Only when the detection result is GREEN/AMBER, this module estimates pedestrian's traffic signal as RED.)</td>
 <td align="left"><code>true</code></td>
 </tr>
+<tr>
+<td align="left"><code>last_detect_color_hold_time</code></td>
+<td align="left"><code>double</code></td>
+<td align="left">The time threshold to hold for last detect color.</td>
+<td align="left"><code>2.0</code></td>
+</tr>
 </tbody>
 </table>
 <h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
