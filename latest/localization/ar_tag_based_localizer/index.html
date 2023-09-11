@@ -14677,6 +14677,19 @@
     How to launch
   </a>
   
+    <nav class="md-nav" aria-label="How to launch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rosbag" class="md-nav__link">
+    Rosbag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -14853,7 +14866,18 @@ The positions and orientations of the AR-Tags are assumed to be written in the L
 <span class="w">    </span>pose_source:<span class="o">=</span>artag<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>...
 </code></pre></div>
-<p><a href="https://drive.google.com/file/d/1wiCQjyjRnYbb0dg8G6mRecdSGh8tv3zR/view">Sample rosbag and map</a></p>
+<h3 id="rosbag">Rosbag<a class="headerlink" href="#rosbag" title="Permanent link">#</a></h3>
+<h4 id="sample-rosbag-and-map-awsim-data"><a href="https://drive.google.com/file/d/1uMVwQQFcfs8JOqfoA1FqfH_fLPwQ71jK/view">Sample rosbag and map (AWSIM data)</a><a class="headerlink" href="#sample-rosbag-and-map-awsim-data" title="Permanent link">#</a></h4>
+<p>This data is simulated data created by <a href="https://tier4.github.io/AWSIM/">AWSIM</a>.
+Essentially, AR tag-based self-localization is not intended for such public road driving, but for driving in a smaller area, so the max driving speed is set at 15 km/h.</p>
+<p>It is a known problem that the timing of when each AR tag begins to be detected can cause significant changes in estimation.</p>
+<p><img alt="sample_result_in_awsim" src="doc_image/sample_result_in_awsim.png"></p>
+<h4 id="sample-rosbag-and-map-real-world-data"><a href="https://drive.google.com/file/d/1wiCQjyjRnYbb0dg8G6mRecdSGh8tv3zR/view">Sample rosbag and map (Real world data)</a><a class="headerlink" href="#sample-rosbag-and-map-real-world-data" title="Permanent link">#</a></h4>
+<p>Please remap the topic names and play it.</p>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>bag<span class="w"> </span>play<span class="w"> </span>/path/to/ar_tag_based_localizer_sample_bag/<span class="w"> </span>-r<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span>-s<span class="w"> </span>sqlite3<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--remap<span class="w"> </span>/sensing/camera/front/image:<span class="o">=</span>/sensing/camera/traffic_light/image_raw<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>/sensing/camera/front/image/info:<span class="o">=</span>/sensing/camera/traffic_light/camera_info
+</code></pre></div>
 <p>This dataset contains issues such as missing IMU data, and overall the accuracy is low. Even when running AR tag-based self-localization, significant difference from the true trajectory can be observed.</p>
 <p>The image below shows the trajectory when the sample is executed and plotted.</p>
 <p><img alt="sample_result" src="doc_image/sample_result.png"></p>
