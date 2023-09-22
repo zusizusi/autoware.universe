@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/latest/localization/ar_tag_based_localizer/">
+        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/latest/localization/landmark_based_localizer/">
       
       
-        <link rel="prev" href="../../launch/tier4_vehicle_launch/">
+        <link rel="prev" href="../gyro_odometer/">
       
       
-        <link rel="next" href="../ekf_localizer/">
+        <link rel="next" href="ar_tag_based_localizer/">
       
       <link rel="icon" href="../../docs/assets/images/autoware-foundation.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.20">
     
     
       
-        <title>AR Tag Based Localizer - Autoware Universe Documentation</title>
+        <title>Landmark Based Localizer - Autoware Universe Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ar-tag-based-localizer" class="md-skip">
+        <a href="#landmark-based-localizer" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              AR Tag Based Localizer
+              Landmark Based Localizer
             
           </span>
         </div>
@@ -313,7 +313,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="./" class="md-tabs__link md-tabs__link--active">
+      <a href="../ekf_localizer/" class="md-tabs__link md-tabs__link--active">
         Localization
       </a>
     </li>
@@ -5499,18 +5499,18 @@
               
   
   
-    
-  
   
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1" >
       
       
         
@@ -5522,15 +5522,15 @@
       
         
         
-        <div class="md-nav__link md-nav__link--index md-nav__link--active">
-          <a href="./">Ar tag based localizer</a>
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../ekf_localizer/">Ekf localizer</a>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_5_1">
           <span class="md-nav__icon md-icon"></span>
-          Ar tag based localizer
+          Ekf localizer
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -5571,14 +5571,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../ekf_localizer/">Ekf localizer</a>
+          <a href="../gyro_odometer/">Gyro odometer</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_5_2">
           <span class="md-nav__icon md-icon"></span>
-          Ekf localizer
+          Gyro odometer
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -5595,18 +5595,63 @@
               
   
   
+    
+  
   
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index md-nav__link--active">
+          <a href="./">Landmark based localizer</a>
+          
+            <label for="__nav_5_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Landmark based localizer
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
         
       
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3_2" >
       
       
         
@@ -5619,17 +5664,24 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../gyro_odometer/">Gyro odometer</a>
+          <a href="ar_tag_based_localizer/">Ar tag based localizer</a>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_5_3">
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_3_2">
           <span class="md-nav__icon md-icon"></span>
-          Gyro odometer
+          Ar tag based localizer
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
             
           
         </ul>
@@ -14762,6 +14814,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#node-diagram" class="md-nav__link">
+    Node diagram
+  </a>
+  
+    <nav class="md-nav" aria-label="Node diagram">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#landmark_tf_caster-node" class="md-nav__link">
+    landmark_tf_caster node
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landmark-based-localizer-packages" class="md-nav__link">
+    Landmark based localizer packages
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#inputs-outputs" class="md-nav__link">
     Inputs / Outputs
   </a>
@@ -14770,69 +14849,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ar_tag_based_localizer-node" class="md-nav__link">
-    ar_tag_based_localizer node
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tag_tf_caster-node" class="md-nav__link">
-    tag_tf_caster node
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-to-launch" class="md-nav__link">
-    How to launch
-  </a>
-  
-    <nav class="md-nav" aria-label="How to launch">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rosbag" class="md-nav__link">
-    Rosbag
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
-    Architecture
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#principle" class="md-nav__link">
-    Principle
-  </a>
-  
-    <nav class="md-nav" aria-label="Principle">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ar_tag_based_localizer-node_1" class="md-nav__link">
-    ar_tag_based_localizer node
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tag_tf_caster-node_1" class="md-nav__link">
-    tag_tf_caster node
+  <a href="#landmark_tf_caster-node_1" class="md-nav__link">
+    landmark_tf_caster node
   </a>
   
 </li>
@@ -14852,7 +14870,7 @@
         
           <li class="md-nav__item">
   <a href="#example-of-lanelet2_maposm" class="md-nav__link">
-    example of lanelet2_map.osm
+    Example of lanelet2_map.osm
   </a>
   
 </li>
@@ -14880,74 +14898,39 @@
   
 
 
-<div><h1 id="ar-tag-based-localizer">AR Tag Based Localizer<a class="headerlink" href="#ar-tag-based-localizer" title="Permanent link">#</a></h1>
-<p><strong>ArTagBasedLocalizer</strong> is a vision-based localization package.</p>
-<p><img src="./doc_image/ar_tag_image.png" width="320px"></p>
-<p>This package uses <a href="https://index.ros.org/p/aruco/">the ArUco library</a> to detect AR-Tags from camera images and calculates and publishes the pose of the ego vehicle based on these detections.
-The positions and orientations of the AR-Tags are assumed to be written in the Lanelet2 format.</p>
-<p>This package includes two nodes.</p>
+<div><h1 id="landmark-based-localizer">Landmark Based Localizer<a class="headerlink" href="#landmark-based-localizer" title="Permanent link">#</a></h1>
+<p>This directory contains packages for landmark-based localization.</p>
+<p>Landmarks are, for example</p>
 <ul>
-<li><code>ar_tag_based_localizer</code> : A node that detects AR-Tags from camera images and publishes the pose of the ego vehicle.</li>
-<li><code>tag_tf_caster</code> : A node that publishes the pose of the AR-Tags applied in Lanelet2 as <code>tf_static</code>.</li>
+<li>AR tags detected by camera</li>
+<li>Boards characterized by intensity detected by LiDAR</li>
+</ul>
+<p>etc.</p>
+<p>Since these landmarks are easy to detect and estimate pose, the ego pose can be calculated from the pose of the detected landmark if the pose of the landmark is written on the map in advance.</p>
+<p>Currently, landmarks are assumed to be flat.</p>
+<p>The following figure shows the principle of localization in the case of <code>ar_tag_based_localizer</code>.</p>
+<p><img alt="principle" src="doc_image/principle.png"></p>
+<p>This calculated ego pose is passed to the EKF, where it is fused with the twist information and used to estimate a more accurate ego pose.</p>
+<h2 id="node-diagram">Node diagram<a class="headerlink" href="#node-diagram" title="Permanent link">#</a></h2>
+<p><img alt="node diagram" src="doc_image/node_diagram.drawio.svg"></p>
+<h3 id="landmark_tf_caster-node"><code>landmark_tf_caster</code> node<a class="headerlink" href="#landmark_tf_caster-node" title="Permanent link">#</a></h3>
+<p>The definitions of the landmarks written to the map are introduced in the next section. See <code>Map Specifications</code>.</p>
+<p>The <code>landmark_tf_caster</code> node publishes the TF from the map to the landmark.</p>
+<ul>
+<li>Translation : The center of the four vertices of the landmark</li>
+<li>Rotation : Let the vertex numbers be 1, 2, 3, 4 counterclockwise as shown in the next section. Direction is defined as the cross product of the vector from 1 to 2 and the vector from 2 to 3.</li>
+</ul>
+<p>Users can define landmarks as Lanelet2 4-vertex polygons.
+In this case, it is possible to define an arrangement in which the four vertices cannot be considered to be on the same plane. The direction of the landmark in that case is difficult to calculate.
+So, if the 4 vertices are considered as forming a tetrahedron and its volume exceeds the <code>volume_threshold</code> parameter, the landmark will not publish tf_static.</p>
+<h3 id="landmark-based-localizer-packages">Landmark based localizer packages<a class="headerlink" href="#landmark-based-localizer-packages" title="Permanent link">#</a></h3>
+<ul>
+<li>ar_tag_based_localizer</li>
+<li>etc.</li>
 </ul>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
-<h3 id="ar_tag_based_localizer-node"><code>ar_tag_based_localizer</code> node<a class="headerlink" href="#ar_tag_based_localizer-node" title="Permanent link">#</a></h3>
+<h3 id="landmark_tf_caster-node_1"><code>landmark_tf_caster</code> node<a class="headerlink" href="#landmark_tf_caster-node_1" title="Permanent link">#</a></h3>
 <h4 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h4>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>~/input/image</code></td>
-<td align="left"><code>sensor_msgs::msg::Image</code></td>
-<td align="left">Camera Image</td>
-</tr>
-<tr>
-<td align="left"><code>~/input/camera_info</code></td>
-<td align="left"><code>sensor_msgs::msg::CameraInfo</code></td>
-<td align="left">Camera Info</td>
-</tr>
-<tr>
-<td align="left"><code>~/input/ekf_pose</code></td>
-<td align="left"><code>geometry_msgs::msg::PoseWithCovarianceStamped</code></td>
-<td align="left">EKF Pose without IMU correction. It is used to validate detected AR tags by filtering out False Positives. Only if the EKF Pose and the AR tag-detected Pose are within a certain temporal and spatial range, the AR tag-detected Pose is considered valid and published.</td>
-</tr>
-</tbody>
-</table>
-<h4 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h4>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>~/output/pose_with_covariance</code></td>
-<td align="left"><code>geometry_msgs::msg::PoseWithCovarianceStamped</code></td>
-<td align="left">Estimated Pose</td>
-</tr>
-<tr>
-<td align="left"><code>~/debug/result</code></td>
-<td align="left"><code>sensor_msgs::msg::Image</code></td>
-<td align="left">[debug topic] Image in which marker detection results are superimposed on the input image</td>
-</tr>
-<tr>
-<td align="left"><code>tf</code></td>
-<td align="left"><code>geometry_msgs::msg::TransformStamped</code></td>
-<td align="left">[debug topic] TF from camera to detected tag</td>
-</tr>
-</tbody>
-</table>
-<h3 id="tag_tf_caster-node"><code>tag_tf_caster</code> node<a class="headerlink" href="#tag_tf_caster-node" title="Permanent link">#</a></h3>
-<h4 id="input_1">Input<a class="headerlink" href="#input_1" title="Permanent link">#</a></h4>
 <table>
 <thead>
 <tr>
@@ -14964,7 +14947,7 @@ The positions and orientations of the AR-Tags are assumed to be written in the L
 </tr>
 </tbody>
 </table>
-<h4 id="output_1">Output<a class="headerlink" href="#output_1" title="Permanent link">#</a></h4>
+<h4 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h4>
 <table>
 <thead>
 <tr>
@@ -14981,56 +14964,19 @@ The positions and orientations of the AR-Tags are assumed to be written in the L
 </tr>
 </tbody>
 </table>
-<h2 id="how-to-launch">How to launch<a class="headerlink" href="#how-to-launch" title="Permanent link">#</a></h2>
-<p>When launching Autoware, specify <code>artag</code> for <code>pose_source</code>.</p>
-<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>launch<span class="w"> </span>autoware_launch<span class="w"> </span>...<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>pose_source:<span class="o">=</span>artag<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>...
-</code></pre></div>
-<h3 id="rosbag">Rosbag<a class="headerlink" href="#rosbag" title="Permanent link">#</a></h3>
-<h4 id="sample-rosbag-and-map-awsim-data"><a href="https://drive.google.com/file/d/1uMVwQQFcfs8JOqfoA1FqfH_fLPwQ71jK/view">Sample rosbag and map (AWSIM data)</a><a class="headerlink" href="#sample-rosbag-and-map-awsim-data" title="Permanent link">#</a></h4>
-<p>This data is simulated data created by <a href="https://tier4.github.io/AWSIM/">AWSIM</a>.
-Essentially, AR tag-based self-localization is not intended for such public road driving, but for driving in a smaller area, so the max driving speed is set at 15 km/h.</p>
-<p>It is a known problem that the timing of when each AR tag begins to be detected can cause significant changes in estimation.</p>
-<p><img alt="sample_result_in_awsim" src="doc_image/sample_result_in_awsim.png"></p>
-<h4 id="sample-rosbag-and-map-real-world-data"><a href="https://drive.google.com/file/d/1wiCQjyjRnYbb0dg8G6mRecdSGh8tv3zR/view">Sample rosbag and map (Real world data)</a><a class="headerlink" href="#sample-rosbag-and-map-real-world-data" title="Permanent link">#</a></h4>
-<p>Please remap the topic names and play it.</p>
-<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>bag<span class="w"> </span>play<span class="w"> </span>/path/to/ar_tag_based_localizer_sample_bag/<span class="w"> </span>-r<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span>-s<span class="w"> </span>sqlite3<span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>--remap<span class="w"> </span>/sensing/camera/front/image:<span class="o">=</span>/sensing/camera/traffic_light/image_raw<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>/sensing/camera/front/image/info:<span class="o">=</span>/sensing/camera/traffic_light/camera_info
-</code></pre></div>
-<p>This dataset contains issues such as missing IMU data, and overall the accuracy is low. Even when running AR tag-based self-localization, significant difference from the true trajectory can be observed.</p>
-<p>The image below shows the trajectory when the sample is executed and plotted.</p>
-<p><img alt="sample_result" src="doc_image/sample_result.png"></p>
-<p>The pull request video below should also be helpful.</p>
-<p><a href="https://github.com/autowarefoundation/autoware.universe/pull/4347#issuecomment-1663155248">https://github.com/autowarefoundation/autoware.universe/pull/4347#issuecomment-1663155248</a></p>
-<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">#</a></h2>
-<p><img alt="node diagram" src="doc_image/node_diagram.drawio.svg"></p>
-<h2 id="principle">Principle<a class="headerlink" href="#principle" title="Permanent link">#</a></h2>
-<h3 id="ar_tag_based_localizer-node_1"><code>ar_tag_based_localizer</code> node<a class="headerlink" href="#ar_tag_based_localizer-node_1" title="Permanent link">#</a></h3>
-<p><img alt="principle" src="doc_image/principle.png"></p>
-<h3 id="tag_tf_caster-node_1"><code>tag_tf_caster</code> node<a class="headerlink" href="#tag_tf_caster-node_1" title="Permanent link">#</a></h3>
-<p>The definitions of the tags written to the map are introduced in the next section. See <code>Map Specifications</code>.</p>
-<p>The <code>tag_tf_caster</code> node publishes the TF from the map to the tag.</p>
-<ul>
-<li>Translation : The center of the four vertices of the tag</li>
-<li>Rotation : Let the vertex numbers be 1, 2, 3, 4 counterclockwise as shown in the next section. Direction is defined as the cross product of the vector from 1 to 2 and the vector from 2 to 3.</li>
-</ul>
-<p>Users can define tags as Lanelet2 4-vertex polygons.
-In this case, it is possible to define an arrangement in which the four vertices cannot be considered to be on the same plane. The direction of the tag in that case is difficult to calculate.
-So, if the 4 vertices are considered as forming a tetrahedron and its volume exceeds the <code>volume_threshold</code> parameter, the tag will not publish tf_static.</p>
 <h2 id="map-specifications">Map specifications<a class="headerlink" href="#map-specifications" title="Permanent link">#</a></h2>
-<p>For this package to function correctly, the pose of the AR-Tags must be specified in the Lanelet2 map format that Autoware can interpret.</p>
-<p>The four vertices of AR-Tag are defined counterclockwise.</p>
-<p>The order of the four vertices is defined as follows. In the coordinate system of AR-Tag,</p>
+<p>For this package to work correctly, the poses of the landmarks must be specified in the Lanelet2 map format that <code>map_loader</code> and <code>landmark_tf_caster</code> can interpret.</p>
+<p>The four vertices of a landmark are defined counterclockwise.</p>
+<p>The order of the four vertices is defined as follows. In the coordinate system of a landmark,</p>
 <ul>
 <li>the x-axis is parallel to the vector from the first vertex to the second vertex</li>
 <li>the y-axis is parallel to the vector from the second vertex to the third vertex</li>
 </ul>
 <p><img alt="lanelet2 data structure" src="doc_image/lanelet2_data_structure.drawio.svg"></p>
-<h3 id="example-of-lanelet2_maposm">example of <code>lanelet2_map.osm</code><a class="headerlink" href="#example-of-lanelet2_maposm" title="Permanent link">#</a></h3>
+<h3 id="example-of-lanelet2_maposm">Example of <code>lanelet2_map.osm</code><a class="headerlink" href="#example-of-lanelet2_maposm" title="Permanent link">#</a></h3>
 <p>The values provided below are placeholders.
-Ensure to input the correct coordinates corresponding to the actual location where the AR-Tag is placed, such as <code>lat</code>, <code>lon</code>, <code>mgrs_code</code>, <code>local_x</code>, <code>local_y</code>.</p>
+Ensure to input the correct coordinates corresponding to the actual location where the landmark is placed, such as <code>lat</code>, <code>lon</code>, <code>mgrs_code</code>, <code>local_x</code>, <code>local_y</code>.</p>
+<p>For example, when using the AR tag, it would look like this.</p>
 <div class="highlight"><pre><span></span><code>...
 
 <span class="w">  </span><span class="nt">&lt;node</span><span class="w"> </span><span class="na">id=</span><span class="s">"1"</span><span class="w"> </span><span class="na">lat=</span><span class="s">"35.8xxxxx"</span><span class="w"> </span><span class="na">lon=</span><span class="s">"139.6xxxxx"</span><span class="nt">&gt;</span>
@@ -15099,7 +15045,7 @@ Ensure to input the correct coordinates corresponding to the actual location whe
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../launch/tier4_vehicle_launch/" class="md-footer__link md-footer__link--prev" aria-label="Previous: tier4_vehicle_launch" rel="prev">
+          <a href="../gyro_odometer/" class="md-footer__link md-footer__link--prev" aria-label="Previous: gyro_odometer" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -15108,20 +15054,20 @@ Ensure to input the correct coordinates corresponding to the actual location whe
                 Previous
               </span>
               <div class="md-ellipsis">
-                tier4_vehicle_launch
+                gyro_odometer
               </div>
             </div>
           </a>
         
         
           
-          <a href="../ekf_localizer/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview" rel="next">
+          <a href="ar_tag_based_localizer/" class="md-footer__link md-footer__link--next" aria-label="Next: AR Tag Based Localizer" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Overview
+                AR Tag Based Localizer
               </div>
             </div>
             <div class="md-footer__button md-icon">
