@@ -461,17 +461,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/localization/ar_tag_based_localizer/</loc>
-         <lastmod>2023-09-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/localization/ekf_localizer/</loc>
          <lastmod>2023-09-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/localization/gyro_odometer/</loc>
+         <lastmod>2023-09-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/localization/landmark_based_localizer/</loc>
+         <lastmod>2023-09-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/localization/landmark_based_localizer/ar_tag_based_localizer/</loc>
          <lastmod>2023-09-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
