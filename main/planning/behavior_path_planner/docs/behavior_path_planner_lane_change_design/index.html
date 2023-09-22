@@ -9527,6 +9527,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#lane-change-regulations" class="md-nav__link">
+    Lane change regulations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#aborting-lane-change" class="md-nav__link">
     Aborting lane change
   </a>
@@ -9549,6 +9556,13 @@
           <li class="md-nav__item">
   <a href="#essential-lane-change-parameters" class="md-nav__link">
     Essential lane change parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lane-change-regulations_1" class="md-nav__link">
+    Lane change regulations
   </a>
   
 </li>
@@ -14914,6 +14928,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#lane-change-regulations" class="md-nav__link">
+    Lane change regulations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#aborting-lane-change" class="md-nav__link">
     Aborting lane change
   </a>
@@ -14936,6 +14957,13 @@
           <li class="md-nav__item">
   <a href="#essential-lane-change-parameters" class="md-nav__link">
     Essential lane change parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lane-change-regulations_1" class="md-nav__link">
+    Lane change regulations
   </a>
   
 </li>
@@ -15101,6 +15129,9 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 </code></pre></div>
 <p>The following figure illustrates when the lane is blocked in multiple lane changes cases.</p>
 <p><img alt="multiple-lane-changes" src="../../image/lane_change/lane_change-when_cannot_change_lanes.png"></p>
+<h3 id="lane-change-regulations">Lane change regulations<a class="headerlink" href="#lane-change-regulations" title="Permanent link">#</a></h3>
+<p>If you want to regulate lane change on crosswalks or intersections, the lane change module finds a lane change path excluding it includes crosswalks or intersections.
+To regulate lane change on crosswalks or intersections, change <code>regulation.crosswalk</code> or <code>regulation.intersection</code> to <code>true</code>.</p>
 <h3 id="aborting-lane-change">Aborting lane change<a class="headerlink" href="#aborting-lane-change" title="Permanent link">#</a></h3>
 <p>The abort process may result in three different outcome; Cancel, Abort and Stop/Cruise.</p>
 <p>The following depicts the flow of the abort lane change check.</p>
@@ -15318,6 +15349,34 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 <td>boolean</td>
 <td>Include pedestrian objects for safety check</td>
 <td>true</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lane-change-regulations_1">Lane change regulations<a class="headerlink" href="#lane-change-regulations_1" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th>Unit</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>regulation.crosswalk</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Regulate lane change on crosswalks</td>
+<td>false</td>
+</tr>
+<tr>
+<td align="left"><code>regulation.intersection</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Regulate lane change on intersections</td>
+<td>false</td>
 </tr>
 </tbody>
 </table>
