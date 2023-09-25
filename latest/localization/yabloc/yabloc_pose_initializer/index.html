@@ -14984,17 +14984,16 @@
 <ul>
 <li><a href="#camera_pose_initializer">camera_pose_initializer</a></li>
 </ul>
-<p>Ideally, this package downloads a pre-trained semantic segmentation model during the build and loads it at runtime for initialization.
-However, to handle cases where network connectivity is not available at build time, <strong>the default behavior is not to download the model during build.</strong>
-Even if the model is not downloaded, initialization will still complete, but the accuracy may be compromised.</p>
-<!-- cspell: ignore DDOWNLOAD_ARTIFACTS -->
-
-<p>To download the model, please specify <code>--cmake-args -DDOWNLOAD_ARTIFACTS=ON</code> to the build command.</p>
-<div class="highlight"><pre><span></span><code>colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install<span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span>-DDOWNLOAD_ARTIFACTS<span class="o">=</span>ON<span class="w"> </span>--packages-select<span class="w"> </span>yabloc_pose_initializer
+<p>This package requires the pre-trained semantic segmentation model for runtime. This model is usually downloaded by <code>ansible</code> during env preparation phase of the <a href="https://autowarefoundation.github.io/autoware-documentation/main/installation/autoware/source-installation/">installation</a>.
+It is also possible to download it manually. Even if the model is not downloaded, initialization will still complete, but the accuracy may be compromised.</p>
+<p>To download and extract the model manually:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/autoware_data/yabloc_pose_initializer/
+$<span class="w"> </span>wget<span class="w"> </span>-P<span class="w"> </span>~/autoware_data/yabloc_pose_initializer/<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>https://s3.ap-northeast-2.wasabisys.com/pinto-model-zoo/136_road-segmentation-adas-0001/resources.tar.gz
+$<span class="w"> </span>tar<span class="w"> </span>xzf<span class="w"> </span>~/autoware_data/yabloc_pose_initializer/resources.tar.gz<span class="w"> </span>-C<span class="w"> </span>~/autoware_data/yabloc_pose_initializer/
 </code></pre></div>
-<p>For detailed information about the downloaded contents, please consult the <code>download.cmake</code> file in this package.</p>
 <h2 id="note">Note<a class="headerlink" href="#note" title="Permanent link">#</a></h2>
-<p>This package makes use of external code. The trained files are provided by apollo. The trained files are automatically downloaded when you build.</p>
+<p>This package makes use of external code. The trained files are provided by apollo. The trained files are automatically downloaded during env preparation.</p>
 <p>Original model URL</p>
 <p><a href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/road-segmentation-adas-0001">https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/road-segmentation-adas-0001</a></p>
 <blockquote>
