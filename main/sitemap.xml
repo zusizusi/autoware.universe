@@ -231,6 +231,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/common/tier4_logging_level_configure_rviz_plugin/</loc>
+         <lastmod>2023-09-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/common/tier4_perception_rviz_plugin/</loc>
          <lastmod>2023-09-25</lastmod>
          <changefreq>daily</changefreq>
