@@ -15436,7 +15436,14 @@ searched for in certain range of the shoulder lane.</p>
 </thead>
 <tbody>
 <tr>
-<td align="left">search_priority</td>
+<td align="left">goal_priority</td>
+<td align="left">[-]</td>
+<td align="left">string</td>
+<td align="left">In case <code>minimum_weighted_distance</code>, sort with smaller longitudinal distances taking precedence over smaller lateral distances. In case <code>minimum_longitudinal_distance</code>, sort with weighted lateral distance against longitudinal distance.</td>
+<td align="left"><code>minimum_weighted_distance</code></td>
+</tr>
+<tr>
+<td align="left">path_priority</td>
 <td align="left">[-]</td>
 <td align="left">string</td>
 <td align="left">In case <code>efficient_path</code> use a goal that can generate an efficient path( priority is <code>shift_parking</code> -&gt; <code>arc_forward_parking</code> -&gt; <code>arc_backward_parking</code>). In case <code>close_goal</code> use the closest goal to the original one.</td>
