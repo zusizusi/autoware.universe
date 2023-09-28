@@ -15522,7 +15522,7 @@
 <p>If other labels (case insensitive) are contained in the file specified via the <code>label_file</code> parameter,
 those are labeled as <code>UNKNOWN</code>, while detected rectangles are drawn in the visualization result (<code>out/image</code>).</p>
 <h2 id="onnx-model">Onnx model<a class="headerlink" href="#onnx-model" title="Permanent link">#</a></h2>
-<p>A sample model (named <code>yolox-tiny.onnx</code>) is downloaded automatically during the build process.
+<p>A sample model (named <code>yolox-tiny.onnx</code>) is downloaded by ansible script on env preparation stage, if not, please, follow <a href="https://github.com/autowarefoundation/autoware/tree/main/ansible/roles/artifacts">Manual downloading of artifacts</a>.
 To accelerate Non-maximum-suppression (NMS), which is one of the common post-process after object detection inference,
 <code>EfficientNMS_TRT</code> module is attached after the ordinal YOLOX (tiny) network.
 The <code>EfficientNMS_TRT</code> module contains fixed values for <code>score_threshold</code> and <code>nms_threshold</code> in it,
@@ -15587,7 +15587,7 @@ pip3<span class="w"> </span>install<span class="w"> </span>git+ssh://git@github.
 </li>
 </ol>
 <h2 id="label-file">Label file<a class="headerlink" href="#label-file" title="Permanent link">#</a></h2>
-<p>A sample label file (named <code>label.txt</code>)is also downloaded automatically during the build process
+<p>A sample label file (named <code>label.txt</code>)is also downloaded automatically during env preparation process
 (<strong>NOTE:</strong> This file is incompatible with models that output labels for the COCO dataset (e.g., models from the official YOLOX repository)).</p>
 <p>This file represents the correspondence between class index (integer outputted from YOLOX network) and
 class label (strings making understanding easier). This package maps class IDs (incremented from 0)
