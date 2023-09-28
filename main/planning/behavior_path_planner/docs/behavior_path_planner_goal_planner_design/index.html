@@ -15741,11 +15741,11 @@ searched for in certain range of the shoulder lane.</p>
 <td align="left"><code>minimum_weighted_distance</code></td>
 </tr>
 <tr>
-<td align="left">path_priority</td>
+<td align="left">prioritize_goals_before_objects</td>
 <td align="left">[-]</td>
-<td align="left">string</td>
-<td align="left">In case <code>efficient_path</code> use a goal that can generate an efficient path( priority is <code>shift_parking</code> -&gt; <code>arc_forward_parking</code> -&gt; <code>arc_backward_parking</code>). In case <code>close_goal</code> use the closest goal to the original one.</td>
-<td align="left">efficient_path</td>
+<td align="left">bool</td>
+<td align="left">If there are objects that may need to be avoided, prioritize the goal in front of them</td>
+<td align="left">true</td>
 </tr>
 <tr>
 <td align="left">forward_goal_search_length</td>
@@ -15860,6 +15860,20 @@ The path is generated with a certain margin (default: <code>0.5 m</code>) from t
 <td align="left">double</td>
 <td align="left">maximum deceleration. it prevents sudden deceleration when a parking path cannot be found suddenly</td>
 <td align="left">1.0</td>
+</tr>
+<tr>
+<td align="left">path_priority</td>
+<td align="left">[-]</td>
+<td align="left">string</td>
+<td align="left">In case <code>efficient_path</code> use a goal that can generate an efficient path which is set in <code>efficient_path_order</code>. In case <code>close_goal</code> use the closest goal to the original one.</td>
+<td align="left">efficient_path</td>
+</tr>
+<tr>
+<td align="left">efficient_path_order</td>
+<td align="left">[-]</td>
+<td align="left">string</td>
+<td align="left">efficient order of pull over planner along lanes　excluding freespace pull over</td>
+<td align="left">["SHIFT", "ARC_FORWARD", "ARC_BACKWARD"]</td>
 </tr>
 </tbody>
 </table>
