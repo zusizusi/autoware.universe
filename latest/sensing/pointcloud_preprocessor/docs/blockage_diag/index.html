@@ -12516,8 +12516,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#inner-workings-algorithms" class="md-nav__link">
-    Inner-workings / Algorithms
+  <a href="#inner-workings-algorithmsblockage-detection" class="md-nav__link">
+    Inner-workings / Algorithms(Blockage detection)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inner-workings-algorithmsdust-detection" class="md-nav__link">
+    Inner-workings /Algorithms(Dust detection)
   </a>
   
 </li>
@@ -15334,8 +15341,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#inner-workings-algorithms" class="md-nav__link">
-    Inner-workings / Algorithms
+  <a href="#inner-workings-algorithmsblockage-detection" class="md-nav__link">
+    Inner-workings / Algorithms(Blockage detection)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inner-workings-algorithmsdust-detection" class="md-nav__link">
+    Inner-workings /Algorithms(Dust detection)
   </a>
   
 </li>
@@ -15429,14 +15443,22 @@
 
 <div><h1 id="blockage_diag">blockage_diag<a class="headerlink" href="#blockage_diag" title="Permanent link">#</a></h1>
 <h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
-<p>To ensure the performance of LiDAR and safety for autonomous driving, the abnormal condition diagnostics feature is needed.
-LiDAR blockage is abnormal condition of LiDAR when some unwanted objects stitch to and block the light pulses and return signal.
+<p>To ensure the performance of LiDAR and safety for autonomous driving, the abnormal condition diagnostics feature is
+needed.
+LiDAR blockage is abnormal condition of LiDAR when some unwanted objects stitch to and block the light pulses and return
+signal.
 This node's purpose is to detect the existing of blockage on LiDAR and its related size and location.</p>
-<h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
+<h2 id="inner-workings-algorithmsblockage-detection">Inner-workings / Algorithms(Blockage detection)<a class="headerlink" href="#inner-workings-algorithmsblockage-detection" title="Permanent link">#</a></h2>
 <p>This node bases on the no-return region and its location to decide if it is a blockage.</p>
 <p><img alt="blockage situation" src="../image/blockage_diag.png"></p>
 <p>The logic is showed as below</p>
 <p><img alt="blockage_diag_flowchart" src="../image/blockage_diag_flowchart.drawio.svg"></p>
+<h2 id="inner-workings-algorithmsdust-detection">Inner-workings /Algorithms(Dust detection)<a class="headerlink" href="#inner-workings-algorithmsdust-detection" title="Permanent link">#</a></h2>
+<p>About dust detection, morphological processing is implemented.
+If the lidar's ray cannot be acquired due to dust in the lidar area where the point cloud is considered to return from
+the ground,
+black pixels appear as noise in the depth image.
+The area of noise is found by erosion and dilation these black pixels.</p>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
 <p>This implementation inherits <code>pointcloud_preprocessor::Filter</code> class, please refer <a href="../../">README</a>.</p>
 <h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
@@ -15460,31 +15482,51 @@ This node's purpose is to detect the existing of blockage on LiDAR and its relat
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
+<th align="left">Name</th>
+<th align="left">Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>~/output/blockage_diag/debug/blockage_mask_image</code></td>
-<td><code>sensor_msgs::msg::Image</code></td>
+<td align="left"><code>~/output/blockage_diag/debug/blockage_mask_image</code></td>
+<td align="left"><code>sensor_msgs::msg::Image</code></td>
 <td>The mask image of detected blockage</td>
 </tr>
 <tr>
-<td><code>~/output/blockage_diag/debug/ground_blockage_ratio</code></td>
-<td><code>tier4_debug_msgs::msg::Float32Stamped</code></td>
+<td align="left"><code>~/output/blockage_diag/debug/ground_blockage_ratio</code></td>
+<td align="left"><code>tier4_debug_msgs::msg::Float32Stamped</code></td>
 <td>The area ratio of blockage region in ground region</td>
 </tr>
 <tr>
-<td><code>~/output/blockage_diag/debug/sky_blockage_ratio</code></td>
-<td><code>tier4_debug_msgs::msg::Float32Stamped</code></td>
+<td align="left"><code>~/output/blockage_diag/debug/sky_blockage_ratio</code></td>
+<td align="left"><code>tier4_debug_msgs::msg::Float32Stamped</code></td>
 <td>The area ratio of blockage region in sky region</td>
 </tr>
 <tr>
-<td><code>~/output/blockage_diag/debug/lidar_depth_map</code></td>
-<td><code>sensor_msgs::msg::Image</code></td>
+<td align="left"><code>~/output/blockage_diag/debug/lidar_depth_map</code></td>
+<td align="left"><code>sensor_msgs::msg::Image</code></td>
 <td>The depth map image of input point cloud</td>
+</tr>
+<tr>
+<td align="left"><code>~/output/blockage_diag/debug/single_frame_dust_mask</code></td>
+<td align="left"><code>sensor_msgs::msg::Image</code></td>
+<td>The mask image of detected dusty area in latest single frame</td>
+</tr>
+<tr>
+<td align="left"><code>~/output/blockage_diag/debug/multi_frame_dust_mask</code></td>
+<td align="left"><code>sensor_msgs::msg::Image</code></td>
+<td>The mask image of continuous detected dusty area</td>
+</tr>
+<tr>
+<td align="left"><code>~/output/blockage_diag/debug/blockage_dust_merged_image</code></td>
+<td align="left"><code>sensor_msgs::msg::Image</code></td>
+<td>The merged image of blockage detection(red) and multi frame dusty area detection(yellow) results</td>
+</tr>
+<tr>
+<td align="left"><code>~/output/blockage_diag/debug/ground_dust_ratio</code></td>
+<td align="left"><code>tier4_debug_msgs::msg::Float32Stamped</code></td>
+<td>The ratio of dusty area divided by area where ray usually returns from the ground.</td>
 </tr>
 </tbody>
 </table>
@@ -15501,7 +15543,7 @@ This node's purpose is to detect the existing of blockage on LiDAR and its relat
 <tr>
 <td><code>blockage_ratio_threshold</code></td>
 <td>float</td>
-<td>The threshold of blockage area ratio</td>
+<td>The threshold of blockage area ratio.If the blockage value exceeds this threshold, the diagnostic state will be set to ERROR.</td>
 </tr>
 <tr>
 <td><code>blockage_count_threshold</code></td>
@@ -15529,21 +15571,48 @@ This node's purpose is to detect the existing of blockage on LiDAR and its relat
 <td>The LiDAR model</td>
 </tr>
 <tr>
-<td><code>buffering_frames</code></td>
-<td>uint</td>
-<td>The number of buffering [range:1-200]</td>
+<td><code>blockage_buffering_frames</code></td>
+<td>int</td>
+<td>The number of buffering about blockage detection [range:1-200]</td>
 </tr>
 <tr>
-<td><code>buffering_interval</code></td>
-<td>uint</td>
-<td>The interval of buffering</td>
+<td><code>blockage_buffering_interval</code></td>
+<td>int</td>
+<td>The interval of buffering about blockage detection</td>
+</tr>
+<tr>
+<td><code>dust_ratio_threshold</code></td>
+<td>float</td>
+<td>The threshold of dusty area ratio</td>
+</tr>
+<tr>
+<td><code>dust_count_threshold</code></td>
+<td>int</td>
+<td>The threshold of number continuous frames include dusty area</td>
+</tr>
+<tr>
+<td><code>dust_kernel_size</code></td>
+<td>int</td>
+<td>The kernel size of morphology processing in dusty area detection</td>
+</tr>
+<tr>
+<td><code>dust_buffering_frames</code></td>
+<td>int</td>
+<td>The number of buffering about dusty area detection [range:1-200]</td>
+</tr>
+<tr>
+<td><code>dust_buffering_interval</code></td>
+<td>int</td>
+<td>The interval of buffering about dusty area detection</td>
 </tr>
 </tbody>
 </table>
 <h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
 <ol>
-<li>Only Hesai Pandar40P and Hesai PandarQT were tested. For a new LiDAR, it is necessary to check order of channel id in vertical distribution manually and modify the code.</li>
-<li>The current method is still limited for dust type of blockage when dust particles are sparsely distributed.</li>
+<li>Only Hesai Pandar40P and Hesai PandarQT were tested. For a new LiDAR, it is necessary to check order of channel id in
+   vertical distribution manually and modify the code.</li>
+<li>About dusty area detection, False positives occur when there are water puddles on the road surface due to rain, etc.
+   Also, the area of the ray to the sky is currently undetectable.</li>
 </ol>
 <h2 id="optional-error-detection-and-handling">(Optional) Error detection and handling<a class="headerlink" href="#optional-error-detection-and-handling" title="Permanent link">#</a></h2>
 <h2 id="optional-performance-characterization">(Optional) Performance characterization<a class="headerlink" href="#optional-performance-characterization" title="Permanent link">#</a></h2>
