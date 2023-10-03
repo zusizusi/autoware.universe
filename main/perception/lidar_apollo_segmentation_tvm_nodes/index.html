@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lidar_apollo_segmentation_tvm_nodes" class="md-skip">
+        <a href="#macro-rendering-error" class="md-skip">
           Skip to content
         </a>
       
@@ -15253,83 +15253,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#purpose-use-cases" class="md-nav__link">
-    Purpose / Use cases
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#design" class="md-nav__link">
-    Design
-  </a>
-  
-    <nav class="md-nav" aria-label="Design">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#assumptions-known-limits" class="md-nav__link">
-    Assumptions / Known limits
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#inputs-outputs-api" class="md-nav__link">
-    Inputs / Outputs / API
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#error-detection-and-handling" class="md-nav__link">
-    Error detection and handling
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#security-considerations" class="md-nav__link">
-    Security considerations
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#future-extensions-unimplemented-parts" class="md-nav__link">
-    Future extensions / Unimplemented parts
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#related-issues" class="md-nav__link">
-    Related issues
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -15346,135 +15269,21 @@
   
 
 
-<div><h1 id="lidar_apollo_segmentation_tvm_nodes">lidar_apollo_segmentation_tvm_nodes<a class="headerlink" href="#lidar_apollo_segmentation_tvm_nodes" title="Permanent link">#</a></h1>
-<h2 id="purpose-use-cases">Purpose / Use cases<a class="headerlink" href="#purpose-use-cases" title="Permanent link">#</a></h2>
-<p>An alternative to Euclidean clustering.
-This node detects and labels foreground obstacles (e.g. cars, motorcycles, pedestrians) from a point
-cloud, using a neural network.</p>
-<h2 id="design">Design<a class="headerlink" href="#design" title="Permanent link">#</a></h2>
-<p>See the design of the algorithm in the core (lidar_apollo_segmentation_tvm) package's design documents.</p>
-<h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h3>
-<p><code>lidar_apollo_segmentation_tvm</code> and <code>lidar_apollo_segmentation_tvm_nodes</code> will not build without a neural network.
-See the lidar_apollo_segmentation_tvm usage for more information.</p>
-<h3 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h3>
-<p>The original node from Apollo has a Region Of Interest (ROI) filter.
-This has the benefit of working with a filtered point cloud that includes only the points inside the
-ROI (i.e., the drivable road and junction areas) with most of the background obstacles removed (such
-as buildings and trees around the road region).
-Not having this filter may negatively impact performance.</p>
-<h3 id="inputs-outputs-api">Inputs / Outputs / API<a class="headerlink" href="#inputs-outputs-api" title="Permanent link">#</a></h3>
-<h4 id="inputs">Inputs<a class="headerlink" href="#inputs" title="Permanent link">#</a></h4>
-<p>The input are non-ground points as a PointCloud2 message from the sensor_msgs package.</p>
-<h4 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">#</a></h4>
-<p>The output is a <a href="https://github.com/tier4/tier4_autoware_msgs/blob/tier4/universe/tier4_perception_msgs/msg/object_recognition/DetectedObjectsWithFeature.msg">DetectedObjectsWithFeature</a>.</p>
-<h4 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h4>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-<th>Range</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>range</td>
-<td>integer</td>
-<td>The range of the 2D grid with respect to the origin.</td>
-<td>90</td>
-<td>&gt;0</td>
-</tr>
-<tr>
-<td>score_threshold</td>
-<td>float</td>
-<td>The detection confidence score threshold for filtering out the candidate clusters in the post-processing step.</td>
-<td>0.1</td>
-<td>≥0.0<br>≤1.0</td>
-</tr>
-<tr>
-<td>use_intensity_feature</td>
-<td>boolean</td>
-<td>Enable input channel intensity feature.</td>
-<td>false</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>use_constant_feature</td>
-<td>boolean</td>
-<td>Enable input channel constant feature.</td>
-<td>false</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>z_offset</td>
-<td>float</td>
-<td>Vertical translation of the pointcloud before inference.</td>
-<td>0.0</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>min_height</td>
-<td>float</td>
-<td>The minimum height with respect to the origin</td>
-<td>-5.0</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>max_height</td>
-<td>float</td>
-<td>The maximum height with respect to the origin.</td>
-<td>5.0</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>objectness_thresh</td>
-<td>float</td>
-<td>The threshold of objectness for filtering out non-object cells in the obstacle clustering step.</td>
-<td>0.5</td>
-<td>≥0.0<br>≤1.0</td>
-</tr>
-<tr>
-<td>min_pts_num</td>
-<td>integer</td>
-<td>In the post-processing step, the candidate clusters with less than min_pts_num points are removed.</td>
-<td>3</td>
-<td>≥0</td>
-</tr>
-<tr>
-<td>height_thresh</td>
-<td>float</td>
-<td>If it is non-negative, the points that are higher than the predicted object height by height_thresh are filtered out in the post-processing step.</td>
-<td>0.5</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
-<h3 id="error-detection-and-handling">Error detection and handling<a class="headerlink" href="#error-detection-and-handling" title="Permanent link">#</a></h3>
-<p>Abort and warn when the input frame can't be converted to <code>base_link</code>.</p>
-<h3 id="security-considerations">Security considerations<a class="headerlink" href="#security-considerations" title="Permanent link">#</a></h3>
-<p>Both the input and output are controlled by the same actor, so the following security concerns are
-out-of-scope:</p>
-<ul>
-<li>Spoofing</li>
-<li>Tampering</li>
-</ul>
-<p>Leaking data to another actor would require a flaw in TVM or the host operating system that allows
-arbitrary memory to be read, a significant security flaw in itself.
-This is also true for an external actor operating the pipeline early: only the object that initiated
-the pipeline can run the methods to receive its output.</p>
-<p>A Denial-of-Service attack could make the target hardware unusable for other pipelines but would
-require being able to run code on the CPU, which would already allow a more severe Denial-of-Service
-attack.</p>
-<p>No elevation of privilege is required for this package.</p>
-<h2 id="future-extensions-unimplemented-parts">Future extensions / Unimplemented parts<a class="headerlink" href="#future-extensions-unimplemented-parts" title="Permanent link">#</a></h2>
-<h2 id="related-issues">Related issues<a class="headerlink" href="#related-issues" title="Permanent link">#</a></h2>
-<ul>
-<li>
-<h1 id="226-autowareauto-neural-networks-inference-architecture-design">226: Autoware.Auto Neural Networks Inference Architecture Design<a class="headerlink" href="#226-autowareauto-neural-networks-inference-architecture-design" title="Permanent link">#</a></h1>
-</li>
-</ul></div>
+<div><h1 id="macro-rendering-error"><em>Macro Rendering Error</em><a class="headerlink" href="#macro-rendering-error" title="Permanent link">#</a></h1>
+<p><em>File</em>: <code>perception/lidar_apollo_segmentation_tvm_nodes/README.md</code></p>
+<p><em>UndefinedError</em>: 'json_to_markdown' is undefined</p>
+<div class="highlight"><pre><span></span><code>Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/mkdocs_macros/plugin.py", line 527, in render
+    return md_template.render(**page_variables)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "&lt;template&gt;", line 54, in top-level template code
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'json_to_markdown' is undefined
+</code></pre></div></div>
 
 
 
