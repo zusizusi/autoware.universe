@@ -15545,11 +15545,6 @@ it is skipped.</p>
 <td>[-] if true, do not take an action that would cause more deceleration than the maximum allowed</td>
 </tr>
 <tr>
-<td><code>strict</code></td>
-<td>bool</td>
-<td>[-] if true, when a decision is taken to avoid entering a lane, the stop point will make sure no lane at all is entered by ego; if false, ego stops just before entering a lane but may then be overlapping another lane</td>
-</tr>
-<tr>
 <td><code>distance_buffer</code></td>
 <td>double</td>
 <td>[m] buffer distance to try to keep between the ego footprint and lane</td>
@@ -15562,7 +15557,7 @@ it is skipped.</p>
 <tr>
 <td><code>slowdown.velocity</code></td>
 <td>double</td>
-<td>[m/s] slow down velocity</td>
+<td>[m] slow down velocity</td>
 </tr>
 <tr>
 <td><code>stop.distance_threshold</code></td>
