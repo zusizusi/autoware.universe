@@ -15336,6 +15336,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#caveat-pitch-calculation" class="md-nav__link">
+    (Caveat) Pitch calculation
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -15654,6 +15661,9 @@
 <h3 id="default-tf-configuration">Default TF configuration<a class="headerlink" href="#default-tf-configuration" title="Permanent link">#</a></h3>
 <p>Since the vehicle outputs <code>odom</code>-&gt;<code>base_link</code> tf, this simulator outputs the tf with the same frame_id configuration.
 In the simple_planning_simulator.launch.py, the node that outputs the <code>map</code>-&gt;<code>odom</code> tf, that usually estimated by the localization module (e.g. NDT), will be launched as well. Since the tf output by this simulator module is an ideal value, <code>odom</code>-&gt;<code>map</code> will always be 0.</p>
+<h3 id="caveat-pitch-calculation">(Caveat) Pitch calculation<a class="headerlink" href="#caveat-pitch-calculation" title="Permanent link">#</a></h3>
+<p>Ego vehicle pitch angle is calculated in the following manner.</p>
+<p><img alt="pitch calculation" src="media/pitch-calculation.drawio.svg"></p>
 <h2 id="error-detection-and-handling">Error detection and handling<a class="headerlink" href="#error-detection-and-handling" title="Permanent link">#</a></h2>
 <p>The only validation on inputs being done is testing for a valid vehicle model type.</p>
 <h2 id="security-considerations">Security considerations<a class="headerlink" href="#security-considerations" title="Permanent link">#</a></h2>
