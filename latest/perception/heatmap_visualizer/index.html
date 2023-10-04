@@ -15449,40 +15449,46 @@ When publishing, firstly these values are normalized to [0, 1] using maximum and
 </thead>
 <tbody>
 <tr>
-<td><code>frame_count</code></td>
+<td><code>publish_frame_count</code></td>
 <td>int</td>
 <td><code>50</code></td>
 <td>The number of frames to publish heatmap</td>
 </tr>
 <tr>
-<td><code>map_frame</code></td>
+<td><code>heatmap_frame_id</code></td>
 <td>string</td>
 <td><code>base_link</code></td>
-<td>the frame of heatmap to be respected</td>
+<td>The frame ID of heatmap to be respected</td>
 </tr>
 <tr>
-<td><code>map_length</code></td>
+<td><code>heatmap_length</code></td>
 <td>float</td>
 <td><code>200.0</code></td>
-<td>the length of map in meter</td>
+<td>A length of map in meter</td>
 </tr>
 <tr>
-<td><code>map_resolution</code></td>
+<td><code>heatmap_resolution</code></td>
 <td>float</td>
 <td><code>0.8</code></td>
-<td>the resolution of map</td>
+<td>A resolution of map</td>
 </tr>
 <tr>
 <td><code>use_confidence</code></td>
 <td>bool</td>
 <td><code>false</code></td>
-<td>the flag if use confidence score as heatmap value</td>
+<td>A flag if use confidence score as heatmap value</td>
 </tr>
 <tr>
-<td><code>rename_car_to_truck_and_bus</code></td>
+<td><code>class_names</code></td>
+<td>array<string></string></td>
+<td><code>["UNKNOWN", "CAR", "TRUCK", "BUS", "TRAILER", "BICYCLE", "MOTORBIKE", "PEDESTRIAN"]</code></td>
+<td>An array of class names to be published</td>
+</tr>
+<tr>
+<td><code>rename_to_car</code></td>
 <td>bool</td>
 <td><code>true</code></td>
-<td>the flag if rename car to truck or bus</td>
+<td>A flag if rename car like vehicle to car</td>
 </tr>
 </tbody>
 </table>
