@@ -15720,15 +15720,23 @@
 <tr>
 <td><code>input/camera_info</code></td>
 <td><code>sensor_msgs::msg::CameraInfo</code></td>
-<td>raw compressed image</td>
+<td>camera info</td>
+</tr>
+<tr>
+<td><code>input/image_raw</code></td>
+<td><code>sensor_msgs::msg::Image</code></td>
+<td>raw camera image</td>
 </tr>
 <tr>
 <td><code>input/image_raw/compressed</code></td>
 <td><code>sensor_msgs::msg::CompressedImage</code></td>
-<td>raw sensor info</td>
+<td>compressed camera image</td>
 </tr>
 </tbody>
 </table>
+<p>This node subscribes to both compressed image and raw image topics.
+If raw image is subscribed to even once, compressed image will no longer be subscribed to.
+This is to avoid redundant decompression within Autoware.</p>
 <h4 id="output_3">Output<a class="headerlink" href="#output_3" title="Permanent link">#</a></h4>
 <table>
 <thead>
