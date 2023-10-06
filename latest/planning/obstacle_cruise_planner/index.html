@@ -15920,28 +15920,53 @@ v_{target} &amp; = max(v_{ego} + v_{add}, v_{min, cruise})
 </thead>
 <tbody>
 <tr>
-<td><code>slow_down.min_lat_velocity</code></td>
-<td>double</td>
-<td>minimum velocity to linearly calculate slow down velocity [m]</td>
+<td><code>slow_down.labels</code></td>
+<td>vector(string)</td>
+<td>A vector of labels for customizing obstacle-label-based slow down behavior. Each label represents an obstacle type that will be treated differently when applying slow down. The possible labels are ("default" (Mandatory), "unknown","car","truck","bus","trailer","motorcycle","bicycle" or "pedestrian")</td>
 </tr>
 <tr>
-<td><code>slow_down.max_lat_velocity</code></td>
+<td><code>slow_down.default.min_lat_velocity</code></td>
 <td>double</td>
-<td>maximum velocity to linearly calculate slow down velocity [m]</td>
+<td>minimum velocity to linearly calculate slow down velocity [m]. Note: This default value will be used when the detected obstacle label does not match any of the slow_down.labels</td>
 </tr>
 <tr>
-<td><code>slow_down.min_lat_margin</code></td>
+<td><code>slow_down.default.max_lat_velocity</code></td>
 <td>double</td>
-<td>minimum lateral margin to linearly calculate slow down velocity [m]</td>
+<td>maximum velocity to linearly calculate slow down velocity [m]. Note: This default value will be used when the detected obstacle label does not match any of the slow_down.labels</td>
 </tr>
 <tr>
-<td><code>slow_down.max_lat_margin</code></td>
+<td><code>slow_down.default.min_lat_margin</code></td>
 <td>double</td>
-<td>maximum lateral margin to linearly calculate slow down velocity [m]</td>
+<td>minimum lateral margin to linearly calculate slow down velocity [m]. Note: This default value will be used when the detected obstacle label does not match any of the slow_down.labels</td>
+</tr>
+<tr>
+<td><code>slow_down.default.max_lat_margin</code></td>
+<td>double</td>
+<td>maximum lateral margin to linearly calculate slow down velocity [m]. Note: This default value will be used when the detected obstacle label does not match any of the slow_down.labels</td>
+</tr>
+<tr>
+<td><code>(optional) slow_down."label".min_lat_velocity</code></td>
+<td>double</td>
+<td>minimum velocity to linearly calculate slow down velocity [m]. Note: only for obstacles specified in <code>slow_down.labels</code></td>
+</tr>
+<tr>
+<td><code>(optional) slow_down."label".max_lat_velocity</code></td>
+<td>double</td>
+<td>maximum velocity to linearly calculate slow down velocity [m]. Note: only for obstacles specified in <code>slow_down.labels</code></td>
+</tr>
+<tr>
+<td><code>(optional) slow_down."label".min_lat_margin</code></td>
+<td>double</td>
+<td>minimum lateral margin to linearly calculate slow down velocity [m]. Note: only for obstacles specified in <code>slow_down.labels</code></td>
+</tr>
+<tr>
+<td><code>(optional) slow_down."label".max_lat_margin</code></td>
+<td>double</td>
+<td>maximum lateral margin to linearly calculate slow down velocity [m]. Note: only for obstacles specified in <code>slow_down.labels</code></td>
 </tr>
 </tbody>
 </table>
-<p>The role of the slow down planning is inserting slow down velocity in the trajectory where the trajectory points are close to the obstacles.</p>
+<p>The role of the slow down planning is inserting slow down velocity in the trajectory where the trajectory points are close to the obstacles. The parameters can be customized depending on the obstacle type (see <code>slow_down.labels</code>), making it possible to adjust the slow down behavior depending if the obstacle is a pedestrian, bicycle, car, etc.</p>
 <p>The closest point on the obstacle to the ego's trajectory is calculated.
 Then, the slow down velocity is calculated by linear interpolation with the distance between the point and trajectory as follows.</p>
 <p><img alt="slow_down_velocity_calculation" src="media/slow_down_velocity_calculation.svg"></p>
