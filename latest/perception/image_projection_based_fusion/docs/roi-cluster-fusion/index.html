@@ -15526,19 +15526,24 @@
 </thead>
 <tbody>
 <tr>
-<td><code>use_iou_x</code></td>
-<td>bool</td>
-<td>calculate IoU only along x-axis</td>
+<td><code>fusion_distance</code></td>
+<td>double</td>
+<td>If the detected object's distance to frame_id is less than the threshold, the fusion will be processed</td>
 </tr>
 <tr>
-<td><code>use_iou_y</code></td>
-<td>bool</td>
-<td>calculate IoU only along y-axis</td>
+<td><code>trust_object_distance</code></td>
+<td>double</td>
+<td>if the detected object's distance is less than the <code>trust_object_distance</code>, <code>trust_object_iou_mode</code> will be used, otherwise <code>non_trust_object_iou_mode</code> will be used</td>
 </tr>
 <tr>
-<td><code>use_iou</code></td>
-<td>bool</td>
-<td>calculate IoU both along x-axis and y-axis</td>
+<td><code>trust_object_iou_mode</code></td>
+<td>string</td>
+<td>select mode from 3 options {<code>iou</code>, <code>iou_x</code>, <code>iou_y</code>} to calculate IoU in range of [<code>0</code>, <code>trust_distance</code>]. <br>  <code>iou</code>: IoU along x-axis and y-axis <br>  <code>iou_x</code>: IoU along x-axis <br>  <code>iou_y</code>: IoU along y-axis</td>
+</tr>
+<tr>
+<td><code>non_trust_object_iou_mode</code></td>
+<td>string</td>
+<td>the IOU mode using in range of [<code>trust_distance</code>, <code>fusion_distance</code>] if <code>trust_distance</code> &lt; <code>fusion_distance</code></td>
 </tr>
 <tr>
 <td><code>use_cluster_semantic_type</code></td>
@@ -15552,18 +15557,23 @@
 </tr>
 <tr>
 <td><code>roi_scale_factor</code></td>
-<td>float</td>
+<td>double</td>
 <td>the scale factor for offset of detector RoIs if <code>only_allow_inside_cluster=true</code></td>
 </tr>
 <tr>
 <td><code>iou_threshold</code></td>
-<td>float</td>
+<td>double</td>
 <td>the IoU threshold to overwrite a label of clusters with a label of roi</td>
 </tr>
 <tr>
 <td><code>unknown_iou_threshold</code></td>
-<td>float</td>
+<td>double</td>
 <td>the IoU threshold to fuse cluster with unknown label of roi</td>
+</tr>
+<tr>
+<td><code>remove_unknown</code></td>
+<td>bool</td>
+<td>if <code>true</code>, remove all <code>UNKNOWN</code> labeled objects from output</td>
 </tr>
 <tr>
 <td><code>rois_number</code></td>
