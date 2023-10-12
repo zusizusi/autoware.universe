@@ -15203,6 +15203,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    Purpose
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input" class="md-nav__link">
+    Input
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -15219,7 +15241,26 @@
   
 
 
-<h1 id="tier4_system_rviz_plugin">tier4_system_rviz_plugin<a class="headerlink" href="#tier4_system_rviz_plugin" title="Permanent link">#</a></h1>
+<div><h1 id="tier4_system_rviz_plugin">tier4_system_rviz_plugin<a class="headerlink" href="#tier4_system_rviz_plugin" title="Permanent link">#</a></h1>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
+<p>This plugin display the Hazard information from Autoware; and output notices when emergencies are from initial localization and route setting.</p>
+<h2 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/system/emergency/hazard_status</code></td>
+<td><code>autoware_auto_system_msgs::msg::HazardStatusStamped</code></td>
+<td>The topic represents the emergency information from Autoware</td>
+</tr>
+</tbody>
+</table></div>
 
 
 
