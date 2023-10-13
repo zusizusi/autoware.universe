@@ -1416,6 +1416,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/system/duplicated_node_checker/</loc>
+         <lastmod>2023-10-13</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/system/emergency_handler/</loc>
          <lastmod>2023-10-13</lastmod>
          <changefreq>daily</changefreq>
