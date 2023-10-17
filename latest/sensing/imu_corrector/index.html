@@ -15511,12 +15511,15 @@ We also assume that <span class="arithmatex">\(n\sim\mathcal{N}(0, \sigma^2)\)</
 <td><strong>raw</strong> imu data</td>
 </tr>
 <tr>
-<td><code>~/input/twist</code></td>
-<td><code>geometry_msgs::msg::TwistWithCovarianceStamped</code></td>
-<td>vehicle velocity</td>
+<td><code>~/input/pose</code></td>
+<td><code>geometry_msgs::msg::PoseWithCovarianceStamped</code></td>
+<td>ndt pose</td>
 </tr>
 </tbody>
 </table>
+<p>Note that the input pose is assumed to be accurate enough. For example when using NDT, we assume that the NDT is appropriately converged.</p>
+<p>Currently, it is possible to use methods other than NDT as a <code>pose_source</code> for Autoware, but less accurate methods are not suitable for IMU bias estimation.</p>
+<p>In the future, with careful implementation for pose errors, the IMU bias estimated by NDT could potentially be used not only for validation but also for online calibration.</p>
 <h3 id="output_1">Output<a class="headerlink" href="#output_1" title="Permanent link">#</a></h3>
 <table>
 <thead>
@@ -15565,19 +15568,14 @@ We also assume that <span class="arithmatex">\(n\sim\mathcal{N}(0, \sigma^2)\)</
 <td>threshold of the bias of the gyroscope [rad/s]</td>
 </tr>
 <tr>
-<td><code>velocity_threshold</code></td>
+<td><code>timer_callback_interval_sec</code></td>
 <td>double</td>
-<td>threshold of the vehicle velocity to determine if the vehicle is stopped[m/s]</td>
+<td>seconds about the timer callback function [sec]</td>
 </tr>
 <tr>
-<td><code>timestamp_threshold</code></td>
+<td><code>straight_motion_ang_vel_upper_limit</code></td>
 <td>double</td>
-<td>threshold of the timestamp diff between IMU and twist [s]</td>
-</tr>
-<tr>
-<td><code>data_num_threshold</code></td>
-<td>int</td>
-<td>number of data used to calculate bias</td>
+<td>upper limit of yaw angular velocity, beyond which motion is not considered straight [rad/s]</td>
 </tr>
 </tbody>
 </table></div>
