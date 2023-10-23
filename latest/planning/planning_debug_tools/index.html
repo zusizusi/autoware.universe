@@ -15361,6 +15361,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#processing-time-checker" class="md-nav__link">
+    Processing time checker
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -15384,6 +15391,8 @@
 <ul>
 <li><strong>Trajectory analyzer</strong>: visualizes the information (speed, curvature, yaw, etc) along the trajectory</li>
 <li><strong>Closest velocity checker</strong>: prints the velocity information indicated by each modules</li>
+<li><strong>Perception reproducer</strong>: generates detected objects from rosbag data in planning simulator environment</li>
+<li><strong>processing time checker</strong>: displays processing_time of modules on the terminal</li>
 </ul>
 <h2 id="trajectory-analyzer">Trajectory analyzer<a class="headerlink" href="#trajectory-analyzer" title="Permanent link">#</a></h2>
 <p>The <code>trajectory_analyzer</code> visualizes the information (speed, curvature, yaw, etc) along the trajectory. This feature would be helpful for purposes such as "<em>investigating the reason why the vehicle decelerates here</em>". This feature employs the OSS <a href="https://www.plotjuggler.io/">PlotJuggler</a>.</p>
@@ -15553,7 +15562,20 @@ The GUI is launched as well with which a timestamp of rosbag can be managed.</p>
 <p>You can designate multiple rosbags in the directory.</p>
 <div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>run<span class="w"> </span>planning_debug_tools<span class="w"> </span>perception_replayer.py<span class="w"> </span>-b<span class="w"> </span>&lt;dir-to-bag-files&gt;
 </code></pre></div>
-<p>Instead of publishing predicted objects, you can publish detected/tracked objects by designating <code>-d</code> or <code>-t</code>, respectively.</p></div>
+<p>Instead of publishing predicted objects, you can publish detected/tracked objects by designating <code>-d</code> or <code>-t</code>, respectively.</p>
+<h2 id="processing-time-checker">Processing time checker<a class="headerlink" href="#processing-time-checker" title="Permanent link">#</a></h2>
+<p>The purpose of the Processing Time Subscriber is to monitor and visualize the processing times of various ROS 2 topics in a system. By providing a real-time terminal-based visualization, users can easily confirm the processing time performance as in the picture below.</p>
+<p><img alt="processing_time_checker" src="image/processing_time_checker.png"></p>
+<p>You can run the program by the following command.</p>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>run<span class="w"> </span>planning_debug_tools<span class="w"> </span>processing_time_checker.py<span class="w"> </span>-f<span class="w"> </span>&lt;update-hz&gt;<span class="w"> </span>-m<span class="w"> </span>&lt;max-bar-time&gt;
+</code></pre></div>
+<p>This program subscribes to ROS 2 topics that have a suffix of <code>processing_time_ms</code>.</p>
+<p>The program allows users to customize two parameters via command-line arguments:</p>
+<ul>
+<li>--max_display_time (or -m): This sets the maximum display time in milliseconds. The default value is 150ms.</li>
+<li>--display_frequency (or -f): This sets the frequency at which the terminal UI updates. The default value is 5Hz.</li>
+</ul>
+<p>By adjusting these parameters, users can tailor the display to their specific monitoring needs.</p></div>
 
 
 
