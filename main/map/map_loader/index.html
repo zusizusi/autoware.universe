@@ -15526,6 +15526,7 @@ Currently, it supports the following two types:</p>
 <li>Send partial pointcloud map loading via ROS 2 service</li>
 <li>Send differential pointcloud map loading via ROS 2 service</li>
 </ul>
+<p>NOTE: <strong>We strongly recommend to use divided maps when using large pointcloud map to enable the latter two features (partial and differential load). Please go through the prerequisites section for more details, and follow the instruction for dividing the map and preparing the metadata.</strong></p>
 <h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">#</a></h3>
 <h4 id="prerequisites-on-pointcloud-map-files">Prerequisites on pointcloud map file(s)<a class="headerlink" href="#prerequisites-on-pointcloud-map-files" title="Permanent link">#</a></h4>
 <p>You may provide either a single .pcd file or multiple .pcd files. If you are using multiple PCD data and either of <code>enable_partial_load</code>, <code>enable_differential_load</code> or <code>enable_selected_load</code> are set true, it MUST obey the following rules:</p>
