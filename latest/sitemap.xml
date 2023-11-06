@@ -206,6 +206,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/tier4_camera_view_rviz_plugin/</loc>
+         <lastmod>2023-11-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/tier4_control_rviz_plugin/</loc>
          <lastmod>2023-11-06</lastmod>
          <changefreq>daily</changefreq>
