@@ -15615,6 +15615,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#2d-real-time-covariance-estimation" class="md-nav__link">
+    2D real-time covariance estimation
+  </a>
+  
+    <nav class="md-nav" aria-label="2D real-time covariance estimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#abstract_2" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -15717,6 +15744,16 @@
 <td><code>initial_pose_with_covariance</code></td>
 <td><code>geometry_msgs::msg::PoseWithCovarianceStamped</code></td>
 <td>[debug topic] initial pose used in scan matching</td>
+</tr>
+<tr>
+<td><code>multi_ndt_pose</code></td>
+<td><code>geometry_msgs::msg::PoseArray</code></td>
+<td>[debug topic] estimated poses from multiple initial poses in real-time covariance estimation</td>
+</tr>
+<tr>
+<td><code>multi_initial_pose</code></td>
+<td><code>geometry_msgs::msg::PoseArray</code></td>
+<td>[debug topic] initial poses for real-time covariance estimation</td>
 </tr>
 <tr>
 <td><code>exe_time_ms</code></td>
@@ -16162,6 +16199,43 @@ Follow the next two instructions.</p>
 <td><code>z_margin_for_ground_removal</code></td>
 <td>double</td>
 <td>Z-value margin for removal ground points</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2d-real-time-covariance-estimation">2D real-time covariance estimation<a class="headerlink" href="#2d-real-time-covariance-estimation" title="Permanent link">#</a></h2>
+<h3 id="abstract_2">Abstract<a class="headerlink" href="#abstract_2" title="Permanent link">#</a></h3>
+<p>Calculate 2D covariance (xx, xy, yx, yy) in real time using the NDT convergence from multiple initial poses.
+The arrangement of multiple initial poses is efficiently limited by the Hessian matrix of the NDT score function.
+In this implementation, the number of initial positions is fixed to simplify the code.
+The covariance can be seen as error ellipse from ndt_pose_with_covariance setting on rviz2.
+<a href="https://www.fujipress.jp/jrm/rb/robot003500020435/">original paper</a>.</p>
+<p>Note that this function may spoil healthy system behavior if it consumes much calculation resources.</p>
+<h3 id="parameters_4">Parameters<a class="headerlink" href="#parameters_4" title="Permanent link">#</a></h3>
+<p>initial_pose_offset_model is rotated around (x,y) = (0,0) in the direction of the first principal component of the Hessian matrix.
+initial_pose_offset_model_x &amp; initial_pose_offset_model_y must have the same number of elements.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>use_covariance_estimation</code></td>
+<td>bool</td>
+<td>Flag for using real-time covariance estimation (FALSE by default)</td>
+</tr>
+<tr>
+<td><code>initial_pose_offset_model_x</code></td>
+<td>std::vector<double></double></td>
+<td>X-axis offset [m]</td>
+</tr>
+<tr>
+<td><code>initial_pose_offset_model_y</code></td>
+<td>std::vector<double></double></td>
+<td>Y-axis offset [m]</td>
 </tr>
 </tbody>
 </table></div>
