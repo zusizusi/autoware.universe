@@ -15522,9 +15522,10 @@
 <h2 id="design">Design<a class="headerlink" href="#design" title="Permanent link">#</a></h2>
 <h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h3>
 <h4 id="neural-network">Neural network<a class="headerlink" href="#neural-network" title="Permanent link">#</a></h4>
-<p>This package will not build without a neural network for its inference.
-The network is provided by the cmake function exported by the tvm_utility package.
-See its design page for more information on how to enable downloading pre-compiled networks (by setting the <code>DOWNLOAD_ARTIFACTS</code> cmake variable), or how to handle user-compiled networks.</p>
+<p>This package will not run without a neural network for its inference.
+The network is provided by ansible script during the installation of Autoware or can be downloaded manually according to <a href="https://github.com/autowarefoundation/autoware/tree/main/ansible/roles/artifacts">Manual Downloading</a>.
+This package uses 'get_neural_network' function from tvm_utility package to create and provide proper dependency.
+See its design page for more information on how to handle user-compiled networks.</p>
 <h4 id="backend">Backend<a class="headerlink" href="#backend" title="Permanent link">#</a></h4>
 <p>The backend used for the inference can be selected by setting the <code>lidar_apollo_segmentation_tvm_BACKEND</code> cmake variable.
 The current available options are <code>llvm</code> for a CPU backend, and <code>vulkan</code> for a GPU backend.
