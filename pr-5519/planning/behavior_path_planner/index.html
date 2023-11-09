@@ -15482,8 +15482,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#manager-design" class="md-nav__link">
-    Manager design
+  <a href="#planner-manager-design" class="md-nav__link">
+    Planner Manager design
   </a>
   
 </li>
@@ -15666,8 +15666,14 @@
 <h4 id="how-to-implement-new-module">How to implement new module?<a class="headerlink" href="#how-to-implement-new-module" title="Permanent link">#</a></h4>
 <p>WIP</p>
 <hr>
-<h3 id="manager-design">Manager design<a class="headerlink" href="#manager-design" title="Permanent link">#</a></h3>
-<p>The role of manager is to launch the appropriate scene module according to the situation. (e.g. if there is parked-vehicle in ego's driving lane, the manager launches the avoidance module.)</p>
+<h3 id="planner-manager-design">Planner Manager design<a class="headerlink" href="#planner-manager-design" title="Permanent link">#</a></h3>
+<p>The Planner Manager's responsibilities include:</p>
+<ol>
+<li>Activating the relevant scene module in response to the specific situation faced by the autonomous vehicle. For example, when a parked vehicle block ego vehicle's driving lane, the manager would engage the avoidance module.</li>
+<li>Managing the execution order of when multiple modules are running at the same time. If, for instance, both lane-changing and avoidance modules are operational, the manager decides which should take precedence.</li>
+<li>When multiple modules are activated simultaneously and each generates its own path, the manager merges these into a single functional path.</li>
+</ol>
+<p>For more in-depth information, refer to <a href="https://autowarefoundation.github.io/autoware.universe/main/planning/behavior_path_planner/docs/behavior_path_planner_manager_design/">Manager design</a> document.</p>
 <h2 id="inputs-outputs-api">Inputs / Outputs / API<a class="headerlink" href="#inputs-outputs-api" title="Permanent link">#</a></h2>
 <h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
 <table>
@@ -15742,6 +15748,10 @@
 </tr>
 </tbody>
 </table>
+<ul>
+<li>○ Mandatory: Planning Module would not work if anyone of this is not present.</li>
+<li>△ Optional: Some module would not work, but Planning Module can still be operated.</li>
+</ul>
 <h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h3>
 <table>
 <thead>
@@ -15784,8 +15794,6 @@
 </tr>
 </tbody>
 </table>
-<p>○ Mandatory: Planning Module would not work if anyone of this is not present.
-△ Optional: Some module would not work, but Planning Module can still be operated.</p>
 <h2 id="general-features-of-behavior-path-planner">General features of behavior path planner<a class="headerlink" href="#general-features-of-behavior-path-planner" title="Permanent link">#</a></h2>
 <h3 id="drivable-area-generation-logic">Drivable area generation logic<a class="headerlink" href="#drivable-area-generation-logic" title="Permanent link">#</a></h3>
 <p>The behavior path planner generates drivable area that is defined in <code>autoware_auto_planning_msgs::msg::PathWithLaneId</code> and <code>autoware_auto_planning_msgs::msg::Path</code> messages as:</p>
