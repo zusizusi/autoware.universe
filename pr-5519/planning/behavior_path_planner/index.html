@@ -15660,7 +15660,7 @@
 </tr>
 </tbody>
 </table>
-<table>
+<table align="center">
   <tr>
     <td><img src="./image/supported_module_lane_following.svg" alt="Lane Following Module" width="300"></td>
     <td><a href="https://www.youtube.com/watch?v=A_V9yvfKZ4E"><img src="./image/supported_module_avoidance.svg" alt="Avoidance Module" width="300"></a></td>
@@ -15684,6 +15684,8 @@ The remainder of this subsection is work in progress (WIP).</p>
 <li>Managing the execution order of when multiple modules are running at the same time. If, for instance, both lane-changing and avoidance modules are operational, the manager decides which should take precedence.</li>
 <li>When multiple modules are activated simultaneously and each generates its own path, the manager merges these into a single functional path.</li>
 </ol>
+<p>To check the scene module's transition, i.e.: registered, approved and candidate modules, set <code>verbose: true</code> in the <a href="https://github.com/autowarefoundation/autoware_launch/blob/0cd5d891a36ac34a32a417205905c109f2bafe7b/autoware_launch/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/behavior_path_planner.param.yaml#L3">behavior path planner configuration file</a>.</p>
+<p><img alt="Scene module's transition table" src="image/checking_module_transition.png"></p>
 <p>For more in-depth information, refer to <a href="https://autowarefoundation.github.io/autoware.universe/main/planning/behavior_path_planner/docs/behavior_path_planner_manager_design/">Manager design</a> document.</p>
 <h2 id="inputs-outputs-api">Inputs / Outputs / API<a class="headerlink" href="#inputs-outputs-api" title="Permanent link">#</a></h2>
 <h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
