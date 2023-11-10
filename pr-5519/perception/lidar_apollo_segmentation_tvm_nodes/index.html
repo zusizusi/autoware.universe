@@ -15554,7 +15554,7 @@ cloud, using a neural network.</p>
 <h2 id="design">Design<a class="headerlink" href="#design" title="Permanent link">#</a></h2>
 <p>See the design of the algorithm in the core (lidar_apollo_segmentation_tvm) package's design documents.</p>
 <h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h3>
-<p><code>lidar_apollo_segmentation_tvm</code> and <code>lidar_apollo_segmentation_tvm_nodes</code> will not build without a neural network.
+<p><code>lidar_apollo_segmentation_tvm</code> and <code>lidar_apollo_segmentation_tvm_nodes</code> will not work without a neural network.
 See the lidar_apollo_segmentation_tvm usage for more information.</p>
 <h3 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h3>
 <p>The original node from Apollo has a Region Of Interest (ROI) filter.
@@ -15647,6 +15647,13 @@ Not having this filter may negatively impact performance.</p>
 <td>float</td>
 <td>If it is non-negative, the points that are higher than the predicted object height by height_thresh are filtered out in the post-processing step.</td>
 <td>0.5</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>data_path</td>
+<td>string</td>
+<td>Packages data and artifacts directory path.</td>
+<td>$(env HOME)/autoware_data</td>
 <td>N/A</td>
 </tr>
 </tbody>

@@ -15528,26 +15528,39 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#general-features-of-behavior-path-planner" class="md-nav__link">
-    General features of behavior path planner
+  <a href="#generating-drivable-area" class="md-nav__link">
+    Generating Drivable Area
   </a>
   
-    <nav class="md-nav" aria-label="General features of behavior path planner">
+    <nav class="md-nav" aria-label="Generating Drivable Area">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#drivable-area-generation-logic" class="md-nav__link">
-    Drivable area generation logic
+  <a href="#static-drivable-area-logic" class="md-nav__link">
+    Static Drivable area logic
   </a>
   
 </li>
         
           <li class="md-nav__item">
+  <a href="#dynamic-drivable-area-algorithm" class="md-nav__link">
+    Dynamic Drivable Area Algorithm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#generating-turn-signal" class="md-nav__link">
     Generating Turn Signal
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Generating Turn Signal">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#shifted-path-generation-logic" class="md-nav__link">
@@ -15667,10 +15680,10 @@
 </tr>
 </tbody>
 </table>
-<p>!!! <strong>Note</strong></p>
-<div class="codehilite"><pre><span></span><code>click on the following images to view the video of their execution
-</code></pre></div>
-
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>click on the following images to view the video of their execution</p>
+</div>
 <table align="center">
   <tr>
     <td><img src="./image/supported_module_lane_following.svg" alt="Lane Following Module" width="300"></td>
@@ -15690,10 +15703,10 @@
 </div>
 <h4 id="how-to-add-or-implement-new-module">How to add or implement new module?<a class="headerlink" href="#how-to-add-or-implement-new-module" title="Permanent link">#</a></h4>
 <p>All scene modules are implemented by inheriting base class <code>scene_module_interface.hpp</code>.</p>
-<p>!!! <strong>Warning</strong></p>
-<div class="codehilite"><pre><span></span><code>The remainder of this subsection is work in progress (WIP).
-</code></pre></div>
-
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The remainder of this subsection is work in progress (WIP).</p>
+</div>
 <h3 id="planner-manager">Planner Manager<a class="headerlink" href="#planner-manager" title="Permanent link">#</a></h3>
 <p>The Planner Manager's responsibilities include:</p>
 <ol>
@@ -15841,8 +15854,8 @@
 </tbody>
 </table>
 <h2 id="how-to-enable-or-disable-the-modules">How to enable or disable the modules<a class="headerlink" href="#how-to-enable-or-disable-the-modules" title="Permanent link">#</a></h2>
-<h2 id="general-features-of-behavior-path-planner">General features of behavior path planner<a class="headerlink" href="#general-features-of-behavior-path-planner" title="Permanent link">#</a></h2>
-<h3 id="drivable-area-generation-logic">Drivable area generation logic<a class="headerlink" href="#drivable-area-generation-logic" title="Permanent link">#</a></h3>
+<h2 id="generating-drivable-area">Generating Drivable Area<a class="headerlink" href="#generating-drivable-area" title="Permanent link">#</a></h2>
+<h3 id="static-drivable-area-logic">Static Drivable area logic<a class="headerlink" href="#static-drivable-area-logic" title="Permanent link">#</a></h3>
 <p>The behavior path planner generates drivable area that is defined in <code>autoware_auto_planning_msgs::msg::PathWithLaneId</code> and <code>autoware_auto_planning_msgs::msg::Path</code> messages as:</p>
 <div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">geometry_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">Point</span><span class="o">&gt;</span><span class="w"> </span><span class="n">left_bound</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">geometry_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">Point</span><span class="o">&gt;</span><span class="w"> </span><span class="n">right_bound</span><span class="p">;</span>
@@ -15884,7 +15897,10 @@ Expansion parameters are defined for each module of the <code>behavior_path_plan
 </tbody>
 </table>
 <p>Click <a href="docs/behavior_path_planner_drivable_area_design/">here</a> for details.</p>
-<h3 id="generating-turn-signal">Generating Turn Signal<a class="headerlink" href="#generating-turn-signal" title="Permanent link">#</a></h3>
+<h3 id="dynamic-drivable-area-algorithm">Dynamic Drivable Area Algorithm<a class="headerlink" href="#dynamic-drivable-area-algorithm" title="Permanent link">#</a></h3>
+<p>Large vehicles require much more space, which sometimes causes them to veer out of their current lane—a typical example being a bus making a turn at a corner. In such cases, relying on a static drivable area is insufficient, since the static method depends on lane information provided by high-definition maps. To overcome the limitations of the static approach, the dynamic drivable area expansion algorithm adjusts the navigable space for an autonomous vehicle in real-time. It conserves computational power by reusing previously calculated path data, updating only when there is a significant change in the vehicle's position. The system evaluates the minimum lane width necessary to accommodate the vehicle's turning radius and other dynamic factors. It then calculates the optimal expansion of the drivable area's boundaries to ensure there is adequate space for safe maneuvering, taking into account the vehicle's path curvature. The rate at which these boundaries can expand or contract is moderated to maintain stability in the vehicle's navigation. The algorithm aims to maximize the drivable space while avoiding fixed obstacles and adhering to legal driving limits. Finally, it applies these boundary adjustments and smooths out the path curvature calculations to ensure a safe and legally compliant navigable path is maintained throughout the vehicle's operation.</p>
+<p>The feature can be enabled in the <a href="https://github.com/autowarefoundation/autoware_launch/blob/0cd5d891a36ac34a32a417205905c109f2bafe7b/autoware_launch/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/drivable_area_expansion.param.yaml#L10">drivable_area_expansion.param.yaml</a>.</p>
+<h2 id="generating-turn-signal">Generating Turn Signal<a class="headerlink" href="#generating-turn-signal" title="Permanent link">#</a></h2>
 <p>The Behavior Path Planner module uses the <code>autoware_auto_vehicle_msgs::msg::TurnIndicatorsCommand</code> to output turn signal commands (see <a href="https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_vehicle_msgs/msg/TurnIndicatorsCommand.idl">TurnIndicatorsCommand.idl</a>). The system evaluates the driving context and determines when to activate turn signals based on its maneuver planning—like turning, lane changing, or obstacle avoidance.</p>
 <p>Within this framework, the system differentiates between <em>'desired'</em> and <em>'required'</em> blinker activations. <em>'Desired'</em> activations are those recommended by traffic laws for typical driving scenarios, such as signaling before a lane change or turn. <em>'Required'</em> activations are those that are deemed mandatory for safety reasons, like signaling an abrupt lane change to avoid an obstacle.</p>
 <p>The <code>TurnIndicatorsCommand</code> message structure has a command field that can take one of several constants: <code>NO_COMMAND</code> indicates no signal is necessary, <code>DISABLE</code> to deactivate signals, <code>ENABLE_LEFT</code> to signal a left turn, and <code>ENABLE_RIGHT</code> to signal a right turn. The Behavior Path Planner sends these commands at the appropriate times, based on its rules-based system that considers both the <em>'desired'</em> and <em>'required'</em> scenarios for blinker activation.</p>
