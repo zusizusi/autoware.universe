@@ -15683,20 +15683,19 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>click on the following images to view the video of their execution</p>
-</div>
-<table align="center">
-  <tr>
-    <td><img src="./image/supported_module_lane_following.svg" alt="Lane Following Module" width="300"></td>
-    <td><a href="https://www.youtube.com/watch?v=A_V9yvfKZ4E"><img src="./image/supported_module_avoidance.svg" alt="Avoidance Module" width="300"></a></td>
-    <td><img src="./image/supported_module_avoidance_by_lane_change.svg" alt="Avoidance by Lane Change Module" width="300"></td>
-  </tr>
-  <tr>
-    <td><a href="https://www.youtube.com/watch?v=0jRDGQ84cD4"><img src="./image/supported_module_lane_change.svg" alt="Lane Change Module" width="300"></a></td>
-    <td><a href="https://www.youtube.com/watch?v=xOjnPqoHup4"><img src="./image/supported_module_start_planner.svg" alt="Start Planner Module" width="300"></a></td>
-    <td><a href="https://www.youtube.com/watch?v=ornbzkWxRWU"><img src="./image/supported_module_goal_planner.svg" alt="Goal Planner Module" width="300"></a></td>
-  </tr>
+<p></p><table align="center">
+    <tr>
+        <td><img src="./image/supported_module_lane_following.svg" alt="Lane Following Module" width="300"></td>
+        <td><a href="https://www.youtube.com/watch?v=A_V9yvfKZ4E"><img src="./image/supported_module_avoidance.svg" alt="Avoidance Module" width="300"></a></td>
+        <td><img src="./image/supported_module_avoidance_by_lane_change.svg" alt="Avoidance by Lane Change Module" width="300"></td>
+    </tr>
+    <tr>
+        <td><a href="https://www.youtube.com/watch?v=0jRDGQ84cD4"><img src="./image/supported_module_lane_change.svg" alt="Lane Change Module" width="300"></a></td>
+        <td><a href="https://www.youtube.com/watch?v=xOjnPqoHup4"><img src="./image/supported_module_start_planner.svg" alt="Start Planner Module" width="300"></a></td>
+        <td><a href="https://www.youtube.com/watch?v=ornbzkWxRWU"><img src="./image/supported_module_goal_planner.svg" alt="Goal Planner Module" width="300"></a></td>
+    </tr>
 </table>
-
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Users can refer to <a href="https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-architecture/planning/#supported-functions">Planning component design</a> for some additional behavior.</p>
@@ -15898,12 +15897,12 @@ Expansion parameters are defined for each module of the <code>behavior_path_plan
 </table>
 <p>Click <a href="docs/behavior_path_planner_drivable_area_design/">here</a> for details.</p>
 <h3 id="dynamic-drivable-area-algorithm">Dynamic Drivable Area Algorithm<a class="headerlink" href="#dynamic-drivable-area-algorithm" title="Permanent link">#</a></h3>
-<p>Large vehicles require much more space, which sometimes causes them to veer out of their current lane—a typical example being a bus making a turn at a corner. In such cases, relying on a static drivable area is insufficient, since the static method depends on lane information provided by high-definition maps. To overcome the limitations of the static approach, the dynamic drivable area expansion algorithm adjusts the navigable space for an autonomous vehicle in real-time. It conserves computational power by reusing previously calculated path data, updating only when there is a significant change in the vehicle's position. The system evaluates the minimum lane width necessary to accommodate the vehicle's turning radius and other dynamic factors. It then calculates the optimal expansion of the drivable area's boundaries to ensure there is adequate space for safe maneuvering, taking into account the vehicle's path curvature. The rate at which these boundaries can expand or contract is moderated to maintain stability in the vehicle's navigation. The algorithm aims to maximize the drivable space while avoiding fixed obstacles and adhering to legal driving limits. Finally, it applies these boundary adjustments and smooths out the path curvature calculations to ensure a safe and legally compliant navigable path is maintained throughout the vehicle's operation.</p>
+<p>Large vehicles require much more space, which sometimes causes them to veer out of their current lane. A typical example being a bus making a turn at a corner. In such cases, relying on a static drivable area is insufficient, since the static method depends on lane information provided by high-definition maps. To overcome the limitations of the static approach, the dynamic drivable area expansion algorithm adjusts the navigable space for an autonomous vehicle in real-time. It conserves computational power by reusing previously calculated path data, updating only when there is a significant change in the vehicle's position. The system evaluates the minimum lane width necessary to accommodate the vehicle's turning radius and other dynamic factors. It then calculates the optimal expansion of the drivable area's boundaries to ensure there is adequate space for safe maneuvering, taking into account the vehicle's path curvature. The rate at which these boundaries can expand or contract is moderated to maintain stability in the vehicle's navigation. The algorithm aims to maximize the drivable space while avoiding fixed obstacles and adhering to legal driving limits. Finally, it applies these boundary adjustments and smooths out the path curvature calculations to ensure a safe and legally compliant navigable path is maintained throughout the vehicle's operation.</p>
 <p>The feature can be enabled in the <a href="https://github.com/autowarefoundation/autoware_launch/blob/0cd5d891a36ac34a32a417205905c109f2bafe7b/autoware_launch/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/drivable_area_expansion.param.yaml#L10">drivable_area_expansion.param.yaml</a>.</p>
 <h2 id="generating-turn-signal">Generating Turn Signal<a class="headerlink" href="#generating-turn-signal" title="Permanent link">#</a></h2>
 <p>The Behavior Path Planner module uses the <code>autoware_auto_vehicle_msgs::msg::TurnIndicatorsCommand</code> to output turn signal commands (see <a href="https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_vehicle_msgs/msg/TurnIndicatorsCommand.idl">TurnIndicatorsCommand.idl</a>). The system evaluates the driving context and determines when to activate turn signals based on its maneuver planning—like turning, lane changing, or obstacle avoidance.</p>
-<p>Within this framework, the system differentiates between <em>'desired'</em> and <em>'required'</em> blinker activations. <em>'Desired'</em> activations are those recommended by traffic laws for typical driving scenarios, such as signaling before a lane change or turn. <em>'Required'</em> activations are those that are deemed mandatory for safety reasons, like signaling an abrupt lane change to avoid an obstacle.</p>
-<p>The <code>TurnIndicatorsCommand</code> message structure has a command field that can take one of several constants: <code>NO_COMMAND</code> indicates no signal is necessary, <code>DISABLE</code> to deactivate signals, <code>ENABLE_LEFT</code> to signal a left turn, and <code>ENABLE_RIGHT</code> to signal a right turn. The Behavior Path Planner sends these commands at the appropriate times, based on its rules-based system that considers both the <em>'desired'</em> and <em>'required'</em> scenarios for blinker activation.</p>
+<p>Within this framework, the system differentiates between <strong>desired</strong> and <strong>required</strong> blinker activations. <strong>Desired</strong> activations are those recommended by traffic laws for typical driving scenarios, such as signaling before a lane change or turn. <strong>Required</strong> activations are those that are deemed mandatory for safety reasons, like signaling an abrupt lane change to avoid an obstacle.</p>
+<p>The <code>TurnIndicatorsCommand</code> message structure has a command field that can take one of several constants: <code>NO_COMMAND</code> indicates no signal is necessary, <code>DISABLE</code> to deactivate signals, <code>ENABLE_LEFT</code> to signal a left turn, and <code>ENABLE_RIGHT</code> to signal a right turn. The Behavior Path Planner sends these commands at the appropriate times, based on its rules-based system that considers both the <strong>desired</strong> and <strong>required</strong> scenarios for blinker activation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For more in-depth information, refer to <a href="docs/behavior_path_planner_turn_signal_design/">Turn Signal Design</a> document.</p>
