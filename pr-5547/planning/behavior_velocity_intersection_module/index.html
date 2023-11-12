@@ -15710,11 +15710,11 @@
 <p>If a stopline is associated with the intersection lane on the map, that line is used as the stopline for collision detection. Otherwise the path is interpolated at a certain intervals (=<code>common.path_interpolation_ds</code>), and the point which is <code>stop_line_margin</code> meters behind the attention area is defined as the position of the stop line for the vehicle front.</p>
 <h4 id="pass-judge-line">Pass Judge Line<a class="headerlink" href="#pass-judge-line" title="Permanent link">#</a></h4>
 <p>To avoid sudden braking, if deceleration and jerk more than a threshold (<code>behavior_velocity_planner.max_accel</code> and <code>behavior_velocity_planner.max_jerk</code>) is required to stop just in front of the attention area, namely the <code>first_attention_stop_line</code>, this module does not insert stopline after it passed the <code>default stop_line</code> position.</p>
-<p>The position of the pass judge line depends on the occlusion detection configuration and the existance of the associated traffic light of the intersection lane.</p>
+<p>The position of the pass judge line depends on the occlusion detection configuration and the existence of the associated traffic light of the intersection lane.</p>
 <ul>
 <li>If <code>occlusion.enable</code> is false, the pass judge line before the <code>first_attention_stop_line</code> by the braking distance <span class="arithmatex">\(v_{ego}^{2} / 2a_{max}\)</span>.</li>
 <li>If <code>occlusion.enable</code> is true and:<ul>
-<li>if there are associated traffic lights, the pass judge line is at the <code>occlusion_peeking_stop_line</code> in order to continue peeking/collision detection while occluison is detected.</li>
+<li>if there are associated traffic lights, the pass judge line is at the <code>occlusion_peeking_stop_line</code> in order to continue peeking/collision detection while occlusion is detected.</li>
 <li>if there are no associated traffic lights and:<ul>
 <li>if occlusion is detected, pass judge line is at the <code>occlusion_wo_tl_pass_judge_line</code> to continue peeking.</li>
 <li>if occlusion is not detected, pass judge line is at the same place at the case where <code>occlusion.enable</code> is false.</li>
