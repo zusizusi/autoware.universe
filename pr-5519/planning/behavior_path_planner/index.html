@@ -15461,7 +15461,7 @@
       
         <li class="md-nav__item">
   <a href="#purpose-use-cases" class="md-nav__link">
-    Purpose / Use cases
+    Purpose / Use Cases
   </a>
   
 </li>
@@ -15576,22 +15576,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#references-external-links" class="md-nav__link">
-    References / External links
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#future-extensions-unimplemented-parts" class="md-nav__link">
-    Future extensions / Unimplemented parts
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#related-issues" class="md-nav__link">
-    Related issues
+  <a href="#limitations-future-work" class="md-nav__link">
+    Limitations &amp; Future Work
   </a>
   
 </li>
@@ -15615,12 +15601,15 @@
 
 
 <div><h1 id="behavior-path-planner">Behavior Path Planner<a class="headerlink" href="#behavior-path-planner" title="Permanent link">#</a></h1>
-<h2 id="purpose-use-cases">Purpose / Use cases<a class="headerlink" href="#purpose-use-cases" title="Permanent link">#</a></h2>
-<p>The <code>behavior_path_planner</code> module is responsible to generate</p>
+<p>The Behavior Path Planner's main objective is to significantly enhances the safety of autonomous vehicles by minimizing the risk of accidents. It improves driving efficiency through time conservation and underpins reliability with its rule-based approach. Additionally, it allows users to integrate their own custom behavior modules or use it with different types of vehicles, such as cars, buses, and delivery robots, as well as in various environments, from busy urban streets to open highways.</p>
+<p>The module begins by thoroughly analyzing the ego vehicle's current situation, including position, speed, and surrounding environment, leading to essential driving decisions about lane changes or stopping, and subsequently generates a path that is both safe and efficient, considering road geometry, traffic rules, and dynamic conditions, while also incorporating obstacle avoidance to respond to static and dynamic obstacles such as other vehicles, pedestrians, or unexpected roadblocks, ensuring safe navigation.</p>
+<p>Moreover, the planner actively interacts with other traffic participants, predicting their actions and accordingly adjusting the vehicle's path. This ensures not only the safety of the autonomous vehicle but also contributes to smooth traffic flow. Its adherence to traffic laws, including speed limits and traffic signals, further guarantees lawful and predictable driving behavior. The planner is also designed to minimize sudden or abrupt maneuvers, aiming for a comfortable and natural driving experience.</p>
+<h2 id="purpose-use-cases">Purpose / Use Cases<a class="headerlink" href="#purpose-use-cases" title="Permanent link">#</a></h2>
+<p>Essentially, the module has three primary responsibilities:</p>
 <ol>
-<li><strong>path</strong> based on the traffic situation,</li>
-<li><strong>drivable area</strong> that the vehicle can move (defined in the path msg),</li>
-<li><strong>turn signal</strong> command to be sent to the vehicle interface.</li>
+<li>Creating a <strong>path based</strong> on the traffic situation.</li>
+<li>Generating <strong>drivable area</strong>, i.e. the area within which the vehicle can maneuver.</li>
+<li>Generating <strong>turn signal</strong> commands to be relayed to the vehicle interface.</li>
 </ol>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">#</a></h2>
 <h3 id="supported-scene-modules">Supported Scene Modules<a class="headerlink" href="#supported-scene-modules" title="Permanent link">#</a></h3>
@@ -15949,10 +15938,16 @@ Expansion parameters are defined for each module of the <code>behavior_path_plan
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Click <a href="docs/behavior_path_planner_drivable_area_design/">here</a> for details.</p>
+</div>
 <h3 id="dynamic-drivable-area-algorithm">Dynamic Drivable Area Algorithm<a class="headerlink" href="#dynamic-drivable-area-algorithm" title="Permanent link">#</a></h3>
 <p>Large vehicles require much more space, which sometimes causes them to veer out of their current lane. A typical example being a bus making a turn at a corner. In such cases, relying on a static drivable area is insufficient, since the static method depends on lane information provided by high-definition maps. To overcome the limitations of the static approach, the dynamic drivable area expansion algorithm adjusts the navigable space for an autonomous vehicle in real-time. It conserves computational power by reusing previously calculated path data, updating only when there is a significant change in the vehicle's position. The system evaluates the minimum lane width necessary to accommodate the vehicle's turning radius and other dynamic factors. It then calculates the optimal expansion of the drivable area's boundaries to ensure there is adequate space for safe maneuvering, taking into account the vehicle's path curvature. The rate at which these boundaries can expand or contract is moderated to maintain stability in the vehicle's navigation. The algorithm aims to maximize the drivable space while avoiding fixed obstacles and adhering to legal driving limits. Finally, it applies these boundary adjustments and smooths out the path curvature calculations to ensure a safe and legally compliant navigable path is maintained throughout the vehicle's operation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The feature can be enabled in the <a href="https://github.com/autowarefoundation/autoware_launch/blob/0cd5d891a36ac34a32a417205905c109f2bafe7b/autoware_launch/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/drivable_area_expansion.param.yaml#L10">drivable_area_expansion.param.yaml</a>.</p>
+</div>
 <h2 id="generating-turn-signal">Generating Turn Signal<a class="headerlink" href="#generating-turn-signal" title="Permanent link">#</a></h2>
 <p>The Behavior Path Planner module uses the <code>autoware_auto_vehicle_msgs::msg::TurnIndicatorsCommand</code> to output turn signal commands (see <a href="https://github.com/tier4/autoware_auto_msgs/blob/tier4/main/autoware_auto_vehicle_msgs/msg/TurnIndicatorsCommand.idl">TurnIndicatorsCommand.idl</a>). The system evaluates the driving context and determines when to activate turn signals based on its maneuver planning—like turning, lane changing, or obstacle avoidance.</p>
 <p>Within this framework, the system differentiates between <strong>desired</strong> and <strong>required</strong> blinker activations. <strong>Desired</strong> activations are those recommended by traffic laws for typical driving scenarios, such as signaling before a lane change or turn. <strong>Required</strong> activations are those that are deemed mandatory for safety reasons, like signaling an abrupt lane change to avoid an obstacle.</p>
@@ -15971,14 +15966,7 @@ Expansion parameters are defined for each module of the <code>behavior_path_plan
 <p class="admonition-title">Note</p>
 <p>If you're a math lover, refer to <a href="docs/behavior_path_planner_path_generation_design/">Path Generation Design</a> for the nitty-gritty.</p>
 </div>
-<h2 id="references-external-links">References / External links<a class="headerlink" href="#references-external-links" title="Permanent link">#</a></h2>
-<!-- cspell:ignore Vorobieva, Minoiu, Enache, Mammar, IFAC -->
-
-<p><a href="https://www.sciencedirect.com/science/article/pii/S1474667015347431">[1]</a> H. Vorobieva, S. Glaser, N. Minoiu-Enache, and S. Mammar, “Geometric path planning for automatic parallel parking in tiny spots”, IFAC Proceedings Volumes, vol. 45, no. 24, pp. 36–42, 2012.</p>
-<h2 id="future-extensions-unimplemented-parts">Future extensions / Unimplemented parts<a class="headerlink" href="#future-extensions-unimplemented-parts" title="Permanent link">#</a></h2>
-<p>-</p>
-<h2 id="related-issues">Related issues<a class="headerlink" href="#related-issues" title="Permanent link">#</a></h2>
-<p>-</p></div>
+<h2 id="limitations-future-work">Limitations &amp; Future Work<a class="headerlink" href="#limitations-future-work" title="Permanent link">#</a></h2></div>
 
 
 
