@@ -15756,6 +15756,8 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 <p>The following figure illustrates when the lane is blocked in multiple lane changes cases.</p>
 <p><img alt="multiple-lane-changes" src="../../image/lane_change/lane_change-when_cannot_change_lanes.png"></p>
 <h4 id="stopping-position-when-an-object-exists-ahead">Stopping position when an object exists ahead<a class="headerlink" href="#stopping-position-when-an-object-exists-ahead" title="Permanent link">#</a></h4>
+<p>When an obstacle is in front of the ego vehicle, stop with keeping a distance for lane change.
+The position to be stopped depends on the situation, such as when the lane change is blocked by the target lane obstacle, or when the lane change is not needed immediately.The following shows the division in that case.</p>
 <h5 id="when-the-ego-vehicle-is-near-the-end-of-the-lane-change">When the ego vehicle is near the end of the lane change<a class="headerlink" href="#when-the-ego-vehicle-is-near-the-end-of-the-lane-change" title="Permanent link">#</a></h5>
 <p>Regardless of the presence or absence of objects in the lane change target lane, stop by keeping the distance necessary for lane change to the object ahead.</p>
 <p><img alt="stop_at_terminal_no_block" src="../../image/lane_change/lane_change-stop_at_terminal_no_block.drawio.svg"></p>
