@@ -15915,6 +15915,17 @@
 <p>For specific information of which topics are being subscribed and published, refer to <a href="https://github.com/autowarefoundation/autoware.universe/blob/9000f430c937764c14e43109539302f1f878ed70/planning/behavior_path_planner/launch/behavior_path_planner.launch.xml#L36-L49">behavior_path_planner.xml</a>.</p>
 </div>
 <h2 id="how-to-enable-or-disable-the-modules">How to enable or disable the modules<a class="headerlink" href="#how-to-enable-or-disable-the-modules" title="Permanent link">#</a></h2>
+<p>Enabling and disabling the modules in the behavior path planner is primarily managed through two key files: <code>default_preset.yaml</code> and <code>behavior_path_planner.launch.xml</code>.</p>
+<p>The <code>default_preset.yaml</code> file acts as a configuration file for enabling or disabling specific modules within the planner. It contains a series of arguments which represent the behavior path planner's modules or features. For example:</p>
+<ul>
+<li><code>launch_avoidance_module</code>: Set to <code>true</code> to enable the avoidance module, or <code>false</code> to disable it.</li>
+<li><code>use_experimental_lane_change_function</code>: Set to <code>true</code> to enable experimental features in the lane change module.</li>
+</ul>
+<p>The <code>behavior_path_planner.launch.xml</code> file references the settings defined in <code>default_preset.yaml</code> to apply the configurations when the behavior path planner's node is running. For instance, the parameter <code>avoidance.enable_module</code> in</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"avoidance.enable_module"</span><span class="w"> </span><span class="na">value=</span><span class="s">"$(var launch_avoidance_module)"</span><span class="nt">/&gt;</span>
+</code></pre></div>
+<p>corresponds to launch_avoidance_module from <code>default_preset.yaml</code>.</p>
+<p>Therefore, to enable or disable a module, simply set the corresponding module in <code>default_preset.yaml</code> to <code>true</code> or <code>false</code>. These changes will be applied upon the next launch of Autoware.</p>
 <h2 id="collision-assessment-safety-check">Collision Assessment / Safety check<a class="headerlink" href="#collision-assessment-safety-check" title="Permanent link">#</a></h2>
 <p>The collision assessment function's purpose in the Behavior Path Planner is to evaluate the potential for collisions with target objects across all modules. It is utilized in two scenarios. The first event occurs during candidate path generation to ensure that the generated candidate path is collision-free. The second occurs when the path is approved by the manager, and the ego vehicle is executing the current module. If the current situation is unsafe, depending on each module's requirements, the planner will either cancel the execution or opt to execute another module.</p>
 <p>The function operates under the assumption that accurate data on the position, velocity, and shape of both the ego vehicle (the autonomous vehicle) and any target objects are available. It also relies on the yaw angle of each point in the predicted paths of these objects, which is expected to point towards the next path point.</p>
@@ -15969,7 +15980,7 @@
 <p>If you're a math lover, refer to <a href="docs/behavior_path_planner_path_generation_design/">Path Generation Design</a> for the nitty-gritty.</p>
 </div>
 <h2 id="parameters-and-configuration">Parameters and Configuration<a class="headerlink" href="#parameters-and-configuration" title="Permanent link">#</a></h2>
-<p>The configuration files are organized in a hierarchical directory structure for ease of navigation and management. Each subdirectory contains specific configuration files relevant to its module. The root directory holds general configuration files that apply to the overall behavior of the planner. The following is an overview of the directory structure with the respective configuration files. These directories can be found <a href="https://github.com/autowarefoundation/autoware_launch/tree/main/autoware_launch/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner">here</a>.</p>
+<p>The <a href="https://github.com/autowarefoundation/autoware_launch/tree/main/autoware_launch/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner">configuration files</a> are organized in a hierarchical directory structure for ease of navigation and management. Each subdirectory contains specific configuration files relevant to its module. The root directory holds general configuration files that apply to the overall behavior of the planner. The following is an overview of the directory structure with the respective configuration files.</p>
 <div class="highlight"><pre><span></span><code>behavior_path_planner
 ├── behavior_path_planner.param.yaml
 ├── drivable_area_expansion.param.yaml
@@ -15994,6 +16005,10 @@
 ├── common.param.yaml
 ├── costmap_generator.param.yaml
 └── nearest_search.param.yaml
+</code></pre></div>
+<p>The <a href="https://github.com/autowarefoundation/autoware_launch/tree/main/autoware_launch/config/planning/preset">preset</a> directory contains the configurations for managing the operational state of various modules. It includes the default_preset.yaml file, which specifically caters to enabling and disabling modules within the system.</p>
+<div class="highlight"><pre><span></span><code>preset
+└── default_preset.yaml
 </code></pre></div>
 <h2 id="limitations-future-work">Limitations &amp; Future Work<a class="headerlink" href="#limitations-future-work" title="Permanent link">#</a></h2>
 <div class="codehilite"><pre><span></span><code>1. Some module cannot be simultaneously executed for now. For instance
