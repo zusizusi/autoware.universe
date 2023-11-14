@@ -15673,18 +15673,20 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>click on the following images to view the video of their execution</p>
-<p></p><table align="center">
-    <tr>
-        <td><img src="./image/supported_module_lane_following.svg" alt="Lane Following Module" width="300"></td>
-        <td><a href="https://www.youtube.com/watch?v=A_V9yvfKZ4E"><img src="./image/supported_module_avoidance.svg" alt="Avoidance Module" width="300"></a></td>
-        <td><img src="./image/supported_module_avoidance_by_lane_change.svg" alt="Avoidance by Lane Change Module" width="300"></td>
-    </tr>
-    <tr>
-        <td><a href="https://www.youtube.com/watch?v=0jRDGQ84cD4"><img src="./image/supported_module_lane_change.svg" alt="Lane Change Module" width="300"></a></td>
-        <td><a href="https://www.youtube.com/watch?v=xOjnPqoHup4"><img src="./image/supported_module_start_planner.svg" alt="Start Planner Module" width="300"></a></td>
-        <td><a href="https://www.youtube.com/watch?v=ornbzkWxRWU"><img src="./image/supported_module_goal_planner.svg" alt="Goal Planner Module" width="300"></a></td>
-    </tr>
-</table>
+<p></p><div align="center">
+    <table>
+        <tr>
+            <td><img src="./image/supported_module_lane_following.svg" alt="Lane Following Module" width="300"></td>
+            <td><a href="https://www.youtube.com/watch?v=A_V9yvfKZ4E"><img src="./image/supported_module_avoidance.svg" alt="Avoidance Module" width="300"></a></td>
+            <td><img src="./image/supported_module_avoidance_by_lane_change.svg" alt="Avoidance by Lane Change Module" width="300"></td>
+        </tr>
+        <tr>
+            <td><a href="https://www.youtube.com/watch?v=0jRDGQ84cD4"><img src="./image/supported_module_lane_change.svg" alt="Lane Change Module" width="300"></a></td>
+            <td><a href="https://www.youtube.com/watch?v=xOjnPqoHup4"><img src="./image/supported_module_start_planner.svg" alt="Start Planner Module" width="300"></a></td>
+            <td><a href="https://www.youtube.com/watch?v=ornbzkWxRWU"><img src="./image/supported_module_goal_planner.svg" alt="Goal Planner Module" width="300"></a></td>
+        </tr>
+    </table>
+</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -15703,8 +15705,11 @@
 <li>Managing the execution order of when multiple modules are running at the same time. If, for instance, both lane-changing and avoidance modules are operational, the manager decides which should take precedence.</li>
 <li>When multiple modules are activated simultaneously and each generates its own path, the manager merges these into a single functional path.</li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>To check the scene module's transition, i.e.: registered, approved and candidate modules, set <code>verbose: true</code> in the <a href="https://github.com/autowarefoundation/autoware_launch/blob/0cd5d891a36ac34a32a417205905c109f2bafe7b/autoware_launch/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/behavior_path_planner.param.yaml#L3">behavior path planner configuration file</a>.</p>
 <p><img alt="Scene module's transition table" src="image/checking_module_transition.png"></p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For more in-depth information, refer to <a href="docs/behavior_path_planner_manager_design/">Manager design</a> document.</p>
@@ -15898,46 +15903,19 @@
 <h2 id="how-to-enable-or-disable-the-modules">How to enable or disable the modules<a class="headerlink" href="#how-to-enable-or-disable-the-modules" title="Permanent link">#</a></h2>
 <h2 id="generating-drivable-area">Generating Drivable Area<a class="headerlink" href="#generating-drivable-area" title="Permanent link">#</a></h2>
 <h3 id="static-drivable-area-logic">Static Drivable area logic<a class="headerlink" href="#static-drivable-area-logic" title="Permanent link">#</a></h3>
-<p>The behavior path planner generates drivable area that is defined in <code>autoware_auto_planning_msgs::msg::PathWithLaneId</code> and <code>autoware_auto_planning_msgs::msg::Path</code> messages as:</p>
-<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">geometry_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">Point</span><span class="o">&gt;</span><span class="w"> </span><span class="n">left_bound</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">geometry_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">Point</span><span class="o">&gt;</span><span class="w"> </span><span class="n">right_bound</span><span class="p">;</span>
-</code></pre></div>
-<p>Optionally, the drivable area can be expanded by a static distance.
-Expansion parameters are defined for each module of the <code>behavior_path_planner</code> and should be prefixed accordingly (see <code>config/drivable_area_expansion.yaml</code> for an example).</p>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Unit</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">drivable_area_right_bound_offset</td>
-<td align="left">[m]</td>
-<td align="left">double</td>
-<td align="left">expansion distance of the right bound</td>
-<td align="left">0.0</td>
-</tr>
-<tr>
-<td align="left">drivable_area_right_bound_offset</td>
-<td align="left">[m]</td>
-<td align="left">double</td>
-<td align="left">expansion distance of the left bound</td>
-<td align="left">0.0</td>
-</tr>
-<tr>
-<td align="left">drivable_area_types_to_skip</td>
-<td align="left"></td>
-<td align="left">list of strings</td>
-<td align="left">types of linestrings that are not expanded</td>
-<td align="left">[road_border]</td>
-</tr>
-</tbody>
-</table>
+<p>The drivable area is used to determine the area in which the ego vehicle can travel. The primary goal of static drivable area expansion is to ensure safe travel by generating an area that encompasses only the necessary spaces for the vehicle's current behavior, while excluding non-essential areas. For example, while <code>avoidance</code> module is running, the drivable area includes additional space needed for maneuvers around obstacles, and it limits the behavior by not extending the avoidance path outside of lanelet areas.</p>
+<div align="center">
+    <table>
+        <tr>
+            <td><img src="./image/static_drivable_area_before_expansion.png" alt="Before expansion"></td>
+        </tr>
+        <tr>
+            <td><img src="./image/static_drivable_area_after_expansion.png" alt="After expansion"></td>
+        </tr>
+    </table>
+</div>
+
+<p>Static drivable area expansion operates under assumptions about the correct arrangement of lanes and the coverage of both the front and rear of the vehicle within the left and right boundaries. Key parameters for drivable area generation include extra footprint offsets for the ego vehicle, the handling of dynamic objects, maximum expansion distance, and specific methods for expansion. Additionally, since each module generates its own drivable area, before passing it as the input to generate the next running module's drivable area, or before generating a unified drivable area, the system sorts drivable lanes based on the vehicle's passage order. This ensures the correct definition of the lanes used in drivable area generation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Click <a href="docs/behavior_path_planner_drivable_area_design/">here</a> for details.</p>
