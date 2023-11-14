@@ -15583,6 +15583,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#parameters-and-configuration" class="md-nav__link">
+    Parameters and Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#limitations-future-work" class="md-nav__link">
     Limitations &amp; Future Work
   </a>
@@ -15961,6 +15968,33 @@
 <p class="admonition-title">Note</p>
 <p>If you're a math lover, refer to <a href="docs/behavior_path_planner_path_generation_design/">Path Generation Design</a> for the nitty-gritty.</p>
 </div>
+<h2 id="parameters-and-configuration">Parameters and Configuration<a class="headerlink" href="#parameters-and-configuration" title="Permanent link">#</a></h2>
+<p>The configuration files are organized in a hierarchical directory structure for ease of navigation and management. Each subdirectory contains specific configuration files relevant to its module. The root directory holds general configuration files that apply to the overall behavior of the planner. The following is an overview of the directory structure with the respective configuration files. These directories can be found <a href="https://github.com/autowarefoundation/autoware_launch/tree/main/autoware_launch/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner">here</a>.</p>
+<div class="highlight"><pre><span></span><code>behavior_path_planner
+├── behavior_path_planner.param.yaml
+├── drivable_area_expansion.param.yaml
+├── scene_module_manager.param.yaml
+├── avoidance
+│   └── avoidance.param.yaml
+├── avoidance_by_lc
+│   └── avoidance_by_lc.param.yaml
+├── dynamic_avoidance
+│   └── dynamic_avoidance.param.yaml
+├── goal_planner
+│   └── goal_planner.param.yaml
+├── lane_change
+│   └── lane_change.param.yaml
+├── side_shift
+│   └── side_shift.param.yaml
+└── start_planner
+    └── start_planner.param.yaml
+</code></pre></div>
+<p>Similarly, the <a href="https://github.com/autowarefoundation/autoware_launch/tree/main/autoware_launch/config/planning/scenario_planning/common">common</a> directory contains configuration files that are used across various modules, providing shared parameters and settings essential for the functioning of the Behavior Path Planner:</p>
+<div class="highlight"><pre><span></span><code>common
+├── common.param.yaml
+├── costmap_generator.param.yaml
+└── nearest_search.param.yaml
+</code></pre></div>
 <h2 id="limitations-future-work">Limitations &amp; Future Work<a class="headerlink" href="#limitations-future-work" title="Permanent link">#</a></h2>
 <div class="codehilite"><pre><span></span><code>1. Some module cannot be simultaneously executed for now. For instance
    - Avoidance and Goal planner
