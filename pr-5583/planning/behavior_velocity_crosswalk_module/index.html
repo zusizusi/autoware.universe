@@ -15806,12 +15806,27 @@ Calculating the collision point, the decision is based on the following variable
 <figcaption>time-to-collision vs time-to-vehicle</figcaption>
 </figure>
 <h3 id="dead-lock-prevention">Dead Lock Prevention<a class="headerlink" href="#dead-lock-prevention" title="Permanent link">#</a></h3>
-<p>If there are objects stop within a radius of <code>min_object_velocity * ego_pass_later_margin</code> meters from virtual collision point, this module judges that ego should stop based on the pass judge logic described above at all times. In such a situation, even if the pedestrian has no intention of crossing, ego continues the stop decision on the spot. So, this module has another logic for dead lock prevention, and if the object continues to stop for more than <code>timeout_no_intention_to_walk</code> seconds after ego stops in front of the crosswalk, this module judges that the object has no intention of crossing and switches from <strong>STOP</strong> state to <strong>PASS</strong> state. The parameter <code>stop_object_velocity_threshold</code> is used to judge whether the objects are stopped or not. In addition, if the object starts to move after the module judges that the object has no intention of crossing, this module judges whether ego should stop or not once again.</p>
+<p>When the object is stopped around the crosswalk but has no intention to walk, the ego will yield the object forever.
+To prevent this dead lock, the ego will cancel the yield depending on the situation.</p>
+<h4 id="when-there-is-no-traffic-light">When there is no traffic light<a class="headerlink" href="#when-there-is-no-traffic-light" title="Permanent link">#</a></h4>
+<p>For the object is stopped around the crosswalk but has no intention to walk, when the ego keeps stopping to yield for a certain time (*1), the ego cancels the yield and start driving.</p>
 <figure>
 <p><img alt="no-intension" src="docs/no-intension.svg" width="1000">
   </p>
 <figcaption>dead lock situation</figcaption>
 </figure>
+<p>*1:
+The time is calculated based on the distance between the object and crosswalk.
+When <code>distance_map_for_no_intention_to_walk</code> is <code>[1.0, 5.0]</code> and <code>timeout_map_for_no_intention_to_walk</code> is <code>[3.0, 0.0]</code>, the time is calculated as follows.</p>
+<h4 id="when-there-is-traffic-light">When there is traffic light<a class="headerlink" href="#when-there-is-traffic-light" title="Permanent link">#</a></h4>
+<p>For the object is stopped around the crosswalk but has no intention to walk, when the ego will cancel the yield without stopping.
+This comes from the assumption that the object has no intention to walk since it is stopped even though the pedestrian traffic light is green.</p>
+<figure>
+<p><img alt="no-intension" src="docs/no-intension.svg" width="1000">
+  </p>
+<figcaption>dead lock situation</figcaption>
+</figure>
+<h4 id="new-object-handling">New Object Handling<a class="headerlink" href="#new-object-handling" title="Permanent link">#</a></h4>
 <h3 id="safety-slow-down-behavior">Safety Slow Down Behavior<a class="headerlink" href="#safety-slow-down-behavior" title="Permanent link">#</a></h3>
 <p>In current autoware implementation if there are no target objects around a crosswalk, ego vehicle
 will not slow down for the crosswalk. However, if ego vehicle to slow down to a certain speed in
