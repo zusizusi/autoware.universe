@@ -15695,7 +15695,7 @@
 
 <div><h2 id="intersection">Intersection<a class="headerlink" href="#intersection" title="Permanent link">#</a></h2>
 <h3 id="role">Role<a class="headerlink" href="#role" title="Permanent link">#</a></h3>
-<p>The <em>intersection</em> module is responsible for safely passing urban intersections by:</p>
+<p>The intersection module is responsible for safely passing urban intersections by:</p>
 <ol>
 <li>checking collisions with upcoming vehicles</li>
 <li>recognizing the occluded area in the intersection</li>
@@ -15704,16 +15704,16 @@
 <p>This module is designed to be agnostic to left-hand/right-hand traffic rules and work for crossroads, T-shape junctions, etc.</p>
 <p><img alt="topology" src="docs/intersection-topology.drawio.svg"></p>
 <h3 id="activation-condition">Activation condition<a class="headerlink" href="#activation-condition" title="Permanent link">#</a></h3>
-<p>This module is activated when the path contains the lanes with <strong><em>turn_direction</em></strong> tag. More precisely, if the <strong><em>lane_ids</em></strong> of the path contains the ids of those lanes, corresponding instances of intersection module are activated on each lane respectively.</p>
+<p>This module is activated when the path contains the lanes with turn_direction tag. More precisely, if the lane_ids of the path contains the ids of those lanes, corresponding instances of intersection module are activated on each lane respectively.</p>
 <h3 id="requirementslimitations">Requirements/Limitations<a class="headerlink" href="#requirementslimitations" title="Permanent link">#</a></h3>
 <ul>
-<li>The HDMap needs to have the information of turn_direction tag (which should be one of <strong><em>straight</em></strong> , <strong><em>left</em></strong> , <strong><em>right</em></strong>) for all the lanes in intersections and <strong><em>right_of_way</em></strong> tag for specific lanes (refer to <a href="#right-of-way">RightOfWay</a> section for more details). See <a href="https://github.com/autowarefoundation/autoware_common/blob/main/tmp/lanelet2_extension/docs/lanelet2_format_extension.md">lanelet2_extension document</a> for more detail.</li>
+<li>The HDMap needs to have the information of turn_direction tag (which should be one of straight, left, right) for all the lanes in intersections and right_of_way tag for specific lanes (refer to <a href="#right-of-way">RightOfWay</a> section for more details). See <a href="https://github.com/autowarefoundation/autoware_common/blob/main/tmp/lanelet2_extension/docs/lanelet2_format_extension.md">lanelet2_extension document</a> for more detail.</li>
 <li>WIP(perception requirements/limitations)</li>
 <li>WIP(sensor visibility requirements/limitations)</li>
 </ul>
 <h3 id="attention-area">Attention area<a class="headerlink" href="#attention-area" title="Permanent link">#</a></h3>
-<p>The <strong><em>attention area</em></strong> in the intersection are defined as the set of lanes that are conflicting with ego vehicle's path and their preceding lanes up to <code>common.attention_area_length</code> meters. RightOfWay tag is used to rule out the lanes that each lane has priority given the traffic light relation and turn_direction priority(<strong><em>yield lane</em></strong>).</p>
-<p><strong><em>intersection area</em></strong>, which is supposed to be defined on the HDMap, is an area converting the entire intersection.</p>
+<p>The attention area in the intersection are defined as the set of lanes that are conflicting with ego vehicle's path and their preceding lanes up to <code>common.attention_area_length</code> meters. RightOfWay tag is used to rule out the lanes that each lane has priority given the traffic light relation and turn_direction priority(yield lane).</p>
+<p>intersection_area, which is supposed to be defined on the HDMap, is an area converting the entire intersection.</p>
 <p><img alt="attention_area" src="docs/intersection-attention.drawio.svg"></p>
 <h4 id="right-of-way">Right Of Way<a class="headerlink" href="#right-of-way" title="Permanent link">#</a></h4>
 <p>Following table shows an example of how to assign right_of_way tag and set yield_lanes to each lane in intersections.</p>
@@ -15761,7 +15761,7 @@
 <p>Following figure illustrates important positions used in the intersection module. Note that each solid line represents ego front line position and the corresponding dot represents the actual inserted stop point position for the vehicle frame, namely the center of the rear wheel.</p>
 <p><img alt="data structure" src="docs/intersection-stoplines.drawio.svg"></p>
 <p>To precisely calculate stop positions, the path is interpolated at the certain interval of <code>common.path_interpolation_ds</code>.</p>
-<p><strong><em>closest_idx</em></strong> denotes the path point index which is closest to ego vehicle position. <strong><em>first_attention_stopline</em></strong> denotes the first path point where ego vehicle footprint intersects with the <strong><em>attention_area</em></strong>. If a stopline is associated with the intersection lane on the map, that line is used as the <strong><em>default_stopline</em></strong> for collision detection. Otherwise the point which is <code>common.default_stopline_margin</code> meters behind first_attention_stopline is defined as the default_stopline instead. <strong><em>occlusion_peeking_stopline</em></strong> is a bit ahead of first_attention_stopline as described later. <strong><em>occlusion_wo_tl_pass_judge_line</em></strong> is the first position where ego vehicle footprint intersects with the centerline of the first attention_area lane.</p>
+<p>closest_idx denotes the path point index which is closest to ego vehicle position. first_attention_stopline denotes the first path point where ego vehicle footprint intersects with the attention_area. If a stopline is associated with the intersection lane on the map, that line is used as the default_stopline for collision detection. Otherwise the point which is <code>common.default_stopline_margin</code> meters behind first_attention_stopline is defined as the default_stopline instead. occlusion_peeking_stopline is a bit ahead of first_attention_stopline as described later. occlusion_wo_tl_pass_judge_line is the first position where ego vehicle footprint intersects with the centerline of the first attention_area lane.</p>
 <h3 id="target-objects">Target objects<a class="headerlink" href="#target-objects" title="Permanent link">#</a></h3>
 <p>For <a href="#stuck-vehicle-detection">stuck vehicle detection</a> and <a href="#collision-detection">collision detection</a>, this module checks <strong>car</strong>, <strong>bus</strong>, <strong>truck</strong>, <strong>trailer</strong>, <strong>motor cycle</strong>, and <strong>bicycle</strong> type objects.</p>
 <p>Objects that satisfy all of the following conditions are considered as target objects (possible collision objects):</p>
@@ -15790,7 +15790,7 @@
 </ol>
 </li>
 <li>if collision is detected, the module inserts a stopline</li>
-<li>if ego is over the <a href="#pass-judge-line"><em><strong>pass_judge_line</strong></em></a>, collision checking is skipped to avoid sudden braking and/or unnecessary stop in the middle of the intersection</li>
+<li>if ego is over the <a href="#pass-judge-line">pass_judge_line</a>, collision checking is skipped to avoid sudden braking and/or unnecessary stop in the middle of the intersection</li>
 </ol>
 <p>The parameters <code>collision_detection.collision_start_margin_time</code> and <code>collision_detection.collision_end_margin_time</code> can be interpreted as follows:</p>
 <ul>
@@ -15818,7 +15818,7 @@
 </li>
 </ul>
 <h3 id="occlusion-detection">Occlusion detection<a class="headerlink" href="#occlusion-detection" title="Permanent link">#</a></h3>
-<p>If the flag <code>occlusion.enable</code> is true this module checks if there is sufficient field of view (FOV) on the attention area up to <code>occlusion.occlusion_attention_area_length</code>. If FOV is not clear enough ego vehicle first make a brief stop at the default stop line for <code>occlusion.temporal_stop_time_before_peeking</code>, and then slowly creep toward occlusion_peeking_stop_line at the speed of <code>occlusion.creep_during_peeking.creep_velocity</code> if <code>occlusion.creep_during_peeking.enable</code> is true. During the creeping if collision is detected this module inserts a stop line in front of ego vehicle immediately, and if the FOV gets sufficiently clear the <strong><em>intersection_occlusion</em></strong> wall will disappear. If occlusion is cleared and no collision is detected ego vehicle will pass the intersection.</p>
+<p>If the flag <code>occlusion.enable</code> is true this module checks if there is sufficient field of view (FOV) on the attention area up to <code>occlusion.occlusion_attention_area_length</code>. If FOV is not clear enough ego vehicle first make a brief stop at the default stop line for <code>occlusion.temporal_stop_time_before_peeking</code>, and then slowly creep toward occlusion_peeking_stop_line at the speed of <code>occlusion.creep_during_peeking.creep_velocity</code> if <code>occlusion.creep_during_peeking.enable</code> is true. During the creeping if collision is detected this module inserts a stop line in front of ego vehicle immediately, and if the FOV gets sufficiently clear the intersection_occlusion wall will disappear. If occlusion is cleared and no collision is detected ego vehicle will pass the intersection.</p>
 <p>The occlusion is detected as the common area of occlusion attention area(which is partially the same as the normal attention area) and the unknown cells of the occupancy grid map. The occupancy grid map is denoised using morphology with the window size of <code>occlusion.denoise_kernel</code>. The occlusion attention area lanes are discretized to line strings and they are used to generate a grid whose each cell represents the distance from ego path along the lane as shown below.</p>
 <p><img alt="occlusion_detection" src="docs/occlusion_grid.drawio.svg"></p>
 <p>If the nearest occlusion cell value is below the threshold, occlusion is detected. It is expected that the occlusion gets cleared as the vehicle approaches the occlusion peeking stop line.</p>
@@ -15856,9 +15856,12 @@
 </tr>
 </tbody>
 </table>
-<p>If the traffic light color is RED or Arrow signal is turned on, the attention lanes which are not conflicting with ego lane are not used for detection. And even if the object stops with a certain overshoot from its stopline, but its expected stop position under the deceleration of <code>collision_detection.ignore_on_amber_traffic_light.object_expected_deceleration</code> is more than the distance <code>collision_detection.ignore_on_red_traffic_light.object_margin_to_path</code> from collision point, the object is ignored.</p>
+<h4 id="yield-on-green">yield on GREEN<a class="headerlink" href="#yield-on-green" title="Permanent link">#</a></h4>
+<p>If the traffic light color changed to GREEN and ego approached the entry of the intersection lane within the distance <code>collision_detection.yield_on_green_traffic_light.distance_to_assigned_lanelet_start</code> and there is any object whose distance to its stopline is less than <code>collision_detection.yield_on_green_traffic_light.object_dist_to_stopline</code>, this module commands to stop for the duration of <code>collision_detection.yield_on_green_traffic_light.duration</code> at the default_stopline.</p>
+<h4 id="skip-on-amber">skip on AMBER<a class="headerlink" href="#skip-on-amber" title="Permanent link">#</a></h4>
 <p>If the traffic light color is AMBER but the object is expected to stop before its stopline under the deceleration of <code>collision_detection.ignore_on_amber_traffic_light.object_expected_deceleration</code>, collision checking is skipped.</p>
-<p>If the traffic light color changed to GREEN and ego approached the entry of the intersection lane within <code>collision_detection.yield_on_green_traffic_light.distance_to_assigned_lanelet_start</code> and there si any object whose distance to its stopline is less than <code>collision_detection.yield_on_green_traffic_light.object_dist_to_stopline</code>, this module commands to stop for the duration of <code>collision_detection.yield_on_green_traffic_light.duration</code> at the default_stopline.</p>
+<h4 id="skip-on-red">skip on RED<a class="headerlink" href="#skip-on-red" title="Permanent link">#</a></h4>
+<p>If the traffic light color is RED or Arrow signal is turned on, the attention lanes which are not conflicting with ego lane are not used for detection. And even if the object stops with a certain overshoot from its stopline, but its expected stop position under the deceleration of <code>collision_detection.ignore_on_amber_traffic_light.object_expected_deceleration</code> is more than the distance <code>collision_detection.ignore_on_red_traffic_light.object_margin_to_path</code> from collision point, the object is ignored.</p>
 <h4 id="occlusion-detection_1">Occlusion detection<a class="headerlink" href="#occlusion-detection_1" title="Permanent link">#</a></h4>
 <p>When the traffic light color/shape is RED/Arrow, occlusion detection is skipped.</p>
 <h3 id="data-structure">Data Structure<a class="headerlink" href="#data-structure" title="Permanent link">#</a></h3>
@@ -15873,6 +15876,7 @@
 <p><code>TargetObject</code> holds the object, its belonging lane and corresponding stopline information.</p>
 <p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSIxNzRweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjMzMHB4O2hlaWdodDoxNzRweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAzMzAgMTc0IiB3aWR0aD0iMzMwcHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48IS0tY2xhc3MgVGFyZ2V0T2JqZWN0LS0+PGcgaWQ9ImVsZW1fVGFyZ2V0T2JqZWN0Ij48cmVjdCBjb2RlTGluZT0iMSIgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIxNTMuNzgxMyIgaWQ9IlRhcmdldE9iamVjdCIgcng9IjIuNSIgcnk9IjIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMzA5IiB4PSI3IiB5PSI3Ii8+PGVsbGlwc2UgY3g9IjEwOC43NSIgY3k9IjIzIiBmaWxsPSIjQUREMUIyIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBhdGggZD0iTTEwNy41NDY5LDIzLjg3NSBMMTA5LDIzLjg3NSBMMTA5LDIzLjk4NDQgQzEwOSwyNC4zOTA2IDEwOS4wMzEzLDI0LjU0NjkgMTA5LjEwOTQsMjQuNzAzMSBDMTA5LjI2NTYsMjQuOTUzMSAxMDkuNTQ2OSwyNS4xMDk0IDEwOS44NDM4LDI1LjEwOTQgQzExMC4wOTM4LDI1LjEwOTQgMTEwLjM1OTQsMjQuOTY4OCAxMTAuNTE1NiwyNC43NSBDMTEwLjY0MDYsMjQuNTkzOCAxMTAuNjcxOSwyNC40Mzc1IDExMC42NzE5LDIzLjk4NDQgTDExMC42NzE5LDIyLjA2MjUgQzExMC42NzE5LDIxLjkwNjMgMTEwLjY3MTksMjEuODU5NCAxMTAuNjU2MywyMS43MDMxIEMxMTAuNTkzOCwyMS4yMzQ0IDExMC4yODEzLDIwLjkyMTkgMTA5LjgyODEsMjAuOTIxOSBDMTA5LjU3ODEsMjAuOTIxOSAxMDkuMzEyNSwyMS4wNjI1IDEwOS4xNDA2LDIxLjI4MTMgQzEwOS4wMzEzLDIxLjQ1MzEgMTA5LDIxLjYwOTQgMTA5LDIyLjA2MjUgTDEwOSwyMi4xODc1IEwxMDcuNTQ2OSwyMi4xODc1IEwxMDcuNTQ2OSwxOS43ODEzIEwxMTEuNTMxMywxOS43ODEzIEwxMTEuNTMxMywyMC42NDA2IEMxMTEuNTMxMywyMS4wNDY5IDExMS41NjI1LDIxLjIxODggMTExLjY0MDYsMjEuMzc1IEMxMTEuODEyNSwyMS42MjUgMTEyLjA5MzgsMjEuNzgxMyAxMTIuMzc1LDIxLjc4MTMgQzExMi42NDA2LDIxLjc4MTMgMTEyLjkwNjMsMjEuNjQwNiAxMTMuMDc4MSwyMS40MjE5IEMxMTMuMTg3NSwyMS4yNSAxMTMuMjE4OCwyMS4xMDk0IDExMy4yMTg4LDIwLjY0MDYgTDExMy4yMTg4LDE4LjA5MzggTDEwNS41OTM4LDE4LjA5MzggQzEwNS4xNTYzLDE4LjA5MzggMTA1LjAzMTMsMTguMTA5NCAxMDQuODc1LDE4LjIwMzEgQzEwNC42MjUsMTguMzU5NCAxMDQuNDY4OCwxOC42NTYzIDEwNC40Njg4LDE4LjkzNzUgQzEwNC40Njg4LDE5LjIxODggMTA0LjYwOTQsMTkuNDY4OCAxMDQuODI4MSwxOS42NDA2IEMxMDQuOTg0NCwxOS43NSAxMDUuMTcxOSwxOS43ODEzIDEwNS41OTM4LDE5Ljc4MTMgTDEwNS44NDM4LDE5Ljc4MTMgTDEwNS44NDM4LDI2LjI5NjkgTDEwNS41OTM4LDI2LjI5NjkgQzEwNS4xODc1LDI2LjI5NjkgMTA1LjAzMTMsMjYuMzEyNSAxMDQuODc1LDI2LjQyMTkgQzEwNC42MjUsMjYuNTkzOCAxMDQuNDY4OCwyNi44NTk0IDEwNC40Njg4LDI3LjE1NjMgQzEwNC40Njg4LDI3LjQyMTkgMTA0LjYwOTQsMjcuNjcxOSAxMDQuODI4MSwyNy44MjgxIEMxMDQuOTY4OCwyNy45NTMxIDEwNS4yMDMxLDI4IDEwNS41OTM4LDI4IEwxMTMuNTkzOCwyOCBMMTEzLjU5MzgsMjUuNDIxOSBDMTEzLjU5MzgsMjQuOTg0NCAxMTMuNTYyNSwyNC44NDM4IDExMy40ODQ0LDI0LjY4NzUgQzExMy4zMTI1LDI0LjQzNzUgMTEzLjAzMTMsMjQuMjgxMyAxMTIuNzUsMjQuMjgxMyBDMTEyLjQ4NDQsMjQuMjgxMyAxMTIuMjE4OCwyNC4zOTA2IDExMi4wNDY5LDI0LjY0MDYgQzExMS45Mzc1LDI0Ljc5NjkgMTExLjkwNjMsMjQuOTM3NSAxMTEuOTA2MywyNS40MjE5IEwxMTEuOTA2MywyNi4yOTY5IEwxMDcuNTQ2OSwyNi4yOTY5IEwxMDcuNTQ2OSwyMy44NzUgWiAiIGZpbGw9IiMwMDAwMDAiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI5NyIgeD0iMTI5LjI1IiB5PSIyNy44NDY3Ij5UYXJnZXRPYmplY3Q8L3RleHQ+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iOCIgeDI9IjMxNSIgeTE9IjM5IiB5Mj0iMzkiLz48ZWxsaXBzZSBjeD0iMTgiIGN5PSI1Mi42NDg0IiBmaWxsPSIjMDAwMDAwIiByeD0iMyIgcnk9IjMiIHN0eWxlPSJzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MS4wOyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE3NSIgeD0iMjciIHk9IjU1Ljk5NTEiPm9iamVjdDogUHJlZGljdGVkT2JqZWN0PC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjExOCIgeD0iMjciIHk9IjcyLjI5MiI+ZGV0ZWN0ZWQgb2JqZWN0PC90ZXh0PjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjgiIHgyPSIzMTUiIHkxPSI3OS41OTM4IiB5Mj0iNzkuNTkzOCIvPjxlbGxpcHNlIGN4PSIxOCIgY3k9IjkzLjI0MjIiIGZpbGw9IiMwMDAwMDAiIHJ4PSIzIiByeT0iMyIgc3R5bGU9InN0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoxLjA7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjMxIiB4PSIyNyIgeT0iOTYuNTg4OSI+YXR0ZW50aW9uX2xhbmVsZXQ6IENvbnN0TGFuZWxldDwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxOTEiIHg9IjI3IiB5PSIxMTIuODg1NyI+YmVsb25naW5nIGxhbmVsZXQgaW5zdGFuY2U8L3RleHQ+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iOCIgeDI9IjMxNSIgeTE9IjEyMC4xODc1IiB5Mj0iMTIwLjE4NzUiLz48ZWxsaXBzZSBjeD0iMTgiIGN5PSIxMzMuODM1OSIgZmlsbD0iIzAwMDAwMCIgcng9IjMiIHJ5PSIzIiBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjEuMDsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIyMDIiIHg9IjI3IiB5PSIxMzcuMTgyNiI+c3RvcGxpbmU6IENvbnN0TGluZVN0cmluZzNkPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjI4MyIgeD0iMjciIHk9IjE1My40Nzk1Ij5yZWFjaGFibGUgc3RvcGxpbmUgb2YgYXR0ZW50aW9uX2xhbmVsZXQ8L3RleHQ+PC9nPjwhLS1TUkM9W1BPc24zaThtMzRKdFZlTGRmNHZpaEFuODhDNkVkRUc4R1A2REtZLWV1anluUk82MXBOVmx4V29uT1d5d1NTa21WUldYNmVxVHFPZnE0WGl3REFHSTNNY2NwWDhDUnNFOWtERnRLdU5EdTdpZ3Z5ZzIyY3psTEdSUnBTZXAwTEtiNXljcTlBV3VQdWR1aEdvY3pyZTRkeEFWSHNsVU1JVmQzSG9sNzJnLUVUQkJfLVZrLUc4MF0tLT48L2c+PC9zdmc+" class="uml" alt="uml diagram" title=""></p>
 <h3 id="module-parameters">Module Parameters<a class="headerlink" href="#module-parameters" title="Permanent link">#</a></h3>
+<h4 id="common">common<a class="headerlink" href="#common" title="Permanent link">#</a></h4>
 <table>
 <thead>
 <tr>
@@ -15883,50 +15887,62 @@
 </thead>
 <tbody>
 <tr>
-<td><code>common.attention_area_length</code></td>
+<td><code>.attention_area_length</code></td>
 <td>double</td>
 <td>[m] range for object detection</td>
 </tr>
 <tr>
-<td><code>common.attention_area_margin</code></td>
+<td><code>.attention_area_margin</code></td>
 <td>double</td>
 <td>[m] margin for expanding attention area width</td>
 </tr>
 <tr>
-<td><code>common.attention_area_angle_threshold</code></td>
+<td><code>.attention_area_angle_threshold</code></td>
 <td>double</td>
 <td>[rad] threshold of angle difference between the detected object and lane</td>
 </tr>
 <tr>
-<td><code>common.use_intersection_area</code></td>
+<td><code>.use_intersection_area</code></td>
 <td>bool</td>
 <td>[-] flag to use intersection_area for collision detection</td>
 </tr>
 <tr>
-<td><code>common.default_stopline_margin</code></td>
+<td><code>.default_stopline_margin</code></td>
 <td>double</td>
 <td>[m] margin before_stop_line</td>
 </tr>
 <tr>
-<td><code>common.stopline_overshoot_margin</code></td>
+<td><code>.stopline_overshoot_margin</code></td>
 <td>double</td>
 <td>[m] margin for the overshoot from stopline</td>
 </tr>
 <tr>
-<td><code>common.max_accel</code></td>
+<td><code>.max_accel</code></td>
 <td>double</td>
 <td>[m/ss] max acceleration for stop</td>
 </tr>
 <tr>
-<td><code>common.max_jerk</code></td>
+<td><code>.max_jerk</code></td>
 <td>double</td>
 <td>[m/sss] max jerk for stop</td>
 </tr>
 <tr>
-<td><code>common.delay_response_time</code></td>
+<td><code>.delay_response_time</code></td>
 <td>double</td>
 <td>[s] action delay before stop</td>
 </tr>
+</tbody>
+</table>
+<h4 id="stuck_vehicleyield_stuck">stuck_vehicle/yield_stuck<a class="headerlink" href="#stuck_vehicleyield_stuck" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td><code>stuck_vehicle.turn_direction</code></td>
 <td>-</td>
@@ -15947,84 +15963,9 @@
 <td>double</td>
 <td>[m/s] distance threshold of yield stuck vehicle from ego path along the lane</td>
 </tr>
-<tr>
-<td><code>collision_detection.consider_wrong_direction_vehicle</code></td>
-<td>bool</td>
-<td>[-] flag to detect objects in the wrong direction</td>
-</tr>
-<tr>
-<td><code>collision_detection.collision_detection_hold_time</code></td>
-<td>double</td>
-<td>[s] hold time of collision detection</td>
-</tr>
-<tr>
-<td><code>collision_detection.min_predicted_path_confidence</code></td>
-<td>double</td>
-<td>[-] minimum confidence value of predicted path to use for collision detection</td>
-</tr>
-<tr>
-<td><code>collision_detection.keep_detection_velocity_threshold</code></td>
-<td>double</td>
-<td>[s] ego velocity threshold for continuing collision detection before pass judge line</td>
-</tr>
-<tr>
-<td><code>collision_detection.velocity_profile.use_upstream</code></td>
-<td>bool</td>
-<td>[-] flag to use velocity profile planned by upstream modules</td>
-</tr>
-<tr>
-<td><code>collision_detection.velocity_profile.minimum_upstream_velocity</code></td>
-<td>double</td>
-<td>[m/s] minimum velocity of upstream velocity profile to avoid zero division</td>
-</tr>
-<tr>
-<td><code>collision_detection.velocity_profile.default_velocity</code></td>
-<td>double</td>
-<td>[m/s] constant velocity profile when use_upstream is false</td>
-</tr>
-<tr>
-<td><code>collision_detection.velocity_profile.minimum_default_velocity</code></td>
-<td>doubel</td>
-<td>[m/s] minimum velocity of default velocity profile to avoid zero division</td>
-</tr>
-<tr>
-<td><code>collision_detection.collision_start_margin_time</code></td>
-<td>double</td>
-<td>[s] time margin for the beginning of collision with upcoming vehicle</td>
-</tr>
-<tr>
-<td><code>collision_detection.collision_end_margin_time</code></td>
-<td>double</td>
-<td>[s] time margin for the finish of collision with upcoming vehicle</td>
-</tr>
-<tr>
-<td><code>occlusion.occlusion_attention_area_length</code></td>
-<td>double</td>
-<td>[m] the length of attention are for occlusion detection</td>
-</tr>
-<tr>
-<td><code>occlusion.enable_creeping</code></td>
-<td>bool</td>
-<td>[-] flag to insert <code>occlusion_creep_velocity</code> while peeking to intersection occlusion stopline</td>
-</tr>
-<tr>
-<td><code>occlusion.peeking_offset</code></td>
-<td>double</td>
-<td>[m] the offset of the front of the vehicle into the attention area for peeking to occlusion</td>
-</tr>
-<tr>
-<td><code>occlusion.min_vehicle_brake_for_rss</code></td>
-<td>double</td>
-<td>[m/s] assumed minimum brake of the vehicle running from behind the occlusion</td>
-</tr>
-<tr>
-<td><code>occlusion.max_vehicle_velocity_for_rss</code></td>
-<td>double</td>
-<td>[m/s] assumed maximum velocity of the vehicle running from behind the occlusion</td>
-</tr>
 </tbody>
 </table>
-<h4 id="for-developers-only">For developers only<a class="headerlink" href="#for-developers-only" title="Permanent link">#</a></h4>
+<h4 id="collision_detection">collision_detection<a class="headerlink" href="#collision_detection" title="Permanent link">#</a></h4>
 <table>
 <thead>
 <tr>
@@ -16035,14 +15976,161 @@
 </thead>
 <tbody>
 <tr>
-<td><code>common.path_interpolation_ds</code></td>
-<td>double</td>
-<td>[m] path interpolation interval</td>
+<td><code>.consider_wrong_direction_vehicle</code></td>
+<td>bool</td>
+<td>[-] flag to detect objects in the wrong direction</td>
 </tr>
 <tr>
-<td><code>occlusion.denoise_kernel</code></td>
+<td><code>.collision_detection_hold_time</code></td>
 <td>double</td>
-<td>[m] the window size of morphology process for clearing noisy occlusion</td>
+<td>[s] hold time of collision detection</td>
+</tr>
+<tr>
+<td><code>.min_predicted_path_confidence</code></td>
+<td>double</td>
+<td>[-] minimum confidence value of predicted path to use for collision detection</td>
+</tr>
+<tr>
+<td><code>.keep_detection_velocity_threshold</code></td>
+<td>double</td>
+<td>[s] ego velocity threshold for continuing collision detection before pass judge line</td>
+</tr>
+<tr>
+<td><code>.velocity_profile.use_upstream</code></td>
+<td>bool</td>
+<td>[-] flag to use velocity profile planned by upstream modules</td>
+</tr>
+<tr>
+<td><code>.velocity_profile.minimum_upstream_velocity</code></td>
+<td>double</td>
+<td>[m/s] minimum velocity of upstream velocity profile to avoid zero division</td>
+</tr>
+<tr>
+<td><code>.velocity_profile.default_velocity</code></td>
+<td>double</td>
+<td>[m/s] constant velocity profile when use_upstream is false</td>
+</tr>
+<tr>
+<td><code>.velocity_profile.minimum_default_velocity</code></td>
+<td>double</td>
+<td>[m/s] minimum velocity of default velocity profile to avoid zero division</td>
+</tr>
+<tr>
+<td><code>.yield_on_green_traffic_light</code></td>
+<td>-</td>
+<td>[-] <a href="#yield-on-green">description</a></td>
+</tr>
+<tr>
+<td><code>.ignore_amber_traffic_light</code></td>
+<td>-</td>
+<td>[-] <a href="#skip-on-amber">description</a></td>
+</tr>
+<tr>
+<td><code>.ignore_on_red_traffic_light</code></td>
+<td>-</td>
+<td>[-] <a href="#skip-on-red">description</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="occlusion">occlusion<a class="headerlink" href="#occlusion" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.enable</code></td>
+<td>bool</td>
+<td>[-] flag to calculate occlusion detection</td>
+</tr>
+<tr>
+<td><code>.occlusion_attention_area_length</code></td>
+<td>double</td>
+<td>[m] the length of attention are for occlusion detection</td>
+</tr>
+<tr>
+<td><code>.free_space_max</code></td>
+<td>int</td>
+<td>[-] maximum value of occupancy grid cell to treat at occluded</td>
+</tr>
+<tr>
+<td><code>.occupied_min</code></td>
+<td>int</td>
+<td>[-] minimum value of occupancy grid cell to treat at occluded</td>
+</tr>
+<tr>
+<td><code>.denoise_kernel</code></td>
+<td>double</td>
+<td>[m] morphology window size for preprocessing raw occupancy grid</td>
+</tr>
+<tr>
+<td><code>.attention_lane_crop_curvature_threshold</code></td>
+<td>double</td>
+<td>[m] curvature threshold for trimming curved part of the lane</td>
+</tr>
+<tr>
+<td><code>.attention_lane_crop_curvature_ds</code></td>
+<td>double</td>
+<td>[m] descritization interval of centerline for lane curvature calculation</td>
+</tr>
+<tr>
+<td><code>.creep_during_peeking.enable</code></td>
+<td>bool</td>
+<td>[-] flag to insert <code>creep_velocity</code> while peeking to intersection occlusion stopline</td>
+</tr>
+<tr>
+<td><code>.creep_during_peeking.creep_velocity</code></td>
+<td>double</td>
+<td>[m/s] the command velocity while peeking to intersection occlusion stopline</td>
+</tr>
+<tr>
+<td><code>.peeking_offset</code></td>
+<td>double</td>
+<td>[m] the offset of the front of the vehicle into the attention area for peeking to occlusion</td>
+</tr>
+<tr>
+<td><code>.occlusion_required_clearance_distance</code></td>
+<td>double</td>
+<td>[m] threshold for the distance to nearest occlusion cell from ego path</td>
+</tr>
+<tr>
+<td><code>.possible_object_bbox</code></td>
+<td>[double]</td>
+<td>[m] minimum bounding box size for checking if occlusion polygon is small enough</td>
+</tr>
+<tr>
+<td><code>.ignore_parked_vehicle_speed_threshold</code></td>
+<td>double</td>
+<td>[m/s] velocity threshold for checking parked vehicle</td>
+</tr>
+<tr>
+<td><code>.occlusion_detection_hold_time</code></td>
+<td>double</td>
+<td>[s] hold time of occlusion detection</td>
+</tr>
+<tr>
+<td><code>.temporal_stop_time_before_peeking</code></td>
+<td>double</td>
+<td>[s] temporal stop duration at the default_stop_line before starting peeking</td>
+</tr>
+<tr>
+<td><code>.temporal_stop_before_attention_area</code></td>
+<td>bool</td>
+<td>[-] flag to temporarily stop at first_attention_stopline before peeking into attention_area</td>
+</tr>
+<tr>
+<td><code>.creep_velocity_without_traffic_light</code></td>
+<td>double</td>
+<td>[m/s] creep velocity to occlusion_wo_tl_passs_judge_line</td>
+</tr>
+<tr>
+<td><code>.static_occlusion_with_traffic_light_timeout</code></td>
+<td>double</td>
+<td>[s] the timeout duration for ignoring static occlusion at intersection with traffic light</td>
 </tr>
 </tbody>
 </table>
