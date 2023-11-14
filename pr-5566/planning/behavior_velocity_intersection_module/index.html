@@ -15883,14 +15883,14 @@
 </thead>
 <tbody>
 <tr>
-<td><code>common.attention_area_margin</code></td>
-<td>double</td>
-<td>[m] margin for expanding attention area width</td>
-</tr>
-<tr>
 <td><code>common.attention_area_length</code></td>
 <td>double</td>
 <td>[m] range for object detection</td>
+</tr>
+<tr>
+<td><code>common.attention_area_margin</code></td>
+<td>double</td>
+<td>[m] margin for expanding attention area width</td>
 </tr>
 <tr>
 <td><code>common.attention_area_angle_threshold</code></td>
@@ -15898,24 +15898,39 @@
 <td>[rad] threshold of angle difference between the detected object and lane</td>
 </tr>
 <tr>
-<td><code>common.stopline_margin</code></td>
-<td>double</td>
-<td>[m] margin before stop line</td>
+<td><code>common.use_intersection_area</code></td>
+<td>bool</td>
+<td>[-] flag to use intersection_area for collision detection</td>
 </tr>
 <tr>
-<td><code>common.intersection_velocity</code></td>
+<td><code>common.default_stopline_margin</code></td>
 <td>double</td>
-<td>[m/s] velocity profile for pass judge calculation</td>
+<td>[m] margin before_stop_line</td>
 </tr>
 <tr>
-<td><code>common.intersection_max_accel</code></td>
-<td>double</td>
-<td>[m/s^2] acceleration profile for pass judge calculation</td>
-</tr>
-<tr>
-<td><code>common.stop_overshoot_margin</code></td>
+<td><code>common.stopline_overshoot_margin</code></td>
 <td>double</td>
 <td>[m] margin for the overshoot from stopline</td>
+</tr>
+<tr>
+<td><code>common.max_accel</code></td>
+<td>double</td>
+<td>[m/ss] max acceleration for stop</td>
+</tr>
+<tr>
+<td><code>common.max_jerk</code></td>
+<td>double</td>
+<td>[m/sss] max jerk for stop</td>
+</tr>
+<tr>
+<td><code>common.delay_response_time</code></td>
+<td>double</td>
+<td>[s] action delay before stop</td>
+</tr>
+<tr>
+<td><code>stuck_vehicle.turn_direction</code></td>
+<td>-</td>
+<td>[-] turn_direction specifier for stuck vehicle detection</td>
 </tr>
 <tr>
 <td><code>stuck_vehicle.stuck_vehicle_detect_dist</code></td>
@@ -15923,19 +15938,54 @@
 <td>[m] length toward from the exit of intersection for stuck vehicle detection</td>
 </tr>
 <tr>
-<td><code>stuck_vehicle.stuck_vehicle_vel_thr</code></td>
+<td><code>stuck_vehicle.stuck_vehicle_velocity_threshold</code></td>
 <td>double</td>
 <td>[m/s] velocity threshold for stuck vehicle detection</td>
 </tr>
 <tr>
-<td><code>collision_detection.state_transit_margin_time</code></td>
+<td><code>yield_stuck.distance_threshold</code></td>
 <td>double</td>
-<td>[m] time margin to change state</td>
+<td>[m/s] distance threshold of yield stuck vehicle from ego path along the lane</td>
+</tr>
+<tr>
+<td><code>collision_detection.consider_wrong_direction_vehicle</code></td>
+<td>bool</td>
+<td>[-] flag to detect objects in the wrong direction</td>
+</tr>
+<tr>
+<td><code>collision_detection.collision_detection_hold_time</code></td>
+<td>double</td>
+<td>[s] hold time of collision detection</td>
 </tr>
 <tr>
 <td><code>collision_detection.min_predicted_path_confidence</code></td>
 <td>double</td>
 <td>[-] minimum confidence value of predicted path to use for collision detection</td>
+</tr>
+<tr>
+<td><code>collision_detection.keep_detection_velocity_threshold</code></td>
+<td>double</td>
+<td>[s] ego velocity threshold for continuing collision detection before pass judge line</td>
+</tr>
+<tr>
+<td><code>collision_detection.velocity_profile.use_upstream</code></td>
+<td>bool</td>
+<td>[-] flag to use velocity profile planned by upstream modules</td>
+</tr>
+<tr>
+<td><code>collision_detection.velocity_profile.minimum_upstream_velocity</code></td>
+<td>double</td>
+<td>[m/s] minimum velocity of upstream velocity profile to avoid zero division</td>
+</tr>
+<tr>
+<td><code>collision_detection.velocity_profile.default_velocity</code></td>
+<td>double</td>
+<td>[m/s] constant velocity profile when use_upstream is false</td>
+</tr>
+<tr>
+<td><code>collision_detection.velocity_profile.minimum_default_velocity</code></td>
+<td>doubel</td>
+<td>[m/s] minimum velocity of default velocity profile to avoid zero division</td>
 </tr>
 <tr>
 <td><code>collision_detection.collision_start_margin_time</code></td>
@@ -15946,11 +15996,6 @@
 <td><code>collision_detection.collision_end_margin_time</code></td>
 <td>double</td>
 <td>[s] time margin for the finish of collision with upcoming vehicle</td>
-</tr>
-<tr>
-<td><code>collision_detection.keep_detection_vel_thr</code></td>
-<td>double</td>
-<td>[m/s] ego velocity threshold for continuing collision detection before pass judge line</td>
 </tr>
 <tr>
 <td><code>occlusion.occlusion_attention_area_length</code></td>
