@@ -15619,6 +15619,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#trouble-shooting" class="md-nav__link">
+    Trouble Shooting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#referencesexternal-links" class="md-nav__link">
     References/External links
   </a>
@@ -15721,25 +15728,16 @@
 <p>When the stop line exists in the lanelet map, the stop position is calculated based on the line.
 When the stop line does <strong>NOT</strong> exist in the lanelet map, the stop position is calculated by keeping <code>stop_distance_from_crosswalk</code> between the ego and the crosswalk.</p>
 <figure>
-<p><img alt="stop_distance_from_object" src="docs/stop_margin.svg" width="1000">
+<p><img alt="stop_distance_from_object" src="docs/stop_margin.svg" width="700">
   </p>
 <figcaption>stop margin</figcaption>
 </figure>
 <figure>
-<p><img alt="stop_line" src="docs/stop_line.svg" width="700">
-  </p>
-<figcaption>explicit stop line</figcaption>
-</figure>
-<figure>
-<p><img alt="stop_distance_from_crosswalk" src="docs/stop_line_distance.svg" width="700">
-  </p>
-<figcaption>virtual stop point</figcaption>
+<p><img alt="far_object_threshold" src="docs/virtual_stop_line.svg" width="700"></p>
 </figure>
 <p>On the other hand, if pedestrian (bicycle) is crossing <strong>wide</strong> crosswalks seen in scramble intersections, and the pedestrian position is more than <code>far_object_threshold</code> meters away from the stop line, the actual stop position is determined to be <code>stop_distance_from_object</code> and pedestrian position, not at the stop line.</p>
 <figure>
-<p><img alt="far_object_threshold" src="docs/stop_line_margin.svg" width="1000">
-  </p>
-<figcaption>stop at wide crosswalk</figcaption>
+<p><img alt="far_object_threshold" src="docs/virtual_stop_line.svg" width="700"></p>
 </figure>
 <p>See the workflow in algorithms section.</p>
 <table>
@@ -16008,6 +16006,25 @@ The label of each plot is <code>&lt;crosswalk module id&gt;-&lt;pedestrian uuid&
   </p>
 <figcaption>Plot of time to collision</figcaption>
 </figure>
+<h2 id="trouble-shooting">Trouble Shooting<a class="headerlink" href="#trouble-shooting" title="Permanent link">#</a></h2>
+<ul>
+<li>Q. The ego stopped around the crosswalk even though there were no crosswalk user objects.<ul>
+<li>A. See <a href="https://autowarefoundation.github.io/autoware.universe/pr-5583/planning/behavior_velocity_crosswalk_module/#stuck-vehicle-detection">Stuck Vehicle Detection</a>.</li>
+</ul>
+</li>
+<li>Q. The crosswalk virtual wall suddenly appears resulting in the sudden stop.<ul>
+<li>A. The crosswalk user objects started moving when the ego was close to the crosswalk.</li>
+</ul>
+</li>
+<li>Q. The ego's yield behavior is too conservative.<ul>
+<li>A. Tune <code>ego_pass_later_margin</code> described in <a href="https://autowarefoundation.github.io/autoware.universe/pr-5583/planning/behavior_velocity_crosswalk_module/#stuck-vehicle-detection">Yield Decision</a></li>
+</ul>
+</li>
+<li>Q. The ego's yield behavior is too aggressive.<ul>
+<li>A. Tune <code>ego_pass_later_margin</code> described in <a href="https://autowarefoundation.github.io/autoware.universe/pr-5583/planning/behavior_velocity_crosswalk_module/#stuck-vehicle-detection">Yield Decision</a></li>
+</ul>
+</li>
+</ul>
 <h2 id="referencesexternal-links">References/External links<a class="headerlink" href="#referencesexternal-links" title="Permanent link">#</a></h2>
 <p>[1] 佐藤 みなみ, 早坂 祥一, 清水 政行, 村野 隆彦, 横断歩行者に対するドライバのリスク回避行動のモデル化, 自動車技術会論文集, 2013, 44 巻, 3 号, p. 931-936.</p></div>
 
