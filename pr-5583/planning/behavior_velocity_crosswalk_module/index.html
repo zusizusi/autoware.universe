@@ -15700,7 +15700,7 @@
 </table>
 <p>For pedestrians crossing outside the crosswalk, the crosswalk module creates an attention area around the crosswalk. If the object's predicted path collides with the attention area, the object will be targeted for yield.</p>
 <figure>
-<p><img alt="crosswalk_attention_range" src="docs/crosswalk_attention_range.svg" width="800"></p>
+<p><img alt="crosswalk_attention_range" src="docs/crosswalk_attention_range.svg" width="500"></p>
 </figure>
 <p>In the <code>object_filtering.target_object</code> namespace.</p>
 <table>
@@ -15796,7 +15796,7 @@ Calculating the collision point, the decision is based on the following variable
     <table>
         <tr>
             <td><img src="./docs/virtual_collision_point.svg" width="600"></td>
-            <td><img src="./docs/ttc_vs_ttv.drawio.svg" width="200"></td>
+            <td><img src="./docs/ttc_vs_ttv.drawio.svg" width="350"></td>
         </tr>
     </table>
 </div>
@@ -15870,9 +15870,7 @@ document.</p>
 When there are low-speed or stopped vehicle ahead of the crosswalk, and there is not enough space between the crosswalk and the vehicle, the crosswalk module will plan to stop before the crosswalk even if there are no pedestrians or bicycles.</p>
 <p><code>min_acc</code>, <code>min_jerk</code>, and <code>max_jerk</code> are met. If the ego cannot stop before the crosswalk with these parameters, the stop position will move forward.</p>
 <figure>
-<p><img alt="stuck_vehicle_attention_range" src="docs/stuck_vehicle_attention_range.svg" width="1000">
-  </p>
-<figcaption>stuck vehicle attention range</figcaption>
+<p><img alt="stuck_vehicle_attention_range" src="docs/stuck_vehicle_detection.svg" width="600"></p>
 </figure>
 <p>In the <code>stuck_vehicle</code> namespace,</p>
 <table>
