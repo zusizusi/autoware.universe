@@ -15572,13 +15572,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pass-judge-line" class="md-nav__link">
-    Pass Judge Line
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#occlusion-detection" class="md-nav__link">
     Occlusion detection
   </a>
@@ -15588,6 +15581,13 @@
           <li class="md-nav__item">
   <a href="#traffic-signal-specific-behavior" class="md-nav__link">
     Traffic signal specific behavior
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass-judge-line" class="md-nav__link">
+    Pass Judge Line
   </a>
   
 </li>
@@ -15785,7 +15785,7 @@
 <li>predict the time <span class="arithmatex">\(t\)</span> when the object intersects with ego path from the predicted path time step. Only the predicted whose confidence is greater than <code>collision_detection.min_predicted_path_confidence</code> is used.</li>
 <li>detect collision between the predicted path and ego's predicted path in the following process<ol>
 <li>calculate the collision interval of [<span class="arithmatex">\(t\)</span> - <code>collision_detection.collision_start_margin_time</code>, <span class="arithmatex">\(t\)</span> + <code>collision_detection.collision_end_margin_time</code>]</li>
-<li>obtain the passing area of ego vehicle during the collision interval from the array of (time, distance) obtained by smoothed velocity profile</li>
+<li>calculate the passing area of ego vehicle during the collision interval from the array of (time, distance) obtained by smoothed velocity profile</li>
 <li>check if ego passing area and object predicted path interval collides</li>
 </ol>
 </li>
@@ -15802,28 +15802,14 @@
 <div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>run<span class="w"> </span>behavior_velocity_intersection_module<span class="w"> </span>ttc.py<span class="w"> </span>--lane_id<span class="w"> </span>&lt;lane_id&gt;
 </code></pre></div>
 <p><img alt="ego ttc profile" src="docs/ttc.gif"></p>
-<h3 id="pass-judge-line">Pass Judge Line<a class="headerlink" href="#pass-judge-line" title="Permanent link">#</a></h3>
-<p>To avoid sudden braking, if deceleration and jerk more than the threshold (<code>common.max_accel</code> and <code>common.max_jerk</code>) is required to stop at first_attention_stopline, this module does not command to stop once it passed the default_stopline position.</p>
-<p>The position of the pass judge line depends on the occlusion detection configuration and the existence of the associated traffic light of the intersection lane.</p>
-<ul>
-<li>If <code>occlusion.enable</code> is false, the pass judge line before the <code>first_attention_stopline</code> by the braking distance <span class="arithmatex">\(v_{ego}^{2} / 2a_{max}\)</span>.</li>
-<li>If <code>occlusion.enable</code> is true and:<ul>
-<li>if there are associated traffic lights, the pass judge line is at the <code>occlusion_peeking_stopline</code> in order to continue peeking/collision detection while occlusion is detected.</li>
-<li>if there are no associated traffic lights and:<ul>
-<li>if occlusion is detected, pass judge line is at the <code>occlusion_wo_tl_pass_judge_line</code> to continue peeking.</li>
-<li>if occlusion is not detected, pass judge line is at the same place at the case where <code>occlusion.enable</code> is false.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <h3 id="occlusion-detection">Occlusion detection<a class="headerlink" href="#occlusion-detection" title="Permanent link">#</a></h3>
 <p>If the flag <code>occlusion.enable</code> is true this module checks if there is sufficient field of view (FOV) on the attention area up to <code>occlusion.occlusion_attention_area_length</code>. If FOV is not clear enough ego vehicle first make a brief stop at the default stop line for <code>occlusion.temporal_stop_time_before_peeking</code>, and then slowly creep toward occlusion_peeking_stop_line at the speed of <code>occlusion.creep_during_peeking.creep_velocity</code> if <code>occlusion.creep_during_peeking.enable</code> is true. During the creeping if collision is detected this module inserts a stop line in front of ego vehicle immediately, and if the FOV gets sufficiently clear the intersection_occlusion wall will disappear. If occlusion is cleared and no collision is detected ego vehicle will pass the intersection.</p>
 <p>The occlusion is detected as the common area of occlusion attention area(which is partially the same as the normal attention area) and the unknown cells of the occupancy grid map. The occupancy grid map is denoised using morphology with the window size of <code>occlusion.denoise_kernel</code>. The occlusion attention area lanes are discretized to line strings and they are used to generate a grid whose each cell represents the distance from ego path along the lane as shown below.</p>
 <p><img alt="occlusion_detection" src="docs/occlusion_grid.drawio.svg"></p>
 <p>If the nearest occlusion cell value is below the threshold, occlusion is detected. It is expected that the occlusion gets cleared as the vehicle approaches the occlusion peeking stop line.</p>
 <h4 id="occlusion-source-estimation-with-traffic-light">Occlusion source estimation with traffic light<a class="headerlink" href="#occlusion-source-estimation-with-traffic-light" title="Permanent link">#</a></h4>
-<p>At intersection with traffic light, the whereabout of occlusion is estimated by checking if there are any objects between ego and the nearest occlusion cell. While the occlusion is estimated to be caused by some object (DYNAMICALLY occluded), intersection_wall will be inserted. If no objects are found between ego and the nearest occlusion cell (STATICALLY occluded), after ego stopped for the duration of <code>occlusion.static_occlusion_with_traffic_light_timeout</code>, occlusion is ignored to avoid stuck.</p>
+<p>At intersection with traffic light, the whereabout of occlusion is estimated by checking if there are any objects between ego and the nearest occlusion cell. While the occlusion is estimated to be caused by some object (DYNAMICALLY occluded), intersection_wall will be inserted. If no objects are found between ego and the nearest occlusion cell (STATICALLY occluded), after ego stopped for the duration of <code>occlusion.static_occlusion_with_traffic_light_timeout</code>, occlusion is intentionally ignored to avoid stuck.</p>
+<p><img alt="occlusion_detection" src="docs/occlusion-with-tl.drawio.svg"></p>
 <h4 id="occlusion-handling-without-traffic-light">Occlusion handling without traffic light<a class="headerlink" href="#occlusion-handling-without-traffic-light" title="Permanent link">#</a></h4>
 <p>At intersection without traffic light, if occlusion is detected, ego vehicle will make a brief stop at the default_stopline and first_attention_stopline. After stopping at the first_attention_area_stopline this module inserts <code>occlusion.absence_traffic_light.creep_velocity</code> velocity between ego and occlusion_wo_tl_pass_judge_line while occlusion is not cleared. If collision is detected, ego will instantly stop. Once the occlusion is cleared or ego passed occlusion_wo_tl_pass_judge_line this module does not detect collision and occlusion because ego vehicle is already inside the intersection.</p>
 <p><img alt="occlusion_detection" src="docs/occlusion-without-tl.drawio.svg"></p>
@@ -15864,6 +15850,21 @@
 <p>If the traffic light color is RED or Arrow signal is turned on, the attention lanes which are not conflicting with ego lane are not used for detection. And even if the object stops with a certain overshoot from its stopline, but its expected stop position under the deceleration of <code>collision_detection.ignore_on_amber_traffic_light.object_expected_deceleration</code> is more than the distance <code>collision_detection.ignore_on_red_traffic_light.object_margin_to_path</code> from collision point, the object is ignored.</p>
 <h4 id="occlusion-detection_1">Occlusion detection<a class="headerlink" href="#occlusion-detection_1" title="Permanent link">#</a></h4>
 <p>When the traffic light color/shape is RED/Arrow, occlusion detection is skipped.</p>
+<h3 id="pass-judge-line">Pass Judge Line<a class="headerlink" href="#pass-judge-line" title="Permanent link">#</a></h3>
+<p>To avoid sudden braking, if deceleration and jerk more than the threshold (<code>common.max_accel</code> and <code>common.max_jerk</code>) is required to stop at first_attention_stopline, this module does not command to stop once it passed the default_stopline position.</p>
+<p>The position of the pass judge line depends on the occlusion detection configuration and the existence of the associated traffic light of the intersection lane.</p>
+<ul>
+<li>If <code>occlusion.enable</code> is false, the pass judge line before the <code>first_attention_stopline</code> by the braking distance <span class="arithmatex">\(v_{ego}^{2} / 2a_{max}\)</span>.</li>
+<li>If <code>occlusion.enable</code> is true and:<ul>
+<li>if there are associated traffic lights, the pass judge line is at the <code>occlusion_peeking_stopline</code> in order to continue peeking/collision detection while occlusion is detected.</li>
+<li>if there are no associated traffic lights and:<ul>
+<li>if occlusion is detected, pass judge line is at the <code>occlusion_wo_tl_pass_judge_line</code> to continue peeking.</li>
+<li>if occlusion is not detected, pass judge line is at the same place at the case where <code>occlusion.enable</code> is false.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="data-structure">Data Structure<a class="headerlink" href="#data-structure" title="Permanent link">#</a></h3>
 <p>Each data structure is defined in <code>util_type.hpp</code>.</p>
 <p><img alt="data-structure" src="docs/data-structure.drawio.svg"></p>
