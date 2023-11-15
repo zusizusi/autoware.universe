@@ -15700,9 +15700,7 @@
 </table>
 <p>For pedestrians crossing outside the crosswalk, the crosswalk module creates an attention area around the crosswalk. If the object's predicted path collides with the attention area, the object will be targeted for yield.</p>
 <figure>
-<p><img alt="crosswalk_attention_range" src="docs/crosswalk_attention_range.svg" width="1000">
-  </p>
-<figcaption>crosswalk attention range</figcaption>
+<p><img alt="crosswalk_attention_range" src="docs/crosswalk_attention_range.svg" width="800"></p>
 </figure>
 <p>In the <code>object_filtering.target_object</code> namespace.</p>
 <table>
@@ -15779,11 +15777,6 @@ Calculating the collision point, the decision is based on the following variable
 <li>TTC: Time-To-Collision which is the time for the <strong>ego</strong> to reach the virtual collision point.</li>
 <li>TTV: Time-To-Vehicle which is the time for the <strong>object</strong> to reach the virtual collision point.</li>
 </ul>
-<figure>
-<p><img alt="virtual_collision_point" src="docs/virtual_collision_point.svg" width="1000">
-  </p>
-<figcaption>virtual collision point</figcaption>
-</figure>
 <p>Depending on the relative relationship between TTC and TTV, the ego's behavior at crosswalks can be classified into three categories based on [1]</p>
 <ul>
 <li>A. <strong>TTC &gt;&gt; TTV</strong>: The object has enough time to cross before the ego.<ul>
@@ -15799,11 +15792,15 @@ Calculating the collision point, the decision is based on the following variable
 </ul>
 </li>
 </ul>
-<figure>
-<p><img alt="ttc-ttv" src="docs/ttc-ttv.svg" width="1000">
-  </p>
-<figcaption>time-to-collision vs time-to-vehicle</figcaption>
-</figure>
+<div align="center">
+    <table>
+        <tr>
+            <td><img src="./docs/virtual_collision_point.svg" width="600"></td>
+            <td><img src="./docs/ttc_vs_ttv.drawio.svg" width="600"></td>
+        </tr>
+    </table>
+</div>
+
 <h3 id="dead-lock-prevention">Dead Lock Prevention<a class="headerlink" href="#dead-lock-prevention" title="Permanent link">#</a></h3>
 <p>When the object is stopped around the crosswalk but has no intention to walk, the ego will yield the object forever.
 To prevent this dead lock, the ego will cancel the yield depending on the situation.</p>
