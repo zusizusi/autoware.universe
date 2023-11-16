@@ -15532,8 +15532,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dead-lock-prevention" class="md-nav__link">
-    Dead Lock Prevention
+  <a href="#smooth-yield-decision" class="md-nav__link">
+    Smooth Yield Decision
   </a>
   
 </li>
@@ -15652,11 +15652,9 @@
 
 <div><h1 id="crosswalk">Crosswalk<a class="headerlink" href="#crosswalk" title="Permanent link">#</a></h1>
 <h2 id="role">Role<a class="headerlink" href="#role" title="Permanent link">#</a></h2>
-<p>This module judges whether the ego should stop in front of the crosswalk in order to provide safe passage of pedestrians and bicycles based on object's behavior and surround traffic.</p>
+<p>This module judges whether the ego should stop in front of the crosswalk in order to provide safe passage of crosswalk users such as pedestrians and bicycles based on the objects' behavior and surround traffic.</p>
 <figure>
-<p><img alt="example" src="docs/example.png" width="1000">
-  </p>
-<figcaption>crosswalk module</figcaption>
+<p><img alt="crosswalk_module" src="docs/crosswalk_module.svg" width="1000"></p>
 </figure>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">#</a></h2>
 <h3 id="yield">Yield<a class="headerlink" href="#yield" title="Permanent link">#</a></h3>
@@ -15676,33 +15674,33 @@
 <td><code>unknown</code></td>
 <td>[-]</td>
 <td>bool</td>
-<td>target vehicle velocity when module receive slow down command from FOA</td>
-</tr>
-<tr>
-<td><code>bicycle</code></td>
-<td>[-]</td>
-<td>bool</td>
-<td>minimum jerk deceleration for safe brake</td>
-</tr>
-<tr>
-<td><code>motorcycle</code></td>
-<td>[-]</td>
-<td>bool</td>
-<td>minimum accel deceleration for safe brake</td>
+<td>whether to look and stop by UNKNOWN objects</td>
 </tr>
 <tr>
 <td><code>pedestrian</code></td>
 <td>[-]</td>
 <td>bool</td>
-<td>if the current velocity is less than X m/s, ego always stops at the stop position(not relax deceleration constraints)</td>
+<td>whether to look and stop by PEDESTRIAN objects</td>
+</tr>
+<tr>
+<td><code>bicycle</code></td>
+<td>[-]</td>
+<td>bool</td>
+<td>whether to look and stop by BICYCLE objects</td>
+</tr>
+<tr>
+<td><code>motorcycle</code></td>
+<td>[-]</td>
+<td>bool</td>
+<td>whether to look and stop by MOTORCYCLE objects</td>
 </tr>
 </tbody>
 </table>
-<p>For pedestrians crossing outside the crosswalk, the crosswalk module creates an attention area around the crosswalk. If the object's predicted path collides with the attention area, the object will be targeted for yield.</p>
+<p>In order to detect crosswalk users crossing outside the crosswalk as well, the crosswalk module creates an attention area around the crosswalk shown as the yellow polygon in the figure. If the object's predicted path collides with the attention area, the object will be targeted for yield.</p>
 <figure>
-<p><img alt="crosswalk_attention_range" src="docs/crosswalk_attention_range.svg" width="500"></p>
+<p><img alt="crosswalk_attention_range" src="docs/crosswalk_attention_range.svg" width="600"></p>
 </figure>
-<p>In the <code>object_filtering.target_object</code> namespace.</p>
+<p>The parameter is in the <code>object_filtering.target_object</code> namespace.</p>
 <table>
 <thead>
 <tr>
@@ -15722,9 +15720,9 @@
 </tbody>
 </table>
 <h4 id="stop-position">Stop Position<a class="headerlink" href="#stop-position" title="Permanent link">#</a></h4>
-<p>First of all, <code>stop_distance_from_object</code> [m] is kept at least between the ego and the target object.</p>
+<p>First of all, <code>stop_distance_from_object [m]</code> is always kept at least between the ego and the target object for safety.</p>
 <p>When the stop line exists in the lanelet map, the stop position is calculated based on the line.
-When the stop line does <strong>NOT</strong> exist in the lanelet map, the stop position is calculated by keeping <code>stop_distance_from_crosswalk</code> between the ego and the crosswalk.</p>
+When the stop line does <strong>NOT</strong> exist in the lanelet map, the stop position is calculated by keeping <code>stop_distance_from_crosswalk [m]</code> between the ego and the crosswalk.</p>
 <div align="center">
     <table>
         <tr>
@@ -15738,38 +15736,6 @@ When the stop line does <strong>NOT</strong> exist in the lanelet map, the stop 
 <figure>
 <p><img alt="far_object_threshold" src="docs/virtual_stop_line.svg" width="700"></p>
 </figure>
-<p>See the workflow in algorithms section.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>stop_position.stop_distance_from_object</code></td>
-<td>double</td>
-<td>[m] the vehicle decelerates to be able to stop in front of object with margin</td>
-</tr>
-<tr>
-<td><code>stop_position.stop_distance_from_crosswalk</code></td>
-<td>double</td>
-<td>[m] make stop line away from crosswalk when no explicit stop line exists</td>
-</tr>
-<tr>
-<td><code>stop_position.far_object_threshold</code></td>
-<td>double</td>
-<td>[m] if objects cross X meters behind the stop line, the stop position is determined according to the object position (stop_distance_from_object meters before the object)</td>
-</tr>
-<tr>
-<td><code>stop_position.stop_position_threshold</code></td>
-<td>double</td>
-<td>[m] threshold for check whether the vehicle stop in front of crosswalk</td>
-</tr>
-</tbody>
-</table>
 <h4 id="yield-decision">Yield decision<a class="headerlink" href="#yield-decision" title="Permanent link">#</a></h4>
 <p>The module make a decision to yield only when the pedestrian traffic light is <strong>GREEN</strong> or <strong>UNKNOWN</strong>.
 Calculating the collision point, the decision is based on the following variables.</p>
@@ -15801,7 +15767,7 @@ Calculating the collision point, the decision is based on the following variable
     </table>
 </div>
 
-<h3 id="dead-lock-prevention">Dead Lock Prevention<a class="headerlink" href="#dead-lock-prevention" title="Permanent link">#</a></h3>
+<h3 id="smooth-yield-decision">Smooth Yield Decision<a class="headerlink" href="#smooth-yield-decision" title="Permanent link">#</a></h3>
 <p>When the object is stopped around the crosswalk but has no intention to walk, the ego will yield the object forever.
 To prevent this dead lock, the ego will cancel the yield depending on the situation.</p>
 <h4 id="when-there-is-no-traffic-light">When there is no traffic light<a class="headerlink" href="#when-there-is-no-traffic-light" title="Permanent link">#</a></h4>
@@ -15991,6 +15957,13 @@ When there are low-speed or stopped vehicle ahead of the crosswalk, and there is
 </tbody>
 </table>
 <h2 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">#</a></h2>
+<ul>
+<li>The yield decision may be sometimes aggressive or conservative depending on the case.<ul>
+<li>The main reason is that the crosswalk module does not know the ego's position in the future. The detailed ego's position will be determined after the whole planning.</li>
+<li>Currently the module assumes that the ego will move with a constant velocit.yu</li>
+</ul>
+</li>
+</ul>
 <h2 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Permanent link">#</a></h2>
 <h3 id="visualization-of-debug-markers">Visualization of debug markers<a class="headerlink" href="#visualization-of-debug-markers" title="Permanent link">#</a></h3>
 <h3 id="visualization-of-time-to-collision">Visualization of Time-To-Collision<a class="headerlink" href="#visualization-of-time-to-collision" title="Permanent link">#</a></h3>
