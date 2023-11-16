@@ -15623,6 +15623,26 @@
     Trouble Shooting
   </a>
   
+    <nav class="md-nav" aria-label="Trouble Shooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#behavior" class="md-nav__link">
+    Behavior
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter-tuning" class="md-nav__link">
+    Parameter Tuning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -15654,7 +15674,7 @@
 <h2 id="role">Role<a class="headerlink" href="#role" title="Permanent link">#</a></h2>
 <p>This module judges whether the ego should stop in front of the crosswalk in order to provide safe passage of crosswalk users such as pedestrians and bicycles based on the objects' behavior and surround traffic.</p>
 <figure>
-<p><img alt="crosswalk_module" src="docs/crosswalk_module.svg" width="1000"></p>
+<p><img alt="crosswalk_module" src="docs/crosswalk_module.svg" width="1100"></p>
 </figure>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">#</a></h2>
 <h3 id="yield">Yield<a class="headerlink" href="#yield" title="Permanent link">#</a></h3>
@@ -15966,26 +15986,58 @@ When there are low-speed or stopped vehicle ahead of the crosswalk, and there is
 </ul>
 <h2 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Permanent link">#</a></h2>
 <h3 id="visualization-of-debug-markers">Visualization of debug markers<a class="headerlink" href="#visualization-of-debug-markers" title="Permanent link">#</a></h3>
+<p><code>/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/crosswalk</code> shows the following markers.</p>
+<figure>
+<p><img alt="limitation" src="docs/debug_markers.png" width="1000"></p>
+</figure>
+<ul>
+<li>Yellow polygons<ul>
+<li>Ego footprints' polygon to calculate the collision check.</li>
+</ul>
+</li>
+<li>Pink polygons<ul>
+<li>Object footprints' polygon to calculate the collision check.</li>
+</ul>
+</li>
+<li>The color of crosswalk<ul>
+<li>Considering the traffic light's color, red means the target crosswalk and white means the ignored crosswalk.</li>
+</ul>
+</li>
+<li>Texts<ul>
+<li>It shows the module id, TTC, TTV, and the module state.</li>
+</ul>
+</li>
+</ul>
 <h3 id="visualization-of-time-to-collision">Visualization of Time-To-Collision<a class="headerlink" href="#visualization-of-time-to-collision" title="Permanent link">#</a></h3>
 <div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>run<span class="w"> </span>behavior_velocity_crosswalk_module<span class="w"> </span>time_to_collision_plotter.py
 </code></pre></div>
 <p>enables you to visualize the following figure of the ego and pedestrian's time to collision.
 The label of each plot is <code>&lt;crosswalk module id&gt;-&lt;pedestrian uuid&gt;</code>.</p>
 <figure>
-<p><img alt="limitation" src="docs/time_to_collision_plot.png" width="1000">
-  </p>
-<figcaption>Plot of time to collision</figcaption>
+<p><img alt="limitation" src="docs/time_to_collision_plot.png" width="1000"></p>
 </figure>
 <h2 id="trouble-shooting">Trouble Shooting<a class="headerlink" href="#trouble-shooting" title="Permanent link">#</a></h2>
+<h3 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">#</a></h3>
 <ul>
 <li>Q. The ego stopped around the crosswalk even though there were no crosswalk user objects.<ul>
 <li>A. See <a href="https://autowarefoundation.github.io/autoware.universe/pr-5583/planning/behavior_velocity_crosswalk_module/#stuck-vehicle-detection">Stuck Vehicle Detection</a>.</li>
 </ul>
 </li>
-<li>Q. The crosswalk virtual wall suddenly appears resulting in the sudden stop.<ul>
-<li>A. The crosswalk user objects started moving when the ego was close to the crosswalk.</li>
+<li>Q. The crosswalk virtual wall suddenly appeared resulting in the sudden stop.<ul>
+<li>A. There may be a crosswalk user started moving when the ego was close to the crosswalk.</li>
 </ul>
 </li>
+<li>Q. The crosswalk module decides to stop even when the pedestrian traffic light is red.<ul>
+<li>A. The lanelet map may be incorrect. The pedestrian traffic light and the crosswalk have to be related.</li>
+</ul>
+</li>
+<li>Q. In the planning simulation, the crosswalk module does the yield decision to stop on all the crosswalks.<ul>
+<li>A. This is because the pedestrian traffic light is unknown by default. In this case, the crosswalk does the yield decision for safety.</li>
+</ul>
+</li>
+</ul>
+<h3 id="parameter-tuning">Parameter Tuning<a class="headerlink" href="#parameter-tuning" title="Permanent link">#</a></h3>
+<ul>
 <li>Q. The ego's yield behavior is too conservative.<ul>
 <li>A. Tune <code>ego_pass_later_margin</code> described in <a href="https://autowarefoundation.github.io/autoware.universe/pr-5583/planning/behavior_velocity_crosswalk_module/#stuck-vehicle-detection">Yield Decision</a></li>
 </ul>
