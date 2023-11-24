@@ -16034,20 +16034,20 @@ This enables large vehicles to pass narrow curve. The image of this process can 
 </tr>
 </tbody>
 </table>
-<p>This expansion can be summarized with the following steps:</p>
+<p>Next we detail the algorithm used to expand the drivable area bounds.</p>
 <h5 id="1-calculate-and-smooth-the-path-curvature">1 Calculate and smooth the path curvature<a class="headerlink" href="#1-calculate-and-smooth-the-path-curvature" title="Permanent link">#</a></h5>
 <p>To avoid sudden changes of the expanded drivable area, we first try to reuse as much of the previous path and its calculated curvatures as possible.
 Previous path points and curvatures are reused up to the first previous path point that deviates from the new path by more than the <code>reuse_max_deviation</code> parameter.
 At this stage, the path is also resampled according to the <code>resampled_interval</code> and cropped according to the <code>max_arc_length</code>.
 With the resulting preprocessed path points and previous curvatures, curvatures of the new path points are calculated using the 3 points method and smoothed using a moving window average with window size <code>curvature_average_window</code>.</p>
-<h6 id="2-for-each-path-point-calculate-the-closest-bound-segment-and-the-minimum-drivable-area-width">2 For each path point, calculate the closest bound segment and the minimum drivable area width<a class="headerlink" href="#2-for-each-path-point-calculate-the-closest-bound-segment-and-the-minimum-drivable-area-width" title="Permanent link">#</a></h6>
+<h5 id="2-for-each-path-point-calculate-the-closest-bound-segment-and-the-minimum-drivable-area-width">2 For each path point, calculate the closest bound segment and the minimum drivable area width<a class="headerlink" href="#2-for-each-path-point-calculate-the-closest-bound-segment-and-the-minimum-drivable-area-width" title="Permanent link">#</a></h5>
 <p>Each path point is projected on the left and right drivable area bounds to calculate its corresponding bound index, original distance from the bounds, and the projected point.
 Additionally, for each path point, the minimum drivable area width is calculated using the following equation:
 <script type="math/tex; mode=display"> W = \frac{a² + 2 al + 2kw + l² + w²}{2k + w}</script>
 Where <span class="arithmatex">\(W\)</span> is the minimum drivable area width, <span class="arithmatex">\(a\)</span>, is the front overhang of ego, <span class="arithmatex">\(l\)</span> is the wheelbase of ego, <span class="arithmatex">\(w\)</span> is the width of ego, and <span class="arithmatex">\(k\)</span> is the path curvature.
 This equation was derived from the work of <a href="https://www.sae.org/publications/technical-papers/content/2021-01-0099/">Lim, H., Kim, C., and Jo, A., "Model Predictive Control-Based Lateral Control of Autonomous Large-Size Bus on Road with Large Curvature," SAE Technical Paper 2021-01-0099, 2021</a>.</p>
 <p><img alt="min width" src="../../image/drivable_area/DynamicDrivableArea-MinWidth.drawio.svg"></p>
-<h6 id="3-calculate-maximum-expansion-distances-of-each-bound-point-based-on-dynamic-objects-and-linestring-of-the-vector-map-optional">3 Calculate maximum expansion distances of each bound point based on dynamic objects and linestring of the vector map (optional)<a class="headerlink" href="#3-calculate-maximum-expansion-distances-of-each-bound-point-based-on-dynamic-objects-and-linestring-of-the-vector-map-optional" title="Permanent link">#</a></h6>
+<h5 id="3-calculate-maximum-expansion-distances-of-each-bound-point-based-on-dynamic-objects-and-linestring-of-the-vector-map-optional">3 Calculate maximum expansion distances of each bound point based on dynamic objects and linestring of the vector map (optional)<a class="headerlink" href="#3-calculate-maximum-expansion-distances-of-each-bound-point-based-on-dynamic-objects-and-linestring-of-the-vector-map-optional" title="Permanent link">#</a></h5>
 <p>For each drivable area bound point, we calculate its maximum expansion distance as its distance to the closest "obstacle" (either a map linestring with type <code>avoid_linestrings.type</code>, or a dynamic object footprint if <code>dynamic_objects.avoid</code> is set to <code>true</code>).
 If <code>max_expansion_distance</code> is not <code>0.0</code>, it is use here if smaller than the distance to the closest obstacle.</p>
 <p><img alt="max distances" src="../../image/drivable_area/DynamicDrivableArea-MaxWidth.drawio.svg"></p>
