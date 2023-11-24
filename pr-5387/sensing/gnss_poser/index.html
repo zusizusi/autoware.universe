@@ -15739,40 +15739,60 @@
 <tr>
 <th>Name</th>
 <th>Type</th>
-<th>Default Value</th>
 <th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>base_frame</code></td>
+<td>base_frame</td>
 <td>string</td>
-<td>"base_link"</td>
-<td>frame id</td>
+<td>frame id for base_frame</td>
+<td>base_link</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td><code>gnss_frame</code></td>
+<td>gnss_frame</td>
 <td>string</td>
-<td>"gnss"</td>
-<td>frame id</td>
+<td>frame id for gnss_frame</td>
+<td>gnss</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td><code>gnss_base_frame</code></td>
+<td>gnss_base_frame</td>
 <td>string</td>
-<td>"gnss_base_link"</td>
-<td>frame id</td>
+<td>frame id for gnss_base_frame</td>
+<td>gnss_base_link</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td><code>map_frame</code></td>
+<td>map_frame</td>
 <td>string</td>
-<td>"map"</td>
-<td>frame id</td>
+<td>frame id for map_frame</td>
+<td>map</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td><code>gnss_pose_pub_method</code></td>
-<td>int</td>
-<td>0</td>
+<td>use_gnss_ins_orientation</td>
+<td>boolean</td>
+<td>use Gnss-Ins orientation</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>gnss_pose_pub_method</td>
+<td>integer</td>
 <td>0: Instant Value 1: Average Value 2: Median Value. If 0 is chosen buffer_epoch parameter loses affect.</td>
+<td>0</td>
+<td>≥0<br>≤2</td>
+</tr>
+<tr>
+<td>buff_epoch</td>
+<td>integer</td>
+<td>Buffer epoch</td>
+<td>1</td>
+<td>≥0</td>
 </tr>
 </tbody>
 </table>

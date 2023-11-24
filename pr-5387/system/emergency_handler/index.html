@@ -15618,26 +15618,6 @@
     Parameters
   </a>
   
-    <nav class="md-nav" aria-label="Parameters">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#node-parameters" class="md-nav__link">
-    Node Parameters
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#core-parameters" class="md-nav__link">
-    Core Parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -15752,59 +15732,65 @@
 </tbody>
 </table>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
-<h3 id="node-parameters">Node Parameters<a class="headerlink" href="#node-parameters" title="Permanent link">#</a></h3>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Type</th>
-<th>Default Value</th>
-<th>Explanation</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>update_rate</td>
-<td>int</td>
-<td><code>10</code></td>
+<td>integer</td>
 <td>Timer callback period.</td>
+<td>10</td>
+<td>N/A</td>
 </tr>
-</tbody>
-</table>
-<h3 id="core-parameters">Core Parameters<a class="headerlink" href="#core-parameters" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default Value</th>
-<th>Explanation</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>timeout_hazard_status</td>
-<td>double</td>
-<td><code>0.5</code></td>
+<td>float</td>
 <td>If the input <code>hazard_status</code> topic cannot be received for more than <code>timeout_hazard_status</code>, vehicle will make an emergency stop.</td>
+<td>0.5</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>timeout_takeover_request</td>
+<td>float</td>
+<td>Transition to MRR_OPERATING if the time from the last takeover request exceeds <code>timeout_takeover_request</code>.</td>
+<td>10.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>use_takeover_request</td>
+<td>boolean</td>
+<td>If this parameter is true, the handler will record the time and make take over request to the driver when emergency state occurs.</td>
+<td>false</td>
+<td>N/A</td>
 </tr>
 <tr>
 <td>use_parking_after_stopped</td>
-<td>bool</td>
-<td><code>false</code></td>
+<td>boolean</td>
 <td>If this parameter is true, it will publish PARKING shift command.</td>
-</tr>
-<tr>
-<td>turning_hazard_on.emergency</td>
-<td>bool</td>
-<td><code>true</code></td>
-<td>If this parameter is true, hazard lamps will be turned on during emergency state.</td>
+<td>false</td>
+<td>N/A</td>
 </tr>
 <tr>
 <td>use_comfortable_stop</td>
-<td>bool</td>
-<td><code>false</code></td>
+<td>boolean</td>
 <td>If this parameter is true, operate comfortable stop when latent faults occur.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>turning_hazard_on.emergency</td>
+<td>boolean</td>
+<td>If this parameter is true, hazard lamps will be turned on during emergency state.</td>
+<td>true</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table>
