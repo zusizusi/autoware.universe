@@ -15801,34 +15801,55 @@ ros2<span class="w"> </span>bag<span class="w"> </span>play<span class="w"> </sp
 <table>
 <thead>
 <tr>
-<th>Params</th>
+<th>Name</th>
+<th>Type</th>
 <th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>steer_update_hz</code></td>
-<td>update hz</td>
-</tr>
-<tr>
-<td><code>initial_covariance</code></td>
+<td>initial_covariance</td>
+<td>float</td>
 <td>steer offset is larger than tolerance</td>
+<td>1000</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td><code>forgetting_factor</code></td>
+<td>steer_update_hz</td>
+<td>float</td>
+<td>update hz of steer data</td>
+<td>10</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>forgetting_factor</td>
+<td>float</td>
 <td>weight of using previous value</td>
+<td>0.999</td>
+<td>≥0.0</td>
 </tr>
 <tr>
-<td><code>valid_min_velocity</code></td>
+<td>valid_min_velocity</td>
+<td>float</td>
 <td>velocity below this value is not used</td>
+<td>5</td>
+<td>≥0.0</td>
 </tr>
 <tr>
-<td><code>valid_max_steer</code></td>
+<td>valid_max_steer</td>
+<td>float</td>
 <td>steer above this value is not used</td>
+<td>0.05</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td><code>warn_steer_offset_deg</code></td>
-<td>warn if offset is above this value</td>
+<td>warn_steer_offset_deg</td>
+<td>float</td>
+<td>Warn if offset is above this value. ex. if absolute estimated offset is larger than 2.5[deg] =&gt; warning</td>
+<td>2.5</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table>
