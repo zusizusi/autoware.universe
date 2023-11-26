@@ -15892,12 +15892,22 @@ You can choose whether to use this feature by parameter of <code>slow_down_limit
 </thead>
 <tbody>
 <tr>
-<td><code>min_vel_kmph</code></td>
+<td><code>use_mandatory_area</code></td>
+<td>double</td>
+<td>[-] whether to use mandatory detection area</td>
+</tr>
+<tr>
+<td><code>assume_fixed_velocity.enable</code></td>
+<td>double</td>
+<td>[-] If enabled, the obstacle's velocity is assumed to be within the minimum and maximum velocity values specified below</td>
+</tr>
+<tr>
+<td><code>assume_fixed_velocity.min_vel_kmph</code></td>
 <td>double</td>
 <td>[km/h] minimum velocity for dynamic obstacles</td>
 </tr>
 <tr>
-<td><code>max_vel_kmph</code></td>
+<td><code>assume_fixed_velocity.max_vel_kmph</code></td>
 <td>double</td>
 <td>[km/h] maximum velocity for dynamic obstacles</td>
 </tr>
