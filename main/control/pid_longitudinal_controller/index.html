@@ -15853,8 +15853,10 @@ For instance, if the vehicle is attempting to start with an acceleration of <cod
 <li>Large integral terms may cause unintended behavior by users.</li>
 <li>Unintended noise may cause the output of the derivative term to be very large.</li>
 </ul>
-<p>Also, the integral term is not accumulated when the vehicle is stopped. This is to prevent unintended accumulation of the integral term in cases such as Autoware assumes that the vehicle is engaged, but an external system has locked the vehicle to start.
-On the other hand, if the vehicle gets stuck in a depression in the road surface when starting, the vehicle will not start forever, which is currently being addressed by developers.</p>
+<p>Note: by default, the integral term in the control system is not accumulated when the vehicle is stationary. This precautionary measure aims to prevent unintended accumulation of the integral term in scenarios where Autoware assumes the vehicle is engaged, but an external system has immobilized the vehicle to initiate startup procedures.</p>
+<p>However, certain situations may arise, such as when the vehicle encounters a depression in the road surface during startup or if the slope compensation is inaccurately estimated (lower than necessary), leading to a failure to initiate motion. To address these scenarios, it is possible to activate error integration even when the vehicle is at rest by setting the <code>enable_integration_at_low_speed</code> parameter to true.</p>
+<p>When <code>enable_integration_at_low_speed</code> is set to true, the PID controller will initiate integration of the acceleration error after a specified duration defined by the <code>time_threshold_before_pid_integration</code> parameter has elapsed without the vehicle surpassing a minimum velocity set by the <code>current_vel_threshold_pid_integration</code> parameter.</p>
+<p>The presence of the <code>time_threshold_before_pid_integration</code> parameter is important for practical PID tuning. Integrating the error when the vehicle is stationary or at low speed can complicate PID tuning. This parameter effectively introduces a delay before the integral part becomes active, preventing it from kicking in immediately. This delay allows for more controlled and effective tuning of the PID controller.</p>
 <p>At present, PID control is implemented from the viewpoint of trade-off between development/maintenance cost and performance.
 This may be replaced by a higher performance controller (adaptive control or robust control) in future development.</p>
 <h4 id="time-delay-compensation">Time delay compensation<a class="headerlink" href="#time-delay-compensation" title="Permanent link">#</a></h4>
@@ -16168,10 +16170,22 @@ AutonomouStuff Lexus RX 450h for under 40 km/h driving.</p>
 <td align="left">0.9</td>
 </tr>
 <tr>
+<td align="left">enable_integration_at_low_speed</td>
+<td align="left">bool</td>
+<td align="left">Whether to enable integration of acceleration errors when the vehicle speed is lower than <code>current_vel_threshold_pid_integration</code> or not.</td>
+<td align="left"></td>
+</tr>
+<tr>
 <td align="left">current_vel_threshold_pid_integration</td>
 <td align="left">double</td>
 <td align="left">Velocity error is integrated for I-term only when the absolute value of current velocity is larger than this parameter. [m/s]</td>
-<td align="left">0.5</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">time_threshold_before_pid_integration</td>
+<td align="left">double</td>
+<td align="left">How much time without the vehicle moving must past to enable PID error integration. [s]</td>
+<td align="left">5.0</td>
 </tr>
 <tr>
 <td align="left">brake_keeping_acc</td>
