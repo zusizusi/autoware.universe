@@ -15631,6 +15631,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#2d-tracking-modification-from-original-codes" class="md-nav__link">
+    2d tracking modification from original codes
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -15734,7 +15741,7 @@
 <p>The core algorithm, named <code>ByteTrack</code>, mainly aims to perform multi-object tracking.
 Because the algorithm associates almost every detection box including ones with low detection scores,
 the number of false negatives is expected to decrease by using it.</p>
-<p><a href="https://user-images.githubusercontent.com/3022416/225920856-745a3bb7-6b35-403d-87b0-6e5085952d70.mp4">demo video</a></p>
+<p><a href="https://github.com/YoshiRi/autoware.universe/assets/3022416/40f4c158-657e-48e1-81c2-8ac39152892d">demo video</a></p>
 <h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
 <h3 id="cite">Cite<a class="headerlink" href="#cite" title="Permanent link">#</a></h3>
 <!-- cspell: ignore Yifu Peize Jiang Dongdong Fucheng Weng Zehuan Xinggang -->
@@ -15746,6 +15753,12 @@ the number of false negatives is expected to decrease by using it.</p>
 <li>This package is ported version toward Autoware from <a href="https://github.com/ifzhang/ByteTrack/tree/main/deploy/TensorRT/cpp">this repository</a>
   (The C++ implementation by the ByteTrack's authors)</li>
 </ul>
+<h3 id="2d-tracking-modification-from-original-codes">2d tracking modification from original codes<a class="headerlink" href="#2d-tracking-modification-from-original-codes" title="Permanent link">#</a></h3>
+<p>The paper just says that the 2d tracking algorithm is a simple Kalman filter.
+Original codes use the <code>top-left-corner</code> and <code>aspect ratio</code> and <code>size</code> as the state vector.</p>
+<p>This is sometimes unstable because the aspectratio can be changed by the occlusion.
+So, we use the <code>top-left</code> and <code>size</code> as the state vector.</p>
+<p>Kalman filter settings can be controlled by the parameters in <code>config/bytetrack_node.param.yaml</code>.</p>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
 <h3 id="bytetrack_node">bytetrack_node<a class="headerlink" href="#bytetrack_node" title="Permanent link">#</a></h3>
 <h4 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h4>
