@@ -16403,10 +16403,10 @@
 <p>In this case, first visualize <code>/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/intersection</code> topic and check the <code>attention_area</code> polygon. Intersection module performs collision checking for vehicles running on this polygon, so if it extends to unintended lanes, it needs to have <a href="#how-towhy-set-rightofway-tag">RightOfWay tag</a>.</p>
 <p>By lowering <code>common.attention_area_length</code> you can check which lanes are conflicting with the intersection lane. Then set part of the conflicting lanes as the yield_lane.</p>
 <h3 id="the-stop-line-of-intersection-is-chattering">The stop line of intersection is chattering<a class="headerlink" href="#the-stop-line-of-intersection-is-chattering" title="Permanent link">#</a></h3>
-<p>The parameter <code>collision_detection.collision_detection_hold_time</code> suppresses the chattering by keeping UNSAFE decision for this duration until SAFE decision is finally made. The role of thie parameter is to account for unstable detection/tracking of objects. By increasing this value you can suppress the chattering. However it could elongate the stopping duration excessively.</p>
+<p>The parameter <code>collision_detection.collision_detection_hold_time</code> suppresses the chattering by keeping UNSAFE decision for this duration until SAFE decision is finally made. The role of this parameter is to account for unstable detection/tracking of objects. By increasing this value you can suppress the chattering. However it could elongate the stopping duration excessively.</p>
 <p>If the chattering arises from the acceleration/deceleration of target vehicles, increase <code>collision_detection.collision_detection.collision_end_margin_time</code> and/or <code>collision_detection.collision_detection.collision_end_margin_time</code>.</p>
 <h3 id="the-stop-line-is-released-too-fastslow">The stop line is released too fast/slow<a class="headerlink" href="#the-stop-line-is-released-too-fastslow" title="Permanent link">#</a></h3>
-<p>If the intersection wall appears too fast, or ego tends to stop too conservatively for upcoming vehicls, lower the parameter <code>collision_detection.collision_detection.collision_start_margin_time</code>. If it lasts too long after the target vehicle passed, then lower the parameter <code>collision_detection.collision_detection.collision_end_margin_time</code>.</p>
+<p>If the intersection wall appears too fast, or ego tends to stop too conservatively for upcoming vehicles, lower the parameter <code>collision_detection.collision_detection.collision_start_margin_time</code>. If it lasts too long after the target vehicle passed, then lower the parameter <code>collision_detection.collision_detection.collision_end_margin_time</code>.</p>
 <h3 id="ego-suddenly-stops-at-intersection-with-traffic-light">Ego suddenly stops at intersection with traffic light<a class="headerlink" href="#ego-suddenly-stops-at-intersection-with-traffic-light" title="Permanent link">#</a></h3>
 <p>If the traffic light color changed from AMBER/RED to UNKNOWN, the intersection module works in the GREEN color mode. So collision and occlusion are likely to be detected again.</p>
 <h3 id="occlusion-is-detected-overly">Occlusion is detected overly<a class="headerlink" href="#occlusion-is-detected-overly" title="Permanent link">#</a></h3>
@@ -16415,14 +16415,14 @@
 <p>If you want to care the occlusion nearby ego more cautiously, set <code>occlusion.occlusion_required_clearance_distance</code> to a larger value. Then ego will approach the occlusion_peeking_stopline more closely to assure more clear FOV.</p>
 <p><code>occlusion.possible_object_bbox</code> is used for checking if detected occlusion area is small enough that no vehicles larger than this size can exist inside. By decreasing this size ego will ignore small occluded area.</p>
 <h4 id="occupancy-grid-map-tuning">occupancy grid map tuning<a class="headerlink" href="#occupancy-grid-map-tuning" title="Permanent link">#</a></h4>
-<p>Refer to the document of <a href="https://autowarefoundation.github.io/autoware.universe/main/perception/probabilistic_occupancy_grid_map/">probabilistic_occpancy_grid_map</a> for details. If occlusion tends to be detected at apparently free space, increase <code>occlusion.free_space_max</code> to ignore them.</p>
+<p>Refer to the document of <a href="https://autowarefoundation.github.io/autoware.universe/main/perception/probabilistic_occupancy_grid_map/">probabilistic_occypancy_grid_map</a> for details. If occlusion tends to be detected at apparently free space, increase <code>occlusion.free_space_max</code> to ignore them.</p>
 <h4 id="in-simple_planning_simulator">in simple_planning_simulator<a class="headerlink" href="#in-simple_planning_simulator" title="Permanent link">#</a></h4>
-<p>intersection_occlusion feature is <strong>not recommended</strong> for use in plannig_simulator because the laserscan_based_occpancy_grid_map generates unnatural UNKNOWN cells in 2D manner:</p>
+<p>intersection_occlusion feature is <strong>not recommended</strong> for use in planning_simulator because the laserscan_based_occupancy_grid_map generates unnatural UNKNOWN cells in 2D manner:</p>
 <ul>
 <li>all the cells behind pedestrians are UNKNOWN</li>
 <li>no ground point clouds are generated</li>
 </ul>
-<p>Also oftenwise the user does not set trafic light information although it is very critical for intersection_occlusion (and in real traffic environment too).</p>
+<p>Also many users do not set traffic light information frequently although it is very critical for intersection_occlusion (and in real traffic environment too).</p>
 <p>For these reasons, <code>occlusion.enable</code> is false by default.</p>
 <h4 id="on-real-vehicle-in-end-to-end-simulator">on real vehicle / in end-to-end simulator<a class="headerlink" href="#on-real-vehicle-in-end-to-end-simulator" title="Permanent link">#</a></h4>
 <p>On real vehicle or in end-to-end simulator like <a href="https://tier4.github.io/AWSIM/">AWSIM</a> the following pointcloud_based_occupancy_grid_map configuration is highly recommended:</p>
