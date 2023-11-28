@@ -15853,7 +15853,7 @@
 <li><code>DELAY_STEER_VEL</code></li>
 <li><code>DELAY_STEER_ACC</code></li>
 <li><code>DELAY_STEER_ACC_GEARED</code></li>
-<li><code>DELAY_STEER_MAP_ACC_GEARED</code></li>
+<li><code>DELAY_STEER_MAP_ACC_GEARED</code>: applies 1D dynamics and time delay to the steering and acceleration commands. The simulated acceleration is determined by a value converted through the provided acceleration map. This model is valuable for an accurate simulation with acceleration deviations in a real vehicle.</li>
 </ul>
 <p>The <code>IDEAL</code> model moves ideally as commanded, while the <code>DELAY</code> model moves based on a 1st-order with time delay model. The <code>STEER</code> means the model receives the steer command. The <code>VEL</code> means the model receives the target velocity command, while the <code>ACC</code> model receives the target acceleration command. The <code>GEARED</code> suffix means that the motion will consider the gear command: the vehicle moves only one direction following the gear.</p>
 <p>The table below shows which models correspond to what parameters. The model names are written in abbreviated form (e.g. IDEAL_STEER_VEL = I_ST_V).</p>
@@ -16073,8 +16073,8 @@
 </tr>
 </tbody>
 </table>
-<p><code>acceleration_map</code> is used only for <code>DELAY_STEER_MAP_ACC_GEARED</code> and it shows the acceleration command on the vertical axis and the current velocity on the horizontal axis, with each cell representing the converted acceleration command that is actually used in the simulator's motion calculation. Values in between are linearly interpolated.</p>
-<p>example of <code>acceleration_map.csv</code></p>
+<p>The <code>acceleration_map</code> is used only for <code>DELAY_STEER_MAP_ACC_GEARED</code> and it shows the acceleration command on the vertical axis and the current velocity on the horizontal axis, with each cell representing the converted acceleration command that is actually used in the simulator's motion calculation. Values in between are linearly interpolated.</p>
+<p>Example of <code>acceleration_map.csv</code></p>
 <div class="highlight"><pre><span></span><code>default,0.00,1.39,2.78,4.17,5.56,6.94,8.33,9.72,11.11,12.50,13.89,15.28,16.67
 -4,-4.4,-4.363636551,-4.377800754,-4.123122297,-4.200251976,-3.941588901,-3.983020054,-3.8,-3.767618565,-3.76158025,-3.588141709,-3.5,-3.4
 -3.5,-4,-3.912946297,-3.855195605,-3.637975596,-3.675459,-3.548710083,-3.417860611,-3.24471272,-3.246114944,-3.004011648,-3.039347414,-2.92900558,-2.8
