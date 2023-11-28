@@ -901,6 +901,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5694/planning/</loc>
+         <lastmod>2023-11-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-5694/planning/behavior_path_planner/</loc>
          <lastmod>2023-11-28</lastmod>
          <changefreq>daily</changefreq>
