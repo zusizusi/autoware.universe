@@ -15705,36 +15705,188 @@
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
+<th>Name</th>
 <th>Type</th>
 <th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>update_rate</code></td>
-<td>double</td>
-<td>timer's update rate</td>
+<td>csv_path_accel_map</td>
+<td>string</td>
+<td>path for acceleration map csv file</td>
+<td>$(find-pkg-share raw_vehicle_cmd_converter)/data/default/accel_map.csv</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td><code>th_max_message_delay_sec</code></td>
-<td>double</td>
-<td>threshold time of input messages' maximum delay</td>
+<td>csv_path_brake_map</td>
+<td>string</td>
+<td>path for brake map csv file</td>
+<td>$(find-pkg-share raw_vehicle_cmd_converter)/data/default/brake_map.csv</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td><code>th_arrived_distance_m</code></td>
-<td>double</td>
-<td>threshold distance to check if vehicle has arrived at the trajectory's endpoint</td>
+<td>csv_path_steer_map</td>
+<td>string</td>
+<td>path for steer map csv file</td>
+<td>$(find-pkg-share raw_vehicle_cmd_converter)/data/default/steer_map.csv</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td><code>th_stopped_time_sec</code></td>
-<td>double</td>
-<td>threshold time to check if vehicle is stopped</td>
+<td>convert_accel_cmd</td>
+<td>boolean</td>
+<td>use accel or not</td>
+<td>true</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td><code>th_stopped_velocity_mps</code></td>
-<td>double</td>
-<td>threshold velocity to check if vehicle is stopped</td>
+<td>convert_brake_cmd</td>
+<td>boolean</td>
+<td>use brake or not</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>convert_steer_cmd</td>
+<td>boolean</td>
+<td>use steer or not</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>use_steer_ff</td>
+<td>boolean</td>
+<td>steering steer controller using steer feed forward or not</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>use_steer_fb</td>
+<td>boolean</td>
+<td>steering steer controller using steer feed back or not</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>is_debugging</td>
+<td>boolean</td>
+<td>debugging mode or not</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_throttle</td>
+<td>float</td>
+<td>maximum value of throttle</td>
+<td>0.4</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>max_brake</td>
+<td>float</td>
+<td>maximum value of brake</td>
+<td>0.8</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>max_steer</td>
+<td>float</td>
+<td>maximum value of steer</td>
+<td>10.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_steer</td>
+<td>float</td>
+<td>minimum value of steer</td>
+<td>-10.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>steer_pid.kp</td>
+<td>float</td>
+<td>proportional coefficient value in PID control</td>
+<td>150.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>steer_pid.ki</td>
+<td>float</td>
+<td>integral coefficient value in PID control</td>
+<td>15.0</td>
+<td>&gt;0.0</td>
+</tr>
+<tr>
+<td>steer_pid.kd</td>
+<td>float</td>
+<td>derivative coefficient value in PID control</td>
+<td>0.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>steer_pid.max</td>
+<td>float</td>
+<td>maximum value of PID</td>
+<td>8.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>steer_pid.min</td>
+<td>float</td>
+<td>minimum value of PID</td>
+<td>-8.0.</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>steer_pid.max_p</td>
+<td>float</td>
+<td>maximum value of Proportional in PID</td>
+<td>8.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>steer_pid.min_p</td>
+<td>float</td>
+<td>minimum value of Proportional in PID</td>
+<td>-8.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>steer_pid.max_i</td>
+<td>float</td>
+<td>maximum value of Integral in PID</td>
+<td>8.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>steer_pid.min_i</td>
+<td>float</td>
+<td>minimum value of Integral in PID</td>
+<td>-8.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>steer_pid.max_d</td>
+<td>float</td>
+<td>maximum value of Derivative in PID</td>
+<td>0.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>steer_pid.min_d</td>
+<td>float</td>
+<td>minimum value of Derivative in PID</td>
+<td>0.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>steer_pid.invalid_integration_decay</td>
+<td>float</td>
+<td>invalid integration decay value in PID control</td>
+<td>0.97</td>
+<td>&gt;0.0</td>
 </tr>
 </tbody>
 </table>
