@@ -16019,7 +16019,8 @@ This enables large vehicles to pass narrow curve. The image of this process can 
 <p><img alt="expanded_lanes" src="../../image/drivable_area/expanded_lanes.drawio.svg"></p>
 <p>Note that we only expand right bound of the rightmost lane and left bound of the leftmost lane.</p>
 <h4 id="dynamic-expansion_1">Dynamic Expansion<a class="headerlink" href="#dynamic-expansion_1" title="Permanent link">#</a></h4>
-<p>The drivable area can also be expanded dynamically based on a minimum width calculated from the path curvature and the ego vehicle's properties.</p>
+<p>The drivable area can also be expanded dynamically based on a minimum width calculated from the path curvature and the ego vehicle's properties.
+If static expansion is also enabled, the dynamic expansion will be done after the static expansion such that both expansions are applied.</p>
 <table>
 <thead>
 <tr>
@@ -16036,12 +16037,12 @@ This enables large vehicles to pass narrow curve. The image of this process can 
 </table>
 <p>Next we detail the algorithm used to expand the drivable area bounds.</p>
 <h5 id="1-calculate-and-smooth-the-path-curvature">1 Calculate and smooth the path curvature<a class="headerlink" href="#1-calculate-and-smooth-the-path-curvature" title="Permanent link">#</a></h5>
-<p>To avoid sudden changes of the expanded drivable area, we first try to reuse as much of the previous path and its calculated curvatures as possible.
+<p>To avoid sudden changes of the dynamically expanded drivable area, we first try to reuse as much of the previous path and its calculated curvatures as possible.
 Previous path points and curvatures are reused up to the first previous path point that deviates from the new path by more than the <code>reuse_max_deviation</code> parameter.
 At this stage, the path is also resampled according to the <code>resampled_interval</code> and cropped according to the <code>max_arc_length</code>.
 With the resulting preprocessed path points and previous curvatures, curvatures of the new path points are calculated using the 3 points method and smoothed using a moving window average with window size <code>curvature_average_window</code>.</p>
 <h5 id="2-for-each-path-point-calculate-the-closest-bound-segment-and-the-minimum-drivable-area-width">2 For each path point, calculate the closest bound segment and the minimum drivable area width<a class="headerlink" href="#2-for-each-path-point-calculate-the-closest-bound-segment-and-the-minimum-drivable-area-width" title="Permanent link">#</a></h5>
-<p>Each path point is projected on the left and right drivable area bounds to calculate its corresponding bound index, original distance from the bounds, and the projected point.
+<p>Each path point is projected on the original left and right drivable area bounds to calculate its corresponding bound index, original distance from the bounds, and the projected point.
 Additionally, for each path point, the minimum drivable area width is calculated using the following equation:
 <script type="math/tex; mode=display"> W = \frac{a² + 2 al + 2kw + l² + w²}{2k + w}</script>
 Where <span class="arithmatex">\(W\)</span> is the minimum drivable area width, <span class="arithmatex">\(a\)</span>, is the front overhang of ego, <span class="arithmatex">\(l\)</span> is the wheelbase of ego, <span class="arithmatex">\(w\)</span> is the width of ego, and <span class="arithmatex">\(k\)</span> is the path curvature.
