@@ -15709,9 +15709,7 @@ The optimization of the control command is formulated as a Quadratic Program (QP
 </ul>
 <h3 id="filtering">Filtering<a class="headerlink" href="#filtering" title="Permanent link">#</a></h3>
 <p>Filtering is required for good noise reduction.
-A <a href="https://en.wikipedia.org/wiki/Butterworth_filter">Butterworth filter</a> is used for the yaw and lateral errors used as
-input of the MPC as well as for
-the output steering angle.
+A <a href="https://en.wikipedia.org/wiki/Butterworth_filter">Butterworth filter</a> is employed for processing the yaw and lateral errors, which are used as inputs for the MPC, as well as for refining the output steering angle.
 Other filtering methods can be considered as long as the noise reduction performances are good
 enough.
 The moving average filter for example is not suited and can yield worse results than without any
