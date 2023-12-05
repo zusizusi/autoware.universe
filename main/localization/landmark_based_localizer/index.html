@@ -14553,6 +14553,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#about-consider_orientation" class="md-nav__link">
+    About consider_orientation
+  </a>
+  
+    <nav class="md-nav" aria-label="About consider_orientation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consider_orientation-true" class="md-nav__link">
+    consider_orientation = true
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consider_orientation-false" class="md-nav__link">
+    consider_orientation = false
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -14655,7 +14682,16 @@ Ensure to input the correct coordinates corresponding to the actual location whe
 <span class="w">  </span><span class="nt">&lt;/way&gt;</span>
 
 ...
-</code></pre></div></div>
+</code></pre></div>
+<h2 id="about-consider_orientation">About <code>consider_orientation</code><a class="headerlink" href="#about-consider_orientation" title="Permanent link">#</a></h2>
+<p>The <code>calculate_new_self_pose</code> function in the <code>LandmarkManager</code> class includes a boolean argument named <code>consider_orientation</code>. This argument determines the method used to calculate the new self pose based on detected and mapped landmarks. The following image illustrates the difference between the two methods.</p>
+<p><img alt="consider_orientation_figure" src="doc_image/consider_orientation.drawio.svg"></p>
+<h3 id="consider_orientation-true"><code>consider_orientation = true</code><a class="headerlink" href="#consider_orientation-true" title="Permanent link">#</a></h3>
+<p>In this mode, the new self pose is calculated so that the relative Pose of the "landmark detected from the current self pose" is equal to the relative Pose of the "landmark mapped from the new self pose".
+This method can correct for orientation, but is strongly affected by the orientation error of the landmark detection.</p>
+<h3 id="consider_orientation-false"><code>consider_orientation = false</code><a class="headerlink" href="#consider_orientation-false" title="Permanent link">#</a></h3>
+<p>In this mode, the new self pose is calculated so that only the relative position is correct for x, y, and z.</p>
+<p>This method can not correct for orientation, but it is not affected by the orientation error of the landmark detection.</p></div>
 
 
 
