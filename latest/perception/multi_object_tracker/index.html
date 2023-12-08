@@ -14734,6 +14734,40 @@ Example:
 -->
 
 <h3 id="core-parameters">Core Parameters<a class="headerlink" href="#core-parameters" title="Permanent link">#</a></h3>
+<p>Node parameters are defined in <a href="config/multi_object_tracker.param.yaml">multi_object_tracker.param.yaml</a> and association parameters are defined in <a href="config/data_association.param.yaml">data_association.param.yaml</a>.</p>
+<h4 id="node-parameters">Node parameters<a class="headerlink" href="#node-parameters" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>***_tracker</code></td>
+<td>string</td>
+<td>EKF tracker name for each class</td>
+</tr>
+<tr>
+<td><code>world_frame_id</code></td>
+<td>double</td>
+<td>object kinematics definition frame</td>
+</tr>
+<tr>
+<td><code>enable_delay_compensation</code></td>
+<td>bool</td>
+<td>if True, tracker use timers to schedule publishers and use prediction step to extrapolate object state at desired timestamp</td>
+</tr>
+<tr>
+<td><code>publish_rate</code></td>
+<td>double</td>
+<td>Timer frequency to output with delay compensation</td>
+</tr>
+</tbody>
+</table>
+<h4 id="association-parameters">Association parameters<a class="headerlink" href="#association-parameters" title="Permanent link">#</a></h4>
 <table>
 <thead>
 <tr>
@@ -14767,21 +14801,6 @@ Example:
 <td><code>max_rad_matrix</code></td>
 <td>double</td>
 <td>Maximum angle table for data association</td>
-</tr>
-<tr>
-<td><code>world_frame_id</code></td>
-<td>double</td>
-<td>tracking frame</td>
-</tr>
-<tr>
-<td><code>enable_delay_compensation</code></td>
-<td>bool</td>
-<td>Estimate obstacles at current time considering detection delay</td>
-</tr>
-<tr>
-<td><code>publish_rate</code></td>
-<td>double</td>
-<td>if enable_delay_compensation is true, how many hertz to output</td>
 </tr>
 </tbody>
 </table>
