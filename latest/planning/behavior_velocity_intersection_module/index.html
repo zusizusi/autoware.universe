@@ -15110,6 +15110,7 @@
 <p>If the traffic light color is RED or Arrow signal is turned on, the attention lanes which are not conflicting with ego lane are not used for detection. And even if the object stops with a certain overshoot from its stopline, but its expected stop position under the deceleration of <code>collision_detection.ignore_on_amber_traffic_light.object_expected_deceleration</code> is more than the distance <code>collision_detection.ignore_on_red_traffic_light.object_margin_to_path</code> from collision point, the object is ignored.</p>
 <h3 id="occlusion-detection_1">Occlusion detection<a class="headerlink" href="#occlusion-detection_1" title="Permanent link">#</a></h3>
 <p>When the traffic light color/shape is RED/Arrow, occlusion detection is skipped.</p>
+<p><img alt="traffic-light-specific-behavior" src="docs/traffic-light-specific-behavior.drawio.svg"></p>
 <h2 id="pass-judge-line">Pass Judge Line<a class="headerlink" href="#pass-judge-line" title="Permanent link">#</a></h2>
 <p>To avoid sudden braking, if deceleration and jerk more than the threshold (<code>common.max_accel</code> and <code>common.max_jerk</code>) is required to stop at first_attention_stopline, this module does not command to stop once it passed the default_stopline position.</p>
 <p>If ego passed pass_judge_line, then ego does not stop anymore. If ego passed pass_judge_line while ego is stopping for dangerous decision, then ego stops while the situation is judged as dangerous. Once the judgement turned safe, ego restarts and does not stop anymore.</p>
