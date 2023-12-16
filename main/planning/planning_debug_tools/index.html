@@ -14615,6 +14615,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#logging-level-updater" class="md-nav__link">
+    Logging Level Updater
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -14640,6 +14647,7 @@
 <li><strong>Closest velocity checker</strong>: prints the velocity information indicated by each modules</li>
 <li><strong>Perception reproducer</strong>: generates detected objects from rosbag data in planning simulator environment</li>
 <li><strong>processing time checker</strong>: displays processing_time of modules on the terminal</li>
+<li><strong>logging level updater</strong>: updates the logging level of the planning modules.</li>
 </ul>
 <h2 id="trajectory-analyzer">Trajectory analyzer<a class="headerlink" href="#trajectory-analyzer" title="Permanent link">#</a></h2>
 <p>The <code>trajectory_analyzer</code> visualizes the information (speed, curvature, yaw, etc) along the trajectory. This feature would be helpful for purposes such as "<em>investigating the reason why the vehicle decelerates here</em>". This feature employs the OSS <a href="https://www.plotjuggler.io/">PlotJuggler</a>.</p>
@@ -14822,7 +14830,15 @@ The GUI is launched as well with which a timestamp of rosbag can be managed.</p>
 <li>--max_display_time (or -m): This sets the maximum display time in milliseconds. The default value is 150ms.</li>
 <li>--display_frequency (or -f): This sets the frequency at which the terminal UI updates. The default value is 5Hz.</li>
 </ul>
-<p>By adjusting these parameters, users can tailor the display to their specific monitoring needs.</p></div>
+<p>By adjusting these parameters, users can tailor the display to their specific monitoring needs.</p>
+<h2 id="logging-level-updater">Logging Level Updater<a class="headerlink" href="#logging-level-updater" title="Permanent link">#</a></h2>
+<p>The purpose of the Logging Level Updater is to update the logging level of the planning modules via ROS 2 service. Users can easily update the logging level for debugging.</p>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>run<span class="w"> </span>planning_debug_tools<span class="w"> </span>update_logger_level.sh<span class="w"> </span>&lt;module-name&gt;<span class="w"> </span>&lt;logger-level&gt;
+</code></pre></div>
+<p><code>&lt;logger-level&gt;</code> will be <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, or <code>ERROR</code>.</p>
+<p><img alt="logging_level_updater" src="image/logging_level_updater.png"></p>
+<p>When you have a typo of the planning module, the script will show the available modules.</p>
+<p><img alt="logging_level_updater_typo" src="image/logging_level_updater_typo.png"></p></div>
 
 
 
