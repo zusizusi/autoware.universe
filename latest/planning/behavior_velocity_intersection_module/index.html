@@ -14583,6 +14583,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#yield-stuck-vehicle-detection" class="md-nav__link">
+    Yield stuck vehicle detection
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#collision-detection" class="md-nav__link">
     Collision detection
   </a>
@@ -15034,6 +15041,9 @@
 <h2 id="stuck-vehicle-detection">Stuck Vehicle Detection<a class="headerlink" href="#stuck-vehicle-detection" title="Permanent link">#</a></h2>
 <p>If there is any object on the path inside the intersection and at the exit of the intersection (up to <code>stuck_vehicle.stuck_vehicle_detect_dist</code>) lane and its velocity is less than the threshold (<code>stuck_vehicle.stuck_vehicle_velocity_threshold</code>), the object is regarded as a stuck vehicle. If stuck vehicles exist, this module inserts a stopline a certain distance (=<code>default_stopline_margin</code>) before the overlapped region with other lanes. The stuck vehicle detection area is generated based on the planned path, so the stuck vehicle stopline is not inserted if the upstream module generated an avoidance path.</p>
 <p><img alt="stuck_vehicle_detection" src="docs/stuck-vehicle.drawio.svg"></p>
+<h2 id="yield-stuck-vehicle-detection">Yield stuck vehicle detection<a class="headerlink" href="#yield-stuck-vehicle-detection" title="Permanent link">#</a></h2>
+<p>If there is any stopped object on the attention lanelet between the intersection point with ego path and the position which is <code>yield_stuck.distance_threshold</code> before that position, the object is regarded as yielding to ego vehicle. In this case ego is given the right-of-way by the yielding object but this module inserts stopline to prevent entry into the intersection. This scene happens when the object is yielding against ego or the object is waiting before the crosswalk around the exit of the intersection.</p>
+<p><img alt="yield_stuck_detection" src="docs/yield-stuck.drawio.svg"></p>
 <h2 id="collision-detection">Collision detection<a class="headerlink" href="#collision-detection" title="Permanent link">#</a></h2>
 <p>The following process is performed for the targets objects to determine whether ego can pass the intersection safely. If it is judged that ego cannot pass the intersection with enough margin, this module inserts a stopline on the path.</p>
 <ol>
