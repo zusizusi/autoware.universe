@@ -15177,6 +15177,9 @@ If the ego is still running, strong acceleration (<code>strong_stop_acc</code>) 
 </tbody>
 </table>
 <h3 id="stopped-parameter">STOPPED Parameter<a class="headerlink" href="#stopped-parameter" title="Permanent link">#</a></h3>
+<p>The <code>STOPPED</code> state assumes that the vehicle is completely stopped with the brakes fully applied.
+Therefore, <code>stopped_acc</code> should be set to a value that allows the vehicle to apply the strongest possible brake.
+If <code>stopped_acc</code> is not sufficiently low, there is a possibility of sliding down on steep slopes.</p>
 <table>
 <thead>
 <tr>
