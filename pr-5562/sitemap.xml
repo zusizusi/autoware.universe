@@ -296,11 +296,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/common/trtexec_vendor/</loc>
-         <lastmod>2023-12-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/common/tvm_utility/</loc>
          <lastmod>2023-12-26</lastmod>
          <changefreq>daily</changefreq>
@@ -481,6 +476,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/localization/geo_pose_projector/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/localization/gyro_odometer/</loc>
          <lastmod>2023-12-26</lastmod>
          <changefreq>daily</changefreq>
@@ -517,6 +517,11 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/localization/pose_initializer/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/localization/pose_instability_detector/</loc>
          <lastmod>2023-12-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -896,6 +901,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/planning/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/planning/behavior_path_lane_change_module/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/planning/behavior_path_planner/</loc>
          <lastmod>2023-12-26</lastmod>
          <changefreq>daily</changefreq>
@@ -927,11 +942,6 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/planning/behavior_path_planner/docs/behavior_path_planner_interface_design/</loc>
-         <lastmod>2023-12-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/planning/behavior_path_planner/docs/behavior_path_planner_lane_change_design/</loc>
          <lastmod>2023-12-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1092,6 +1102,11 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/planning/motion_velocity_smoother/README.ja/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/planning/objects_of_interest_marker_interface/</loc>
          <lastmod>2023-12-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1431,6 +1446,46 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/diagnostic_graph_aggregator/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/diagnostic_graph_aggregator/doc/format/and/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/diagnostic_graph_aggregator/doc/format/diag/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/diagnostic_graph_aggregator/doc/format/graph-file/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/diagnostic_graph_aggregator/doc/format/node/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/diagnostic_graph_aggregator/doc/format/or/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/diagnostic_graph_aggregator/doc/format/path/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/diagnostic_graph_aggregator/doc/format/unit/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/dummy_diag_publisher/</loc>
          <lastmod>2023-12-26</lastmod>
          <changefreq>daily</changefreq>
@@ -1457,46 +1512,6 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/mrm_emergency_stop_operator/</loc>
-         <lastmod>2023-12-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/system_diagnostic_graph/</loc>
-         <lastmod>2023-12-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/system_diagnostic_graph/doc/format/and/</loc>
-         <lastmod>2023-12-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/system_diagnostic_graph/doc/format/diag/</loc>
-         <lastmod>2023-12-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/system_diagnostic_graph/doc/format/graph-file/</loc>
-         <lastmod>2023-12-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/system_diagnostic_graph/doc/format/node/</loc>
-         <lastmod>2023-12-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/system_diagnostic_graph/doc/format/or/</loc>
-         <lastmod>2023-12-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/system_diagnostic_graph/doc/format/path/</loc>
-         <lastmod>2023-12-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5562/system/system_diagnostic_graph/doc/format/unit/</loc>
          <lastmod>2023-12-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
