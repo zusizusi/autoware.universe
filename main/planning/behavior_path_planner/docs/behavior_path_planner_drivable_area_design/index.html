@@ -14532,6 +14532,26 @@
     Parameters for drivable area generation
   </a>
   
+    <nav class="md-nav" aria-label="Parameters for drivable area generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-expansion" class="md-nav__link">
+    Static expansion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-expansion" class="md-nav__link">
+    Dynamic expansion
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -14611,6 +14631,42 @@
 <h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">#</a></h2>
 <p>Currently, when clipping left bound or right bound, it can clip the bound more than necessary and the generated path might be conservative.</p>
 <h2 id="parameters-for-drivable-area-generation">Parameters for drivable area generation<a class="headerlink" href="#parameters-for-drivable-area-generation" title="Permanent link">#</a></h2>
+<h3 id="static-expansion">Static expansion<a class="headerlink" href="#static-expansion" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">drivable_area_right_bound_offset</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">right offset length to expand drivable area</td>
+<td align="left">5.0</td>
+</tr>
+<tr>
+<td align="left">drivable_area_left_bound_offset</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">left offset length to expand drivable area</td>
+<td align="left">5.0</td>
+</tr>
+<tr>
+<td align="left">drivable_area_types_to_skip</td>
+<td align="left">[-]</td>
+<td align="left">string</td>
+<td align="left">linestring types (as defined in the lanelet map) that will not be expanded</td>
+<td align="left">road_border</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dynamic-expansion">Dynamic expansion<a class="headerlink" href="#dynamic-expansion" title="Permanent link">#</a></h3>
 <table>
 <thead>
 <tr>
@@ -14626,36 +14682,64 @@
 <td align="left">enabled</td>
 <td align="left">[-]</td>
 <td align="left">boolean</td>
-<td align="left">whether to dynamically the drivable area using the ego footprint</td>
-<td align="left">false</td>
+<td align="left">if true, dynamically expand the drivable area based on the path curvature</td>
+<td align="left">true</td>
 </tr>
 <tr>
-<td align="left">ego.extra_footprint_offset.front</td>
+<td align="left">print_runtime</td>
+<td align="left">[-]</td>
+<td align="left">boolean</td>
+<td align="left">if true, runtime is logged by the node</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left">max_expansion_distance</td>
 <td align="left">[m]</td>
 <td align="left">double</td>
-<td align="left">extra length to add to the front of the ego footprint</td>
+<td align="left">maximum distance by which the original drivable area can be expanded (no limit if set to 0)</td>
 <td align="left">0.0</td>
 </tr>
 <tr>
-<td align="left">ego.extra_footprint_offset.rear</td>
+<td align="left">smoothing.curvature_average_window</td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">window size used for smoothing the curvatures using a moving window average</td>
+<td align="left">3</td>
+</tr>
+<tr>
+<td align="left">smoothing.max_bound_rate</td>
+<td align="left">[m/m]</td>
+<td align="left">double</td>
+<td align="left">maximum rate of change of the bound lateral distance over its arc length</td>
+<td align="left">1.0</td>
+</tr>
+<tr>
+<td align="left">smoothing.arc_length_range</td>
 <td align="left">[m]</td>
 <td align="left">double</td>
-<td align="left">extra length to add to the rear of the ego footprint</td>
+<td align="left">arc length range where an expansion distance is initially applied</td>
+<td align="left">2.0</td>
+</tr>
+<tr>
+<td align="left">ego.extra_wheel_base</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">extra ego wheelbase</td>
 <td align="left">0.0</td>
 </tr>
 <tr>
-<td align="left">ego.extra_footprint_offset.left</td>
+<td align="left">ego.extra_front_overhang</td>
 <td align="left">[m]</td>
 <td align="left">double</td>
-<td align="left">extra length to add to the left of the ego footprint</td>
-<td align="left">0.0</td>
+<td align="left">extra ego overhang</td>
+<td align="left">0.5</td>
 </tr>
 <tr>
-<td align="left">ego.extra_footprint_offset.right</td>
+<td align="left">ego.extra_width</td>
 <td align="left">[m]</td>
 <td align="left">double</td>
-<td align="left">extra length to add to the rear of the ego footprint</td>
-<td align="left">0.0</td>
+<td align="left">extra ego width</td>
+<td align="left">1.0</td>
 </tr>
 <tr>
 <td align="left">dynamic_objects.avoid</td>
@@ -14693,39 +14777,32 @@
 <td align="left">0.5</td>
 </tr>
 <tr>
-<td align="left">max_distance</td>
+<td align="left">path_preprocessing.max_arc_length</td>
 <td align="left">[m]</td>
 <td align="left">double</td>
-<td align="left">maximum distance by which the drivable area can be expended. A value of 0.0 means no maximum distance.</td>
-<td align="left">0.0</td>
+<td align="left">maximum arc length along the path where the ego footprint is projected (0.0 means no limit)</td>
+<td align="left">100.0</td>
 </tr>
 <tr>
-<td align="left">expansion.method</td>
-<td align="left">[-]</td>
-<td align="left">string</td>
-<td align="left">method to use for the expansion: "polygon" will expand the drivable area around the ego footprint polygons; "lanelet" will expand to the whole lanelets overlapped by the ego footprints</td>
-<td align="left">"polygon"</td>
-</tr>
-<tr>
-<td align="left">expansion.max_arc_path_length</td>
+<td align="left">path_preprocessing.resample_interval</td>
 <td align="left">[m]</td>
 <td align="left">double</td>
-<td align="left">maximum length along the path where the ego footprint is projected</td>
-<td align="left">50.0</td>
+<td align="left">fixed interval between resampled path points (0.0 means path points are directly used)</td>
+<td align="left">2.0</td>
 </tr>
 <tr>
-<td align="left">expansion.extra_arc_length</td>
+<td align="left">path_preprocessing.reuse_max_deviation</td>
 <td align="left">[m]</td>
 <td align="left">double</td>
-<td align="left">extra arc length (relative to the path) around ego footprints where the drivable area is expanded</td>
+<td align="left">if the path changes by more than this value, the curvatures are recalculated. Otherwise they are reused</td>
 <td align="left">0.5</td>
 </tr>
 <tr>
-<td align="left">expansion.avoid_linestring.types</td>
+<td align="left">avoid_linestring.types</td>
 <td align="left">[-]</td>
 <td align="left">string array</td>
 <td align="left">linestring types in the lanelet maps that will not be crossed when expanding the drivable area</td>
-<td align="left">[guard_rail, road_border]</td>
+<td align="left">["road_border", "curbstone"]</td>
 </tr>
 <tr>
 <td align="left">avoid_linestring.distance</td>
@@ -14733,55 +14810,6 @@
 <td align="left">double</td>
 <td align="left">distance to keep between the drivable area and the linestrings to avoid</td>
 <td align="left">0.0</td>
-</tr>
-<tr>
-<td align="left">avoid_linestring.compensate.enable</td>
-<td align="left">[-]</td>
-<td align="left">bool</td>
-<td align="left">if true, when the expansion is blocked by a linestring on one side of the path, we try to compensate and expand on the other side</td>
-<td align="left">true</td>
-</tr>
-<tr>
-<td align="left">avoid_linestring.compensate.extra_distance</td>
-<td align="left">[m]</td>
-<td align="left">double</td>
-<td align="left">extra distance added to the expansion when compensating</td>
-<td align="left">3.0</td>
-</tr>
-</tbody>
-</table>
-<p>The following parameters are defined for each module. Please refer to the <code>config/drivable_area_expansion.yaml</code> file.</p>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Unit</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">drivable_area_right_bound_offset</td>
-<td align="left">[m]</td>
-<td align="left">double</td>
-<td align="left">right offset length to expand drivable area</td>
-<td align="left">5.0</td>
-</tr>
-<tr>
-<td align="left">drivable_area_left_bound_offset</td>
-<td align="left">[m]</td>
-<td align="left">double</td>
-<td align="left">left offset length to expand drivable area</td>
-<td align="left">5.0</td>
-</tr>
-<tr>
-<td align="left">drivable_area_types_to_skip</td>
-<td align="left">[-]</td>
-<td align="left">string</td>
-<td align="left">linestring types (as defined in the lanelet map) that will not be expanded</td>
-<td align="left">road_border</td>
 </tr>
 </tbody>
 </table>
@@ -14809,44 +14837,66 @@
 <p>and each point of right bound and left bound has a position in the absolute coordinate system.</p>
 <p><img alt="drivable_lines" src="../../image/drivable_area/drivable_lines.drawio.svg"></p>
 <h3 id="drivable-area-expansion">Drivable Area Expansion<a class="headerlink" href="#drivable-area-expansion" title="Permanent link">#</a></h3>
-<h4 id="static-expansion">Static Expansion<a class="headerlink" href="#static-expansion" title="Permanent link">#</a></h4>
+<h4 id="static-expansion_1">Static Expansion<a class="headerlink" href="#static-expansion_1" title="Permanent link">#</a></h4>
 <p>Each module can statically expand the left and right bounds of the target lanes by the parameter defined values.
 This enables large vehicles to pass narrow curve. The image of this process can be described as</p>
 <p><img alt="expanded_lanes" src="../../image/drivable_area/expanded_lanes.drawio.svg"></p>
 <p>Note that we only expand right bound of the rightmost lane and left bound of the leftmost lane.</p>
-<h4 id="dynamic-expansion">Dynamic Expansion<a class="headerlink" href="#dynamic-expansion" title="Permanent link">#</a></h4>
-<p>The drivable area can also be expanded dynamically by considering the ego vehicle footprint projected on each path point.
-This expansion can be summarized with the following steps:</p>
-<ol>
-<li>Build the ego path footprint.</li>
-<li>Build the dynamic objects' predicted footprints (optional).</li>
-<li>Build "uncrossable" lines.</li>
-<li>Remove the footprints from step 2 and the lines from step 3 from the ego path footprint from step 1.</li>
-<li>Expand the drivable area with the result of step 4.</li>
-</ol>
+<h4 id="dynamic-expansion_1">Dynamic Expansion<a class="headerlink" href="#dynamic-expansion_1" title="Permanent link">#</a></h4>
+<p>The drivable area can also be expanded dynamically based on a minimum width calculated from the path curvature and the ego vehicle's properties.
+If static expansion is also enabled, the dynamic expansion will be done after the static expansion such that both expansions are applied.</p>
 <table>
 <thead>
 <tr>
-<th align="left"></th>
-<th align="left"></th>
+<th>Without dynamic expansion</th>
+<th>With dynamic expansion</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">Inputs</td>
-<td align="left"><img alt="drivable_area_expansion_inputs" src="../../image/drivable_area/drivable_area_expansion_inputs.png"></td>
-</tr>
-<tr>
-<td align="left">Footprints and uncrossable lines</td>
-<td align="left"><img alt="drivable_area_expansion_footprints" src="../../image/drivable_area/drivable_area_expansion_footprints.png"></td>
-</tr>
-<tr>
-<td align="left">Expanded drivable area</td>
-<td align="left"><img alt="drivable_area_expansion_result" src="../../image/drivable_area/drivable_area_expansion_result.png"></td>
+<td><img alt="dynamic_expansion_off" src="../../image/drivable_area/dynamic_expansion_off.png"></td>
+<td><img alt="dynamic_expansion_on" src="../../image/drivable_area/dynamic_expansion_on.png"></td>
 </tr>
 </tbody>
 </table>
-<p>Please note that the dynamic expansion can only increase the size of the drivable area and cannot remove any part from the original drivable area.</p>
+<p>Next we detail the algorithm used to expand the drivable area bounds.</p>
+<h5 id="1-calculate-and-smooth-the-path-curvature">1 Calculate and smooth the path curvature<a class="headerlink" href="#1-calculate-and-smooth-the-path-curvature" title="Permanent link">#</a></h5>
+<p>To avoid sudden changes of the dynamically expanded drivable area, we first try to reuse as much of the previous path and its calculated curvatures as possible.
+Previous path points and curvatures are reused up to the first previous path point that deviates from the new path by more than the <code>reuse_max_deviation</code> parameter.
+At this stage, the path is also resampled according to the <code>resampled_interval</code> and cropped according to the <code>max_arc_length</code>.
+With the resulting preprocessed path points and previous curvatures, curvatures of the new path points are calculated using the 3 points method and smoothed using a moving window average with window size <code>curvature_average_window</code>.</p>
+<h5 id="2-for-each-path-point-calculate-the-closest-bound-segment-and-the-minimum-drivable-area-width">2 For each path point, calculate the closest bound segment and the minimum drivable area width<a class="headerlink" href="#2-for-each-path-point-calculate-the-closest-bound-segment-and-the-minimum-drivable-area-width" title="Permanent link">#</a></h5>
+<p>Each path point is projected on the original left and right drivable area bounds to calculate its corresponding bound index, original distance from the bounds, and the projected point.
+Additionally, for each path point, the minimum drivable area width is calculated using the following equation:
+<script type="math/tex; mode=display"> W = \frac{a² + 2 al + 2kw + l² + w²}{2k + w}</script>
+Where <span class="arithmatex">\(W\)</span> is the minimum drivable area width, <span class="arithmatex">\(a\)</span>, is the front overhang of ego, <span class="arithmatex">\(l\)</span> is the wheelbase of ego, <span class="arithmatex">\(w\)</span> is the width of ego, and <span class="arithmatex">\(k\)</span> is the path curvature.
+This equation was derived from the work of <a href="https://www.sae.org/publications/technical-papers/content/2021-01-0099/">Lim, H., Kim, C., and Jo, A., "Model Predictive Control-Based Lateral Control of Autonomous Large-Size Bus on Road with Large Curvature," SAE Technical Paper 2021-01-0099, 2021</a>.</p>
+<p><img alt="min width" src="../../image/drivable_area/DynamicDrivableArea-MinWidth.drawio.svg"></p>
+<h5 id="3-calculate-maximum-expansion-distances-of-each-bound-point-based-on-dynamic-objects-and-linestring-of-the-vector-map-optional">3 Calculate maximum expansion distances of each bound point based on dynamic objects and linestring of the vector map (optional)<a class="headerlink" href="#3-calculate-maximum-expansion-distances-of-each-bound-point-based-on-dynamic-objects-and-linestring-of-the-vector-map-optional" title="Permanent link">#</a></h5>
+<p>For each drivable area bound point, we calculate its maximum expansion distance as its distance to the closest "obstacle" (either a map linestring with type <code>avoid_linestrings.type</code>, or a dynamic object footprint if <code>dynamic_objects.avoid</code> is set to <code>true</code>).
+If <code>max_expansion_distance</code> is not <code>0.0</code>, it is use here if smaller than the distance to the closest obstacle.</p>
+<p><img alt="max distances" src="../../image/drivable_area/DynamicDrivableArea-MaxWidth.drawio.svg"></p>
+<h5 id="4-calculate-by-how-much-each-bound-point-should-be-pushed-away-from-the-path">4 Calculate by how much each bound point should be pushed away from the path<a class="headerlink" href="#4-calculate-by-how-much-each-bound-point-should-be-pushed-away-from-the-path" title="Permanent link">#</a></h5>
+<p>For each bound point, a shift distance is calculated.
+such that the resulting width between corresponding left and right bound points is as close as possible to the minimum width calculated in step 2 but the individual shift distance stays bellow the previously calculated maximum expansion distance.</p>
+<p><img alt="expansion distances" src="../../image/drivable_area/DynamicDrivableArea-ExpDistances.drawio.svg"></p>
+<h5 id="5-shift-bound-points-by-the-values-calculated-in-step-4-and-remove-all-loops-in-the-resulting-bound">5 Shift bound points by the values calculated in step 4 and remove all loops in the resulting bound<a class="headerlink" href="#5-shift-bound-points-by-the-values-calculated-in-step-4-and-remove-all-loops-in-the-resulting-bound" title="Permanent link">#</a></h5>
+<p>Finally, each bound point is shifted away from the path by the distance calculated in step 4.
+Once all points have been shifted, loops are removed from the bound and we obtain our final expanded drivable area.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="expansion" src="../../image/drivable_area/DynamicDrivableArea-Expansion.drawio.svg"></td>
+<td><img alt="result" src="../../image/drivable_area/DynamicDrivableArea-Result.drawio.svg"></td>
+</tr>
+</tbody>
+</table>
 <h3 id="visualizing-maximum-drivable-area-debug">Visualizing maximum drivable area (Debug)<a class="headerlink" href="#visualizing-maximum-drivable-area-debug" title="Permanent link">#</a></h3>
 <p>Sometimes, the developers might get a different result between two maps that may look identical during visual inspection.</p>
 <p>For example, in the same area, one can perform avoidance and another cannot. This might be related to the maximum drivable area issues due to the non-compliance vector map design from the user.</p>
