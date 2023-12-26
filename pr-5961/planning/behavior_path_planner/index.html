@@ -14784,7 +14784,7 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For more in-depth information, refer to <a href="docs/behavior_path_planner_manager_design/">Manager design</a> document.</p>
+<p>For more in-depth information, refer to <a href="../behavior_path_planner_common/docs/behavior_path_planner_manager_design.md">Manager design</a> document.</p>
 </div>
 <h2 id="inputs-outputs-api">Inputs / Outputs / API<a class="headerlink" href="#inputs-outputs-api" title="Permanent link">#</a></h2>
 <h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
@@ -14995,7 +14995,7 @@
 <p>The shifted path generation logic enables the behavior path planner to dynamically generate safe and efficient paths, precisely controlling the vehicle’s lateral movements to ensure the smooth execution of lane changes and avoidance maneuvers. This careful planning and execution adhere to the vehicle's dynamic capabilities and safety constraints, maximizing efficiency and safety in autonomous vehicle navigation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you're a math lover, refer to <a href="./docs/behavior_path_planner_path_generation_design.md">Path Generation Design</a> for the nitty-gritty.</p>
+<p>If you're a math lover, refer to <a href="../behavior_path_planner_common/docs/behavior_path_planner_path_generation_design/">Path Generation Design</a> for the nitty-gritty.</p>
 </div>
 <h2 id="collision-assessment-safety-check">Collision Assessment / Safety check<a class="headerlink" href="#collision-assessment-safety-check" title="Permanent link">#</a></h2>
 <p>The purpose of the collision assessment function in the Behavior Path Planner is to evaluate the potential for collisions with target objects across all modules. It is utilized in two scenarios:</p>
@@ -15008,7 +15008,7 @@
 <p>However, the module does have a limitation concerning the yaw angle of each point in the predicted paths of target objects, which may not always accurately point to the next point, leading to potential inaccuracies in some edge cases.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For further reading on the collision assessment  method, please refer to <a href="./docs/behavior_path_planner_safety_check.md">Safety check utils</a></p>
+<p>For further reading on the collision assessment  method, please refer to <a href="../behavior_path_planner_common/docs/behavior_path_planner_safety_check/">Safety check utils</a></p>
 </div>
 <h2 id="generating-drivable-area">Generating Drivable Area<a class="headerlink" href="#generating-drivable-area" title="Permanent link">#</a></h2>
 <h3 id="static-drivable-area-logic">Static Drivable Area logic<a class="headerlink" href="#static-drivable-area-logic" title="Permanent link">#</a></h3>
@@ -15041,7 +15041,7 @@
 <p>The <code>TurnIndicatorsCommand</code> message structure has a command field that can take one of several constants: <code>NO_COMMAND</code> indicates no signal is necessary, <code>DISABLE</code> to deactivate signals, <code>ENABLE_LEFT</code> to signal a left turn, and <code>ENABLE_RIGHT</code> to signal a right turn. The Behavior Path Planner sends these commands at the appropriate times, based on its rules-based system that considers both the <strong>desired</strong> and <strong>required</strong> scenarios for blinker activation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For more in-depth information, refer to <a href="./docs/behavior_path_planner_turn_signal_design.md">Turn Signal Design</a> document.</p>
+<p>For more in-depth information, refer to <a href="../behavior_path_planner_common/docs/behavior_path_planner_turn_signal_design/">Turn Signal Design</a> document.</p>
 </div>
 <h2 id="rerouting">Rerouting<a class="headerlink" href="#rerouting" title="Permanent link">#</a></h2>
 <div class="admonition warning">
