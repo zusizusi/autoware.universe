@@ -926,11 +926,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5961/planning/behavior_path_planner/docs/behavior_path_planner_drivable_area_design/</loc>
-         <lastmod>2023-12-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-5961/planning/behavior_path_planner/docs/behavior_path_planner_dynamic_avoidance_design/</loc>
          <lastmod>2023-12-26</lastmod>
          <changefreq>daily</changefreq>
@@ -951,17 +946,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5961/planning/behavior_path_planner/docs/behavior_path_planner_path_generation_design/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5961/planning/behavior_path_planner_common/docs/behavior_path_planner_drivable_area_design/</loc>
          <lastmod>2023-12-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5961/planning/behavior_path_planner/docs/behavior_path_planner_safety_check/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5961/planning/behavior_path_planner_common/docs/behavior_path_planner_path_generation_design/</loc>
          <lastmod>2023-12-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5961/planning/behavior_path_planner/docs/behavior_path_planner_turn_signal_design/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5961/planning/behavior_path_planner_common/docs/behavior_path_planner_safety_check/</loc>
+         <lastmod>2023-12-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-5961/planning/behavior_path_planner_common/docs/behavior_path_planner_turn_signal_design/</loc>
          <lastmod>2023-12-26</lastmod>
          <changefreq>daily</changefreq>
     </url>

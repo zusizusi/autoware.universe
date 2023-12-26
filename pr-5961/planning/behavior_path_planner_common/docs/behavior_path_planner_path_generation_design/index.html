@@ -8,10 +8,10 @@
       
       
       
-        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/pr-5961/planning/behavior_path_planner/docs/behavior_path_planner_path_generation_design/">
+        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/pr-5961/planning/behavior_path_planner_common/docs/behavior_path_planner_path_generation_design/">
       
       
-        <link rel="prev" href="../behavior_path_planner_manager_design/">
+        <link rel="prev" href="../behavior_path_planner_drivable_area_design/">
       
       
         <link rel="next" href="../behavior_path_planner_safety_check/">
@@ -9664,7 +9664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../../behavior_path_planner" class="md-nav__link">
         About Behavior Path
       </a>
     </li>
@@ -9721,7 +9721,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner_manager_design" class="md-nav__link">
+      <a href="../../../behavior_path_planner/docs/behavior_path_planner_manager_design" class="md-nav__link">
         Planner Manager
       </a>
     </li>
@@ -9735,7 +9735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner_interface_design" class="md-nav__link">
+      <a href="../../../behavior_path_planner/docs/behavior_path_planner_interface_design" class="md-nav__link">
         Scene Module Interface
       </a>
     </li>
@@ -9749,7 +9749,7 @@
   
   
     <li class="md-nav__item">
-      <a href="." class="md-nav__link">
+      <a href="../../../behavior_path_planner/docs/behavior_path_planner_path_generation_design" class="md-nav__link">
         Path Generation
       </a>
     </li>
@@ -9763,7 +9763,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner_safety_check" class="md-nav__link">
+      <a href="../../../behavior_path_planner/docs/behavior_path_planner_safety_check" class="md-nav__link">
         Collision Assessment/Safety Check
       </a>
     </li>
@@ -9777,7 +9777,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner_drivable_area_design" class="md-nav__link">
+      <a href="../../../behavior_path_planner/docs/behavior_path_planner_drivable_area_design" class="md-nav__link">
         Dynamic Drivable Area
       </a>
     </li>
@@ -9791,7 +9791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner_turn_signal_design" class="md-nav__link">
+      <a href="../../../behavior_path_planner/docs/behavior_path_planner_turn_signal_design" class="md-nav__link">
         Turn Signal
       </a>
     </li>
@@ -9885,7 +9885,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner_dynamic_avoidance_design" class="md-nav__link">
+      <a href="../../../behavior_path_planner/docs/behavior_path_planner_dynamic_avoidance_design" class="md-nav__link">
         Dynamic Avoidance
       </a>
     </li>
@@ -9899,7 +9899,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner_goal_planner_design" class="md-nav__link">
+      <a href="../../../behavior_path_planner/docs/behavior_path_planner_goal_planner_design" class="md-nav__link">
         Goal Planner
       </a>
     </li>
@@ -14573,11 +14573,11 @@
 
 
 <div><h1 id="path-generation-design">Path Generation design<a class="headerlink" href="#path-generation-design" title="Permanent link">#</a></h1>
-<p>This document explains how the path is generated for lane change and avoidance, etc. The implementation can be found in <a href="https://github.com/autowarefoundation/autoware.universe/blob/main/planning/behavior_path_planner/include/behavior_path_planner/utils/path_shifter/path_shifter.hpp">path_shifter.hpp</a>.</p>
+<p>This document explains how the path is generated for lane change and avoidance, etc. The implementation can be found in <a href="https://github.com/autowarefoundation/autoware.universe/blob/main/planning/behavior_path_planner_common/include/behavior_path_planner_common/utils/path_shifter/path_shifter.hpp">path_shifter.hpp</a>.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
 <p>The base idea of the path generation in lane change and avoidance is to smoothly shift the reference path, such as the center line, in the lateral direction. This is achieved by using a constant-jerk profile as in the figure below. More details on how it is used can be found in <a href="https://github.com/autowarefoundation/autoware.universe/blob/main/planning/behavior_path_planner/README.md">README</a>. It is assumed that the reference path is smooth enough for this algorithm.</p>
 <p>The figure below explains how the application of a constant lateral jerk <span class="arithmatex">\(l^{'''}(s)\)</span> can be used to induce lateral shifting. In order to comply with the limits on lateral acceleration and velocity, zero-jerk time is employed in the figure ( <span class="arithmatex">\(T_a\)</span> and <span class="arithmatex">\(T_v\)</span> ). In each interval where constant jerk is applied, the shift position <span class="arithmatex">\(l(s)\)</span> can be characterized by a third-degree polynomial. Therefore the shift length from the reference path can then be calculated by combining spline curves.</p>
-<p><img alt="path-shifter" src="../../image/path_shifter.png"></p>
+<p><img alt="path-shifter" src="../../images/path_shifter/path_shifter.png"></p>
 <p>Note that, due to the rarity of the <span class="arithmatex">\(T_v\)</span> in almost all cases of lane change and avoidance, <span class="arithmatex">\(T_v\)</span> is not considered in the current implementation.</p>
 <h2 id="mathematical-derivation">Mathematical Derivation<a class="headerlink" href="#mathematical-derivation" title="Permanent link">#</a></h2>
 <p>With initial longitudinal velocity <span class="arithmatex">\(v_0^{\rm lon}\)</span> and longitudinal acceleration <span class="arithmatex">\(a^{\rm lon}\)</span>, longitudinal position <span class="arithmatex">\(s(t)\)</span> and longitudinal velocity at each time <span class="arithmatex">\(v^{\rm lon}(t)\)</span> can be derived as:</p>
@@ -14685,7 +14685,7 @@ T_a &amp;= \frac{1}{2}\sqrt{\frac{a_{\rm lim}^{\rm lat}}{j}^2 + \frac{4L}{a_{\rm
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../behavior_path_planner_manager_design/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Manager design" rel="prev">
+          <a href="../behavior_path_planner_drivable_area_design/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Drivable Area design" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -14694,7 +14694,7 @@ T_a &amp;= \frac{1}{2}\sqrt{\frac{a_{\rm lim}^{\rm lat}}{j}^2 + \frac{4L}{a_{\rm
                 Previous
               </span>
               <div class="md-ellipsis">
-                Manager design
+                Drivable Area design
               </div>
             </div>
           </a>

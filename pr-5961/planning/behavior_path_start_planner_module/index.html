@@ -14797,7 +14797,7 @@ This module is activated when a new route is received.</p>
 <h2 id="safety-check-with-dynamic-obstacles">Safety check with dynamic obstacles<a class="headerlink" href="#safety-check-with-dynamic-obstacles" title="Permanent link">#</a></h2>
 <h3 id="basic-concept-of-safety-check-against-dynamic-obstacles"><strong>Basic concept of safety check against dynamic obstacles</strong><a class="headerlink" href="#basic-concept-of-safety-check-against-dynamic-obstacles" title="Permanent link">#</a></h3>
 <p>This is based on the concept of RSS. For the logic used, refer to the link below.
-See <a href="../docs/behavior_path_planner_safety_check.md">safety check feature explanation</a></p>
+See <a href="../behavior_path_planner_common/docs/behavior_path_planner_safety_check/">safety check feature explanation</a></p>
 <h3 id="collision-check-performed-range"><strong>Collision check performed range</strong><a class="headerlink" href="#collision-check-performed-range" title="Permanent link">#</a></h3>
 <p>A collision check with dynamic objects is primarily performed between the shift start point and end point. The range for safety check varies depending on the type of path generated, so it will be explained for each pattern.</p>
 <h4 id="shift-pull-out"><strong>Shift pull out</strong><a class="headerlink" href="#shift-pull-out" title="Permanent link">#</a></h4>
@@ -14806,7 +14806,7 @@ See <a href="../docs/behavior_path_planner_safety_check.md">safety check feature
 <p>Since there's a stop at the midpoint during the shift, this becomes the endpoint for safety verification. After stopping, safety verification resumes.</p>
 <h4 id="backward-pull-out-start-point-search"><strong>Backward pull out start point search</strong><a class="headerlink" href="#backward-pull-out-start-point-search" title="Permanent link">#</a></h4>
 <p>During backward movement, no safety check is performed. Safety check begins at the point where the backward movement ends.</p>
-<p><img alt="collision_check_range" src="./images/start_planner/collision_check_range.drawio.svg"></p>
+<p><img alt="collision_check_range" src="images/collision_check_range.drawio.svg"></p>
 <h3 id="ego-vehicles-velocity-planning"><strong>Ego vehicle's velocity planning</strong><a class="headerlink" href="#ego-vehicles-velocity-planning" title="Permanent link">#</a></h3>
 <p>WIP</p>
 <h3 id="safety-check-in-free-space-area"><strong>Safety check in free space area</strong><a class="headerlink" href="#safety-check-in-free-space-area" title="Permanent link">#</a></h3>
@@ -15169,7 +15169,7 @@ See <a href="../docs/behavior_path_planner_safety_check.md">safety check feature
 <li>In the section between merge start and end, path is shifted by a method that is used to generate avoidance path (four segmental constant jerk polynomials)</li>
 <li>Combine this path with center line of road lane</li>
 </ul>
-<p><img alt="shift_pull_out" src="./images/shift_pull_out.drawio.svg"></p>
+<p><img alt="shift_pull_out" src="images/shift_pull_out.drawio.svg"></p>
 <p><a href="https://user-images.githubusercontent.com/39142679/187872468-6d5057ee-e039-499b-afc7-fe0dc8052a6b.mp4">shift pull out video</a></p>
 <h4 id="parameters-for-shift-pull-out">parameters for shift pull out<a class="headerlink" href="#parameters-for-shift-pull-out" title="Permanent link">#</a></h4>
 <table>
@@ -15364,7 +15364,7 @@ See also <a href="https://www.sciencedirect.com/science/article/pii/S14746670153
 </table>
 <h3 id="freespace-pull-out"><strong>freespace pull out</strong><a class="headerlink" href="#freespace-pull-out" title="Permanent link">#</a></h3>
 <p>If the vehicle gets stuck with pull out along lanes, execute freespace pull out.
-To run this feature, you need to set <code>parking_lot</code> to the map, <code>activate_by_scenario</code> of <a href="../../costmap_generator/README.md">costmap_generator</a> to <code>false</code> and <code>enable_freespace_planner</code> to <code>true</code></p>
+To run this feature, you need to set <code>parking_lot</code> to the map, <code>activate_by_scenario</code> of <a href="../costmap_generator/">costmap_generator</a> to <code>false</code> and <code>enable_freespace_planner</code> to <code>true</code></p>
 <p><img src="https://user-images.githubusercontent.com/39142679/270964106-ae688bca-1709-4e06-98c4-90f671bb8246.png" width="600"></p>
 <h4 id="unimplemented-parts-limitations-for-freespace-pull-out">Unimplemented parts / limitations for freespace pull out<a class="headerlink" href="#unimplemented-parts-limitations-for-freespace-pull-out" title="Permanent link">#</a></h4>
 <ul>
@@ -15414,7 +15414,7 @@ To run this feature, you need to set <code>parking_lot</code> to the map, <code>
 </tr>
 </tbody>
 </table>
-<p>See <a href="../../freespace_planner/README.md">freespace_planner</a> for other parameters.</p></div>
+<p>See <a href="../freespace_planner/">freespace_planner</a> for other parameters.</p></div>
 
 
 
