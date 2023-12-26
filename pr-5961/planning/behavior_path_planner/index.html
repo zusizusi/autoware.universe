@@ -14784,7 +14784,7 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For more in-depth information, refer to <a href="../behavior_path_planner_common/docs/behavior_path_planner_manager_design.md">Manager design</a> document.</p>
+<p>For more in-depth information, refer to <a href="docs/behavior_path_planner_manager_design/">Manager design</a> document.</p>
 </div>
 <h2 id="inputs-outputs-api">Inputs / Outputs / API<a class="headerlink" href="#inputs-outputs-api" title="Permanent link">#</a></h2>
 <h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
@@ -15027,7 +15027,7 @@
 <p>Static drivable area expansion operates under assumptions about the correct arrangement of lanes and the coverage of both the front and rear of the vehicle within the left and right boundaries. Key parameters for drivable area generation include extra footprint offsets for the ego vehicle, the handling of dynamic objects, maximum expansion distance, and specific methods for expansion. Additionally, since each module generates its own drivable area, before passing it as the input to generate the next running module's drivable area, or before generating a unified drivable area, the system sorts drivable lanes based on the vehicle's passage order. This ensures the correct definition of the lanes used in drivable area generation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Further details can is provided in <a href="./docs/behavior_path_planner_drivable_area_design.md">Drivable Area Design</a>.</p>
+<p>Further details can is provided in <a href="../behavior_path_planner_common/docs/behavior_path_planner_drivable_area_design/">Drivable Area Design</a>.</p>
 </div>
 <h3 id="dynamic-drivable-area-logic">Dynamic Drivable Area Logic<a class="headerlink" href="#dynamic-drivable-area-logic" title="Permanent link">#</a></h3>
 <p>Large vehicles require much more space, which sometimes causes them to veer out of their current lane. A typical example being a bus making a turn at a corner. In such cases, relying on a static drivable area is insufficient, since the static method depends on lane information provided by high-definition maps. To overcome the limitations of the static approach, the dynamic drivable area expansion algorithm adjusts the navigable space for an autonomous vehicle in real-time. It conserves computational power by reusing previously calculated path data, updating only when there is a significant change in the vehicle's position. The system evaluates the minimum lane width necessary to accommodate the vehicle's turning radius and other dynamic factors. It then calculates the optimal expansion of the drivable area's boundaries to ensure there is adequate space for safe maneuvering, taking into account the vehicle's path curvature. The rate at which these boundaries can expand or contract is moderated to maintain stability in the vehicle's navigation. The algorithm aims to maximize the drivable space while avoiding fixed obstacles and adhering to legal driving limits. Finally, it applies these boundary adjustments and smooths out the path curvature calculations to ensure a safe and legally compliant navigable path is maintained throughout the vehicle's operation.</p>
