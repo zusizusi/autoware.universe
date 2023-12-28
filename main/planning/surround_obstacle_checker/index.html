@@ -15066,28 +15066,34 @@ As mentioned in stop condition section, it prevents chattering by changing thres
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>use_pointcloud</code></td>
+<td align="left"><code>enable_check</code></td>
 <td align="left"><code>bool</code></td>
-<td align="left">Use pointcloud as obstacle check</td>
-<td align="left"><code>true</code></td>
+<td align="left">Indicates whether each object is considered in the obstacle check target.</td>
+<td align="left"><code>true</code> for objects; <code>false</code> for point clouds</td>
 </tr>
 <tr>
-<td align="left"><code>use_dynamic_object</code></td>
+<td align="left"><code>surround_check_front_distance</code></td>
 <td align="left"><code>bool</code></td>
-<td align="left">Use dynamic object as obstacle check</td>
-<td align="left"><code>true</code></td>
-</tr>
-<tr>
-<td align="left"><code>surround_check_distance</code></td>
-<td align="left"><code>double</code></td>
-<td align="left">If objects exist in this distance, transit to "exist-surrounding-obstacle" status [m]</td>
+<td align="left">If there are objects or point clouds within this distance in front, transition to the "exist-surrounding-obstacle" status [m].</td>
 <td align="left">0.5</td>
 </tr>
 <tr>
-<td align="left"><code>surround_check_recover_distance</code></td>
+<td align="left"><code>surround_check_side_distance</code></td>
 <td align="left"><code>double</code></td>
-<td align="left">If no object exists in this distance, transit to "non-surrounding-obstacle" status [m]</td>
-<td align="left">0.8</td>
+<td align="left">If there are objects or point clouds within this side distance, transition to the "exist-surrounding-obstacle" status [m].</td>
+<td align="left">0.5</td>
+</tr>
+<tr>
+<td align="left"><code>surround_check_back_distance</code></td>
+<td align="left"><code>double</code></td>
+<td align="left">If there are objects or point clouds within this back distance, transition to the "exist-surrounding-obstacle" status [m].</td>
+<td align="left">0.5</td>
+</tr>
+<tr>
+<td align="left"><code>surround_check_hysteresis_distance</code></td>
+<td align="left"><code>double</code></td>
+<td align="left">If no object exists within <code>surround_check_xxx_distance</code> plus this additional distance, transition to the "non-surrounding-obstacle" status [m].</td>
+<td align="left">0.3</td>
 </tr>
 <tr>
 <td align="left"><code>state_clear_time</code></td>
