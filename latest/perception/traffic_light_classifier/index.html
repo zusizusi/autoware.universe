@@ -14805,6 +14805,11 @@ The information of the models is listed here:</p>
 <td>str</td>
 <td>packages data and artifacts directory path</td>
 </tr>
+<tr>
+<td><code>backlight_threshold</code></td>
+<td>float</td>
+<td>If the intensity get grater than this overwrite with UNKNOWN in corresponding RoI. Note that, if the value is much higher, the node only overwrites in the harsher backlight situations. Therefore, If you wouldn't like to use this feature set this value to <code>1.0</code>. The value can be <code>[0.0, 1.0]</code>. The confidence of overwritten signal is set to <code>0.0</code>.</td>
+</tr>
 </tbody>
 </table>
 <h3 id="core-parameters">Core Parameters<a class="headerlink" href="#core-parameters" title="Permanent link">#</a></h3>
