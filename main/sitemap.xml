@@ -711,6 +711,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/perception/image_projection_based_fusion/docs/segmentation-pointcloud-fusion/</loc>
+         <lastmod>2024-01-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/perception/lidar_apollo_instance_segmentation/</loc>
          <lastmod>2024-01-09</lastmod>
          <changefreq>daily</changefreq>
