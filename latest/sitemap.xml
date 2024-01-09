@@ -911,6 +911,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_dynamic_avoidance_module/</loc>
+         <lastmod>2024-01-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_goal_planner_module/</loc>
          <lastmod>2024-01-09</lastmod>
          <changefreq>daily</changefreq>
@@ -922,11 +927,6 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_planner/</loc>
-         <lastmod>2024-01-09</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_planner/docs/behavior_path_planner_dynamic_avoidance_design/</loc>
          <lastmod>2024-01-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
