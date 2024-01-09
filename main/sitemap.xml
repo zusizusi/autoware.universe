@@ -791,6 +791,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/perception/probabilistic_occupancy_grid_map/synchronized_grid_map_fusion/</loc>
+         <lastmod>2024-01-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/perception/radar_crossing_objects_noise_filter/</loc>
          <lastmod>2024-01-09</lastmod>
          <changefreq>daily</changefreq>
