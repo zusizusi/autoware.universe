@@ -1001,6 +1001,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/planning/behavior_velocity_dynamic_obstacle_stop_module/</loc>
+         <lastmod>2024-01-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/planning/behavior_velocity_intersection_module/</loc>
          <lastmod>2024-01-10</lastmod>
          <changefreq>daily</changefreq>
