@@ -14684,6 +14684,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#search-priority" class="md-nav__link">
+    search priority
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#parameters-for-backward-pull-out-start-point-search" class="md-nav__link">
     parameters for backward pull out start point search
   </a>
@@ -15338,6 +15345,99 @@ See also <a href="https://www.sciencedirect.com/science/article/pii/S14746670153
 <p>If a safe path cannot be generated from the current position, search backwards for a pull out start point at regular intervals(default: <code>2.0</code>).</p>
 <p><img alt="pull_out_after_back" src="images/pull_out_after_back.drawio.svg"></p>
 <p><a href="https://user-images.githubusercontent.com/39142679/181025149-8fb9fb51-9b8f-45c4-af75-27572f4fba78.mp4">pull out after backward driving video</a></p>
+<h3 id="search-priority"><strong>search priority</strong><a class="headerlink" href="#search-priority" title="Permanent link">#</a></h3>
+<p>If a safe path with sufficient clearance for static obstacles cannot be generated forward, a backward search from the vehicle's current position is conducted to locate a suitable start point for a pull out path generation.</p>
+<p>During this backward search, different policies can be applied based on <code>search_priority</code> parameters:</p>
+<p>Selecting <code>efficient_path</code> focuses on creating a shift pull out path, regardless of how far back the vehicle needs to move.
+Opting for <code>short_back_distance</code> aims to find a location with the least possible backward movement.</p>
+<p><img alt="priority_order" src="images/priority_order.drawio.svg"></p>
+<p><code>PriorityOrder</code> is defined as a vector of pairs, where each element consists of a <code>size_t</code> index representing a start pose candidate index, and the planner type. The PriorityOrder vector is processed sequentially from the beginning, meaning that the pairs listed at the top of the vector are given priority in the selection process for pull out path generation.</p>
+<h4 id="efficient_path"><code>efficient_path</code><a class="headerlink" href="#efficient_path" title="Permanent link">#</a></h4>
+<p>When <code>search_priority</code> is set to <code>efficient_path</code> and the preference is for prioritizing <code>shift_pull_out</code>, the <code>PriorityOrder</code> array is populated in such a way that <code>shift_pull_out</code> is grouped together for all start pose candidates before moving on to the next planner type. This prioritization is reflected in the order of the array, with <code>shift_pull_out</code> being listed before geometric_pull_out.</p>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Planner Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>shift_pull_out</td>
+</tr>
+<tr>
+<td>1</td>
+<td>shift_pull_out</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>N</td>
+<td>shift_pull_out</td>
+</tr>
+<tr>
+<td>0</td>
+<td>geometric_pull_out</td>
+</tr>
+<tr>
+<td>1</td>
+<td>geometric_pull_out</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>N</td>
+<td>geometric_pull_out</td>
+</tr>
+</tbody>
+</table>
+<p>This approach prioritizes trying all candidates with <code>shift_pull_out</code> before proceeding to <code>geometric_pull_out</code>, which may be efficient in situations where <code>shift_pull_out</code> is likely to be appropriate.</p>
+<h4 id="short_back_distance"><code>short_back_distance</code><a class="headerlink" href="#short_back_distance" title="Permanent link">#</a></h4>
+<p>For <code>search_priority</code> set to <code>short_back_distance</code>, the array alternates between planner types for each start pose candidate, which can minimize the distance the vehicle needs to move backward if the earlier candidates are successful.</p>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Planner Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>shift_pull_out</td>
+</tr>
+<tr>
+<td>0</td>
+<td>geometric_pull_out</td>
+</tr>
+<tr>
+<td>1</td>
+<td>shift_pull_out</td>
+</tr>
+<tr>
+<td>1</td>
+<td>geometric_pull_out</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>N</td>
+<td>shift_pull_out</td>
+</tr>
+<tr>
+<td>N</td>
+<td>geometric_pull_out</td>
+</tr>
+</tbody>
+</table>
+<p>This ordering is beneficial when the priority is to minimize the backward distance traveled, giving an equal chance for each planner to succeed at the closest possible starting position.</p>
 <h3 id="parameters-for-backward-pull-out-start-point-search"><strong>parameters for backward pull out start point search</strong><a class="headerlink" href="#parameters-for-backward-pull-out-start-point-search" title="Permanent link">#</a></h3>
 <table>
 <thead>
