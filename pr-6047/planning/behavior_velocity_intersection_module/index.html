@@ -15157,7 +15157,9 @@
 <p>Generally it is not tolerable for vehicles that have lower traffic priority to stop in the middle of the unprotected area in intersections, and they need to stop at the stop line beforehand if there is any risk of collision, which introduces two requirements:</p>
 <ol>
 <li>The vehicle must start braking at least before the boundary of the unprotected area by the braking distance if it is supposed to stop</li>
-<li>The vehicle must recognize upcoming vehicles and check safety with enough braking distance margin to the boundary of the unprotected area if it is supposed to go</li>
+<li>The vehicle must recognize upcoming vehicles and check safety with enough braking distance margin to the boundary of the unprotected area if it is supposed to go
+   2.1 And the SAFE decision must be absolutely certain and continue to be valid for the future horizon so that the safety condition is always satisfied while ego is driving inside the unprotected area.
+   2.2 (TODO): Since it is almost impossible to make perfectly safe decision beforehand given the limited detection range/velocity tracking performance, intersection module should plan risk-evasive acceleration velocity profile AND/OR relax lateral acceleration limit if the safety decision is "betrayed"(the situation turned dangerous) while ego is driving inside the unprotected area</li>
 </ol>
 <p>1st_pass_judge_line is the position which is before the boundary of the unprotected area by the braking distance of ego current speed which is obtained by</p>
 <div class="arithmatex">\[
