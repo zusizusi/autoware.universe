@@ -15157,9 +15157,11 @@
 <p>Generally it is not tolerable for vehicles that have lower traffic priority to stop in the middle of the unprotected area in intersections, and they need to stop at the stop line beforehand if there is any risk of collision, which introduces two requirements:</p>
 <ol>
 <li>The vehicle must start braking at least before the boundary of the unprotected area by the braking distance if it is supposed to stop</li>
-<li>The vehicle must recognize upcoming vehicles and check safety with enough braking distance margin to the boundary of the unprotected area if it is supposed to go
-   2.1 And the SAFE decision must be absolutely certain and continue to be valid for the future horizon so that the safety condition is always satisfied while ego is driving inside the unprotected area.
-   2.2 (TODO): Since it is almost impossible to make perfectly safe decision beforehand given the limited detection range/velocity tracking performance, intersection module should plan risk-evasive acceleration velocity profile AND/OR relax lateral acceleration limit if the safety decision is "betrayed"(the situation turned dangerous) while ego is driving inside the unprotected area</li>
+<li>The vehicle must recognize upcoming vehicles and check safety with enough braking distance margin to the boundary of the unprotected area if it is supposed to go<ol>
+<li>And the SAFE decision must be absolutely certain and continue to be valid for the future horizon so that the safety condition is always satisfied while ego is driving inside the unprotected area.</li>
+<li>(TODO): Since it is almost impossible to make perfectly safe decision beforehand given the limited detection range/velocity tracking performance, intersection module should plan risk-evasive acceleration velocity profile AND/OR relax lateral acceleration limit if the safety decision is "betrayed"(the situation turned dangerous) while ego is driving inside the unprotected area.</li>
+</ol>
+</li>
 </ol>
 <p>1st_pass_judge_line is the position which is before the boundary of the unprotected area by the braking distance of ego current speed which is obtained by</p>
 <div class="arithmatex">\[
@@ -15176,12 +15178,18 @@
 </ul>
 <p>because it is expected to stop or continue stop decision if</p>
 <ol>
-<li>ego is before default_stopline OR
-   1.1 reason: default_stopline is defined on the map and should be respected</li>
-<li>ego is before 1st_pass_judge_line OR
-   2.1 reason: it has enough braking distance margin</li>
-<li>ego judged UNSAFE previously
-   3.1 reason: ego is now trying to stop and should continue stop decision if collision is detected in later calculation</li>
+<li>ego is before default_stopline OR<ol>
+<li>reason: default_stopline is defined on the map and should be respected</li>
+</ol>
+</li>
+<li>ego is before 1st_pass_judge_line OR<ol>
+<li>reason: it has enough braking distance margin</li>
+</ol>
+</li>
+<li>ego judged UNSAFE previously<ol>
+<li>reason: ego is now trying to stop and should continue stop decision if collision is detected in later calculation</li>
+</ol>
+</li>
 <li>(ego is between 1st and 2nd pass_judge_line and the most probable collision is expected to happen in the 2nd attention lane)</li>
 </ol>
 <p>For the 3rd condition, it is possible that ego stops with some overshoot to the unprotected area while it is trying to stop for collision detection, because ego should keep stop decision while UNSAFE decision is made even if it passed 1st_pass_judge_line during deceleration.</p>
