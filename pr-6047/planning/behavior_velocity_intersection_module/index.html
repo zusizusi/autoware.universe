@@ -15154,31 +15154,36 @@
 <p>When the traffic light color/shape is RED/Arrow, occlusion detection is skipped.</p>
 <p><img alt="traffic-light-specific-behavior" src="docs/traffic-light-specific-behavior.drawio.svg"></p>
 <h2 id="pass-judge-line">Pass Judge Line<a class="headerlink" href="#pass-judge-line" title="Permanent link">#</a></h2>
-<p>Generally it is not tolerable for vehicles that have lower traffic priority to stop in the middle of the unprotected area in intersections, and they need to stop at the stop line beforehand if there is any risk of collision, which introduces two requirements:</p>
+<p>Generally it is not tolerable for vehicles that have lower traffic priority to stop in the middle of the unprotected area in intersections, and they need to stop at the stop line beforehand if there will be any risk of collision, which introduces two requirements:</p>
 <ol>
-<li>The vehicle must start braking at least before the boundary of the unprotected area by the braking distance if it is supposed to stop</li>
-<li>The vehicle must recognize upcoming vehicles and check safety with enough braking distance margin to the boundary of the unprotected area if it is supposed to go<ol>
-<li>And the SAFE decision must be absolutely certain and continue to be valid for the future horizon so that the safety condition is always satisfied while ego is driving inside the unprotected area.</li>
-<li>(TODO): Since it is almost impossible to make perfectly safe decision beforehand given the limited detection range/velocity tracking performance, intersection module should plan risk-evasive acceleration velocity profile AND/OR relax lateral acceleration limit if the safety decision is "betrayed"(the situation turned dangerous) while ego is driving inside the unprotected area.</li>
+<li>The vehicle must start braking before the boundary of the unprotected area at least by the braking distance if it is supposed to stop</li>
+<li>The vehicle must recognize upcoming vehicles and check safety beforehand with enough braking distance margin if it is supposed to go<ol>
+<li>And the SAFE decision must be absolutely certain and remain to be valid for the future horizon so that the safety condition will be always satisfied while ego is driving inside the unprotected area.</li>
+</ol>
+</li>
+<li>(TODO): Since it is almost impossible to make perfectly safe decision beforehand given the limited detection range/velocity tracking performance, intersection module should plan risk-evasive acceleration velocity profile AND/OR relax lateral acceleration limit while ego is driving inside the unprotected area, if the safety decision is "betrayed" later due to the following reasons:<ol>
+<li>The situation <em>turned out to be dangerous</em> later, mainly because velocity tracking was underestimated or the object accelerated beyond TTC margin</li>
+<li>The situation <em>turned dangerous</em> later, mainly because the object is suddenly detected out of nowhere</li>
 </ol>
 </li>
 </ol>
-<p>1st_pass_judge_line is the position which is before the boundary of the unprotected area by the braking distance of ego current speed which is obtained by</p>
+<p>The position which is before the boundary of unprotected area by the braking distance which is obtained by</p>
 <div class="arithmatex">\[
-\dfrac{v_{\mathrm{ego}}^{2}}{a_{\mathrm{max}}} + v_{\mathrm{ego}} * t_{\mathrm{delay}}
+\dfrac{v_{\mathrm{ego}}^{2}}{2a_{\mathrm{max}}} + v_{\mathrm{ego}} * t_{\mathrm{delay}}
 \]</div>
-<p>At intersections with multiple upcoming lanes, 2nd_pass_judge_line is defined as the position which is before the boundary of second attention lane by the braking distance plus <code>common.second_pass_judge_line_margin</code>. 1st/2nd_pass_judge_line are illustrated in the following figure.</p>
+<p>is called pass_judge_line, and safety decision must be made before ego passes this position because ego does not stop anymore.</p>
+<p>1st_pass_judge_line is before the first upcoming lane, and at intersections with multiple upcoming lanes, 2nd_pass_judge_line is defined as the position which is before the centerline of the first attention lane by the braking distance. 1st/2nd_pass_judge_line are illustrated in the following figure.</p>
 <p><img alt="pass-judge-line" src="docs/pass-judge-line.drawio.svg"></p>
 <p>Intersection module will command to GO if</p>
 <ul>
-<li>ego is over default_stopline AND</li>
+<li>ego is over default_stopline(or <code>common.enable_pass_judge_before_default_stopline</code> is true) AND</li>
 <li>ego is over 1st_pass judge line AND</li>
 <li>ego judged SAFE previously AND</li>
 <li>(ego is over 2nd_pass_judge_line OR ego is between 1st and 2nd pass_judge_line but most probable collision is expected to happen in the 1st attention lane)</li>
 </ul>
 <p>because it is expected to stop or continue stop decision if</p>
 <ol>
-<li>ego is before default_stopline OR<ol>
+<li>ego is before default_stopline &amp;&amp; <code>common.enable_pass_judge_before_default_stopline</code> is false OR<ol>
 <li>reason: default_stopline is defined on the map and should be respected</li>
 </ol>
 </li>
@@ -15261,6 +15266,11 @@
 <td><code>.delay_response_time</code></td>
 <td>double</td>
 <td>[s] action delay before stop</td>
+</tr>
+<tr>
+<td><code>.enable_pass_judge_before_default_stopline</code></td>
+<td>bool</td>
+<td>[-] flag not to stop before default_stopline even if ego is over pass_judge_line</td>
 </tr>
 </tbody>
 </table>
