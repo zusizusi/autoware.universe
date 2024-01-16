@@ -14763,7 +14763,7 @@ When the stop line does <strong>NOT</strong> exist in the lanelet map, the stop 
 
 <p>On the other hand, if pedestrian (bicycle) is crossing <strong>wide</strong> crosswalks seen in scramble intersections, and the pedestrian position is more than <code>far_object_threshold</code> meters away from the stop line, the actual stop position is determined to be <code>stop_distance_from_object</code> and pedestrian position, not at the stop line.</p>
 <figure>
-<p><img alt="far_object_threshold" src="docs/virtual_stop_line.svg" width="700"></p>
+<p><img alt="far_object_threshold" src="docs/far_object_threshold.drawio.svg" width="700"></p>
 </figure>
 <p>In the <code>stop_position</code> namespace,</p>
 <table>
@@ -15109,7 +15109,7 @@ When there are low-speed or stopped vehicle ahead of the crosswalk, and there is
 <ul>
 <li>The yield decision may be sometimes aggressive or conservative depending on the case.<ul>
 <li>The main reason is that the crosswalk module does not know the ego's position in the future. The detailed ego's position will be determined after the whole planning.</li>
-<li>Currently the module assumes that the ego will move with a constant velocit.yu</li>
+<li>Currently the module assumes that the ego will move with a constant velocity.</li>
 </ul>
 </li>
 </ul>
