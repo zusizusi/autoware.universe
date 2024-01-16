@@ -15434,7 +15434,14 @@ SHIFT_{current} &gt; L_{threshold}
 <td align="left">object_check_goal_distance</td>
 <td align="left">[m]</td>
 <td align="left">double</td>
-<td align="left">Backward distance to search the avoidance target.</td>
+<td align="left">If the distance between object and goal position is less than this parameter, the module do not return center line.</td>
+<td align="left">20.0</td>
+</tr>
+<tr>
+<td align="left">object_check_return_pose_distance</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">If the distance between object and return position is less than this parameter, the module do not return center line.</td>
 <td align="left">20.0</td>
 </tr>
 <tr>
