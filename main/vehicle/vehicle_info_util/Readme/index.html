@@ -14538,6 +14538,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#versioning-policy" class="md-nav__link">
+    Versioning Policy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scripts" class="md-nav__link">
     Scripts
   </a>
@@ -14620,6 +14627,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#versioning-policy" class="md-nav__link">
+    Versioning Policy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scripts" class="md-nav__link">
     Scripts
   </a>
@@ -14660,7 +14674,36 @@
 <h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
 <p>This package is to get vehicle info parameters.</p>
 <h3 id="description">Description<a class="headerlink" href="#description" title="Permanent link">#</a></h3>
-<p>In <a href="https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-interfaces/components/vehicle-dimensions/">here</a>, you can check the vehicle dimensions with more detail.</p>
+<p>In <a href="https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-interfaces/components/vehicle-dimensions/">here</a>, you can check the vehicle dimensions with more detail.
+The current format supports only the Ackermann model. This file defines the model assumed in autoware path planning, control, etc. and does not represent the exact physical model. If a model other than the Ackermann model is used, it is assumed that a vehicle interface will be designed to change the control output for the model.</p>
+<h3 id="versioning-policy">Versioning Policy<a class="headerlink" href="#versioning-policy" title="Permanent link">#</a></h3>
+<p>We have implemented a versioning system for the <code>vehicle_info.param.yaml</code> file to ensure clarity and consistency in file format across different versions of Autoware and its external applications. Please see <a href="https://github.com/orgs/autowarefoundation/discussions/4050">discussion</a> for the details.</p>
+<h4 id="how-to-operate">How to Operate<a class="headerlink" href="#how-to-operate" title="Permanent link">#</a></h4>
+<ul>
+<li>The current file format is set as an unversioned base version (<code>version:</code> field is commented out).</li>
+<li>For the next update involving changes (such as additions, deletions, or modifications):<ul>
+<li>Uncomment and update the version line at the beginning of the file.</li>
+<li>Initiate versioning by assigning a version number, starting from <code>0.1.0</code>. Follow the semantic versioning format (MAJOR.MINOR.PATCH).</li>
+<li>Update this Readme.md too.</li>
+</ul>
+</li>
+<li>For subsequent updates, continue incrementing the version number in accordance with the changes made.<ul>
+<li>Discuss how to increment version depending on the amount of changes made to the file.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">/**</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># version: 0.1.0 # Uncomment and update this line for future format changes.</span>
+<span class="w">    </span><span class="nt">wheel_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.383</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</code></pre></div>
+<h4 id="why-versioning">Why Versioning?<a class="headerlink" href="#why-versioning" title="Permanent link">#</a></h4>
+<ul>
+<li>Consistency Across Updates: Implementing version control will allow accurate tracking of changes over time and changes in vehicle information parameters.</li>
+<li>Clarity for External Applications: External applications that depend on <code>vehicle_info.param.yaml</code> need to reference the correct file version for optimal compatibility and functionality.</li>
+<li>Simplified Management for Customized Branches: Assigning versions directly to the <code>vehicle_info.param.yaml</code> file simplifies management compared to maintaining separate versions for multiple customized Autoware branches. This approach streamlines version tracking and reduces complexity.</li>
+</ul>
 <h3 id="scripts">Scripts<a class="headerlink" href="#scripts" title="Permanent link">#</a></h3>
 <h4 id="minimum-turning-radius">Minimum turning radius<a class="headerlink" href="#minimum-turning-radius" title="Permanent link">#</a></h4>
 <div class="highlight"><pre><span></span><code>$<span class="w"> </span>ros2<span class="w"> </span>run<span class="w"> </span>vehicle_info_util<span class="w"> </span>min_turning_radius_calculator.py
