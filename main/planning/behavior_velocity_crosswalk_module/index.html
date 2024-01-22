@@ -14681,14 +14681,14 @@
 
 <div><h1 id="crosswalk">Crosswalk<a class="headerlink" href="#crosswalk" title="Permanent link">#</a></h1>
 <h2 id="role">Role<a class="headerlink" href="#role" title="Permanent link">#</a></h2>
-<p>This module judges whether the ego should stop in front of the crosswalk in order to provide safe passage of crosswalk users such as pedestrians and bicycles based on the objects' behavior and surround traffic.</p>
+<p>This module judges whether the ego should stop in front of the crosswalk in order to provide safe passage for crosswalk users, such as pedestrians and bicycles, based on the objects' behavior and surround traffic.</p>
 <figure>
 <p><img alt="crosswalk_module" src="docs/crosswalk_module.svg" width="1100"></p>
 </figure>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">#</a></h2>
 <h3 id="yield">Yield<a class="headerlink" href="#yield" title="Permanent link">#</a></h3>
 <h4 id="target-object">Target Object<a class="headerlink" href="#target-object" title="Permanent link">#</a></h4>
-<p>The target object's type is filtered by the following parameters in the <code>object_filtering.target_object</code> namespace.</p>
+<p>The crosswalk module handles objects of the types defined by the following parameters in the <code>object_filtering.target_object</code> namespace.</p>
 <table>
 <thead>
 <tr>
@@ -14725,11 +14725,11 @@
 </tr>
 </tbody>
 </table>
-<p>In order to detect crosswalk users crossing outside the crosswalk as well, the crosswalk module creates an attention area around the crosswalk shown as the yellow polygon in the figure. If the object's predicted path collides with the attention area, the object will be targeted for yield.</p>
+<p>In order to handle the crosswalk users crossing the neighborhood but outside the crosswalk, the crosswalk module creates an attention area around the crosswalk, shown as the yellow polygon in the figure. If the object's predicted path collides with the attention area, the object will be targeted for yield.</p>
 <figure>
 <p><img alt="crosswalk_attention_range" src="docs/crosswalk_attention_range.svg" width="600"></p>
 </figure>
-<p>The parameter is in the <code>object_filtering.target_object</code> namespace.</p>
+<p>The neighborhood is defined by the following parameter in the <code>object_filtering.target_object</code> namespace.</p>
 <table>
 <thead>
 <tr>
@@ -14761,11 +14761,11 @@ When the stop line does <strong>NOT</strong> exist in the lanelet map, the stop 
     </table>
 </div>
 
-<p>On the other hand, if pedestrian (bicycle) is crossing <strong>wide</strong> crosswalks seen in scramble intersections, and the pedestrian position is more than <code>far_object_threshold</code> meters away from the stop line, the actual stop position is determined to be <code>stop_distance_from_object</code> and pedestrian position, not at the stop line.</p>
+<p>As an exceptional case, if a pedestrian (or bicycle) is crossing <strong>wide</strong> crosswalks seen in scramble intersections, and the pedestrian position is more than <code>far_object_threshold</code> meters away from the stop line, the actual stop position is determined by <code>stop_distance_from_object</code> and pedestrian position, not at the stop line.</p>
 <figure>
 <p><img alt="far_object_threshold" src="docs/far_object_threshold.drawio.svg" width="700"></p>
 </figure>
-<p>In the <code>stop_position</code> namespace,</p>
+<p>In the <code>stop_position</code> namespace, the following parameters are defined.</p>
 <table>
 <thead>
 <tr>
@@ -14804,12 +14804,12 @@ When the stop line does <strong>NOT</strong> exist in the lanelet map, the stop 
 </table>
 <h4 id="yield-decision">Yield decision<a class="headerlink" href="#yield-decision" title="Permanent link">#</a></h4>
 <p>The module makes a decision to yield only when the pedestrian traffic light is <strong>GREEN</strong> or <strong>UNKNOWN</strong>.
-Calculating the collision point, the decision is based on the following variables.</p>
+The decision is based on the following variables, along with the calculation of the collision point.</p>
 <ul>
-<li>TTC: Time-To-Collision which is the time for the <strong>ego</strong> to reach the virtual collision point.</li>
-<li>TTV: Time-To-Vehicle which is the time for the <strong>object</strong> to reach the virtual collision point.</li>
+<li>Time-To-Collision (TTC): The time for the <strong>ego</strong> to reach the virtual collision point.</li>
+<li>Time-To-Vehicle (TTV): The time for the <strong>object</strong> to reach the virtual collision point.</li>
 </ul>
-<p>Depending on the relative relationship between TTC and TTV, the ego's behavior at crosswalks can be classified into three categories based on [1]</p>
+<p>We classify ego behavior at crosswalks into three categories according to the relative relationship between TTC and TTV [1].</p>
 <ul>
 <li>A. <strong>TTC &gt;&gt; TTV</strong>: The object has enough time to cross before the ego.<ul>
 <li>No stop planning.</li>
@@ -14833,9 +14833,11 @@ Calculating the collision point, the decision is based on the following variable
     </table>
 </div>
 
-<p>The boundary of A and B is interpolated from <code>ego_pass_later_margin_x</code> and <code>ego_pass_later_margin_y</code>. In the case of the upper figure, <code>ego_pass_later_margin_x</code> is <code>{0, 1, 2}</code> and <code>ego_pass_later_margin_y</code> is <code>{1, 4, 6}</code> for example.
-The same way, the boundary of B and C is calculated from <code>ego_pass_first_margin_x</code> and <code>ego_pass_first_margin_y</code>. In the case of the upper figure, <code>ego_pass_first_margin_x</code> is <code>{3, 5}</code> and <code>ego_pass_first_margin_y</code> is <code>{0, 1}</code> for example.</p>
-<p>In the <code>pass_judge</code> namespace,</p>
+<p>The boundary of A and B is interpolated from <code>ego_pass_later_margin_x</code> and <code>ego_pass_later_margin_y</code>.
+In the case of the upper figure, <code>ego_pass_later_margin_x</code> is <code>{0, 1, 2}</code> and <code>ego_pass_later_margin_y</code> is <code>{1, 4, 6}</code>.
+In the same way, the boundary of B and C is calculated from <code>ego_pass_first_margin_x</code> and <code>ego_pass_first_margin_y</code>.
+In the case of the upper figure, <code>ego_pass_first_margin_x</code> is <code>{3, 5}</code> and <code>ego_pass_first_margin_y</code> is <code>{0, 1}</code>.</p>
+<p>In the <code>pass_judge</code> namespace, the following parameters are defined.</p>
 <table>
 <thead>
 <tr>
@@ -14885,13 +14887,13 @@ The same way, the boundary of B and C is calculated from <code>ego_pass_first_ma
 </tbody>
 </table>
 <h3 id="smooth-yield-decision">Smooth Yield Decision<a class="headerlink" href="#smooth-yield-decision" title="Permanent link">#</a></h3>
-<p>When the object is stopped around the crosswalk but has no intention to walk, the ego will yield the object forever.
-To prevent this dead lock behavior, the ego will cancel the yield depending on the situation.</p>
-<h4 id="when-there-is-no-traffic-light">When there is no traffic light<a class="headerlink" href="#when-there-is-no-traffic-light" title="Permanent link">#</a></h4>
-<p>For the object stopped around the crosswalk but has no intention to walk (*1), when the ego keeps stopping to yield for a certain time (*2), the ego cancels the yield and start driving.</p>
+<p>If the object is stopped near the crosswalk but has no intention of walking, a situation can arise in which the ego continues to yield the right-of-way to the object.
+To prevent such a deadlock situation, the ego will cancel yielding depending on the situation.</p>
+<h4 id="cases-without-traffic-lights">Cases without traffic lights<a class="headerlink" href="#cases-without-traffic-lights" title="Permanent link">#</a></h4>
+<p>For the object stopped around the crosswalk but has no intention to walk (*1), after the ego has keep stopping to yield for a specific time (*2), the ego cancels the yield and starts driving.</p>
 <p>*1:
 The time is calculated by the interpolation of distance between the object and crosswalk with <code>distance_map_for_no_intention_to_walk</code> and <code>timeout_map_for_no_intention_to_walk</code>.</p>
-<p>In the <code>pass_judge</code> namespace,</p>
+<p>In the <code>pass_judge</code> namespace, the following parameters are defined.</p>
 <table>
 <thead>
 <tr>
@@ -14917,7 +14919,7 @@ The time is calculated by the interpolation of distance between the object and c
 </tbody>
 </table>
 <p>*2:
-In the <code>pass_judge</code> namespace,</p>
+In the <code>pass_judge</code> namespace, the following parameters are defined.</p>
 <table>
 <thead>
 <tr>
@@ -14936,11 +14938,11 @@ In the <code>pass_judge</code> namespace,</p>
 </tr>
 </tbody>
 </table>
-<h4 id="when-there-is-traffic-light">When there is traffic light<a class="headerlink" href="#when-there-is-traffic-light" title="Permanent link">#</a></h4>
-<p>For the object stopped around the crosswalk but has no intention to walk (*1), the ego will cancel the yield without stopping.
+<h4 id="cases-with-traffic-lights">Cases with traffic lights<a class="headerlink" href="#cases-with-traffic-lights" title="Permanent link">#</a></h4>
+<p>The ego will cancel the yield without stopping when the object stops around the crosswalk but has no intention to walk (*1).
 This comes from the assumption that the object has no intention to walk since it is stopped even though the pedestrian traffic light is green.</p>
 <p>*1:
-The crosswalk user's intention to walk is calculated in the same way as <code>When there is no traffic light</code>.</p>
+The crosswalk user's intention to walk is calculated in the same way as <code>Cases without traffic lights</code>.</p>
 <div align="center">
     <table>
         <tr>
@@ -14952,10 +14954,10 @@ The crosswalk user's intention to walk is calculated in the same way as <code>Wh
 
 <h4 id="new-object-handling">New Object Handling<a class="headerlink" href="#new-object-handling" title="Permanent link">#</a></h4>
 <p>Due to the perception's limited performance where the tree or poll is recognized as a pedestrian or the tracking failure in the crowd or occlusion, even if the surrounding environment does not change, the new pedestrian (= the new ID's pedestrian) may suddenly appear unexpectedly.
-When this happens when the ego is going to pass the crosswalk, the ego will stop suddenly.</p>
-<p>To fix this issue, the option <code>disable_yield_for_new_stopped_object</code> is prepared.
-If set to true, the new stopped object will be ignored during the yield decision around the crosswalk with a traffic light.</p>
-<p>In the <code>pass_judge</code> namespace,</p>
+If this happens while the ego is going to pass the crosswalk, the ego will stop suddenly.</p>
+<p>To deal with this issue, the option <code>disable_yield_for_new_stopped_object</code> is prepared.
+If true is set, the yield decisions around the crosswalk with a traffic light will ignore the new stopped object.</p>
+<p>In the <code>pass_judge</code> namespace, the following parameters are defined.</p>
 <table>
 <thead>
 <tr>
@@ -14975,11 +14977,9 @@ If set to true, the new stopped object will be ignored during the yield decision
 </tbody>
 </table>
 <h3 id="safety-slow-down-behavior">Safety Slow Down Behavior<a class="headerlink" href="#safety-slow-down-behavior" title="Permanent link">#</a></h3>
-<p>In current autoware implementation if there are no target objects around a crosswalk, ego vehicle
-will not slow down for the crosswalk. However, if ego vehicle to slow down to a certain speed in
-such cases is wanted then it is possible by adding some tags to the related crosswalk definition as
-it is instructed
-in <a href="https://github.com/autowarefoundation/autoware_common/blob/main/tmp/lanelet2_extension/docs/lanelet2_format_extension.md">lanelet2_format_extension.md</a>
+<p>In the current autoware implementation, if no target object is detected around a crosswalk, the ego vehicle will not slow down for the crosswalk.
+However, it may be desirable to slow down in situations, for example, where there are blind spots.
+Such a situation can be handled by setting some tags to the related crosswalk as instructed in the <a href="https://github.com/autowarefoundation/autoware_common/blob/main/tmp/lanelet2_extension/docs/lanelet2_format_extension.md">lanelet2_format_extension.md</a>
 document.</p>
 <table>
 <thead>
@@ -15019,12 +15019,12 @@ document.</p>
 </table>
 <h3 id="stuck-vehicle-detection">Stuck Vehicle Detection<a class="headerlink" href="#stuck-vehicle-detection" title="Permanent link">#</a></h3>
 <p>The feature will make the ego not to stop on the crosswalk.
-When there are low-speed or stopped vehicle ahead of the crosswalk, and there is not enough space between the crosswalk and the vehicle, the crosswalk module will plan to stop before the crosswalk even if there are no pedestrians or bicycles.</p>
+When there is a low-speed or stopped vehicle ahead of the crosswalk, and there is not enough space between the crosswalk and the vehicle, the crosswalk module plans to stop before the crosswalk even if there are no pedestrians or bicycles.</p>
 <p><code>min_acc</code>, <code>min_jerk</code>, and <code>max_jerk</code> are met. If the ego cannot stop before the crosswalk with these parameters, the stop position will move forward.</p>
 <figure>
 <p><img alt="stuck_vehicle_attention_range" src="docs/stuck_vehicle_detection.svg" width="600"></p>
 </figure>
-<p>In the <code>stuck_vehicle</code> namespace,</p>
+<p>In the <code>stuck_vehicle</code> namespace, the following parameters are defined.</p>
 <table>
 <thead>
 <tr>
@@ -15074,7 +15074,7 @@ When there are low-speed or stopped vehicle ahead of the crosswalk, and there is
 </tbody>
 </table>
 <h3 id="others">Others<a class="headerlink" href="#others" title="Permanent link">#</a></h3>
-<p>In the <code>common</code> namespace,</p>
+<p>In the <code>common</code> namespace, the following parameters are defined.</p>
 <table>
 <thead>
 <tr>
@@ -15128,12 +15128,12 @@ When there are low-speed or stopped vehicle ahead of the crosswalk, and there is
 <li>Object footprints' polygon to calculate the collision check.</li>
 </ul>
 </li>
-<li>The color of crosswalk<ul>
-<li>Considering the traffic light's color, red means the target crosswalk and white means the ignored crosswalk.</li>
+<li>The color of crosswalks<ul>
+<li>Considering the traffic light's color, red means the target crosswalk, and white means the ignored crosswalk.</li>
 </ul>
 </li>
 <li>Texts<ul>
-<li>It shows the module id, TTC, TTV, and the module state.</li>
+<li>It shows the module ID, TTC, TTV, and the module state.</li>
 </ul>
 </li>
 </ul>
