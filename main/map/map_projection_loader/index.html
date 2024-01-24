@@ -14641,6 +14641,13 @@ This is necessary information especially when you want to convert from global (g
 <div class="highlight"><pre><span></span><code><span class="c1"># map_projector_info.yaml</span>
 <span class="nt">projector_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
 </code></pre></div>
+<h4 id="limitation">Limitation<a class="headerlink" href="#limitation" title="Permanent link">#</a></h4>
+<p>The functionality that requires latitude and longitude will become unavailable.</p>
+<p>The currently identified unavailable functionalities are:</p>
+<ul>
+<li>GNSS localization</li>
+<li>Sending the self-position in latitude and longitude using ADAPI</li>
+</ul>
 <h3 id="using-mgrs">Using MGRS<a class="headerlink" href="#using-mgrs" title="Permanent link">#</a></h3>
 <p>If you want to use MGRS, please specify the MGRS grid as well.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># map_projector_info.yaml</span>
@@ -14648,6 +14655,8 @@ This is necessary information especially when you want to convert from global (g
 <span class="nt">vertical_datum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WGS84</span>
 <span class="nt">mgrs_grid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">54SUE</span>
 </code></pre></div>
+<h4 id="limitation_1">Limitation<a class="headerlink" href="#limitation_1" title="Permanent link">#</a></h4>
+<p>It cannot be used with maps that span across two or more MGRS grids. Please use it only when it falls within the scope of a single MGRS grid.</p>
 <h3 id="using-localcartesianutm">Using LocalCartesianUTM<a class="headerlink" href="#using-localcartesianutm" title="Permanent link">#</a></h3>
 <p>If you want to use local cartesian UTM, please specify the map origin as well.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># map_projector_info.yaml</span>
