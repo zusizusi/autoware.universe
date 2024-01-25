@@ -14780,23 +14780,31 @@
 <th>Name</th>
 <th>Type</th>
 <th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>road_marking_labels</code></td>
-<td>vector\&lt;string&gt;</td>
-<td>This label is used to extract the road surface markings from lanelet2.</td>
+<td>road_marking_labels</td>
+<td>array</td>
+<td>line string types that indicating road surface markings in lanelet2</td>
+<td>['cross_walk', 'zebra_marking', 'line_thin', 'line_thick', 'pedestrian_marking', 'stop_line', 'road_border']</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td><code>sign_board_labels</code></td>
-<td>vector\&lt;string&gt;</td>
-<td>This label is used to extract the traffic sign boards from lanelet2.</td>
+<td>sign_board_labels</td>
+<td>array</td>
+<td>line string types that indicating traffic sign boards in lanelet2</td>
+<td>['sign-board']</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td><code>bounding_box_labels</code></td>
-<td>vector\&lt;string&gt;</td>
-<td>This label is used to extract the bounding boxes from lanelet2.</td>
+<td>bounding_box_labels</td>
+<td>array</td>
+<td>line string types that indicating not mapped areas in lanelet2</td>
+<td>['none']</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table></div>
