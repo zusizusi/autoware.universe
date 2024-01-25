@@ -14559,6 +14559,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-to-launch" class="md-nav__link">
     How to launch
   </a>
@@ -14605,7 +14612,7 @@
 
 <div><h1 id="ar-tag-based-localizer">AR Tag Based Localizer<a class="headerlink" href="#ar-tag-based-localizer" title="Permanent link">#</a></h1>
 <p><strong>ArTagBasedLocalizer</strong> is a vision-based localization node.</p>
-<p><img src="./doc_image/ar_tag_image.png" width="320px"></p>
+<p><img src="./doc_image/ar_tag_image.png" width="320px" alt="ar_tag_image"></p>
 <p>This node uses <a href="https://index.ros.org/p/aruco/">the ArUco library</a> to detect AR-Tags from camera images and calculates and publishes the pose of the ego vehicle based on these detections.
 The positions and orientations of the AR-Tags are assumed to be written in the Lanelet2 format.</p>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
@@ -14676,6 +14683,83 @@ The positions and orientations of the AR-Tags are assumed to be written in the L
 <td align="left"><code>/diagnostics</code></td>
 <td align="left"><code>diagnostic_msgs::msg::DiagnosticArray</code></td>
 <td align="left">Diagnostics outputs</td>
+</tr>
+</tbody>
+</table>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>marker_size</td>
+<td>float</td>
+<td>marker_size</td>
+<td>0.6</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>target_tag_ids</td>
+<td>array</td>
+<td>target_tag_ids</td>
+<td>['0','1','2','3','4','5','6']</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>base_covariance</td>
+<td>array</td>
+<td>base_covariance</td>
+<td>[0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.02, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.02, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.02]</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>distance_threshold</td>
+<td>float</td>
+<td>distance_threshold(m)</td>
+<td>13.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>consider_orientation</td>
+<td>boolean</td>
+<td>consider_orientation</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>detection_mode</td>
+<td>string</td>
+<td>detection_mode select from [DM_NORMAL, DM_FAST, DM_VIDEO_FAST]</td>
+<td>DM_NORMAL</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_marker_size</td>
+<td>float</td>
+<td>min_marker_size</td>
+<td>0.02</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>ekf_time_tolerance</td>
+<td>float</td>
+<td>ekf_time_tolerance(sec)</td>
+<td>5.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>ekf_position_tolerance</td>
+<td>float</td>
+<td>ekf_position_tolerance(m)</td>
+<td>10.0</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table>
