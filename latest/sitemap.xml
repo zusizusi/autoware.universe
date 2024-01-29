@@ -61,6 +61,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/awf_vehicle_rviz_plugin/awf_2d_overlay_vehicle/</loc>
+         <lastmod>2024-01-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/bag_time_manager_rviz_plugin/</loc>
          <lastmod>2024-01-29</lastmod>
          <changefreq>daily</changefreq>
