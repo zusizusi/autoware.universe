@@ -14817,6 +14817,7 @@ We also assume that <span class="arithmatex">\(n\sim\mathcal{N}(0, \sigma^2)\)</
 </tbody>
 </table>
 <h3 id="parameters_1">Parameters<a class="headerlink" href="#parameters_1" title="Permanent link">#</a></h3>
+<p>Note that this node also uses <code>angular_velocity_offset_x</code>, <code>angular_velocity_offset_y</code>, <code>angular_velocity_offset_z</code> parameters from <code>imu_corrector.param.yaml</code>.</p>
 <table>
 <thead>
 <tr>
@@ -14827,21 +14828,6 @@ We also assume that <span class="arithmatex">\(n\sim\mathcal{N}(0, \sigma^2)\)</
 </thead>
 <tbody>
 <tr>
-<td><code>angular_velocity_offset_x</code></td>
-<td>double</td>
-<td>roll rate offset in imu_link [rad/s]</td>
-</tr>
-<tr>
-<td><code>angular_velocity_offset_y</code></td>
-<td>double</td>
-<td>pitch rate offset imu_link [rad/s]</td>
-</tr>
-<tr>
-<td><code>angular_velocity_offset_z</code></td>
-<td>double</td>
-<td>yaw rate offset imu_link [rad/s]</td>
-</tr>
-<tr>
 <td><code>gyro_bias_threshold</code></td>
 <td>double</td>
 <td>threshold of the bias of the gyroscope [rad/s]</td>
@@ -14850,6 +14836,11 @@ We also assume that <span class="arithmatex">\(n\sim\mathcal{N}(0, \sigma^2)\)</
 <td><code>timer_callback_interval_sec</code></td>
 <td>double</td>
 <td>seconds about the timer callback function [sec]</td>
+</tr>
+<tr>
+<td><code>diagnostics_updater_interval_sec</code></td>
+<td>double</td>
+<td>period of the diagnostics updater [sec]</td>
 </tr>
 <tr>
 <td><code>straight_motion_ang_vel_upper_limit</code></td>
