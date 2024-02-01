@@ -14687,8 +14687,42 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#input-output" class="md-nav__link">
-    Input / Output
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    Note
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interface" class="md-nav__link">
+    Interface
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input" class="md-nav__link">
+    Input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    Output
   </a>
   
 </li>
@@ -14702,13 +14736,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#note" class="md-nav__link">
-    Note
-  </a>
   
 </li>
       
@@ -14739,44 +14766,12 @@
 </li>
 </ul>
 <h2 id="design">Design<a class="headerlink" href="#design" title="Permanent link">#</a></h2>
-<h3 id="input-output">Input / Output<a class="headerlink" href="#input-output" title="Permanent link">#</a></h3>
-<ul>
-<li>Input<ul>
-<li><code>~/input/radar_objects</code> (radar_msgs/msg/RadarTracks.msg): Input radar topic</li>
-<li><code>~/input/odometry</code> (nav_msgs/msg/Odometry.msg): Ego vehicle odometry topic</li>
-</ul>
-</li>
-<li>Output<ul>
-<li><code>~/output/radar_detected_objects</code> (autoware_auto_perception_msgs/msg/DetectedObject.idl): The topic converted to Autoware's message. This is used for radar sensor fusion detection and radar detection.</li>
-<li><code>~/output/radar_tracked_objects</code> (autoware_auto_perception_msgs/msg/TrackedObject.idl): The topic converted to Autoware's message. This is used for tracking layer sensor fusion.</li>
-</ul>
-</li>
-</ul>
-<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h3>
-<ul>
-<li><code>update_rate_hz</code> (double): The update rate [hz].<ul>
-<li>Default parameter is 20.0</li>
-</ul>
-</li>
-<li><code>new_frame_id</code> (string): The header frame of the output topic.<ul>
-<li>Default parameter is "base_link"</li>
-</ul>
-</li>
-<li><code>use_twist_compensation</code> (bool): If the parameter is true, then the twist of the output objects' topic is compensated by ego vehicle motion.<ul>
-<li>Default parameter is "true"</li>
-</ul>
-</li>
-<li><code>use_twist_yaw_compensation</code> (bool): If the parameter is true, then the ego motion compensation will also consider yaw motion of the ego vehicle.<ul>
-<li>Default parameter is "false"</li>
-</ul>
-</li>
-<li><code>static_object_speed_threshold</code> (float): Specify the threshold for static object speed which determines the flag <code>is_stationary</code> [m/s].<ul>
-<li>Default parameter is 1.0</li>
-</ul>
-</li>
-</ul>
-<h2 id="note">Note<a class="headerlink" href="#note" title="Permanent link">#</a></h2>
-<p>This package convert the label from <code>radar_msgs/msg/RadarTrack.msg</code> to Autoware label.
+<h3 id="background">Background<a class="headerlink" href="#background" title="Permanent link">#</a></h3>
+<p>Autoware uses <a href="https://github.com/ros-perception/radar_msgs/blob/ros2/msg/RadarTracks.msg">radar_msgs/msg/RadarTracks.msg</a> as radar objects input data.
+To use radar objects data for Autoware perception module easily, <code>radar_tracks_msgs_converter</code> converts message type from <code>radar_msgs/msg/RadarTracks.msg</code> to <code>autoware_auto_perception_msgs/msg/DetectedObject</code>.
+In addition, because many detection module have an assumption on base_link frame, <code>radar_tracks_msgs_converter</code> provide the functions of transform frame_id.</p>
+<h3 id="note">Note<a class="headerlink" href="#note" title="Permanent link">#</a></h3>
+<p><code>Radar_tracks_msgs_converter</code> converts the label from <code>radar_msgs/msg/RadarTrack.msg</code> to Autoware label.
 Label id is defined as below.</p>
 <table>
 <thead>
@@ -14829,12 +14824,73 @@ Label id is defined as below.</p>
 </tr>
 </tbody>
 </table>
+<p>Additional vendor-specific classifications are permitted starting from 32000 in <a href="https://github.com/ros-perception/radar_msgs/blob/ros2/msg/RadarTrack.msg">radar_msgs/msg/RadarTrack.msg</a>.
+Autoware objects label is defined in <a href="https://gitlab.com/autowarefoundation/autoware.auto/autoware_auto_msgs/-/blob/master/autoware_auto_perception_msgs/msg/ObjectClassification.idl">ObjectClassification.idl</a></p>
+<h2 id="interface">Interface<a class="headerlink" href="#interface" title="Permanent link">#</a></h2>
+<h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
 <ul>
-<li><a href="https://github.com/ros-perception/radar_msgs/blob/ros2/msg/RadarTrack.msg">radar_msgs/msg/RadarTrack.msg</a>: additional vendor-specific classifications are permitted starting from 32000.</li>
+<li><code>~/input/radar_objects</code> (<code>radar_msgs/msg/RadarTracks.msg</code>)<ul>
+<li>Input radar topic</li>
 </ul>
+</li>
+<li><code>~/input/odometry</code> (<code>nav_msgs/msg/Odometry.msg</code>)<ul>
+<li>Ego vehicle odometry topic</li>
+</ul>
+</li>
+</ul>
+<h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h3>
 <ul>
-<li><a href="https://gitlab.com/autowarefoundation/autoware.auto/autoware_auto_msgs/-/blob/master/autoware_auto_perception_msgs/msg/ObjectClassification.idl">Autoware objects label</a></li>
-</ul></div>
+<li><code>~/output/radar_detected_objects</code> (<code>autoware_auto_perception_msgs/msg/DetectedObject.idl</code>)<ul>
+<li>DetectedObject topic converted to Autoware message.</li>
+<li>This is used for radar sensor fusion detection and radar detection.</li>
+</ul>
+</li>
+<li><code>~/output/radar_tracked_objects</code> (<code>autoware_auto_perception_msgs/msg/TrackedObject.idl</code>)<ul>
+<li>TrackedObject topic converted to Autoware message.</li>
+<li>This is used for tracking layer sensor fusion.</li>
+</ul>
+</li>
+</ul>
+<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h3>
+<ul>
+<li><code>update_rate_hz</code> (double) [hz]<ul>
+<li>Default parameter is 20.0</li>
+</ul>
+</li>
+</ul>
+<p>This parameter is update rate for the <code>onTimer</code> function.
+This parameter should be same as the frame rate of input topics.</p>
+<ul>
+<li><code>new_frame_id</code> (string)<ul>
+<li>Default parameter is "base_link"</li>
+</ul>
+</li>
+</ul>
+<p>This parameter is the header frame_id of the output topic.</p>
+<ul>
+<li><code>use_twist_compensation</code> (bool)<ul>
+<li>Default parameter is "true"</li>
+</ul>
+</li>
+</ul>
+<p>This parameter is the flag to use the compensation to linear of ego vehicle's twist.
+If the parameter is true, then the twist of the output objects' topic is compensated by the ego vehicle linear motion.</p>
+<ul>
+<li><code>use_twist_yaw_compensation</code> (bool)<ul>
+<li>Default parameter is "false"</li>
+</ul>
+</li>
+</ul>
+<p>This parameter is the flag to use the compensation to yaw rotation of ego vehicle's twist.
+If the parameter is true, then the ego motion compensation will also consider yaw motion of the ego vehicle.</p>
+<ul>
+<li><code>static_object_speed_threshold</code> (float) [m/s]<ul>
+<li>Default parameter is 1.0</li>
+</ul>
+</li>
+</ul>
+<p>This parameter is the threshold to determine the flag <code>is_stationary</code>.
+If the velocity is lower than this parameter, the flag <code>is_stationary</code> of DetectedObject is set to <code>true</code> and dealt as a static object.</p></div>
 
 
 
