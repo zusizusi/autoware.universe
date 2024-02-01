@@ -1,5 +1,10 @@
 [
   {
+    "version": "refs-tags-v1.0",
+    "title": "refs-tags-v1.0",
+    "aliases": []
+  },
+  {
     "version": "pr-6280",
     "title": "pr-6280",
     "aliases": []
