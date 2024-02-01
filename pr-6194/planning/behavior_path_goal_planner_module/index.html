@@ -14679,6 +14679,19 @@
     safety check
   </a>
   
+    <nav class="md-nav" aria-label="safety check">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters-for-safety-check" class="md-nav__link">
+    Parameters for safety check
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -14809,22 +14822,24 @@ When allowed, park in accordance with the specified policy(e.g pull over on left
 <p>To realize pull over even when an obstacle exists near the original goal, a collision free area is searched within a certain range around the original goal. The goal found will be published as <code>/planning/scenario_planning/modified_goal</code>.</p>
 <p><a href="https://user-images.githubusercontent.com/39142679/188359594-c6724e3e-1cb7-4051-9a18-8d2c67d4dee9.mp4">goal search video</a></p>
 <ol>
-<li>The original goal is set, and the refined goal pose is obtained by moving in the direction normal to the lane center line and keeping <code>margin_from_boundary</code> from the edge of the lane.</li>
-</ol>
-<p><img alt="refined_goal" src="images/goal_planner-refined_goal.drawio.svg"></p>
-<ol>
-<li>Using <code>refined_goal</code> as the base goal, search for candidate goals in the range of <code>-forward_goal_search_length</code> to <code>backward_goal_search_length</code> in the longitudinal direction and <code>longitudinal_margin</code> to <code>longitudinal_margin+max_lateral_offset</code> in th lateral direction based on refined_goal.</li>
-</ol>
-<p><img alt="goal_candidates" src="images/goal_planner-goal_candidates.drawio.svg"></p>
-<ol>
-<li>Each candidate goal is prioritized and a path is generated for each planner for each goal. The priority of a candidate goal is determined by its distance from the base goal. The ego vehicle tries to park for the highest possible goal. The distance is determined by the selected policy. In case <code>minimum_longitudinal_distance</code>, sort with smaller longitudinal distances taking precedence over smaller lateral distances. In case <code>minimum_weighted_distance</code>, sort with the sum of weighted lateral distance and longitudinal distance. This means the distance is calculated by <code>longitudinal_distance + lateral_cost*lateral_distance</code></li>
-</ol>
-<p><img alt="goal_distance" src="images/goal_planner-goal_distance.drawio.svg"></p>
-<p>The following figure is an example of minimum_weighted_distance.​ The white number indicates the goal candidate priority, and the smaller the number, the higher the priority. the 0 goal indicates the base goal.
-<img alt="goal_priority_rviz_with_goal" src="images/goal_priority_with_goal.png">
-<img alt="goal_priority_rviz" src="images/goal_priority_rviz.png"></p>
-<ol>
-<li>If the footprint in each goal candidate is within <code>object_recognition_collision_check_margin</code> of that of the object, it is determined to be unsafe. These goals are not selected. If <code>use_occupancy_grid_for_goal_search</code> is enabled, collision detection on the grid is also performed with <code>occupancy_grid_collision_check_margin</code>.</li>
+<li>
+<p>The original goal is set, and the refined goal pose is obtained by moving in the direction normal to the lane center line and keeping <code>margin_from_boundary</code> from the edge of the lane.
+   <img alt="refined_goal" src="images/goal_planner-refined_goal.drawio.svg"></p>
+</li>
+<li>
+<p>Using <code>refined_goal</code> as the base goal, search for candidate goals in the range of <code>-forward_goal_search_length</code> to <code>backward_goal_search_length</code> in the longitudinal direction and <code>longitudinal_margin</code> to <code>longitudinal_margin+max_lateral_offset</code> in th lateral direction based on refined_goal.
+   <img alt="goal_candidates" src="images/goal_planner-goal_candidates.drawio.svg"></p>
+</li>
+<li>
+<p>Each candidate goal is prioritized and a path is generated for each planner for each goal. The priority of a candidate goal is determined by its distance from the base goal. The ego vehicle tries to park for the highest possible goal. The distance is determined by the selected policy. In case <code>minimum_longitudinal_distance</code>, sort with smaller longitudinal distances taking precedence over smaller lateral distances. In case <code>minimum_weighted_distance</code>, sort with the sum of weighted lateral distance and longitudinal distance. This means the distance is calculated by <code>longitudinal_distance + lateral_cost*lateral_distance</code>
+   <img alt="goal_distance" src="images/goal_planner-goal_distance.drawio.svg">
+   The following figure is an example of minimum_weighted_distance.​ The white number indicates the goal candidate priority, and the smaller the number, the higher the priority. the 0 goal indicates the base goal.
+   <img alt="goal_priority_rviz_with_goal" src="images/goal_priority_with_goal.png">
+   <img alt="goal_priority_rviz" src="images/goal_priority_rviz.png"></p>
+</li>
+<li>
+<p>If the footprint in each goal candidate is within <code>object_recognition_collision_check_margin</code> of that of the object, it is determined to be unsafe. These goals are not selected. If <code>use_occupancy_grid_for_goal_search</code> is enabled, collision detection on the grid is also performed with <code>occupancy_grid_collision_check_margin</code>.</p>
+</li>
 </ol>
 <p>Red goals candidates in the image indicate unsafe ones.</p>
 <p><img alt="is_safe" src="images/goal_planner-is_safe.drawio.svg"></p>
@@ -15362,7 +15377,7 @@ This method integrates the footprints of egos and objects at a given time and ch
    　　   |  |    |   |       |           |   |  |
    　　 0 =========================-------==========--&gt; t
 </code></pre></div>
-<h4 id="parameters-for-safety-check">Parameters for safety check<a class="headerlink" href="#parameters-for-safety-check" title="Permanent link">#</a></h4>
+<h3 id="parameters-for-safety-check">Parameters for safety check<a class="headerlink" href="#parameters-for-safety-check" title="Permanent link">#</a></h3>
 <table>
 <thead>
 <tr>
@@ -15411,7 +15426,7 @@ This method integrates the footprints of egos and objects at a given time and ch
 </tr>
 </tbody>
 </table>
-<h5 id="parameters-for-rss-safety-check">Parameters for RSS safety check<a class="headerlink" href="#parameters-for-rss-safety-check" title="Permanent link">#</a></h5>
+<h4 id="parameters-for-rss-safety-check">Parameters for RSS safety check<a class="headerlink" href="#parameters-for-rss-safety-check" title="Permanent link">#</a></h4>
 <table>
 <thead>
 <tr>
@@ -15460,7 +15475,7 @@ This method integrates the footprints of egos and objects at a given time and ch
 </tr>
 </tbody>
 </table>
-<h5 id="parameters-for-integral_predicted_polygon-safety-check">Parameters for integral_predicted_polygon safety check<a class="headerlink" href="#parameters-for-integral_predicted_polygon-safety-check" title="Permanent link">#</a></h5>
+<h4 id="parameters-for-integral_predicted_polygon-safety-check">Parameters for integral_predicted_polygon safety check<a class="headerlink" href="#parameters-for-integral_predicted_polygon-safety-check" title="Permanent link">#</a></h4>
 <table>
 <thead>
 <tr>
