@@ -14814,6 +14814,11 @@ If the roi msg 3 is not subscribed before the next pointcloud message coming or 
 <p>The timeout threshold should be set according to the postprocessing time.
 E.g, if the postprocessing time is around 50ms, the timeout threshold should be set smaller than 50ms, so that the whole processing time could be less than 100ms.
 current default value at autoware.universe for XX1: - timeout_ms: 50.0</p>
+<h4 id="the-build_only-option">The <code>build_only</code> option<a class="headerlink" href="#the-build_only-option" title="Permanent link">#</a></h4>
+<p>The <code>pointpainting_fusion</code> node has <code>build_only</code> option to build the TensorRT engine file from the ONNX file.
+Although it is preferred to move all the ROS parameters in <code>.param.yaml</code> file in Autoware Universe, the <code>build_only</code> option is not moved to the <code>.param.yaml</code> file for now, because it may be used as a flag to execute the build as a pre-task. You can execute with the following command:</p>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>launch<span class="w"> </span>image_projection_based_fusion<span class="w"> </span>pointpainting_fusion.launch.xml<span class="w"> </span>model_name:<span class="o">=</span>pointpainting<span class="w"> </span>model_path:<span class="o">=</span>/home/autoware/autoware_data/image_projection_based_fusion<span class="w"> </span>model_param_path:<span class="o">=</span><span class="k">$(</span>ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>image_projection_based_fusion<span class="w"> </span>--share<span class="k">)</span>/config/pointpainting.param.yaml<span class="w"> </span>build_only:<span class="o">=</span><span class="nb">true</span>
+</code></pre></div>
 <h4 id="known-limits">Known Limits<a class="headerlink" href="#known-limits" title="Permanent link">#</a></h4>
 <p>The rclcpp::TimerBase timer could not break a for loop, therefore even if time is out when fusing a roi msg at the middle, the program will run until all msgs are fused.</p>
 <h3 id="detail-description-of-each-fusions-algorithm-is-in-the-following-links">Detail description of each fusion's algorithm is in the following links<a class="headerlink" href="#detail-description-of-each-fusions-algorithm-is-in-the-following-links" title="Permanent link">#</a></h3>
