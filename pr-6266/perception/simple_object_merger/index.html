@@ -14835,7 +14835,18 @@ If the time difference between the first topic of <code>input_topics</code> and 
 </li>
 </ul>
 <p>This parameter is the name of input topics.
-For example, when this packages use for radar objects, <code>"[/sensing/radar/front_center/detected_objects, /sensing/radar/front_left/detected_objects, /sensing/radar/rear_left/detected_objects, /sensing/radar/rear_center/detected_objects, /sensing/radar/rear_right/detected_objects, /sensing/radar/front_right/detected_objects]"</code> can be set.
+For example, when this packages use for radar objects,</p>
+<div class="highlight"><pre><span></span><code><span class="nt">input_topics</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">[</span>
+<span class="w">    </span><span class="s">"/sensing/radar/front_center/detected_objects"</span><span class="p p-Indicator">,</span>
+<span class="w">    </span><span class="s">"/sensing/radar/front_left/detected_objects"</span><span class="p p-Indicator">,</span>
+<span class="w">    </span><span class="s">"/sensing/radar/rear_left/detected_objects"</span><span class="p p-Indicator">,</span>
+<span class="w">    </span><span class="s">"/sensing/radar/rear_center/detected_objects"</span><span class="p p-Indicator">,</span>
+<span class="w">    </span><span class="s">"/sensing/radar/rear_right/detected_objects"</span><span class="p p-Indicator">,</span>
+<span class="w">    </span><span class="s">"/sensing/radar/front_right/detected_objects"</span><span class="p p-Indicator">,</span>
+<span class="w">  </span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>can be set in config yaml file.
 For now, the time difference is calculated by the header time between the first topic of <code>input_topics</code> and the input topics, so the most important objects to detect should be set in the first of <code>input_topics</code> list.</p></div>
 
 
