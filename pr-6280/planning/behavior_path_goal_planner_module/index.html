@@ -15347,7 +15347,7 @@ There are three main margins at this point.</p>
 <p><code>RSS</code> method is a method commonly used by other behavior path planner modules, see <a href="../behavior_path_planner_common/docs/behavior_path_planner_safety_check/">RSS based safety check utils explanation</a>.</p>
 <p><code>integral_predicted_polygon</code> is a more safety-oriented method. This method is implemented because speeds during pull over are lower than during driving, and fewer objects travel along the edge of the lane. (It is sometimes overreactive and may be less available.)
 This method integrates the footprints of egos and objects at a given time and checks for collisions between them.</p>
-<p><img alt="safety_check" src="./images/goal_planner-safety_check.drawio.svg"></p>
+<p><img alt="safety_check" src="images/goal_planner-safety_check.drawio.svg"></p>
 <p>In addition, the safety check has a time hysteresis, and if the path is judged "safe" for a certain period of time(<code>keep_unsafe_time</code>), it is finally treated as "safe".</p>
 <div class="highlight"><pre><span></span><code>   　　                    ==== is_safe
    　　                    ---- current_is_safe
@@ -15412,12 +15412,54 @@ This method integrates the footprints of egos and objects at a given time and ch
 </tbody>
 </table>
 <h5 id="parameters-for-rss-safety-check">Parameters for RSS safety check<a class="headerlink" href="#parameters-for-rss-safety-check" title="Permanent link">#</a></h5>
-<p>| Name | Unit | Type | Description | Default value |
-| rear_vehicle_reaction_time | [s] | double | Reaction time for rear vehicles | 2.0 |
-| rear_vehicle_safety_time_margin | [s] | double | Safety time margin for rear vehicles | 1.0 |
-| lateral_distance_max_threshold | [m] | double | Maximum lateral distance threshold | 2.0 |
-| longitudinal_distance_min_threshold | [m] | double | Minimum longitudinal distance threshold | 3.0 |
-| longitudinal_velocity_delta_time | [s] | double | Delta time for longitudinal velocity | 0.8 |</p>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">rear_vehicle_reaction_time</td>
+<td align="left">[s]</td>
+<td align="left">double</td>
+<td align="left">Reaction time for rear vehicles</td>
+<td align="left">2.0</td>
+</tr>
+<tr>
+<td align="left">rear_vehicle_safety_time_margin</td>
+<td align="left">[s]</td>
+<td align="left">double</td>
+<td align="left">Safety time margin for rear vehicles</td>
+<td align="left">1.0</td>
+</tr>
+<tr>
+<td align="left">lateral_distance_max_threshold</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">Maximum lateral distance threshold</td>
+<td align="left">2.0</td>
+</tr>
+<tr>
+<td align="left">longitudinal_distance_min_threshold</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">Minimum longitudinal distance threshold</td>
+<td align="left">3.0</td>
+</tr>
+<tr>
+<td align="left">longitudinal_velocity_delta_time</td>
+<td align="left">[s]</td>
+<td align="left">double</td>
+<td align="left">Delta time for longitudinal velocity</td>
+<td align="left">0.8</td>
+</tr>
+</tbody>
+</table>
 <h5 id="parameters-for-integral_predicted_polygon-safety-check">Parameters for integral_predicted_polygon safety check<a class="headerlink" href="#parameters-for-integral_predicted_polygon-safety-check" title="Permanent link">#</a></h5>
 <table>
 <thead>
@@ -15462,7 +15504,7 @@ This method integrates the footprints of egos and objects at a given time and ch
 </table>
 <h2 id="path-deciding"><strong>path deciding</strong><a class="headerlink" href="#path-deciding" title="Permanent link">#</a></h2>
 <p>When <code>decide_path_distance</code> closer to the start of the pull over, if it is collision-free at that time and safe for the predicted path of the objects, it transitions to DECIDING. If it is safe for a certain period of time, it moves to DECIDED.</p>
-<p><img alt="path_deciding" src="./images/goal_planner-deciding_path.drawio.svg"></p>
+<p><img alt="path_deciding" src="images/goal_planner-deciding_path.drawio.svg"></p>
 <h2 id="unimplemented-parts-limitations">Unimplemented parts / limitations<a class="headerlink" href="#unimplemented-parts-limitations" title="Permanent link">#</a></h2>
 <ul>
 <li>Only shift pull over can be executed concurrently with other modules</li>
