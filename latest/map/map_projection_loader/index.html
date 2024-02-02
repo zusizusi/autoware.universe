@@ -14819,27 +14819,34 @@ This is necessary information especially when you want to convert from global (g
 </code></pre></div>
 <h2 id="published-topics">Published Topics<a class="headerlink" href="#published-topics" title="Permanent link">#</a></h2>
 <ul>
-<li>~/map_projector_info (tier4_map_msgs/MapProjectorInfo) : Topic for defining map projector information</li>
+<li><code>~/map_projector_info</code> (tier4_map_msgs/MapProjectorInfo) : This topic shows the definition of map projector information</li>
 </ul>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
+<p>Note that these parameters are assumed to be passed from launch arguments, and it is not recommended to directly write them in <code>map_projection_loader.param.yaml</code>.</p>
 <table>
 <thead>
 <tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">map_projector_info_path</td>
-<td align="left">std::string</td>
-<td align="left">A path to map_projector_info.yaml (used by default)</td>
+<td>map_projector_info_path</td>
+<td>string</td>
+<td>The path where map_projector_info.yaml is located</td>
+<td>$(var map_projector_info_path)</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">lanelet2_map_path</td>
-<td align="left">std::string</td>
-<td align="left">A path to lanelet2 map (used only when <code>map_projector_info_path</code> does not exist)</td>
+<td>lanelet2_map_path</td>
+<td>string</td>
+<td>The path where the lanelet2 map file (.osm) is located</td>
+<td>$(var lanelet2_map_path)</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table></div>
