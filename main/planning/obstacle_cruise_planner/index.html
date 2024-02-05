@@ -15059,6 +15059,17 @@ The obstacles not in front of the ego will be ignored.</p>
 </tr>
 </tbody>
 </table>
+<h5 id="yield-for-vehicles-that-might-cut-in-into-the-egos-lane">Yield for vehicles that might cut in into the ego's lane<a class="headerlink" href="#yield-for-vehicles-that-might-cut-in-into-the-egos-lane" title="Permanent link">#</a></h5>
+<p>It is also possible to yield (cruise) behind vehicles in neighbor lanes if said vehicles might cut in the ego vehicle's current lane.</p>
+<p>The obstacles meeting the following condition are determined as obstacles for yielding (cruising).</p>
+<ul>
+<li>The object type is for cruising according to <code>common.cruise_obstacle_type.*</code> and it is moving with a speed greater than <code>behavior_determination.cruise.yield.stopped_obstacle_velocity_threshold</code>.</li>
+<li>The object is not crossing the ego's trajectory (*1).</li>
+<li>There is another object of type <code>common.cruise_obstacle_type.*</code> stopped in front of the moving obstacle.</li>
+<li>The lateral distance (using the ego's trajectory as reference) between both obstacles is less than <code>behavior_determination.cruise.yield.max_lat_dist_between_obstacles</code></li>
+<li>Both obstacles, moving and stopped, are within <code>behavior_determination.cruise.yield.lat_distance_threshold</code> and <code>behavior_determination.cruise.yield.lat_distance_threshold</code> + <code>behavior_determination.cruise.yield.max_lat_dist_between_obstacles</code> lateral distance from the ego's trajectory respectively.</li>
+</ul>
+<p>If the above conditions are met, the ego vehicle will cruise behind the moving obstacle, yielding to it so it can cut in into the ego's lane to avoid the stopped obstacle.</p>
 <h4 id="determine-stop-vehicles">Determine stop vehicles<a class="headerlink" href="#determine-stop-vehicles" title="Permanent link">#</a></h4>
 <p>Among obstacles which are not for cruising, the obstacles meeting the following condition are determined as obstacles for stopping.</p>
 <ul>
