@@ -15068,48 +15068,55 @@
 <table>
 <thead>
 <tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">show_debug_info</td>
-<td align="left">bool</td>
-<td align="left">Flag to display debug info</td>
-<td align="left">false</td>
+<td>show_debug_info</td>
+<td>boolean</td>
+<td>Flag to display debug info</td>
+<td>0</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">predict_frequency</td>
-<td align="left">double</td>
-<td align="left">Frequency for filtering and publishing [Hz]</td>
-<td align="left">50.0</td>
+<td>predict_frequency</td>
+<td>float</td>
+<td>Frequency for filtering and publishing [Hz]</td>
+<td>50</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">tf_rate</td>
-<td align="left">double</td>
-<td align="left">Frequency for tf broadcasting [Hz]</td>
-<td align="left">10.0</td>
+<td>tf_rate</td>
+<td>float</td>
+<td>Frequency for tf broadcasting [Hz]</td>
+<td>50</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">publish_tf</td>
-<td align="left">bool</td>
-<td align="left">Whether to publish tf</td>
-<td align="left">true</td>
+<td>publish_tf</td>
+<td>boolean</td>
+<td>Whether to publish tf</td>
+<td>1</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">extend_state_step</td>
-<td align="left">int</td>
-<td align="left">Max delay step which can be dealt with in EKF. Large number increases computational cost.</td>
-<td align="left">50</td>
+<td>extend_state_step</td>
+<td>integer</td>
+<td>Max delay step which can be dealt with in EKF. Large number increases computational cost.</td>
+<td>50</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">enable_yaw_bias_estimation</td>
-<td align="left">bool</td>
-<td align="left">Flag to enable yaw bias estimation</td>
-<td align="left">true</td>
+<td>enable_yaw_bias_estimation</td>
+<td>boolean</td>
+<td>Flag to enable yaw bias estimation</td>
+<td>1</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table>
@@ -15117,36 +15124,41 @@
 <table>
 <thead>
 <tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">pose_additional_delay</td>
-<td align="left">double</td>
-<td align="left">Additional delay time for pose measurement [s]</td>
-<td align="left">0.0</td>
+<td>pose_additional_delay</td>
+<td>float</td>
+<td>Additional delay time for pose measurement [s]</td>
+<td>0</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">pose_measure_uncertainty_time</td>
-<td align="left">double</td>
-<td align="left">Measured time uncertainty used for covariance calculation [s]</td>
-<td align="left">0.01</td>
+<td>pose_measure_uncertainty_time</td>
+<td>float</td>
+<td>Measured time uncertainty used for covariance calculation [s]</td>
+<td>0.01</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">pose_smoothing_steps</td>
-<td align="left">int</td>
-<td align="left">A value for smoothing steps</td>
-<td align="left">5</td>
+<td>pose_smoothing_steps</td>
+<td>integer</td>
+<td>A value for smoothing steps</td>
+<td>5</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">pose_gate_dist</td>
-<td align="left">double</td>
-<td align="left">Limit of Mahalanobis distance used for outliers detection</td>
-<td align="left">10000.0</td>
+<td>pose_gate_dist</td>
+<td>float</td>
+<td>Limit of Mahalanobis distance used for outliers detection</td>
+<td>10000</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table>
@@ -15154,30 +15166,34 @@
 <table>
 <thead>
 <tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">twist_additional_delay</td>
-<td align="left">double</td>
-<td align="left">Additional delay time for twist [s]</td>
-<td align="left">0.0</td>
+<td>twist_additional_delay</td>
+<td>float</td>
+<td>Additional delay time for twist [s]</td>
+<td>0</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">twist_smoothing_steps</td>
-<td align="left">int</td>
-<td align="left">A value for smoothing steps</td>
-<td align="left">2</td>
+<td>twist_smoothing_steps</td>
+<td>integer</td>
+<td>A value for smoothing steps</td>
+<td>2</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">twist_gate_dist</td>
-<td align="left">double</td>
-<td align="left">Limit of Mahalanobis distance used for outliers detection</td>
-<td align="left">10000.0</td>
+<td>twist_gate_dist</td>
+<td>float</td>
+<td>Limit of Mahalanobis distance used for outliers detection</td>
+<td>10000</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table>
@@ -15185,36 +15201,34 @@
 <table>
 <thead>
 <tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">proc_stddev_vx_c</td>
-<td align="left">double</td>
-<td align="left">Standard deviation of process noise in time differentiation expression of linear velocity x, noise for d_vx = 0</td>
-<td align="left">2.0</td>
+<td>proc_stddev_vx_c</td>
+<td>float</td>
+<td>Standard deviation of process noise in time differentiation expression of linear velocity x, noise for d_vx = 0</td>
+<td>10</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">proc_stddev_wz_c</td>
-<td align="left">double</td>
-<td align="left">Standard deviation of process noise in time differentiation expression of angular velocity z, noise for d_wz = 0</td>
-<td align="left">0.2</td>
+<td>proc_stddev_wz_c</td>
+<td>float</td>
+<td>Standard deviation of process noise in time differentiation expression of angular velocity z, noise for d_wz = 0</td>
+<td>5</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">proc_stddev_yaw_c</td>
-<td align="left">double</td>
-<td align="left">Standard deviation of process noise in time differentiation expression of yaw, noise for d_yaw = omega</td>
-<td align="left">0.005</td>
-</tr>
-<tr>
-<td align="left">proc_stddev_yaw_bias_c</td>
-<td align="left">double</td>
-<td align="left">Standard deviation of process noise in time differentiation expression of yaw_bias, noise for d_yaw_bias = 0</td>
-<td align="left">0.001</td>
+<td>proc_stddev_yaw_c</td>
+<td>float</td>
+<td>Standard deviation of process noise in time differentiation expression of yaw, noise for d_yaw = omega</td>
+<td>0.005</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table>
@@ -15223,30 +15237,34 @@
 <table>
 <thead>
 <tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">z_filter_proc_dev</td>
-<td align="left">double</td>
-<td align="left">Simple1DFilter - Z filter process deviation</td>
-<td align="left">1.0</td>
+<td>z_filter_proc_dev</td>
+<td>float</td>
+<td>Simple1DFilter - Z filter process deviation</td>
+<td>1</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">roll_filter_proc_dev</td>
-<td align="left">double</td>
-<td align="left">Simple1DFilter - Roll filter process deviation</td>
-<td align="left">0.01</td>
+<td>roll_filter_proc_dev</td>
+<td>float</td>
+<td>Simple1DFilter - Roll filter process deviation</td>
+<td>0.01</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">pitch_filter_proc_dev</td>
-<td align="left">double</td>
-<td align="left">Simple1DFilter - Pitch filter process deviation</td>
-<td align="left">0.01</td>
+<td>pitch_filter_proc_dev</td>
+<td>float</td>
+<td>Simple1DFilter - Pitch filter process deviation</td>
+<td>0.01</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table>
@@ -15254,36 +15272,41 @@
 <table>
 <thead>
 <tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">pose_no_update_count_threshold_warn</td>
-<td align="left">size_t</td>
-<td align="left">The threshold at which a WARN state is triggered due to the Pose Topic update not happening continuously for a certain number of times.</td>
-<td align="left">50</td>
+<td>pose_no_update_count_threshold_warn</td>
+<td>integer</td>
+<td>The threshold at which a WARN state is triggered due to the Pose Topic update not happening continuously for a certain number of times</td>
+<td>50</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">pose_no_update_count_threshold_error</td>
-<td align="left">size_t</td>
-<td align="left">The threshold at which an ERROR state is triggered due to the Pose Topic update not happening continuously for a certain number of times.</td>
-<td align="left">250</td>
+<td>pose_no_update_count_threshold_error</td>
+<td>integer</td>
+<td>The threshold at which an ERROR state is triggered due to the Pose Topic update not happening continuously for a certain number of times</td>
+<td>100</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">twist_no_update_count_threshold_warn</td>
-<td align="left">size_t</td>
-<td align="left">The threshold at which a WARN state is triggered due to the Twist Topic update not happening continuously for a certain number of times.</td>
-<td align="left">50</td>
+<td>twist_no_update_count_threshold_warn</td>
+<td>integer</td>
+<td>The threshold at which a WARN state is triggered due to the Twist Topic update not happening continuously for a certain number of times</td>
+<td>50</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">twist_no_update_count_threshold_error</td>
-<td align="left">size_t</td>
-<td align="left">The threshold at which an ERROR state is triggered due to the Twist Topic update not happening continuously for a certain number of times.</td>
-<td align="left">250</td>
+<td>twist_no_update_count_threshold_error</td>
+<td>integer</td>
+<td>The threshold at which an ERROR state is triggered due to the Twist Topic update not happening continuously for a certain number of times</td>
+<td>100</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table>
@@ -15291,18 +15314,27 @@
 <table>
 <thead>
 <tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">threshold_observable_velocity_mps</td>
-<td align="left">double</td>
-<td align="left">Minimum value for velocity that will be used for EKF. Mainly used for dead zone in velocity sensor</td>
-<td align="left">0.0 (disabled)</td>
+<td>threshold_observable_velocity_mps</td>
+<td>float</td>
+<td>Minimum value for velocity that will be used for EKF. Mainly used for dead zone in velocity sensor [m/s] (0.0 means disabled)</td>
+<td>0.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>pose_frame_id</td>
+<td>string</td>
+<td>Parent frame_id of EKF output pose</td>
+<td>map</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table>
