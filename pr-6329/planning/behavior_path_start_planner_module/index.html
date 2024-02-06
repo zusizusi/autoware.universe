@@ -15019,13 +15019,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#search-priority" class="md-nav__link">
-    search priority
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#parameters-for-backward-pull-out-start-point-search" class="md-nav__link">
     parameters for backward pull out start point search
   </a>
@@ -15160,7 +15153,7 @@
 </ul>
 </li>
 </ul>
-<p>Here's the expression of the steps start pose searching steps, considering the threshold levels are set at [2.0, 1.0, 0.5, 0.1 meters] as example. The process is as follows:</p>
+<p>Here's the expression of the steps start pose searching steps, considering the <code>collision_check_margins</code> is set at [2.0, 1.0, 0.5, 0.1] as example. The process is as follows:</p>
 <ol>
 <li>
 <p><strong>Generating start pose candidates</strong></p>
@@ -15171,12 +15164,18 @@
 <li>Include the current position as one of the start pose candidates.</li>
 </ul>
 </li>
+</ol>
+<figure>
+<p><img alt="start pose candidate" src="images/start_pose_candidate.drawio.svg" width="1100"></p>
+</figure>
+<ol>
 <li>
 <p><strong>Starting search at maximum margin</strong></p>
 <ul>
 <li>Begin the search with the largest threshold (e.g., 2.0 meters).</li>
 <li>Evaluate each start pose candidate to see if it maintains a margin of more than 2.0 meters.</li>
 <li>Simultaneously, verify that the path generated from that start pose meets other necessary criteria (e.g., path deviation check).</li>
+<li>Following the search priority described later, evaluate each in turn and adopt the start pose if it meets the conditions.</li>
 </ul>
 </li>
 <li>
@@ -15199,9 +15198,99 @@
 </ul>
 </li>
 </ol>
-<figure>
-<p><img alt="start pose candidate" src="images/start_pose_candidate.drawio.svg" width="1100"></p>
-</figure>
+<h4 id="search-priority"><strong>search priority</strong><a class="headerlink" href="#search-priority" title="Permanent link">#</a></h4>
+<p>If a safe path with sufficient clearance for static obstacles cannot be generated forward, a backward search from the vehicle's current position is conducted to locate a suitable start point for a pull out path generation.</p>
+<p>During this backward search, different policies can be applied based on <code>search_priority</code> parameters:</p>
+<p>Selecting <code>efficient_path</code> focuses on creating a shift pull out path, regardless of how far back the vehicle needs to move.
+Opting for <code>short_back_distance</code> aims to find a location with the least possible backward movement.</p>
+<p><img alt="priority_order" src="images/priority_order.drawio.svg"></p>
+<p><code>PriorityOrder</code> is defined as a vector of pairs, where each element consists of a <code>size_t</code> index representing a start pose candidate index, and the planner type. The PriorityOrder vector is processed sequentially from the beginning, meaning that the pairs listed at the top of the vector are given priority in the selection process for pull out path generation.</p>
+<h5 id="efficient_path"><code>efficient_path</code><a class="headerlink" href="#efficient_path" title="Permanent link">#</a></h5>
+<p>When <code>search_priority</code> is set to <code>efficient_path</code> and the preference is for prioritizing <code>shift_pull_out</code>, the <code>PriorityOrder</code> array is populated in such a way that <code>shift_pull_out</code> is grouped together for all start pose candidates before moving on to the next planner type. This prioritization is reflected in the order of the array, with <code>shift_pull_out</code> being listed before geometric_pull_out.</p>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Planner Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>shift_pull_out</td>
+</tr>
+<tr>
+<td>1</td>
+<td>shift_pull_out</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>N</td>
+<td>shift_pull_out</td>
+</tr>
+<tr>
+<td>0</td>
+<td>geometric_pull_out</td>
+</tr>
+<tr>
+<td>1</td>
+<td>geometric_pull_out</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>N</td>
+<td>geometric_pull_out</td>
+</tr>
+</tbody>
+</table>
+<p>This approach prioritizes trying all candidates with <code>shift_pull_out</code> before proceeding to <code>geometric_pull_out</code>, which may be efficient in situations where <code>shift_pull_out</code> is likely to be appropriate.</p>
+<h5 id="short_back_distance"><code>short_back_distance</code><a class="headerlink" href="#short_back_distance" title="Permanent link">#</a></h5>
+<p>For <code>search_priority</code> set to <code>short_back_distance</code>, the array alternates between planner types for each start pose candidate, which can minimize the distance the vehicle needs to move backward if the earlier candidates are successful.</p>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Planner Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>shift_pull_out</td>
+</tr>
+<tr>
+<td>0</td>
+<td>geometric_pull_out</td>
+</tr>
+<tr>
+<td>1</td>
+<td>shift_pull_out</td>
+</tr>
+<tr>
+<td>1</td>
+<td>geometric_pull_out</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>N</td>
+<td>shift_pull_out</td>
+</tr>
+<tr>
+<td>N</td>
+<td>geometric_pull_out</td>
+</tr>
+</tbody>
+</table>
+<p>This ordering is beneficial when the priority is to minimize the backward distance traveled, giving an equal chance for each planner to succeed at the closest possible starting position.</p>
 <h3 id="2-collision-detection-with-dynamic-obstacles">2. Collision detection with dynamic obstacles<a class="headerlink" href="#2-collision-detection-with-dynamic-obstacles" title="Permanent link">#</a></h3>
 <ul>
 <li><strong>Applying RSS in Dynamic Collision Detection</strong>: Collision detection is based on the RSS (Responsibility-Sensitive Safety) model to evaluate if a safe distance is maintained. See <a href="../behavior_path_planner_common/docs/behavior_path_planner_safety_check/">safety check feature explanation</a></li>
@@ -15210,9 +15299,9 @@
 <li><strong>Collision check performed range</strong>: Safety checks for collisions with dynamic objects are conducted within the defined boundaries between the start and end points of each maneuver, ensuring there is no overlap with the road lane's centerline. This is to avoid hindering the progress of following vehicles.</li>
 </ul>
 <ul>
-<li><strong>Collision response policy</strong>: Should a collision with dynamic objects be detected along the generated path, departure is not permitted if detection occurs before movement. If the vehicle has already commenced movement, an attempt to stop will be made, provided it's feasible within the braking constraints and without crossing the travel lane's centerline.</li>
+<li><strong>Collision response policy</strong>: Should a collision with dynamic objects be detected along the generated path, deactivate module decision is registered if collision detection occurs before departure. If the vehicle has already commenced movement, an attempt to stop will be made, provided it's feasible within the braking constraints and without crossing the travel lane's centerline.</li>
 </ul>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSI0MjVweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjU0NXB4O2hlaWdodDo0MjVweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1NDUgNDI1IiB3aWR0aD0iNTQ1cHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48ZWxsaXBzZSBjeD0iMjEzLjI1IiBjeT0iMjAiIGZpbGw9IiMyMjIyMjIiIHJ4PSIxMCIgcnk9IjEwIiBzdHlsZT0ic3Ryb2tlOiMyMjIyMjI7c3Ryb2tlLXdpZHRoOjEuMDsiLz48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMTE0IiB4PSIxNTYuMjUiIHk9IjUwIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iOTQiIHg9IjE2Ni4yNSIgeT0iNzEuMTM4NyI+UGF0aCBHZW5lcmF0aW9uPC90ZXh0Pjxwb2x5Z29uIGZpbGw9IiNGMUYxRjEiIHBvaW50cz0iMTYwLjc1LDE1Mi4zNzExLDI2NS43NSwxNTIuMzcxMSwyNzcuNzUsMTY0LjM3MTEsMjY1Ljc1LDE3Ni4zNzExLDE2MC43NSwxNzYuMzcxMSwxNDguNzUsMTY0LjM3MTEsMTYwLjc1LDE1Mi4zNzExIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxMDUiIHg9IjE2MC43NSIgeT0iMTY4LjE3OTIiPkJlZm9yZSBkZXBhcnR1cmU/PC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjIxIiB4PSIxMjcuNzUiIHk9IjE2MS43NzY5Ij55ZXM8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTQiIHg9IjI3Ny43NSIgeT0iMTYxLjc3NjkiPm5vPC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxNjciIHg9IjExIiB5PSIxODYuMzcxMSIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE0NyIgeD0iMjEiIHk9IjIwNy41MDk4Ij5EZXBhcnR1cmUgbm90IHBlcm1pdHRlZDwvdGV4dD48cG9seWdvbiBmaWxsPSIjRjFGMUYxIiBwb2ludHM9IjI1NCwxODYuMzcxMSw0MTAsMTg2LjM3MTEsNDIyLDIwNS41NzgxLDQxMCwyMjQuNzg1MiwyNTQsMjI0Ljc4NTIsMjQyLDIwNS41NzgxLDI1NCwxODYuMzcxMSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTUyIiB4PSIyNTQiIHk9IjE5Ni41ODE1Ij5DYW4gc3RvcCB3aXRoaW4gY29uc3RyYWludHM8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTgiIHg9IjI1OCIgeT0iMjA5LjM4NjIiPiZhbXA7JmFtcDs8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTMyIiB4PSIyNTgiIHk9IjIyMi4xOTA5Ij5ubyBjcm9zc2luZyBjZW50ZXJsaW5lPzwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIyMSIgeD0iMjIxIiB5PSIyMDIuOTgzOSI+eWVzPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE0IiB4PSI0MjIiIHk9IjIwMi45ODM5Ij5ubzwvdGV4dD48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iNDgiIHg9IjIwOCIgeT0iMjM0Ljc4NTIiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIyOCIgeD0iMjE4IiB5PSIyNTUuOTIzOCI+U3RvcDwvdGV4dD48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMTQ3IiB4PSIzNTguNSIgeT0iMjM0Ljc4NTIiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxMjciIHg9IjM2OC41IiB5PSIyNTUuOTIzOCI+Q29udGludWUgd2l0aCBjYXV0aW9uPC90ZXh0Pjxwb2x5Z29uIGZpbGw9IiNGMUYxRjEiIHBvaW50cz0iMzMyLDI3NC43NTM5LDM0NCwyODYuNzUzOSwzMzIsMjk4Ljc1MzksMzIwLDI4Ni43NTM5LDMzMiwyNzQuNzUzOSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSIyMTMuMjUsMzA0Ljc1MzksMjI1LjI1LDMxNi43NTM5LDIxMy4yNSwzMjguNzUzOSwyMDEuMjUsMzE2Ljc1MzksMjEzLjI1LDMwNC43NTM5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48cG9seWdvbiBmaWxsPSIjRjFGMUYxIiBwb2ludHM9Ijk2Ljc1LDEwMy45Njg4LDMyOS43NSwxMDMuOTY4OCwzNDEuNzUsMTE1Ljk2ODgsMzI5Ljc1LDEyNy45Njg4LDk2Ljc1LDEyNy45Njg4LDg0Ljc1LDExNS45Njg4LDk2Ljc1LDEwMy45Njg4IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIyMSIgeD0iMjE3LjI1IiB5PSIxMzguMTc5MiI+eWVzPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjIzMyIgeD0iOTYuNzUiIHk9IjExOS43NzY5Ij5Db2xsaXNpb24gd2l0aCBkeW5hbWljIG9iamVjdHMgZGV0ZWN0ZWQ/PC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE0IiB4PSIzNDEuNzUiIHk9IjExMy4zNzQ1Ij5ubzwvdGV4dD48cG9seWdvbiBmaWxsPSIjRjFGMUYxIiBwb2ludHM9IjIxMy4yNSwzNDguNzUzOSwyMjUuMjUsMzYwLjc1MzksMjEzLjI1LDM3Mi43NTM5LDIwMS4yNSwzNjAuNzUzOSwyMTMuMjUsMzQ4Ljc1MzkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjxlbGxpcHNlIGN4PSIyMTMuMjUiIGN5PSI0MDMuNzUzOSIgZmlsbD0ibm9uZSIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzIyMjIyMjtzdHJva2Utd2lkdGg6MS4wOyIvPjxlbGxpcHNlIGN4PSIyMTMuMjUiIGN5PSI0MDMuNzUzOSIgZmlsbD0iIzIyMjIyMiIgcng9IjYiIHJ5PSI2IiBzdHlsZT0ic3Ryb2tlOiMyMjIyMjI7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyMTMuMjUiIHgyPSIyMTMuMjUiIHkxPSIzMCIgeTI9IjUwIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMDkuMjUsNDAsMjEzLjI1LDUwLDIxNy4yNSw0MCwyMTMuMjUsNDQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjI0MiIgeDI9IjIzMiIgeTE9IjIwNS41NzgxIiB5Mj0iMjA1LjU3ODEiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyMzIiIHgyPSIyMzIiIHkxPSIyMDUuNTc4MSIgeTI9IjIzNC43ODUyIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMjgsMjI0Ljc4NTIsMjMyLDIzNC43ODUyLDIzNiwyMjQuNzg1MiwyMzIsMjI4Ljc4NTIiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjQyMiIgeDI9IjQzMiIgeTE9IjIwNS41NzgxIiB5Mj0iMjA1LjU3ODEiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI0MzIiIHgyPSI0MzIiIHkxPSIyMDUuNTc4MSIgeTI9IjIzNC43ODUyIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI0MjgsMjI0Ljc4NTIsNDMyLDIzNC43ODUyLDQzNiwyMjQuNzg1Miw0MzIsMjI4Ljc4NTIiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjIzMiIgeDI9IjIzMiIgeTE9IjI2OC43NTM5IiB5Mj0iMjg2Ljc1MzkiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyMzIiIHgyPSIzMjAiIHkxPSIyODYuNzUzOSIgeTI9IjI4Ni43NTM5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIzMTAsMjgyLjc1MzksMzIwLDI4Ni43NTM5LDMxMCwyOTAuNzUzOSwzMTQsMjg2Ljc1MzkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjQzMiIgeDI9IjQzMiIgeTE9IjI2OC43NTM5IiB5Mj0iMjg2Ljc1MzkiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI0MzIiIHgyPSIzNDQiIHkxPSIyODYuNzUzOSIgeTI9IjI4Ni43NTM5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIzNTQsMjgyLjc1MzksMzQ0LDI4Ni43NTM5LDM1NCwyOTAuNzUzOSwzNTAsMjg2Ljc1MzkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjE0OC43NSIgeDI9Ijk0LjUiIHkxPSIxNjQuMzcxMSIgeTI9IjE2NC4zNzExIi8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iOTQuNSIgeDI9Ijk0LjUiIHkxPSIxNjQuMzcxMSIgeTI9IjE4Ni4zNzExIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI5MC41LDE3Ni4zNzExLDk0LjUsMTg2LjM3MTEsOTguNSwxNzYuMzcxMSw5NC41LDE4MC4zNzExIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyNzcuNzUiIHgyPSIzMzIiIHkxPSIxNjQuMzcxMSIgeTI9IjE2NC4zNzExIi8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMzMyIiB4Mj0iMzMyIiB5MT0iMTY0LjM3MTEiIHkyPSIxODYuMzcxMSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMzI4LDE3Ni4zNzExLDMzMiwxODYuMzcxMSwzMzYsMTc2LjM3MTEsMzMyLDE4MC4zNzExIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI5NC41IiB4Mj0iOTQuNSIgeTE9IjIyMC4zMzk4IiB5Mj0iMzE2Ljc1MzkiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI5NC41IiB4Mj0iMjAxLjI1IiB5MT0iMzE2Ljc1MzkiIHkyPSIzMTYuNzUzOSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMTkxLjI1LDMxMi43NTM5LDIwMS4yNSwzMTYuNzUzOSwxOTEuMjUsMzIwLjc1MzksMTk1LjI1LDMxNi43NTM5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIzMzIiIHgyPSIzMzIiIHkxPSIyOTguNzUzOSIgeTI9IjMxNi43NTM5Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMzMyIiB4Mj0iMjI1LjI1IiB5MT0iMzE2Ljc1MzkiIHkyPSIzMTYuNzUzOSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMjM1LjI1LDMxMi43NTM5LDIyNS4yNSwzMTYuNzUzOSwyMzUuMjUsMzIwLjc1MzksMjMxLjI1LDMxNi43NTM5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyMTMuMjUiIHgyPSIyMTMuMjUiIHkxPSIxMjcuOTY4OCIgeTI9IjE1Mi4zNzExIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMDkuMjUsMTQyLjM3MTEsMjEzLjI1LDE1Mi4zNzExLDIxNy4yNSwxNDIuMzcxMSwyMTMuMjUsMTQ2LjM3MTEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjM0MS43NSIgeDI9IjUxOS41IiB5MT0iMTE1Ljk2ODgiIHkyPSIxMTUuOTY4OCIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iNTE1LjUsMjMwLjU2MjUsNTE5LjUsMjQwLjU2MjUsNTIzLjUsMjMwLjU2MjUsNTE5LjUsMjM0LjU2MjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjUxOS41IiB4Mj0iNTE5LjUiIHkxPSIxMTUuOTY4OCIgeTI9IjM2MC43NTM5Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNTE5LjUiIHgyPSIyMjUuMjUiIHkxPSIzNjAuNzUzOSIgeTI9IjM2MC43NTM5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMzUuMjUsMzU2Ljc1MzksMjI1LjI1LDM2MC43NTM5LDIzNS4yNSwzNjQuNzUzOSwyMzEuMjUsMzYwLjc1MzkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjIxMy4yNSIgeDI9IjIxMy4yNSIgeTE9IjMyOC43NTM5IiB5Mj0iMzQ4Ljc1MzkiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjIwOS4yNSwzMzguNzUzOSwyMTMuMjUsMzQ4Ljc1MzksMjE3LjI1LDMzOC43NTM5LDIxMy4yNSwzNDIuNzUzOSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjEzLjI1IiB4Mj0iMjEzLjI1IiB5MT0iODMuOTY4OCIgeTI9IjEwMy45Njg4Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMDkuMjUsOTMuOTY4OCwyMTMuMjUsMTAzLjk2ODgsMjE3LjI1LDkzLjk2ODgsMjEzLjI1LDk3Ljk2ODgiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjIxMy4yNSIgeDI9IjIxMy4yNSIgeTE9IjM3Mi43NTM5IiB5Mj0iMzkyLjc1MzkiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjIwOS4yNSwzODIuNzUzOSwyMTMuMjUsMzkyLjc1MzksMjE3LjI1LDM4Mi43NTM5LDIxMy4yNSwzODYuNzUzOSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PCEtLVNSQz1bUkwxMVFpRDA0QmxsQXRHQXBYVllHdzRmejVoZWpQVmpVam5DU0pIY1RxcDl4cGtzMlFNYmJuczREOTljYy1WZ3dWSUlfTzlkZVRKaVFrbkpxWDdUc1FQOU1zMXlRVjMzWlZjZzFWUi1BU0tSMWw2T0NabVN1SFNYa2ZrcU9tQk1yS1NQaEtmOHZsMVZnbHBMMEFVZEVtVVFPdlB3TEctdEZiWVBjZzJaeFNnaklZUVFzeG1yS1E4T2N6VWlaMXZsbkU2bWxaSUtRZ3FmRnIyNEJkTElfWENUdVFfWHJNX1dUclBHUHdDaDV6Y0ZCZGRQVnNKSlNqMG50VVZGdmV4Sk1sMFJdLS0+PC9nPjwvc3ZnPg==" class="uml" alt="uml diagram" title=""></p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSI0MjVweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjY0OHB4O2hlaWdodDo0MjVweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA2NDggNDI1IiB3aWR0aD0iNjQ4cHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48ZWxsaXBzZSBjeD0iMjkwLjUiIGN5PSIyMCIgZmlsbD0iIzIyMjIyMiIgcng9IjEwIiByeT0iMTAiIHN0eWxlPSJzdHJva2U6IzIyMjIyMjtzdHJva2Utd2lkdGg6MS4wOyIvPjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxMTQiIHg9IjIzMy41IiB5PSI1MCIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9Ijk0IiB4PSIyNDMuNSIgeT0iNzEuMTM4NyI+UGF0aCBHZW5lcmF0aW9uPC90ZXh0Pjxwb2x5Z29uIGZpbGw9IiNGMUYxRjEiIHBvaW50cz0iMjM4LDE1Mi4zNzExLDM0MywxNTIuMzcxMSwzNTUsMTY0LjM3MTEsMzQzLDE3Ni4zNzExLDIzOCwxNzYuMzcxMSwyMjYsMTY0LjM3MTEsMjM4LDE1Mi4zNzExIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxMDUiIHg9IjIzOCIgeT0iMTY4LjE3OTIiPkJlZm9yZSBkZXBhcnR1cmU/PC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjIxIiB4PSIyMDUiIHk9IjE2MS43NzY5Ij55ZXM8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTQiIHg9IjM1NSIgeT0iMTYxLjc3NjkiPm5vPC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIyNzAiIHg9IjExIiB5PSIxODYuMzcxMSIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjI1MCIgeD0iMjEiIHk9IjIwNy41MDk4Ij5EZWFjdGl2YXRlIG1vZHVsZSBkZWNpc2lvbiBpcyByZWdpc3RlcmVkPC90ZXh0Pjxwb2x5Z29uIGZpbGw9IiNGMUYxRjEiIHBvaW50cz0iMzU3LDE4Ni4zNzExLDUxMywxODYuMzcxMSw1MjUsMjA1LjU3ODEsNTEzLDIyNC43ODUyLDM1NywyMjQuNzg1MiwzNDUsMjA1LjU3ODEsMzU3LDE4Ni4zNzExIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNTIiIHg9IjM1NyIgeT0iMTk2LjU4MTUiPkNhbiBzdG9wIHdpdGhpbiBjb25zdHJhaW50czwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxOCIgeD0iMzYxIiB5PSIyMDkuMzg2MiI+JmFtcDsmYW1wOzwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxMzIiIHg9IjM2MSIgeT0iMjIyLjE5MDkiPm5vIGNyb3NzaW5nIGNlbnRlcmxpbmU/PC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjIxIiB4PSIzMjQiIHk9IjIwMi45ODM5Ij55ZXM8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTQiIHg9IjUyNSIgeT0iMjAyLjk4MzkiPm5vPC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSI0OCIgeD0iMzExIiB5PSIyMzQuNzg1MiIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjI4IiB4PSIzMjEiIHk9IjI1NS45MjM4Ij5TdG9wPC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxNDciIHg9IjQ2MS41IiB5PSIyMzQuNzg1MiIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjEyNyIgeD0iNDcxLjUiIHk9IjI1NS45MjM4Ij5Db250aW51ZSB3aXRoIGNhdXRpb248L3RleHQ+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSI0MzUsMjc0Ljc1MzksNDQ3LDI4Ni43NTM5LDQzNSwyOTguNzUzOSw0MjMsMjg2Ljc1MzksNDM1LDI3NC43NTM5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48cG9seWdvbiBmaWxsPSIjRjFGMUYxIiBwb2ludHM9IjI5MC41LDMwNC43NTM5LDMwMi41LDMxNi43NTM5LDI5MC41LDMyOC43NTM5LDI3OC41LDMxNi43NTM5LDI5MC41LDMwNC43NTM5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48cG9seWdvbiBmaWxsPSIjRjFGMUYxIiBwb2ludHM9IjE3NCwxMDMuOTY4OCw0MDcsMTAzLjk2ODgsNDE5LDExNS45Njg4LDQwNywxMjcuOTY4OCwxNzQsMTI3Ljk2ODgsMTYyLDExNS45Njg4LDE3NCwxMDMuOTY4OCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjEiIHg9IjI5NC41IiB5PSIxMzguMTc5MiI+eWVzPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjIzMyIgeD0iMTc0IiB5PSIxMTkuNzc2OSI+Q29sbGlzaW9uIHdpdGggZHluYW1pYyBvYmplY3RzIGRldGVjdGVkPzwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNCIgeD0iNDE5IiB5PSIxMTMuMzc0NSI+bm88L3RleHQ+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSIyOTAuNSwzNDguNzUzOSwzMDIuNSwzNjAuNzUzOSwyOTAuNSwzNzIuNzUzOSwyNzguNSwzNjAuNzUzOSwyOTAuNSwzNDguNzUzOSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PGVsbGlwc2UgY3g9IjI5MC41IiBjeT0iNDAzLjc1MzkiIGZpbGw9Im5vbmUiIHJ4PSIxMSIgcnk9IjExIiBzdHlsZT0ic3Ryb2tlOiMyMjIyMjI7c3Ryb2tlLXdpZHRoOjEuMDsiLz48ZWxsaXBzZSBjeD0iMjkwLjUiIGN5PSI0MDMuNzUzOSIgZmlsbD0iIzIyMjIyMiIgcng9IjYiIHJ5PSI2IiBzdHlsZT0ic3Ryb2tlOiMyMjIyMjI7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyOTAuNSIgeDI9IjI5MC41IiB5MT0iMzAiIHkyPSI1MCIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMjg2LjUsNDAsMjkwLjUsNTAsMjk0LjUsNDAsMjkwLjUsNDQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjM0NSIgeDI9IjMzNSIgeTE9IjIwNS41NzgxIiB5Mj0iMjA1LjU3ODEiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIzMzUiIHgyPSIzMzUiIHkxPSIyMDUuNTc4MSIgeTI9IjIzNC43ODUyIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIzMzEsMjI0Ljc4NTIsMzM1LDIzNC43ODUyLDMzOSwyMjQuNzg1MiwzMzUsMjI4Ljc4NTIiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjUyNSIgeDI9IjUzNSIgeTE9IjIwNS41NzgxIiB5Mj0iMjA1LjU3ODEiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI1MzUiIHgyPSI1MzUiIHkxPSIyMDUuNTc4MSIgeTI9IjIzNC43ODUyIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI1MzEsMjI0Ljc4NTIsNTM1LDIzNC43ODUyLDUzOSwyMjQuNzg1Miw1MzUsMjI4Ljc4NTIiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjMzNSIgeDI9IjMzNSIgeTE9IjI2OC43NTM5IiB5Mj0iMjg2Ljc1MzkiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIzMzUiIHgyPSI0MjMiIHkxPSIyODYuNzUzOSIgeTI9IjI4Ni43NTM5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI0MTMsMjgyLjc1MzksNDIzLDI4Ni43NTM5LDQxMywyOTAuNzUzOSw0MTcsMjg2Ljc1MzkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjUzNSIgeDI9IjUzNSIgeTE9IjI2OC43NTM5IiB5Mj0iMjg2Ljc1MzkiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI1MzUiIHgyPSI0NDciIHkxPSIyODYuNzUzOSIgeTI9IjI4Ni43NTM5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI0NTcsMjgyLjc1MzksNDQ3LDI4Ni43NTM5LDQ1NywyOTAuNzUzOSw0NTMsMjg2Ljc1MzkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjIyNiIgeDI9IjE0NiIgeTE9IjE2NC4zNzExIiB5Mj0iMTY0LjM3MTEiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxNDYiIHgyPSIxNDYiIHkxPSIxNjQuMzcxMSIgeTI9IjE4Ni4zNzExIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIxNDIsMTc2LjM3MTEsMTQ2LDE4Ni4zNzExLDE1MCwxNzYuMzcxMSwxNDYsMTgwLjM3MTEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjM1NSIgeDI9IjQzNSIgeTE9IjE2NC4zNzExIiB5Mj0iMTY0LjM3MTEiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI0MzUiIHgyPSI0MzUiIHkxPSIxNjQuMzcxMSIgeTI9IjE4Ni4zNzExIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI0MzEsMTc2LjM3MTEsNDM1LDE4Ni4zNzExLDQzOSwxNzYuMzcxMSw0MzUsMTgwLjM3MTEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjE0NiIgeDI9IjE0NiIgeTE9IjIyMC4zMzk4IiB5Mj0iMzE2Ljc1MzkiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxNDYiIHgyPSIyNzguNSIgeTE9IjMxNi43NTM5IiB5Mj0iMzE2Ljc1MzkiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjI2OC41LDMxMi43NTM5LDI3OC41LDMxNi43NTM5LDI2OC41LDMyMC43NTM5LDI3Mi41LDMxNi43NTM5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI0MzUiIHgyPSI0MzUiIHkxPSIyOTguNzUzOSIgeTI9IjMxNi43NTM5Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNDM1IiB4Mj0iMzAyLjUiIHkxPSIzMTYuNzUzOSIgeTI9IjMxNi43NTM5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIzMTIuNSwzMTIuNzUzOSwzMDIuNSwzMTYuNzUzOSwzMTIuNSwzMjAuNzUzOSwzMDguNSwzMTYuNzUzOSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjkwLjUiIHgyPSIyOTAuNSIgeTE9IjEyNy45Njg4IiB5Mj0iMTUyLjM3MTEiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjI4Ni41LDE0Mi4zNzExLDI5MC41LDE1Mi4zNzExLDI5NC41LDE0Mi4zNzExLDI5MC41LDE0Ni4zNzExIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI0MTkiIHgyPSI2MjIuNSIgeTE9IjExNS45Njg4IiB5Mj0iMTE1Ljk2ODgiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjYxOC41LDIzMC41NjI1LDYyMi41LDI0MC41NjI1LDYyNi41LDIzMC41NjI1LDYyMi41LDIzNC41NjI1IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI2MjIuNSIgeDI9IjYyMi41IiB5MT0iMTE1Ljk2ODgiIHkyPSIzNjAuNzUzOSIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjYyMi41IiB4Mj0iMzAyLjUiIHkxPSIzNjAuNzUzOSIgeTI9IjM2MC43NTM5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIzMTIuNSwzNTYuNzUzOSwzMDIuNSwzNjAuNzUzOSwzMTIuNSwzNjQuNzUzOSwzMDguNSwzNjAuNzUzOSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjkwLjUiIHgyPSIyOTAuNSIgeTE9IjMyOC43NTM5IiB5Mj0iMzQ4Ljc1MzkiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjI4Ni41LDMzOC43NTM5LDI5MC41LDM0OC43NTM5LDI5NC41LDMzOC43NTM5LDI5MC41LDM0Mi43NTM5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyOTAuNSIgeDI9IjI5MC41IiB5MT0iODMuOTY4OCIgeTI9IjEwMy45Njg4Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyODYuNSw5My45Njg4LDI5MC41LDEwMy45Njg4LDI5NC41LDkzLjk2ODgsMjkwLjUsOTcuOTY4OCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjkwLjUiIHgyPSIyOTAuNSIgeTE9IjM3Mi43NTM5IiB5Mj0iMzkyLjc1MzkiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjI4Ni41LDM4Mi43NTM5LDI5MC41LDM5Mi43NTM5LDI5NC41LDM4Mi43NTM5LDI5MC41LDM4Ni43NTM5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48IS0tU1JDPVtSUDExSW1EMTM4Tmx5b2pvQWprX3EzcThMbDBnVUZLb3Bobmo4ekVhSkJBTF9ka3BrdVdlTlg5MnRkbHZZN2RrZFd1bHNTX3EzNDdGcFlmWklacEhTREpNczZBY0p1dnpsS2stUzI1el9xMW5lbWdGWmxnbTlwejNRQlozemViZWlKdllxZXdHTjJEX3hsWWg4SmV5OEhWZE10UkdIVWxTNWROUHBoNUhudWREcUw3N2FBQ1BRMTNUaDJqUjVaQk53dWg2R2FONWw2VU0wN2lKc2tzTUFhZ2JnbmRCWUdlYXVYaEJGb24xeW5mUHVwaHlsWE1oZXVncHBEWS1LRkF5bE1aTElrS2ZWVlNWdnBRZDFWMEJdLS0+PC9nPjwvc3ZnPg==" class="uml" alt="uml diagram" title=""></p>
 <h4 id="example-of-safety-check-performed-range-for-shift-pull-out"><strong>example of safety check performed range for shift pull out</strong><a class="headerlink" href="#example-of-safety-check-performed-range-for-shift-pull-out" title="Permanent link">#</a></h4>
 <p>Give an example of safety verification range for shift pull out. The safety check is performed from the start of the shift to the end of the shift. And if the vehicle footprint overlaps with the center line of the road lane, the safety check against dynamic objects is disabled.</p>
 <figure>
@@ -15224,7 +15313,7 @@
 <h3 id="when-approval-is-required">When approval is required?<a class="headerlink" href="#when-approval-is-required" title="Permanent link">#</a></h3>
 <h4 id="forward-driving">Forward driving<a class="headerlink" href="#forward-driving" title="Permanent link">#</a></h4>
 <ul>
-<li><strong>Start approval required</strong>: Even if a route is generated, approval is required to initiate movement. If a dynamic object poses a risk, such as an approaching vehicle from behind, candidate routes may be displayed, but approval is not granted.</li>
+<li><strong>Start approval required</strong>: Even if a route is generated, approval is required to initiate movement. If a dynamic object poses a risk, such as an approaching vehicle from behind, candidate routes may be displayed, but approval is necessary for departure.</li>
 </ul>
 <h4 id="backward-driving-forward-driving">Backward driving + forward driving<a class="headerlink" href="#backward-driving-forward-driving" title="Permanent link">#</a></h4>
 <ul>
@@ -15823,99 +15912,6 @@ See also <a href="https://www.sciencedirect.com/science/article/pii/S14746670153
 <p>If a safe path cannot be generated from the current position, search backwards for a pull out start point at regular intervals(default: <code>2.0</code>).</p>
 <p><img alt="pull_out_after_back" src="images/pull_out_after_back.drawio.svg"></p>
 <p><a href="https://user-images.githubusercontent.com/39142679/181025149-8fb9fb51-9b8f-45c4-af75-27572f4fba78.mp4">pull out after backward driving video</a></p>
-<h3 id="search-priority"><strong>search priority</strong><a class="headerlink" href="#search-priority" title="Permanent link">#</a></h3>
-<p>If a safe path with sufficient clearance for static obstacles cannot be generated forward, a backward search from the vehicle's current position is conducted to locate a suitable start point for a pull out path generation.</p>
-<p>During this backward search, different policies can be applied based on <code>search_priority</code> parameters:</p>
-<p>Selecting <code>efficient_path</code> focuses on creating a shift pull out path, regardless of how far back the vehicle needs to move.
-Opting for <code>short_back_distance</code> aims to find a location with the least possible backward movement.</p>
-<p><img alt="priority_order" src="images/priority_order.drawio.svg"></p>
-<p><code>PriorityOrder</code> is defined as a vector of pairs, where each element consists of a <code>size_t</code> index representing a start pose candidate index, and the planner type. The PriorityOrder vector is processed sequentially from the beginning, meaning that the pairs listed at the top of the vector are given priority in the selection process for pull out path generation.</p>
-<h4 id="efficient_path"><code>efficient_path</code><a class="headerlink" href="#efficient_path" title="Permanent link">#</a></h4>
-<p>When <code>search_priority</code> is set to <code>efficient_path</code> and the preference is for prioritizing <code>shift_pull_out</code>, the <code>PriorityOrder</code> array is populated in such a way that <code>shift_pull_out</code> is grouped together for all start pose candidates before moving on to the next planner type. This prioritization is reflected in the order of the array, with <code>shift_pull_out</code> being listed before geometric_pull_out.</p>
-<table>
-<thead>
-<tr>
-<th>Index</th>
-<th>Planner Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>shift_pull_out</td>
-</tr>
-<tr>
-<td>1</td>
-<td>shift_pull_out</td>
-</tr>
-<tr>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr>
-<td>N</td>
-<td>shift_pull_out</td>
-</tr>
-<tr>
-<td>0</td>
-<td>geometric_pull_out</td>
-</tr>
-<tr>
-<td>1</td>
-<td>geometric_pull_out</td>
-</tr>
-<tr>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr>
-<td>N</td>
-<td>geometric_pull_out</td>
-</tr>
-</tbody>
-</table>
-<p>This approach prioritizes trying all candidates with <code>shift_pull_out</code> before proceeding to <code>geometric_pull_out</code>, which may be efficient in situations where <code>shift_pull_out</code> is likely to be appropriate.</p>
-<h4 id="short_back_distance"><code>short_back_distance</code><a class="headerlink" href="#short_back_distance" title="Permanent link">#</a></h4>
-<p>For <code>search_priority</code> set to <code>short_back_distance</code>, the array alternates between planner types for each start pose candidate, which can minimize the distance the vehicle needs to move backward if the earlier candidates are successful.</p>
-<table>
-<thead>
-<tr>
-<th>Index</th>
-<th>Planner Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>shift_pull_out</td>
-</tr>
-<tr>
-<td>0</td>
-<td>geometric_pull_out</td>
-</tr>
-<tr>
-<td>1</td>
-<td>shift_pull_out</td>
-</tr>
-<tr>
-<td>1</td>
-<td>geometric_pull_out</td>
-</tr>
-<tr>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr>
-<td>N</td>
-<td>shift_pull_out</td>
-</tr>
-<tr>
-<td>N</td>
-<td>geometric_pull_out</td>
-</tr>
-</tbody>
-</table>
-<p>This ordering is beneficial when the priority is to minimize the backward distance traveled, giving an equal chance for each planner to succeed at the closest possible starting position.</p>
 <h3 id="parameters-for-backward-pull-out-start-point-search"><strong>parameters for backward pull out start point search</strong><a class="headerlink" href="#parameters-for-backward-pull-out-start-point-search" title="Permanent link">#</a></h3>
 <table>
 <thead>
