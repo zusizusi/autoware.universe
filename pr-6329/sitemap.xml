@@ -526,6 +526,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-6329/localization/pose_estimator_arbiter/</loc>
+         <lastmod>2024-02-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-6329/localization/pose_estimator_arbiter/example_rule/</loc>
+         <lastmod>2024-02-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-6329/localization/pose_initializer/</loc>
          <lastmod>2024-02-06</lastmod>
          <changefreq>daily</changefreq>
@@ -596,7 +606,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/pr-6329/map/map_tf_generator/Readme/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-6329/map/map_tf_generator/</loc>
          <lastmod>2024-02-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -982,6 +992,11 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-6329/planning/behavior_path_planner_common/docs/behavior_path_planner_turn_signal_design/</loc>
+         <lastmod>2024-02-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-6329/planning/behavior_path_sampling_planner_module/</loc>
          <lastmod>2024-02-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
