@@ -14581,7 +14581,7 @@
 
 <div><h1 id="radar_object_clustering">radar_object_clustering<a class="headerlink" href="#radar_object_clustering" title="Permanent link">#</a></h1>
 <p>This package contains a radar object clustering for <a href="https://gitlab.com/autowarefoundation/autoware.auto/autoware_auto_msgs/-/blob/master/autoware_auto_perception_msgs/msg/DetectedObject.idl">autoware_auto_perception_msgs/msg/DetectedObject</a> input.</p>
-<p>This package can make clustered objects from radar DetectedObjects, the objects which is converted from RadarTracks by <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/radar_tracks_msgs_converter">radar_tracks_msgs_converter</a> and is processed by noise filter.
+<p>This package can make clustered objects from radar DetectedObjects, the objects which is converted from RadarTracks by <a href="https://github.com/autowarefoundation/autoware.universe/tree/v1.0/perception/radar_tracks_msgs_converter">radar_tracks_msgs_converter</a> and is processed by noise filter.
 In other word, this package can combine multiple radar detections from one object into one and adjust class and size.</p>
 <p><img alt="radar_clustering" src="docs/radar_clustering.drawio.svg"></p>
 <h2 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">#</a></h2>
@@ -14616,7 +14616,7 @@ If this package use for faraway dynamic object detection with radar, the paramet
 If the parameter is true, the size of a clustered object is overwritten by the label set by <code>size_x</code>, <code>size_y</code>, and <code>size_z</code> parameters.
 If this package use for faraway dynamic object detection with radar, the parameter is recommended to set to
 <code>size_x</code>, <code>size_y</code>, <code>size_z</code>, as average of vehicle size.
-Note that to use for <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/multi_object_tracker">multi_objects_tracker</a>, the size parameters need to exceed <code>min_area_matrix</code> parameters of it.</p>
+Note that to use for <a href="https://github.com/autowarefoundation/autoware.universe/tree/v1.0/perception/multi_object_tracker">multi_objects_tracker</a>, the size parameters need to exceed <code>min_area_matrix</code> parameters of it.</p>
 <h3 id="limitation">Limitation<a class="headerlink" href="#limitation" title="Permanent link">#</a></h3>
 <p>For now, size estimation for clustered object is not implemented.
 So <code>is_fixed_size</code> parameter is recommended to set <code>true</code>, and size parameters is recommended to set to value near to average size of vehicles.</p>

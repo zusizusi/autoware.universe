@@ -14584,9 +14584,9 @@
 <h2 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">#</a></h2>
 <h3 id="background">Background<a class="headerlink" href="#background" title="Permanent link">#</a></h3>
 <p>This package can merge multiple DetectedObjects without matching processing.
-<a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/object_merger">Object_merger</a> solve data association algorithm like Hungarian algorithm for matching problem, but it needs computational cost.
-In addition, for now, <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/object_merger">object_merger</a> can handle only 2 DetectedObjects topics and cannot handle more than 2 topics in one node.
-To merge 6 DetectedObjects topics, 6 <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/object_merger">object_merger</a> nodes need to stand.</p>
+<a href="https://github.com/autowarefoundation/autoware.universe/tree/v1.0/perception/object_merger">Object_merger</a> solve data association algorithm like Hungarian algorithm for matching problem, but it needs computational cost.
+In addition, for now, <a href="https://github.com/autowarefoundation/autoware.universe/tree/v1.0/perception/object_merger">object_merger</a> can handle only 2 DetectedObjects topics and cannot handle more than 2 topics in one node.
+To merge 6 DetectedObjects topics, 6 <a href="https://github.com/autowarefoundation/autoware.universe/tree/v1.0/perception/object_merger">object_merger</a> nodes need to stand.</p>
 <p>So this package aim to merge DetectedObjects simply.
 This package do not use data association algorithm to reduce the computational cost, and it can handle more than 2 topics in one node to prevent launching a large number of nodes.</p>
 <h3 id="limitation">Limitation<a class="headerlink" href="#limitation" title="Permanent link">#</a></h3>
@@ -14602,14 +14602,14 @@ The timeout parameter should be determined by sensor cycle time.</p>
 <li>Post-processing</li>
 </ul>
 <p>Because this package does not have matching processing, so it can be used only when post-processing is used.
-For now, <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/radar_object_clustering">clustering processing</a> can be used as post-processing.</p>
+For now, <a href="https://github.com/autowarefoundation/autoware.universe/tree/v1.0/perception/radar_object_clustering">clustering processing</a> can be used as post-processing.</p>
 <h3 id="use-case">Use case<a class="headerlink" href="#use-case" title="Permanent link">#</a></h3>
 <p>Use case is as below.</p>
 <ul>
 <li>Multiple radar detection</li>
 </ul>
 <p>This package can be used for multiple radar detection.
-Since <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/radar_object_clustering">clustering processing</a> will be included later process in radar faraway detection, this package can be used.</p>
+Since <a href="https://github.com/autowarefoundation/autoware.universe/tree/v1.0/perception/radar_object_clustering">clustering processing</a> will be included later process in radar faraway detection, this package can be used.</p>
 <h2 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h2>
 <table>
 <thead>

@@ -14819,7 +14819,7 @@
 <p>If other labels (case insensitive) are contained in the file specified via the <code>label_file</code> parameter,
 those are labeled as <code>UNKNOWN</code>, while detected rectangles are drawn in the visualization result (<code>out/image</code>).</p>
 <h2 id="onnx-model">Onnx model<a class="headerlink" href="#onnx-model" title="Permanent link">#</a></h2>
-<p>A sample model (named <code>yolox-tiny.onnx</code>) is downloaded by ansible script on env preparation stage, if not, please, follow <a href="https://github.com/autowarefoundation/autoware/tree/main/ansible/roles/artifacts">Manual downloading of artifacts</a>.
+<p>A sample model (named <code>yolox-tiny.onnx</code>) is downloaded by ansible script on env preparation stage, if not, please, follow <a href="https://github.com/autowarefoundation/autoware/tree/v1.0/ansible/roles/artifacts">Manual downloading of artifacts</a>.
 To accelerate Non-maximum-suppression (NMS), which is one of the common post-process after object detection inference,
 <code>EfficientNMS_TRT</code> module is attached after the ordinal YOLOX (tiny) network.
 The <code>EfficientNMS_TRT</code> module contains fixed values for <code>score_threshold</code> and <code>nms_threshold</code> in it,

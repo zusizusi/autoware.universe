@@ -14610,9 +14610,9 @@
 <h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">#</a></h2>
 <p>The Autoware.Universe Planning Modules represent a cutting-edge component within the broader open-source autonomous driving software stack. These modules play a pivotal role in autonomous vehicle navigation, skillfully handling route planning, dynamic obstacle avoidance, and real-time adaptation to varied traffic conditions.</p>
 <ul>
-<li>For high level concept of Planning Components, please refer to <a href="https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-architecture/planning/">Planning Component Design Document</a></li>
-<li>To understand how Planning Components interacts with other components, please refer to <a href="https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-interfaces/components/planning/">Planning Component Interface Document</a></li>
-<li>The <a href="https://autowarefoundation.github.io/autoware-documentation/main/design/autoware-architecture/node-diagram/">Node Diagram</a> illustrates the interactions, inputs, and outputs of all modules in the Autoware.Universe, including planning modules.</li>
+<li>For high level concept of Planning Components, please refer to <a href="https://autowarefoundation.github.io/autoware-documentation/v1.0/design/autoware-architecture/planning/">Planning Component Design Document</a></li>
+<li>To understand how Planning Components interacts with other components, please refer to <a href="https://autowarefoundation.github.io/autoware-documentation/v1.0/design/autoware-interfaces/components/planning/">Planning Component Interface Document</a></li>
+<li>The <a href="https://autowarefoundation.github.io/autoware-documentation/v1.0/design/autoware-architecture/node-diagram/">Node Diagram</a> illustrates the interactions, inputs, and outputs of all modules in the Autoware.Universe, including planning modules.</li>
 </ul>
 <h2 id="planning-module">Planning Module<a class="headerlink" href="#planning-module" title="Permanent link">#</a></h2>
 <p>The <strong>Module</strong> in the Planning Component refers to the various components that collectively form the planning system of the software. These modules cover a range of functionalities necessary for autonomous vehicle planning. Autoware's planning modules are modularized, meaning users can customize which functions are enabled by changing the configuration. This modular design allows for flexibility and adaptability to different scenarios and requirements in autonomous vehicle operations.</p>
@@ -14626,14 +14626,14 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a href="https://github.com/autowarefoundation/autoware_launch/blob/main/autoware_launch/config/planning/preset/default_preset.yaml">here</a> to view the <code>default_preset.yaml</code>.</p>
+<p>Click <a href="https://github.com/autowarefoundation/autoware_launch/blob/v1.0/autoware_launch/config/planning/preset/default_preset.yaml">here</a> to view the <code>default_preset.yaml</code>.</p>
 </div>
-<p>The <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/launch/tier4_planning_launch/launch/scenario_planning/lane_driving">launch files</a> reference the settings defined in <code>default_preset.yaml</code> to apply the configurations when the behavior path planner's node is running. For instance, the parameter <code>avoidance.enable_module</code> in</p>
+<p>The <a href="https://github.com/autowarefoundation/autoware.universe/tree/v1.0/launch/tier4_planning_launch/launch/scenario_planning/lane_driving">launch files</a> reference the settings defined in <code>default_preset.yaml</code> to apply the configurations when the behavior path planner's node is running. For instance, the parameter <code>avoidance.enable_module</code> in</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;param</span><span class="w"> </span><span class="na">name=</span><span class="s">"avoidance.enable_module"</span><span class="w"> </span><span class="na">value=</span><span class="s">"$(var launch_avoidance_module)"</span><span class="nt">/&gt;</span>
 </code></pre></div>
 <p>corresponds to launch_avoidance_module from <code>default_preset.yaml</code>.</p>
 <h3 id="parameters-configuration">Parameters configuration<a class="headerlink" href="#parameters-configuration" title="Permanent link">#</a></h3>
-<p>There are multiple parameters available for configuration, and users have the option to modify them in <a href="https://github.com/autowarefoundation/autoware_launch/tree/main/autoware_launch/config/planning">here</a>. It's important to note that not all parameters are adjustable via <code>rqt_reconfigure</code>. To ensure the changes are effective, modify the parameters and then restart Autoware. Additionally, detailed information about each parameter is available in the corresponding documents under the planning tab.</p>
+<p>There are multiple parameters available for configuration, and users have the option to modify them in <a href="https://github.com/autowarefoundation/autoware_launch/tree/v1.0/autoware_launch/config/planning">here</a>. It's important to note that not all parameters are adjustable via <code>rqt_reconfigure</code>. To ensure the changes are effective, modify the parameters and then restart Autoware. Additionally, detailed information about each parameter is available in the corresponding documents under the planning tab.</p>
 <h3 id="integrating-a-custom-module-into-autoware-a-step-by-step-guide">Integrating a Custom Module into Autoware: A Step-by-Step Guide<a class="headerlink" href="#integrating-a-custom-module-into-autoware-a-step-by-step-guide" title="Permanent link">#</a></h3>
 <p>This guide outlines the steps for integrating your custom module into Autoware:</p>
 <ul>
@@ -14644,7 +14644,7 @@
 <span class="w">  </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">"true"</span>
 </code></pre></div>
 <ul>
-<li>Incorporate your modules into the <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/launch/tier4_planning_launch/launch/scenario_planning">launcher</a>. For example in <a href="https://github.com/autowarefoundation/autoware.universe/blob/main/launch/tier4_planning_launch/launch/scenario_planning/lane_driving/behavior_planning/behavior_planning.launch.xml">behavior_planning.launch.xml</a>:</li>
+<li>Incorporate your modules into the <a href="https://github.com/autowarefoundation/autoware.universe/tree/v1.0/launch/tier4_planning_launch/launch/scenario_planning">launcher</a>. For example in <a href="https://github.com/autowarefoundation/autoware.universe/blob/v1.0/launch/tier4_planning_launch/launch/scenario_planning/lane_driving/behavior_planning/behavior_planning.launch.xml">behavior_planning.launch.xml</a>:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">"launch_intersection_module"</span><span class="w"> </span><span class="na">default=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
 
@@ -14655,8 +14655,8 @@
 <span class="nt">/&gt;</span>
 </code></pre></div>
 <ul>
-<li>If applicable, place your parameter folder within the appropriate existing parameter folder. For example <a href="https://github.com/autowarefoundation/autoware_launch/blob/main/autoware_launch/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/intersection.param.yaml">intersection_module's parameters</a> is in <a href="https://github.com/autowarefoundation/autoware_launch/tree/main/autoware_launch/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner">behavior_velocity_planner</a>.</li>
-<li>Insert the path of your parameters in the <a href="https://github.com/autowarefoundation/autoware_launch/blob/main/autoware_launch/launch/components/tier4_planning_component.launch.xml">tier4_planning_component.launch.xml</a>. For example <code>behavior_velocity_planner_intersection_module_param_path</code> is used.</li>
+<li>If applicable, place your parameter folder within the appropriate existing parameter folder. For example <a href="https://github.com/autowarefoundation/autoware_launch/blob/v1.0/autoware_launch/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/intersection.param.yaml">intersection_module's parameters</a> is in <a href="https://github.com/autowarefoundation/autoware_launch/tree/v1.0/autoware_launch/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner">behavior_velocity_planner</a>.</li>
+<li>Insert the path of your parameters in the <a href="https://github.com/autowarefoundation/autoware_launch/blob/v1.0/autoware_launch/launch/components/tier4_planning_component.launch.xml">tier4_planning_component.launch.xml</a>. For example <code>behavior_velocity_planner_intersection_module_param_path</code> is used.</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">"behavior_velocity_planner_intersection_module_param_path"</span><span class="w"> </span><span class="na">value=</span><span class="s">"$(var behavior_velocity_config_path)/intersection.param.yaml"</span><span class="nt">/&gt;</span>
 </code></pre></div>

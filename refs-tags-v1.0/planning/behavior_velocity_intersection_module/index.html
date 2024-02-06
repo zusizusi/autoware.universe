@@ -14874,7 +14874,7 @@
 <p>This module is activated when the path contains the lanes with turn_direction tag. More precisely, if the lane_ids of the path contain the ids of those lanes, corresponding instances of intersection module are activated on each lane respectively.</p>
 <h2 id="requirementslimitations">Requirements/Limitations<a class="headerlink" href="#requirementslimitations" title="Permanent link">#</a></h2>
 <ul>
-<li>The HDMap needs to have the information of turn_direction tag (which should be one of straight, left, right) for all the lanes in intersections and right_of_way tag for specific lanes (refer to <a href="#how-towhy-set-rightofway-tag">RightOfWay</a> section for more details). See <a href="https://github.com/autowarefoundation/autoware_common/blob/main/tmp/lanelet2_extension/docs/lanelet2_format_extension.md">lanelet2_extension document</a> for more detail.</li>
+<li>The HDMap needs to have the information of turn_direction tag (which should be one of straight, left, right) for all the lanes in intersections and right_of_way tag for specific lanes (refer to <a href="#how-towhy-set-rightofway-tag">RightOfWay</a> section for more details). See <a href="https://github.com/autowarefoundation/autoware_common/blob/v1.0/tmp/lanelet2_extension/docs/lanelet2_format_extension.md">lanelet2_extension document</a> for more detail.</li>
 <li>WIP(perception requirements/limitations)</li>
 <li>WIP(sensor visibility requirements/limitations)</li>
 </ul>
@@ -15414,7 +15414,7 @@
 <p>If you want to care the occlusion nearby ego more cautiously, set <code>occlusion.occlusion_required_clearance_distance</code> to a larger value. Then ego will approach the occlusion_peeking_stopline more closely to assure more clear FOV.</p>
 <p><code>occlusion.possible_object_bbox</code> is used for checking if detected occlusion area is small enough that no vehicles larger than this size can exist inside. By decreasing this size ego will ignore small occluded area.</p>
 <h4 id="occupancy-grid-map-tuning">occupancy grid map tuning<a class="headerlink" href="#occupancy-grid-map-tuning" title="Permanent link">#</a></h4>
-<p>Refer to the document of <a href="https://autowarefoundation.github.io/autoware.universe/main/perception/probabilistic_occupancy_grid_map/">probabilistic_occupancy_grid_map</a> for details. If occlusion tends to be detected at apparently free space, increase <code>occlusion.free_space_max</code> to ignore them.</p>
+<p>Refer to the document of <a href="https://autowarefoundation.github.io/autoware.universe/v1.0/perception/probabilistic_occupancy_grid_map/">probabilistic_occupancy_grid_map</a> for details. If occlusion tends to be detected at apparently free space, increase <code>occlusion.free_space_max</code> to ignore them.</p>
 <h4 id="in-simple_planning_simulator">in simple_planning_simulator<a class="headerlink" href="#in-simple_planning_simulator" title="Permanent link">#</a></h4>
 <p>intersection_occlusion feature is <strong>not recommended</strong> for use in planning_simulator because the laserscan_based_occupancy_grid_map generates unnatural UNKNOWN cells in 2D manner:</p>
 <ul>
