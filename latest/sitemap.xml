@@ -996,6 +996,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_sampling_planner_module/</loc>
+         <lastmod>2024-02-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_side_shift_module/</loc>
          <lastmod>2024-02-06</lastmod>
          <changefreq>daily</changefreq>
