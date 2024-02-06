@@ -15238,6 +15238,34 @@ If the ego vehicle velocity is smaller than <code>stuck_detection.velocity</code
 </table>
 <h3 id="collision-checks-during-lane-change">Collision checks during lane change<a class="headerlink" href="#collision-checks-during-lane-change" title="Permanent link">#</a></h3>
 <p>The following parameters are configurable in <code>behavior_path_planner.param.yaml</code> and <code>lane_change.param.yaml</code>.</p>
+<h4 id="common">common<a class="headerlink" href="#common" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th>Unit</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>safety_check.lane_expansion.left_offset</code></td>
+<td>[m]</td>
+<td>double</td>
+<td>Expand the left boundary of the detection area, allowing objects previously outside on the left to be detected and registered as targets.</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td align="left"><code>safety_check.lane_expansion.right_offset</code></td>
+<td>[m]</td>
+<td>double</td>
+<td>Expand the right boundary of the detection area, allowing objects previously outside on the right to be detected and registered as targets.</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
 <h4 id="execution">execution<a class="headerlink" href="#execution" title="Permanent link">#</a></h4>
 <table>
 <thead>
