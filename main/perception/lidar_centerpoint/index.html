@@ -14836,6 +14836,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#the-build_only-option" class="md-nav__link">
+    The build_only option
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -15058,6 +15065,11 @@
 </tr>
 </tbody>
 </table>
+<h3 id="the-build_only-option">The <code>build_only</code> option<a class="headerlink" href="#the-build_only-option" title="Permanent link">#</a></h3>
+<p>The <code>lidar_centerpoint</code> node has <code>build_only</code> option to build the TensorRT engine file from the ONNX file.
+Although it is preferred to move all the ROS parameters in <code>.param.yaml</code> file in Autoware Universe, the <code>build_only</code> option is not moved to the <code>.param.yaml</code> file for now, because it may be used as a flag to execute the build as a pre-task. You can execute with the following command:</p>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>launch<span class="w"> </span>lidar_centerpoint<span class="w"> </span>lidar_centerpoint.launch.xml<span class="w"> </span>model_name:<span class="o">=</span>centerpoint_tiny<span class="w"> </span>model_path:<span class="o">=</span>/home/autoware/autoware_data/lidar_centerpoint<span class="w"> </span>model_param_path:<span class="o">=</span><span class="k">$(</span>ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>lidar_centerpoint<span class="w"> </span>--share<span class="k">)</span>/config/centerpoint_tiny.param.yaml<span class="w"> </span>build_only:<span class="o">=</span><span class="nb">true</span>
+</code></pre></div>
 <h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
 <ul>
 <li>The <code>object.existence_probability</code> is stored the value of classification confidence of a DNN, not probability.</li>
