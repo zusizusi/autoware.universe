@@ -14766,6 +14766,35 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topic-subscription" class="md-nav__link">
+    Topic subscription
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service-client" class="md-nav__link">
+    Service client
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -14786,29 +14815,54 @@
 <p>This library fits the given point with the ground of the point cloud map.
 The map loading operation is switched by the parameter <code>enable_partial_load</code> of the node specified by <code>map_loader_name</code>.
 The node using this library must use multi thread executor.</p>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
 <table>
 <thead>
 <tr>
-<th>Interface</th>
-<th>Local Name</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>map_loader_name</td>
+<td>string</td>
+<td>Node name of the map loader from which this map_height_fitter will retrieve its parameters</td>
+<td>/map/pointcloud_map_loader</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<h2 id="topic-subscription">Topic subscription<a class="headerlink" href="#topic-subscription" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Topic Name</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Parameter</td>
-<td>map_loader_name</td>
-<td>The point cloud map loader name.</td>
-</tr>
-<tr>
-<td>Subscription</td>
 <td>~/pointcloud_map</td>
-<td>The topic name to load the whole map</td>
+<td>The topic containing the whole pointcloud map (only used when <code>enable_partial_load = false</code>)</td>
 </tr>
+</tbody>
+</table>
+<h2 id="service-client">Service client<a class="headerlink" href="#service-client" title="Permanent link">#</a></h2>
+<table>
+<thead>
 <tr>
-<td>Client</td>
+<th>Service Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td>~/partial_map_load</td>
-<td>The service name to load the partial map</td>
+<td>The service to load the partial map</td>
 </tr>
 </tbody>
 </table></div>
