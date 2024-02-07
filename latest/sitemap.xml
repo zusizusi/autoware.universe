@@ -56,12 +56,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/autoware_testing/design/autoware_testing-design/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/autoware_overlay_rviz_plugin/autoware_overlay_rviz_plugin/</loc>
          <lastmod>2024-02-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/awf_vehicle_rviz_plugin/awf_2d_overlay_vehicle/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/autoware_testing/design/autoware_testing-design/</loc>
          <lastmod>2024-02-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
