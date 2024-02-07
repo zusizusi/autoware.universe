@@ -14773,23 +14773,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#interface" class="md-nav__link">
+    Interface
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#input" class="md-nav__link">
     Input
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#output" class="md-nav__link">
     Output
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
     Parameters
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -14814,64 +14827,33 @@
 <div><h1 id="object_velocity_splitter">object_velocity_splitter<a class="headerlink" href="#object_velocity_splitter" title="Permanent link">#</a></h1>
 <p>This package contains a object filter module for <a href="https://gitlab.com/autowarefoundation/autoware.auto/autoware_auto_msgs/-/blob/master/autoware_auto_perception_msgs/msg/DetectedObject.idl">autoware_auto_perception_msgs/msg/DetectedObject</a>.
 This package can split DetectedObjects into two messages by object's speed.</p>
-<h2 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>~/input/objects</code></td>
-<td>autoware_auto_perception_msgs/msg/DetectedObjects.msg</td>
-<td>3D detected objects.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>~/output/low_speed_objects</code></td>
-<td>autoware_auto_perception_msgs/msg/DetectedObjects.msg</td>
-<td>Objects with low speed</td>
-</tr>
-<tr>
-<td><code>~/output/high_speed_objects</code></td>
-<td>autoware_auto_perception_msgs/msg/DetectedObjects.msg</td>
-<td>Objects with high speed</td>
-</tr>
-</tbody>
-</table>
-<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>velocity_threshold</code></td>
-<td align="left">double</td>
-<td align="left">Velocity threshold parameter to split objects [m/s]</td>
-<td align="left">3.0</td>
-</tr>
-</tbody>
-</table></div>
+<h2 id="interface">Interface<a class="headerlink" href="#interface" title="Permanent link">#</a></h2>
+<h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
+<ul>
+<li><code>~/input/objects</code> (<code>autoware_auto_perception_msgs/msg/DetectedObjects.msg</code>)<ul>
+<li>3D detected objects</li>
+</ul>
+</li>
+</ul>
+<h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h3>
+<ul>
+<li><code>~/output/low_speed_objects</code> (<code>autoware_auto_perception_msgs/msg/DetectedObjects.msg</code>)<ul>
+<li>Objects with low speed</li>
+</ul>
+</li>
+<li><code>~/output/high_speed_objects</code> (<code>autoware_auto_perception_msgs/msg/DetectedObjects.msg</code>)<ul>
+<li>Objects with high speed</li>
+</ul>
+</li>
+</ul>
+<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h3>
+<ul>
+<li><code>velocity_threshold</code> (double) [m/s]<ul>
+<li>Default parameter is 3.0</li>
+</ul>
+</li>
+</ul>
+<p>This parameter is velocity threshold to split objects</p></div>
 
 
 
