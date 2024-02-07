@@ -14903,6 +14903,152 @@ This node depends on the map height fitter library.
 </tr>
 </tbody>
 </table>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gnss_pose_timeout</td>
+<td>float</td>
+<td>The duration that the GNSS pose is valid. [sec]</td>
+<td>3.0</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>stop_check_enabled</td>
+<td>string</td>
+<td>If true, initialization is accepted only when the vehicle is stopped.</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>stop_check_duration</td>
+<td>float</td>
+<td>The duration used for the stop check above. [sec]</td>
+<td>3.0</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>ekf_enabled</td>
+<td>string</td>
+<td>If true, EKF localizer is activated.</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>gnss_enabled</td>
+<td>string</td>
+<td>If true, use the GNSS pose when no pose is specified.</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>yabloc_enabled</td>
+<td>string</td>
+<td>If true, YabLocModule is used.</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>ndt_enabled</td>
+<td>string</td>
+<td>If true, the pose will be estimated by NDT scan matcher, otherwise it is passed through.</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>gnss_particle_covariance</td>
+<td>array</td>
+<td>gnss particle covariance</td>
+<td>[1.0, 0.0, 0.0, 0.0, 0.0, 0.0,</td>
+<td></td>
+</tr>
+<tr>
+<td>0.0, 1.0, 0.0, 0.0, 0.0, 0.0,</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0.0, 0.0, 0.01, 0.0, 0.0, 0.0,</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0.0, 0.0, 0.0, 0.01, 0.0, 0.0,</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0.0, 0.0, 0.0, 0.0, 0.01, 0.0,</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0.0, 0.0, 0.0, 0.0, 0.0, 10.0]</td>
+<td>N/A</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>output_pose_covariance</td>
+<td>array</td>
+<td>output pose covariance</td>
+<td>[1.0, 0.0, 0.0, 0.0, 0.0, 0.0,</td>
+<td></td>
+</tr>
+<tr>
+<td>0.0, 1.0, 0.0,  0.0,  0.0,  0.0,</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0.0, 0.0, 0.01, 0.0, 0.0, 0.0,</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0.0, 0.0, 0.0, 0.01, 0.0, 0.0,</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0.0, 0.0, 0.0, 0.0, 0.01, 0.0,</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0.0, 0.0, 0.0, 0.0, 0.0, 0.2]</td>
+<td>N/A</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="services">Services<a class="headerlink" href="#services" title="Permanent link">#</a></h3>
 <table>
 <thead>
