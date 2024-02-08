@@ -696,11 +696,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/perception/heatmap_visualizer/</loc>
-         <lastmod>2024-02-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/perception/image_projection_based_fusion/</loc>
          <lastmod>2024-02-08</lastmod>
          <changefreq>daily</changefreq>
