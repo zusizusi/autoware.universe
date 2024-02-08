@@ -14773,11 +14773,11 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#algorithm" class="md-nav__link">
-    Algorithm
+  <a href="#design" class="md-nav__link">
+    Design
   </a>
   
-    <nav class="md-nav" aria-label="Algorithm">
+    <nav class="md-nav" aria-label="Design">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -14788,8 +14788,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#detail-algorithm" class="md-nav__link">
-    Detail Algorithm
+  <a href="#algorithm" class="md-nav__link">
+    Algorithm
   </a>
   
 </li>
@@ -14807,23 +14807,36 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#interface" class="md-nav__link">
+    Interface
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#input" class="md-nav__link">
     Input
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#output" class="md-nav__link">
     Output
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    Parameters
+        
+          <li class="md-nav__item">
+  <a href="#parameter" class="md-nav__link">
+    Parameter
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -14850,19 +14863,27 @@
 <p>This package can make clustered objects from radar DetectedObjects, the objects which is converted from RadarTracks by <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/perception/radar_tracks_msgs_converter">radar_tracks_msgs_converter</a> and is processed by noise filter.
 In other word, this package can combine multiple radar detections from one object into one and adjust class and size.</p>
 <p><img alt="radar_clustering" src="docs/radar_clustering.drawio.svg"></p>
-<h2 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">#</a></h2>
+<h2 id="design">Design<a class="headerlink" href="#design" title="Permanent link">#</a></h2>
 <h3 id="background">Background<a class="headerlink" href="#background" title="Permanent link">#</a></h3>
 <p>In radars with object output, there are cases that multiple detection results are obtained from one object, especially for large vehicles such as trucks and trailers.
 Its multiple detection results cause separation of objects in tracking module.
 Therefore, by this package the multiple detection results are clustered into one object in advance.</p>
-<h3 id="detail-algorithm">Detail Algorithm<a class="headerlink" href="#detail-algorithm" title="Permanent link">#</a></h3>
+<h3 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">#</a></h3>
 <ul>
+<li>
+<ol>
 <li>Sort by distance from <code>base_link</code></li>
+</ol>
+</li>
 </ul>
 <p>At first, to prevent changing the result from depending on the order of objects in DetectedObjects, input objects are sorted by distance from <code>base_link</code>.
 In addition, to apply matching in closeness order considering occlusion, objects are sorted in order of short distance in advance.</p>
 <ul>
+<li>
+<ol>
 <li>Clustering</li>
+</ol>
+</li>
 </ul>
 <p>If two radar objects are near, and yaw angle direction and velocity between two radar objects is similar (the degree of these is defined by parameters), then these are clustered.
 Note that radar characteristic affect parameters for this matching.
@@ -14870,13 +14891,21 @@ For example, if resolution of range distance or angle is low and accuracy of vel
 <p><img alt="clustering" src="docs/clustering.drawio.svg"></p>
 <p>After grouping for all radar objects, if multiple radar objects are grouping, the kinematics of the new clustered object is calculated from average of that and label and shape of the new clustered object is calculated from top confidence in radar objects.</p>
 <ul>
+<li>
+<ol>
 <li>Fixed label correction</li>
+</ol>
+</li>
 </ul>
 <p>When the label information from radar outputs lack accuracy, <code>is_fixed_label</code> parameter is recommended to set <code>true</code>.
 If the parameter is true, the label of a clustered object is overwritten by the label set by <code>fixed_label</code> parameter.
 If this package use for faraway dynamic object detection with radar, the parameter is recommended to set to <code>VEHICLE</code>.</p>
 <ul>
+<li>
+<ol>
 <li>Fixed size correction</li>
+</ol>
+</li>
 </ul>
 <p>When the size information from radar outputs lack accuracy, <code>is_fixed_size</code> parameter is recommended to set <code>true</code>.
 If the parameter is true, the size of a clustered object is overwritten by the label set by <code>size_x</code>, <code>size_y</code>, and <code>size_z</code> parameters.
@@ -14886,107 +14915,95 @@ Note that to use for <a href="https://github.com/autowarefoundation/autoware.uni
 <h3 id="limitation">Limitation<a class="headerlink" href="#limitation" title="Permanent link">#</a></h3>
 <p>For now, size estimation for clustered object is not implemented.
 So <code>is_fixed_size</code> parameter is recommended to set <code>true</code>, and size parameters is recommended to set to value near to average size of vehicles.</p>
-<h2 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>~/input/objects</code></td>
-<td>autoware_auto_perception_msgs/msg/DetectedObjects.msg</td>
-<td>Radar objects.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>~/output/objects</code></td>
-<td>autoware_auto_perception_msgs/msg/DetectedObjects.msg</td>
-<td>Output objects</td>
-</tr>
-</tbody>
-</table>
-<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>angle_threshold</code></td>
-<td align="left">double</td>
-<td align="left">Angle threshold to judge whether radar detections come from one object. [rad]</td>
-<td align="left">0.174</td>
-</tr>
-<tr>
-<td align="left"><code>distance_threshold</code></td>
-<td align="left">double</td>
-<td align="left">Distance threshold to judge whether radar detections come from one object. [m]</td>
-<td align="left">4.0</td>
-</tr>
-<tr>
-<td align="left"><code>velocity_threshold</code></td>
-<td align="left">double</td>
-<td align="left">Velocity threshold to judge whether radar detections come from one object. [m/s]</td>
-<td align="left">2.0</td>
-</tr>
-<tr>
-<td align="left"><code>is_fixed_label</code></td>
-<td align="left">bool</td>
-<td align="left">If this parameter is true, the label of a clustered object is overwritten by the label set by <code>fixed_label</code> parameter.</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left"><code>fixed_label</code></td>
-<td align="left">string</td>
-<td align="left">If <code>is_fixed_label</code> is true, the label of a clustered object is overwritten by this parameter.</td>
-<td align="left">"UNKNOWN"</td>
-</tr>
-<tr>
-<td align="left"><code>is_fixed_size</code></td>
-<td align="left">bool</td>
-<td align="left">If this parameter is true, the size of a clustered object is overwritten by the label set by <code>size_x</code>, <code>size_y</code>, and <code>size_z</code> parameters.</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left"><code>size_x</code></td>
-<td align="left">double</td>
-<td align="left">If <code>is_fixed_size</code> is true, the x-axis size of a clustered object is overwritten by this parameter. [m]</td>
-<td align="left">4.0</td>
-</tr>
-<tr>
-<td align="left"><code>size_y</code></td>
-<td align="left">double</td>
-<td align="left">If <code>is_fixed_size</code> is true, the y-axis size of a clustered object is overwritten by this parameter. [m]</td>
-<td align="left">1.5</td>
-</tr>
-<tr>
-<td align="left"><code>size_z</code></td>
-<td align="left">double</td>
-<td align="left">If <code>is_fixed_size</code> is true, the z-axis size of a clustered object is overwritten by this parameter. [m]</td>
-<td align="left">1.5</td>
-</tr>
-</tbody>
-</table></div>
+<h2 id="interface">Interface<a class="headerlink" href="#interface" title="Permanent link">#</a></h2>
+<h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
+<ul>
+<li><code>~/input/objects</code> (<code>autoware_auto_perception_msgs/msg/DetectedObjects.msg</code>)<ul>
+<li>Radar objects</li>
+</ul>
+</li>
+</ul>
+<h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h3>
+<ul>
+<li><code>~/output/objects</code> (<code>autoware_auto_perception_msgs/msg/DetectedObjects.msg</code>)<ul>
+<li>Output objects</li>
+</ul>
+</li>
+</ul>
+<h3 id="parameter">Parameter<a class="headerlink" href="#parameter" title="Permanent link">#</a></h3>
+<ul>
+<li><code>angle_threshold</code> (double) [rad]<ul>
+<li>Default parameter is 0.174.</li>
+</ul>
+</li>
+<li><code>distance_threshold</code> (double) [m]<ul>
+<li>Default parameter is 4.0.</li>
+</ul>
+</li>
+<li><code>velocity_threshold</code> (double) [m/s]<ul>
+<li>Default parameter is 2.0.</li>
+</ul>
+</li>
+</ul>
+<p>These parameter are thresholds for angle, distance, and velocity to judge whether radar detections come from one object in "clustering" processing, which is written in detail at algorithm section.
+If all of the difference in angle/distance/velocity from two objects is less than the thresholds, then the two objects are merged to one clustered object.
+If these parameter is larger, more objects are merged to one clustered object.</p>
+<p>These are used in <code>isSameObject</code> function as below.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">bool</span><span class="w"> </span><span class="nf">RadarObjectClusteringNode::isSameObject</span><span class="p">(</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">DetectedObject</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">object_1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">DetectedObject</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">object_2</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">angle_diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span><span class="n">tier4_autoware_utils</span><span class="o">::</span><span class="n">normalizeRadian</span><span class="p">(</span>
+<span class="w">    </span><span class="n">tf2</span><span class="o">::</span><span class="n">getYaw</span><span class="p">(</span><span class="n">object_1</span><span class="p">.</span><span class="n">kinematics</span><span class="p">.</span><span class="n">pose_with_covariance</span><span class="p">.</span><span class="n">pose</span><span class="p">.</span><span class="n">orientation</span><span class="p">)</span><span class="w"> </span><span class="o">-</span>
+<span class="w">    </span><span class="n">tf2</span><span class="o">::</span><span class="n">getYaw</span><span class="p">(</span><span class="n">object_2</span><span class="p">.</span><span class="n">kinematics</span><span class="p">.</span><span class="n">pose_with_covariance</span><span class="p">.</span><span class="n">pose</span><span class="p">.</span><span class="n">orientation</span><span class="p">)));</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">velocity_diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">abs</span><span class="p">(</span>
+<span class="w">    </span><span class="n">object_1</span><span class="p">.</span><span class="n">kinematics</span><span class="p">.</span><span class="n">twist_with_covariance</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">linear</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">-</span>
+<span class="w">    </span><span class="n">object_2</span><span class="p">.</span><span class="n">kinematics</span><span class="p">.</span><span class="n">twist_with_covariance</span><span class="p">.</span><span class="n">twist</span><span class="p">.</span><span class="n">linear</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tier4_autoware_utils</span><span class="o">::</span><span class="n">calcDistance2d</span><span class="p">(</span>
+<span class="w">    </span><span class="n">object_1</span><span class="p">.</span><span class="n">kinematics</span><span class="p">.</span><span class="n">pose_with_covariance</span><span class="p">.</span><span class="n">pose</span><span class="p">.</span><span class="n">position</span><span class="p">,</span>
+<span class="w">    </span><span class="n">object_2</span><span class="p">.</span><span class="n">kinematics</span><span class="p">.</span><span class="n">pose_with_covariance</span><span class="p">.</span><span class="n">pose</span><span class="p">.</span><span class="n">position</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">distance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">node_param_</span><span class="p">.</span><span class="n">distance_threshold</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">angle_diff</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">node_param_</span><span class="p">.</span><span class="n">angle_threshold</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<span class="w">    </span><span class="n">velocity_diff</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">node_param_</span><span class="p">.</span><span class="n">velocity_threshold</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>is_fixed_label</code> (bool)<ul>
+<li>Default parameter is false.</li>
+</ul>
+</li>
+<li><code>fixed_label</code> (string)<ul>
+<li>Default parameter is "UNKNOWN".</li>
+</ul>
+</li>
+</ul>
+<p><code>is_fixed_label</code> is the flag to use fixed label.
+If it is true, the label of a clustered object is overwritten by the label set by <code>fixed_label</code> parameter.
+If the radar objects do not have label information, then it is recommended to use fixed label.</p>
+<ul>
+<li><code>is_fixed_size</code> (bool)<ul>
+<li>Default parameter is false.</li>
+</ul>
+</li>
+<li><code>size_x</code> (double) [m]<ul>
+<li>Default parameter is 4.0.</li>
+</ul>
+</li>
+<li><code>size_y</code> (double) [m]<ul>
+<li>Default parameter is 1.5.</li>
+</ul>
+</li>
+<li><code>size_z</code> (double) [m]<ul>
+<li>Default parameter is 1.5.</li>
+</ul>
+</li>
+</ul>
+<p><code>is_fixed_size</code> is the flag to use fixed size parameters.
+If it is true, the size of a clustered object is overwritten by the label set by <code>size_x</code>, <code>size_y</code>, and <code>size_z</code> parameters.</p></div>
 
 
 
