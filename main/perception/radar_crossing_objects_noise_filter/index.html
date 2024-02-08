@@ -14723,11 +14723,11 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#algorithm" class="md-nav__link">
-    Algorithm
+  <a href="#design" class="md-nav__link">
+    Design
   </a>
   
-    <nav class="md-nav" aria-label="Algorithm">
+    <nav class="md-nav" aria-label="Design">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -14738,8 +14738,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#detail-algorithm" class="md-nav__link">
-    Detail Algorithm
+  <a href="#algorithm" class="md-nav__link">
+    Algorithm
   </a>
   
 </li>
@@ -14750,23 +14750,36 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#interface" class="md-nav__link">
+    Interface
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#input" class="md-nav__link">
     Input
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#output" class="md-nav__link">
     Output
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
     Parameters
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -14791,7 +14804,7 @@
 <div><h1 id="radar_crossing_objects_noise_filter">radar_crossing_objects_noise_filter<a class="headerlink" href="#radar_crossing_objects_noise_filter" title="Permanent link">#</a></h1>
 <p>This package contains a radar noise filter module for <a href="https://gitlab.com/autowarefoundation/autoware.auto/autoware_auto_msgs/-/blob/master/autoware_auto_perception_msgs/msg/DetectedObject.idl">autoware_auto_perception_msgs/msg/DetectedObject</a>.
 This package can filter the noise objects which cross to the ego vehicle.</p>
-<h2 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">#</a></h2>
+<h2 id="design">Design<a class="headerlink" href="#design" title="Permanent link">#</a></h2>
 <h3 id="background">Background<a class="headerlink" href="#background" title="Permanent link">#</a></h3>
 <p>This package aim to filter the noise objects which cross from the ego vehicle.
 The reason why these objects are noise is as below.</p>
@@ -14821,7 +14834,7 @@ So if an object detected by radars has circular motion viewing from base_link, i
 <p>The example is below figure.
 When the ego vehicle turn right, the surrounding objects have left circular motion.</p>
 <p><img alt="turning_around" src="docs/turning_around.png"></p>
-<h3 id="detail-algorithm">Detail Algorithm<a class="headerlink" href="#detail-algorithm" title="Permanent link">#</a></h3>
+<h3 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">#</a></h3>
 <p>To filter the objects crossing to ego vehicle, this package filter the objects as below algorithm.</p>
 <p><img alt="algorithm" src="docs/radar_crossing_objects_noise_filter.drawio.svg"></p>
 <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="c1">// If velocity of an object is rather than the velocity_threshold,</span>
@@ -14835,70 +14848,42 @@ When the ego vehicle turn right, the surrounding objects have left circular moti
 <span class="w">    </span><span class="c1">// Object is not noise object;</span>
 <span class="w">  </span><span class="p">}</span>
 </code></pre></div>
-<h2 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>~/input/objects</code></td>
-<td>autoware_auto_perception_msgs/msg/DetectedObjects.msg</td>
-<td>Radar objects.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>~/output/noise_objects</code></td>
-<td>autoware_auto_perception_msgs/msg/DetectedObjects.msg</td>
-<td>Noise objects</td>
-</tr>
-<tr>
-<td><code>~/output/filtered_objects</code></td>
-<td>autoware_auto_perception_msgs/msg/DetectedObjects.msg</td>
-<td>Filtered objects</td>
-</tr>
-</tbody>
-</table>
-<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>angle_threshold</code></td>
-<td align="left">double</td>
-<td align="left">The angle threshold parameter to filter [rad]. This parameter has condition that 0 &lt; <code>angle_threshold</code> &lt; pi / 2. See algorithm chapter for details.</td>
-<td align="left">1.0472</td>
-</tr>
-<tr>
-<td align="left"><code>velocity_threshold</code></td>
-<td align="left">double</td>
-<td align="left">The velocity threshold parameter to filter [m/s]. See algorithm chapter for details.</td>
-<td align="left">3.0</td>
-</tr>
-</tbody>
-</table></div>
+<h2 id="interface">Interface<a class="headerlink" href="#interface" title="Permanent link">#</a></h2>
+<h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
+<ul>
+<li><code>~/input/objects</code> (<code>autoware_auto_perception_msgs/msg/DetectedObjects.msg</code>)<ul>
+<li>Input radar objects</li>
+</ul>
+</li>
+</ul>
+<h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h3>
+<ul>
+<li><code>~/output/noise_objects</code> (<code>autoware_auto_perception_msgs/msg/DetectedObjects.msg</code>)<ul>
+<li>Noise objects</li>
+</ul>
+</li>
+<li><code>~/output/filtered_objects</code> (<code>autoware_auto_perception_msgs/msg/DetectedObjects.msg</code>)<ul>
+<li>Filtered objects</li>
+</ul>
+</li>
+</ul>
+<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h3>
+<ul>
+<li><code>angle_threshold</code> (double) [rad]<ul>
+<li>Default parameter is 1.0472.</li>
+</ul>
+</li>
+</ul>
+<p>This parameter is the angle threshold to filter. It has condition that 0 &lt; <code>angle_threshold</code> &lt; pi / 2. If the crossing angle is larger than this parameter, it can be a candidate for noise object. In other words, if it is smaller than this parameter, it is a filtered object.
+If this parameter is set smaller, more objects are considered noise. In detail, see algorithm chapter.</p>
+<ul>
+<li><code>velocity_threshold</code> (double) [m/s]<ul>
+<li>Default parameter is 3.0.</li>
+</ul>
+</li>
+</ul>
+<p>This parameter is the velocity threshold to filter. If velocity of an object is larger than this parameter, it can be a candidate for noise object. In other words, if velocity of an object is smaller than this parameter, it is a filtered object.
+If this parameter is set smaller, more objects are considered noise. In detail, see algorithm chapter.</p></div>
 
 
 
