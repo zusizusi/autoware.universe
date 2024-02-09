@@ -14999,6 +14999,10 @@ t_{predicted} = \dfrac{d_{lat}}{v_{lat}}
 </div>
 
 <p>If there are a reachable crosswalk entry points within the <code>prediction_time_horizon</code> and the objects satisfies above condition, this module outputs additional predicted path to cross the opposite side via the crosswalk entry point.</p>
+<p>This module takes into account the corresponding traffic light information.
+When RED signal is indicated, we assume the target object will not walk across.
+In additon, if the target object is stopping (not moving) against GREEN signal, we assume the target object will not walk across either.
+This prediction comes from the assumption that the object should move if the traffic light is green and the object is intended to cross.</p>
 <div align="center">
   <img src="images/outside_road.svg" width="90%">
 </div>
@@ -15028,6 +15032,11 @@ t_{predicted} = \dfrac{d_{lat}}{v_{lat}}
 <td><code>~/vector_map</code></td>
 <td><code>autoware_auto_mapping_msgs::msg::HADMapBin</code></td>
 <td>binary data of Lanelet2 Map.</td>
+</tr>
+<tr>
+<td>'~/perception/traffic_light_recognition/traffic_signals'</td>
+<td>'autoware_perception_msgs::msg::TrafficSignalArray;'</td>
+<td>rearranged information on the corresponding traffic lights</td>
 </tr>
 </tbody>
 </table>

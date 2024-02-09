@@ -14638,15 +14638,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#yield" class="md-nav__link">
-    Yield
+  <a href="#yield-the-way-to-the-pedestrians" class="md-nav__link">
+    Yield the Way to the Pedestrians
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#smooth-yield-decision" class="md-nav__link">
-    Smooth Yield Decision
+  <a href="#stuck-prevention-on-the-crosswalk" class="md-nav__link">
+    Stuck Prevention on the Crosswalk
   </a>
   
 </li>
@@ -14654,13 +14654,6 @@
           <li class="md-nav__item">
   <a href="#safety-slow-down-behavior" class="md-nav__link">
     Safety Slow Down Behavior
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stuck-vehicle-detection" class="md-nav__link">
-    Stuck Vehicle Detection
   </a>
   
 </li>
@@ -14770,7 +14763,7 @@
 <p><img alt="crosswalk_module" src="docs/crosswalk_module.svg" width="1100"></p>
 </figure>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">#</a></h2>
-<h3 id="yield">Yield<a class="headerlink" href="#yield" title="Permanent link">#</a></h3>
+<h3 id="yield-the-way-to-the-pedestrians">Yield the Way to the Pedestrians<a class="headerlink" href="#yield-the-way-to-the-pedestrians" title="Permanent link">#</a></h3>
 <h4 id="target-object">Target Object<a class="headerlink" href="#target-object" title="Permanent link">#</a></h4>
 <p>The crosswalk module handles objects of the types defined by the following parameters in the <code>object_filtering.target_object</code> namespace.</p>
 <table>
@@ -14921,6 +14914,16 @@ The decision is based on the following variables, along with the calculation of 
 In the case of the upper figure, <code>ego_pass_later_margin_x</code> is <code>{0, 1, 2}</code> and <code>ego_pass_later_margin_y</code> is <code>{1, 4, 6}</code>.
 In the same way, the boundary of B and C is calculated from <code>ego_pass_first_margin_x</code> and <code>ego_pass_first_margin_y</code>.
 In the case of the upper figure, <code>ego_pass_first_margin_x</code> is <code>{3, 5}</code> and <code>ego_pass_first_margin_y</code> is <code>{0, 1}</code>.</p>
+<p>If the red signal is indicating to the corresponding crosswalk, the ego do not yield against the pedestrians.</p>
+<div align="center">
+    <table>
+        <tr>
+            <td><img src="./docs/without_traffic_light.svg" width="600"></td>
+            <td><img src="./docs/with_traffic_light.svg" width="600"></td>
+        </tr>
+    </table>
+</div>
+
 <p>In the <code>pass_judge</code> namespace, the following parameters are defined.</p>
 <table>
 <thead>
@@ -14970,13 +14973,12 @@ In the case of the upper figure, <code>ego_pass_first_margin_x</code> is <code>{
 </tr>
 </tbody>
 </table>
-<h3 id="smooth-yield-decision">Smooth Yield Decision<a class="headerlink" href="#smooth-yield-decision" title="Permanent link">#</a></h3>
+<h4 id="smooth-yield-decision">Smooth Yield Decision<a class="headerlink" href="#smooth-yield-decision" title="Permanent link">#</a></h4>
 <p>If the object is stopped near the crosswalk but has no intention of walking, a situation can arise in which the ego continues to yield the right-of-way to the object.
 To prevent such a deadlock situation, the ego will cancel yielding depending on the situation.</p>
-<h4 id="cases-without-traffic-lights">Cases without traffic lights<a class="headerlink" href="#cases-without-traffic-lights" title="Permanent link">#</a></h4>
 <p>For the object stopped around the crosswalk but has no intention to walk (*1), after the ego has keep stopping to yield for a specific time (*2), the ego cancels the yield and starts driving.</p>
 <p>*1:
-The time is calculated by the interpolation of distance between the object and crosswalk with <code>distance_map_for_no_intention_to_walk</code> and <code>timeout_map_for_no_intention_to_walk</code>.</p>
+The time is calculated by the interpolation of distance between the object and crosswalk with <code>distance_set_for_no_intention_to_walk</code> and <code>timeout_set_for_no_intention_to_walk</code>.</p>
 <p>In the <code>pass_judge</code> namespace, the following parameters are defined.</p>
 <table>
 <thead>
@@ -14989,16 +14991,16 @@ The time is calculated by the interpolation of distance between the object and c
 </thead>
 <tbody>
 <tr>
-<td><code>distance_map_for_no_intention_to_walk</code></td>
+<td><code>distance_set_for_no_intention_to_walk</code></td>
 <td>[[m]]</td>
 <td>double</td>
-<td>distance map to calculate the timeout for no intention to walk with interpolation</td>
+<td>key sets to calculate the timeout for no intention to walk with interpolation</td>
 </tr>
 <tr>
-<td><code>timeout_map_for_no_intention_to_walk</code></td>
+<td><code>timeout_set_for_no_intention_to_walk</code></td>
 <td>[[s]]</td>
 <td>double</td>
-<td>timeout map to calculate the timeout for no intention to walk with interpolation</td>
+<td>value sets to calculate the timeout for no intention to walk with interpolation</td>
 </tr>
 </tbody>
 </table>
@@ -15022,20 +15024,6 @@ In the <code>pass_judge</code> namespace, the following parameters are defined.<
 </tr>
 </tbody>
 </table>
-<h4 id="cases-with-traffic-lights">Cases with traffic lights<a class="headerlink" href="#cases-with-traffic-lights" title="Permanent link">#</a></h4>
-<p>The ego will cancel the yield without stopping when the object stops around the crosswalk but has no intention to walk (*1).
-This comes from the assumption that the object has no intention to walk since it is stopped even though the pedestrian traffic light is green.</p>
-<p>*1:
-The crosswalk user's intention to walk is calculated in the same way as <code>Cases without traffic lights</code>.</p>
-<div align="center">
-    <table>
-        <tr>
-            <td><img src="./docs/without_traffic_light.svg" width="600"></td>
-            <td><img src="./docs/with_traffic_light.svg" width="600"></td>
-        </tr>
-    </table>
-</div>
-
 <h4 id="new-object-handling">New Object Handling<a class="headerlink" href="#new-object-handling" title="Permanent link">#</a></h4>
 <p>Due to the perception's limited performance where the tree or poll is recognized as a pedestrian or the tracking failure in the crowd or occlusion, even if the surrounding environment does not change, the new pedestrian (= the new ID's pedestrian) may suddenly appear unexpectedly.
 If this happens while the ego is going to pass the crosswalk, the ego will stop suddenly.</p>
@@ -15060,48 +15048,7 @@ If true is set, the yield decisions around the crosswalk with a traffic light wi
 </tr>
 </tbody>
 </table>
-<h3 id="safety-slow-down-behavior">Safety Slow Down Behavior<a class="headerlink" href="#safety-slow-down-behavior" title="Permanent link">#</a></h3>
-<p>In the current autoware implementation, if no target object is detected around a crosswalk, the ego vehicle will not slow down for the crosswalk.
-However, it may be desirable to slow down in situations, for example, where there are blind spots.
-Such a situation can be handled by setting some tags to the related crosswalk as instructed in the <a href="https://github.com/autowarefoundation/autoware_common/blob/main/tmp/lanelet2_extension/docs/lanelet2_format_extension.md">lanelet2_format_extension.md</a>
-document.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th></th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>slow_velocity</code></td>
-<td>[m/s]</td>
-<td>double</td>
-<td>target vehicle velocity when module receive slow down command from FOA</td>
-</tr>
-<tr>
-<td><code>max_slow_down_jerk</code></td>
-<td>[m/sss]</td>
-<td>double</td>
-<td>minimum jerk deceleration for safe brake</td>
-</tr>
-<tr>
-<td><code>max_slow_down_accel</code></td>
-<td>[m/ss]</td>
-<td>double</td>
-<td>minimum accel deceleration for safe brake</td>
-</tr>
-<tr>
-<td><code>no_relax_velocity</code></td>
-<td>[m/s]</td>
-<td>double</td>
-<td>if the current velocity is less than X m/s, ego always stops at the stop position(not relax deceleration constraints)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="stuck-vehicle-detection">Stuck Vehicle Detection<a class="headerlink" href="#stuck-vehicle-detection" title="Permanent link">#</a></h3>
+<h3 id="stuck-prevention-on-the-crosswalk">Stuck Prevention on the Crosswalk<a class="headerlink" href="#stuck-prevention-on-the-crosswalk" title="Permanent link">#</a></h3>
 <p>The feature will make the ego not to stop on the crosswalk.
 When there is a low-speed or stopped vehicle ahead of the crosswalk, and there is not enough space between the crosswalk and the vehicle, the crosswalk module plans to stop before the crosswalk even if there are no pedestrians or bicycles.</p>
 <p><code>min_acc</code>, <code>min_jerk</code>, and <code>max_jerk</code> are met. If the ego cannot stop before the crosswalk with these parameters, the stop position will move forward.</p>
@@ -15154,6 +15101,47 @@ When there is a low-speed or stopped vehicle ahead of the crosswalk, and there i
 <td>[m/sss]</td>
 <td>double</td>
 <td>maximum jerk to stop</td>
+</tr>
+</tbody>
+</table>
+<h3 id="safety-slow-down-behavior">Safety Slow Down Behavior<a class="headerlink" href="#safety-slow-down-behavior" title="Permanent link">#</a></h3>
+<p>In the current autoware implementation, if no target object is detected around a crosswalk, the ego vehicle will not slow down for the crosswalk.
+However, it may be desirable to slow down in situations, for example, where there are blind spots.
+Such a situation can be handled by setting some tags to the related crosswalk as instructed in the <a href="https://github.com/autowarefoundation/autoware_common/blob/main/tmp/lanelet2_extension/docs/lanelet2_format_extension.md">lanelet2_format_extension.md</a>
+document.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th></th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>slow_velocity</code></td>
+<td>[m/s]</td>
+<td>double</td>
+<td>target vehicle velocity when module receive slow down command from FOA</td>
+</tr>
+<tr>
+<td><code>max_slow_down_jerk</code></td>
+<td>[m/sss]</td>
+<td>double</td>
+<td>minimum jerk deceleration for safe brake</td>
+</tr>
+<tr>
+<td><code>max_slow_down_accel</code></td>
+<td>[m/ss]</td>
+<td>double</td>
+<td>minimum accel deceleration for safe brake</td>
+</tr>
+<tr>
+<td><code>no_relax_velocity</code></td>
+<td>[m/s]</td>
+<td>double</td>
+<td>if the current velocity is less than X m/s, ego always stops at the stop position(not relax deceleration constraints)</td>
 </tr>
 </tbody>
 </table>
