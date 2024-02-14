@@ -14667,6 +14667,8 @@
 <li><strong>Steering angle rate</strong> : invalid if the expected steering rate value is too large</li>
 <li><strong>Velocity deviation</strong> : invalid if the planning velocity is too far from the ego velocity</li>
 <li><strong>Distance deviation</strong> : invalid if the ego is too far from the trajectory</li>
+<li><strong>Longitudinal distance deviation</strong> : invalid if the trajectory is too far from ego in longitudinal direction</li>
+<li><strong>Forward trajectory length</strong> : invalid if the trajectory length is not enough to stop within a given deceleration</li>
 </ul>
 <p>The following features are to be implemented.</p>
 <ul>
@@ -14836,8 +14838,18 @@
 <td align="left">invalid threshold of the distance deviation between the ego position and the trajectory point closest to ego [m]</td>
 <td align="left">100.0</td>
 </tr>
+<tr>
+<td align="left"><code>parameters.longitudinal_distance_deviation</code></td>
+<td align="left">double</td>
+<td align="left">invalid threshold of the longitudinal distance deviation between the ego position and the trajectory [m]</td>
+<td align="left">2.0</td>
+</tr>
 </tbody>
-</table></div>
+</table>
+<h4 id="parameters_1">Parameters<a class="headerlink" href="#parameters_1" title="Permanent link">#</a></h4>
+<p>For parameters used e.g. to calculate threshold.</p>
+<p>| <code>parameters.forward_trajectory_length_acceleration</code> | double | This value is used to calculate required trajectory length. | -5.0 |
+| <code>parameters.forward_trajectory_length_margin</code> | double | A margin of the required trajectory length not to raise an error when the ego slightly exceeds the trajectory end point. | 2.0 |</p></div>
 
 
 
