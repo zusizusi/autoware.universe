@@ -14694,8 +14694,8 @@ The name <code>decorative</code> means that sub tracking objects are used to com
 <li>When we create a new tracklet, we set the <code>existence_probability</code> to <span class="arithmatex">\(p_{sensor}\)</span> value.</li>
 <li>In each update with specific sensor, we set the <code>existence_probability</code> to <span class="arithmatex">\(p_{sensor}\)</span> value.</li>
 <li>When tracklet does not have update with specific sensor, we reduce the <code>existence_probability</code> by <code>decay_rate</code></li>
-<li>Object can be published if <code>existence_probability</code> is larger than <code>publish_probability_threshold</code></li>
-<li>Object will be removed if <code>existence_probability</code> is smaller than <code>remove_probability_threshold</code></li>
+<li>Object can be published if <code>existence_probability</code> is larger than <code>publish_probability_threshold</code> and time from last update is smaller than <code>max_dt</code></li>
+<li>Object will be removed if <code>existence_probability</code> is smaller than <code>remove_probability_threshold</code> and time from last update is larger than <code>max_dt</code></li>
 </ul>
 <p><img alt="tracklet_management" src="image/tracklet_management.drawio.svg"></p>
 <p>These parameter can be set in <code>config/decorative_tracker_merger.param.yaml</code>.</p>
