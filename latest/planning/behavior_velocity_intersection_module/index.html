@@ -14660,6 +14660,19 @@
     Collision detection
   </a>
   
+    <nav class="md-nav" aria-label="Collision detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#about-use_upstream_velocity-flag" class="md-nav__link">
+    about use_upstream_velocity flag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -15133,6 +15146,10 @@
 <div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>run<span class="w"> </span>behavior_velocity_intersection_module<span class="w"> </span>ttc.py<span class="w"> </span>--lane_id<span class="w"> </span>&lt;lane_id&gt;
 </code></pre></div>
 <p><img alt="ego ttc profile" src="docs/ttc.gif"></p>
+<h3 id="about-use_upstream_velocity-flag">about use_upstream_velocity flag<a class="headerlink" href="#about-use_upstream_velocity-flag" title="Permanent link">#</a></h3>
+<p>There are some use cases where ego should check collision before entering the intersection considering the temporal stop by walkway/crosswalk module around the exit of the intersection, because their stop position can be inside the intersection and it could bother upcoming vehicles. By setting the flag <code>collision_detection.velocity_profile.use_upstream</code> to true and running the walkway/crosswalk module prior to this module, ego velocity profile is calculated considering their velocity and stop positions.</p>
+<p>As illustrated in below figure if upstream module inserted a stopline, ego position profile will remain there for the infinite time, thus it leads to the judgement that ego cannot exit the intersection during the interval [<span class="arithmatex">\(t\)</span> - <code>collision_detection.collision_start_margin_time</code>, <span class="arithmatex">\(t\)</span> + <code>collision_detection.collision_end_margin_time</code>]. In this way this feature considers possible collision for the infinite time if stoplines exist ahead of ego position (practically the prediction horizon is limited so the collision check horizon is bounded).
+<img alt="upstream_velocity" src="docs/upstream-velocity.drawio.svg"></p>
 <h2 id="occlusion-detection">Occlusion detection<a class="headerlink" href="#occlusion-detection" title="Permanent link">#</a></h2>
 <p>If the flag <code>occlusion.enable</code> is true this module checks if there is sufficient field of view (FOV) on the attention area up to <code>occlusion.occlusion_attention_area_length</code>. If FOV is not clear enough ego first makes a brief stop at default_stopline for <code>occlusion.temporal_stop_time_before_peeking</code>, and then slowly creeps toward occlusion_peeking_stopline. If <code>occlusion.creep_during_peeking.enable</code> is true <code>occlusion.creep_during_peeking.creep_velocity</code> is inserted up to occlusion_peeking_stopline. Otherwise only stop line is inserted.</p>
 <p>During the creeping if collision is detected this module inserts a stop line in front of ego immediately, and if the FOV gets sufficiently clear the intersection_occlusion wall will disappear. If occlusion is cleared and no collision is detected ego will pass the intersection.</p>
