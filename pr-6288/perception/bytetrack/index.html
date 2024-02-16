@@ -10141,6 +10141,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_8_3_3" id="__nav_8_3_3_label" tabindex="0">
@@ -10191,6 +10193,20 @@
     <li class="md-nav__item">
       <a href="../../planning/behavior_velocity_detection_area_module" class="md-nav__link">
         Detection Area
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planning/behavior_velocity_dynamic_obstacle_stop_module" class="md-nav__link">
+        Dynamic Obstacle Stop
       </a>
     </li>
   
@@ -14719,7 +14735,7 @@ the number of false negatives is expected to decrease by using it.</p>
 <h3 id="2d-tracking-modification-from-original-codes">2d tracking modification from original codes<a class="headerlink" href="#2d-tracking-modification-from-original-codes" title="Permanent link">#</a></h3>
 <p>The paper just says that the 2d tracking algorithm is a simple Kalman filter.
 Original codes use the <code>top-left-corner</code> and <code>aspect ratio</code> and <code>size</code> as the state vector.</p>
-<p>This is sometimes unstable because the aspectratio can be changed by the occlusion.
+<p>This is sometimes unstable because the aspect ratio can be changed by the occlusion.
 So, we use the <code>top-left</code> and <code>size</code> as the state vector.</p>
 <p>Kalman filter settings can be controlled by the parameters in <code>config/bytetrack_node.param.yaml</code>.</p>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
