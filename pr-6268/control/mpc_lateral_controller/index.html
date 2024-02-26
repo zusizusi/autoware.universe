@@ -15390,21 +15390,47 @@ AutonomouStuff Lexus RX 450h for under 40 km/h driving.</p>
 </table>
 <h3 id="visualizations-of-the-control-results-debug-information">Visualizations of the control results (debug information)<a class="headerlink" href="#visualizations-of-the-control-results-debug-information" title="Permanent link">#</a></h3>
 <p>Some signals are published as topics to evaluate the quality of the control results. A control researcher can visualize these information using the plotting tool such as PlotJuggler. Note that the 'deviation' and the 'state error' are defined as the difference between the state and the reference. That is state - reference. This definition is different from the conventional sign of the 'state error' defined in the control theory.</p>
-<p><code>/control/trajectory_follower/lane_departure_checker_node/debug/deviation/longitudinal</code>
-The longitudinal deviation of the position at the current time.</p>
-<p><code>/control/trajectory_follower/lane_departure_checker_node/debug/deviation/longitudinal_velocity</code>
-The longitudinal deviation of the velocity at the current time.</p>
-<p><code>/control/trajectory_follower/lateral/diagnostic</code>
-The signals evaluating the quality of MPC.
-Some commonly used signal are listed below:
-| The signal | Number |
-| :------------------------------------------------------------- | :----- |
-| final steering command (MPC + Clamp + LPF) | [0] |
-| MPC result | [1] |
-| MPC after Clamp (MPC + Clamp) | [21] |
-| feedforward term (reference steering angle) | [2] |
-| lateral error w.r.t the modified reference, feeding MPC module | [5] |
-| lateral error w.r.t the original reference, feeding mpc.cpp | [22] |</p>
+<p><code>/control/trajectory_follower/lane_departure_checker_node/debug/deviation/longitudinal</code>:
+This topic represents the longitudinal deviation of the position at the current time.</p>
+<p><code>/control/trajectory_follower/lane_departure_checker_node/debug/deviation/longitudinal_velocity</code>:
+This topic represents the longitudinal deviation of the velocity at the current time.</p>
+<p><code>/control/trajectory_follower/lateral/diagnostic</code>:
+The signals in this topic evaluate the quality of MPC.</p>
+<p>Some commonly used signal are listed below:</p>
+<table>
+<thead>
+<tr>
+<th align="left">The signal</th>
+<th align="left">Number</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">final steering command (MPC + Clamp + LPF)</td>
+<td align="left">[0]</td>
+</tr>
+<tr>
+<td align="left">MPC result</td>
+<td align="left">[1]</td>
+</tr>
+<tr>
+<td align="left">MPC after Clamp (MPC + Clamp)</td>
+<td align="left">[21]</td>
+</tr>
+<tr>
+<td align="left">feedforward term (reference steering angle)</td>
+<td align="left">[2]</td>
+</tr>
+<tr>
+<td align="left">lateral error w.r.t the modified reference, feeding MPC module</td>
+<td align="left">[5]</td>
+</tr>
+<tr>
+<td align="left">lateral error w.r.t the original reference, feeding mpc.cpp</td>
+<td align="left">[22]</td>
+</tr>
+</tbody>
+</table>
 <h3 id="how-to-tune-mpc-parameters">How to tune MPC parameters<a class="headerlink" href="#how-to-tune-mpc-parameters" title="Permanent link">#</a></h3>
 <h4 id="set-kinematics-information">Set kinematics information<a class="headerlink" href="#set-kinematics-information" title="Permanent link">#</a></h4>
 <p>First, it's important to set the appropriate parameters for vehicle kinematics. This includes parameters like <code>wheelbase</code>, which represents the distance between the front and rear wheels, and <code>max_steering_angle</code>, which indicates the maximum tire steering angle. These parameters should be set in the <code>vehicle_info.param.yaml</code>.</p>
