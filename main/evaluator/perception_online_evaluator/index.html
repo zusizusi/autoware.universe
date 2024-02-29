@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/main/common/tier4_control_rviz_plugin/">
+        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/main/evaluator/perception_online_evaluator/">
       
       
-        <link rel="prev" href="../tier4_camera_view_rviz_plugin/">
+        <link rel="prev" href="../localization_evaluator/">
       
       
-        <link rel="next" href="../tier4_datetime_rviz_plugin/">
+        <link rel="next" href="../planning_evaluator/">
       
       <link rel="icon" href="../../docs/assets/images/autoware-foundation.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.20">
     
     
       
-        <title>tier4_control_rviz_plugin - Autoware Universe Documentation</title>
+        <title>Perception Evaluator - Autoware Universe Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tier4_control_rviz_plugin" class="md-skip">
+        <a href="#perception-evaluator" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              tier4_control_rviz_plugin
+              Perception Evaluator
             
           </span>
         </div>
@@ -208,8 +208,6 @@
         
   
   
-    
-  
 
 
   
@@ -221,7 +219,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../autoware_ad_api_specs/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../common/autoware_ad_api_specs/" class="md-tabs__link">
         Common
       </a>
     </li>
@@ -256,6 +254,8 @@
         
   
   
+    
+  
 
 
   
@@ -267,7 +267,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../evaluator/diagnostic_converter/" class="md-tabs__link">
+      <a href="../diagnostic_converter/" class="md-tabs__link md-tabs__link--active">
         Evaluator
       </a>
     </li>
@@ -532,16 +532,16 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
       
       
         
@@ -658,7 +658,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_1">
           <span class="md-nav__icon md-icon"></span>
           Common
@@ -693,7 +693,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../autoware_ad_api_specs/">Autoware ad api specs</a>
+          <a href="../../common/autoware_ad_api_specs/">Autoware ad api specs</a>
           
         </div>
       
@@ -787,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_auto_common/design/comparisons/" class="md-nav__link">
+      <a href="../../common/autoware_auto_common/design/comparisons/" class="md-nav__link">
         Comparisons
       </a>
     </li>
@@ -887,7 +887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_auto_geometry/design/interval/" class="md-nav__link">
+      <a href="../../common/autoware_auto_geometry/design/interval/" class="md-nav__link">
         Interval
       </a>
     </li>
@@ -901,7 +901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_auto_geometry/design/polygon_intersection_2d-design/" class="md-nav__link">
+      <a href="../../common/autoware_auto_geometry/design/polygon_intersection_2d-design/" class="md-nav__link">
         2D Convex Polygon Intersection
       </a>
     </li>
@@ -915,7 +915,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_auto_geometry/design/spatial-hash-design/" class="md-nav__link">
+      <a href="../../common/autoware_auto_geometry/design/spatial-hash-design/" class="md-nav__link">
         Spatial Hash
       </a>
     </li>
@@ -965,7 +965,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../autoware_auto_perception_rviz_plugin/">Autoware auto perception rviz plugin</a>
+          <a href="../../common/autoware_auto_perception_rviz_plugin/">Autoware auto perception rviz plugin</a>
           
         </div>
       
@@ -1059,7 +1059,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_auto_tf2/design/autoware-auto-tf2-design/" class="md-nav__link">
+      <a href="../../common/autoware_auto_tf2/design/autoware-auto-tf2-design/" class="md-nav__link">
         autoware_auto_tf2
       </a>
     </li>
@@ -1142,7 +1142,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../autoware_overlay_rviz_plugin/autoware_overlay_rviz_plugin/">Autoware overlay rviz plugin</a>
+          <a href="../../common/autoware_overlay_rviz_plugin/autoware_overlay_rviz_plugin/">Autoware overlay rviz plugin</a>
           
         </div>
       
@@ -1243,7 +1243,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_testing/design/autoware_testing-design/" class="md-nav__link">
+      <a href="../../common/autoware_testing/design/autoware_testing-design/" class="md-nav__link">
         autoware_testing
       </a>
     </li>
@@ -1293,7 +1293,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../bag_time_manager_rviz_plugin/">Bag time manager rviz plugin</a>
+          <a href="../../common/bag_time_manager_rviz_plugin/">Bag time manager rviz plugin</a>
           
         </div>
       
@@ -1341,7 +1341,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../component_interface_specs/">Component interface specs</a>
+          <a href="../../common/component_interface_specs/">Component interface specs</a>
           
         </div>
       
@@ -1389,7 +1389,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../component_interface_tools/">Component interface tools</a>
+          <a href="../../common/component_interface_tools/">Component interface tools</a>
           
         </div>
       
@@ -1437,7 +1437,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../component_interface_utils/">Component interface utils</a>
+          <a href="../../common/component_interface_utils/">Component interface utils</a>
           
         </div>
       
@@ -1485,7 +1485,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../cuda_utils/">Cuda utils</a>
+          <a href="../../common/cuda_utils/">Cuda utils</a>
           
         </div>
       
@@ -1579,7 +1579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fake_test_node/design/fake_test_node-design/" class="md-nav__link">
+      <a href="../../common/fake_test_node/design/fake_test_node-design/" class="md-nav__link">
         Fake Test Node
       </a>
     </li>
@@ -1629,7 +1629,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../geography_utils/">Geography utils</a>
+          <a href="../../common/geography_utils/">Geography utils</a>
           
         </div>
       
@@ -1690,7 +1690,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../global_parameter_loader/Readme/" class="md-nav__link">
+      <a href="../../common/global_parameter_loader/Readme/" class="md-nav__link">
         Autoware Global Parameter Loader
       </a>
     </li>
@@ -1733,7 +1733,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../glog_component/">Glog component</a>
+          <a href="../../common/glog_component/">Glog component</a>
           
         </div>
       
@@ -1794,7 +1794,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../goal_distance_calculator/Readme/" class="md-nav__link">
+      <a href="../../common/goal_distance_calculator/Readme/" class="md-nav__link">
         goal_distance_calculator
       </a>
     </li>
@@ -1837,7 +1837,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../grid_map_utils/">Grid map utils</a>
+          <a href="../../common/grid_map_utils/">Grid map utils</a>
           
         </div>
       
@@ -1885,7 +1885,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../interpolation/">Interpolation</a>
+          <a href="../../common/interpolation/">Interpolation</a>
           
         </div>
       
@@ -1933,7 +1933,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../kalman_filter/">Kalman filter</a>
+          <a href="../../common/kalman_filter/">Kalman filter</a>
           
         </div>
       
@@ -1981,7 +1981,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../mission_planner_rviz_plugin/">Mission planner rviz plugin</a>
+          <a href="../../common/mission_planner_rviz_plugin/">Mission planner rviz plugin</a>
           
         </div>
       
@@ -2031,7 +2031,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../motion_utils/">Motion utils</a>
+          <a href="../../common/motion_utils/">Motion utils</a>
           
             <label for="__nav_1_22">
               <span class="md-nav__icon md-icon"></span>
@@ -2120,7 +2120,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../motion_utils/docs/vehicle/vehicle/" class="md-nav__link">
+      <a href="../../common/motion_utils/docs/vehicle/vehicle/" class="md-nav__link">
         vehicle utils
       </a>
     </li>
@@ -2177,7 +2177,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../object_recognition_utils/">Object recognition utils</a>
+          <a href="../../common/object_recognition_utils/">Object recognition utils</a>
           
         </div>
       
@@ -2271,7 +2271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../osqp_interface/design/osqp_interface-design/" class="md-nav__link">
+      <a href="../../common/osqp_interface/design/osqp_interface-design/" class="md-nav__link">
         Interface for the OSQP library
       </a>
     </li>
@@ -2334,7 +2334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../path_distance_calculator/Readme/" class="md-nav__link">
+      <a href="../../common/path_distance_calculator/Readme/" class="md-nav__link">
         path_distance_calculator
       </a>
     </li>
@@ -2377,7 +2377,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../perception_utils/">Perception utils</a>
+          <a href="../../common/perception_utils/">Perception utils</a>
           
         </div>
       
@@ -2438,7 +2438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../polar_grid/Readme/" class="md-nav__link">
+      <a href="../../common/polar_grid/Readme/" class="md-nav__link">
         Polar Grid
       </a>
     </li>
@@ -2527,7 +2527,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../qp_interface/design/qp_interface-design/" class="md-nav__link">
+      <a href="../../common/qp_interface/design/qp_interface-design/" class="md-nav__link">
         Interface for QP solvers
       </a>
     </li>
@@ -2577,7 +2577,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../rtc_manager_rviz_plugin/">Rtc manager rviz plugin</a>
+          <a href="../../common/rtc_manager_rviz_plugin/">Rtc manager rviz plugin</a>
           
         </div>
       
@@ -2627,7 +2627,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../signal_processing/">Signal processing</a>
+          <a href="../../common/signal_processing/">Signal processing</a>
           
             <label for="__nav_1_30">
               <span class="md-nav__icon md-icon"></span>
@@ -2683,7 +2683,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../signal_processing/documentation/ButterworthFilter/" class="md-nav__link">
+      <a href="../../common/signal_processing/documentation/ButterworthFilter/" class="md-nav__link">
         ButterworthFilter
       </a>
     </li>
@@ -2733,7 +2733,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tensorrt_common/">Tensorrt common</a>
+          <a href="../../common/tensorrt_common/">Tensorrt common</a>
           
         </div>
       
@@ -2781,7 +2781,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_adapi_rviz_plugin/">Tier4 adapi rviz plugin</a>
+          <a href="../../common/tier4_adapi_rviz_plugin/">Tier4 adapi rviz plugin</a>
           
         </div>
       
@@ -2829,7 +2829,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_api_utils/">Tier4 api utils</a>
+          <a href="../../common/tier4_api_utils/">Tier4 api utils</a>
           
         </div>
       
@@ -2877,7 +2877,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_automatic_goal_rviz_plugin/">Tier4 automatic goal rviz plugin</a>
+          <a href="../../common/tier4_automatic_goal_rviz_plugin/">Tier4 automatic goal rviz plugin</a>
           
         </div>
       
@@ -2925,7 +2925,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_autoware_utils/">Tier4 autoware utils</a>
+          <a href="../../common/tier4_autoware_utils/">Tier4 autoware utils</a>
           
         </div>
       
@@ -2973,7 +2973,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_camera_view_rviz_plugin/">Tier4 camera view rviz plugin</a>
+          <a href="../../common/tier4_camera_view_rviz_plugin/">Tier4 camera view rviz plugin</a>
           
         </div>
       
@@ -2997,18 +2997,18 @@
               
   
   
-    
-  
   
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_37" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_37" >
       
       
         
@@ -3020,12 +3020,12 @@
       
         
         
-        <div class="md-nav__link md-nav__link--index md-nav__link--active">
-          <a href="./">Tier4 control rviz plugin</a>
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../common/tier4_control_rviz_plugin/">Tier4 control rviz plugin</a>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_37_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_37_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_1_37">
           <span class="md-nav__icon md-icon"></span>
           Tier4 control rviz plugin
@@ -3069,7 +3069,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_datetime_rviz_plugin/">Tier4 datetime rviz plugin</a>
+          <a href="../../common/tier4_datetime_rviz_plugin/">Tier4 datetime rviz plugin</a>
           
         </div>
       
@@ -3117,7 +3117,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_debug_rviz_plugin/">Tier4 debug rviz plugin</a>
+          <a href="../../common/tier4_debug_rviz_plugin/">Tier4 debug rviz plugin</a>
           
         </div>
       
@@ -3165,7 +3165,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_localization_rviz_plugin/">Tier4 localization rviz plugin</a>
+          <a href="../../common/tier4_localization_rviz_plugin/">Tier4 localization rviz plugin</a>
           
         </div>
       
@@ -3213,7 +3213,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_logging_level_configure_rviz_plugin/">Tier4 logging level configure rviz plugin</a>
+          <a href="../../common/tier4_logging_level_configure_rviz_plugin/">Tier4 logging level configure rviz plugin</a>
           
         </div>
       
@@ -3261,7 +3261,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_perception_rviz_plugin/">Tier4 perception rviz plugin</a>
+          <a href="../../common/tier4_perception_rviz_plugin/">Tier4 perception rviz plugin</a>
           
         </div>
       
@@ -3309,7 +3309,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_planning_rviz_plugin/">Tier4 planning rviz plugin</a>
+          <a href="../../common/tier4_planning_rviz_plugin/">Tier4 planning rviz plugin</a>
           
         </div>
       
@@ -3357,7 +3357,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_screen_capture_rviz_plugin/">Tier4 screen capture rviz plugin</a>
+          <a href="../../common/tier4_screen_capture_rviz_plugin/">Tier4 screen capture rviz plugin</a>
           
         </div>
       
@@ -3405,7 +3405,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_simulated_clock_rviz_plugin/">Tier4 simulated clock rviz plugin</a>
+          <a href="../../common/tier4_simulated_clock_rviz_plugin/">Tier4 simulated clock rviz plugin</a>
           
         </div>
       
@@ -3453,7 +3453,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_state_rviz_plugin/">Tier4 state rviz plugin</a>
+          <a href="../../common/tier4_state_rviz_plugin/">Tier4 state rviz plugin</a>
           
         </div>
       
@@ -3501,7 +3501,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_system_rviz_plugin/">Tier4 system rviz plugin</a>
+          <a href="../../common/tier4_system_rviz_plugin/">Tier4 system rviz plugin</a>
           
         </div>
       
@@ -3549,7 +3549,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_target_object_type_rviz_plugin/">Tier4 target object type rviz plugin</a>
+          <a href="../../common/tier4_target_object_type_rviz_plugin/">Tier4 target object type rviz plugin</a>
           
         </div>
       
@@ -3597,7 +3597,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_traffic_light_rviz_plugin/">Tier4 traffic light rviz plugin</a>
+          <a href="../../common/tier4_traffic_light_rviz_plugin/">Tier4 traffic light rviz plugin</a>
           
         </div>
       
@@ -3645,7 +3645,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_vehicle_rviz_plugin/">Tier4 vehicle rviz plugin</a>
+          <a href="../../common/tier4_vehicle_rviz_plugin/">Tier4 vehicle rviz plugin</a>
           
         </div>
       
@@ -3706,7 +3706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../traffic_light_recognition_marker_publisher/Readme/" class="md-nav__link">
+      <a href="../../common/traffic_light_recognition_marker_publisher/Readme/" class="md-nav__link">
         path_distance_calculator
       </a>
     </li>
@@ -3749,7 +3749,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../traffic_light_utils/">Traffic light utils</a>
+          <a href="../../common/traffic_light_utils/">Traffic light utils</a>
           
         </div>
       
@@ -3801,7 +3801,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tvm_utility/">Tvm utility</a>
+          <a href="../../common/tvm_utility/">Tvm utility</a>
           
             <label for="__nav_1_53">
               <span class="md-nav__icon md-icon"></span>
@@ -3824,7 +3824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tvm_utility/tvm-utility-yolo-v2-tiny-tests/" class="md-nav__link">
+      <a href="../../common/tvm_utility/tvm-utility-yolo-v2-tiny-tests/" class="md-nav__link">
         YOLOv2 Tiny Example Pipeline
       </a>
     </li>
@@ -3858,7 +3858,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tvm_utility/artifacts/">Artifacts</a>
+          <a href="../../common/tvm_utility/artifacts/">Artifacts</a>
           
         </div>
       
@@ -4816,16 +4816,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
       
       
         
@@ -4848,7 +4848,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Evaluator
@@ -4883,7 +4883,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../evaluator/diagnostic_converter/">Diagnostic converter</a>
+          <a href="../diagnostic_converter/">Diagnostic converter</a>
           
         </div>
       
@@ -4931,7 +4931,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../evaluator/kinematic_evaluator/">Kinematic evaluator</a>
+          <a href="../kinematic_evaluator/">Kinematic evaluator</a>
           
         </div>
       
@@ -4979,7 +4979,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../evaluator/localization_evaluator/">Localization evaluator</a>
+          <a href="../localization_evaluator/">Localization evaluator</a>
           
         </div>
       
@@ -5003,18 +5003,18 @@
               
   
   
+    
+  
   
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" checked>
       
       
         
@@ -5026,12 +5026,12 @@
       
         
         
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../../evaluator/perception_online_evaluator/">Perception online evaluator</a>
+        <div class="md-nav__link md-nav__link--index md-nav__link--active">
+          <a href="./">Perception online evaluator</a>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3_4">
           <span class="md-nav__icon md-icon"></span>
           Perception online evaluator
@@ -5075,7 +5075,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../evaluator/planning_evaluator/">Planning evaluator</a>
+          <a href="../planning_evaluator/">Planning evaluator</a>
           
         </div>
       
@@ -5123,7 +5123,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../evaluator/tier4_metrics_rviz_plugin/">Tier4 metrics rviz plugin</a>
+          <a href="../tier4_metrics_rviz_plugin/">Tier4 metrics rviz plugin</a>
           
         </div>
       
@@ -14483,35 +14483,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#inputs-outputs" class="md-nav__link">
-    Inputs / Outputs
+  <a href="#purpose" class="md-nav__link">
+    Purpose
   </a>
-  
-    <nav class="md-nav" aria-label="Inputs / Outputs">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#input" class="md-nav__link">
-    Input
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#output" class="md-nav__link">
-    Output
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
+  <a href="#inner-workings-algorithms" class="md-nav__link">
+    Inner-workings / Algorithms
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    Inputs / Outputs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions-known-limits" class="md-nav__link">
+    Assumptions / Known limits
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#future-extensions-unimplemented-parts" class="md-nav__link">
+    Future extensions / Unimplemented parts
   </a>
   
 </li>
@@ -14534,10 +14542,17 @@
   
 
 
-<div><h1 id="tier4_control_rviz_plugin">tier4_control_rviz_plugin<a class="headerlink" href="#tier4_control_rviz_plugin" title="Permanent link">#</a></h1>
-<p>This package is to mimic external control for simulation.</p>
+<div><h1 id="perception-evaluator">Perception Evaluator<a class="headerlink" href="#perception-evaluator" title="Permanent link">#</a></h1>
+<p>A node for evaluating the output of perception systems.</p>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
+<p>This module allows for the evaluation of how accurately perception results are generated without the need for annotations. It is capable of confirming performance and can evaluate results from a few seconds prior, enabling online execution.</p>
+<h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
+<ul>
+<li>Calculates lateral deviation between the predicted path and the actual traveled trajectory.</li>
+<li>Calculates lateral deviation between the smoothed traveled trajectory and the perceived position to evaluate the stability of lateral position recognition.</li>
+<li>Calculates yaw deviation between the smoothed traveled trajectory and the perceived position to evaluate the stability of yaw recognition.</li>
+</ul>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
-<h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
 <table>
 <thead>
 <tr>
@@ -14548,28 +14563,23 @@
 </thead>
 <tbody>
 <tr>
-<td><code>/control/current_gate_mode</code></td>
-<td><code>tier4_control_msgs::msg::GateMode</code></td>
-<td>Current GATE mode</td>
+<td><code>~/input/objects</code></td>
+<td><code>autoware_auto_perception_msgs::msg::PredictedObjects</code></td>
+<td>The predicted objects to evaluate.</td>
 </tr>
 <tr>
-<td><code>/vehicle/status/velocity_status</code></td>
-<td><code>autoware_auto_vehicle_msgs::msg::VelocityReport</code></td>
-<td>Current velocity status</td>
+<td><code>~/metrics</code></td>
+<td><code>diagnostic_msgs::msg::DiagnosticArray</code></td>
+<td>Diagnostic information about perception accuracy.</td>
 </tr>
 <tr>
-<td><code>/api/autoware/get/engage</code></td>
-<td><code>tier4_external_api_msgs::srv::Engage</code></td>
-<td>Getting Engage</td>
-</tr>
-<tr>
-<td><code>/vehicle/status/gear_status</code></td>
-<td><code>autoware_auto_vehicle_msgs::msg::GearReport</code></td>
-<td>The state of GEAR</td>
+<td><code>~/markers</code></td>
+<td><code>visualization_msgs::msg::MarkerArray</code></td>
+<td>Visual markers for debugging and visualization.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h3>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
 <table>
 <thead>
 <tr>
@@ -14580,41 +14590,42 @@
 </thead>
 <tbody>
 <tr>
-<td><code>/control/gate_mode_cmd</code></td>
-<td><code>tier4_control_msgs::msg::GateMode</code></td>
-<td>GATE mode</td>
+<td><code>selected_metrics</code></td>
+<td>List</td>
+<td>Metrics to be evaluated, such as lateral deviation, yaw deviation, and predicted path deviation.</td>
 </tr>
 <tr>
-<td><code>/external/selected/control_cmd</code></td>
-<td><code>autoware_auto_control_msgs::msg::AckermannControlCommand</code></td>
-<td>AckermannControlCommand</td>
+<td><code>smoothing_window_size</code></td>
+<td>Integer</td>
+<td>Determines the window size for smoothing path, should be an odd number.</td>
 </tr>
 <tr>
-<td><code>/external/selected/gear_cmd</code></td>
-<td><code>autoware_auto_vehicle_msgs::msg::GearCommand</code></td>
-<td>GEAR</td>
+<td><code>prediction_time_horizons</code></td>
+<td>list[double]</td>
+<td>Time horizons for prediction evaluation in seconds.</td>
+</tr>
+<tr>
+<td><code>target_object.*.check_deviation</code></td>
+<td>bool</td>
+<td>Whether to check deviation for specific object types (car, truck, etc.).</td>
+</tr>
+<tr>
+<td><code>debug_marker.*</code></td>
+<td>bool</td>
+<td>Debugging parameters for marker visualization (history path, predicted path, etc.).</td>
 </tr>
 </tbody>
 </table>
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h2>
-<ol>
-<li>
-<p>Start rviz and select Panels.</p>
-<p><img alt="select_panels" src="images/select_panels.png"></p>
-</li>
-<li>
-<p>Select tier4_control_rviz_plugin/ManualController and press OK.</p>
-<p><img alt="select_manual_controller" src="images/select_manual_controller.png"></p>
-</li>
-<li>
-<p>Enter velocity in "Set Cruise Velocity" and Press the button to confirm. You can notice that GEAR shows D (DRIVE).</p>
-<p><img alt="manual_controller_not_ready" src="images/manual_controller_not_ready.png"></p>
-</li>
-<li>
-<p>Press "Enable Manual Control" and you can notice that "GATE" and "Engage" turn "Ready" and the vehicle starts!</p>
-<p><img alt="manual_controller_ready" src="images/manual_controller_ready.png"></p>
-</li>
-</ol></div>
+<h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
+<p>It is assumed that the current positions of PredictedObjects are reasonably accurate.</p>
+<h2 id="future-extensions-unimplemented-parts">Future extensions / Unimplemented parts<a class="headerlink" href="#future-extensions-unimplemented-parts" title="Permanent link">#</a></h2>
+<ul>
+<li>Increase rate in recognition per class</li>
+<li>Metrics for objects with strange physical behavior (e.g., going through a fence)</li>
+<li>Metrics for splitting objects</li>
+<li>Metrics for problems with objects that are normally stationary but move</li>
+<li>Disappearing object metrics</li>
+</ul></div>
 
 
 
@@ -14641,7 +14652,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../tier4_camera_view_rviz_plugin/" class="md-footer__link md-footer__link--prev" aria-label="Previous: tier4_camera_view_rviz_plugin" rel="prev">
+          <a href="../localization_evaluator/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Localization Evaluator" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -14650,20 +14661,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                tier4_camera_view_rviz_plugin
+                Localization Evaluator
               </div>
             </div>
           </a>
         
         
           
-          <a href="../tier4_datetime_rviz_plugin/" class="md-footer__link md-footer__link--next" aria-label="Next: tier4_datetime_rviz_plugin" rel="next">
+          <a href="../planning_evaluator/" class="md-footer__link md-footer__link--next" aria-label="Next: Planning Evaluator" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                tier4_datetime_rviz_plugin
+                Planning Evaluator
               </div>
             </div>
             <div class="md-footer__button md-icon">
