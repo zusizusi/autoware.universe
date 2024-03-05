@@ -14730,6 +14730,16 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 <p>First, we divide the target objects into obstacles in the target lane, obstacles in the current lane, and obstacles in other lanes. Target lane indicates the lane that the ego vehicle is going to reach after the lane change and current lane mean the current lane where the ego vehicle is following before the lane change. Other lanes are lanes that do not belong to the target and current lanes. The following picture describes objects on each lane. Note that users can remove objects either on current and other lanes from safety check by changing the flag, which are <code>check_objects_on_current_lanes</code> and <code>check_objects_on_other_lanes</code>.</p>
 <p><img alt="object lanes" src="images/lane_objects.drawio.svg"></p>
 <p>Furthermore, to change lanes behind a vehicle waiting at a traffic light, we skip the safety check for the stopping vehicles near the traffic light. The explanation for parked car detection is written in <a href="../behavior_path_avoidance_module/">documentation for avoidance module</a>.</p>
+<p>The detection area for the target lane can be expanded beyond its original boundaries to enable detection of objects that are outside the target lane's limits.</p>
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="./images/lane_change-lane_expansion-without" alt="Without lane expansion" width="400"></td>
+      <td><img src="./images/lane_change-lane_expansion-with.png" alt="With lane expansion" width="400"></td>
+    </tr>
+  </table>
+</div>
+
 <h5 id="collision-check-in-prepare-phase">Collision check in prepare phase<a class="headerlink" href="#collision-check-in-prepare-phase" title="Permanent link">#</a></h5>
 <p>The ego vehicle may need to secure ample inter-vehicle distance ahead of the target vehicle before attempting a lane change. The flag <code>enable_collision_check_at_prepare_phase</code> can be enabled to gain this behavior. The following image illustrates the differences between the <code>false</code> and <code>true</code> cases.</p>
 <p><img alt="enable collision check at prepare phase" src="images/lane_change-enable_collision_check_at_prepare_phase.png"></p>
