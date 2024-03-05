@@ -14567,8 +14567,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#collision-checks-during-lane-change" class="md-nav__link">
-    Collision checks during lane change
+  <a href="#collision-checks" class="md-nav__link">
+    Collision checks
   </a>
   
 </li>
@@ -14790,7 +14790,7 @@ If the ego vehicle velocity is smaller than <code>stuck_detection.velocity</code
 <p><img alt="stop" src="images/lane_change-cant_cancel_no_abort.png"></p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
 <h3 id="essential-lane-change-parameters">Essential lane change parameters<a class="headerlink" href="#essential-lane-change-parameters" title="Permanent link">#</a></h3>
-<p>The following parameters are configurable in <code>lane_change.param.yaml</code>.</p>
+<p>The following parameters are configurable in <a href="https://github.com/autowarefoundation/autoware_launch/blob/main/autoware_launch/config/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/lane_change/lane_change.param.yaml">lane_change.param.yaml</a></p>
 <table>
 <thead>
 <tr>
@@ -14835,7 +14835,7 @@ If the ego vehicle velocity is smaller than <code>stuck_detection.velocity</code
 <td>[m]</td>
 <td>double</td>
 <td>The additional buffer used to confirm lane change process completion</td>
-<td>3.0</td>
+<td>2.0</td>
 </tr>
 <tr>
 <td align="left"><code>finish_judge_lateral_threshold</code></td>
@@ -14870,7 +14870,7 @@ If the ego vehicle velocity is smaller than <code>stuck_detection.velocity</code
 <td>[-]</td>
 <td>int</td>
 <td>Number of possible lane-changing trajectories that are being influenced by longitudinal acceleration</td>
-<td>5</td>
+<td>3</td>
 </tr>
 <tr>
 <td align="left"><code>lateral_acceleration_sampling_num</code></td>
@@ -14933,15 +14933,93 @@ If the ego vehicle velocity is smaller than <code>stuck_detection.velocity</code
 <td>[m/ss]</td>
 <td>double</td>
 <td>Min lateral acceleration values corresponding to velocity (look up table)</td>
-<td>[0.15, 0.15, 0.15]</td>
+<td>[0.4, 0.4, 0.4]</td>
 </tr>
 <tr>
 <td align="left"><code>lateral_acceleration.max_values</code></td>
 <td>[m/ss]</td>
 <td>double</td>
 <td>Max lateral acceleration values corresponding to velocity (look up table)</td>
-<td>[0.5, 0.5, 0.5]</td>
+<td>[0.65, 0.65, 0.65]</td>
 </tr>
+</tbody>
+</table>
+<h3 id="lane-change-regulations_1">Lane change regulations<a class="headerlink" href="#lane-change-regulations_1" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th>Unit</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>regulation.crosswalk</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Allow lane change in between crosswalks</td>
+<td>true</td>
+</tr>
+<tr>
+<td align="left"><code>regulation.intersection</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Allow lane change in between intersections</td>
+<td>true</td>
+</tr>
+<tr>
+<td align="left"><code>regulation.traffic_light</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Allow lane change to be performed in between traffic light</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ego-vehicle-stuck-detection">Ego vehicle stuck detection<a class="headerlink" href="#ego-vehicle-stuck-detection" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th>Unit</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>stuck_detection.velocity</code></td>
+<td>[m/s]</td>
+<td>double</td>
+<td>Velocity threshold for ego vehicle stuck detection</td>
+<td>0.1</td>
+</tr>
+<tr>
+<td align="left"><code>stuck_detection.stop_time</code></td>
+<td>[s]</td>
+<td>double</td>
+<td>Stop time threshold for ego vehicle stuck detection</td>
+<td>3.0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="collision-checks">Collision checks<a class="headerlink" href="#collision-checks" title="Permanent link">#</a></h3>
+<h4 id="target-objects">Target Objects<a class="headerlink" href="#target-objects" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th>Unit</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td align="left"><code>target_object.car</code></td>
 <td>[-]</td>
@@ -15000,64 +15078,6 @@ If the ego vehicle velocity is smaller than <code>stuck_detection.velocity</code
 </tr>
 </tbody>
 </table>
-<h3 id="lane-change-regulations_1">Lane change regulations<a class="headerlink" href="#lane-change-regulations_1" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th>Unit</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>regulation.crosswalk</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>Regulate lane change on crosswalks</td>
-<td>false</td>
-</tr>
-<tr>
-<td align="left"><code>regulation.intersection</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>Regulate lane change on intersections</td>
-<td>false</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ego-vehicle-stuck-detection">Ego vehicle stuck detection<a class="headerlink" href="#ego-vehicle-stuck-detection" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th>Unit</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>stuck_detection.velocity</code></td>
-<td>[m/s]</td>
-<td>double</td>
-<td>Velocity threshold for ego vehicle stuck detection</td>
-<td>0.1</td>
-</tr>
-<tr>
-<td align="left"><code>stuck_detection.stop_time</code></td>
-<td>[s]</td>
-<td>double</td>
-<td>Stop time threshold for ego vehicle stuck detection</td>
-<td>3.0</td>
-</tr>
-</tbody>
-</table>
-<h3 id="collision-checks-during-lane-change">Collision checks during lane change<a class="headerlink" href="#collision-checks-during-lane-change" title="Permanent link">#</a></h3>
-<p>The following parameters are configurable in <code>behavior_path_planner.param.yaml</code> and <code>lane_change.param.yaml</code>.</p>
 <h4 id="common">common<a class="headerlink" href="#common" title="Permanent link">#</a></h4>
 <table>
 <thead>
@@ -15086,7 +15106,7 @@ If the ego vehicle velocity is smaller than <code>stuck_detection.velocity</code
 </tr>
 </tbody>
 </table>
-<h4 id="execution">execution<a class="headerlink" href="#execution" title="Permanent link">#</a></h4>
+<h4 id="additional-parameters">Additional parameters<a class="headerlink" href="#additional-parameters" title="Permanent link">#</a></h4>
 <table>
 <thead>
 <tr>
@@ -15099,19 +15119,54 @@ If the ego vehicle velocity is smaller than <code>stuck_detection.velocity</code
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>safety_check.execution.lateral_distance_max_threshold</code></td>
-<td>[m]</td>
-<td>double</td>
-<td>The lateral distance threshold that is used to determine whether lateral distance between two object is enough and whether lane change is safe.</td>
-<td>2.0</td>
+<td align="left"><code>enable_collision_check_at_prepare_phase</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>Perform collision check starting from prepare phase. If <code>false</code>, collision check only evaluated for lane changing phase.</td>
+<td>false</td>
 </tr>
 <tr>
-<td align="left"><code>safety_check.execution.longitudinal_distance_min_threshold</code></td>
-<td>[m]</td>
+<td align="left"><code>prepare_phase_ignore_target_speed_thresh</code></td>
+<td>[m/s]</td>
 <td>double</td>
-<td>The longitudinal distance threshold that is used to determine whether longitudinal distance between two object is enough and whether lane change is safe.</td>
-<td>3.0</td>
+<td>Ignore collision check in prepare phase of object speed that is lesser that the configured value. <code>enable_collision_check_at_prepare_phase</code> must be <code>true</code></td>
+<td>0.1</td>
 </tr>
+<tr>
+<td align="left"><code>check_objects_on_current_lanes</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>If true, the lane change module check objects on current lanes when performing collision assessment.</td>
+<td>false</td>
+</tr>
+<tr>
+<td align="left"><code>check_objects_on_other_lanes</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>If true, the lane change module include objects on other lanes. when performing collision assessment</td>
+<td>false</td>
+</tr>
+<tr>
+<td align="left"><code>use_all_predicted_path</code></td>
+<td>[-]</td>
+<td>boolean</td>
+<td>If false, use only the predicted path that has the maximum confidence.</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<h4 id="safety-constraints-during-lane-change-path-is-computed">safety constraints during lane change path is computed<a class="headerlink" href="#safety-constraints-during-lane-change-path-is-computed" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th>Unit</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td align="left"><code>safety_check.execution.expected_front_deceleration</code></td>
 <td>[m/s^2]</td>
@@ -15138,46 +15193,32 @@ If the ego vehicle velocity is smaller than <code>stuck_detection.velocity</code
 <td>[s]</td>
 <td>double</td>
 <td>The time buffer for the rear vehicle to come into complete stop when its driver perform sudden braking.</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td align="left"><code>safety_check.execution.lateral_distance_max_threshold</code></td>
+<td>[m]</td>
+<td>double</td>
+<td>The lateral distance threshold that is used to determine whether lateral distance between two object is enough and whether lane change is safe.</td>
 <td>2.0</td>
 </tr>
 <tr>
-<td align="left"><code>safety_check.execution.enable_collision_check_at_prepare_phase</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>Perform collision check starting from prepare phase. If <code>false</code>, collision check only evaluated for lane changing phase.</td>
-<td>true</td>
-</tr>
-<tr>
-<td align="left"><code>safety_check.execution.prepare_phase_ignore_target_speed_thresh</code></td>
-<td>[m/s]</td>
+<td align="left"><code>safety_check.execution.longitudinal_distance_min_threshold</code></td>
+<td>[m]</td>
 <td>double</td>
-<td>Ignore collision check in prepare phase of object speed that is lesser that the configured value. <code>enable_collision_check_at_prepare_phase</code> must be <code>true</code></td>
-<td>0.1</td>
+<td>The longitudinal distance threshold that is used to determine whether longitudinal distance between two object is enough and whether lane change is safe.</td>
+<td>3.0</td>
 </tr>
 <tr>
-<td align="left"><code>safety_check.execution.check_objects_on_current_lanes</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>If true, the lane change module include objects on current lanes.</td>
-<td>true</td>
-</tr>
-<tr>
-<td align="left"><code>safety_check.execution.check_objects_on_other_lanes</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>If true, the lane change module include objects on other lanes.</td>
-<td>true</td>
-</tr>
-<tr>
-<td align="left"><code>safety_check.execution.use_all_predicted_path</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>If false, use only the predicted path that has the maximum confidence.</td>
-<td>true</td>
+<td align="left"><code>safety_check.cancel.longitudinal_velocity_delta_time</code></td>
+<td>[m]</td>
+<td>double</td>
+<td>The time multiplier that is used to compute the actual gap between vehicle at each predicted points (not RSS distance)</td>
+<td>0.8</td>
 </tr>
 </tbody>
 </table>
-<h5 id="cancel_1">cancel<a class="headerlink" href="#cancel_1" title="Permanent link">#</a></h5>
+<h5 id="safety-constraints-to-cancel-lane-change-path">safety constraints to cancel lane change path<a class="headerlink" href="#safety-constraints-to-cancel-lane-change-path" title="Permanent link">#</a></h5>
 <table>
 <thead>
 <tr>
@@ -15190,85 +15231,57 @@ If the ego vehicle velocity is smaller than <code>stuck_detection.velocity</code
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>safety_check.cancel.lateral_distance_max_threshold</code></td>
-<td>[m]</td>
-<td>double</td>
-<td>The lateral distance threshold that is used to determine whether lateral distance between two object is enough and whether lane change is safe.</td>
-<td>1.5</td>
-</tr>
-<tr>
-<td align="left"><code>safety_check.cancel.longitudinal_distance_min_threshold</code></td>
-<td>[m]</td>
-<td>double</td>
-<td>The longitudinal distance threshold that is used to determine whether longitudinal distance between two object is enough and whether lane change is safe.</td>
-<td>3.0</td>
-</tr>
-<tr>
 <td align="left"><code>safety_check.cancel.expected_front_deceleration</code></td>
 <td>[m/s^2]</td>
 <td>double</td>
 <td>The front object's maximum deceleration when the front vehicle perform sudden braking. (*1)</td>
-<td>-1.5</td>
+<td>-1.0</td>
 </tr>
 <tr>
 <td align="left"><code>safety_check.cancel.expected_rear_deceleration</code></td>
 <td>[m/s^2]</td>
 <td>double</td>
 <td>The rear object's maximum deceleration when the rear vehicle perform sudden braking. (*1)</td>
-<td>-2.5</td>
+<td>-2.0</td>
 </tr>
 <tr>
 <td align="left"><code>safety_check.cancel.rear_vehicle_reaction_time</code></td>
 <td>[s]</td>
 <td>double</td>
 <td>The reaction time of the rear vehicle driver which starts from the driver noticing the sudden braking of the front vehicle until the driver step on the brake.</td>
-<td>2.0</td>
+<td>1.5</td>
 </tr>
 <tr>
 <td align="left"><code>safety_check.cancel.rear_vehicle_safety_time_margin</code></td>
 <td>[s]</td>
 <td>double</td>
 <td>The time buffer for the rear vehicle to come into complete stop when its driver perform sudden braking.</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td align="left"><code>safety_check.cancel.lateral_distance_max_threshold</code></td>
+<td>[m]</td>
+<td>double</td>
+<td>The lateral distance threshold that is used to determine whether lateral distance between two object is enough and whether lane change is safe.</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td align="left"><code>safety_check.cancel.longitudinal_distance_min_threshold</code></td>
+<td>[m]</td>
+<td>double</td>
+<td>The longitudinal distance threshold that is used to determine whether longitudinal distance between two object is enough and whether lane change is safe.</td>
 <td>2.5</td>
 </tr>
 <tr>
-<td align="left"><code>safety_check.cancel.enable_collision_check_at_prepare_phase</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>Perform collision check starting from prepare phase. If <code>false</code>, collision check only evaluated for lane changing phase.</td>
-<td>false</td>
-</tr>
-<tr>
-<td align="left"><code>safety_check.cancel.prepare_phase_ignore_target_speed_thresh</code></td>
-<td>[m/s]</td>
+<td align="left"><code>safety_check.cancel.longitudinal_velocity_delta_time</code></td>
+<td>[m]</td>
 <td>double</td>
-<td>Ignore collision check in prepare phase of object speed that is lesser that the configured value. <code>enable_collision_check_at_prepare_phase</code> must be <code>true</code></td>
-<td>0.2</td>
-</tr>
-<tr>
-<td align="left"><code>safety_check.cancel.check_objects_on_current_lanes</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>If true, the lane change module include objects on current lanes.</td>
-<td>false</td>
-</tr>
-<tr>
-<td align="left"><code>safety_check.cancel.check_objects_on_other_lanes</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>If true, the lane change module include objects on other lanes.</td>
-<td>false</td>
-</tr>
-<tr>
-<td align="left"><code>safety_check.cancel.use_all_predicted_path</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>If false, use only the predicted path that has the maximum confidence.</td>
-<td>false</td>
+<td>The time multiplier that is used to compute the actual gap between vehicle at each predicted points (not RSS distance)</td>
+<td>0.6</td>
 </tr>
 </tbody>
 </table>
-<h5 id="stuck">stuck<a class="headerlink" href="#stuck" title="Permanent link">#</a></h5>
+<h5 id="safety-constraints-used-during-lane-change-path-is-computed-when-ego-is-stuck">safety constraints used during lane change path is computed when ego is stuck<a class="headerlink" href="#safety-constraints-used-during-lane-change-path-is-computed-when-ego-is-stuck" title="Permanent link">#</a></h5>
 <table>
 <thead>
 <tr>
@@ -15280,20 +15293,6 @@ If the ego vehicle velocity is smaller than <code>stuck_detection.velocity</code
 </tr>
 </thead>
 <tbody>
-<tr>
-<td align="left"><code>safety_check.stuck.lateral_distance_max_threshold</code></td>
-<td>[m]</td>
-<td>double</td>
-<td>The lateral distance threshold that is used to determine whether lateral distance between two object is enough and whether lane change is safe.</td>
-<td>2.0</td>
-</tr>
-<tr>
-<td align="left"><code>safety_check.stuck.longitudinal_distance_min_threshold</code></td>
-<td>[m]</td>
-<td>double</td>
-<td>The longitudinal distance threshold that is used to determine whether longitudinal distance between two object is enough and whether lane change is safe.</td>
-<td>3.0</td>
-</tr>
 <tr>
 <td align="left"><code>safety_check.stuck.expected_front_deceleration</code></td>
 <td>[m/s^2]</td>
@@ -15320,42 +15319,28 @@ If the ego vehicle velocity is smaller than <code>stuck_detection.velocity</code
 <td>[s]</td>
 <td>double</td>
 <td>The time buffer for the rear vehicle to come into complete stop when its driver perform sudden braking.</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td align="left"><code>safety_check.stuck.lateral_distance_max_threshold</code></td>
+<td>[m]</td>
+<td>double</td>
+<td>The lateral distance threshold that is used to determine whether lateral distance between two object is enough and whether lane change is safe.</td>
 <td>2.0</td>
 </tr>
 <tr>
-<td align="left"><code>safety_check.stuck.enable_collision_check_at_prepare_phase</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>Perform collision check starting from prepare phase. If <code>false</code>, collision check only evaluated for lane changing phase.</td>
-<td>true</td>
-</tr>
-<tr>
-<td align="left"><code>safety_check.stuck.prepare_phase_ignore_target_speed_thresh</code></td>
-<td>[m/s]</td>
+<td align="left"><code>safety_check.stuck.longitudinal_distance_min_threshold</code></td>
+<td>[m]</td>
 <td>double</td>
-<td>Ignore collision check in prepare phase of object speed that is lesser that the configured value. <code>enable_collision_check_at_prepare_phase</code> must be <code>true</code></td>
-<td>0.1</td>
+<td>The longitudinal distance threshold that is used to determine whether longitudinal distance between two object is enough and whether lane change is safe.</td>
+<td>3.0</td>
 </tr>
 <tr>
-<td align="left"><code>safety_check.stuck.check_objects_on_current_lanes</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>If true, the lane change module include objects on current lanes.</td>
-<td>true</td>
-</tr>
-<tr>
-<td align="left"><code>safety_check.stuck.check_objects_on_other_lanes</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>If true, the lane change module include objects on other lanes.</td>
-<td>true</td>
-</tr>
-<tr>
-<td align="left"><code>safety_check.stuck.use_all_predicted_path</code></td>
-<td>[-]</td>
-<td>boolean</td>
-<td>If false, use only the predicted path that has the maximum confidence.</td>
-<td>true</td>
+<td align="left"><code>safety_check.stuck.longitudinal_velocity_delta_time</code></td>
+<td>[m]</td>
+<td>double</td>
+<td>The time multiplier that is used to compute the actual gap between vehicle at each predicted points (not RSS distance)</td>
+<td>0.8</td>
 </tr>
 </tbody>
 </table>
