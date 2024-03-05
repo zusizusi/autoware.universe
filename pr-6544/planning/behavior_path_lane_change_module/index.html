@@ -14625,6 +14625,7 @@
 <li>Dashed lane marking: Lane changes are permitted in both directions.</li>
 <li>Dashed marking on the left and solid on the right: Lane changes are allowed from left to right.</li>
 <li>Dashed marking on the right and solid on the left: Lane changes are allowed from right to left.</li>
+<li><code>allow_lane_change</code> tags is set as <code>true</code></li>
 </ul>
 </li>
 <li>During lane change request condition<ul>
@@ -14713,8 +14714,8 @@ Computing candidate paths that assumes ego vehicle's slows down is performed by 
 <p>A candidate path is considered valid if it meets the following criteria:</p>
 <ol>
 <li>The distance from the ego vehicle's current position to the end of the current lanes is sufficient to perform a single lane change.</li>
-<li>The distance from the ego vehicle's current position to the goal, if within the current lanes, allows for multiple lane changes.</li>
-<li>The distance from the ego vehicle's current position to the end of the target lanes is adequate for executing multiple lane changes, regardless of whether the goal is within the current lanes.</li>
+<li>The distance from the ego vehicle's current position to the goal along the current lanes is adequate to complete multiple lane changes.</li>
+<li>The distance from the ego vehicle's current position to the end of the target lanes is adequate for completing multiple lane changes.</li>
 <li>Intersection requirements are met (conditions are parameterized).</li>
 <li>Crosswalk requirements are satisfied (conditions are parameterized).</li>
 <li>Traffic light regulations are adhered to (conditions are parameterized).</li>
