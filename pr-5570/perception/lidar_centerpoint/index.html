@@ -15010,6 +15010,7 @@ docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </
 </code></pre></div>
 <h3 id="preparing-nuscenes-dataset-for-training">Preparing NuScenes dataset for training<a class="headerlink" href="#preparing-nuscenes-dataset-for-training" title="Permanent link">#</a></h3>
 <p><strong>Step 1.</strong> Download the NuScenes dataset from the <a href="https://www.nuscenes.org/download">official website</a> and extract the dataset to a folder of your choice.</p>
+<p><strong>Note:</strong> The NuScenes dataset is large and requires significant disk space. Ensure you have enough storage available before proceeding.</p>
 <p><strong>Step 2.</strong> Create a symbolic link to the dataset folder</p>
 <div class="highlight"><pre><span></span><code>ln<span class="w"> </span>-s<span class="w"> </span>/path/to/nuscenes/dataset/<span class="w"> </span>/path/to/mmdetection3d/data/nuscenes/
 </code></pre></div>
@@ -15021,7 +15022,7 @@ python<span class="w"> </span>tools/create_data.py<span class="w"> </span>nuscen
 <h4 id="prepare-the-config-file">Prepare the config file<a class="headerlink" href="#prepare-the-config-file" title="Permanent link">#</a></h4>
 <p>The configuration file that illustrates how to train the CenterPoint model with the NuScenes dataset is
 located at mmdetection3d/projects/AutowareCenterPoint/configs. This configuration file is a derived version of the
-centerpoint_pillar02_second_secfpn_head-circlenms_8xb4-cyclic-20e_nus-3d.py configuration file from mmdetection3D.
+<code>centerpoint_pillar02_second_secfpn_head-circlenms_8xb4-cyclic-20e_nus-3d.py</code> configuration file from mmdetection3D.
 In this custom configuration, the <strong>use_voxel_center_z parameter</strong> is set to <strong>False</strong> to deactivate the z coordinate of the voxel center,
 aligning with the original paper's specifications and making the model compatible with Autoware. Additionally, the filter size is set as <strong>[32, 32]</strong>.</p>
 <p>The CenterPoint model can be tailored to your specific requirements by modifying various parameters within the configuration file.
