@@ -14961,7 +14961,7 @@ Although it is preferred to move all the ROS parameters in <code>.param.yaml</co
 <h2 id="trained-models">Trained Models<a class="headerlink" href="#trained-models" title="Permanent link">#</a></h2>
 <p>You can download the onnx format of trained models by clicking on the links below.</p>
 <ul>
-<li>Centerpoint : <a href="https://awf.ml.dev.web.auto/perception/models/centerpoint/v2/pts_voxel_encoder_centerpoint.onnx">pts_voxel_encoder_centerpoint.onnx</a>, <a href="https://awf.ml.dev.web.auto/perception/models/centerpoint/v2/pts_backbone_neck_head_centerpoint.onnx">pts_backbone_neck_head_centerpoint.onnx</a></li>
+<li>Centerpoint: <a href="https://awf.ml.dev.web.auto/perception/models/centerpoint/v2/pts_voxel_encoder_centerpoint.onnx">pts_voxel_encoder_centerpoint.onnx</a>, <a href="https://awf.ml.dev.web.auto/perception/models/centerpoint/v2/pts_backbone_neck_head_centerpoint.onnx">pts_backbone_neck_head_centerpoint.onnx</a></li>
 <li>Centerpoint tiny: <a href="https://awf.ml.dev.web.auto/perception/models/centerpoint/v2/pts_voxel_encoder_centerpoint_tiny.onnx">pts_voxel_encoder_centerpoint_tiny.onnx</a>, <a href="https://awf.ml.dev.web.auto/perception/models/centerpoint/v2/pts_backbone_neck_head_centerpoint_tiny.onnx">pts_backbone_neck_head_centerpoint_tiny.onnx</a></li>
 </ul>
 <p><code>Centerpoint</code> was trained in <code>nuScenes</code> (~28k lidar frames) [8] and TIER IV's internal database (~11k lidar frames) for 60 epochs.
@@ -14997,15 +14997,15 @@ In addition, we've integrated a PyTorch to ONNX converter and a T4 format reader
 pip<span class="w"> </span>install<span class="w"> </span>-v<span class="w"> </span>-e<span class="w"> </span>.
 </code></pre></div>
 <h4 id="use-training-repository-with-docker">Use Training Repository with Docker<a class="headerlink" href="#use-training-repository-with-docker" title="Permanent link">#</a></h4>
-<p>Alternatively, you can use Docker to run the mmdetection3d repository.We provide a Dockerfile to build a Docker image with the mmdetection3d repository and its dependencies.</p>
+<p>Alternatively, you can use Docker to run the mmdetection3d repository. We provide a Dockerfile to build a Docker image with the mmdetection3d repository and its dependencies.</p>
 <p>Clone fork of the mmdetection3d repository</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/autowarefoundation/mmdetection3d.git
 </code></pre></div>
-<p>Build the Docker image by running the following command</p>
+<p>Build the Docker image by running the following command:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>mmdetection3d
 docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>mmdetection3d<span class="w"> </span>-f<span class="w"> </span>docker/Dockerfile<span class="w"> </span>.
 </code></pre></div>
-<p>Run the Docker container</p>
+<p>Run the Docker container:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>--shm-size<span class="o">=</span>8g<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span><span class="o">{</span>DATA_DIR<span class="o">}</span>:/mmdetection3d/data<span class="w"> </span>mmdetection3d
 </code></pre></div>
 <h3 id="preparing-nuscenes-dataset-for-training">Preparing NuScenes dataset for training<a class="headerlink" href="#preparing-nuscenes-dataset-for-training" title="Permanent link">#</a></h3>
@@ -15021,9 +15021,10 @@ python<span class="w"> </span>tools/create_data.py<span class="w"> </span>nuscen
 <h3 id="training-centerpoint-with-nuscenes-dataset">Training CenterPoint with NuScenes Dataset<a class="headerlink" href="#training-centerpoint-with-nuscenes-dataset" title="Permanent link">#</a></h3>
 <h4 id="prepare-the-config-file">Prepare the config file<a class="headerlink" href="#prepare-the-config-file" title="Permanent link">#</a></h4>
 <p>The configuration file that illustrates how to train the CenterPoint model with the NuScenes dataset is
-located at mmdetection3d/projects/AutowareCenterPoint/configs. This configuration file is a derived version of the
-<code>centerpoint_pillar02_second_secfpn_head-circlenms_8xb4-cyclic-20e_nus-3d.py</code> configuration file from mmdetection3D.
-In this custom configuration, the <strong>use_voxel_center_z parameter</strong> is set to <strong>False</strong> to deactivate the z coordinate of the voxel center,
+located at <code>mmdetection3d/projects/AutowareCenterPoint/configs</code>. This configuration file is a derived version of
+<a href="https://github.com/autowarefoundation/mmdetection3d/blob/5c0613be29bd2e51771ec5e046d89ba3089887c7/configs/centerpoint/centerpoint_pillar02_second_secfpn_head-circlenms_8xb4-cyclic-20e_nus-3d.py">this centerpoint configuration file</a>
+from mmdetection3D.
+In this custom configuration, the <strong>use_voxel_center_z parameter</strong> is set as <strong>False</strong> to deactivate the z coordinate of the voxel center,
 aligning with the original paper's specifications and making the model compatible with Autoware. Additionally, the filter size is set as <strong>[32, 32]</strong>.</p>
 <p>The CenterPoint model can be tailored to your specific requirements by modifying various parameters within the configuration file.
 This includes adjustments related to preprocessing operations, training, testing, model architecture, dataset, optimizer, learning rate scheduler, and more.</p>
@@ -15043,7 +15044,7 @@ tar<span class="w"> </span>-xvf<span class="w"> </span>lidar_detection_sample_da
 ln<span class="w"> </span>-s<span class="w"> </span>/PATH/TO/DATASET/<span class="w"> </span>/PATH/TO/mmdetection3d/data/tier4_dataset/
 </code></pre></div>
 <h5 id="prepare-dataset-and-evaluate-trained-model">Prepare dataset and evaluate trained model<a class="headerlink" href="#prepare-dataset-and-evaluate-trained-model" title="Permanent link">#</a></h5>
-<p>Create .pkl files for training, evaluation, and testing.</p>
+<p>Create <code>.pkl</code> files for training, evaluation, and testing.</p>
 <div class="highlight"><pre><span></span><code>python<span class="w"> </span>tools/create_data.py<span class="w"> </span>T4Dataset<span class="w"> </span>--root-path<span class="w"> </span>data/sample_dataset/<span class="w"> </span>--out-dir<span class="w"> </span>data/sample_dataset/<span class="w"> </span>--extra-tag<span class="w"> </span>T4Dataset<span class="w"> </span>--version<span class="w"> </span>sample_dataset<span class="w"> </span>--annotation-hz<span class="w"> </span><span class="m">2</span>
 </code></pre></div>
 <p>Run evaluation</p>
