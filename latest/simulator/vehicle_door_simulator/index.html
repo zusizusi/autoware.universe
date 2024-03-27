@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/latest/common/tvm_utility/">
+        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/latest/simulator/vehicle_door_simulator/">
       
       
-        <link rel="prev" href="../traffic_light_utils/">
+        <link rel="prev" href="../simple_planning_simulator/">
       
       
-        <link rel="next" href="tvm-utility-yolo-v2-tiny-tests/">
+        <link rel="next" href="../../system/autoware_auto_msgs_adapter/">
       
       <link rel="icon" href="../../docs/assets/images/autoware-foundation.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.20">
     
     
       
-        <title>TVM Utility - Autoware Universe Documentation</title>
+        <title>vehicle_door_simulator - Autoware Universe Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tvm-utility" class="md-skip">
+        <a href="#vehicle_door_simulator" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TVM Utility
+              vehicle_door_simulator
             
           </span>
         </div>
@@ -208,8 +208,6 @@
         
   
   
-    
-  
 
 
   
@@ -221,7 +219,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../autoware_ad_api_specs/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../common/autoware_ad_api_specs/" class="md-tabs__link">
         Common
       </a>
     </li>
@@ -410,6 +408,8 @@
         
   
   
+    
+  
 
 
   
@@ -421,7 +421,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../simulator/dummy_perception_publisher/" class="md-tabs__link">
+      <a href="../dummy_perception_publisher/" class="md-tabs__link md-tabs__link--active">
         Simulator
       </a>
     </li>
@@ -532,16 +532,16 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
       
       
         
@@ -658,7 +658,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_1">
           <span class="md-nav__icon md-icon"></span>
           Common
@@ -693,7 +693,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../autoware_ad_api_specs/">Autoware ad api specs</a>
+          <a href="../../common/autoware_ad_api_specs/">Autoware ad api specs</a>
           
         </div>
       
@@ -787,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_auto_common/design/comparisons/" class="md-nav__link">
+      <a href="../../common/autoware_auto_common/design/comparisons/" class="md-nav__link">
         Comparisons
       </a>
     </li>
@@ -887,7 +887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_auto_geometry/design/interval/" class="md-nav__link">
+      <a href="../../common/autoware_auto_geometry/design/interval/" class="md-nav__link">
         Interval
       </a>
     </li>
@@ -901,7 +901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_auto_geometry/design/polygon_intersection_2d-design/" class="md-nav__link">
+      <a href="../../common/autoware_auto_geometry/design/polygon_intersection_2d-design/" class="md-nav__link">
         2D Convex Polygon Intersection
       </a>
     </li>
@@ -915,7 +915,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_auto_geometry/design/spatial-hash-design/" class="md-nav__link">
+      <a href="../../common/autoware_auto_geometry/design/spatial-hash-design/" class="md-nav__link">
         Spatial Hash
       </a>
     </li>
@@ -965,7 +965,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../autoware_auto_perception_rviz_plugin/">Autoware auto perception rviz plugin</a>
+          <a href="../../common/autoware_auto_perception_rviz_plugin/">Autoware auto perception rviz plugin</a>
           
         </div>
       
@@ -1059,7 +1059,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_auto_tf2/design/autoware-auto-tf2-design/" class="md-nav__link">
+      <a href="../../common/autoware_auto_tf2/design/autoware-auto-tf2-design/" class="md-nav__link">
         autoware_auto_tf2
       </a>
     </li>
@@ -1142,7 +1142,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../autoware_overlay_rviz_plugin/autoware_overlay_rviz_plugin/">Autoware overlay rviz plugin</a>
+          <a href="../../common/autoware_overlay_rviz_plugin/autoware_overlay_rviz_plugin/">Autoware overlay rviz plugin</a>
           
         </div>
       
@@ -1243,7 +1243,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_testing/design/autoware_testing-design/" class="md-nav__link">
+      <a href="../../common/autoware_testing/design/autoware_testing-design/" class="md-nav__link">
         autoware_testing
       </a>
     </li>
@@ -1293,7 +1293,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../bag_time_manager_rviz_plugin/">Bag time manager rviz plugin</a>
+          <a href="../../common/bag_time_manager_rviz_plugin/">Bag time manager rviz plugin</a>
           
         </div>
       
@@ -1341,7 +1341,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../component_interface_specs/">Component interface specs</a>
+          <a href="../../common/component_interface_specs/">Component interface specs</a>
           
         </div>
       
@@ -1389,7 +1389,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../component_interface_tools/">Component interface tools</a>
+          <a href="../../common/component_interface_tools/">Component interface tools</a>
           
         </div>
       
@@ -1437,7 +1437,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../component_interface_utils/">Component interface utils</a>
+          <a href="../../common/component_interface_utils/">Component interface utils</a>
           
         </div>
       
@@ -1485,7 +1485,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../cuda_utils/">Cuda utils</a>
+          <a href="../../common/cuda_utils/">Cuda utils</a>
           
         </div>
       
@@ -1579,7 +1579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fake_test_node/design/fake_test_node-design/" class="md-nav__link">
+      <a href="../../common/fake_test_node/design/fake_test_node-design/" class="md-nav__link">
         Fake Test Node
       </a>
     </li>
@@ -1629,7 +1629,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../geography_utils/">Geography utils</a>
+          <a href="../../common/geography_utils/">Geography utils</a>
           
         </div>
       
@@ -1690,7 +1690,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../global_parameter_loader/Readme/" class="md-nav__link">
+      <a href="../../common/global_parameter_loader/Readme/" class="md-nav__link">
         Autoware Global Parameter Loader
       </a>
     </li>
@@ -1733,7 +1733,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../glog_component/">Glog component</a>
+          <a href="../../common/glog_component/">Glog component</a>
           
         </div>
       
@@ -1794,7 +1794,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../goal_distance_calculator/Readme/" class="md-nav__link">
+      <a href="../../common/goal_distance_calculator/Readme/" class="md-nav__link">
         goal_distance_calculator
       </a>
     </li>
@@ -1837,7 +1837,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../grid_map_utils/">Grid map utils</a>
+          <a href="../../common/grid_map_utils/">Grid map utils</a>
           
         </div>
       
@@ -1885,7 +1885,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../interpolation/">Interpolation</a>
+          <a href="../../common/interpolation/">Interpolation</a>
           
         </div>
       
@@ -1933,7 +1933,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../kalman_filter/">Kalman filter</a>
+          <a href="../../common/kalman_filter/">Kalman filter</a>
           
         </div>
       
@@ -1981,7 +1981,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../mission_planner_rviz_plugin/">Mission planner rviz plugin</a>
+          <a href="../../common/mission_planner_rviz_plugin/">Mission planner rviz plugin</a>
           
         </div>
       
@@ -2031,7 +2031,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../motion_utils/">Motion utils</a>
+          <a href="../../common/motion_utils/">Motion utils</a>
           
             <label for="__nav_1_22">
               <span class="md-nav__icon md-icon"></span>
@@ -2120,7 +2120,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../motion_utils/docs/vehicle/vehicle/" class="md-nav__link">
+      <a href="../../common/motion_utils/docs/vehicle/vehicle/" class="md-nav__link">
         vehicle utils
       </a>
     </li>
@@ -2177,7 +2177,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../object_recognition_utils/">Object recognition utils</a>
+          <a href="../../common/object_recognition_utils/">Object recognition utils</a>
           
         </div>
       
@@ -2271,7 +2271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../osqp_interface/design/osqp_interface-design/" class="md-nav__link">
+      <a href="../../common/osqp_interface/design/osqp_interface-design/" class="md-nav__link">
         Interface for the OSQP library
       </a>
     </li>
@@ -2334,7 +2334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../path_distance_calculator/Readme/" class="md-nav__link">
+      <a href="../../common/path_distance_calculator/Readme/" class="md-nav__link">
         path_distance_calculator
       </a>
     </li>
@@ -2377,7 +2377,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../perception_utils/">Perception utils</a>
+          <a href="../../common/perception_utils/">Perception utils</a>
           
         </div>
       
@@ -2438,7 +2438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../polar_grid/Readme/" class="md-nav__link">
+      <a href="../../common/polar_grid/Readme/" class="md-nav__link">
         Polar Grid
       </a>
     </li>
@@ -2527,7 +2527,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../qp_interface/design/qp_interface-design/" class="md-nav__link">
+      <a href="../../common/qp_interface/design/qp_interface-design/" class="md-nav__link">
         Interface for QP solvers
       </a>
     </li>
@@ -2577,7 +2577,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../rtc_manager_rviz_plugin/">Rtc manager rviz plugin</a>
+          <a href="../../common/rtc_manager_rviz_plugin/">Rtc manager rviz plugin</a>
           
         </div>
       
@@ -2627,7 +2627,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../signal_processing/">Signal processing</a>
+          <a href="../../common/signal_processing/">Signal processing</a>
           
             <label for="__nav_1_30">
               <span class="md-nav__icon md-icon"></span>
@@ -2683,7 +2683,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../signal_processing/documentation/ButterworthFilter/" class="md-nav__link">
+      <a href="../../common/signal_processing/documentation/ButterworthFilter/" class="md-nav__link">
         ButterworthFilter
       </a>
     </li>
@@ -2733,7 +2733,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tensorrt_common/">Tensorrt common</a>
+          <a href="../../common/tensorrt_common/">Tensorrt common</a>
           
         </div>
       
@@ -2781,7 +2781,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_adapi_rviz_plugin/">Tier4 adapi rviz plugin</a>
+          <a href="../../common/tier4_adapi_rviz_plugin/">Tier4 adapi rviz plugin</a>
           
         </div>
       
@@ -2829,7 +2829,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_api_utils/">Tier4 api utils</a>
+          <a href="../../common/tier4_api_utils/">Tier4 api utils</a>
           
         </div>
       
@@ -2877,7 +2877,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_automatic_goal_rviz_plugin/">Tier4 automatic goal rviz plugin</a>
+          <a href="../../common/tier4_automatic_goal_rviz_plugin/">Tier4 automatic goal rviz plugin</a>
           
         </div>
       
@@ -2925,7 +2925,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_autoware_utils/">Tier4 autoware utils</a>
+          <a href="../../common/tier4_autoware_utils/">Tier4 autoware utils</a>
           
         </div>
       
@@ -2973,7 +2973,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_camera_view_rviz_plugin/">Tier4 camera view rviz plugin</a>
+          <a href="../../common/tier4_camera_view_rviz_plugin/">Tier4 camera view rviz plugin</a>
           
         </div>
       
@@ -3021,7 +3021,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_control_rviz_plugin/">Tier4 control rviz plugin</a>
+          <a href="../../common/tier4_control_rviz_plugin/">Tier4 control rviz plugin</a>
           
         </div>
       
@@ -3069,7 +3069,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_datetime_rviz_plugin/">Tier4 datetime rviz plugin</a>
+          <a href="../../common/tier4_datetime_rviz_plugin/">Tier4 datetime rviz plugin</a>
           
         </div>
       
@@ -3117,7 +3117,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_debug_rviz_plugin/">Tier4 debug rviz plugin</a>
+          <a href="../../common/tier4_debug_rviz_plugin/">Tier4 debug rviz plugin</a>
           
         </div>
       
@@ -3165,7 +3165,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_localization_rviz_plugin/">Tier4 localization rviz plugin</a>
+          <a href="../../common/tier4_localization_rviz_plugin/">Tier4 localization rviz plugin</a>
           
         </div>
       
@@ -3213,7 +3213,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_logging_level_configure_rviz_plugin/">Tier4 logging level configure rviz plugin</a>
+          <a href="../../common/tier4_logging_level_configure_rviz_plugin/">Tier4 logging level configure rviz plugin</a>
           
         </div>
       
@@ -3261,7 +3261,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_perception_rviz_plugin/">Tier4 perception rviz plugin</a>
+          <a href="../../common/tier4_perception_rviz_plugin/">Tier4 perception rviz plugin</a>
           
         </div>
       
@@ -3309,7 +3309,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_planning_rviz_plugin/">Tier4 planning rviz plugin</a>
+          <a href="../../common/tier4_planning_rviz_plugin/">Tier4 planning rviz plugin</a>
           
         </div>
       
@@ -3357,7 +3357,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_screen_capture_rviz_plugin/">Tier4 screen capture rviz plugin</a>
+          <a href="../../common/tier4_screen_capture_rviz_plugin/">Tier4 screen capture rviz plugin</a>
           
         </div>
       
@@ -3405,7 +3405,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_simulated_clock_rviz_plugin/">Tier4 simulated clock rviz plugin</a>
+          <a href="../../common/tier4_simulated_clock_rviz_plugin/">Tier4 simulated clock rviz plugin</a>
           
         </div>
       
@@ -3453,7 +3453,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_state_rviz_plugin/">Tier4 state rviz plugin</a>
+          <a href="../../common/tier4_state_rviz_plugin/">Tier4 state rviz plugin</a>
           
         </div>
       
@@ -3501,7 +3501,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_system_rviz_plugin/">Tier4 system rviz plugin</a>
+          <a href="../../common/tier4_system_rviz_plugin/">Tier4 system rviz plugin</a>
           
         </div>
       
@@ -3549,7 +3549,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_target_object_type_rviz_plugin/">Tier4 target object type rviz plugin</a>
+          <a href="../../common/tier4_target_object_type_rviz_plugin/">Tier4 target object type rviz plugin</a>
           
         </div>
       
@@ -3597,7 +3597,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_traffic_light_rviz_plugin/">Tier4 traffic light rviz plugin</a>
+          <a href="../../common/tier4_traffic_light_rviz_plugin/">Tier4 traffic light rviz plugin</a>
           
         </div>
       
@@ -3645,7 +3645,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tier4_vehicle_rviz_plugin/">Tier4 vehicle rviz plugin</a>
+          <a href="../../common/tier4_vehicle_rviz_plugin/">Tier4 vehicle rviz plugin</a>
           
         </div>
       
@@ -3706,7 +3706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../traffic_light_recognition_marker_publisher/Readme/" class="md-nav__link">
+      <a href="../../common/traffic_light_recognition_marker_publisher/Readme/" class="md-nav__link">
         path_distance_calculator
       </a>
     </li>
@@ -3749,7 +3749,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../traffic_light_utils/">Traffic light utils</a>
+          <a href="../../common/traffic_light_utils/">Traffic light utils</a>
           
         </div>
       
@@ -3773,18 +3773,18 @@
               
   
   
-    
-  
   
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_53" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1_53" >
       
       
         
@@ -3800,8 +3800,8 @@
       
         
         
-        <div class="md-nav__link md-nav__link--index md-nav__link--active">
-          <a href="./">Tvm utility</a>
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../common/tvm_utility/">Tvm utility</a>
           
             <label for="__nav_1_53">
               <span class="md-nav__icon md-icon"></span>
@@ -3809,7 +3809,7 @@
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_53_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_53_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_1_53">
           <span class="md-nav__icon md-icon"></span>
           Tvm utility
@@ -3824,7 +3824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="tvm-utility-yolo-v2-tiny-tests/" class="md-nav__link">
+      <a href="../../common/tvm_utility/tvm-utility-yolo-v2-tiny-tests/" class="md-nav__link">
         YOLOv2 Tiny Example Pipeline
       </a>
     </li>
@@ -3858,7 +3858,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="artifacts/">Artifacts</a>
+          <a href="../../common/tvm_utility/artifacts/">Artifacts</a>
           
         </div>
       
@@ -12279,16 +12279,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
       
       
         
@@ -12307,7 +12307,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_10">
           <span class="md-nav__icon md-icon"></span>
           Simulator
@@ -12342,7 +12342,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../simulator/dummy_perception_publisher/">Dummy perception publisher</a>
+          <a href="../dummy_perception_publisher/">Dummy perception publisher</a>
           
         </div>
       
@@ -12390,7 +12390,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../simulator/fault_injection/">Fault injection</a>
+          <a href="../fault_injection/">Fault injection</a>
           
         </div>
       
@@ -12438,7 +12438,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../simulator/simple_planning_simulator/">Simple planning simulator</a>
+          <a href="../simple_planning_simulator/">Simple planning simulator</a>
           
         </div>
       
@@ -12462,18 +12462,18 @@
               
   
   
+    
+  
   
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_4" checked>
       
       
         
@@ -12485,12 +12485,12 @@
       
         
         
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../../simulator/vehicle_door_simulator/">Vehicle door simulator</a>
+        <div class="md-nav__link md-nav__link--index md-nav__link--active">
+          <a href="./">Vehicle door simulator</a>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_10_4">
           <span class="md-nav__icon md-icon"></span>
           Vehicle door simulator
@@ -14666,96 +14666,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#purpose-use-cases" class="md-nav__link">
-    Purpose / Use cases
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#design" class="md-nav__link">
-    Design
-  </a>
-  
-    <nav class="md-nav" aria-label="Design">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#api" class="md-nav__link">
-    API
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#error-detection-and-handling" class="md-nav__link">
-    Error detection and handling
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#neural-networks-provider" class="md-nav__link">
-    Neural Networks Provider
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#security-considerations" class="md-nav__link">
-    Security considerations
-  </a>
-  
-    <nav class="md-nav" aria-label="Security considerations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pipeline" class="md-nav__link">
-    Pipeline
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#network-provider" class="md-nav__link">
-    Network provider
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#future-extensions-unimplemented-parts" class="md-nav__link">
-    Future extensions / Unimplemented parts
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#related-issues" class="md-nav__link">
-    Related issues
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -14772,101 +14682,8 @@
   
 
 
-<div><h1 id="tvm-utility">TVM Utility<a class="headerlink" href="#tvm-utility" title="Permanent link">#</a></h1>
-<p>This is the design document for the <code>tvm_utility</code> package. For instructions on how to build the tests for YOLOv2 Tiny,
-see the <a href="tvm-utility-yolo-v2-tiny-tests/">YOLOv2 Tiny Example Pipeline</a>.
-For information about where to store test artifacts see the <a href="artifacts/">TVM Utility Artifacts</a>.</p>
-<h2 id="purpose-use-cases">Purpose / Use cases<a class="headerlink" href="#purpose-use-cases" title="Permanent link">#</a></h2>
-<p>A set of c++ utilities to help build a TVM based machine learning inference pipeline. The library contains a pipeline
-class which helps building the pipeline and a number of utility functions that are common in machine learning.</p>
-<h2 id="design">Design<a class="headerlink" href="#design" title="Permanent link">#</a></h2>
-<p>The Pipeline Class is a standardized way to write an inference pipeline. The pipeline class contains 3 different stages:
-the pre-processor, the inference engine and the post-processor. The TVM implementation of an inference engine stage is
-provided.</p>
-<h3 id="api">API<a class="headerlink" href="#api" title="Permanent link">#</a></h3>
-<p>The pre-processor and post-processor need to be implemented by the user before instantiating the pipeline. You can see example
-usage in the example pipeline at <code>test/yolo_v2_tiny</code>.</p>
-<p>Each stage in the pipeline has a <code>schedule</code> function which takes input data as a parameter and return the output data.
-Once the pipeline object is created, <code>pipeline.schedule</code> is called to run the pipeline.</p>
-<div class="highlight"><pre><span></span><code>int main() {
-   create_subscription&lt;sensor_msgs::msg::PointCloud2&gt;("points_raw",
-   rclcpp::QoS{1}, [this](const sensor_msgs::msg::PointCloud2::SharedPtr msg)
-   {pipeline.schedule(msg);});
-}
-</code></pre></div>
-<h4 id="version-checking">Version checking<a class="headerlink" href="#version-checking" title="Permanent link">#</a></h4>
-<p>The <code>InferenceEngineTVM::version_check</code> function can be used to check the version of the neural network in use against the range of earliest to latest supported versions.</p>
-<p>The <code>InferenceEngineTVM</code> class holds the latest supported version, which needs to be updated when the targeted version changes; after having tested the effect of the version change on the packages dependent on this one.</p>
-<p>The earliest supported version depends on each package making use of the inference, and so should be defined (and maintained) in those packages.</p>
-<h4 id="models">Models<a class="headerlink" href="#models" title="Permanent link">#</a></h4>
-<p>Dependent packages are expected to use the <code>get_neural_network</code> cmake function from this package in order to build proper external dependency.</p>
-<h3 id="error-detection-and-handling">Error detection and handling<a class="headerlink" href="#error-detection-and-handling" title="Permanent link">#</a></h3>
-<p><code>std::runtime_error</code> should be thrown whenever an error is encountered. It should be populated with an appropriate text
-error description.</p>
-<h3 id="neural-networks-provider">Neural Networks Provider<a class="headerlink" href="#neural-networks-provider" title="Permanent link">#</a></h3>
-<p>The neural networks are compiled as part of the
-<a href="https://github.com/autowarefoundation/modelzoo/">Model Zoo</a> CI pipeline and saved to an S3 bucket.</p>
-<p>The <code>get_neural_network</code> function creates an abstraction for the artifact management.
-Users should check if model configuration header file is under "data/user/${MODEL_NAME}/". Otherwise, nothing happens and compilation of the package will be skipped.</p>
-<p>The structure inside of the source directory of the package making use of the function is as follow:</p>
-<div class="highlight"><pre><span></span><code>.
-├── data
-│   └── models
-│       ├── ${MODEL 1}
-│       │   └── inference_engine_tvm_config.hpp
-│       ├── ...
-│       └── ${MODEL ...}
-│           └── ...
-</code></pre></div>
-<p>The <code>inference_engine_tvm_config.hpp</code> file needed for compilation by dependent packages should be available under "data/models/${MODEL_NAME}/inference_engine_tvm_config.hpp".
-Dependent packages can use the cmake <code>add_dependencies</code> function with the name provided in the <code>DEPENDENCY</code> output parameter of <code>get_neural_network</code> to ensure this file is created before it gets used.</p>
-<p>The other <code>deploy_*</code> files are installed to "models/${MODEL_NAME}/" under the <code>share</code> directory of the package.</p>
-<p>The other model files should be stored in autoware_data folder under package folder with the structure:</p>
-<div class="highlight"><pre><span></span><code>$HOME/autoware_data
-|     └──${package}
-|        └──models
-|           ├── ${MODEL 1}
-|           |    ├── deploy_graph.json
-|           |    ├── deploy_lib.so
-|           |    └── deploy_param.params
-|           ├── ...
-|           └── ${MODEL ...}
-|                └── ...
-</code></pre></div>
-<h4 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h4>
-<p>Outputs:</p>
-<ul>
-<li><code>get_neural_network</code> cmake function; create proper external dependency for a package with use of the model provided by the user.</li>
-</ul>
-<p>In/Out:</p>
-<ul>
-<li>The <code>DEPENDENCY</code> argument of <code>get_neural_network</code> can be checked for the outcome of the function.
-  It is an empty string when the neural network wasn't provided by the user.</li>
-</ul>
-<h2 id="security-considerations">Security considerations<a class="headerlink" href="#security-considerations" title="Permanent link">#</a></h2>
-<h3 id="pipeline">Pipeline<a class="headerlink" href="#pipeline" title="Permanent link">#</a></h3>
-<p>Both the input and output are controlled by the same actor, so the following security concerns are out-of-scope:</p>
-<ul>
-<li>Spoofing</li>
-<li>Tampering</li>
-</ul>
-<p>Leaking data to another actor would require a flaw in TVM or the host operating system that allows arbitrary memory to
-be read, a significant security flaw in itself. This is also true for an external actor operating the pipeline early:
-only the object that initiated the pipeline can run the methods to receive its output.</p>
-<p>A Denial-of-Service attack could make the target hardware unusable for other pipelines but would require being able to
-run code on the CPU, which would already allow a more severe Denial-of-Service attack.</p>
-<p>No elevation of privilege is required for this package.</p>
-<h3 id="network-provider">Network provider<a class="headerlink" href="#network-provider" title="Permanent link">#</a></h3>
-<p>The pre-compiled networks are downloaded from an S3 bucket and are under threat of spoofing,
-tampering and denial of service.
-Spoofing is mitigated by using an https connection.
-Mitigations for tampering and denial of service are left to AWS.</p>
-<p>The user-provided networks are installed as they are on the host system.
-The user is in charge of securing the files they provide with regard to information disclosure.</p>
-<h2 id="future-extensions-unimplemented-parts">Future extensions / Unimplemented parts<a class="headerlink" href="#future-extensions-unimplemented-parts" title="Permanent link">#</a></h2>
-<p>Future packages will use tvm_utility as part of the perception stack to run machine learning workloads.</p>
-<h2 id="related-issues">Related issues<a class="headerlink" href="#related-issues" title="Permanent link">#</a></h2>
-<p><a href="https://github.com/autowarefoundation/autoware/discussions/2557">https://github.com/autowarefoundation/autoware/discussions/2557</a></p></div>
+<div><h1 id="vehicle_door_simulator">vehicle_door_simulator<a class="headerlink" href="#vehicle_door_simulator" title="Permanent link">#</a></h1>
+<p>This package is for testing operations on vehicle devices such as doors.</p></div>
 
 
 
@@ -14893,7 +14710,7 @@ The user is in charge of securing the files they provide with regard to informat
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../traffic_light_utils/" class="md-footer__link md-footer__link--prev" aria-label="Previous: traffic_light_utils" rel="prev">
+          <a href="../simple_planning_simulator/" class="md-footer__link md-footer__link--prev" aria-label="Previous: simple_planning_simulator" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -14902,20 +14719,20 @@ The user is in charge of securing the files they provide with regard to informat
                 Previous
               </span>
               <div class="md-ellipsis">
-                traffic_light_utils
+                simple_planning_simulator
               </div>
             </div>
           </a>
         
         
           
-          <a href="tvm-utility-yolo-v2-tiny-tests/" class="md-footer__link md-footer__link--next" aria-label="Next: YOLOv2 Tiny Example Pipeline" rel="next">
+          <a href="../../system/autoware_auto_msgs_adapter/" class="md-footer__link md-footer__link--next" aria-label="Next: autoware_auto_msgs_adapter" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                YOLOv2 Tiny Example Pipeline
+                autoware_auto_msgs_adapter
               </div>
             </div>
             <div class="md-footer__button md-icon">
