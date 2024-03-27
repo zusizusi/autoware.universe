@@ -14839,6 +14839,10 @@ We need lanelet map that has the information of partition to use this feature.
 By this feature, we can reduce unnecessary deceleration by obstacles that are unlikely to jump out to the lane.
 You can choose whether to use this feature by parameter of <code>use_partition_lanelet</code>.</p>
 <p><img alt="brief" src="docs/exclude_obstacles_by_partition.svg"></p>
+<h5 id="exclude-obstacles-that-cross-the-ego-vehicles-cut-line">Exclude obstacles that cross the ego vehicle's "cut line"<a class="headerlink" href="#exclude-obstacles-that-cross-the-ego-vehicles-cut-line" title="Permanent link">#</a></h5>
+<p>This module can exclude obstacles that have predicted paths that will cross the back side of the ego vehicle. It excludes obstacles if their predicted path crosses the ego's "cut line". The "cut line" is a virtual line segment that is perpendicular to the ego vehicle and that passes through the ego's base link.</p>
+<p>You can choose whether to use this feature by setting the parameter <code>use_ego_cut_line</code> to <code>true</code> or <code>false</code>. The width of the line can be tuned with the parameter <code>ego_cut_line_length</code>.</p>
+<p><img alt="brief" src="docs/ego_cut_line.svg"></p>
 <h4 id="collision-detection">Collision detection<a class="headerlink" href="#collision-detection" title="Permanent link">#</a></h4>
 <h5 id="detect-collision-with-dynamic-obstacles">Detect collision with dynamic obstacles<a class="headerlink" href="#detect-collision-with-dynamic-obstacles" title="Permanent link">#</a></h5>
 <p>Along the ego vehicle path, determine the points where collision detection is to be performed for each <code>detection_span</code>.</p>
