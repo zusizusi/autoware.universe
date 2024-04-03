@@ -14675,6 +14675,33 @@
     Parameters
   </a>
   
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node-parameters" class="md-nav__link">
+    Node Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grid-map-parameters" class="md-nav__link">
+    Grid Map Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#point-cloud-preprocessing-parameters" class="md-nav__link">
+    Point Cloud Preprocessing Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -14775,6 +14802,7 @@ Cells with No elevation value can be inpainted using the values of neighboring c
 </tbody>
 </table>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
+<h3 id="node-parameters">Node Parameters<a class="headerlink" href="#node-parameters" title="Permanent link">#</a></h3>
 <table>
 <thead>
 <tr>
@@ -14861,6 +14889,153 @@ Cells with No elevation value can be inpainted using the values of neighboring c
 <td>float</td>
 <td>Margin distance from the lane polygon of the area to be included in the inpainting mask [m]. Used only when use_lane_filter=True</td>
 <td>0.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>num_processing_threads</td>
+<td>float</td>
+<td>Number of threads for processing grid map cells. Filtering of the raw input point cloud is not parallelized</td>
+<td>12</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<h3 id="grid-map-parameters">Grid Map Parameters<a class="headerlink" href="#grid-map-parameters" title="Permanent link">#</a></h3>
+<p>See: <a href="https://github.com/ANYbotics/grid_map/tree/ros2/grid_map_pcl">https://github.com/ANYbotics/grid_map/tree/ros2/grid_map_pcl</a></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>min_num_points_per_cell</td>
+<td>integer</td>
+<td>Minimum number of points in the point cloud that have to fall within any of the grid map cells. Otherwise the cell elevation will be set to NaN</td>
+<td>3</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>resolution</td>
+<td>float</td>
+<td>Resolution of the grid map. Width and length are computed automatically</td>
+<td>0.3</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>height_type</td>
+<td>integer</td>
+<td>Resolution of the grid map. Width and length are computed automatically.</td>
+<td>1</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>height_thresh</td>
+<td>float</td>
+<td>Height range from the smallest cluster (Only for height_type 1)</td>
+<td>1</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<h3 id="point-cloud-preprocessing-parameters">Point Cloud Preprocessing Parameters<a class="headerlink" href="#point-cloud-preprocessing-parameters" title="Permanent link">#</a></h3>
+<h4 id="rigid-body-transform-parameters">Rigid body transform parameters<a class="headerlink" href="#rigid-body-transform-parameters" title="Permanent link">#</a></h4>
+<p>Rigid body transform that is applied to the point cloud before computing elevation.</p>
+<h4 id="cluster-extraction-parameters">Cluster Extraction Parameters<a class="headerlink" href="#cluster-extraction-parameters" title="Permanent link">#</a></h4>
+<p>Cluster extraction is based on pcl algorithms. See <a href="https://pointclouds.org/documentation/tutorials/cluster_extraction.html">https://pointclouds.org/documentation/tutorials/cluster_extraction.html</a> for more details.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cluster_tolerance</td>
+<td>float</td>
+<td>Distance between points below which they will still be considered part of one cluster</td>
+<td>0.2</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_num_points</td>
+<td>integer</td>
+<td>Min number of points that a cluster needs to have (otherwise it will be discarded)</td>
+<td>3</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_num_points</td>
+<td>integer</td>
+<td>Max number of points that a cluster can have (otherwise it will be discarded)</td>
+<td>1e+06</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<h4 id="outlier-removal-parameters">Outlier Removal Parameters<a class="headerlink" href="#outlier-removal-parameters" title="Permanent link">#</a></h4>
+<p>See <a href="https://pointclouds.org/documentation/tutorials/statistical_outlier.html">https://pointclouds.org/documentation/tutorials/statistical_outlier.html</a> for more explanation on outlier removal.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is_remove_outliers</td>
+<td>boolean</td>
+<td>Whether to perform statistical outlier removal</td>
+<td>0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>mean_K</td>
+<td>float</td>
+<td>Number of neighbors to analyze for estimating statistics of a point</td>
+<td>10</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>stddev_threshold</td>
+<td>float</td>
+<td>Number of standard deviations under which points are considered to be inliers</td>
+<td>1</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<h4 id="subsampling-parameters">Subsampling Parameters<a class="headerlink" href="#subsampling-parameters" title="Permanent link">#</a></h4>
+<p>See <a href="https://pointclouds.org/documentation/tutorials/voxel_grid.html">https://pointclouds.org/documentation/tutorials/voxel_grid.html</a> for more explanation on point cloud downsampling.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is_downsample_cloud</td>
+<td>boolean</td>
+<td>Whether to perform downsampling or not</td>
+<td>False</td>
 <td>N/A</td>
 </tr>
 </tbody>
