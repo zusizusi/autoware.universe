@@ -14759,47 +14759,6 @@
     Parameter description
   </a>
   
-    <nav class="md-nav" aria-label="Parameter description">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#state-transition" class="md-nav__link">
-    State transition
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#drive-parameter" class="md-nav__link">
-    DRIVE Parameter
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stopping-parameter-smooth-stop" class="md-nav__link">
-    STOPPING Parameter (smooth stop)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stopped-parameter" class="md-nav__link">
-    STOPPED Parameter
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#emergency-parameter" class="md-nav__link">
-    EMERGENCY Parameter
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -14986,424 +14945,432 @@ Then, the velocity can be calculated by providing the current error and time ste
 <h2 id="parameter-description">Parameter description<a class="headerlink" href="#parameter-description" title="Permanent link">#</a></h2>
 <p>The default parameters defined in <code>param/lateral_controller_defaults.param.yaml</code> are adjusted to the
 AutonomouStuff Lexus RX 450h for under 40 km/h driving.</p>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">delay_compensation_time</td>
-<td align="left">double</td>
-<td align="left">delay for longitudinal control [s]</td>
-<td align="left">0.17</td>
-</tr>
-<tr>
-<td align="left">enable_smooth_stop</td>
-<td align="left">bool</td>
-<td align="left">flag to enable transition to STOPPING</td>
-<td align="left">true</td>
-</tr>
-<tr>
-<td align="left">enable_overshoot_emergency</td>
-<td align="left">bool</td>
-<td align="left">flag to enable transition to EMERGENCY when the ego is over the stop line with a certain distance. See <code>emergency_state_overshoot_stop_dist</code>.</td>
-<td align="left">true</td>
-</tr>
-<tr>
-<td align="left">enable_large_tracking_error_emergency</td>
-<td align="left">bool</td>
-<td align="left">flag to enable transition to EMERGENCY when the closest trajectory point search is failed due to a large deviation between trajectory and ego pose.</td>
-<td align="left">true</td>
-</tr>
-<tr>
-<td align="left">enable_slope_compensation</td>
-<td align="left">bool</td>
-<td align="left">flag to modify output acceleration for slope compensation. The source of the slope angle can be selected from ego-pose or trajectory angle. See <code>use_trajectory_for_pitch_calculation</code>.</td>
-<td align="left">true</td>
-</tr>
-<tr>
-<td align="left">enable_brake_keeping_before_stop</td>
-<td align="left">bool</td>
-<td align="left">flag to keep a certain acceleration during DRIVE state before the ego stops. See <a href="#brake-keeping">Brake keeping</a>.</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left">enable_keep_stopped_until_steer_convergence</td>
-<td align="left">bool</td>
-<td align="left">flag to keep stopped condition until until the steer converges.</td>
-<td align="left">true</td>
-</tr>
-<tr>
-<td align="left">max_acc</td>
-<td align="left">double</td>
-<td align="left">max value of output acceleration [m/s^2]</td>
-<td align="left">3.0</td>
-</tr>
-<tr>
-<td align="left">min_acc</td>
-<td align="left">double</td>
-<td align="left">min value of output acceleration [m/s^2]</td>
-<td align="left">-5.0</td>
-</tr>
-<tr>
-<td align="left">max_jerk</td>
-<td align="left">double</td>
-<td align="left">max value of jerk of output acceleration [m/s^3]</td>
-<td align="left">2.0</td>
-</tr>
-<tr>
-<td align="left">min_jerk</td>
-<td align="left">double</td>
-<td align="left">min value of jerk of output acceleration [m/s^3]</td>
-<td align="left">-5.0</td>
-</tr>
-<tr>
-<td align="left">use_trajectory_for_pitch_calculation ***</td>
-<td align="left">bool</td>
-<td align="left">If true, the slope is estimated from trajectory z-level. Otherwise the pitch angle of the ego pose is used.</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left">lpf_pitch_gain</td>
-<td align="left">double</td>
-<td align="left">gain of low-pass filter for pitch estimation</td>
-<td align="left">0.95</td>
-</tr>
-<tr>
-<td align="left">max_pitch_rad</td>
-<td align="left">double</td>
-<td align="left">max value of estimated pitch [rad]</td>
-<td align="left">0.1</td>
-</tr>
-<tr>
-<td align="left">min_pitch_rad</td>
-<td align="left">double</td>
-<td align="left">min value of estimated pitch [rad]</td>
-<td align="left">-0.1</td>
-</tr>
-</tbody>
-</table>
-<h3 id="state-transition">State transition<a class="headerlink" href="#state-transition" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">drive_state_stop_dist</td>
-<td align="left">double</td>
-<td align="left">The state will transit to DRIVE when the distance to the stop point is longer than <code>drive_state_stop_dist</code> + <code>drive_state_offset_stop_dist</code> [m]</td>
-<td align="left">0.5</td>
-</tr>
-<tr>
-<td align="left">drive_state_offset_stop_dist</td>
-<td align="left">double</td>
-<td align="left">The state will transit to DRIVE when the distance to the stop point is longer than <code>drive_state_stop_dist</code> + <code>drive_state_offset_stop_dist</code> [m]</td>
-<td align="left">1.0</td>
-</tr>
-<tr>
-<td align="left">stopping_state_stop_dist</td>
-<td align="left">double</td>
-<td align="left">The state will transit to STOPPING when the distance to the stop point is shorter than <code>stopping_state_stop_dist</code> [m]</td>
-<td align="left">0.5</td>
-</tr>
-<tr>
-<td align="left">stopped_state_entry_vel</td>
-<td align="left">double</td>
-<td align="left">threshold of the ego velocity in transition to the STOPPED state [m/s]</td>
-<td align="left">0.01</td>
-</tr>
-<tr>
-<td align="left">stopped_state_entry_acc</td>
-<td align="left">double</td>
-<td align="left">threshold of the ego acceleration in transition to the STOPPED state [m/s^2]</td>
-<td align="left">0.1</td>
-</tr>
-<tr>
-<td align="left">emergency_state_overshoot_stop_dist</td>
-<td align="left">double</td>
-<td align="left">If <code>enable_overshoot_emergency</code> is true and the ego is <code>emergency_state_overshoot_stop_dist</code>-meter ahead of the stop point, the state will transit to EMERGENCY. [m]</td>
-<td align="left">1.5</td>
-</tr>
-<tr>
-<td align="left">emergency_state_traj_trans_dev</td>
-<td align="left">double</td>
-<td align="left">If the ego's position is <code>emergency_state_traj_tran_dev</code> meter away from the nearest trajectory point, the state will transit to EMERGENCY. [m]</td>
-<td align="left">3.0</td>
-</tr>
-<tr>
-<td align="left">emergency_state_traj_rot_dev</td>
-<td align="left">double</td>
-<td align="left">If the ego's orientation is <code>emergency_state_traj_rot_dev</code> rad away from the nearest trajectory point orientation, the state will transit to EMERGENCY. [rad]</td>
-<td align="left">0.784</td>
-</tr>
-</tbody>
-</table>
-<h3 id="drive-parameter">DRIVE Parameter<a class="headerlink" href="#drive-parameter" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">kp</td>
-<td align="left">double</td>
-<td align="left">p gain for longitudinal control</td>
-<td align="left">1.0</td>
-</tr>
-<tr>
-<td align="left">ki</td>
-<td align="left">double</td>
-<td align="left">i gain for longitudinal control</td>
-<td align="left">0.1</td>
-</tr>
-<tr>
-<td align="left">kd</td>
-<td align="left">double</td>
-<td align="left">d gain for longitudinal control</td>
-<td align="left">0.0</td>
-</tr>
-<tr>
-<td align="left">max_out</td>
-<td align="left">double</td>
-<td align="left">max value of PID's output acceleration during DRIVE state [m/s^2]</td>
-<td align="left">1.0</td>
-</tr>
-<tr>
-<td align="left">min_out</td>
-<td align="left">double</td>
-<td align="left">min value of PID's output acceleration during DRIVE state [m/s^2]</td>
-<td align="left">-1.0</td>
-</tr>
-<tr>
-<td align="left">max_p_effort</td>
-<td align="left">double</td>
-<td align="left">max value of acceleration with p gain</td>
-<td align="left">1.0</td>
-</tr>
-<tr>
-<td align="left">min_p_effort</td>
-<td align="left">double</td>
-<td align="left">min value of acceleration with p gain</td>
-<td align="left">-1.0</td>
-</tr>
-<tr>
-<td align="left">max_i_effort</td>
-<td align="left">double</td>
-<td align="left">max value of acceleration with i gain</td>
-<td align="left">0.3</td>
-</tr>
-<tr>
-<td align="left">min_i_effort</td>
-<td align="left">double</td>
-<td align="left">min value of acceleration with i gain</td>
-<td align="left">-0.3</td>
-</tr>
-<tr>
-<td align="left">max_d_effort</td>
-<td align="left">double</td>
-<td align="left">max value of acceleration with d gain</td>
-<td align="left">0.0</td>
-</tr>
-<tr>
-<td align="left">min_d_effort</td>
-<td align="left">double</td>
-<td align="left">min value of acceleration with d gain</td>
-<td align="left">0.0</td>
-</tr>
-<tr>
-<td align="left">lpf_vel_error_gain</td>
-<td align="left">double</td>
-<td align="left">gain of low-pass filter for velocity error</td>
-<td align="left">0.9</td>
-</tr>
-<tr>
-<td align="left">enable_integration_at_low_speed</td>
-<td align="left">bool</td>
-<td align="left">Whether to enable integration of acceleration errors when the vehicle speed is lower than <code>current_vel_threshold_pid_integration</code> or not.</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">current_vel_threshold_pid_integration</td>
-<td align="left">double</td>
-<td align="left">Velocity error is integrated for I-term only when the absolute value of current velocity is larger than this parameter. [m/s]</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">time_threshold_before_pid_integration</td>
-<td align="left">double</td>
-<td align="left">How much time without the vehicle moving must past to enable PID error integration. [s]</td>
-<td align="left">5.0</td>
-</tr>
-<tr>
-<td align="left">brake_keeping_acc</td>
-<td align="left">double</td>
-<td align="left">If <code>enable_brake_keeping_before_stop</code> is true, a certain acceleration is kept during DRIVE state before the ego stops [m/s^2] See <a href="#brake-keeping">Brake keeping</a>.</td>
-<td align="left">0.2</td>
-</tr>
-</tbody>
-</table>
-<h3 id="stopping-parameter-smooth-stop">STOPPING Parameter (smooth stop)<a class="headerlink" href="#stopping-parameter-smooth-stop" title="Permanent link">#</a></h3>
-<p>Smooth stop is enabled if <code>enable_smooth_stop</code> is true.
+<blockquote>
+<p><strong>STOPPING Parameter (smooth stop)</strong> is enabled if <code>enable_smooth_stop</code> is true.
 In smooth stop, strong acceleration (<code>strong_acc</code>) will be output first to decrease the ego velocity.
 Then weak acceleration (<code>weak_acc</code>) will be output to stop smoothly by decreasing the ego jerk.
 If the ego does not stop in a certain time or some-meter over the stop point, weak acceleration to stop right (<code>weak_stop_acc</code>) now will be output.
 If the ego is still running, strong acceleration (<code>strong_stop_acc</code>) to stop right now will be output.</p>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">smooth_stop_max_strong_acc</td>
-<td align="left">double</td>
-<td align="left">max strong acceleration [m/s^2]</td>
-<td align="left">-0.5</td>
-</tr>
-<tr>
-<td align="left">smooth_stop_min_strong_acc</td>
-<td align="left">double</td>
-<td align="left">min strong acceleration [m/s^2]</td>
-<td align="left">-0.8</td>
-</tr>
-<tr>
-<td align="left">smooth_stop_weak_acc</td>
-<td align="left">double</td>
-<td align="left">weak acceleration [m/s^2]</td>
-<td align="left">-0.3</td>
-</tr>
-<tr>
-<td align="left">smooth_stop_weak_stop_acc</td>
-<td align="left">double</td>
-<td align="left">weak acceleration to stop right now [m/s^2]</td>
-<td align="left">-0.8</td>
-</tr>
-<tr>
-<td align="left">smooth_stop_strong_stop_acc</td>
-<td align="left">double</td>
-<td align="left">strong acceleration to be output when the ego is <code>smooth_stop_strong_stop_dist</code>-meter over the stop point. [m/s^2]</td>
-<td align="left">-3.4</td>
-</tr>
-<tr>
-<td align="left">smooth_stop_max_fast_vel</td>
-<td align="left">double</td>
-<td align="left">max fast vel to judge the ego is running fast [m/s]. If the ego is running fast, strong acceleration will be output.</td>
-<td align="left">0.5</td>
-</tr>
-<tr>
-<td align="left">smooth_stop_min_running_vel</td>
-<td align="left">double</td>
-<td align="left">min ego velocity to judge if the ego is running or not [m/s]</td>
-<td align="left">0.01</td>
-</tr>
-<tr>
-<td align="left">smooth_stop_min_running_acc</td>
-<td align="left">double</td>
-<td align="left">min ego acceleration to judge if the ego is running or not [m/s^2]</td>
-<td align="left">0.01</td>
-</tr>
-<tr>
-<td align="left">smooth_stop_weak_stop_time</td>
-<td align="left">double</td>
-<td align="left">max time to output weak acceleration [s]. After this, strong acceleration will be output.</td>
-<td align="left">0.8</td>
-</tr>
-<tr>
-<td align="left">smooth_stop_weak_stop_dist</td>
-<td align="left">double</td>
-<td align="left">Weak acceleration will be output when the ego is <code>smooth_stop_weak_stop_dist</code>-meter before the stop point. [m]</td>
-<td align="left">-0.3</td>
-</tr>
-<tr>
-<td align="left">smooth_stop_strong_stop_dist</td>
-<td align="left">double</td>
-<td align="left">Strong acceleration will be output when the ego is <code>smooth_stop_strong_stop_dist</code>-meter over the stop point. [m]</td>
-<td align="left">-0.5</td>
-</tr>
-</tbody>
-</table>
-<h3 id="stopped-parameter">STOPPED Parameter<a class="headerlink" href="#stopped-parameter" title="Permanent link">#</a></h3>
-<p>The <code>STOPPED</code> state assumes that the vehicle is completely stopped with the brakes fully applied.
+<p><strong>The <code>STOPPED</code> state</strong> assumes that the vehicle is completely stopped with the brakes fully applied.
 Therefore, <code>stopped_acc</code> should be set to a value that allows the vehicle to apply the strongest possible brake.
 If <code>stopped_acc</code> is not sufficiently low, there is a possibility of sliding down on steep slopes.</p>
+</blockquote>
 <table>
 <thead>
 <tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">stopped_vel</td>
-<td align="left">double</td>
-<td align="left">target velocity in STOPPED state [m/s]</td>
-<td align="left">0.0</td>
+<td>delay_compensation_time</td>
+<td>float</td>
+<td>delay for longitudinal control [s]</td>
+<td>0.17</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">stopped_acc</td>
-<td align="left">double</td>
-<td align="left">target acceleration in STOPPED state [m/s^2]</td>
-<td align="left">-3.4</td>
+<td>enable_smooth_stop</td>
+<td>boolean</td>
+<td>flag to enable transition to STOPPING</td>
+<td>true</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">stopped_jerk</td>
-<td align="left">double</td>
-<td align="left">target jerk in STOPPED state [m/s^3]</td>
-<td align="left">-5.0</td>
-</tr>
-</tbody>
-</table>
-<h3 id="emergency-parameter">EMERGENCY Parameter<a class="headerlink" href="#emergency-parameter" title="Permanent link">#</a></h3>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">emergency_vel</td>
-<td align="left">double</td>
-<td align="left">target velocity in EMERGENCY state [m/s]</td>
-<td align="left">0.0</td>
+<td>enable_overshoot_emergency</td>
+<td>boolean</td>
+<td>flag to enable transition to EMERGENCY when the ego is over the stop line with a certain distance. See <code>emergency_state_overshoot_stop_dist</code></td>
+<td>true</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">emergency_acc</td>
-<td align="left">double</td>
-<td align="left">target acceleration in an EMERGENCY state [m/s^2]</td>
-<td align="left">-5.0</td>
+<td>enable_large_tracking_error_emergency</td>
+<td>boolean</td>
+<td>flag to enable transition to EMERGENCY when the closest trajectory point search is failed due to a large deviation between trajectory and ego pose</td>
+<td>true</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td align="left">emergency_jerk</td>
-<td align="left">double</td>
-<td align="left">target jerk in an EMERGENCY state [m/s^3]</td>
-<td align="left">-3.0</td>
+<td>enable_slope_compensation</td>
+<td>boolean</td>
+<td>flag to modify output acceleration for slope compensation. The source of the slope angle can be selected from ego-pose or trajectory angle</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>enable_keep_stopped_until_steer_convergence</td>
+<td>boolean</td>
+<td>flag to keep stopped condition until until the steer converges</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>drive_state_stop_dist</td>
+<td>float</td>
+<td>The state will transit to DRIVE when the distance to the stop point is longer than <code>drive_state_stop_dist</code> + <code>drive_state_offset_stop_dist</code> [m]</td>
+<td>0.5</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>drive_state_offset_stop_dist</td>
+<td>float</td>
+<td>The state will transit to DRIVE when the distance to the stop point is longer than <code>drive_state_stop_dist</code> + <code>drive_state_offset_stop_dist</code> [m]</td>
+<td>1.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>stopping_state_stop_dist</td>
+<td>float</td>
+<td>The state will transit to STOPPING when the distance to the stop point is shorter than <code>stopping_state_stop_dist</code> [m]</td>
+<td>0.5</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>stopped_state_entry_duration_time</td>
+<td>float</td>
+<td>threshold of the ego velocity in transition to the STOPPED state [s]</td>
+<td>0.1</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>stopped_state_entry_vel</td>
+<td>float</td>
+<td>threshold of the ego velocity in transition to the STOPPED state [m/s]</td>
+<td>0.01</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>stopped_state_entry_acc</td>
+<td>float</td>
+<td>threshold of the ego acceleration in transition to the STOPPED state [m/s^2]</td>
+<td>0.1</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>emergency_state_overshoot_stop_dist</td>
+<td>float</td>
+<td>If <code>enable_overshoot_emergency</code> is true and the ego is <code>emergency_state_overshoot_stop_dist</code>-meter ahead of the stop point, the state will transit to EMERGENCY. [m]</td>
+<td>1.5</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>emergency_state_traj_trans_dev</td>
+<td>float</td>
+<td>If the ego's position is <code>emergency_state_traj_trans_dev</code> meter away from the nearest trajectory point, the state will transit to EMERGENCY. [m]</td>
+<td>3.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>emergency_state_traj_rot_dev</td>
+<td>float</td>
+<td>If the ego's orientation is <code>emergency_state_traj_rot_dev</code> rad away from the nearest trajectory point orientation, the state will transit to EMERGENCY. [rad]</td>
+<td>0.7854</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>kp</td>
+<td>float</td>
+<td>p gain for longitudinal control</td>
+<td>1.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>ki</td>
+<td>float</td>
+<td>i gain for longitudinal control</td>
+<td>0.1</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>kd</td>
+<td>float</td>
+<td>d gain for longitudinal control</td>
+<td>0.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_out</td>
+<td>float</td>
+<td>max value of PID's output acceleration during DRIVE state [m/s^2]</td>
+<td>1.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_out</td>
+<td>float</td>
+<td>min value of PID's output acceleration during DRIVE state [m/s^2]</td>
+<td>-1.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_p_effort</td>
+<td>float</td>
+<td>max value of acceleration with p gain</td>
+<td>1.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_p_effort</td>
+<td>float</td>
+<td>min value of acceleration with p gain</td>
+<td>-1.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_i_effort</td>
+<td>float</td>
+<td>max value of acceleration with i gain</td>
+<td>0.3</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_i_effort</td>
+<td>float</td>
+<td>min value of acceleration with i gain</td>
+<td>-0.3</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_d_effort</td>
+<td>float</td>
+<td>max value of acceleration with d gain</td>
+<td>0.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_d_effort</td>
+<td>float</td>
+<td>min value of acceleration with d gain</td>
+<td>0.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>lpf_vel_error_gain</td>
+<td>float</td>
+<td>gain of low-pass filter for velocity</td>
+<td>0.9</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>enable_integration_at_low_speed</td>
+<td>boolean</td>
+<td>Whether to enable integration of acceleration errors when the vehicle speed is lower than <code>current_vel_threshold_pid_integration</code> or not.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>current_vel_threshold_pid_integration</td>
+<td>float</td>
+<td>Velocity error is integrated for I-term only when the absolute value of current velocity is larger than this parameter. [m/s]</td>
+<td>0.5</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>time_threshold_before_pid_integration</td>
+<td>float</td>
+<td>How much time without the vehicle moving must past to enable PID error integration. [s]</td>
+<td>2.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>enable_brake_keeping_before_stop</td>
+<td>boolean</td>
+<td>flag to keep a certain acceleration during DRIVE state before the ego stops. See [Brake keeping]</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>brake_keeping_acc</td>
+<td>float</td>
+<td>If <code>enable_brake_keeping_before_stop</code> is true, a certain acceleration is kept during DRIVE state before the ego stops [m/s^2] See [Brake keeping]</td>
+<td>-0.2</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>smooth_stop_max_strong_acc</td>
+<td>float</td>
+<td>max strong acceleration [m/s^2]</td>
+<td>-0.5</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>smooth_stop_min_strong_acc</td>
+<td>float</td>
+<td>min strong acceleration [m/s^2]</td>
+<td>-0.8</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>smooth_stop_weak_acc</td>
+<td>float</td>
+<td>weak acceleration [m/s^2]</td>
+<td>-0.3</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>smooth_stop_weak_stop_acc</td>
+<td>float</td>
+<td>weak acceleration to stop right now [m/s^2]</td>
+<td>-0.8</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>smooth_stop_strong_stop_acc</td>
+<td>float</td>
+<td>strong acceleration to be output when the ego is <code>smooth_stop_strong_stop_dist</code>-meter over the stop point. [m/s^2]</td>
+<td>-3.4</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>smooth_stop_max_fast_vel</td>
+<td>float</td>
+<td>max fast vel to judge the ego is running fast [m/s]. If the ego is running fast, strong acceleration will be output.</td>
+<td>0.5</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>smooth_stop_min_running_vel</td>
+<td>float</td>
+<td>min ego velocity to judge if the ego is running or not [m/s]</td>
+<td>0.01</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>smooth_stop_min_running_acc</td>
+<td>float</td>
+<td>min ego acceleration to judge if the ego is running or not [m/s^2]</td>
+<td>0.01</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>smooth_stop_weak_stop_time</td>
+<td>float</td>
+<td>max time to output weak acceleration [s]. After this, strong acceleration will be output.</td>
+<td>0.8</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>smooth_stop_weak_stop_dist</td>
+<td>float</td>
+<td>Weak acceleration will be output when the ego is <code>smooth_stop_weak_stop_dist</code>-meter before the stop point. [m]</td>
+<td>-0.3</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>smooth_stop_strong_stop_dist</td>
+<td>float</td>
+<td>Strong acceleration will be output when the ego is <code>smooth_stop_strong_stop_dist</code>-meter over the stop point. [m]</td>
+<td>-0.5</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>stopped_vel</td>
+<td>float</td>
+<td>target velocity in STOPPED state [m/s]</td>
+<td>0.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>stopped_acc</td>
+<td>float</td>
+<td>target acceleration in STOPPED state [m/s^2]</td>
+<td>-3.4</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>stopped_jerk</td>
+<td>float</td>
+<td>target jerk in STOPPED state [m/s^3]</td>
+<td>-5.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>emergency_vel</td>
+<td>float</td>
+<td>target velocity in EMERGENCY state [m/s]</td>
+<td>0.00</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>emergency_acc</td>
+<td>float</td>
+<td>target acceleration in an EMERGENCY state [m/s^2]</td>
+<td>-5.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>emergency_jerk</td>
+<td>float</td>
+<td>target jerk in an EMERGENCY state [m/s^3]</td>
+<td>-3.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_acc</td>
+<td>float</td>
+<td>max value of output acceleration [m/s^2]</td>
+<td>3.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_acc</td>
+<td>float</td>
+<td>min value of output acceleration [m/s^2]</td>
+<td>-5.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_jerk</td>
+<td>float</td>
+<td>max value of jerk of output acceleration [m/s^3]</td>
+<td>2.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_jerk</td>
+<td>float</td>
+<td>min value of jerk of output acceleration [m/s^3]</td>
+<td>-5.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>lpf_pitch_gain</td>
+<td>float</td>
+<td>gain of low-pass filter for pitch estimation</td>
+<td>0.95</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>slope_source</td>
+<td>string</td>
+<td>source of slope angle.</td>
+<td>raw_pitch</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>adaptive_trajectory_velocity_th</td>
+<td>float</td>
+<td>threshold of the ego velocity to use adaptive trajectory velocity [m/s]</td>
+<td>1.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_pitch_rad</td>
+<td>float</td>
+<td>max value of estimated pitch [rad]</td>
+<td>0.1</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_pitch_rad</td>
+<td>float</td>
+<td>min value of estimated pitch [rad]</td>
+<td>-0.1</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table>
