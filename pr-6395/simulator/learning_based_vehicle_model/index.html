@@ -12300,6 +12300,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
@@ -12494,6 +12496,54 @@
         <label class="md-nav__title" for="__nav_10_4">
           <span class="md-nav__icon md-icon"></span>
           Simple planning simulator
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10_5" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../vehicle_door_simulator/">Vehicle door simulator</a>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_10_5">
+          <span class="md-nav__icon md-icon"></span>
+          Vehicle door simulator
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -14766,7 +14816,7 @@
     - How does it work? -->
 
 <p>The idea behind this package is that the model we want to use for simulation consists of multiple sub-models (e.g., steering model, drive model, vehicle kinematics, etc.). These sub-models are implemented in Python and can be trainable. Each sub-model has string names for all of its inputs/outputs, which are used to create model interconnections automatically (see image below). This allows us to easily switch sub-models for better customization of the simulator.</p>
-<p><img alt="pymodel_interface" src="image/python_model_interface.png" title="PyModel interface"></p>
+<p><img alt="py_model_interface" src="image/python_model_interface.png" title="PyModel interface"></p>
 <h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
 <!-- Required -->
 
@@ -14858,7 +14908,7 @@
 <ul>
 <li>None</li>
 </ul>
-<h4 id="stdvectordouble-updatepymodelstdvectordouble-psim_input"><code>std::vector&lt;double&gt; updatePymodel(std::vector&lt;double&gt; psim_input)</code><a class="headerlink" href="#stdvectordouble-updatepymodelstdvectordouble-psim_input" title="Permanent link">#</a></h4>
+<h4 id="stdvectordouble-updatepymodelstdvectordouble-psim_input"><code>std::vector&lt;double&gt; updatePyModel(std::vector&lt;double&gt; psim_input)</code><a class="headerlink" href="#stdvectordouble-updatepymodelstdvectordouble-psim_input" title="Permanent link">#</a></h4>
 <p>Calculate the next state of the model by calculating the next state of all of the sub-models.</p>
 <p>Inputs:</p>
 <ul>
@@ -14920,7 +14970,7 @@
 <span class="n">vehicle</span><span class="p">.</span><span class="n">initState</span><span class="p">(</span><span class="n">current_state</span><span class="p">);</span>
 
 <span class="c1">// Calculate the next state of the model</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">next_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vehicle</span><span class="p">.</span><span class="n">updatePymodel</span><span class="p">(</span><span class="n">vehicle_input</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">next_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vehicle</span><span class="p">.</span><span class="n">updatePyModel</span><span class="p">(</span><span class="n">vehicle_input</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="references-external-links">References / External links<a class="headerlink" href="#references-external-links" title="Permanent link">#</a></h2>
 <!-- Optional -->
