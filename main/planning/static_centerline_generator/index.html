@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/main/planning/static_centerline_optimizer/">
+        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/main/planning/static_centerline_generator/">
       
       
         <link rel="prev" href="../scenario_selector/">
@@ -21,7 +21,7 @@
     
     
       
-        <title>Static Centerline Optimizer - Autoware Universe Documentation</title>
+        <title>Static Centerline Generator - Autoware Universe Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#static-centerline-optimizer" class="md-skip">
+        <a href="#static-centerline-generator" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Static Centerline Optimizer
+              Static Centerline Generator
             
           </span>
         </div>
@@ -11017,7 +11017,7 @@
   
     <li class="md-nav__item">
       <a href="." class="md-nav__link">
-        Static Centerline Optimizer
+        Static Centerline Generator
       </a>
     </li>
   
@@ -14744,7 +14744,7 @@
   
 
 
-<div><h1 id="static-centerline-optimizer">Static Centerline Optimizer<a class="headerlink" href="#static-centerline-optimizer" title="Permanent link">#</a></h1>
+<div><h1 id="static-centerline-generator">Static Centerline Generator<a class="headerlink" href="#static-centerline-generator" title="Permanent link">#</a></h1>
 <h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
 <p>This package statically calculates the centerline satisfying path footprints inside the drivable area.</p>
 <p>On narrow-road driving, the default centerline, which is the middle line between lanelets' right and left boundaries, often causes path footprints outside the drivable area.
@@ -14771,7 +14771,7 @@ Currently there is no documentation about Vector Map Builder's operation for thi
 <li>http server to connect path planning server and Vector Map Builder</li>
 </ul>
 <p>with the following command by designating <code>&lt;vehicle_model&gt;</code></p>
-<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>launch<span class="w"> </span>static_centerline_optimizer<span class="w"> </span>run_planning_server.launch.xml<span class="w"> </span>vehicle_model:<span class="o">=</span>&lt;vehicle-model&gt;
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>launch<span class="w"> </span>static_centerline_generator<span class="w"> </span>run_planning_server.launch.xml<span class="w"> </span>vehicle_model:<span class="o">=</span>&lt;vehicle-model&gt;
 </code></pre></div>
 <p>FYI, port ID of the http server is 4010 by default.</p>
 <h3 id="command-line-interface">Command Line Interface<a class="headerlink" href="#command-line-interface" title="Permanent link">#</a></h3>
@@ -14783,7 +14783,7 @@ Currently there is no documentation about Vector Map Builder's operation for thi
 <li><code>&lt;end-lanelet-id&gt;</code></li>
 <li><code>&lt;vehicle-model&gt;</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>launch<span class="w"> </span>static_centerline_optimizer<span class="w"> </span>static_centerline_optimizer.launch.xml<span class="w"> </span>run_backgrond:<span class="o">=</span><span class="nb">false</span><span class="w"> </span>lanelet2_input_file_path:<span class="o">=</span>&lt;input-osm-path&gt;<span class="w"> </span>lanelet2_output_file_path:<span class="o">=</span>&lt;output-osm-path&gt;<span class="w"> </span>start_lanelet_id:<span class="o">=</span>&lt;start-lane-id&gt;<span class="w"> </span>end_lanelet_id:<span class="o">=</span>&lt;end-lane-id&gt;<span class="w"> </span>vehicle_model:<span class="o">=</span>&lt;vehicle-model&gt;
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>launch<span class="w"> </span>static_centerline_generator<span class="w"> </span>static_centerline_generator.launch.xml<span class="w"> </span>run_backgrond:<span class="o">=</span><span class="nb">false</span><span class="w"> </span>lanelet2_input_file_path:<span class="o">=</span>&lt;input-osm-path&gt;<span class="w"> </span>lanelet2_output_file_path:<span class="o">=</span>&lt;output-osm-path&gt;<span class="w"> </span>start_lanelet_id:<span class="o">=</span>&lt;start-lane-id&gt;<span class="w"> </span>end_lanelet_id:<span class="o">=</span>&lt;end-lane-id&gt;<span class="w"> </span>vehicle_model:<span class="o">=</span>&lt;vehicle-model&gt;
 </code></pre></div>
 <p>The default output map path containing the optimized centerline locates <code>/tmp/lanelet2_map.osm</code>.
 If you want to change the output map path, you can remap the path by designating <code>&lt;output-osm-path&gt;</code>.</p>

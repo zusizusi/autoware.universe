@@ -1226,7 +1226,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/planning/static_centerline_optimizer/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/planning/static_centerline_generator/</loc>
          <lastmod>2024-04-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
