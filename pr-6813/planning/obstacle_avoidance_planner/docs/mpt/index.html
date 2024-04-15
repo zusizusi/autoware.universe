@@ -14906,36 +14906,36 @@ Therefore, we have to apply the steer angle limitation to <span class="arithmate
     \end{pmatrix}
 \end{align}
 \]</div>
-<p>which can be formulated as follows with the state <span class="arithmatex">\(\mathbf{x}\)</span>, control input <span class="arithmatex">\(u\)</span> and some matrices, where <span class="arithmatex">\(\mathbf{x} = (y_k, \theta_k)\)</span></p>
+<p>which can be formulated as follows with the state <span class="arithmatex">\(\mathbf{\mathit{x}}\)</span>, control input <span class="arithmatex">\(u\)</span> and some matrices, where <span class="arithmatex">\(\mathit{\mathbf{x}} = (y_k, \theta_k)\)</span></p>
 <div class="arithmatex">\[
 \begin{align}
-  \mathbf{x}_{k+1} = A_k {\\boldsymbol x}_k + \\boldsymbol b_k u_k + \boldsymbol w_k
+  \mathbf{\mathit{x}}_{k+1} = A_k \mathit{\mathbf{x}}_k + \mathbf{b}_k u_k + \mathbf{w}_k
 \end{align}
 \]</div>
 <h3 id="time-series-state-equation">Time-series state equation<a class="headerlink" href="#time-series-state-equation" title="Permanent link">#</a></h3>
 <p>Then, we formulate time-series state equation by concatenating states, control inputs and matrices respectively as</p>
 <div class="arithmatex">\[
 \begin{align}
-  \\boldsymbol x = A \boldsymbol x_0 + B \boldsymbol u + \boldsymbol w
+  \mathbf{x} = A \mathbf{x}_0 + B \mathbf{u} + \mathbf{w}
 \end{align}
 \]</div>
 <p>where</p>
 <div class="arithmatex">\[
 \begin{align}
-\boldsymbol x = (\boldsymbol x^T_1, \boldsymbol x^T_2, \boldsymbol x^T_3, \dots, \boldsymbol x^T_{n-1})^T \\\
-\boldsymbol u = (u_0, u_1, u_2, \dots, u_{n-2})^T \\\
-\boldsymbol w = (\boldsymbol w^T_0, \boldsymbol w^T_1, \boldsymbol w^T_2, \dots, \boldsymbol w^T_{n-1})^T. \\\
+\mathbf{x} = (\mathbf{x}^T_1, \mathbf{x}^T_2, \mathbf{x}^T_3, \dots, \mathbf{x}^T_{n-1})^T \\\
+\mathbf{u} = (u_0, u_1, u_2, \dots, u_{n-2})^T \\\
+\mathbf{w} = (\mathbf{w}^T_0, \mathbf{w}^T_1, \mathbf{w}^T_2, \dots, \mathbf{w}^T_{n-1})^T. \\\
 \end{align}
 \]</div>
 <p>In detail, each matrices are constructed as follows.</p>
 <div class="arithmatex">\[
 \begin{align}
     \begin{pmatrix}
-        \boldsymbol{x}_1 \\\
-        \boldsymbol{x}_2 \\\
-        \boldsymbol{x}_3 \\\
+        \mathbf{x}_1 \\\
+        \mathbf{x}_2 \\\
+        \mathbf{x}_3 \\\
         \vdots \\\
-        \boldsymbol{x}_{n-1}
+        \mathbf{x}_{n-1}
     \end{pmatrix}
     =
     \begin{pmatrix}
@@ -14945,7 +14945,7 @@ Therefore, we have to apply the steer angle limitation to <span class="arithmate
         \vdots \\\
         \prod\limits_{k=0}^{n-1} A_{k}
     \end{pmatrix}
-    \boldsymbol{x}_0
+    \mathbf{x}_0
     +
     \begin{pmatrix}
       B_0 &amp; 0 &amp; &amp; \dots &amp; 0 \\\
@@ -14970,39 +14970,39 @@ Therefore, we have to apply the steer angle limitation to <span class="arithmate
       \prod\limits_{k=0}^{n-3} A_k &amp; \prod\limits_{k=0}^{n-4} A_k &amp; \dots &amp; A_0 &amp; I
     \end{pmatrix}
     \begin{pmatrix}
-        \boldsymbol{w}_0 \\\
-        \boldsymbol{w}_1 \\\
-        \boldsymbol{w}_2 \\\
+        \mathbf{w}_0 \\\
+        \mathbf{w}_1 \\\
+        \mathbf{w}_2 \\\
         \vdots \\\
-        \boldsymbol{w}_{n-2}
+        \mathbf{w}_{n-2}
     \end{pmatrix}
 \end{align}
 \]</div>
 <h3 id="free-boundary-conditioned-time-series-state-equation">Free-boundary-conditioned time-series state equation<a class="headerlink" href="#free-boundary-conditioned-time-series-state-equation" title="Permanent link">#</a></h3>
-<p>For path planning which does not start from the current ego pose, <span class="arithmatex">\(\boldsymbol{x}_0\)</span> should be the design variable of optimization.
-Therefore, we make <span class="arithmatex">\(\boldsymbol{u}'\)</span> by concatenating <span class="arithmatex">\(\boldsymbol{x}_0\)</span> and <span class="arithmatex">\(\boldsymbol{u}\)</span>, and redefine <span class="arithmatex">\(\boldsymbol{x}\)</span> as follows.</p>
+<p>For path planning which does not start from the current ego pose, <span class="arithmatex">\(\mathbf{x}_0\)</span> should be the design variable of optimization.
+Therefore, we make <span class="arithmatex">\(\mathbf{u}'\)</span> by concatenating <span class="arithmatex">\(\mathbf{x}_0\)</span> and <span class="arithmatex">\(\mathbf{u}\)</span>, and redefine <span class="arithmatex">\(\mathbf{x}\)</span> as follows.</p>
 <div class="arithmatex">\[
 \begin{align}
-  \boldsymbol{u}' &amp; = (\boldsymbol{x}^T_0, \boldsymbol{u}^T)^T \\\
-  \boldsymbol{x} &amp; = (\boldsymbol{x}^T_0, \boldsymbol{x}^T_1, \boldsymbol{x}^T_2, \dots, \boldsymbol{x}^T_{n-1})^T
+  \mathbf{u}' &amp; = (\mathbf{x}^T_0, \mathbf{u}^T)^T \\\
+  \mathbf{x} &amp; = (\mathbf{x}^T_0, \mathbf{x}^T_1, \mathbf{x}^T_2, \dots, \mathbf{x}^T_{n-1})^T
 \end{align}
 \]</div>
 <p>Then we get the following state equation</p>
 <div class="arithmatex">\[
 \begin{align}
-  \boldsymbol{x}' = B \boldsymbol{u}' + \boldsymbol{w},
+  \mathbf{x}' = B \mathbf{u}' + \mathbf{w},
 \end{align}
 \]</div>
 <p>which is in detail</p>
 <div class="arithmatex">\[
 \begin{align}
     \begin{pmatrix}
-        \boldsymbol{x}_0 \\\
-        \boldsymbol{x}_1 \\\
-        \boldsymbol{x}_2 \\\
-        \boldsymbol{x}_3 \\\
+        \mathbf{x}_0 \\\
+        \mathbf{x}_1 \\\
+        \mathbf{x}_2 \\\
+        \mathbf{x}_3 \\\
         \vdots \\\
-        \boldsymbol{x}_{n-1}
+        \mathbf{x}_{n-1}
     \end{pmatrix}
     =
     \begin{pmatrix}
@@ -15014,7 +15014,7 @@ Therefore, we make <span class="arithmatex">\(\boldsymbol{u}'\)</span> by concat
       \prod\limits_{k=0}^{n-1} A_k &amp; \prod\limits_{k=0}^{n-3} A_k B_0 &amp; \prod\limits_{k=0}^{n-4} A_k B_1 &amp; \dots &amp; A_0 B_{n-3} &amp; B_{n-2}
     \end{pmatrix}
     \begin{pmatrix}
-        \boldsymbol{x}_0 \\\
+        \mathbf{x}_0 \\\
         u_0 \\\
         u_1 \\\
         u_2 \\\
@@ -15031,11 +15031,11 @@ Therefore, we make <span class="arithmatex">\(\boldsymbol{u}'\)</span> by concat
       \prod\limits_{k=0}^{n-3} A_k &amp; \prod\limits_{k=0}^{n-4} A_k &amp; \dots &amp; A_0 &amp; I
     \end{pmatrix}
     \begin{pmatrix}
-        \boldsymbol{w}_0 \\\
-        \boldsymbol{w}_1 \\\
-        \boldsymbol{w}_2 \\\
+        \mathbf{w}_0 \\\
+        \mathbf{w}_1 \\\
+        \mathbf{w}_2 \\\
         \vdots \\\
-        \boldsymbol{w}_{n-2}
+        \mathbf{w}_{n-2}
     \end{pmatrix}.
 \end{align}
 \]</div>
@@ -15043,9 +15043,9 @@ Therefore, we make <span class="arithmatex">\(\boldsymbol{u}'\)</span> by concat
 <p>The objective function for smoothing and tracking is shown as follows, which can be formulated with value function matrices <span class="arithmatex">\(Q, R\)</span>.</p>
 <div class="arithmatex">\[
 \begin{align}
-J_1 (\boldsymbol{x}', \boldsymbol{u}') &amp; = w_y \sum_{k} y_k^2 + w_{\theta} \sum_{k} \theta_k^2 + w_{\delta} \sum_k \delta_k^2 + w_{\dot \delta} \sum_k \dot \delta_k^2 + w_{\ddot \delta} \sum_k \ddot \delta_k^2 \\\
-&amp; = \boldsymbol{x}'^T Q \boldsymbol{x}' + \boldsymbol{u}'^T R \boldsymbol{u}' \\\
-&amp; = \boldsymbol{u}'^T H \boldsymbol{u}' + \boldsymbol{u}'^T \boldsymbol{f}
+J_1 (\mathbf{x}', \mathbf{u}') &amp; = w_y \sum_{k} y_k^2 + w_{\theta} \sum_{k} \theta_k^2 + w_{\delta} \sum_k \delta_k^2 + w_{\dot \delta} \sum_k \dot \delta_k^2 + w_{\ddot \delta} \sum_k \ddot \delta_k^2 \\\
+&amp; = \mathbf{x}'^T Q \mathbf{x}' + \mathbf{u}'^T R \mathbf{u}' \\\
+&amp; = \mathbf{u}'^T H \mathbf{u}' + \mathbf{u}'^T \mathbf{f}
 \end{align}
 \]</div>
 <p>As mentioned before, the constraints to be collision free with obstacles and road boundaries are formulated to be soft constraints.
@@ -15061,24 +15061,24 @@ y_{\mathrm{mid}, k, \min} - \lambda_{\mathrm{mid}, k} \leq y_{\mathrm{mid}, k} (
 <p>Since <span class="arithmatex">\(y_{\mathrm{base}, k}, y_{\mathrm{top}, k}, y_{\mathrm{mid}, k}\)</span> is formulated as a linear function of <span class="arithmatex">\(y_k\)</span>, the objective function for soft constraints is formulated as follows.</p>
 <div class="arithmatex">\[
 \begin{align}
-J_2 &amp; (\boldsymbol{\lambda}_\mathrm{base}, \boldsymbol{\lambda}_\mathrm{top}, \boldsymbol {\lambda}_\mathrm{mid})\\\
+J_2 &amp; (\mathbf{\lambda}_\mathrm{base}, \mathbf{\lambda}_\mathrm{top}, \mathbf {\lambda}_\mathrm{mid})\\\
 &amp; = w_{\mathrm{base}} \sum_{k} \lambda_{\mathrm{base}, k} + w_{\mathrm{mid}} \sum_k \lambda_{\mathrm{mid}, k} + w_{\mathrm{top}} \sum_k \lambda_{\mathrm{top}, k}
 \end{align}
 \]</div>
 <p>Slack variables are also design variables for optimization.
-We define a vector <span class="arithmatex">\(\boldsymbol{v}\)</span>, that concatenates all the design variables.</p>
+We define a vector <span class="arithmatex">\(\mathbf{v}\)</span>, that concatenates all the design variables.</p>
 <div class="arithmatex">\[
 \begin{align}
-\boldsymbol{v} =
+\mathbf{v} =
 \begin{pmatrix}
-  \boldsymbol{u}'^T &amp; \boldsymbol{\lambda}_\mathrm{base}^T &amp; \boldsymbol{\lambda}_\mathrm{top}^T &amp; \boldsymbol{\lambda}_\mathrm{mid}^T
+  \mathbf{u}'^T &amp; \mathbf{\lambda}_\mathrm{base}^T &amp; \mathbf{\lambda}_\mathrm{top}^T &amp; \mathbf{\lambda}_\mathrm{mid}^T
 \end{pmatrix}^T
 \end{align}
 \]</div>
 <p>The summation of these two objective functions is the objective function for the optimization problem.</p>
 <div class="arithmatex">\[
 \begin{align}
-\min_{\boldsymbol{v}} J (\boldsymbol{v}) = \min_{\boldsymbol{v}} J_1 (\boldsymbol{u}') + J_2 (\boldsymbol{\lambda}_\mathrm{base}, \boldsymbol{\lambda}_\mathrm{top}, \boldsymbol{\lambda}_\mathrm{mid})
+\min_{\mathbf{v}} J (\mathbf{v}) = \min_{\mathbf{v}} J_1 (\mathbf{u}') + J_2 (\mathbf{\lambda}_\mathrm{base}, \mathbf{\lambda}_\mathrm{top}, \mathbf{\lambda}_\mathrm{mid})
 \end{align}
 \]</div>
 <p>As mentioned before, we use hard constraints where some trajectory points in front of the ego are the same as the previously generated trajectory points.
@@ -15091,8 +15091,8 @@ This hard constraints is formulated as follows.</p>
 <p>Finally we transform those objective functions to the following QP problem, and solve it.</p>
 <div class="arithmatex">\[
 \begin{align}
-\min_{\boldsymbol{v}} \ &amp; \frac{1}{2} \boldsymbol{v}^T \boldsymbol{H} \boldsymbol{v} + \boldsymbol{f} \boldsymbol{v} \\\
-\mathrm{s.t.} \ &amp; \boldsymbol{b}_{lower} \leq \boldsymbol{A} \boldsymbol{v} \leq \boldsymbol{b}_{upper}
+\min_{\mathbf{v}} \ &amp; \frac{1}{2} \mathbf{v}^T \mathbf{H} \mathbf{v} + \mathbf{f} \mathbf{v} \\\
+\mathrm{s.t.} \ &amp; \mathbf{b}_{lower} \leq \mathbf{A} \mathbf{v} \leq \mathbf{b}_{upper}
 \end{align}
 \]</div>
 <h2 id="constraints">Constraints<a class="headerlink" href="#constraints" title="Permanent link">#</a></h2>
@@ -15146,9 +15146,9 @@ b_l + r - \lambda \leq y' \leq b_u - r + \lambda.
 \]</div>
 <div class="arithmatex">\[
 \begin{align}
-y' &amp; = C_1 \boldsymbol{x} + C_2 \\\
-&amp; = C_1 (B \boldsymbol{v} + \boldsymbol{w}) + C_2 \\\
-&amp; = C_1 B \boldsymbol{v} + \boldsymbol{w} + C_2
+y' &amp; = C_1 \mathbf{x} + C_2 \\\
+&amp; = C_1 (B \mathbf{v} + \mathbf{w}) + C_2 \\\
+&amp; = C_1 B \mathbf{v} + \mathbf{w} + C_2
 \end{align}
 \]</div>
 <p>Note that longitudinal position of the circle center and the trajectory point to calculate boundaries are different.
@@ -15162,16 +15162,16 @@ For example, if the boundaries are not vertical against the trajectory and there
         -C_1 B &amp; O &amp; \dots &amp; O &amp; I &amp; O \dots &amp; O\\\
         O &amp; O &amp; \dots &amp; O &amp; I &amp; O \dots &amp; O
     \end{pmatrix}
-    \in \boldsymbol{R}^{3 N_{ref} \times D_v + N_{circle} N_{ref}} \\\
-    \boldsymbol{b}_{lower, blk} &amp; =
+    \in \mathbf{R}^{3 N_{ref} \times D_v + N_{circle} N_{ref}} \\\
+    \mathbf{b}_{lower, blk} &amp; =
     \begin{pmatrix}
-        \boldsymbol{b}_{lower} - C_1 \boldsymbol{w} - C_2 \\\
-        -\boldsymbol{b}_{upper} + C_1 \boldsymbol{w} + C_2 \\\
+        \mathbf{b}_{lower} - C_1 \mathbf{w} - C_2 \\\
+        -\mathbf{b}_{upper} + C_1 \mathbf{w} + C_2 \\\
         O
     \end{pmatrix}
-    \in \boldsymbol{R}^{3 N_{ref}} \\\
-    \boldsymbol{b}_{upper, blk} &amp; = \boldsymbol{\infty}
-    \in \boldsymbol{R}^{3 N_{ref}}
+    \in \mathbf{R}^{3 N_{ref}} \\\
+    \mathbf{b}_{upper, blk} &amp; = \mathbf{\infty}
+    \in \mathbf{R}^{3 N_{ref}}
 \end{align}
 \]</div>
 <p>We will explain options for optimization.</p>
@@ -15186,7 +15186,7 @@ Instead, if we use L-infinity norm where slack variables are shared by enabling 
         -C_1 B &amp; I \\\
         O &amp; I
     \end{pmatrix}
-\in \boldsymbol{R}^{3N_{ref} \times D_v + N_{ref}}
+\in \mathbf{R}^{3N_{ref} \times D_v + N_{ref}}
 \end{align}
 \]</div>
 <h2 id="tips-for-stable-trajectory-planning">Tips for stable trajectory planning<a class="headerlink" href="#tips-for-stable-trajectory-planning" title="Permanent link">#</a></h2>
