@@ -14760,9 +14760,11 @@
 <p>Compare the predicted path of past objects with their actual traveled path to determine the deviation. For each object, calculate the mean distance between the predicted path points and the corresponding points on the actual path, up to the specified time step. In other words, this calculates the Average Displacement Error (ADE). The target object to be evaluated is the object from <span class="arithmatex">\(T_N\)</span> seconds ago, where <span class="arithmatex">\(T_N\)</span> is the maximum value of the prediction time horizon <span class="arithmatex">\([T_1, T_2, ..., T_N]\)</span>.</p>
 <p><img alt="path_deviation_each_object" src="images/path_deviation_each_object.drawio.svg"></p>
 <div class="arithmatex">\[
+\begin{align}
 n_{points} = T / dt \\
 ADE = \Sigma_{i=1}^{n_{points}} d_i / n_{points}　\\
 Var = \Sigma_{i=1}^{n_{points}} (d_i - ADE)^2 / n_{points}
+\end{align}
 \]</div>
 <ul>
 <li><span class="arithmatex">\(n_{points}\)</span> : Number of points in the predicted path</li>
@@ -14775,14 +14777,18 @@ Var = \Sigma_{i=1}^{n_{points}} (d_i - ADE)^2 / n_{points}
 <p>The final predicted path deviation metrics are calculated by averaging the mean deviation of the predicted path for all objects of the same class, and then calculating the mean, maximum, and minimum values of the mean deviation.</p>
 <p><img alt="path_deviation" src="images/path_deviation.drawio.svg"></p>
 <div class="arithmatex">\[
+\begin{align}
 ADE_{mean} = \Sigma_{j=1}^{n_{objects}} ADE_j / n_{objects} \\
 ADE_{max} = max(ADE_j) \\
 ADE_{min} = min(ADE_j)
+\end{align}
 \]</div>
 <div class="arithmatex">\[
+\begin{align}
 Var_{mean} = \Sigma_{j=1}^{n_{objects}} Var_j / n_{objects} \\
 Var_{max} = max(Var_j) \\
 Var_{min} = min(Var_j)
+\end{align}
 \]</div>
 <ul>
 <li><span class="arithmatex">\(n_{objects}\)</span> : Number of objects</li>
