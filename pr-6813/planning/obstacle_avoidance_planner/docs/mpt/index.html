@@ -14906,25 +14906,25 @@ Therefore, we have to apply the steer angle limitation to <span class="arithmate
     \end{pmatrix}
 \end{align}
 \]</div>
-<p>which can be formulated as follows with the state <span class="arithmatex">\(\boldsymbol{x}\)</span>, control input <span class="arithmatex">\(u\)</span> and some matrices, where <span class="arithmatex">\(\boldsymbol{x} = (y_k, \theta_k)\)</span></p>
+<p>which can be formulated as follows with the state <span class="arithmatex">\(\boldsymbol x\)</span>, control input <span class="arithmatex">\(u\)</span> and some matrices, where <span class="arithmatex">\(\boldsymbol x = (y_k, \theta_k)\)</span></p>
 <div class="arithmatex">\[
 \begin{align}
-  \boldsymbol{x}_{k+1} = A_k \boldsymbol{x}_k + \boldsymbol{b}_k u_k + \boldsymbol{w}_k
+  \boldsymbol x_{k+1} = A_k \boldsymbol x_k + \boldsymbol b_k u_k + \boldsymbol w_k
 \end{align}
 \]</div>
 <h3 id="time-series-state-equation">Time-series state equation<a class="headerlink" href="#time-series-state-equation" title="Permanent link">#</a></h3>
 <p>Then, we formulate time-series state equation by concatenating states, control inputs and matrices respectively as</p>
 <div class="arithmatex">\[
 \begin{align}
-  \boldsymbol{x} = A \boldsymbol{x}_0 + B \boldsymbol{u} + \boldsymbol{w}
+  \boldsymbol x = A \boldsymbol x_0 + B \boldsymbol u + \boldsymbol w
 \end{align}
 \]</div>
 <p>where</p>
 <div class="arithmatex">\[
 \begin{align}
-\boldsymbol{x} = (\boldsymbol{x}^T_1, \boldsymbol{x}^T_2, \boldsymbol{x}^T_3, \dots, \boldsymbol{x}^T_{n-1})^T \\\
-\boldsymbol{u} = (u_0, u_1, u_2, \dots, u_{n-2})^T \\\
-\boldsymbol{w} = (\boldsymbol{w}^T_0, \boldsymbol{w}^T_1, \boldsymbol{w}^T_2, \dots, \boldsymbol{w}^T_{n-1})^T. \\\
+\boldsymbol x = (\boldsymbol x^T_1, \boldsymbol x^T_2, \boldsymbol x^T_3, \dots, \boldsymbol x^T_{n-1})^T \\\
+\boldsymbol u = (u_0, u_1, u_2, \dots, u_{n-2})^T \\\
+\boldsymbol w = (\boldsymbol w^T_0, \boldsymbol w^T_1, \boldsymbol w^T_2, \dots, \boldsymbol w^T_{n-1})^T. \\\
 \end{align}
 \]</div>
 <p>In detail, each matrices are constructed as follows.</p>
