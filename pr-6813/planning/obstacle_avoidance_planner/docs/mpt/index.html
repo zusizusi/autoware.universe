@@ -14871,8 +14871,8 @@ Therefore, we have to apply the steer angle limitation to <span class="arithmate
 <p>Using this <span class="arithmatex">\(\delta_{\mathrm{ref}, k}\)</span>, <span class="arithmatex">\(\tan \delta_k\)</span> is linearized as follows.</p>
 <div class="arithmatex">\[
 \begin{align}
-\tan \delta_k &amp; \approx \tan \delta_{\mathrm{ref}, k} + \lbrace.\frac{d \tan \delta}{d \delta}\rbrace|_{\delta = \delta_{\mathrm{ref}, k}} \Delta \delta_k \\\
-&amp; = \tan \delta_{\mathrm{ref}, k} + \lbrace.\frac{d \tan \delta}{d \delta}\rbrace|_{\delta = \delta_{\mathrm{ref}, k}} (\delta_{\mathrm{ref}, k} - \delta_k) \\\
+\tan \delta_k &amp; \approx \tan \delta_{\mathrm{ref}, k} + \lbrace\frac{d \tan \delta}{d \delta}\rbrace|_{\delta = \delta_{\mathrm{ref}, k}} \Delta \delta_k \\\
+&amp; = \tan \delta_{\mathrm{ref}, k} + \lbrace\frac{d \tan \delta}{d \delta}\rbrace|_{\delta = \delta_{\mathrm{ref}, k}} (\delta_{\mathrm{ref}, k} - \delta_k) \\\
 &amp; = \tan \delta_{\mathrm{ref}, k} - \frac{\delta_{\mathrm{ref}, k}}{\cos^2 \delta_{\mathrm{ref}, k}} + \frac{1}{\cos^2 \delta_{\mathrm{ref}, k}} \delta_k
 \end{align}
 \]</div>
@@ -14887,29 +14887,29 @@ Therefore, we have to apply the steer angle limitation to <span class="arithmate
     =
     \begin{pmatrix}
         1 &amp; v dt \\\
-        0 &amp; 1 \\\
+        0 &amp; 1
     \end{pmatrix}
     \begin{pmatrix}
         y_k \\\
-        \theta_k \\\
+        \theta_k
     \end{pmatrix}
     +
     \begin{pmatrix}
         0 \\\
-        \frac{v dt}{L \cos^{2} \delta_{\mathrm{ref}, k}} \\\
+        \frac{v dt}{L \cos^{2} \delta_{\mathrm{ref}, k}}
     \end{pmatrix}
     \delta_{k}
     +
     \begin{pmatrix}
         0 \\\
-        \frac{v \tan(\delta_{\mathrm{ref}, k}) dt}{L} - \frac{v \delta_{\mathrm{ref}, k} dt}{L \cos^{2} \delta_{\mathrm{ref}, k}} - \kappa_k v dt\\\
+        \frac{v \tan(\delta_{\mathrm{ref}, k}) dt}{L} - \frac{v \delta_{\mathrm{ref}, k} dt}{L \cos^{2} \delta_{\mathrm{ref}, k}} - \kappa_k v dt
     \end{pmatrix}
 \end{align}
 \]</div>
-<p>which can be formulated as follows with the state <span class="arithmatex">\(\mathbf{\mathit{x}}\)</span>, control input <span class="arithmatex">\(u\)</span> and some matrices, where <span class="arithmatex">\(\mathit{\mathbf{x}} = (y_k, \theta_k)\)</span></p>
+<p>which can be formulated as follows with the state <span class="arithmatex">\(\mathbf{x}\)</span>, control input <span class="arithmatex">\(u\)</span> and some matrices, where <span class="arithmatex">\(\mathbf{x} = (y_k, \theta_k)\)</span></p>
 <div class="arithmatex">\[
 \begin{align}
-  \mathbf{\mathit{x}}_{k+1} = A_k \mathit{\mathbf{x}}_k + \mathbf{b}_k u_k + \mathbf{w}_k
+  \mathbf{x}_{k+1} = A_k \mathbf{x}_k + \mathbf{b}_k u_k + \mathbf{w}_k
 \end{align}
 \]</div>
 <h3 id="time-series-state-equation">Time-series state equation<a class="headerlink" href="#time-series-state-equation" title="Permanent link">#</a></h3>
