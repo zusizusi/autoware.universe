@@ -14715,13 +14715,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#predicted-path-deviation-predicted-path-deviation-variance_1" class="md-nav__link">
-    Predicted Path Deviation / Predicted Path Deviation Variance
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -14787,8 +14780,11 @@
 <li>yaw_rate</li>
 </ul>
 <h3 id="predicted-path-deviation-predicted-path-deviation-variance">Predicted Path Deviation / Predicted Path Deviation Variance<a class="headerlink" href="#predicted-path-deviation-predicted-path-deviation-variance" title="Permanent link">#</a></h3>
-<p>Compare the predicted path of past objects with their actual traveled path to determine the deviation. For each object, calculate the mean distance between the predicted path points and the corresponding points on the actual path, up to the specified time step. In other words, this calculates the Average Displacement Error (ADE). The target object to be evaluated is the object from <span class="arithmatex">\(T_N\)</span> seconds ago, where <span class="arithmatex">\(T_N\)</span> is the maximum value of the prediction time horizon <span class="arithmatex">\([T_1, T_2, ..., T_N]\)</span>.</p>
-<p><strong>Note</strong> The object from <span class="arithmatex">\(T_N\)</span> seconds ago is the target object for all metrics. This is to unify the time of the target object across metrics.</p>
+<p>Compare the predicted path of past objects with their actual traveled path to determine the deviation for <strong>MOVING OBJECTS</strong>. For each object, calculate the mean distance between the predicted path points and the corresponding points on the actual path, up to the specified time step. In other words, this calculates the Average Displacement Error (ADE). The target object to be evaluated is the object from <span class="arithmatex">\(T_N\)</span> seconds ago, where <span class="arithmatex">\(T_N\)</span> is the maximum value of the prediction time horizon <span class="arithmatex">\([T_1, T_2, ..., T_N]\)</span>.</p>
+<blockquote>
+<p>[!NOTE]
+The object from <span class="arithmatex">\(T_N\)</span> seconds ago is the target object for all metrics. This is to unify the time of the target object across metrics.</p>
+</blockquote>
 <p><img alt="path_deviation_each_object" src="images/path_deviation_each_object.drawio.svg"></p>
 <div class="arithmatex">\[
 \begin{align}
@@ -14841,50 +14837,6 @@ For stopped objects, the smoothed traveled trajectory is unstable, so this metri
 <h3 id="yaw-rate">Yaw Rate<a class="headerlink" href="#yaw-rate" title="Permanent link">#</a></h3>
 <p>Calculates the yaw rate of an object based on the change in yaw angle from the previous time step. It is evaluated for <strong>STATIONARY OBJECTS</strong> and assesses the stability of yaw rate recognition. The yaw rate is calculated by comparing the yaw angle of the past object with the yaw angle of the object received in the previous cycle. Here, t2 is the timestamp that is <span class="arithmatex">\(T_n\)</span> seconds ago.</p>
 <p><img alt="yaw_rate" src="images/yaw_rate.drawio.svg"></p>
-<h3 id="predicted-path-deviation-predicted-path-deviation-variance_1">Predicted Path Deviation / Predicted Path Deviation Variance<a class="headerlink" href="#predicted-path-deviation-predicted-path-deviation-variance_1" title="Permanent link">#</a></h3>
-<p>Compare the predicted path of past objects with their actual traveled path to determine the deviation. For each object, calculate the mean distance between the predicted path points and the corresponding points on the actual path, up to the specified time step. In other words, this calculates the Average Displacement Error (ADE). The target object to be evaluated is the object from <span class="arithmatex">\(T_N\)</span> seconds ago, where <span class="arithmatex">\(T_N\)</span> is the maximum value of the prediction time horizon <span class="arithmatex">\([T_1, T_2, ..., T_N]\)</span>.</p>
-<p><img alt="path_deviation_each_object" src="images/path_deviation_each_object.drawio.svg"></p>
-<div class="arithmatex">\[
-\begin{align}
-n_{points} = T / dt \\
-ADE = \Sigma_{i=1}^{n_{points}} d_i / n_{points}　\\
-Var = \Sigma_{i=1}^{n_{points}} (d_i - ADE)^2 / n_{points}
-\end{align}
-\]</div>
-<ul>
-<li><span class="arithmatex">\(n_{points}\)</span> : Number of points in the predicted path</li>
-<li><span class="arithmatex">\(T\)</span> : Time horizon for prediction evaluation.</li>
-<li><span class="arithmatex">\(dt\)</span> : Time interval of the predicted path</li>
-<li><span class="arithmatex">\(d_i\)</span> : Distance between the predicted path and the actual traveled path at path point <span class="arithmatex">\(i\)</span></li>
-<li><span class="arithmatex">\(ADE\)</span> : Mean deviation of the predicted path for the target object.</li>
-<li><span class="arithmatex">\(Var\)</span> : Variance of the predicted path deviation for the target object.</li>
-</ul>
-<p>The final predicted path deviation metrics are calculated by averaging the mean deviation of the predicted path for all objects of the same class, and then calculating the mean, maximum, and minimum values of the mean deviation.</p>
-<p><img alt="path_deviation" src="images/path_deviation.drawio.svg"></p>
-<div class="arithmatex">\[
-\begin{align}
-ADE_{mean} = \Sigma_{j=1}^{n_{objects}} ADE_j / n_{objects} \\
-ADE_{max} = max(ADE_j) \\
-ADE_{min} = min(ADE_j)
-\end{align}
-\]</div>
-<div class="arithmatex">\[
-\begin{align}
-Var_{mean} = \Sigma_{j=1}^{n_{objects}} Var_j / n_{objects} \\
-Var_{max} = max(Var_j) \\
-Var_{min} = min(Var_j)
-\end{align}
-\]</div>
-<ul>
-<li><span class="arithmatex">\(n_{objects}\)</span> : Number of objects</li>
-<li><span class="arithmatex">\(ADE_{mean}\)</span> : Mean deviation of the predicted path through all objects</li>
-<li><span class="arithmatex">\(ADE_{max}\)</span> : Maximum deviation of the predicted path through all objects</li>
-<li><span class="arithmatex">\(ADE_{min}\)</span> : Minimum deviation of the predicted path through all objects</li>
-<li><span class="arithmatex">\(Var_{mean}\)</span> : Mean variance of the predicted path deviation through all objects</li>
-<li><span class="arithmatex">\(Var_{max}\)</span> : Maximum variance of the predicted path deviation through all objects</li>
-<li><span class="arithmatex">\(Var_{min}\)</span> : Minimum variance of the predicted path deviation through all objects</li>
-</ul>
-<p>The actual metric name is determined by the object class and time horizon. For example, <code>predicted_path_deviation_variance_CAR_5.00</code></p>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
 <table>
 <thead>
