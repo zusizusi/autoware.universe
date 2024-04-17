@@ -14694,6 +14694,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#lateral-deviation" class="md-nav__link">
+    Lateral Deviation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yaw-deviation" class="md-nav__link">
+    Yaw Deviation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yaw-rate" class="md-nav__link">
+    Yaw Rate
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -14750,14 +14771,20 @@
 <h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
 <p>This module allows for the evaluation of how accurately perception results are generated without the need for annotations. It is capable of confirming performance and can evaluate results from a few seconds prior, enabling online execution.</p>
 <h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
+<p>The evaluated metrics are as follows:</p>
 <ul>
-<li>Calculates lateral deviation between the predicted path and the actual traveled trajectory.</li>
-<li>Calculates lateral deviation between the smoothed traveled trajectory and the perceived position to evaluate the stability of lateral position recognition.</li>
-<li>Calculates yaw deviation between the smoothed traveled trajectory and the perceived position to evaluate the stability of yaw recognition.</li>
-<li>Calculates yaw rate based on the yaw of the object received in the previous cycle to evaluate the stability of the yaw rate recognition.</li>
+<li>predicted_path_deviation</li>
+<li>predicted_path_deviation_variance</li>
+<li>lateral_deviation</li>
+<li>yaw_deviation</li>
+<li>yaw_rate</li>
 </ul>
 <h3 id="predicted-path-deviation-predicted-path-deviation-variance">Predicted Path Deviation / Predicted Path Deviation Variance<a class="headerlink" href="#predicted-path-deviation-predicted-path-deviation-variance" title="Permanent link">#</a></h3>
-<p>Compare the predicted path of past objects with their actual traveled path to determine the deviation. For each object, calculate the mean distance between the predicted path points and the corresponding points on the actual path, up to the specified time step. In other words, this calculates the Average Displacement Error (ADE). The target object to be evaluated is the object from <span class="arithmatex">\(T_N\)</span> seconds ago, where <span class="arithmatex">\(T_N\)</span> is the maximum value of the prediction time horizon <span class="arithmatex">\([T_1, T_2, ..., T_N]\)</span>.</p>
+<p>Compare the predicted path of past objects with their actual traveled path to determine the deviation for <strong>MOVING OBJECTS</strong>. For each object, calculate the mean distance between the predicted path points and the corresponding points on the actual path, up to the specified time step. In other words, this calculates the Average Displacement Error (ADE). The target object to be evaluated is the object from <span class="arithmatex">\(T_N\)</span> seconds ago, where <span class="arithmatex">\(T_N\)</span> is the maximum value of the prediction time horizon <span class="arithmatex">\([T_1, T_2, ..., T_N]\)</span>.</p>
+<blockquote>
+<p>[!NOTE]
+The object from <span class="arithmatex">\(T_N\)</span> seconds ago is the target object for all metrics. This is to unify the time of the target object across metrics.</p>
+</blockquote>
 <p><img alt="path_deviation_each_object" src="images/path_deviation_each_object.drawio.svg"></p>
 <div class="arithmatex">\[
 \begin{align}
@@ -14800,6 +14827,16 @@ Var_{min} = min(Var_j)
 <li><span class="arithmatex">\(Var_{min}\)</span> : Minimum variance of the predicted path deviation through all objects</li>
 </ul>
 <p>The actual metric name is determined by the object class and time horizon. For example, <code>predicted_path_deviation_variance_CAR_5.00</code></p>
+<h3 id="lateral-deviation">Lateral Deviation<a class="headerlink" href="#lateral-deviation" title="Permanent link">#</a></h3>
+<p>Calculates lateral deviation between the smoothed traveled trajectory and the perceived position to evaluate the stability of lateral position recognition for <strong>MOVING OBJECTS</strong>. The smoothed traveled trajectory is calculated by applying a centered moving average filter whose window size is specified by the parameter <code>smoothing_window_size</code>. The lateral deviation is calculated by comparing the smoothed traveled trajectory with the perceived position of the past object whose timestamp is <span class="arithmatex">\(T=T_n\)</span> seconds ago. For stopped objects, the smoothed traveled trajectory is unstable, so this metric is not calculated.</p>
+<p><img alt="lateral_deviation" src="images/lateral_deviation.drawio.svg"></p>
+<h3 id="yaw-deviation">Yaw Deviation<a class="headerlink" href="#yaw-deviation" title="Permanent link">#</a></h3>
+<p>Calculates the deviation between the recognized yaw angle of an past object and the yaw azimuth angle of the smoothed traveled trajectory for <strong>MOVING OBJECTS</strong>. The smoothed traveled trajectory is calculated by applying a centered moving average filter whose window size is specified by the parameter <code>smoothing_window_size</code>. The yaw deviation is calculated by comparing the yaw azimuth angle of smoothed traveled trajectory with the perceived orientation of the past object whose timestamp is <span class="arithmatex">\(T=T_n\)</span> seconds ago.
+For stopped objects, the smoothed traveled trajectory is unstable, so this metric is not calculated.</p>
+<p><img alt="yaw_deviation" src="images/yaw_deviation.drawio.svg"></p>
+<h3 id="yaw-rate">Yaw Rate<a class="headerlink" href="#yaw-rate" title="Permanent link">#</a></h3>
+<p>Calculates the yaw rate of an object based on the change in yaw angle from the previous time step. It is evaluated for <strong>STATIONARY OBJECTS</strong> and assesses the stability of yaw rate recognition. The yaw rate is calculated by comparing the yaw angle of the past object with the yaw angle of the object received in the previous cycle. Here, t2 is the timestamp that is <span class="arithmatex">\(T_n\)</span> seconds ago.</p>
+<p><img alt="yaw_rate" src="images/yaw_rate.drawio.svg"></p>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
 <table>
 <thead>
