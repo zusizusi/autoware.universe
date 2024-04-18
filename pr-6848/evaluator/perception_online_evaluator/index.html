@@ -14850,13 +14850,13 @@ For stopped objects, the smoothed traveled trajectory is unstable, so this metri
 <h3 id="object-counts">Object Counts<a class="headerlink" href="#object-counts" title="Permanent link">#</a></h3>
 <p>Counts the number of detections for each object class within the specified detection range. These metrics are measured for the most recent object not past objects.</p>
 <p><img alt="detection_counts" src="images/detection_counts.drawio.svg"></p>
-<p>In the provided illustration, the range <span class="arithmatex">\( R \)</span> is determined by a combination of lists of radii (e.g., <span class="arithmatex">\( r_1, r_2, \ldots \)</span>) and heights (e.g., <span class="arithmatex">\( h_1, h_2, \ldots \)</span>).
+<p>In the provided illustration, the range <span class="arithmatex">\(R\)</span> is determined by a combination of lists of radii (e.g., <span class="arithmatex">\(r_1, r_2, \ldots\)</span>) and heights (e.g., <span class="arithmatex">\(h_1, h_2, \ldots\)</span>).
 For example,</p>
 <ul>
-<li>the number of CAR in range <span class="arithmatex">\( R = (r_1, h_1) \)</span> equals 1</li>
-<li>the number of CAR in range <span class="arithmatex">\( R = (r_1, h_2) \)</span> equals 2</li>
-<li>the number of CAR in range <span class="arithmatex">\( R = (r_2, h_1) \)</span> equals 3</li>
-<li>the number of CAR in range <span class="arithmatex">\( R = (r_2, h_2) \)</span> equals 4</li>
+<li>the number of CAR in range <span class="arithmatex">\(R = (r_1, h_1)\)</span> equals 1</li>
+<li>the number of CAR in range <span class="arithmatex">\(R = (r_1, h_2)\)</span> equals 2</li>
+<li>the number of CAR in range <span class="arithmatex">\(R = (r_2, h_1)\)</span> equals 3</li>
+<li>the number of CAR in range <span class="arithmatex">\(R = (r_2, h_2)\)</span> equals 4</li>
 </ul>
 <h4 id="total-object-count">Total Object Count<a class="headerlink" href="#total-object-count" title="Permanent link">#</a></h4>
 <p>Counts the number of unique objects for each class within the specified detection range. The total object count is calculated as follows:</p>
@@ -14867,10 +14867,10 @@ For example,</p>
 \]</div>
 <p>where:</p>
 <ul>
-<li><span class="arithmatex">\( \bigcup \)</span> represents the union across all frames from <span class="arithmatex">\( t = 0 \)</span> to <span class="arithmatex">\( T\_{\text{now}} \)</span>, which ensures that each uuid is counted only once.</li>
-<li><span class="arithmatex">\( \text{class}(t, \text{uuid}) = C \)</span> specifies that the object with uuid at time <span class="arithmatex">\( t \)</span> belongs to class <span class="arithmatex">\( C \)</span>.</li>
-<li><span class="arithmatex">\( \text{position}(t, \text{uuid}) \in R \)</span> indicates that the object with uuid at time <span class="arithmatex">\( t \)</span> is within the specified range <span class="arithmatex">\( R \)</span>.</li>
-<li><span class="arithmatex">\( \left| \{ \ldots \} \right| \)</span> denotes the cardinality of the set, which counts the number of unique uuids that meet the class and range criteria across all considered times.</li>
+<li><span class="arithmatex">\(\bigcup\)</span> represents the union across all frames from <span class="arithmatex">\(t = 0\)</span> to <span class="arithmatex">\(T\_{\text{now}}\)</span>, which ensures that each uuid is counted only once.</li>
+<li><span class="arithmatex">\(\text{class}(t, \text{uuid}) = C\)</span> specifies that the object with uuid at time <span class="arithmatex">\(t\)</span> belongs to class <span class="arithmatex">\(C\)</span>.</li>
+<li><span class="arithmatex">\(\text{position}(t, \text{uuid}) \in R\)</span> indicates that the object with uuid at time <span class="arithmatex">\(t\)</span> is within the specified range <span class="arithmatex">\(R\)</span>.</li>
+<li><span class="arithmatex">\(\left| \{ \ldots \} \right|\)</span> denotes the cardinality of the set, which counts the number of unique uuids that meet the class and range criteria across all considered times.</li>
 </ul>
 <h4 id="average-object-count">Average Object Count<a class="headerlink" href="#average-object-count" title="Permanent link">#</a></h4>
 <p>Counts the average number of objects for each class within the specified detection range. This metric measures how many objects were detected in one frame, without considering uuids. The average object count is calculated as follows:</p>
@@ -14881,8 +14881,8 @@ For example,</p>
 \]</div>
 <p>where:</p>
 <ul>
-<li><span class="arithmatex">\( N \)</span> represents the total number of frames within the time period time to <span class="arithmatex">\( T\_{\text{now}} \)</span> (it is precisely <code>detection_count_purge_seconds</code>)</li>
-<li><span class="arithmatex">\(\text{object}\)</span> denotes the number of objects that meet the class and range criteria at time <span class="arithmatex">\( t \)</span>.</li>
+<li><span class="arithmatex">\(N\)</span> represents the total number of frames within the time period time to <span class="arithmatex">\(T\_{\text{now}}\)</span> (it is precisely <code>detection_count_purge_seconds</code>)</li>
+<li><span class="arithmatex">\(text{object}\)</span> denotes the number of objects that meet the class and range criteria at time <span class="arithmatex">\(t\)</span>.</li>
 </ul>
 <h4 id="interval-object-count">Interval Object Count<a class="headerlink" href="#interval-object-count" title="Permanent link">#</a></h4>
 <p>Counts the average number of objects for each class within the specified detection range over the last <code>objects_count_window_seconds</code>. This metric measures how many objects were detected in one frame, without considering uuids. The interval object count is calculated as follows:</p>
@@ -14893,8 +14893,8 @@ For example,</p>
 \]</div>
 <p>where:</p>
 <ul>
-<li><span class="arithmatex">\( W \)</span> represents the total number of frames within the last <code>objects_count_window_seconds</code>.</li>
-<li><span class="arithmatex">\( T_W \)</span> represents the time window <code>objects_count_window_seconds</code></li>
+<li><span class="arithmatex">\(W\)</span> represents the total number of frames within the last <code>objects_count_window_seconds</code>.</li>
+<li><span class="arithmatex">\(T_W\)</span> represents the time window <code>objects_count_window_seconds</code></li>
 </ul>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
 <table>
@@ -14955,12 +14955,12 @@ For example,</p>
 </tr>
 <tr>
 <td><code>detection_radius_list</code></td>
-<td>double</td>
+<td>list[double]</td>
 <td>Detection radius for objects to be evaluated.(used for objects count only)</td>
 </tr>
 <tr>
 <td><code>detection_height_list</code></td>
-<td>double</td>
+<td>list[double]</td>
 <td>Detection height for objects to be evaluated. (used for objects count only)</td>
 </tr>
 <tr>
