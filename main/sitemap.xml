@@ -1471,12 +1471,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/node/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/path/</loc>
          <lastmod>2024-04-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/path/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/unit/</loc>
          <lastmod>2024-04-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1486,47 +1486,52 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/node/and/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/unit/and/</loc>
          <lastmod>2024-04-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/node/const/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/unit/const/</loc>
          <lastmod>2024-04-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/node/diag/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/unit/diag/</loc>
          <lastmod>2024-04-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/node/link/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/unit/link/</loc>
          <lastmod>2024-04-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/node/or/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/unit/or/</loc>
          <lastmod>2024-04-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/node/remap/</loc>
-         <lastmod>2024-04-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/tool/converter/</loc>
-         <lastmod>2024-04-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/tool/dump/</loc>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/format/unit/remap/</loc>
          <lastmod>2024-04-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_aggregator/doc/tool/tree/</loc>
+         <lastmod>2024-04-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_utils/</loc>
+         <lastmod>2024-04-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_utils/doc/node/converter/</loc>
+         <lastmod>2024-04-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/diagnostic_graph_utils/doc/node/dump/</loc>
          <lastmod>2024-04-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1562,6 +1567,11 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/system/mrm_handler/</loc>
+         <lastmod>2024-04-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/system/system_diagnostic_monitor/</loc>
          <lastmod>2024-04-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1652,6 +1662,11 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/system/velodyne_monitor/</loc>
+         <lastmod>2024-04-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/tools/rqt_diagnostic_graph_monitor/</loc>
          <lastmod>2024-04-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
