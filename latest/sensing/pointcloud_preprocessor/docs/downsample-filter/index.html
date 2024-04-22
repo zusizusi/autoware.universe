@@ -11923,6 +11923,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#pickup-based-voxel-grid-downsample-filter" class="md-nav__link">
+    Pickup Based Voxel Grid Downsample Filter
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -11967,6 +11974,13 @@
           <li class="md-nav__item">
   <a href="#voxel-grid-downsample-filter_1" class="md-nav__link">
     Voxel Grid Downsample Filter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pickup-based-voxel-grid-downsample-filter_1" class="md-nav__link">
+    Pickup Based Voxel Grid Downsample Filter
   </a>
   
 </li>
@@ -15162,6 +15176,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#pickup-based-voxel-grid-downsample-filter" class="md-nav__link">
+    Pickup Based Voxel Grid Downsample Filter
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -15206,6 +15227,13 @@
           <li class="md-nav__item">
   <a href="#voxel-grid-downsample-filter_1" class="md-nav__link">
     Voxel Grid Downsample Filter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pickup-based-voxel-grid-downsample-filter_1" class="md-nav__link">
+    Pickup Based Voxel Grid Downsample Filter
   </a>
   
 </li>
@@ -15278,6 +15306,8 @@
 <p><code>pcl::RandomSample</code> is used, which points are sampled with uniform probability.</p>
 <h3 id="voxel-grid-downsample-filter">Voxel Grid Downsample Filter<a class="headerlink" href="#voxel-grid-downsample-filter" title="Permanent link">#</a></h3>
 <p><code>pcl::VoxelGrid</code> is used, which points in each voxel are approximated with their centroid.</p>
+<h3 id="pickup-based-voxel-grid-downsample-filter">Pickup Based Voxel Grid Downsample Filter<a class="headerlink" href="#pickup-based-voxel-grid-downsample-filter" title="Permanent link">#</a></h3>
+<p>This algorithm samples a single actual point existing within the voxel, not the centroid. The computation cost is low compared to Centroid Based Voxel Grid Filter.</p>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
 <p>These implementations inherit <code>pointcloud_preprocessor::Filter</code> class, please refer <a href="../../">README</a>.</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
@@ -15365,7 +15395,41 @@
 </tr>
 </tbody>
 </table>
+<h3 id="pickup-based-voxel-grid-downsample-filter_1">Pickup Based Voxel Grid Downsample Filter<a class="headerlink" href="#pickup-based-voxel-grid-downsample-filter_1" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>voxel_size_x</code></td>
+<td>double</td>
+<td>1.0</td>
+<td>voxel size x [m]</td>
+</tr>
+<tr>
+<td><code>voxel_size_y</code></td>
+<td>double</td>
+<td>1.0</td>
+<td>voxel size y [m]</td>
+</tr>
+<tr>
+<td><code>voxel_size_z</code></td>
+<td>double</td>
+<td>1.0</td>
+<td>voxel size z [m]</td>
+</tr>
+</tbody>
+</table>
 <h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
+<!-- cspell: ignore martinus -->
+
+<p>This implementation uses the <code>robin_hood.h</code> hashing library by martinus, available under the MIT License at <a href="https://github.com/martinus/robin-hood-hashing">martinus/robin-hood-hashing</a> on GitHub. Special thanks to martinus for this contribution.</p>
 <h2 id="optional-error-detection-and-handling">(Optional) Error detection and handling<a class="headerlink" href="#optional-error-detection-and-handling" title="Permanent link">#</a></h2>
 <h2 id="optional-performance-characterization">(Optional) Performance characterization<a class="headerlink" href="#optional-performance-characterization" title="Permanent link">#</a></h2>
 <h2 id="optional-referencesexternal-links">(Optional) References/External links<a class="headerlink" href="#optional-referencesexternal-links" title="Permanent link">#</a></h2>
