@@ -15473,57 +15473,24 @@
 <p><img alt="lane_change_skip" src="../../image/manager/lane_change_skip.svg"></p>
 <p>When the manager removes succeeded modules, the last added module's output is used as approved modules stack.</p>
 <h2 id="reference-path-generation">Reference path generation<a class="headerlink" href="#reference-path-generation" title="Permanent link">#</a></h2>
-<p>The root reference path is generated from the centerline of the <strong>lanelet sequence</strong> that obtained from the <strong>root lanelet</strong>, and it is not only used as an input to the first added module of approved modules stack, but also used as the output of <code>behavior_path_planner</code> if none of the modules are running.</p>
+<p>The reference path is generated from the centerline of the <strong>lanelet sequence</strong> obtained from the <strong>current route lanelet</strong>, and it is not only used as an input to the first added module of approved modules stack, but also used as the output of <code>behavior_path_planner</code> if none of the modules are running.</p>
 <figure>
 <p><img alt="root_generation" src="../../image/manager/root_generation.svg" width="500">
   </p>
 <figcaption>root reference path generation</figcaption>
 </figure>
-<p>The root lanelet is the closest lanelet within the route, and the update timing is based on Ego's operation mode state.</p>
-<ul>
-<li>the state is <code>OperationModeState::AUTONOMOUS</code>: Update only when the ego moves to right or left lane by lane change module.</li>
-<li>the state is <strong>NOT</strong> <code>OperationModeState::AUTONOMOUS</code>: Update at the beginning of every planning cycle.</li>
-</ul>
-<p><img alt="root_lanelet" src="../../image/manager/root_lanelet.svg"></p>
+<p>The <strong>current route lanelet</strong> keeps track of the route lanelet currently followed by the planner.
+It is initialized as the closest lanelet within the route.
+It is then updated as ego travels along the route such that (1) it follows the previous <strong>current route lanelet</strong> and (2) it is the closest lanelet within the route.</p>
+<p>The <strong>current route lanelet</strong> can be reset to the closest lanelet within the route, ignoring whether it follows the previous <strong>current route lanelet</strong> .</p>
+<p><img alt="current_route_lanelet" src="../../image/manager/current_route_lanelet.svg"></p>
 <p>The manager needs to know the ego behavior and then generate a root reference path from the lanes that Ego should follow.</p>
-<p>For example, during autonomous driving, even if Ego moves into the next lane in order to avoid a parked vehicle, the target lanes that Ego should follow will <strong>NOT</strong> change because Ego will return to the original lane after the avoidance maneuver. Therefore, the manager does <strong>NOT</strong> update <strong>root lanelet</strong> even if the avoidance maneuver is finished.</p>
+<p>For example, during autonomous driving, even if Ego moves into the next lane in order to avoid a parked vehicle, the target lanes that Ego should follow will <strong>NOT</strong> change because Ego will return to the original lane after the avoidance maneuver. Therefore, the manager does <strong>NOT</strong> reset the <strong>current route lanelet</strong>, even if the avoidance maneuver is finished.</p>
 <p><img alt="avoidance" src="../../image/manager/avoidance.svg"></p>
-<p>On the other hand, if the lane change is successful, the manager updates <strong>root lanelet</strong> because the lane that Ego should follow changes.</p>
+<p>On the other hand, if the lane change is successful, the manager resets the <strong>current route lanelet</strong> because the lane that Ego should follow changes.</p>
 <p><img alt="lane_change" src="../../image/manager/lane_change.svg"></p>
-<p>In addition, while manual driving, the manager always updates <strong>root lanelet</strong> because the pilot may move to an adjacent lane regardless of the decision of the autonomous driving system.</p>
-<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * @brief get reference path from root_lanelet_ centerline.</span>
-<span class="cm">   * @param planner data.</span>
-<span class="cm">   * @return reference path.</span>
-<span class="cm">   */</span>
-<span class="w">  </span><span class="n">BehaviorModuleOutput</span><span class="w"> </span><span class="nf">getReferencePath</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">PlannerData</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">const</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">route_handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">route_handler</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">pose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">self_odometry</span><span class="o">-&gt;</span><span class="n">pose</span><span class="p">.</span><span class="n">pose</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">parameters</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">extra_margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">backward_length</span><span class="w"> </span><span class="o">=</span>
-<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">backward_path_length</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">backward_path_length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">extra_margin</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">lanelet_sequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">route_handler</span><span class="o">-&gt;</span><span class="n">getLaneletSequence</span><span class="p">(</span>
-<span class="w">      </span><span class="n">root_lanelet_</span><span class="p">.</span><span class="n">value</span><span class="p">(),</span><span class="w"> </span><span class="n">pose</span><span class="p">,</span><span class="w"> </span><span class="n">backward_length</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">());</span>
-
-<span class="w">    </span><span class="n">lanelet</span><span class="o">::</span><span class="n">ConstLanelet</span><span class="w"> </span><span class="n">closest_lane</span><span class="p">{};</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lanelet</span><span class="o">::</span><span class="n">utils</span><span class="o">::</span><span class="n">query</span><span class="o">::</span><span class="n">getClosestLaneletWithConstrains</span><span class="p">(</span>
-<span class="w">          </span><span class="n">lanelet_sequence</span><span class="p">,</span><span class="w"> </span><span class="n">pose</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">closest_lane</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">ego_nearest_dist_threshold</span><span class="p">,</span>
-<span class="w">          </span><span class="n">p</span><span class="p">.</span><span class="n">ego_nearest_yaw_threshold</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">getReferencePath</span><span class="p">(</span><span class="n">closest_lane</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lanelet</span><span class="o">::</span><span class="n">utils</span><span class="o">::</span><span class="n">query</span><span class="o">::</span><span class="n">getClosestLanelet</span><span class="p">(</span><span class="n">lanelet_sequence</span><span class="p">,</span><span class="w"> </span><span class="n">pose</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">closest_lane</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">getReferencePath</span><span class="p">(</span><span class="n">closest_lane</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span><span class="w">  </span><span class="c1">// something wrong.</span>
-<span class="w">  </span><span class="p">}</span>
-</code></pre></div>
-<p>Code is <a href="https://github.com/autowarefoundation/autoware.universe/blob/b1734916e3efd9786507a271e0fe829dd37476c8/planning/behavior_path_planner/include/behavior_path_planner/planner_manager.hpp#L202-L227">here</a></p>
+<p>In addition, while manually driving (i.e., either the <code>OperationModeState</code> is different from <code>AUTONOMOUS</code> or the Autoware control is not engaged), the manager resets the <strong>current route lanelet</strong> at each iteration because the ego vehicle may move to an adjacent lane regardless of the decision of the autonomous driving system.
+The only exception is when a module is already approved, allowing testing the module's behavior while manually driving.</p>
 <h2 id="drivable-area-generation">Drivable area generation<a class="headerlink" href="#drivable-area-generation" title="Permanent link">#</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
