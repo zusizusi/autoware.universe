@@ -14976,6 +14976,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#interface" class="md-nav__link">
+    Interface
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#assumptions-known-limits" class="md-nav__link">
     Assumptions / Known limits
   </a>
@@ -15010,6 +15017,28 @@
 <div><h1 id="tier4_screen_capture_rviz_plugin">tier4_screen_capture_rviz_plugin<a class="headerlink" href="#tier4_screen_capture_rviz_plugin" title="Permanent link">#</a></h1>
 <h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
 <p>This plugin captures the screen of rviz.</p>
+<h2 id="interface">Interface<a class="headerlink" href="#interface" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/debug/capture/video</code></td>
+<td><code>std_srvs::srv::Trigger</code></td>
+<td>Trigger to start screen capturing.</td>
+</tr>
+<tr>
+<td><code>/debug/capture/screen_shot</code></td>
+<td><code>std_srvs::srv::Trigger</code></td>
+<td>Trigger to capture screen shot.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
 <p>This is only for debug or analyze.
 The <code>capture screen</code> button is still beta version which can slow frame rate.
