@@ -1381,6 +1381,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/simulator/learning_based_vehicle_model/</loc>
+         <lastmod>2024-04-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/simulator/simple_planning_simulator/</loc>
          <lastmod>2024-04-24</lastmod>
          <changefreq>daily</changefreq>
