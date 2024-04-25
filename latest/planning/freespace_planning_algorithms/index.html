@@ -15087,6 +15087,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#extension-to-python-module-only-a-supported" class="md-nav__link">
+    Extension to Python module (only A* supported)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#license-notice" class="md-nav__link">
     License notice
   </a>
@@ -15168,6 +15175,22 @@ in the figures below. The created figures are then again saved in <code>/tmp</co
 <p>The black cells, green box, and red box, respectively, indicate obstacles,
 start configuration, and goal configuration.
 The sequence of the blue boxes indicate the solution path.</p>
+<h2 id="extension-to-python-module-only-a-supported">Extension to Python module (only A* supported)<a class="headerlink" href="#extension-to-python-module-only-a-supported" title="Permanent link">#</a></h2>
+<p>There is an implementation of the extension to the python module.
+You can try A* search via Python by setting follows:</p>
+<ul>
+<li>parameters,</li>
+<li>costmap,</li>
+<li>start pose,</li>
+<li>goal pose.</li>
+</ul>
+<p>Then, you can get</p>
+<ul>
+<li>success or failure,</li>
+<li>searched trajectory.</li>
+</ul>
+<p>The example code is <a href="scripts/example/example.py">scripts/example/example.py</a>.
+Note that you need to build this package and source the setup shell script in advance.</p>
 <h2 id="license-notice">License notice<a class="headerlink" href="#license-notice" title="Permanent link">#</a></h2>
 <p>Files <code>src/reeds_shepp.cpp</code> and <code>include/astar_search/reeds_shepp.h</code>
 are fetched from <a href="https://github.com/ghliu/pyReedsShepp">pyReedsShepp</a>.
