@@ -15083,8 +15083,9 @@
 <p>Launch <a href="https://autowarefoundation.github.io/autoware-documentation/main/tutorials/ad-hoc-simulation/planning-simulation/#1-launch-autoware">planning simulator</a> with <code>use_sim_time:=true</code>.</p>
 <div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>launch<span class="w"> </span>autoware_launch<span class="w"> </span>planning_simulator.launch.xml<span class="w"> </span>map_path:<span class="o">=</span><span class="nv">$HOME</span>/autoware_map/sample-map-planning<span class="w"> </span>vehicle_model:<span class="o">=</span>sample_vehicle<span class="w"> </span>sensor_model:<span class="o">=</span>sample_sensor_kit<span class="w"> </span>use_sim_time:<span class="o">=</span><span class="nb">true</span>
 </code></pre></div>
-<p>!!! warning</p>
-<p>If you launch planning simulator without adding the <code>tier4_simulated_clock_rviz_plugin</code>, your simulation will not be running. You'll not even be able to place the initial and the goal pose.</p>
+<blockquote>
+<p><strong>Warning</strong>: If you launch the planning simulator without adding the <code>tier4_simulated_clock_rviz_plugin</code>, your simulation will not be running. You'll not even be able to place the initial and the goal pose.</p>
+</blockquote>
 </li>
 <li>
 <p>Start rviz and select panels/Add new panel.</p>
@@ -15105,8 +15106,9 @@
 <li>Time step: value used to advance the clock when pressing the step button d).</li>
 <li>Time unit: time unit associated with the value from e).</li>
 </ul>
-<p>!!! warning</p>
-<p>If you set the time step too large, your simulation will go haywire.</p>
+<blockquote>
+<p><strong>Warning</strong>: If you set the time step too large, your simulation will go haywire.</p>
+</blockquote>
 </li>
 </ol></div>
 
