@@ -931,6 +931,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/pr-6817/planning/autoware_planning_test_manager/</loc>
+         <lastmod>2024-05-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/pr-6817/planning/autoware_remaining_distance_time_calculator/</loc>
          <lastmod>2024-05-15</lastmod>
          <changefreq>daily</changefreq>
