@@ -15302,17 +15302,12 @@
 
 <div><h1 id="distortion_corrector">distortion_corrector<a class="headerlink" href="#distortion_corrector" title="Permanent link">#</a></h1>
 <h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
-<p>The <code>distortion_corrector</code> is a node that compensates pointcloud distortion caused by ego vehicle's movement during 1 scan.</p>
-<p>Since the LiDAR sensor scans by rotating an internal laser, the resulting point cloud will be distorted if the ego-vehicle moves during a single scan (as shown by the figure below). The node corrects this by interpolating sensor data using odometry of ego-vehicle.</p>
+<p>The <code>distortion_corrector</code> is a node that compensates for pointcloud distortion caused by the ego-vehicle's movement during 1 scan.</p>
+<p>Since the LiDAR sensor scans by rotating an internal laser, the resulting point cloud will be distorted if the ego-vehicle moves during a single scan (as shown by the figure below). The node corrects this by interpolating sensor data using the odometry of the ego-vehicle.</p>
 <h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
-<ul>
-<li>Use the equations below (specific to the Velodyne 32C sensor) to obtain an accurate timestamp for each scan data point.</li>
-<li>Use twist information to determine the distance the ego-vehicle has traveled between the time that the scan started and the corrected timestamp of each point, and then correct the position of the point.</li>
-</ul>
-<p>The offset equation is given by
-$ TimeOffset = (55.296 \mu s <em>SequenceIndex) + (2.304 \mu s</em> DataPointIndex) $</p>
-<p>To calculate the exact point time, add the TimeOffset to the timestamp.
-$ ExactPointTime = TimeStamp + TimeOffset $</p>
+<p>The node utilizes twist information (linear velocity and angular velocity) from the <code>~/input/twist</code> topic. If the user sets <code>use_imu</code> to true, the node will replace the twist's angular velocity with the IMU's angular velocity. Afterward, the node will undistort all of the points one by one based on the velocity information.</p>
+<p>The node also supports two different kinds of distortion methods: 2D distortion correction and 3D distortion correction. The main difference is that the 2D distortion corrector only utilizes the x-axis of linear velocity and the z-axis of angular velocity to correct the points. On the other hand, the 3D distortion corrector utilizes all linear and angular velocity components to correct the points.</p>
+<p>Please note that the processing time difference between the two distortion methods is significant; the 3D corrector takes 50% more time than the 2D corrector. Therefore, it is recommended that in general cases, users should set <code>use_3d_distortion_correction</code> to <code>false</code>. However, in scenarios such as a vehicle going over speed bumps, using the 3D corrector can be beneficial.</p>
 <p><img alt="distortion corrector figure" src="../image/distortion_corrector.jpg"></p>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
 <h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
@@ -15328,17 +15323,17 @@ $ ExactPointTime = TimeStamp + TimeOffset $</p>
 <tr>
 <td><code>~/input/points</code></td>
 <td><code>sensor_msgs::msg::PointCloud2</code></td>
-<td>reference points</td>
+<td>Topic of the distorted pointcloud.</td>
 </tr>
 <tr>
 <td><code>~/input/twist</code></td>
 <td><code>geometry_msgs::msg::TwistWithCovarianceStamped</code></td>
-<td>twist</td>
+<td>Topic of the twist information.</td>
 </tr>
 <tr>
 <td><code>~/input/imu</code></td>
 <td><code>sensor_msgs::msg::Imu</code></td>
-<td>imu data</td>
+<td>Topic of the IMU data.</td>
 </tr>
 </tbody>
 </table>
@@ -15355,7 +15350,7 @@ $ ExactPointTime = TimeStamp + TimeOffset $</p>
 <tr>
 <td><code>~/output/points</code></td>
 <td><code>sensor_msgs::msg::PointCloud2</code></td>
-<td>filtered points</td>
+<td>Topic of the undistorted pointcloud</td>
 </tr>
 </tbody>
 </table>
@@ -15373,19 +15368,28 @@ $ ExactPointTime = TimeStamp + TimeOffset $</p>
 <tbody>
 <tr>
 <td><code>timestamp_field_name</code></td>
-<td>string</td>
-<td>"time_stamp"</td>
-<td>time stamp field name</td>
+<td><code>string</code></td>
+<td><code>time_stamp</code></td>
+<td>Name of time stamp field.</td>
 </tr>
 <tr>
 <td><code>use_imu</code></td>
-<td>bool</td>
-<td>true</td>
-<td>use gyroscope for yaw rate if true, else use vehicle status</td>
+<td><code>bool</code></td>
+<td><code>true</code></td>
+<td>Use gyroscope for yaw rate if true, else use vehicle status</td>
+</tr>
+<tr>
+<td><code>use_3d_distortion_correction</code></td>
+<td><code>bool</code></td>
+<td></td>
+<td>Use 3d correction if true, otherwise use 2d correction</td>
 </tr>
 </tbody>
 </table>
-<h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2></div>
+<h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
+<ul>
+<li>The node requires that time synchronization works well between the pointcloud, twist, and IMU.</li>
+</ul></div>
 
 
 
