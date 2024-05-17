@@ -1701,6 +1701,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/tools/reaction_analyzer/</loc>
+         <lastmod>2024-05-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/vehicle/accel_brake_map_calibrator/</loc>
          <lastmod>2024-05-17</lastmod>
          <changefreq>daily</changefreq>
