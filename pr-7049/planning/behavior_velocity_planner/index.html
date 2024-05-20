@@ -15305,7 +15305,7 @@ So for example, in order to stop at a stop line with the vehicles' front on the 
 <table>
 <thead>
 <tr>
-<th align="left">module | case</th>
+<th align="left">module \ case</th>
 <th><code>info</code> is <code>null</code></th>
 <th><code>info</code> is not null</th>
 </tr>
@@ -15314,7 +15314,7 @@ So for example, in order to stop at a stop line with the vehicles' front on the 
 <tr>
 <td align="left">intersection_occlusion(<code>is_simulation = *</code>) <ul> <li><code>info</code> is the latest available information <strong>up to present</strong></li></ul></td>
 <td>GO(occlusion is ignored)</td>
-<td>intersection_occlusion uses the latest non UNKNOWN observation in the queue up to present.<ul><li>If <code>info</code> is <code>GREEN or UNKNOWN</code> occlusion is cared</li><li>If <code>info</code> is <code>RED or YELLOW</code> occlusion is ignored(GO) </li> <li> NOTE: Currently timeout is not considered</li> </ul></td>
+<td>intersection_occlusion uses the latest non UNKNOWN observation in the queue up to present.<ul><li>If <code>info</code> is <code>GREEN or UNKNOWN</code>, occlusion is cared</li><li>If <code>info</code> is <code>RED or YELLOW</code>, occlusion is ignored(GO) </li> <li> NOTE: Currently timeout is not considered</li> </ul></td>
 </tr>
 <tr>
 <td align="left">traffic_light(sim, <code>is_simulation = true</code>) <ul> <li><code>info</code> is the latest information <strong>at present</strong></li></ul></td>
