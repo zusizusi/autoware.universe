@@ -15453,6 +15453,7 @@ ln<span class="w"> </span>-s<span class="w"> </span>/PATH/TO/DATASET/<span class
 </code></pre></div>
 <h5 id="prepare-dataset-and-evaluate-trained-model">Prepare dataset and evaluate trained model<a class="headerlink" href="#prepare-dataset-and-evaluate-trained-model" title="Permanent link">#</a></h5>
 <p>Create <code>.pkl</code> files for training, evaluation, and testing.</p>
+<p>The dataset was formatted according to T4Dataset specifications, with 'sample_dataset' designated as one of its versions.</p>
 <div class="highlight"><pre><span></span><code>python<span class="w"> </span>tools/create_data.py<span class="w"> </span>T4Dataset<span class="w"> </span>--root-path<span class="w"> </span>data/sample_dataset/<span class="w"> </span>--out-dir<span class="w"> </span>data/sample_dataset/<span class="w"> </span>--extra-tag<span class="w"> </span>T4Dataset<span class="w"> </span>--version<span class="w"> </span>sample_dataset<span class="w"> </span>--annotation-hz<span class="w"> </span><span class="m">2</span>
 </code></pre></div>
 <p>Run evaluation</p>
