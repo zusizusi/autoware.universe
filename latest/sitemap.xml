@@ -886,6 +886,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/autoware_behavior_velocity_planner/</loc>
+         <lastmod>2024-05-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/autoware_planning_test_manager/</loc>
          <lastmod>2024-05-27</lastmod>
          <changefreq>daily</changefreq>
@@ -1022,11 +1027,6 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_velocity_out_of_lane_module/</loc>
-         <lastmod>2024-05-27</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_velocity_planner/</loc>
          <lastmod>2024-05-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
