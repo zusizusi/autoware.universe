@@ -21,6 +21,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/common/</loc>
+         <lastmod>2024-05-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/common/autoware_ad_api_specs/</loc>
          <lastmod>2024-05-28</lastmod>
          <changefreq>daily</changefreq>
@@ -62,6 +67,11 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/main/common/autoware_overlay_rviz_plugin/autoware_overlay_rviz_plugin/</loc>
+         <lastmod>2024-05-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/main/common/autoware_point_types/</loc>
          <lastmod>2024-05-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
