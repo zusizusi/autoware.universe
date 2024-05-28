@@ -14836,6 +14836,47 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#initialize-pose-via-cli" class="md-nav__link">
+    Initialize pose via CLI
+  </a>
+  
+    <nav class="md-nav" aria-label="Initialize pose via CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-the-gnss-estimated-position" class="md-nav__link">
+    Using the GNSS estimated position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-input-position" class="md-nav__link">
+    Using the input position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#direct-initial-position-set" class="md-nav__link">
+    Direct initial position set
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#via-ros2-topic-pub" class="md-nav__link">
+    Via ros2 topic pub
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -14966,7 +15007,7 @@ This node depends on the map height fitter library.
 <tbody>
 <tr>
 <td><code>/localization/initialize</code></td>
-<td>autoware_adapi_v1_msgs::srv::InitializeLocalization</td>
+<td>tier4_localization_msgs::srv::InitializeLocalization</td>
 <td>initial pose from api</td>
 </tr>
 </tbody>
@@ -15034,7 +15075,73 @@ This node depends on the map height fitter library.
 </table>
 <h2 id="connection-with-default-ad-api">Connection with Default AD API<a class="headerlink" href="#connection-with-default-ad-api" title="Permanent link">#</a></h2>
 <p>This <code>pose_initializer</code> is used via default AD API. For detailed description of the API description, please refer to <a href="https://github.com/autowarefoundation/autoware.universe/blob/main/system/default_ad_api/document/localization.md">the description of <code>default_ad_api</code></a>.</p>
-<p><img src="../../system/default_ad_api/document/images/localization.drawio.svg" alt="drawing" width="800"></p></div>
+<p><img src="../../system/default_ad_api/document/images/localization.drawio.svg" alt="drawing" width="800"></p>
+<h2 id="initialize-pose-via-cli">Initialize pose via CLI<a class="headerlink" href="#initialize-pose-via-cli" title="Permanent link">#</a></h2>
+<h3 id="using-the-gnss-estimated-position">Using the GNSS estimated position<a class="headerlink" href="#using-the-gnss-estimated-position" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/localization/initialize<span class="w"> </span>tier4_localization_msgs/srv/InitializeLocalization
+</code></pre></div>
+<p>The GNSS estimated position is used as the initial guess, and the localization algorithm automatically estimates a more accurate position.</p>
+<h3 id="using-the-input-position">Using the input position<a class="headerlink" href="#using-the-input-position" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/localization/initialize<span class="w"> </span>tier4_localization_msgs/srv/InitializeLocalization<span class="w"> </span><span class="s2">"</span>
+<span class="s2">pose_with_covariance:</span>
+<span class="s2">  - header:</span>
+<span class="s2">      frame_id: map</span>
+<span class="s2">    pose:</span>
+<span class="s2">      pose:</span>
+<span class="s2">        position:</span>
+<span class="s2">          x: 89571.1640625</span>
+<span class="s2">          y: 42301.1875</span>
+<span class="s2">          z: -3.1565165519714355</span>
+<span class="s2">        orientation:</span>
+<span class="s2">          x: 0.0</span>
+<span class="s2">          y: 0.0</span>
+<span class="s2">          z: 0.28072773940524687</span>
+<span class="s2">          w: 0.9597874433062874</span>
+<span class="s2">      covariance: [0.25, 0, 0, 0, 0, 0, 0, 0.25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.06853891909122467]</span>
+<span class="s2">method: 0</span>
+<span class="s2">"</span>
+</code></pre></div>
+<p>The input position is used as the initial guess, and the localization algorithm automatically estimates a more accurate position.</p>
+<h3 id="direct-initial-position-set">Direct initial position set<a class="headerlink" href="#direct-initial-position-set" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/localization/initialize<span class="w"> </span>tier4_localization_msgs/srv/InitializeLocalization<span class="w"> </span><span class="s2">"</span>
+<span class="s2">pose_with_covariance:</span>
+<span class="s2">  - header:</span>
+<span class="s2">      frame_id: map</span>
+<span class="s2">    pose:</span>
+<span class="s2">      pose:</span>
+<span class="s2">        position:</span>
+<span class="s2">          x: 89571.1640625</span>
+<span class="s2">          y: 42301.1875</span>
+<span class="s2">          z: -3.1565165519714355</span>
+<span class="s2">        orientation:</span>
+<span class="s2">          x: 0.0</span>
+<span class="s2">          y: 0.0</span>
+<span class="s2">          z: 0.28072773940524687</span>
+<span class="s2">          w: 0.9597874433062874</span>
+<span class="s2">      covariance: [0.25, 0, 0, 0, 0, 0, 0, 0.25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.06853891909122467]</span>
+<span class="s2">method: 1</span>
+<span class="s2">"</span>
+</code></pre></div>
+<p>The initial position is set directly by the input position without going through localization algorithm.</p>
+<h3 id="via-ros2-topic-pub">Via ros2 topic pub<a class="headerlink" href="#via-ros2-topic-pub" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>--once<span class="w"> </span>/initialpose<span class="w"> </span>geometry_msgs/msg/PoseWithCovarianceStamped<span class="w"> </span><span class="s2">"</span>
+<span class="s2">header:</span>
+<span class="s2">  frame_id: map</span>
+<span class="s2">pose:</span>
+<span class="s2">  pose:</span>
+<span class="s2">    position:</span>
+<span class="s2">      x: 89571.1640625</span>
+<span class="s2">      y: 42301.1875</span>
+<span class="s2">      z: 0.0</span>
+<span class="s2">    orientation:</span>
+<span class="s2">      x: 0.0</span>
+<span class="s2">      y: 0.0</span>
+<span class="s2">      z: 0.28072773940524687</span>
+<span class="s2">      w: 0.9597874433062874</span>
+<span class="s2">"</span>
+</code></pre></div>
+<p>It behaves the same as "initialpose (from rviz)".
+The position.z and the covariance will be overwritten by <a href="https://github.com/autowarefoundation/autoware.universe/tree/main/system/default_ad_api_helpers/ad_api_adaptors">ad_api_adaptors</a>, so there is no need to input them.</p></div>
 
 
 
