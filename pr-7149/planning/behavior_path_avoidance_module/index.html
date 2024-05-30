@@ -13151,6 +13151,26 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ego-vehicle-behavior" class="md-nav__link">
+    Ego vehicle behavior
+  </a>
+  
+    <nav class="md-nav" aria-label="Ego vehicle behavior">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_1" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+        
           <li class="md-nav__item">
   <a href="#object-filtering-flowchart" class="md-nav__link">
     Object filtering flowchart
@@ -13458,67 +13478,6 @@
 </tr>
 </tbody>
 </table>
-<table>
-<thead>
-<tr>
-<th>Situation</th>
-<th>Details</th>
-<th>Ego behavior</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Vehicle is within intersection area definded in HDMap. The module ignores vehicle which is following lane or merging to ego lane.</td>
-<td><img alt="fig" src="images/target_filter/never_avoid_intersection.png"></td>
-<td>Never avoid it.</td>
-</tr>
-<tr>
-<td>Vehicle is on ego lane. There are adjacent lanes for both side.</td>
-<td><img alt="fig" src="images/target_filter/never_avoid_not_edge.png"></td>
-<td>Never avoid it.</td>
-</tr>
-<tr>
-<td>Vehicle is merging to other lane from ego lane. Most part of its footprint is on ego lane.</td>
-<td><img alt="fig" src="images/target_filter/never_avoid_deviating.png"></td>
-<td>Never avoid it.</td>
-</tr>
-<tr>
-<td>Vehicle is merging to ego lane from other lane. Most part of its footprint is on ego lane.</td>
-<td><img alt="fig" src="images/target_filter/never_avoid_merging.png"></td>
-<td>Never avoid it.</td>
-</tr>
-<tr>
-<td>Vehicle is not a obvious parked vehile and stopping in front of the crosswalk or traffic light.</td>
-<td><img alt="fig" src="images/target_filter/never_avoid_stop_factor.png"></td>
-<td>Never avoid it.</td>
-</tr>
-<tr>
-<td>Vehicle stops on ego lane with pulling over to the side of the road.</td>
-<td><img alt="fig" src="images/target_filter/avoid_on_ego_lane.png"></td>
-<td>Avoid it immediately.</td>
-</tr>
-<tr>
-<td>Vehicle stops on adjacent lane.</td>
-<td><img alt="fig" src="images/target_filter/avoid_not_on_ego_lane.png"></td>
-<td>Avoid it immediately.</td>
-</tr>
-<tr>
-<td>Vehicle stops on adjacent lane.</td>
-<td><img alt="fig" src="images/target_filter/ambiguous_parallel.png"></td>
-<td>Avoid it immediately.</td>
-</tr>
-<tr>
-<td>Vehicle stops on adjacent lane.</td>
-<td><img alt="fig" src="images/target_filter/ambiguous_merging.png"></td>
-<td>Avoid it immediately.</td>
-</tr>
-<tr>
-<td>Vehicle stops on adjacent lane.</td>
-<td><img alt="fig" src="images/target_filter/ambiguous_deviating.png"></td>
-<td>Avoid it immediately.</td>
-</tr>
-</tbody>
-</table>
 <h3 id="detection-area">Detection area<a class="headerlink" href="#detection-area" title="Permanent link">#</a></h3>
 <p>The module generates detection area for target filtering based on following params:</p>
 <div class="highlight"><pre><span></span><code><span class="w">      </span><span class="c1"># avoidance is performed for the object type with true</span>
@@ -13608,8 +13567,71 @@ ratio =  \frac{l_{a}}{L_{d}}
 <li><span class="arithmatex">\(W_{obj}\)</span> : object width.</li>
 </ul>
 <p><img alt="fig2" src="images/target_filter/parked_vehicle.svg"></p>
+<h2 id="ego-vehicle-behavior">Ego vehicle behavior<a class="headerlink" href="#ego-vehicle-behavior" title="Permanent link">#</a></h2>
+<h3 id="overview_1">Overview<a class="headerlink" href="#overview_1" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Details</th>
+<th>Ego behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vehicle is within intersection area defined in HDMap. The module ignores vehicle which is following lane or merging to ego lane.</td>
+<td><img alt="fig" src="images/target_filter/never_avoid_intersection.png"></td>
+<td>Never avoid it.</td>
+</tr>
+<tr>
+<td>Vehicle is on ego lane. There are adjacent lanes for both side.</td>
+<td><img alt="fig" src="images/target_filter/never_avoid_not_edge.png"></td>
+<td>Never avoid it.</td>
+</tr>
+<tr>
+<td>Vehicle is merging to other lane from ego lane. Most part of its footprint is on ego lane.</td>
+<td><img alt="fig" src="images/target_filter/never_avoid_deviating.png"></td>
+<td>Never avoid it.</td>
+</tr>
+<tr>
+<td>Vehicle is merging to ego lane from other lane. Most part of its footprint is on ego lane.</td>
+<td><img alt="fig" src="images/target_filter/never_avoid_merging.png"></td>
+<td>Never avoid it.</td>
+</tr>
+<tr>
+<td>Vehicle is not a obvious parked vehicle and stopping in front of the crosswalk or traffic light.</td>
+<td><img alt="fig" src="images/target_filter/never_avoid_stop_factor.png"></td>
+<td>Never avoid it.</td>
+</tr>
+<tr>
+<td>Vehicle stops on ego lane with pulling over to the side of the road.</td>
+<td><img alt="fig" src="images/target_filter/avoid_on_ego_lane.png"></td>
+<td>Avoid it immediately.</td>
+</tr>
+<tr>
+<td>Vehicle stops on adjacent lane.</td>
+<td><img alt="fig" src="images/target_filter/avoid_not_on_ego_lane.png"></td>
+<td>Avoid it immediately.</td>
+</tr>
+<tr>
+<td>Vehicle stops on ego lane without pulling over to the side of the road.</td>
+<td><img alt="fig" src="images/target_filter/ambiguous_parallel.png"></td>
+<td>Set the parameter <code>avoidance_for_ambiguous_vehicle.enable</code> to <code>true</code>, the module avoids ambiguous vehicle.</td>
+</tr>
+<tr>
+<td>Vehicle is merging to ego lane from other lane.</td>
+<td><img alt="fig" src="images/target_filter/ambiguous_merging.png"></td>
+<td>Set the parameter <code>avoidance_for_ambiguous_vehicle.enable</code> to <code>true</code>, the module avoids ambiguous vehicle.</td>
+</tr>
+<tr>
+<td>Vehicle is merging to other lane from ego lane.</td>
+<td><img alt="fig" src="images/target_filter/ambiguous_deviating.png"></td>
+<td>Set the parameter <code>avoidance_for_ambiguous_vehicle.enable</code> to <code>true</code>, the module avoids ambiguous vehicle.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="object-filtering-flowchart">Object filtering flowchart<a class="headerlink" href="#object-filtering-flowchart" title="Permanent link">#</a></h3>
-<p>There are three main filtering functions <code>isSatisfiedWithCommonCondition()</code>, <code>isSatisfiedWithVehicleCondition()</code> and <code>isSatisfiedWithNonVehicleCodition()</code>. The filtering process is executed according to following flowchart. Additionally, the module checks avoidance necessity in <code>isNoNeedAvoidanceBehavior()</code> based on the object pose, ego path and lateral margin in config file.</p>
+<p>There are three main filtering functions <code>isSatisfiedWithCommonCondition()</code>, <code>isSatisfiedWithVehicleCondition()</code> and <code>isSatisfiedWithNonVehicleCondition()</code>. The filtering process is executed according to following flowchart. Additionally, the module checks avoidance necessity in <code>isNoNeedAvoidanceBehavior()</code> based on the object pose, ego path and lateral margin in config file.</p>
 <p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSI2NDlweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjUxNHB4O2hlaWdodDo2NDlweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MTQgNjQ5IiB3aWR0aD0iNTE0cHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTk3IiB4PSIxNTciIHk9IjMyLjk5NTEiPk9iamVjdCBmaWx0ZXJpbmcgZmxvd2NoYXJ0PC90ZXh0PjxlbGxpcHNlIGN4PSIyNDIuNSIgY3k9IjU3LjI5NjkiIGZpbGw9IiMyMjIyMjIiIHJ4PSIxMCIgcnk9IjEwIiBzdHlsZT0ic3Ryb2tlOiMyMjIyMjI7c3Ryb2tlLXdpZHRoOjEuMDsiLz48cG9seWdvbiBmaWxsPSIjRjFGMUYxIiBwb2ludHM9IjE0NSw5Mi4wMDA1LDM0MCw5Mi4wMDA1LDM1MiwxMDQuMDAwNSwzNDAsMTE2LjAwMDUsMTQ1LDExNi4wMDA1LDEzMywxMDQuMDAwNSwxNDUsOTIuMDAwNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTk1IiB4PSIxNDUiIHk9IjEwNy44MDg2Ij5pc1NhdGlzZmllZFdpdGhDb21tb25Db25kaXRpb24oKTwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIyMCIgeD0iMTEzIiB5PSIxMDEuNDA2MyI+eWVzPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjQiIHg9IjM1MiIgeT0iODguNjAxNiI+JiMxNjA7PC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE0IiB4PSIzNTYiIHk9IjEwMS40MDYzIj5ubzwvdGV4dD48cmVjdCBmaWxsPSIjMDBGRkIxIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iNjYiIHg9IjkwIiB5PSIxNzQuNDAyOCIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjQ2IiB4PSIxMDAiIHk9IjE5NS41NDE1Ij5JR05PUkU8L3RleHQ+PGVsbGlwc2UgY3g9IjEyMyIgY3k9IjI1My4xNDg5IiBmaWxsPSJub25lIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PGVsbGlwc2UgY3g9IjEyMyIgY3k9IjI1My4xNDg5IiBmaWxsPSIjMjIyMjIyIiByeD0iNiIgcnk9IjYiIHN0eWxlPSJzdHJva2U6IzIyMjIyMjtzdHJva2Utd2lkdGg6MS4wOyIvPjxwb2x5Z29uIGZpbGw9IiNGMUYxRjEiIHBvaW50cz0iMzguNSwxMjYuMDAwNSwyMDcuNSwxMjYuMDAwNSwyMTkuNSwxMzguMDAwNSwyMDcuNSwxNTAuMDAwNSwzOC41LDE1MC4wMDA1LDI2LjUsMTM4LjAwMDUsMzguNSwxMjYuMDAwNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjAiIHg9IjEyNyIgeT0iMTYwLjIxMDkiPnllczwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNjkiIHg9IjM4LjUiIHk9IjE0MS44MDg2Ij5pc05vTmVlZEF2b2lkYW5jZUJlaGF2aW9yKCk8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNCIgeD0iMjE5LjUiIHk9IjEyMi42MDE2Ij4mIzE2MDs8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTQiIHg9IjIyMy41IiB5PSIxMzUuNDA2MyI+bm88L3RleHQ+PHJlY3QgZmlsbD0iIzAwRkZCMSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjY2IiB4PSIzMjkiIHk9IjEyNi4wMDA1Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNDYiIHg9IjMzOSIgeT0iMTQ3LjEzOTIiPklHTk9SRTwvdGV4dD48ZWxsaXBzZSBjeD0iMzYyIiBjeT0iMjA1Ljk2OTIiIGZpbGw9Im5vbmUiIHJ4PSIxMSIgcnk9IjExIiBzdHlsZT0ic3Ryb2tlOiMyMjIyMjI7c3Ryb2tlLXdpZHRoOjEuMDsiLz48ZWxsaXBzZSBjeD0iMzYyIiBjeT0iMjA1Ljk2OTIiIGZpbGw9IiMyMjIyMjIiIHJ4PSI2IiByeT0iNiIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSIxOTksMzEwLjg1MjUsMjg2LDMxMC44NTI1LDI5OCwzMjIuODUyNSwyODYsMzM0Ljg1MjUsMTk5LDMzNC44NTI1LDE4NywzMjIuODUyNSwxOTksMzEwLjg1MjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9Ijg3IiB4PSIxOTkiIHk9IjMyNi42NjA2Ij5JcyB2ZWhpY2xlIHR5cGU/PC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjIwIiB4PSIxNjciIHk9IjMyMC4yNTgzIj55ZXM8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNCIgeD0iMjk4IiB5PSIzMDcuNDUzNiI+JiMxNjA7PC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE0IiB4PSIzMDIiIHk9IjMyMC4yNTgzIj5ubzwvdGV4dD48cmVjdCBmaWxsPSIjMDBGRkIxIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iNjYiIHg9Ijg3LjUiIHk9IjM5OS42NTcyIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNDYiIHg9Ijk3LjUiIHk9IjQyMC43OTU5Ij5JR05PUkU8L3RleHQ+PGVsbGlwc2UgY3g9IjEyMC41IiBjeT0iNDc5LjYyNiIgZmlsbD0ibm9uZSIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzIyMjIyMjtzdHJva2Utd2lkdGg6MS4wOyIvPjxlbGxpcHNlIGN4PSIxMjAuNSIgY3k9IjQ3OS42MjYiIGZpbGw9IiMyMjIyMjIiIHJ4PSI2IiByeT0iNiIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSIzMiwzNDQuODUyNSwyMDksMzQ0Ljg1MjUsMjIxLDM1Ni44NTI1LDIwOSwzNjguODUyNSwzMiwzNjguODUyNSwyMCwzNTYuODUyNSwzMiwzNDQuODUyNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNCIgeD0iMTI0LjUiIHk9IjM3OS4wNjMiPiYjMTYwOzwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNCIgeD0iMTI4LjUiIHk9IjM5MS44Njc3Ij5ubzwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNzciIHg9IjMyIiB5PSIzNjAuNjYwNiI+aXNTYXRpc2ZpZWRXaXRoVmVoaWNsZUNvZGl0aW9uKCk8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjAiIHg9IjIyMSIgeT0iMzU0LjI1ODMiPnllczwvdGV4dD48cmVjdCBmaWxsPSIjMDBGRkIxIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iNjYiIHg9IjMzMS41IiB5PSIzOTkuNjU3MiIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjQ2IiB4PSIzNDEuNSIgeT0iNDIwLjc5NTkiPklHTk9SRTwvdGV4dD48ZWxsaXBzZSBjeD0iMzY0LjUiIGN5PSI0NzkuNjI2IiBmaWxsPSJub25lIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PGVsbGlwc2UgY3g9IjM2NC41IiBjeT0iNDc5LjYyNiIgZmlsbD0iIzIyMjIyMiIgcng9IjYiIHJ5PSI2IiBzdHlsZT0ic3Ryb2tlOiMyMjIyMjI7c3Ryb2tlLXdpZHRoOjEuMDsiLz48cG9seWdvbiBmaWxsPSIjRjFGMUYxIiBwb2ludHM9IjI2NSwzNDQuODUyNSw0NjQsMzQ0Ljg1MjUsNDc2LDM1Ni44NTI1LDQ2NCwzNjguODUyNSwyNjUsMzY4Ljg1MjUsMjUzLDM1Ni44NTI1LDI2NSwzNDQuODUyNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNCIgeD0iMzY4LjUiIHk9IjM3OS4wNjMiPiYjMTYwOzwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNCIgeD0iMzcyLjUiIHk9IjM5MS44Njc3Ij5ubzwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxOTkiIHg9IjI2NSIgeT0iMzYwLjY2MDYiPmlzU2F0aXNmaWVkV2l0aE5vblZlaGljbGVDb2RpdGlvbigpPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjIwIiB4PSI0NzYiIHk9IjM1NC4yNTgzIj55ZXM8L3RleHQ+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSIyNDIuNSw1MTguNjI2LDI1NC41LDUzMC42MjYsMjQyLjUsNTQyLjYyNiwyMzAuNSw1MzAuNjI2LDI0Mi41LDUxOC42MjYiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjxyZWN0IGZpbGw9IiNGRjAwNkMiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSI2NyIgeD0iMjA5IiB5PSI1NjIuNjI2Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNDciIHg9IjIxOSIgeT0iNTgzLjc2NDYiPlRBUkdFVDwvdGV4dD48ZWxsaXBzZSBjeD0iMjQyLjUiIGN5PSI2MjcuNTk0NyIgZmlsbD0ibm9uZSIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzIyMjIyMjtzdHJva2Utd2lkdGg6MS4wOyIvPjxlbGxpcHNlIGN4PSIyNDIuNSIgY3k9IjYyNy41OTQ3IiBmaWxsPSIjMjIyMjIyIiByeD0iNiIgcnk9IjYiIHN0eWxlPSJzdHJva2U6IzIyMjIyMjtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjEyMyIgeDI9IjEyMyIgeTE9IjIwOC4zNzE2IiB5Mj0iMjQyLjE0ODkiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjExOSwyMzIuMTQ4OSwxMjMsMjQyLjE0ODksMTI3LDIzMi4xNDg5LDEyMywyMzYuMTQ4OSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMTIzIiB4Mj0iMTIzIiB5MT0iMTUwLjAwMDUiIHkyPSIxNzQuNDAyOCIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMTE5LDE2NC40MDI4LDEyMywxNzQuNDAyOCwxMjcsMTY0LjQwMjgsMTIzLDE2OC40MDI4IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyMTkuNSIgeDI9IjI0Mi41IiB5MT0iMTM4LjAwMDUiIHkyPSIxMzguMDAwNSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMjM4LjUsMjI2Ljk2OTIsMjQyLjUsMjM2Ljk2OTIsMjQ2LjUsMjI2Ljk2OTIsMjQyLjUsMjMwLjk2OTIiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjI0Mi41IiB4Mj0iMjQyLjUiIHkxPSIxMzguMDAwNSIgeTI9IjMxMC44NTI1Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMzguNSwzMDAuODUyNSwyNDIuNSwzMTAuODUyNSwyNDYuNSwzMDAuODUyNSwyNDIuNSwzMDQuODUyNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMzYyIiB4Mj0iMzYyIiB5MT0iMTU5Ljk2OTIiIHkyPSIxOTQuOTY5MiIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMzU4LDE4NC45NjkyLDM2MiwxOTQuOTY5MiwzNjYsMTg0Ljk2OTIsMzYyLDE4OC45NjkyIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxMzMiIHgyPSIxMjMiIHkxPSIxMDQuMDAwNSIgeTI9IjEwNC4wMDA1Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMTIzIiB4Mj0iMTIzIiB5MT0iMTA0LjAwMDUiIHkyPSIxMjYuMDAwNSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMTE5LDExNi4wMDA1LDEyMywxMjYuMDAwNSwxMjcsMTE2LjAwMDUsMTIzLDEyMC4wMDA1IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIzNTIiIHgyPSIzNjIiIHkxPSIxMDQuMDAwNSIgeTI9IjEwNC4wMDA1Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMzYyIiB4Mj0iMzYyIiB5MT0iMTA0LjAwMDUiIHkyPSIxMjYuMDAwNSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMzU4LDExNi4wMDA1LDM2MiwxMjYuMDAwNSwzNjYsMTE2LjAwMDUsMzYyLDEyMC4wMDA1IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyNDIuNSIgeDI9IjI0Mi41IiB5MT0iNjcuMjk2OSIgeTI9IjkyLjAwMDUiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjIzOC41LDgyLjAwMDUsMjQyLjUsOTIuMDAwNSwyNDYuNSw4Mi4wMDA1LDI0Mi41LDg2LjAwMDUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjEyMC41IiB4Mj0iMTIwLjUiIHkxPSI0MzMuNjI2IiB5Mj0iNDY4LjYyNiIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMTE2LjUsNDU4LjYyNiwxMjAuNSw0NjguNjI2LDEyNC41LDQ1OC42MjYsMTIwLjUsNDYyLjYyNiIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMTIwLjUiIHgyPSIxMjAuNSIgeTE9IjM2OC44NTI1IiB5Mj0iMzk5LjY1NzIiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjExNi41LDM4OS42NTcyLDEyMC41LDM5OS42NTcyLDEyNC41LDM4OS42NTcyLDEyMC41LDM5My42NTcyIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyMjEiIHgyPSIyMzMiIHkxPSIzNTYuODUyNSIgeTI9IjM1Ni44NTI1Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMjksNDMyLjE0MTYsMjMzLDQ0Mi4xNDE2LDIzNyw0MzIuMTQxNiwyMzMsNDM2LjE0MTYiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjIzMyIgeDI9IjIzMyIgeTE9IjM1Ni44NTI1IiB5Mj0iNTEyLjYyNiIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjIzMyIgeDI9IjEyMC41IiB5MT0iNTEyLjYyNiIgeTI9IjUxMi42MjYiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxMjAuNSIgeDI9IjEyMC41IiB5MT0iNTEyLjYyNiIgeTI9IjUzMC42MjYiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxMjAuNSIgeDI9IjIzMC41IiB5MT0iNTMwLjYyNiIgeTI9IjUzMC42MjYiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjIyMC41LDUyNi42MjYsMjMwLjUsNTMwLjYyNiwyMjAuNSw1MzQuNjI2LDIyNC41LDUzMC42MjYiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjM2NC41IiB4Mj0iMzY0LjUiIHkxPSI0MzMuNjI2IiB5Mj0iNDY4LjYyNiIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMzYwLjUsNDU4LjYyNiwzNjQuNSw0NjguNjI2LDM2OC41LDQ1OC42MjYsMzY0LjUsNDYyLjYyNiIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMzY0LjUiIHgyPSIzNjQuNSIgeTE9IjM2OC44NTI1IiB5Mj0iMzk5LjY1NzIiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjM2MC41LDM4OS42NTcyLDM2NC41LDM5OS42NTcyLDM2OC41LDM4OS42NTcyLDM2NC41LDM5My42NTcyIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI0NzYiIHgyPSI0ODgiIHkxPSIzNTYuODUyNSIgeTI9IjM1Ni44NTI1Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI0ODQsNDQxLjE0MTYsNDg4LDQ1MS4xNDE2LDQ5Miw0NDEuMTQxNiw0ODgsNDQ1LjE0MTYiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjQ4OCIgeDI9IjQ4OCIgeTE9IjM1Ni44NTI1IiB5Mj0iNTMwLjYyNiIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjQ4OCIgeDI9IjI1NC41IiB5MT0iNTMwLjYyNiIgeTI9IjUzMC42MjYiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjI2NC41LDUyNi42MjYsMjU0LjUsNTMwLjYyNiwyNjQuNSw1MzQuNjI2LDI2MC41LDUzMC42MjYiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjE4NyIgeDI9IjEyMC41IiB5MT0iMzIyLjg1MjUiIHkyPSIzMjIuODUyNSIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjEyMC41IiB4Mj0iMTIwLjUiIHkxPSIzMjIuODUyNSIgeTI9IjM0NC44NTI1Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIxMTYuNSwzMzQuODUyNSwxMjAuNSwzNDQuODUyNSwxMjQuNSwzMzQuODUyNSwxMjAuNSwzMzguODUyNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjk4IiB4Mj0iMzY0LjUiIHkxPSIzMjIuODUyNSIgeTI9IjMyMi44NTI1Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMzY0LjUiIHgyPSIzNjQuNSIgeTE9IjMyMi44NTI1IiB5Mj0iMzQ0Ljg1MjUiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjM2MC41LDMzNC44NTI1LDM2NC41LDM0NC44NTI1LDM2OC41LDMzNC44NTI1LDM2NC41LDMzOC44NTI1IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyNDIuNSIgeDI9IjI0Mi41IiB5MT0iNTQyLjYyNiIgeTI9IjU2Mi42MjYiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjIzOC41LDU1Mi42MjYsMjQyLjUsNTYyLjYyNiwyNDYuNSw1NTIuNjI2LDI0Mi41LDU1Ni42MjYiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjI0Mi41IiB4Mj0iMjQyLjUiIHkxPSI1OTYuNTk0NyIgeTI9IjYxNi41OTQ3Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMzguNSw2MDYuNTk0NywyNDIuNSw2MTYuNTk0NywyNDYuNSw2MDYuNTk0NywyNDIuNSw2MTAuNTk0NyIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PCEtLVNSQz1baE95bkp5RDAzOE50LW5NTWtZSFJNMVpBV0RBZWdSZ2FLZWJXT0phSU5zRXVzNTdFMUZobEVMZTlBSEdhMWZPdE1EX0p2blRVWTBTeHNYdlFURlJMUXV0bGNkaXdTOC1pcUNKMHFPR2xZYUxuWmRYcVFlb0lVZUpUcXBDczJldnlSMTRWbTdidlFwZXhnV2R3Y09QU0drN0VBV0w3czN3R1RlTnFsTjBYdDlBSVM5QWNlMXFvOTRTQ3dQY2xmNDlpeXFjZWpUcFcyWml4YU9wVnE0TU1iVU5nMmZSUkpSTlJocy1ZS1dRM0ZZMGFabm1fSm1yNllQa1ZWY2NUbTJaVjFmWW1lb1FFcS1FMGp2VkZwU1JTZHpiMlZYcHBQXzRDbEJIS21seWJFa01ZQkJGaWtlMWJkVXl0d19mQ1YwMDBdLS0+PC9nPjwvc3ZnPg==" class="uml" alt="uml diagram" title=""></p>
 <h4 id="common-conditions">Common conditions<a class="headerlink" href="#common-conditions" title="Permanent link">#</a></h4>
 <p>At first, the function <code>isSatisfiedWithCommonCondition()</code> includes conditions used for all object class.</p>
@@ -13823,7 +13845,7 @@ D_{lon} = V_{ego}T_{idle} + \frac{1}{2}a_{max}T_{idle}^2 + \frac{(V_{ego} + a_{m
 </code></pre></div>
 <hr>
 <h3 id="yield-maneuver">Yield maneuver<a class="headerlink" href="#yield-maneuver" title="Permanent link">#</a></h3>
-<h4 id="overview_1">Overview<a class="headerlink" href="#overview_1" title="Permanent link">#</a></h4>
+<h4 id="overview_2">Overview<a class="headerlink" href="#overview_2" title="Permanent link">#</a></h4>
 <p>If an avoidance path can be generated and it is determined that avoidance maneuver should not be executed due to surrounding traffic conditions, the module executes YIELD maneuver. In yield maneuver, the vehicle slows down to the target vehicle velocity (<code>yield_velocity</code>) and keep that speed until the module judge that avoidance path is safe. If the YIELD condition goes on and the vehicle approaches the avoidance target, it stops at the avoidable position and waits until the safety is confirmed.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># For yield maneuver</span>
 <span class="nt">yield_velocity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.78</span><span class="w"> </span><span class="c1"># [m/s]</span>
