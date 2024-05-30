@@ -1111,6 +1111,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/motion_velocity_planner/autoware_motion_velocity_out_of_lane_module/</loc>
+         <lastmod>2024-05-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/motion_velocity_planner/autoware_motion_velocity_planner_node/</loc>
+         <lastmod>2024-05-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/motion_velocity_smoother/</loc>
          <lastmod>2024-05-30</lastmod>
          <changefreq>daily</changefreq>
