@@ -36,11 +36,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/autoware_auto_perception_rviz_plugin/</loc>
-         <lastmod>2024-06-03</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/autoware_auto_tf2/design/autoware-auto-tf2-design/</loc>
          <lastmod>2024-06-03</lastmod>
          <changefreq>daily</changefreq>
@@ -52,6 +47,11 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/autoware_overlay_rviz_plugin/autoware_overlay_rviz_plugin/</loc>
+         <lastmod>2024-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/common/autoware_perception_rviz_plugin/</loc>
          <lastmod>2024-06-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
