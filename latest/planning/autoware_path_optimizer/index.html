@@ -8,10 +8,10 @@
       
       
       
-        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/latest/planning/obstacle_avoidance_planner/">
+        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/latest/planning/autoware_path_optimizer/">
       
       
-        <link rel="prev" href="../objects_of_interest_marker_interface/">
+        <link rel="prev" href="../autoware_behavior_velocity_template_module/">
       
       
         <link rel="next" href="docs/debug/">
@@ -21,7 +21,7 @@
     
     
       
-        <title>Obstacle Avoidance Planner - Autoware Universe Documentation</title>
+        <title>Path optimizer - Autoware Universe Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#obstacle-avoidance-planner" class="md-skip">
+        <a href="#path-optimizer" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Obstacle Avoidance Planner
+              Path optimizer
             
           </span>
         </div>
@@ -8483,14 +8483,14 @@
       
       
         <label class="md-nav__link" for="__nav_8_6_1" id="__nav_8_6_1_label" tabindex="0">
-          Obstacle Avoidance Planner
+          Path Optimizer
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_8_6_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_8_6_1">
           <span class="md-nav__icon md-icon"></span>
-          Obstacle Avoidance Planner
+          Path Optimizer
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -8501,7 +8501,7 @@
   
     <li class="md-nav__item">
       <a href="." class="md-nav__link">
-        About Obstacle Avoidance
+        About Path Optimizer
       </a>
     </li>
   
@@ -13231,7 +13231,7 @@
   
 
 
-<div><h1 id="obstacle-avoidance-planner">Obstacle Avoidance Planner<a class="headerlink" href="#obstacle-avoidance-planner" title="Permanent link">#</a></h1>
+<div><h1 id="path-optimizer">Path optimizer<a class="headerlink" href="#path-optimizer" title="Permanent link">#</a></h1>
 <h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
 <p>This package generates a trajectory that is kinematically-feasible to drive and collision-free based on the input path, drivable area.
 Only position and orientation of trajectory are updated in this module, and velocity is just taken over from the one in the input path.</p>
@@ -13368,7 +13368,7 @@ Therefore, we have to make sure that the optimized trajectory is inside the driv
 <ul>
 <li>Computation cost is sometimes high.</li>
 <li>Because of the approximation such as linearization, some narrow roads cannot be run by the planner.</li>
-<li>Roles of planning for <code>behavior_path_planner</code> and <code>obstacle_avoidance_planner</code> are not decided clearly. Both can avoid obstacles.</li>
+<li>Roles of planning for <code>behavior_path_planner</code> and <code>path_optimizer</code> are not decided clearly. Both can avoid obstacles.</li>
 </ul>
 <h2 id="comparison-to-other-methods">Comparison to other methods<a class="headerlink" href="#comparison-to-other-methods" title="Permanent link">#</a></h2>
 <p>Trajectory planning problem that satisfies kinematically-feasibility and collision-free has two main characteristics that makes hard to be solved: one is non-convex and the other is high dimension.
@@ -13409,7 +13409,7 @@ Although it has a cons to converge to the local minima, it can get a good soluti
 </ul>
 <ul>
 <li>change or tune the method to approximate footprints with a set of circles.<ul>
-<li>See <a href="https://autowarefoundation.github.io/autoware.universe/main/planning/obstacle_avoidance_planner/docs/mpt/#collision-free">here</a></li>
+<li>See <a href="https://autowarefoundation.github.io/autoware.universe/main/planning/path_optimizer/docs/mpt/#collision-free">here</a></li>
 <li>Tuning means changing the ratio of circle's radius.</li>
 </ul>
 </li>
@@ -13463,7 +13463,7 @@ Although it has a cons to converge to the local minima, it can get a good soluti
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../objects_of_interest_marker_interface/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Objects Of Interest Marker Interface" rel="prev">
+          <a href="../autoware_behavior_velocity_template_module/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Index" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -13472,7 +13472,7 @@ Although it has a cons to converge to the local minima, it can get a good soluti
                 Previous
               </span>
               <div class="md-ellipsis">
-                Objects Of Interest Marker Interface
+                Index
               </div>
             </div>
           </a>
