@@ -13247,7 +13247,7 @@ The <code>pose_instaibility_detector</code> calculates the possible range where 
 <li><span class="arithmatex">\(\tau_y \cdots\)</span> Threshold for the difference in the lateral axis [m]</li>
 <li><span class="arithmatex">\(l \cdots\)</span> Maximum lateral distance describved in the image above [m]</li>
 <li><span class="arithmatex">\(\sigma_v^2 \cdots\)</span> Variance of the heading velocity [m/s]</li>
-<li><span class="arithmatex">\(\sigma_theta^2 \cdots\)</span> Variance of the heading angle [rad]</li>
+<li><span class="arithmatex">\(\sigma_\theta^2 \cdots\)</span> Variance of the heading angle [rad]</li>
 <li><span class="arithmatex">\(v_{\rm max} \cdots\)</span> Maximum heading velocity [m/s]</li>
 <li><span class="arithmatex">\(\omega_{\rm max} \cdots\)</span> Maximum angular velocity [rad/s]</li>
 <li><span class="arithmatex">\(\Delta t \cdots\)</span> Time interval [s]</li>
@@ -13255,7 +13255,8 @@ The <code>pose_instaibility_detector</code> calculates the possible range where 
 </ul>
 <p>Note that <code>pose_instability_detector</code> sets the threshold for the vertical axis as the same as the lateral axis. Only the pose estimator error tolerance is different.</p>
 <h3 id="diff_angle_x-diff_angle_y-and-diff_angle_z"><code>diff_angle_x</code>, <code>diff_angle_y</code>, and <code>diff_angle_z</code><a class="headerlink" href="#diff_angle_x-diff_angle_y-and-diff_angle_z" title="Permanent link">#</a></h3>
-<p>These thresholds examine the difference in the roll, pitch, and yaw angles between the two poses.</p>
+<p>These thresholds examine the difference in the roll, pitch, and yaw angles between the two poses.
+This threshold is a sum of "maximum angular error due to velocity scale factor error and bias error", "process error in dead reckoning", and "pose estimation error"</p>
 <div class="arithmatex">\[
 \tau_\phi = \tau_\theta = \tau_\psi = \left(\omega_{\rm max}\frac{\beta_\omega}{100} + b \right) \Delta t + 3\sqrt{N\sigma_\omega^2\left(\Delta t\right)^2} + \epsilon_\psi
 \]</div>
