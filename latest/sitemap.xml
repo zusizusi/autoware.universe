@@ -881,12 +881,37 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/autoware_behavior_path_planner_common/docs/behavior_path_planner_drivable_area_design/</loc>
+         <lastmod>2024-06-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/autoware_behavior_path_planner_common/docs/behavior_path_planner_path_generation_design/</loc>
+         <lastmod>2024-06-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/autoware_behavior_path_planner_common/docs/behavior_path_planner_safety_check/</loc>
+         <lastmod>2024-06-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/autoware_behavior_path_planner_common/docs/behavior_path_planner_turn_signal_design/</loc>
+         <lastmod>2024-06-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/autoware_behavior_path_static_obstacle_avoidance_module/</loc>
          <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/autoware_behavior_velocity_planner/</loc>
+         <lastmod>2024-06-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/autoware_behavior_velocity_run_out_module/</loc>
          <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -976,26 +1001,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_planner_common/docs/behavior_path_planner_drivable_area_design/</loc>
-         <lastmod>2024-06-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_planner_common/docs/behavior_path_planner_path_generation_design/</loc>
-         <lastmod>2024-06-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_planner_common/docs/behavior_path_planner_safety_check/</loc>
-         <lastmod>2024-06-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_planner_common/docs/behavior_path_planner_turn_signal_design/</loc>
-         <lastmod>2024-06-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_sampling_planner_module/</loc>
          <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
@@ -1057,11 +1062,6 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_velocity_planner_common/</loc>
-         <lastmod>2024-06-06</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_velocity_run_out_module/</loc>
          <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>

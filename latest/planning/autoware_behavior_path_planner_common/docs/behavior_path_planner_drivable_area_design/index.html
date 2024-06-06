@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/latest/planning/behavior_path_planner_common/docs/behavior_path_planner_path_generation_design/">
+        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/latest/planning/autoware_behavior_path_planner_common/docs/behavior_path_planner_drivable_area_design/">
       
       
-        <link rel="prev" href="../behavior_path_planner_drivable_area_design/">
+        <link rel="prev" href="../../../autoware_behavior_path_dynamic_obstacle_avoidance_module/">
       
       
-        <link rel="next" href="../behavior_path_planner_safety_check/">
+        <link rel="next" href="../behavior_path_planner_path_generation_design/">
       
       <link rel="icon" href="../../../../docs/assets/images/autoware-foundation.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.20">
     
     
       
-        <title>Path Generation design - Autoware Universe Documentation</title>
+        <title>Drivable Area design - Autoware Universe Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#path-generation-design" class="md-skip">
+        <a href="#drivable-area-design" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Path Generation design
+              Drivable Area design
             
           </span>
         </div>
@@ -7682,7 +7682,7 @@
   
   
     <li class="md-nav__item">
-      <a href="." class="md-nav__link">
+      <a href="../behavior_path_planner_path_generation_design" class="md-nav__link">
         Path Generation
       </a>
     </li>
@@ -7710,7 +7710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../behavior_path_planner_drivable_area_design" class="md-nav__link">
+      <a href="." class="md-nav__link">
         Dynamic Drivable Area
       </a>
     </li>
@@ -8156,7 +8156,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../behavior_velocity_run_out_module" class="md-nav__link">
+      <a href="../../../autoware_behavior_velocity_run_out_module" class="md-nav__link">
         Run Out
       </a>
     </li>
@@ -13036,37 +13036,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    Overview
+  <a href="#purpose-role" class="md-nav__link">
+    Purpose / Role
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#mathematical-derivation" class="md-nav__link">
-    Mathematical Derivation
+  <a href="#assumption" class="md-nav__link">
+    Assumption
   </a>
   
-    <nav class="md-nav" aria-label="Mathematical Derivation">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    Limitations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters-for-drivable-area-generation" class="md-nav__link">
+    Parameters for drivable area generation
+  </a>
+  
+    <nav class="md-nav" aria-label="Parameters for drivable area generation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#calculation-of-maximum-acceleration-from-transition-time-and-final-shift-length" class="md-nav__link">
-    Calculation of Maximum Acceleration from transition time and final shift length
+  <a href="#static-expansion" class="md-nav__link">
+    Static expansion
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#calculation-of-ta-tj-and-jerk-from-acceleration-limit" class="md-nav__link">
-    Calculation of Ta, Tj and jerk from acceleration limit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#calculation-of-required-time-from-jerk-and-acceleration-constraint" class="md-nav__link">
-    Calculation of Required Time from Jerk and Acceleration Constraint
+  <a href="#dynamic-expansion" class="md-nav__link">
+    Dynamic expansion
   </a>
   
 </li>
@@ -13077,9 +13084,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#limitation" class="md-nav__link">
-    Limitation
+  <a href="#inner-workings-algorithms" class="md-nav__link">
+    Inner-workings / Algorithms
   </a>
+  
+    <nav class="md-nav" aria-label="Inner-workings / Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drivable-lanes-generation" class="md-nav__link">
+    Drivable Lanes Generation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drivable-area-generation" class="md-nav__link">
+    Drivable Area Generation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drivable-area-expansion" class="md-nav__link">
+    Drivable Area Expansion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-maximum-drivable-area-debug" class="md-nav__link">
+    Visualizing maximum drivable area (Debug)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -13101,93 +13142,301 @@
   
 
 
-<div><h1 id="path-generation-design">Path Generation design<a class="headerlink" href="#path-generation-design" title="Permanent link">#</a></h1>
-<p>This document explains how the path is generated for lane change and avoidance, etc. The implementation can be found in <a href="https://github.com/autowarefoundation/autoware.universe/blob/main/planning/behavior_path_planner_common/include/behavior_path_planner_common/utils/path_shifter/path_shifter.hpp">path_shifter.hpp</a>.</p>
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
-<p>The base idea of the path generation in lane change and avoidance is to smoothly shift the reference path, such as the center line, in the lateral direction. This is achieved by using a constant-jerk profile as in the figure below. More details on how it is used can be found in <a href="https://github.com/autowarefoundation/autoware.universe/blob/main/planning/behavior_path_planner/README.md">README</a>. It is assumed that the reference path is smooth enough for this algorithm.</p>
-<p>The figure below explains how the application of a constant lateral jerk <span class="arithmatex">\(l^{'''}(s)\)</span> can be used to induce lateral shifting. In order to comply with the limits on lateral acceleration and velocity, zero-jerk time is employed in the figure ( <span class="arithmatex">\(T_a\)</span> and <span class="arithmatex">\(T_v\)</span> ). In each interval where constant jerk is applied, the shift position <span class="arithmatex">\(l(s)\)</span> can be characterized by a third-degree polynomial. Therefore the shift length from the reference path can then be calculated by combining spline curves.</p>
-<p><img alt="path-shifter" src="../../images/path_shifter/path_shifter.png"></p>
-<p>Note that, due to the rarity of the <span class="arithmatex">\(T_v\)</span> in almost all cases of lane change and avoidance, <span class="arithmatex">\(T_v\)</span> is not considered in the current implementation.</p>
-<h2 id="mathematical-derivation">Mathematical Derivation<a class="headerlink" href="#mathematical-derivation" title="Permanent link">#</a></h2>
-<p>With initial longitudinal velocity <span class="arithmatex">\(v_0^{\rm lon}\)</span> and longitudinal acceleration <span class="arithmatex">\(a^{\rm lon}\)</span>, longitudinal position <span class="arithmatex">\(s(t)\)</span> and longitudinal velocity at each time <span class="arithmatex">\(v^{\rm lon}(t)\)</span> can be derived as:</p>
-<div class="arithmatex">\[
-\begin{align}
-s_1&amp;= v^{\rm lon}_0 T_j + \frac{1}{2} a^{\rm lon} T_j^2 \\
-v_1&amp;= v^{\rm lon}_0 + a^{\rm lon} T_j \\
-s_2&amp;= v^{\rm lon}_1 T_a + \frac{1}{2} a^{\rm lon} T_a^2 \\
-v_2&amp;= v^{\rm lon}_1 + a^{\rm lon} T_a \\
-s_3&amp;= v^{\rm lon}_2 T_j + \frac{1}{2} a^{\rm lon} T_j^2 \\
-v_3&amp;= v^{\rm lon}_2 + a^{\rm lon} T_j \\
-s_4&amp;= v^{\rm lon}_3 T_v + \frac{1}{2} a^{\rm lon} T_v^2 \\
-v_4&amp;= v^{\rm lon}_3 + a^{\rm lon} T_v \\
-s_5&amp;= v^{\rm lon}_4 T_j + \frac{1}{2} a^{\rm lon} T_j^2 \\
-v_5&amp;= v^{\rm lon}_4 + a^{\rm lon} T_j \\
-s_6&amp;= v^{\rm lon}_5 T_a + \frac{1}{2} a^{\rm lon} T_a^2 \\
-v_6&amp;= v^{\rm lon}_5 + a^{\rm lon} T_a \\
-s_7&amp;= v^{\rm lon}_6 T_j + \frac{1}{2} a^{\rm lon} T_j^2 \\
-v_7&amp;= v^{\rm lon}_6 + a^{\rm lon} T_j
-\end{align}
-\]</div>
-<p>By applying simple integral operations, the following analytical equations can be derived to describe the shift distance <span class="arithmatex">\(l(t)\)</span> at each time under lateral jerk, lateral acceleration, and velocity constraints.</p>
-<div class="arithmatex">\[
-\begin{align}
-l_1&amp;= \frac{1}{6}jT_j^3\\[10pt]
-l_2&amp;= \frac{1}{6}j T_j^3 + \frac{1}{2} j T_a T_j^2 + \frac{1}{2} j T_a^2 T_j\\[10pt]
-l_3&amp;= j  T_j^3 + \frac{3}{2} j T_a T_j^2 + \frac{1}{2} j T_a^2 T_j\\[10pt]
-l_4&amp;= j T_j^3 + \frac{3}{2} j T_a T_j^2 + \frac{1}{2} j T_a^2 T_j + j(T_a + T_j)T_j T_v\\[10pt]
-l_5&amp;= \frac{11}{6} j T_j^3 + \frac{5}{2} j T_a T_j^2 + \frac{1}{2} j T_a^2 T_j + j(T_a + T_j)T_j T_v \\[10pt]
-l_6&amp;= \frac{11}{6} j T_j^3 + 3 j T_a T_j^2 + j T_a^2 T_j + j(T_a + T_j)T_j T_v\\[10pt]
-l_7&amp;= 2 j T_j^3 + 3 j T_a T_j^2 + j T_a^2 T_j + j(T_a + T_j)T_j T_v
-\end{align}
-\]</div>
-<p>These equations are used to determine the shape of a path. Additionally, by applying further mathematical operations to these basic equations, the expressions of the following subsections can be derived.</p>
-<h3 id="calculation-of-maximum-acceleration-from-transition-time-and-final-shift-length">Calculation of Maximum Acceleration from transition time and final shift length<a class="headerlink" href="#calculation-of-maximum-acceleration-from-transition-time-and-final-shift-length" title="Permanent link">#</a></h3>
-<p>In the case where there are no limitations on lateral velocity and lateral acceleration, the maximum lateral acceleration during the shifting can be calculated as follows. The constant-jerk time is given by <span class="arithmatex">\(T_j = T_{\rm total}/4\)</span> because of its symmetric property. Since <span class="arithmatex">\(T_a=T_v=0\)</span>, the final shift length <span class="arithmatex">\(L=l_7=2jT_j^3\)</span> can be determined using the above equation. The maximum lateral acceleration is then given by <span class="arithmatex">\(a_{\rm max} =jT_j\)</span>. This results in the following expression for the maximum lateral acceleration:</p>
-<div class="arithmatex">\[
-\begin{align}
-a_{\rm max}^{\rm lat}  = \frac{8L}{T_{\rm total}^2}
-\end{align}
-\]</div>
-<h3 id="calculation-of-ta-tj-and-jerk-from-acceleration-limit">Calculation of Ta, Tj and jerk from acceleration limit<a class="headerlink" href="#calculation-of-ta-tj-and-jerk-from-acceleration-limit" title="Permanent link">#</a></h3>
-<p>In the case where there are no limitations on lateral velocity, the constant-jerk and acceleration times, as well as the required jerk can be calculated from the acceleration limit, total time, and final shift length as follows. Since <span class="arithmatex">\(T_v=0\)</span>, the final shift length is given by:</p>
-<div class="arithmatex">\[
-\begin{align}
-L = l_7 = 2 j T_j^3 + 3 j T_a T_j^2 + j T_a^2 T_j
-\end{align}
-\]</div>
-<p>Additionally, the velocity profile reveals the following relations:</p>
-<div class="arithmatex">\[
-\begin{align}
-a_{\rm lim}^{\rm lat} &amp;= j T_j\\
-T_{\rm total} &amp;= 4T_j + 2T_a
-\end{align}
-\]</div>
-<p>By solving these three equations, the following can be obtained:</p>
-<div class="arithmatex">\[
-\begin{align}
-T_j&amp;=\frac{T_{\rm total}}{2} - \frac{2L}{a_{\rm lim}^{\rm lat} T_{\rm total}}\\[10pt]
-T_a&amp;=\frac{4L}{a_{\rm lim}^{\rm lat} T_{\rm total}} - \frac{T_{\rm total}}{2}\\[10pt]
-jerk&amp;=\frac{2a_{\rm lim} ^2T_{\rm total}}{a_{\rm lim}^{\rm lat} T_{\rm total}^2-4L}
-\end{align}
-\]</div>
-<p>where <span class="arithmatex">\(T_j\)</span> is the constant-jerk time, <span class="arithmatex">\(T_a\)</span> is the constant acceleration time, <span class="arithmatex">\(j\)</span> is the required jerk, <span class="arithmatex">\(a_{\rm lim}^{\rm lat}\)</span> is the lateral acceleration limit, and <span class="arithmatex">\(L\)</span> is the final shift length.</p>
-<h3 id="calculation-of-required-time-from-jerk-and-acceleration-constraint">Calculation of Required Time from Jerk and Acceleration Constraint<a class="headerlink" href="#calculation-of-required-time-from-jerk-and-acceleration-constraint" title="Permanent link">#</a></h3>
-<p>In the case where there are no limitations on lateral velocity, the total time required for shifting can be calculated from the lateral jerk and lateral acceleration limits and the final shift length as follows. By solving the two equations given above:</p>
-<div class="arithmatex">\[
-L = l_7 = 2 j T_j^3 + 3 j T_a T_j^2 + j T_a^2 T_j,\quad a_{\rm lim}^{\rm lat} = j T_j
-\]</div>
-<p>we obtain the following expressions:</p>
-<div class="arithmatex">\[
-\begin{align}
-T_j &amp;= \frac{a_{\rm lim}^{\rm lat}}{j}\\[10pt]
-T_a &amp;= \frac{1}{2}\sqrt{\frac{a_{\rm lim}^{\rm lat}}{j}^2 + \frac{4L}{a_{\rm lim}^{\rm lat}}} - \frac{3a_{\rm lim}^{\rm lat}}{2j}
-\end{align}
-\]</div>
-<p>The total time required for shifting can then be calculated as <span class="arithmatex">\(T_{\rm total}=4T_j+2T_a\)</span>.</p>
-<h2 id="limitation">Limitation<a class="headerlink" href="#limitation" title="Permanent link">#</a></h2>
+<div><h1 id="drivable-area-design">Drivable Area design<a class="headerlink" href="#drivable-area-design" title="Permanent link">#</a></h1>
+<p>Drivable Area represents the area where ego vehicle can pass.</p>
+<h2 id="purpose-role">Purpose / Role<a class="headerlink" href="#purpose-role" title="Permanent link">#</a></h2>
+<p>In order to defined the area that ego vehicle can travel safely, we generate drivable area in behavior path planner module. Our drivable area is represented by two line strings, which are <code>left_bound</code> line and <code>right_bound</code> line respectively. Both <code>left_bound</code> and <code>right_bound</code> are created from left and right boundaries of lanelets. Note that <code>left_bound</code> and <code>right bound</code> are generated by <code>generateDrivableArea</code> function.</p>
+<h2 id="assumption">Assumption<a class="headerlink" href="#assumption" title="Permanent link">#</a></h2>
+<p>Our drivable area has several assumptions.</p>
 <ul>
-<li>Since <span class="arithmatex">\(T_v\)</span> is zero in almost all cases of lane change and avoidance, <span class="arithmatex">\(T_v\)</span> is not considered in the current implementation.</li>
-</ul></div>
+<li>Drivable Area should have all of the necessary area but should not represent unnecessary area for current behaviors. For example, when ego vehicle is in <code>follow lane</code> mode, drivable area should not contain adjacent lanes.</li>
+</ul>
+<ul>
+<li>When generating a drivable area, lanes need to be arranged in the order in which cars pass by (More details can be found in following sections).</li>
+</ul>
+<ul>
+<li>Both left and right bounds should cover the front of the path and the end of the path.</li>
+</ul>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">#</a></h2>
+<p>Currently, when clipping left bound or right bound, it can clip the bound more than necessary and the generated path might be conservative.</p>
+<h2 id="parameters-for-drivable-area-generation">Parameters for drivable area generation<a class="headerlink" href="#parameters-for-drivable-area-generation" title="Permanent link">#</a></h2>
+<h3 id="static-expansion">Static expansion<a class="headerlink" href="#static-expansion" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">drivable_area_right_bound_offset</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">right offset length to expand drivable area</td>
+<td align="left">5.0</td>
+</tr>
+<tr>
+<td align="left">drivable_area_left_bound_offset</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">left offset length to expand drivable area</td>
+<td align="left">5.0</td>
+</tr>
+<tr>
+<td align="left">drivable_area_types_to_skip</td>
+<td align="left">[-]</td>
+<td align="left">string</td>
+<td align="left">linestring types (as defined in the lanelet map) that will not be expanded</td>
+<td align="left">road_border</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dynamic-expansion">Dynamic expansion<a class="headerlink" href="#dynamic-expansion" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">enabled</td>
+<td align="left">[-]</td>
+<td align="left">boolean</td>
+<td align="left">if true, dynamically expand the drivable area based on the path curvature</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left">print_runtime</td>
+<td align="left">[-]</td>
+<td align="left">boolean</td>
+<td align="left">if true, runtime is logged by the node</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left">max_expansion_distance</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">maximum distance by which the original drivable area can be expanded (no limit if set to 0)</td>
+<td align="left">0.0</td>
+</tr>
+<tr>
+<td align="left">smoothing.curvature_average_window</td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">window size used for smoothing the curvatures using a moving window average</td>
+<td align="left">3</td>
+</tr>
+<tr>
+<td align="left">smoothing.max_bound_rate</td>
+<td align="left">[m/m]</td>
+<td align="left">double</td>
+<td align="left">maximum rate of change of the bound lateral distance over its arc length</td>
+<td align="left">1.0</td>
+</tr>
+<tr>
+<td align="left">smoothing.arc_length_range</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">arc length range where an expansion distance is initially applied</td>
+<td align="left">2.0</td>
+</tr>
+<tr>
+<td align="left">ego.extra_wheel_base</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">extra ego wheelbase</td>
+<td align="left">0.0</td>
+</tr>
+<tr>
+<td align="left">ego.extra_front_overhang</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">extra ego overhang</td>
+<td align="left">0.5</td>
+</tr>
+<tr>
+<td align="left">ego.extra_width</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">extra ego width</td>
+<td align="left">1.0</td>
+</tr>
+<tr>
+<td align="left">dynamic_objects.avoid</td>
+<td align="left">[-]</td>
+<td align="left">boolean</td>
+<td align="left">if true, the drivable area is not expanded in the predicted path of dynamic objects</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left">dynamic_objects.extra_footprint_offset.front</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">extra length to add to the front of the ego footprint</td>
+<td align="left">0.5</td>
+</tr>
+<tr>
+<td align="left">dynamic_objects.extra_footprint_offset.rear</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">extra length to add to the rear of the ego footprint</td>
+<td align="left">0.5</td>
+</tr>
+<tr>
+<td align="left">dynamic_objects.extra_footprint_offset.left</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">extra length to add to the left of the ego footprint</td>
+<td align="left">0.5</td>
+</tr>
+<tr>
+<td align="left">dynamic_objects.extra_footprint_offset.right</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">extra length to add to the rear of the ego footprint</td>
+<td align="left">0.5</td>
+</tr>
+<tr>
+<td align="left">path_preprocessing.max_arc_length</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">maximum arc length along the path where the ego footprint is projected (0.0 means no limit)</td>
+<td align="left">100.0</td>
+</tr>
+<tr>
+<td align="left">path_preprocessing.resample_interval</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">fixed interval between resampled path points (0.0 means path points are directly used)</td>
+<td align="left">2.0</td>
+</tr>
+<tr>
+<td align="left">path_preprocessing.reuse_max_deviation</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">if the path changes by more than this value, the curvatures are recalculated. Otherwise they are reused</td>
+<td align="left">0.5</td>
+</tr>
+<tr>
+<td align="left">avoid_linestring.types</td>
+<td align="left">[-]</td>
+<td align="left">string array</td>
+<td align="left">linestring types in the lanelet maps that will not be crossed when expanding the drivable area</td>
+<td align="left">["road_border", "curbstone"]</td>
+</tr>
+<tr>
+<td align="left">avoid_linestring.distance</td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">distance to keep between the drivable area and the linestrings to avoid</td>
+<td align="left">0.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
+<p>This section gives details of the generation of the drivable area (<code>left_bound</code> and <code>right_bound</code>).</p>
+<h3 id="drivable-lanes-generation">Drivable Lanes Generation<a class="headerlink" href="#drivable-lanes-generation" title="Permanent link">#</a></h3>
+<p>Before generating drivable areas, drivable lanes need to be sorted. Drivable Lanes are selected in each module (<code>Lane Follow</code>, <code>Avoidance</code>, <code>Lane Change</code>, <code>Goal Planner</code>, <code>Pull Out</code> and etc.), so more details about selection of drivable lanes can be found in each module's document. We use the following structure to define the drivable lanes.</p>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">DrivalbleLanes</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">lanelet</span><span class="o">::</span><span class="n">ConstLanelet</span><span class="w"> </span><span class="n">right_lanelet</span><span class="p">;</span><span class="w"> </span><span class="c1">// right most lane</span>
+<span class="w">    </span><span class="n">lanelet</span><span class="o">::</span><span class="n">ConstLanelet</span><span class="w"> </span><span class="n">left_lanelet</span><span class="p">;</span><span class="w"> </span><span class="c1">// left most lane</span>
+<span class="w">    </span><span class="n">lanelet</span><span class="o">::</span><span class="n">ConstLanelets</span><span class="w"> </span><span class="n">middle_lanelets</span><span class="p">;</span><span class="w"> </span><span class="c1">// middle lanes</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>The image of the sorted drivable lanes is depicted in the following picture.</p>
+<p><img alt="sorted_lanes" src="../../images/drivable_area/sorted_lanes.drawio.svg"></p>
+<p>Note that, the order of drivable lanes become</p>
+<div class="highlight"><pre><span></span><code><span class="n">drivable_lanes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">DrivableLane1</span><span class="p">,</span><span class="w"> </span><span class="n">DrivableLanes2</span><span class="p">,</span><span class="w"> </span><span class="n">DrivableLanes3</span><span class="p">,</span><span class="w"> </span><span class="n">DrivableLanes4</span><span class="p">,</span><span class="w"> </span><span class="n">DrivableLanes5</span><span class="p">}</span>
+</code></pre></div>
+<h3 id="drivable-area-generation">Drivable Area Generation<a class="headerlink" href="#drivable-area-generation" title="Permanent link">#</a></h3>
+<p>In this section, a drivable area is created using drivable lanes arranged in the order in which vehicles pass by. We created <code>left_bound</code> from left boundary of the leftmost lanelet and <code>right_bound</code> from right boundary of the rightmost lanelet. The image of the created drivable area will be the following blue lines. Note that the drivable area is defined in the <code>Path</code> and <code>PathWithLaneId</code> messages as</p>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">geometry_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">Point</span><span class="o">&gt;</span><span class="w"> </span><span class="n">left_bound</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">geometry_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">Point</span><span class="o">&gt;</span><span class="w"> </span><span class="n">right_bound</span><span class="p">;</span>
+</code></pre></div>
+<p>and each point of right bound and left bound has a position in the absolute coordinate system.</p>
+<p><img alt="drivable_lines" src="../../images/drivable_area/drivable_lines.drawio.svg"></p>
+<h3 id="drivable-area-expansion">Drivable Area Expansion<a class="headerlink" href="#drivable-area-expansion" title="Permanent link">#</a></h3>
+<h4 id="static-expansion_1">Static Expansion<a class="headerlink" href="#static-expansion_1" title="Permanent link">#</a></h4>
+<p>Each module can statically expand the left and right bounds of the target lanes by the parameter defined values.
+This enables large vehicles to pass narrow curve. The image of this process can be described as</p>
+<p><img alt="expanded_lanes" src="../../images/drivable_area/expanded_lanes.drawio.svg"></p>
+<p>Note that we only expand right bound of the rightmost lane and left bound of the leftmost lane.</p>
+<h4 id="dynamic-expansion_1">Dynamic Expansion<a class="headerlink" href="#dynamic-expansion_1" title="Permanent link">#</a></h4>
+<p>The drivable area can also be expanded dynamically based on a minimum width calculated from the path curvature and the ego vehicle's properties.
+If static expansion is also enabled, the dynamic expansion will be done after the static expansion such that both expansions are applied.</p>
+<table>
+<thead>
+<tr>
+<th>Without dynamic expansion</th>
+<th>With dynamic expansion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="dynamic_expansion_off" src="../../images/drivable_area/dynamic_expansion_off.png"></td>
+<td><img alt="dynamic_expansion_on" src="../../images/drivable_area/dynamic_expansion_on.png"></td>
+</tr>
+</tbody>
+</table>
+<p>Next we detail the algorithm used to expand the drivable area bounds.</p>
+<h5 id="1-calculate-and-smooth-the-path-curvature">1 Calculate and smooth the path curvature<a class="headerlink" href="#1-calculate-and-smooth-the-path-curvature" title="Permanent link">#</a></h5>
+<p>To avoid sudden changes of the dynamically expanded drivable area, we first try to reuse as much of the previous path and its calculated curvatures as possible.
+Previous path points and curvatures are reused up to the first previous path point that deviates from the new path by more than the <code>reuse_max_deviation</code> parameter.
+At this stage, the path is also resampled according to the <code>resampled_interval</code> and cropped according to the <code>max_arc_length</code>.
+With the resulting preprocessed path points and previous curvatures, curvatures of the new path points are calculated using the 3 points method and smoothed using a moving window average with window size <code>curvature_average_window</code>.</p>
+<h5 id="2-for-each-path-point-calculate-the-closest-bound-segment-and-the-minimum-drivable-area-width">2 For each path point, calculate the closest bound segment and the minimum drivable area width<a class="headerlink" href="#2-for-each-path-point-calculate-the-closest-bound-segment-and-the-minimum-drivable-area-width" title="Permanent link">#</a></h5>
+<p>Each path point is projected on the original left and right drivable area bounds to calculate its corresponding bound index, original distance from the bounds, and the projected point.
+Additionally, for each path point, the minimum drivable area width is calculated using the following equation:
+<script type="math/tex; mode=display"> W = \frac{a² + 2 al + 2kw + l² + w²}{2k + w}</script>
+Where <span class="arithmatex">\(W\)</span> is the minimum drivable area width, <span class="arithmatex">\(a\)</span>, is the front overhang of ego, <span class="arithmatex">\(l\)</span> is the wheelbase of ego, <span class="arithmatex">\(w\)</span> is the width of ego, and <span class="arithmatex">\(k\)</span> is the path curvature.
+This equation was derived from the work of <a href="https://www.sae.org/publications/technical-papers/content/2021-01-0099/">Lim, H., Kim, C., and Jo, A., "Model Predictive Control-Based Lateral Control of Autonomous Large-Size Bus on Road with Large Curvature," SAE Technical Paper 2021-01-0099, 2021</a>.</p>
+<p><img alt="min width" src="../../images/drivable_area/DynamicDrivableArea-MinWidth.drawio.svg"></p>
+<h5 id="3-calculate-maximum-expansion-distances-of-each-bound-point-based-on-dynamic-objects-and-linestring-of-the-vector-map-optional">3 Calculate maximum expansion distances of each bound point based on dynamic objects and linestring of the vector map (optional)<a class="headerlink" href="#3-calculate-maximum-expansion-distances-of-each-bound-point-based-on-dynamic-objects-and-linestring-of-the-vector-map-optional" title="Permanent link">#</a></h5>
+<p>For each drivable area bound point, we calculate its maximum expansion distance as its distance to the closest "obstacle" (either a map linestring with type <code>avoid_linestrings.type</code>, or a dynamic object footprint if <code>dynamic_objects.avoid</code> is set to <code>true</code>).
+If <code>max_expansion_distance</code> is not <code>0.0</code>, it is use here if smaller than the distance to the closest obstacle.</p>
+<p><img alt="max distances" src="../../images/drivable_area/DynamicDrivableArea-MaxWidth.drawio.svg"></p>
+<h5 id="4-calculate-by-how-much-each-bound-point-should-be-pushed-away-from-the-path">4 Calculate by how much each bound point should be pushed away from the path<a class="headerlink" href="#4-calculate-by-how-much-each-bound-point-should-be-pushed-away-from-the-path" title="Permanent link">#</a></h5>
+<p>For each bound point, a shift distance is calculated.
+such that the resulting width between corresponding left and right bound points is as close as possible to the minimum width calculated in step 2 but the individual shift distance stays bellow the previously calculated maximum expansion distance.</p>
+<p><img alt="expansion distances" src="../../images/drivable_area/DynamicDrivableArea-ExpDistances.drawio.svg"></p>
+<h5 id="5-shift-bound-points-by-the-values-calculated-in-step-4-and-remove-all-loops-in-the-resulting-bound">5 Shift bound points by the values calculated in step 4 and remove all loops in the resulting bound<a class="headerlink" href="#5-shift-bound-points-by-the-values-calculated-in-step-4-and-remove-all-loops-in-the-resulting-bound" title="Permanent link">#</a></h5>
+<p>Finally, each bound point is shifted away from the path by the distance calculated in step 4.
+Once all points have been shifted, loops are removed from the bound and we obtain our final expanded drivable area.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="expansion" src="../../images/drivable_area/DynamicDrivableArea-Expansion.drawio.svg"></td>
+<td><img alt="result" src="../../images/drivable_area/DynamicDrivableArea-Result.drawio.svg"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="visualizing-maximum-drivable-area-debug">Visualizing maximum drivable area (Debug)<a class="headerlink" href="#visualizing-maximum-drivable-area-debug" title="Permanent link">#</a></h3>
+<p>Sometimes, the developers might get a different result between two maps that may look identical during visual inspection.</p>
+<p>For example, in the same area, one can perform avoidance and another cannot. This might be related to the maximum drivable area issues due to the non-compliance vector map design from the user.</p>
+<p>To debug the issue, the maximum drivable area boundary can be visualized.</p>
+<p><img alt="drivable_area_boundary_marker1" src="../../images/drivable_area/drivable_area_boundary_marker_example1.png"></p>
+<p><img alt="drivable_area_boundary_marker2" src="../../images/drivable_area/drivable_area_boundary_marker_example2.png"></p>
+<p>The maximum drivable area can be visualize by adding the marker from <code>/planning/scenario_planning/lane_driving/behavior_planning/behavior_path_planner/maximum_drivable_area</code></p>
+<h4 id="expansion-with-hatched-road-markings-area">Expansion with hatched road markings area<a class="headerlink" href="#expansion-with-hatched-road-markings-area" title="Permanent link">#</a></h4>
+<p>If the hatched road markings area is defined in the lanelet map, the area can be used as a drivable area.
+Since the area is expressed as a polygon format of Lanelet2, several steps are required for correct expansion.</p>
+<p><img alt="hatched_road_markings_drivable_area_expansion" src="../../images/drivable_area/hatched_road_markings_drivable_area_expansion.drawio.svg"></p></div>
 
 
 
@@ -13214,7 +13463,7 @@ T_a &amp;= \frac{1}{2}\sqrt{\frac{a_{\rm lim}^{\rm lat}}{j}^2 + \frac{4L}{a_{\rm
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../behavior_path_planner_drivable_area_design/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Drivable Area design" rel="prev">
+          <a href="../../../autoware_behavior_path_dynamic_obstacle_avoidance_module/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Avoidance module for dynamic objects" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -13223,20 +13472,20 @@ T_a &amp;= \frac{1}{2}\sqrt{\frac{a_{\rm lim}^{\rm lat}}{j}^2 + \frac{4L}{a_{\rm
                 Previous
               </span>
               <div class="md-ellipsis">
-                Drivable Area design
+                Avoidance module for dynamic objects
               </div>
             </div>
           </a>
         
         
           
-          <a href="../behavior_path_planner_safety_check/" class="md-footer__link md-footer__link--next" aria-label="Next: Safety Check Utils" rel="next">
+          <a href="../behavior_path_planner_path_generation_design/" class="md-footer__link md-footer__link--next" aria-label="Next: Path Generation design" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Safety Check Utils
+                Path Generation design
               </div>
             </div>
             <div class="md-footer__button md-icon">
