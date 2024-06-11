@@ -8,18 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/latest/vehicle/external_cmd_converter/">
+        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/latest/control/autoware_shift_decider/">
       
       
-        <link rel="prev" href="../autoware_vehicle_info_utils/Readme/">
+        <link rel="prev" href="../autoware_pid_longitudinal_controller/">
       
+      
+        <link rel="next" href="../autoware_smart_mpc_trajectory_follower/">
       
       <link rel="icon" href="../../docs/assets/images/autoware-foundation.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.20">
     
     
       
-        <title>external_cmd_converter - Autoware Universe Documentation</title>
+        <title>Shift Decider - Autoware Universe Documentation</title>
       
     
     
@@ -75,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#external_cmd_converter" class="md-skip">
+        <a href="#shift-decider" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              external_cmd_converter
+              Shift Decider
             
           </span>
         </div>
@@ -222,6 +224,8 @@
         
   
   
+    
+  
 
 
   
@@ -233,7 +237,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../control/autoware_autonomous_emergency_braking/" class="md-tabs__link">
+      <a href="../autoware_autonomous_emergency_braking/" class="md-tabs__link md-tabs__link--active">
         Control
       </a>
     </li>
@@ -348,7 +352,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../perception/autoware_map_based_prediction/" class="md-tabs__link">
+      <a href="../../perception/autoware_crosswalk_traffic_light_estimator/" class="md-tabs__link">
         Perception
       </a>
     </li>
@@ -468,8 +472,6 @@
         
   
   
-    
-  
 
 
   
@@ -481,7 +483,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../accel_brake_map_calibrator/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../vehicle/autoware_accel_brake_map_calibrator/" class="md-tabs__link">
         Vehicle
       </a>
     </li>
@@ -1683,16 +1685,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
         
@@ -1737,7 +1739,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Control
@@ -1772,7 +1774,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_autonomous_emergency_braking/">Autoware autonomous emergency braking</a>
+          <a href="../autoware_autonomous_emergency_braking/">Autoware autonomous emergency braking</a>
           
         </div>
       
@@ -1820,7 +1822,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_control_validator/">Autoware control validator</a>
+          <a href="../autoware_control_validator/">Autoware control validator</a>
           
         </div>
       
@@ -1868,7 +1870,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_external_cmd_selector/">Autoware external cmd selector</a>
+          <a href="../autoware_external_cmd_selector/">Autoware external cmd selector</a>
           
         </div>
       
@@ -1916,7 +1918,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_joy_controller/">Autoware joy controller</a>
+          <a href="../autoware_joy_controller/">Autoware joy controller</a>
           
         </div>
       
@@ -1964,7 +1966,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_lane_departure_checker/">Autoware lane departure checker</a>
+          <a href="../autoware_lane_departure_checker/">Autoware lane departure checker</a>
           
         </div>
       
@@ -2014,7 +2016,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_mpc_lateral_controller/">Autoware mpc lateral controller</a>
+          <a href="../autoware_mpc_lateral_controller/">Autoware mpc lateral controller</a>
           
             <label for="__nav_2_6">
               <span class="md-nav__icon md-icon"></span>
@@ -2037,7 +2039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control/autoware_mpc_lateral_controller/model_predictive_control_algorithm/" class="md-nav__link">
+      <a href="../autoware_mpc_lateral_controller/model_predictive_control_algorithm/" class="md-nav__link">
         MPC Algorithm
       </a>
     </li>
@@ -2080,7 +2082,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_pid_longitudinal_controller/">Autoware pid longitudinal controller</a>
+          <a href="../autoware_pid_longitudinal_controller/">Autoware pid longitudinal controller</a>
           
         </div>
       
@@ -2104,18 +2106,18 @@
               
   
   
+    
+  
   
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_8" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" checked>
       
       
         
@@ -2127,15 +2129,15 @@
       
         
         
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_smart_mpc_trajectory_follower/">Autoware smart mpc trajectory follower</a>
+        <div class="md-nav__link md-nav__link--index md-nav__link--active">
+          <a href="./">Autoware shift decider</a>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2_8">
           <span class="md-nav__icon md-icon"></span>
-          Autoware smart mpc trajectory follower
+          Autoware shift decider
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2176,14 +2178,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_vehicle_cmd_gate/">Autoware vehicle cmd gate</a>
+          <a href="../autoware_smart_mpc_trajectory_follower/">Autoware smart mpc trajectory follower</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_9">
           <span class="md-nav__icon md-icon"></span>
-          Autoware vehicle cmd gate
+          Autoware smart mpc trajectory follower
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2224,14 +2226,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/control_performance_analysis/">Control performance analysis</a>
+          <a href="../autoware_trajectory_follower_base/">Autoware trajectory follower base</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_10">
           <span class="md-nav__icon md-icon"></span>
-          Control performance analysis
+          Autoware trajectory follower base
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2272,14 +2274,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/obstacle_collision_checker/">Obstacle collision checker</a>
+          <a href="../autoware_vehicle_cmd_gate/">Autoware vehicle cmd gate</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_11">
           <span class="md-nav__icon md-icon"></span>
-          Obstacle collision checker
+          Autoware vehicle cmd gate
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2320,14 +2322,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/operation_mode_transition_manager/">Operation mode transition manager</a>
+          <a href="../control_performance_analysis/">Control performance analysis</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_12">
           <span class="md-nav__icon md-icon"></span>
-          Operation mode transition manager
+          Control performance analysis
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2368,14 +2370,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/predicted_path_checker/">Predicted path checker</a>
+          <a href="../obstacle_collision_checker/">Obstacle collision checker</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_13_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_13">
           <span class="md-nav__icon md-icon"></span>
-          Predicted path checker
+          Obstacle collision checker
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2416,14 +2418,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/pure_pursuit/">Pure pursuit</a>
+          <a href="../operation_mode_transition_manager/">Operation mode transition manager</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_14_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_14">
           <span class="md-nav__icon md-icon"></span>
-          Pure pursuit
+          Operation mode transition manager
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2464,14 +2466,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/shift_decider/">Shift decider</a>
+          <a href="../predicted_path_checker/">Predicted path checker</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_15_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_15">
           <span class="md-nav__icon md-icon"></span>
-          Shift decider
+          Predicted path checker
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2512,14 +2514,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/trajectory_follower_base/">Trajectory follower base</a>
+          <a href="../pure_pursuit/">Pure pursuit</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_16_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_16">
           <span class="md-nav__icon md-icon"></span>
-          Trajectory follower base
+          Pure pursuit
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2562,7 +2564,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/trajectory_follower_node/">Trajectory follower node</a>
+          <a href="../trajectory_follower_node/">Trajectory follower node</a>
           
             <label for="__nav_2_17">
               <span class="md-nav__icon md-icon"></span>
@@ -2618,7 +2620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control/trajectory_follower_node/design/simple_trajectory_follower-design/" class="md-nav__link">
+      <a href="../trajectory_follower_node/design/simple_trajectory_follower-design/" class="md-nav__link">
         Simple Trajectory Follower
       </a>
     </li>
@@ -5095,14 +5097,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/autoware_map_based_prediction/">Autoware map based prediction</a>
+          <a href="../../perception/autoware_crosswalk_traffic_light_estimator/">Autoware crosswalk traffic light estimator</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_7_1">
           <span class="md-nav__icon md-icon"></span>
-          Autoware map based prediction
+          Autoware crosswalk traffic light estimator
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -5143,14 +5145,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/bytetrack/">Bytetrack</a>
+          <a href="../../perception/autoware_map_based_prediction/">Autoware map based prediction</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_7_2">
           <span class="md-nav__icon md-icon"></span>
-          Bytetrack
+          Autoware map based prediction
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -5191,14 +5193,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/cluster_merger/">Cluster merger</a>
+          <a href="../../perception/bytetrack/">Bytetrack</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_7_3">
           <span class="md-nav__icon md-icon"></span>
-          Cluster merger
+          Bytetrack
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -5239,14 +5241,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/compare_map_segmentation/">Compare map segmentation</a>
+          <a href="../../perception/cluster_merger/">Cluster merger</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_7_4">
           <span class="md-nav__icon md-icon"></span>
-          Compare map segmentation
+          Cluster merger
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -5287,14 +5289,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../perception/crosswalk_traffic_light_estimator/">Crosswalk traffic light estimator</a>
+          <a href="../../perception/compare_map_segmentation/">Compare map segmentation</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_7_5">
           <span class="md-nav__icon md-icon"></span>
-          Crosswalk traffic light estimator
+          Compare map segmentation
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -8090,7 +8092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planning/behavior_velocity_crosswalk_module" class="md-nav__link">
+      <a href="../../planning/autoware_behavior_velocity_crosswalk_module" class="md-nav__link">
         Crosswalk
       </a>
     </li>
@@ -8600,7 +8602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planning/obstacle_cruise_planner" class="md-nav__link">
+      <a href="../../planning/autoware_obstacle_cruise_planner" class="md-nav__link">
         About Obstacle Cruise
       </a>
     </li>
@@ -8614,7 +8616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planning/obstacle_cruise_planner/docs/debug" class="md-nav__link">
+      <a href="../../planning/autoware_obstacle_cruise_planner/docs/debug" class="md-nav__link">
         How to Debug
       </a>
     </li>
@@ -9205,7 +9207,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planning/route_handler" class="md-nav__link">
+      <a href="../../planning/autoware_route_handler" class="md-nav__link">
         Route Handler
       </a>
     </li>
@@ -12742,16 +12744,16 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13" >
       
       
         
@@ -12772,7 +12774,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_13">
           <span class="md-nav__icon md-icon"></span>
           Vehicle
@@ -12807,14 +12809,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../accel_brake_map_calibrator/">Accel brake map calibrator</a>
+          <a href="../../vehicle/autoware_accel_brake_map_calibrator/">Autoware accel brake map calibrator</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_13_1">
           <span class="md-nav__icon md-icon"></span>
-          Accel brake map calibrator
+          Autoware accel brake map calibrator
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -12855,14 +12857,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../autoware_raw_vehicle_cmd_converter/">Autoware raw vehicle cmd converter</a>
+          <a href="../../vehicle/autoware_external_cmd_converter/">Autoware external cmd converter</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_13_2">
           <span class="md-nav__icon md-icon"></span>
-          Autoware raw vehicle cmd converter
+          Autoware external cmd converter
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -12895,33 +12897,25 @@
       
         
           
+            
+          
         
       
       
-        <label class="md-nav__link" for="__nav_13_3" id="__nav_13_3_label" tabindex="0">
-          Autoware steer offset estimator
-          <span class="md-nav__icon md-icon"></span>
-        </label>
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../vehicle/autoware_raw_vehicle_cmd_converter/">Autoware raw vehicle cmd converter</a>
+          
+        </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_13_3">
           <span class="md-nav__icon md-icon"></span>
-          Autoware steer offset estimator
+          Autoware raw vehicle cmd converter
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../autoware_steer_offset_estimator/Readme/" class="md-nav__link">
-        steer_offset_estimator
-      </a>
-    </li>
-  
-
             
           
         </ul>
@@ -12955,14 +12949,14 @@
       
       
         <label class="md-nav__link" for="__nav_13_4" id="__nav_13_4_label" tabindex="0">
-          Autoware vehicle info utils
+          Autoware steer offset estimator
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_4_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_13_4">
           <span class="md-nav__icon md-icon"></span>
-          Autoware vehicle info utils
+          Autoware steer offset estimator
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -12972,8 +12966,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_vehicle_info_utils/Readme/" class="md-nav__link">
-        Vehicle Info Util
+      <a href="../../vehicle/autoware_steer_offset_estimator/Readme/" class="md-nav__link">
+        steer_offset_estimator
       </a>
     </li>
   
@@ -12991,41 +12985,49 @@
               
   
   
-    
-  
   
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13_5" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_5" >
       
       
         
           
-            
-          
         
       
       
-        
-        
-        <div class="md-nav__link md-nav__link--index md-nav__link--active">
-          <a href="./">External cmd converter</a>
-          
-        </div>
+        <label class="md-nav__link" for="__nav_13_5" id="__nav_13_5_label" tabindex="0">
+          Autoware vehicle info utils
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_5_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_5_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_13_5">
           <span class="md-nav__icon md-icon"></span>
-          External cmd converter
+          Autoware vehicle info utils
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vehicle/autoware_vehicle_info_utils/Readme/" class="md-nav__link">
+        Vehicle Info Util
+      </a>
+    </li>
+  
+
             
           
         </ul>
@@ -13068,16 +13070,63 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#input-topics" class="md-nav__link">
-    Input topics
+  <a href="#purpose" class="md-nav__link">
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#output-topics" class="md-nav__link">
-    Output topics
+  <a href="#inner-workings-algorithms" class="md-nav__link">
+    Inner-workings / Algorithms
   </a>
+  
+    <nav class="md-nav" aria-label="Inner-workings / Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flow-chart" class="md-nav__link">
+    Flow chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    Algorithms
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    Inputs / Outputs
+  </a>
+  
+    <nav class="md-nav" aria-label="Inputs / Outputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input" class="md-nav__link">
+    Input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    Output
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -13089,8 +13138,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#limitation" class="md-nav__link">
-    Limitation
+  <a href="#assumptions-known-limits" class="md-nav__link">
+    Assumptions / Known limits
   </a>
   
 </li>
@@ -13113,9 +13162,15 @@
   
 
 
-<div><h1 id="external_cmd_converter">external_cmd_converter<a class="headerlink" href="#external_cmd_converter" title="Permanent link">#</a></h1>
-<p><code>external_cmd_converter</code> is a node that converts desired mechanical input to acceleration and velocity by using accel/brake map.</p>
-<h2 id="input-topics">Input topics<a class="headerlink" href="#input-topics" title="Permanent link">#</a></h2>
+<div><h1 id="shift-decider">Shift Decider<a class="headerlink" href="#shift-decider" title="Permanent link">#</a></h1>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
+<p><code>autoware_shift_decider</code> is a module to decide shift from ackermann control command.</p>
+<h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
+<h3 id="flow-chart">Flow chart<a class="headerlink" href="#flow-chart" title="Permanent link">#</a></h3>
+<p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSIzNTZweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjU2MnB4O2hlaWdodDozNTZweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1NjIgMzU2IiB3aWR0aD0iNTYycHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTU5IiB4PSIyMDAiIHk9IjMyLjk5NTEiPnVwZGF0ZSBjdXJyZW50IHNoaWZ0PC90ZXh0PjxlbGxpcHNlIGN4PSIyMjgiIGN5PSI1Ny4yOTY5IiBmaWxsPSIjMjIyMjIyIiByeD0iMTAiIHJ5PSIxMCIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSI5Nyw4Ny4yOTY5LDM1OSw4Ny4yOTY5LDM3MSw5OS4yOTY5LDM1OSwxMTEuMjk2OSw5NywxMTEuMjk2OSw4NSw5OS4yOTY5LDk3LDg3LjI5NjkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjI2MiIgeD0iOTciIHk9IjEwMy4xMDUiPmFic29sdXRlIHRhcmdldCB2ZWxvY2l0eSBpcyBsZXNzIHRoYW4gdGhyZXNob2xkPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjIwIiB4PSI2NSIgeT0iOTYuNzAyNiI+eWVzPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE0IiB4PSIzNzEiIHk9Ijk2LjcwMjYiPm5vPC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxMjgiIHg9IjExIiB5PSIxMjEuMjk2OSIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjEwOCIgeD0iMjEiIHk9IjE0Mi40MzU1Ij5zZXQgcHJldmlvdXMgc2hpZnQ8L3RleHQ+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSIzMTAsMTIxLjI5NjksNDUyLDEyMS4yOTY5LDQ2NCwxMzMuMjk2OSw0NTIsMTQ1LjI5NjksMzEwLDE0NS4yOTY5LDI5OCwxMzMuMjk2OSwzMTAsMTIxLjI5NjkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE0MiIgeD0iMzEwIiB5PSIxMzcuMTA1Ij50YXJnZXQgdmVsb2NpdHkgaXMgcG9zaXRpdmU8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjAiIHg9IjI3OCIgeT0iMTMwLjcwMjYiPnllczwvdGV4dD48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMTExIiB4PSIyMzIuNSIgeT0iMTU1LjI5NjkiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI5MSIgeD0iMjQyLjUiIHk9IjE3Ni40MzU1Ij5zZXQgc2hpZnQgRFJJVkU8L3RleHQ+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjEzMSIgeD0iNDA4LjUiIHk9IjE1NS4yOTY5Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTExIiB4PSI0MTguNSIgeT0iMTc2LjQzNTUiPnNldCBzaGlmdCBSRVZFUlNFPC90ZXh0Pjxwb2x5Z29uIGZpbGw9IiNGMUYxRjEiIHBvaW50cz0iMzgxLDE5NS4yNjU2LDM5MywyMDcuMjY1NiwzODEsMjE5LjI2NTYsMzY5LDIwNy4yNjU2LDM4MSwxOTUuMjY1NiIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSIyMjgsMjI1LjI2NTYsMjQwLDIzNy4yNjU2LDIyOCwyNDkuMjY1NiwyMTYsMjM3LjI2NTYsMjI4LDIyNS4yNjU2IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48cGF0aCBkPSJNMzIxLDI3My42ODM2IEwzMjEsMjgyLjI1IEwzMDEsMjg2LjI1IEwzMjEsMjkwLjI1IEwzMjEsMjk4LjgxNjQgQTAsMCAwIDAgMCAzMjEsMjk4LjgxNjQgTDU1MCwyOTguODE2NCBBMCwwIDAgMCAwIDU1MCwyOTguODE2NCBMNTUwLDI4My42ODM2IEw1NDAsMjczLjY4MzYgTDMyMSwyNzMuNjgzNiBBMCwwIDAgMCAwIDMyMSwyNzMuNjgzNiAiIGZpbGw9IiNGQUZBRkEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjxwYXRoIGQ9Ik01NDAsMjczLjY4MzYgTDU0MCwyODMuNjgzNiBMNTUwLDI4My42ODM2IEw1NDAsMjczLjY4MzYgIiBmaWxsPSIjRkFGQUZBIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMyIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIyMDgiIHg9IjMyNyIgeT0iMjkwLjc1MDUiPnB1Ymxpc2ggc2hpZnQgZm9yIGNvbnN0YW50IGludGVydmFsPC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxNDYiIHg9IjE1NSIgeT0iMjY5LjI2NTYiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxMjYiIHg9IjE2NSIgeT0iMjkwLjQwNDMiPnB1Ymxpc2ggY3VycmVudCBzaGlmdDwvdGV4dD48ZWxsaXBzZSBjeD0iMjI4IiBjeT0iMzM0LjIzNDQiIGZpbGw9Im5vbmUiIHJ4PSIxMSIgcnk9IjExIiBzdHlsZT0ic3Ryb2tlOiMyMjIyMjI7c3Ryb2tlLXdpZHRoOjEuMDsiLz48ZWxsaXBzZSBjeD0iMjI4IiBjeT0iMzM0LjIzNDQiIGZpbGw9IiMyMjIyMjIiIHJ4PSI2IiByeT0iNiIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjk4IiB4Mj0iMjg4IiB5MT0iMTMzLjI5NjkiIHkyPSIxMzMuMjk2OSIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjI4OCIgeDI9IjI4OCIgeTE9IjEzMy4yOTY5IiB5Mj0iMTU1LjI5NjkiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjI4NCwxNDUuMjk2OSwyODgsMTU1LjI5NjksMjkyLDE0NS4yOTY5LDI4OCwxNDkuMjk2OSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNDY0IiB4Mj0iNDc0IiB5MT0iMTMzLjI5NjkiIHkyPSIxMzMuMjk2OSIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjQ3NCIgeDI9IjQ3NCIgeTE9IjEzMy4yOTY5IiB5Mj0iMTU1LjI5NjkiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjQ3MCwxNDUuMjk2OSw0NzQsMTU1LjI5NjksNDc4LDE0NS4yOTY5LDQ3NCwxNDkuMjk2OSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjg4IiB4Mj0iMjg4IiB5MT0iMTg5LjI2NTYiIHkyPSIyMDcuMjY1NiIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjI4OCIgeDI9IjM2OSIgeTE9IjIwNy4yNjU2IiB5Mj0iMjA3LjI2NTYiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjM1OSwyMDMuMjY1NiwzNjksMjA3LjI2NTYsMzU5LDIxMS4yNjU2LDM2MywyMDcuMjY1NiIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNDc0IiB4Mj0iNDc0IiB5MT0iMTg5LjI2NTYiIHkyPSIyMDcuMjY1NiIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjQ3NCIgeDI9IjM5MyIgeTE9IjIwNy4yNjU2IiB5Mj0iMjA3LjI2NTYiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjQwMywyMDMuMjY1NiwzOTMsMjA3LjI2NTYsNDAzLDIxMS4yNjU2LDM5OSwyMDcuMjY1NiIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iODUiIHgyPSI3NSIgeTE9Ijk5LjI5NjkiIHkyPSI5OS4yOTY5Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNzUiIHgyPSI3NSIgeTE9Ijk5LjI5NjkiIHkyPSIxMjEuMjk2OSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iNzEsMTExLjI5NjksNzUsMTIxLjI5NjksNzksMTExLjI5NjksNzUsMTE1LjI5NjkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjM3MSIgeDI9IjM4MSIgeTE9Ijk5LjI5NjkiIHkyPSI5OS4yOTY5Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMzgxIiB4Mj0iMzgxIiB5MT0iOTkuMjk2OSIgeTI9IjEyMS4yOTY5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIzNzcsMTExLjI5NjksMzgxLDEyMS4yOTY5LDM4NSwxMTEuMjk2OSwzODEsMTE1LjI5NjkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9Ijc1IiB4Mj0iNzUiIHkxPSIxNTUuMjY1NiIgeTI9IjIzNy4yNjU2Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNzUiIHgyPSIyMTYiIHkxPSIyMzcuMjY1NiIgeTI9IjIzNy4yNjU2Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMDYsMjMzLjI2NTYsMjE2LDIzNy4yNjU2LDIwNiwyNDEuMjY1NiwyMTAsMjM3LjI2NTYiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjM4MSIgeDI9IjM4MSIgeTE9IjIxOS4yNjU2IiB5Mj0iMjM3LjI2NTYiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIzODEiIHgyPSIyNDAiIHkxPSIyMzcuMjY1NiIgeTI9IjIzNy4yNjU2Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyNTAsMjMzLjI2NTYsMjQwLDIzNy4yNjU2LDI1MCwyNDEuMjY1NiwyNDYsMjM3LjI2NTYiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjIyOCIgeDI9IjIyOCIgeTE9IjY3LjI5NjkiIHkyPSI4Ny4yOTY5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMjQsNzcuMjk2OSwyMjgsODcuMjk2OSwyMzIsNzcuMjk2OSwyMjgsODEuMjk2OSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjI4IiB4Mj0iMjI4IiB5MT0iMjQ5LjI2NTYiIHkyPSIyNjkuMjY1NiIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMjI0LDI1OS4yNjU2LDIyOCwyNjkuMjY1NiwyMzIsMjU5LjI2NTYsMjI4LDI2My4yNjU2IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyMjgiIHgyPSIyMjgiIHkxPSIzMDMuMjM0NCIgeTI9IjMyMy4yMzQ0Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMjQsMzEzLjIzNDQsMjI4LDMyMy4yMzQ0LDIzMiwzMTMuMjM0NCwyMjgsMzE3LjIzNDQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjwhLS1TUkM9W1JQMm5SaUNtMzRIdFZHTDctblVJakh3d2thMXNuUU9aZVo4ZmE5STFfN3RhazA1SWpDazE4RXlVU0JIbHVYOHJoaDBBb3ZIS0xXSk5ZWTR1VUtRZVBPd0VDNUxMUDBUQmo3V21aLWcxNWtaWXJJSk5QY1lSNnBmaWM2S1lsbUNQUDNHM0p2NlJBNWdJRkZUakg4UmtaalE3YXhMMEtUbjhnWHRhU3kxaXNCN3FKX2VfcTI5NkpYbC05SnExeTM1LU5lTzN5eHVVWHlpbVZrcTdkY2R2cUxFZnJxb01WaFN4MXZQTUlFY01GQm1TMXNLSFhLY3VyTXpjT2FWVE9qdlhpNFZRTXdHeTAwMDBdLS0+PC9nPjwvc3ZnPg==" class="uml" alt="uml diagram" title=""></p>
+<h3 id="algorithms">Algorithms<a class="headerlink" href="#algorithms" title="Permanent link">#</a></h3>
+<h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
+<h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
 <table>
 <thead>
 <tr>
@@ -13126,33 +13181,13 @@
 </thead>
 <tbody>
 <tr>
-<td><code>~/in/external_control_cmd</code></td>
-<td>tier4_external_api_msgs::msg::ControlCommand</td>
-<td>target <code>throttle/brake/steering_angle/steering_angle_velocity</code> is necessary to calculate desired control command.</td>
-</tr>
-<tr>
-<td><code>~/input/shift_cmd"</code></td>
-<td>autoware_vehicle_msgs::GearCommand</td>
-<td>current command of gear.</td>
-</tr>
-<tr>
-<td><code>~/input/emergency_stop</code></td>
-<td>tier4_external_api_msgs::msg::Heartbeat</td>
-<td>emergency heart beat for external command.</td>
-</tr>
-<tr>
-<td><code>~/input/current_gate_mode</code></td>
-<td>tier4_control_msgs::msg::GateMode</td>
-<td>topic for gate mode.</td>
-</tr>
-<tr>
-<td><code>~/input/odometry</code></td>
-<td>navigation_msgs::Odometry</td>
-<td>twist topic in odometry is used.</td>
+<td><code>~/input/control_cmd</code></td>
+<td><code>autoware_control_msgs::msg::Control</code></td>
+<td>Control command for vehicle.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="output-topics">Output topics<a class="headerlink" href="#output-topics" title="Permanent link">#</a></h2>
+<h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h3>
 <table>
 <thead>
 <tr>
@@ -13163,46 +13198,16 @@
 </thead>
 <tbody>
 <tr>
-<td><code>~/out/control_cmd</code></td>
-<td>autoware_control_msgs::msg::Control</td>
-<td>ackermann control command converted from selected external command</td>
+<td><code>~output/gear_cmd</code></td>
+<td><code>autoware_vehicle_msgs::msg::GearCommand</code></td>
+<td>Gear for drive forward / backward.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>timer_rate</code></td>
-<td>double</td>
-<td>timer's update rate</td>
-</tr>
-<tr>
-<td><code>wait_for_first_topic</code></td>
-<td>double</td>
-<td>if time out check is done after receiving first topic</td>
-</tr>
-<tr>
-<td><code>control_command_timeout</code></td>
-<td>double</td>
-<td>time out check for control command</td>
-</tr>
-<tr>
-<td><code>emergency_stop_timeout</code></td>
-<td>double</td>
-<td>time out check for emergency stop command</td>
-</tr>
-</tbody>
-</table>
-<h2 id="limitation">Limitation<a class="headerlink" href="#limitation" title="Permanent link">#</a></h2>
-<p>tbd.</p></div>
+<p>none.</p>
+<h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
+<p>TBD.</p></div>
 
 
 
@@ -13229,7 +13234,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../autoware_vehicle_info_utils/Readme/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Vehicle Info Util" rel="prev">
+          <a href="../autoware_pid_longitudinal_controller/" class="md-footer__link md-footer__link--prev" aria-label="Previous: PID Longitudinal Controller" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -13238,11 +13243,26 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Vehicle Info Util
+                PID Longitudinal Controller
               </div>
             </div>
           </a>
         
+        
+          
+          <a href="../autoware_smart_mpc_trajectory_follower/" class="md-footer__link md-footer__link--next" aria-label="Next: Index" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Index
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
         
       </nav>
     
