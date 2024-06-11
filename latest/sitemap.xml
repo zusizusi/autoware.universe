@@ -301,6 +301,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/control/autoware_operation_mode_transition_manager/</loc>
+         <lastmod>2024-06-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/control/autoware_pid_longitudinal_controller/</loc>
          <lastmod>2024-06-11</lastmod>
          <changefreq>daily</changefreq>
@@ -321,6 +326,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/control/autoware_trajectory_follower_node/</loc>
+         <lastmod>2024-06-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware.universe/latest/control/autoware_trajectory_follower_node/design/simple_trajectory_follower-design/</loc>
+         <lastmod>2024-06-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/control/autoware_vehicle_cmd_gate/</loc>
          <lastmod>2024-06-11</lastmod>
          <changefreq>daily</changefreq>
@@ -336,27 +351,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/control/operation_mode_transition_manager/</loc>
-         <lastmod>2024-06-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/control/predicted_path_checker/</loc>
          <lastmod>2024-06-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware.universe/latest/control/pure_pursuit/</loc>
-         <lastmod>2024-06-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/control/trajectory_follower_node/</loc>
-         <lastmod>2024-06-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware.universe/latest/control/trajectory_follower_node/design/simple_trajectory_follower-design/</loc>
          <lastmod>2024-06-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
