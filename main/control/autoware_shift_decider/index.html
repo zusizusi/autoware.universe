@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/main/perception/crosswalk_traffic_light_estimator/">
+        <link rel="canonical" href="https://autowarefoundation.github.io/autoware.universe/main/control/autoware_shift_decider/">
       
       
-        <link rel="prev" href="../compare_map_segmentation/">
+        <link rel="prev" href="../autoware_pid_longitudinal_controller/">
       
       
-        <link rel="next" href="../detected_object_feature_remover/">
+        <link rel="next" href="../autoware_smart_mpc_trajectory_follower/">
       
       <link rel="icon" href="../../docs/assets/images/autoware-foundation.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.20">
     
     
       
-        <title>crosswalk_traffic_light_estimator - Autoware Universe Documentation</title>
+        <title>Shift Decider - Autoware Universe Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#crosswalk_traffic_light_estimator" class="md-skip">
+        <a href="#shift-decider" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              crosswalk_traffic_light_estimator
+              Shift Decider
             
           </span>
         </div>
@@ -224,6 +224,8 @@
         
   
   
+    
+  
 
 
   
@@ -235,7 +237,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../control/autoware_autonomous_emergency_braking/" class="md-tabs__link">
+      <a href="../autoware_autonomous_emergency_braking/" class="md-tabs__link md-tabs__link--active">
         Control
       </a>
     </li>
@@ -339,8 +341,6 @@
         
   
   
-    
-  
 
 
   
@@ -352,7 +352,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../autoware_map_based_prediction/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../perception/autoware_crosswalk_traffic_light_estimator/" class="md-tabs__link">
         Perception
       </a>
     </li>
@@ -483,7 +483,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../vehicle/accel_brake_map_calibrator/" class="md-tabs__link">
+      <a href="../../vehicle/autoware_accel_brake_map_calibrator/" class="md-tabs__link">
         Vehicle
       </a>
     </li>
@@ -1685,16 +1685,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
         
@@ -1739,7 +1739,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Control
@@ -1774,7 +1774,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_autonomous_emergency_braking/">Autoware autonomous emergency braking</a>
+          <a href="../autoware_autonomous_emergency_braking/">Autoware autonomous emergency braking</a>
           
         </div>
       
@@ -1822,7 +1822,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_control_validator/">Autoware control validator</a>
+          <a href="../autoware_control_validator/">Autoware control validator</a>
           
         </div>
       
@@ -1870,7 +1870,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_external_cmd_selector/">Autoware external cmd selector</a>
+          <a href="../autoware_external_cmd_selector/">Autoware external cmd selector</a>
           
         </div>
       
@@ -1918,7 +1918,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_joy_controller/">Autoware joy controller</a>
+          <a href="../autoware_joy_controller/">Autoware joy controller</a>
           
         </div>
       
@@ -1966,7 +1966,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_lane_departure_checker/">Autoware lane departure checker</a>
+          <a href="../autoware_lane_departure_checker/">Autoware lane departure checker</a>
           
         </div>
       
@@ -2016,7 +2016,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_mpc_lateral_controller/">Autoware mpc lateral controller</a>
+          <a href="../autoware_mpc_lateral_controller/">Autoware mpc lateral controller</a>
           
             <label for="__nav_2_6">
               <span class="md-nav__icon md-icon"></span>
@@ -2039,7 +2039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control/autoware_mpc_lateral_controller/model_predictive_control_algorithm/" class="md-nav__link">
+      <a href="../autoware_mpc_lateral_controller/model_predictive_control_algorithm/" class="md-nav__link">
         MPC Algorithm
       </a>
     </li>
@@ -2082,7 +2082,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_pid_longitudinal_controller/">Autoware pid longitudinal controller</a>
+          <a href="../autoware_pid_longitudinal_controller/">Autoware pid longitudinal controller</a>
           
         </div>
       
@@ -2106,18 +2106,18 @@
               
   
   
+    
+  
   
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_8" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" checked>
       
       
         
@@ -2129,15 +2129,15 @@
       
         
         
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_smart_mpc_trajectory_follower/">Autoware smart mpc trajectory follower</a>
+        <div class="md-nav__link md-nav__link--index md-nav__link--active">
+          <a href="./">Autoware shift decider</a>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2_8">
           <span class="md-nav__icon md-icon"></span>
-          Autoware smart mpc trajectory follower
+          Autoware shift decider
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2178,14 +2178,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/autoware_vehicle_cmd_gate/">Autoware vehicle cmd gate</a>
+          <a href="../autoware_smart_mpc_trajectory_follower/">Autoware smart mpc trajectory follower</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_9">
           <span class="md-nav__icon md-icon"></span>
-          Autoware vehicle cmd gate
+          Autoware smart mpc trajectory follower
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2226,14 +2226,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/control_performance_analysis/">Control performance analysis</a>
+          <a href="../autoware_trajectory_follower_base/">Autoware trajectory follower base</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_10">
           <span class="md-nav__icon md-icon"></span>
-          Control performance analysis
+          Autoware trajectory follower base
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2274,14 +2274,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/obstacle_collision_checker/">Obstacle collision checker</a>
+          <a href="../autoware_vehicle_cmd_gate/">Autoware vehicle cmd gate</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_11">
           <span class="md-nav__icon md-icon"></span>
-          Obstacle collision checker
+          Autoware vehicle cmd gate
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2322,14 +2322,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/operation_mode_transition_manager/">Operation mode transition manager</a>
+          <a href="../control_performance_analysis/">Control performance analysis</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_12">
           <span class="md-nav__icon md-icon"></span>
-          Operation mode transition manager
+          Control performance analysis
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2370,14 +2370,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/predicted_path_checker/">Predicted path checker</a>
+          <a href="../obstacle_collision_checker/">Obstacle collision checker</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_13_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_13">
           <span class="md-nav__icon md-icon"></span>
-          Predicted path checker
+          Obstacle collision checker
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2418,14 +2418,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/pure_pursuit/">Pure pursuit</a>
+          <a href="../operation_mode_transition_manager/">Operation mode transition manager</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_14_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_14">
           <span class="md-nav__icon md-icon"></span>
-          Pure pursuit
+          Operation mode transition manager
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2466,14 +2466,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/shift_decider/">Shift decider</a>
+          <a href="../predicted_path_checker/">Predicted path checker</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_15_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_15">
           <span class="md-nav__icon md-icon"></span>
-          Shift decider
+          Predicted path checker
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2514,14 +2514,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/trajectory_follower_base/">Trajectory follower base</a>
+          <a href="../pure_pursuit/">Pure pursuit</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_16_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2_16">
           <span class="md-nav__icon md-icon"></span>
-          Trajectory follower base
+          Pure pursuit
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2564,7 +2564,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../control/trajectory_follower_node/">Trajectory follower node</a>
+          <a href="../trajectory_follower_node/">Trajectory follower node</a>
           
             <label for="__nav_2_17">
               <span class="md-nav__icon md-icon"></span>
@@ -2620,7 +2620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../control/trajectory_follower_node/design/simple_trajectory_follower-design/" class="md-nav__link">
+      <a href="../trajectory_follower_node/design/simple_trajectory_follower-design/" class="md-nav__link">
         Simple Trajectory Follower
       </a>
     </li>
@@ -4958,16 +4958,16 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
       
       
         
@@ -5062,7 +5062,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_7">
           <span class="md-nav__icon md-icon"></span>
           Perception
@@ -5097,14 +5097,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../autoware_map_based_prediction/">Autoware map based prediction</a>
+          <a href="../../perception/autoware_crosswalk_traffic_light_estimator/">Autoware crosswalk traffic light estimator</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_7_1">
           <span class="md-nav__icon md-icon"></span>
-          Autoware map based prediction
+          Autoware crosswalk traffic light estimator
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -5145,14 +5145,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../bytetrack/">Bytetrack</a>
+          <a href="../../perception/autoware_map_based_prediction/">Autoware map based prediction</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_7_2">
           <span class="md-nav__icon md-icon"></span>
-          Bytetrack
+          Autoware map based prediction
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -5193,14 +5193,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../cluster_merger/">Cluster merger</a>
+          <a href="../../perception/bytetrack/">Bytetrack</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_7_3">
           <span class="md-nav__icon md-icon"></span>
-          Cluster merger
+          Bytetrack
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -5241,14 +5241,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../compare_map_segmentation/">Compare map segmentation</a>
+          <a href="../../perception/cluster_merger/">Cluster merger</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_4_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_7_4">
           <span class="md-nav__icon md-icon"></span>
-          Compare map segmentation
+          Cluster merger
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -5265,18 +5265,18 @@
               
   
   
-    
-  
   
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" checked>
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_5" >
       
       
         
@@ -5288,15 +5288,15 @@
       
         
         
-        <div class="md-nav__link md-nav__link--index md-nav__link--active">
-          <a href="./">Crosswalk traffic light estimator</a>
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../perception/compare_map_segmentation/">Compare map segmentation</a>
           
         </div>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_7_5">
           <span class="md-nav__icon md-icon"></span>
-          Crosswalk traffic light estimator
+          Compare map segmentation
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -5337,7 +5337,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../detected_object_feature_remover/">Detected object feature remover</a>
+          <a href="../../perception/detected_object_feature_remover/">Detected object feature remover</a>
           
         </div>
       
@@ -5393,7 +5393,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../detected_object_validation/">Detected object validation</a>
+          <a href="../../perception/detected_object_validation/">Detected object validation</a>
           
             <label for="__nav_7_7">
               <span class="md-nav__icon md-icon"></span>
@@ -5416,7 +5416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../detected_object_validation/object-lanelet-filter/" class="md-nav__link">
+      <a href="../../perception/detected_object_validation/object-lanelet-filter/" class="md-nav__link">
         object_lanelet_filter
       </a>
     </li>
@@ -5430,7 +5430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../detected_object_validation/object-position-filter/" class="md-nav__link">
+      <a href="../../perception/detected_object_validation/object-position-filter/" class="md-nav__link">
         object_position_filter
       </a>
     </li>
@@ -5444,7 +5444,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../detected_object_validation/obstacle-pointcloud-based-validator/" class="md-nav__link">
+      <a href="../../perception/detected_object_validation/obstacle-pointcloud-based-validator/" class="md-nav__link">
         obstacle pointcloud based validator
       </a>
     </li>
@@ -5458,7 +5458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../detected_object_validation/occupancy-grid-based-validator/" class="md-nav__link">
+      <a href="../../perception/detected_object_validation/occupancy-grid-based-validator/" class="md-nav__link">
         occupancy grid based validator
       </a>
     </li>
@@ -5501,7 +5501,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../detection_by_tracker/">Detection by tracker</a>
+          <a href="../../perception/detection_by_tracker/">Detection by tracker</a>
           
         </div>
       
@@ -5549,7 +5549,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../elevation_map_loader/">Elevation map loader</a>
+          <a href="../../perception/elevation_map_loader/">Elevation map loader</a>
           
         </div>
       
@@ -5597,7 +5597,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../euclidean_cluster/">Euclidean cluster</a>
+          <a href="../../perception/euclidean_cluster/">Euclidean cluster</a>
           
         </div>
       
@@ -5647,7 +5647,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../ground_segmentation/">Ground segmentation</a>
+          <a href="../../perception/ground_segmentation/">Ground segmentation</a>
           
             <label for="__nav_7_11">
               <span class="md-nav__icon md-icon"></span>
@@ -5707,7 +5707,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ground_segmentation/docs/ransac-ground-filter/" class="md-nav__link">
+      <a href="../../perception/ground_segmentation/docs/ransac-ground-filter/" class="md-nav__link">
         RANSAC Ground Filter
       </a>
     </li>
@@ -5721,7 +5721,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ground_segmentation/docs/ray-ground-filter/" class="md-nav__link">
+      <a href="../../perception/ground_segmentation/docs/ray-ground-filter/" class="md-nav__link">
         Ray Ground Filter
       </a>
     </li>
@@ -5735,7 +5735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ground_segmentation/docs/scan-ground-filter/" class="md-nav__link">
+      <a href="../../perception/ground_segmentation/docs/scan-ground-filter/" class="md-nav__link">
         Scan Ground Filter
       </a>
     </li>
@@ -5787,7 +5787,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../image_projection_based_fusion/">Image projection based fusion</a>
+          <a href="../../perception/image_projection_based_fusion/">Image projection based fusion</a>
           
             <label for="__nav_7_12">
               <span class="md-nav__icon md-icon"></span>
@@ -5851,7 +5851,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../image_projection_based_fusion/docs/pointpainting-fusion/" class="md-nav__link">
+      <a href="../../perception/image_projection_based_fusion/docs/pointpainting-fusion/" class="md-nav__link">
         pointpainting_fusion
       </a>
     </li>
@@ -5865,7 +5865,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../image_projection_based_fusion/docs/roi-cluster-fusion/" class="md-nav__link">
+      <a href="../../perception/image_projection_based_fusion/docs/roi-cluster-fusion/" class="md-nav__link">
         roi_cluster_fusion
       </a>
     </li>
@@ -5879,7 +5879,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../image_projection_based_fusion/docs/roi-detected-object-fusion/" class="md-nav__link">
+      <a href="../../perception/image_projection_based_fusion/docs/roi-detected-object-fusion/" class="md-nav__link">
         roi_detected_object_fusion
       </a>
     </li>
@@ -5893,7 +5893,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../image_projection_based_fusion/docs/roi-pointcloud-fusion/" class="md-nav__link">
+      <a href="../../perception/image_projection_based_fusion/docs/roi-pointcloud-fusion/" class="md-nav__link">
         roi_pointcloud_fusion
       </a>
     </li>
@@ -5907,7 +5907,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../image_projection_based_fusion/docs/segmentation-pointcloud-fusion/" class="md-nav__link">
+      <a href="../../perception/image_projection_based_fusion/docs/segmentation-pointcloud-fusion/" class="md-nav__link">
         segmentation_pointcloud_fusion
       </a>
     </li>
@@ -5957,7 +5957,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../lidar_apollo_instance_segmentation/">Lidar apollo instance segmentation</a>
+          <a href="../../perception/lidar_apollo_instance_segmentation/">Lidar apollo instance segmentation</a>
           
         </div>
       
@@ -6005,7 +6005,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../lidar_apollo_segmentation_tvm/">Lidar apollo segmentation tvm</a>
+          <a href="../../perception/lidar_apollo_segmentation_tvm/">Lidar apollo segmentation tvm</a>
           
         </div>
       
@@ -6053,7 +6053,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../lidar_apollo_segmentation_tvm_nodes/">Lidar apollo segmentation tvm nodes</a>
+          <a href="../../perception/lidar_apollo_segmentation_tvm_nodes/">Lidar apollo segmentation tvm nodes</a>
           
         </div>
       
@@ -6101,7 +6101,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../lidar_centerpoint/">Lidar centerpoint</a>
+          <a href="../../perception/lidar_centerpoint/">Lidar centerpoint</a>
           
         </div>
       
@@ -6149,7 +6149,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../lidar_centerpoint_tvm/">Lidar centerpoint tvm</a>
+          <a href="../../perception/lidar_centerpoint_tvm/">Lidar centerpoint tvm</a>
           
         </div>
       
@@ -6197,7 +6197,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../lidar_transfusion/">Lidar transfusion</a>
+          <a href="../../perception/lidar_transfusion/">Lidar transfusion</a>
           
         </div>
       
@@ -6247,7 +6247,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../multi_object_tracker/">Multi object tracker</a>
+          <a href="../../perception/multi_object_tracker/">Multi object tracker</a>
           
             <label for="__nav_7_19">
               <span class="md-nav__icon md-icon"></span>
@@ -6270,7 +6270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../multi_object_tracker/models/" class="md-nav__link">
+      <a href="../../perception/multi_object_tracker/models/" class="md-nav__link">
         Models used in this module
       </a>
     </li>
@@ -6313,7 +6313,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../object_merger/">Object merger</a>
+          <a href="../../perception/object_merger/">Object merger</a>
           
         </div>
       
@@ -6361,7 +6361,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../object_range_splitter/">Object range splitter</a>
+          <a href="../../perception/object_range_splitter/">Object range splitter</a>
           
         </div>
       
@@ -6409,7 +6409,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../object_velocity_splitter/">Object velocity splitter</a>
+          <a href="../../perception/object_velocity_splitter/">Object velocity splitter</a>
           
         </div>
       
@@ -6457,7 +6457,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../occupancy_grid_map_outlier_filter/">Occupancy grid map outlier filter</a>
+          <a href="../../perception/occupancy_grid_map_outlier_filter/">Occupancy grid map outlier filter</a>
           
         </div>
       
@@ -6511,7 +6511,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../probabilistic_occupancy_grid_map/">Probabilistic occupancy grid map</a>
+          <a href="../../perception/probabilistic_occupancy_grid_map/">Probabilistic occupancy grid map</a>
           
             <label for="__nav_7_24">
               <span class="md-nav__icon md-icon"></span>
@@ -6534,7 +6534,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probabilistic_occupancy_grid_map/laserscan-based-occupancy-grid-map/" class="md-nav__link">
+      <a href="../../perception/probabilistic_occupancy_grid_map/laserscan-based-occupancy-grid-map/" class="md-nav__link">
         laserscan based occupancy grid map
       </a>
     </li>
@@ -6548,7 +6548,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probabilistic_occupancy_grid_map/pointcloud-based-occupancy-grid-map/" class="md-nav__link">
+      <a href="../../perception/probabilistic_occupancy_grid_map/pointcloud-based-occupancy-grid-map/" class="md-nav__link">
         pointcloud based occupancy grid map
       </a>
     </li>
@@ -6562,7 +6562,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../probabilistic_occupancy_grid_map/synchronized_grid_map_fusion/" class="md-nav__link">
+      <a href="../../perception/probabilistic_occupancy_grid_map/synchronized_grid_map_fusion/" class="md-nav__link">
         synchronized OGM fusion
       </a>
     </li>
@@ -6605,7 +6605,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../radar_crossing_objects_noise_filter/">Radar crossing objects noise filter</a>
+          <a href="../../perception/radar_crossing_objects_noise_filter/">Radar crossing objects noise filter</a>
           
         </div>
       
@@ -6655,7 +6655,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../radar_fusion_to_detected_object/">Radar fusion to detected object</a>
+          <a href="../../perception/radar_fusion_to_detected_object/">Radar fusion to detected object</a>
           
             <label for="__nav_7_26">
               <span class="md-nav__icon md-icon"></span>
@@ -6711,7 +6711,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../radar_fusion_to_detected_object/docs/algorithm/" class="md-nav__link">
+      <a href="../../perception/radar_fusion_to_detected_object/docs/algorithm/" class="md-nav__link">
         Algorithm
       </a>
     </li>
@@ -6761,7 +6761,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../radar_object_clustering/">Radar object clustering</a>
+          <a href="../../perception/radar_object_clustering/">Radar object clustering</a>
           
         </div>
       
@@ -6811,7 +6811,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../radar_object_tracker/">Radar object tracker</a>
+          <a href="../../perception/radar_object_tracker/">Radar object tracker</a>
           
             <label for="__nav_7_28">
               <span class="md-nav__icon md-icon"></span>
@@ -6834,7 +6834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../radar_object_tracker/models/" class="md-nav__link">
+      <a href="../../perception/radar_object_tracker/models/" class="md-nav__link">
         models
       </a>
     </li>
@@ -6877,7 +6877,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../radar_tracks_msgs_converter/">Radar tracks msgs converter</a>
+          <a href="../../perception/radar_tracks_msgs_converter/">Radar tracks msgs converter</a>
           
         </div>
       
@@ -6938,7 +6938,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../raindrop_cluster_filter/raindrop_cluster_filter/" class="md-nav__link">
+      <a href="../../perception/raindrop_cluster_filter/raindrop_cluster_filter/" class="md-nav__link">
         low_intensity_cluster_filter
       </a>
     </li>
@@ -6981,7 +6981,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../shape_estimation/">Shape estimation</a>
+          <a href="../../perception/shape_estimation/">Shape estimation</a>
           
         </div>
       
@@ -7029,7 +7029,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../simple_object_merger/">Simple object merger</a>
+          <a href="../../perception/simple_object_merger/">Simple object merger</a>
           
         </div>
       
@@ -7077,7 +7077,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tensorrt_classifier/">Tensorrt classifier</a>
+          <a href="../../perception/tensorrt_classifier/">Tensorrt classifier</a>
           
         </div>
       
@@ -7125,7 +7125,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tensorrt_yolox/">Tensorrt yolox</a>
+          <a href="../../perception/tensorrt_yolox/">Tensorrt yolox</a>
           
         </div>
       
@@ -7173,7 +7173,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../tracking_object_merger/">Tracking object merger</a>
+          <a href="../../perception/tracking_object_merger/">Tracking object merger</a>
           
         </div>
       
@@ -7221,7 +7221,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../traffic_light_arbiter/">Traffic light arbiter</a>
+          <a href="../../perception/traffic_light_arbiter/">Traffic light arbiter</a>
           
         </div>
       
@@ -7269,7 +7269,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../traffic_light_classifier/">Traffic light classifier</a>
+          <a href="../../perception/traffic_light_classifier/">Traffic light classifier</a>
           
         </div>
       
@@ -7317,7 +7317,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../traffic_light_fine_detector/">Traffic light fine detector</a>
+          <a href="../../perception/traffic_light_fine_detector/">Traffic light fine detector</a>
           
         </div>
       
@@ -7365,7 +7365,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../traffic_light_map_based_detector/">Traffic light map based detector</a>
+          <a href="../../perception/traffic_light_map_based_detector/">Traffic light map based detector</a>
           
         </div>
       
@@ -7413,7 +7413,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../traffic_light_multi_camera_fusion/">Traffic light multi camera fusion</a>
+          <a href="../../perception/traffic_light_multi_camera_fusion/">Traffic light multi camera fusion</a>
           
         </div>
       
@@ -7461,7 +7461,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../traffic_light_occlusion_predictor/">Traffic light occlusion predictor</a>
+          <a href="../../perception/traffic_light_occlusion_predictor/">Traffic light occlusion predictor</a>
           
         </div>
       
@@ -7509,7 +7509,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../traffic_light_visualization/">Traffic light visualization</a>
+          <a href="../../perception/traffic_light_visualization/">Traffic light visualization</a>
           
         </div>
       
@@ -8092,7 +8092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planning/behavior_velocity_crosswalk_module" class="md-nav__link">
+      <a href="../../planning/autoware_behavior_velocity_crosswalk_module" class="md-nav__link">
         Crosswalk
       </a>
     </li>
@@ -8602,7 +8602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planning/obstacle_cruise_planner" class="md-nav__link">
+      <a href="../../planning/autoware_obstacle_cruise_planner" class="md-nav__link">
         About Obstacle Cruise
       </a>
     </li>
@@ -8616,7 +8616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planning/obstacle_cruise_planner/docs/debug" class="md-nav__link">
+      <a href="../../planning/autoware_obstacle_cruise_planner/docs/debug" class="md-nav__link">
         How to Debug
       </a>
     </li>
@@ -9207,7 +9207,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planning/route_handler" class="md-nav__link">
+      <a href="../../planning/autoware_route_handler" class="md-nav__link">
         Route Handler
       </a>
     </li>
@@ -12809,14 +12809,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../vehicle/accel_brake_map_calibrator/">Accel brake map calibrator</a>
+          <a href="../../vehicle/autoware_accel_brake_map_calibrator/">Autoware accel brake map calibrator</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_13_1">
           <span class="md-nav__icon md-icon"></span>
-          Accel brake map calibrator
+          Autoware accel brake map calibrator
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -12857,14 +12857,14 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../vehicle/autoware_raw_vehicle_cmd_converter/">Autoware raw vehicle cmd converter</a>
+          <a href="../../vehicle/autoware_external_cmd_converter/">Autoware external cmd converter</a>
           
         </div>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_13_2">
           <span class="md-nav__icon md-icon"></span>
-          Autoware raw vehicle cmd converter
+          Autoware external cmd converter
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -12897,16 +12897,64 @@
       
         
           
+            
+          
         
       
       
-        <label class="md-nav__link" for="__nav_13_3" id="__nav_13_3_label" tabindex="0">
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../vehicle/autoware_raw_vehicle_cmd_converter/">Autoware raw vehicle cmd converter</a>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_13_3">
+          <span class="md-nav__icon md-icon"></span>
+          Autoware raw vehicle cmd converter
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_4" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_13_4" id="__nav_13_4_label" tabindex="0">
           Autoware steer offset estimator
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_3_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_13_3">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_13_4">
           <span class="md-nav__icon md-icon"></span>
           Autoware steer offset estimator
         </label>
@@ -12948,7 +12996,7 @@
       
         
       
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_4" >
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_5" >
       
       
         
@@ -12956,13 +13004,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_13_4" id="__nav_13_4_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_13_5" id="__nav_13_5_label" tabindex="0">
           Autoware vehicle info utils
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_4_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_13_4">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_13_5">
           <span class="md-nav__icon md-icon"></span>
           Autoware vehicle info utils
         </label>
@@ -12980,54 +13028,6 @@
     </li>
   
 
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_13_5" >
-      
-      
-        
-          
-            
-          
-        
-      
-      
-        
-        
-        <div class="md-nav__link md-nav__link--index ">
-          <a href="../../vehicle/external_cmd_converter/">External cmd converter</a>
-          
-        </div>
-      
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_5_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_13_5">
-          <span class="md-nav__icon md-icon"></span>
-          External cmd converter
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
             
           
         </ul>
@@ -13077,6 +13077,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#inner-workings-algorithms" class="md-nav__link">
+    Inner-workings / Algorithms
+  </a>
+  
+    <nav class="md-nav" aria-label="Inner-workings / Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flow-chart" class="md-nav__link">
+    Flow chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algorithms" class="md-nav__link">
+    Algorithms
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#inputs-outputs" class="md-nav__link">
     Inputs / Outputs
   </a>
@@ -13111,42 +13138,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#inner-workings-algorithms" class="md-nav__link">
-    Inner-workings / Algorithms
-  </a>
-  
-    <nav class="md-nav" aria-label="Inner-workings / Algorithms">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#situation1" class="md-nav__link">
-    Situation1
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#situation2" class="md-nav__link">
-    Situation2
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#assumptions-known-limits" class="md-nav__link">
     Assumptions / Known limits
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#future-extensions-unimplemented-parts" class="md-nav__link">
-    Future extensions / Unimplemented parts
   </a>
   
 </li>
@@ -13169,9 +13162,13 @@
   
 
 
-<div><h1 id="crosswalk_traffic_light_estimator">crosswalk_traffic_light_estimator<a class="headerlink" href="#crosswalk_traffic_light_estimator" title="Permanent link">#</a></h1>
+<div><h1 id="shift-decider">Shift Decider<a class="headerlink" href="#shift-decider" title="Permanent link">#</a></h1>
 <h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
-<p><code>crosswalk_traffic_light_estimator</code> is a module that estimates pedestrian traffic signals from HDMap and detected vehicle traffic signals.</p>
+<p><code>autoware_shift_decider</code> is a module to decide shift from ackermann control command.</p>
+<h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
+<h3 id="flow-chart">Flow chart<a class="headerlink" href="#flow-chart" title="Permanent link">#</a></h3>
+<p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSIzNTZweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjU2MnB4O2hlaWdodDozNTZweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1NjIgMzU2IiB3aWR0aD0iNTYycHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTU5IiB4PSIyMDAiIHk9IjMyLjk5NTEiPnVwZGF0ZSBjdXJyZW50IHNoaWZ0PC90ZXh0PjxlbGxpcHNlIGN4PSIyMjgiIGN5PSI1Ny4yOTY5IiBmaWxsPSIjMjIyMjIyIiByeD0iMTAiIHJ5PSIxMCIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSI5Nyw4Ny4yOTY5LDM1OSw4Ny4yOTY5LDM3MSw5OS4yOTY5LDM1OSwxMTEuMjk2OSw5NywxMTEuMjk2OSw4NSw5OS4yOTY5LDk3LDg3LjI5NjkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjI2MiIgeD0iOTciIHk9IjEwMy4xMDUiPmFic29sdXRlIHRhcmdldCB2ZWxvY2l0eSBpcyBsZXNzIHRoYW4gdGhyZXNob2xkPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjIwIiB4PSI2NSIgeT0iOTYuNzAyNiI+eWVzPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE0IiB4PSIzNzEiIHk9Ijk2LjcwMjYiPm5vPC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxMjgiIHg9IjExIiB5PSIxMjEuMjk2OSIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjEwOCIgeD0iMjEiIHk9IjE0Mi40MzU1Ij5zZXQgcHJldmlvdXMgc2hpZnQ8L3RleHQ+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSIzMTAsMTIxLjI5NjksNDUyLDEyMS4yOTY5LDQ2NCwxMzMuMjk2OSw0NTIsMTQ1LjI5NjksMzEwLDE0NS4yOTY5LDI5OCwxMzMuMjk2OSwzMTAsMTIxLjI5NjkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE0MiIgeD0iMzEwIiB5PSIxMzcuMTA1Ij50YXJnZXQgdmVsb2NpdHkgaXMgcG9zaXRpdmU8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjAiIHg9IjI3OCIgeT0iMTMwLjcwMjYiPnllczwvdGV4dD48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMTExIiB4PSIyMzIuNSIgeT0iMTU1LjI5NjkiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI5MSIgeD0iMjQyLjUiIHk9IjE3Ni40MzU1Ij5zZXQgc2hpZnQgRFJJVkU8L3RleHQ+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjEzMSIgeD0iNDA4LjUiIHk9IjE1NS4yOTY5Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTExIiB4PSI0MTguNSIgeT0iMTc2LjQzNTUiPnNldCBzaGlmdCBSRVZFUlNFPC90ZXh0Pjxwb2x5Z29uIGZpbGw9IiNGMUYxRjEiIHBvaW50cz0iMzgxLDE5NS4yNjU2LDM5MywyMDcuMjY1NiwzODEsMjE5LjI2NTYsMzY5LDIwNy4yNjU2LDM4MSwxOTUuMjY1NiIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSIyMjgsMjI1LjI2NTYsMjQwLDIzNy4yNjU2LDIyOCwyNDkuMjY1NiwyMTYsMjM3LjI2NTYsMjI4LDIyNS4yNjU2IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48cGF0aCBkPSJNMzIxLDI3My42ODM2IEwzMjEsMjgyLjI1IEwzMDEsMjg2LjI1IEwzMjEsMjkwLjI1IEwzMjEsMjk4LjgxNjQgQTAsMCAwIDAgMCAzMjEsMjk4LjgxNjQgTDU1MCwyOTguODE2NCBBMCwwIDAgMCAwIDU1MCwyOTguODE2NCBMNTUwLDI4My42ODM2IEw1NDAsMjczLjY4MzYgTDMyMSwyNzMuNjgzNiBBMCwwIDAgMCAwIDMyMSwyNzMuNjgzNiAiIGZpbGw9IiNGQUZBRkEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjxwYXRoIGQ9Ik01NDAsMjczLjY4MzYgTDU0MCwyODMuNjgzNiBMNTUwLDI4My42ODM2IEw1NDAsMjczLjY4MzYgIiBmaWxsPSIjRkFGQUZBIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMyIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIyMDgiIHg9IjMyNyIgeT0iMjkwLjc1MDUiPnB1Ymxpc2ggc2hpZnQgZm9yIGNvbnN0YW50IGludGVydmFsPC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxNDYiIHg9IjE1NSIgeT0iMjY5LjI2NTYiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxMjYiIHg9IjE2NSIgeT0iMjkwLjQwNDMiPnB1Ymxpc2ggY3VycmVudCBzaGlmdDwvdGV4dD48ZWxsaXBzZSBjeD0iMjI4IiBjeT0iMzM0LjIzNDQiIGZpbGw9Im5vbmUiIHJ4PSIxMSIgcnk9IjExIiBzdHlsZT0ic3Ryb2tlOiMyMjIyMjI7c3Ryb2tlLXdpZHRoOjEuMDsiLz48ZWxsaXBzZSBjeD0iMjI4IiBjeT0iMzM0LjIzNDQiIGZpbGw9IiMyMjIyMjIiIHJ4PSI2IiByeT0iNiIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjk4IiB4Mj0iMjg4IiB5MT0iMTMzLjI5NjkiIHkyPSIxMzMuMjk2OSIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjI4OCIgeDI9IjI4OCIgeTE9IjEzMy4yOTY5IiB5Mj0iMTU1LjI5NjkiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjI4NCwxNDUuMjk2OSwyODgsMTU1LjI5NjksMjkyLDE0NS4yOTY5LDI4OCwxNDkuMjk2OSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNDY0IiB4Mj0iNDc0IiB5MT0iMTMzLjI5NjkiIHkyPSIxMzMuMjk2OSIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjQ3NCIgeDI9IjQ3NCIgeTE9IjEzMy4yOTY5IiB5Mj0iMTU1LjI5NjkiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjQ3MCwxNDUuMjk2OSw0NzQsMTU1LjI5NjksNDc4LDE0NS4yOTY5LDQ3NCwxNDkuMjk2OSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjg4IiB4Mj0iMjg4IiB5MT0iMTg5LjI2NTYiIHkyPSIyMDcuMjY1NiIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjI4OCIgeDI9IjM2OSIgeTE9IjIwNy4yNjU2IiB5Mj0iMjA3LjI2NTYiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjM1OSwyMDMuMjY1NiwzNjksMjA3LjI2NTYsMzU5LDIxMS4yNjU2LDM2MywyMDcuMjY1NiIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNDc0IiB4Mj0iNDc0IiB5MT0iMTg5LjI2NTYiIHkyPSIyMDcuMjY1NiIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjQ3NCIgeDI9IjM5MyIgeTE9IjIwNy4yNjU2IiB5Mj0iMjA3LjI2NTYiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjQwMywyMDMuMjY1NiwzOTMsMjA3LjI2NTYsNDAzLDIxMS4yNjU2LDM5OSwyMDcuMjY1NiIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iODUiIHgyPSI3NSIgeTE9Ijk5LjI5NjkiIHkyPSI5OS4yOTY5Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNzUiIHgyPSI3NSIgeTE9Ijk5LjI5NjkiIHkyPSIxMjEuMjk2OSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iNzEsMTExLjI5NjksNzUsMTIxLjI5NjksNzksMTExLjI5NjksNzUsMTE1LjI5NjkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjM3MSIgeDI9IjM4MSIgeTE9Ijk5LjI5NjkiIHkyPSI5OS4yOTY5Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMzgxIiB4Mj0iMzgxIiB5MT0iOTkuMjk2OSIgeTI9IjEyMS4yOTY5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIzNzcsMTExLjI5NjksMzgxLDEyMS4yOTY5LDM4NSwxMTEuMjk2OSwzODEsMTE1LjI5NjkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9Ijc1IiB4Mj0iNzUiIHkxPSIxNTUuMjY1NiIgeTI9IjIzNy4yNjU2Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNzUiIHgyPSIyMTYiIHkxPSIyMzcuMjY1NiIgeTI9IjIzNy4yNjU2Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMDYsMjMzLjI2NTYsMjE2LDIzNy4yNjU2LDIwNiwyNDEuMjY1NiwyMTAsMjM3LjI2NTYiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjM4MSIgeDI9IjM4MSIgeTE9IjIxOS4yNjU2IiB5Mj0iMjM3LjI2NTYiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIzODEiIHgyPSIyNDAiIHkxPSIyMzcuMjY1NiIgeTI9IjIzNy4yNjU2Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyNTAsMjMzLjI2NTYsMjQwLDIzNy4yNjU2LDI1MCwyNDEuMjY1NiwyNDYsMjM3LjI2NTYiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjIyOCIgeDI9IjIyOCIgeTE9IjY3LjI5NjkiIHkyPSI4Ny4yOTY5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMjQsNzcuMjk2OSwyMjgsODcuMjk2OSwyMzIsNzcuMjk2OSwyMjgsODEuMjk2OSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjI4IiB4Mj0iMjI4IiB5MT0iMjQ5LjI2NTYiIHkyPSIyNjkuMjY1NiIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMjI0LDI1OS4yNjU2LDIyOCwyNjkuMjY1NiwyMzIsMjU5LjI2NTYsMjI4LDI2My4yNjU2IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyMjgiIHgyPSIyMjgiIHkxPSIzMDMuMjM0NCIgeTI9IjMyMy4yMzQ0Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIyMjQsMzEzLjIzNDQsMjI4LDMyMy4yMzQ0LDIzMiwzMTMuMjM0NCwyMjgsMzE3LjIzNDQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjwhLS1TUkM9W1JQMm5SaUNtMzRIdFZHTDctblVJakh3d2thMXNuUU9aZVo4ZmE5STFfN3RhazA1SWpDazE4RXlVU0JIbHVYOHJoaDBBb3ZIS0xXSk5ZWTR1VUtRZVBPd0VDNUxMUDBUQmo3V21aLWcxNWtaWXJJSk5QY1lSNnBmaWM2S1lsbUNQUDNHM0p2NlJBNWdJRkZUakg4UmtaalE3YXhMMEtUbjhnWHRhU3kxaXNCN3FKX2VfcTI5NkpYbC05SnExeTM1LU5lTzN5eHVVWHlpbVZrcTdkY2R2cUxFZnJxb01WaFN4MXZQTUlFY01GQm1TMXNLSFhLY3VyTXpjT2FWVE9qdlhpNFZRTXdHeTAwMDBdLS0+PC9nPjwvc3ZnPg==" class="uml" alt="uml diagram" title=""></p>
+<h3 id="algorithms">Algorithms<a class="headerlink" href="#algorithms" title="Permanent link">#</a></h3>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
 <h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
 <table>
@@ -13184,19 +13181,9 @@
 </thead>
 <tbody>
 <tr>
-<td><code>~/input/vector_map</code></td>
-<td><code>autoware_map_msgs::msg::LaneletMapBin</code></td>
-<td>vector map</td>
-</tr>
-<tr>
-<td><code>~/input/route</code></td>
-<td><code>autoware_planning_msgs::msg::LaneletRoute</code></td>
-<td>route</td>
-</tr>
-<tr>
-<td><code>~/input/classified/traffic_signals</code></td>
-<td><code>tier4_perception_msgs::msg::TrafficSignalArray</code></td>
-<td>classified signals</td>
+<td><code>~/input/control_cmd</code></td>
+<td><code>autoware_control_msgs::msg::Control</code></td>
+<td>Control command for vehicle.</td>
 </tr>
 </tbody>
 </table>
@@ -13211,63 +13198,16 @@
 </thead>
 <tbody>
 <tr>
-<td><code>~/output/traffic_signals</code></td>
-<td><code>autoware_perception_msgs::msg::TrafficLightGroupArray</code></td>
-<td>output that contains estimated pedestrian traffic signals</td>
+<td><code>~output/gear_cmd</code></td>
+<td><code>autoware_vehicle_msgs::msg::GearCommand</code></td>
+<td>Gear for drive forward / backward.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-<th align="left">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><code>use_last_detect_color</code></td>
-<td align="left"><code>bool</code></td>
-<td align="left">If this parameter is <code>true</code>, this module estimates pedestrian's traffic signal as RED not only when vehicle's traffic signal is detected as GREEN/AMBER but also when detection results change GREEN/AMBER to UNKNOWN. (If detection results change RED or AMBER to UNKNOWN, this module estimates pedestrian's traffic signal as UNKNOWN.) If this parameter is <code>false</code>, this module use only latest detection results for estimation. (Only when the detection result is GREEN/AMBER, this module estimates pedestrian's traffic signal as RED.)</td>
-<td align="left"><code>true</code></td>
-</tr>
-<tr>
-<td align="left"><code>last_detect_color_hold_time</code></td>
-<td align="left"><code>double</code></td>
-<td align="left">The time threshold to hold for last detect color.</td>
-<td align="left"><code>2.0</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
-<p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSI3MzBweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjEzNjNweDtoZWlnaHQ6NzMwcHg7YmFja2dyb3VuZDojRkZGRkZGOyIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMTM2MyA3MzAiIHdpZHRoPSIxMzYzcHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48ZWxsaXBzZSBjeD0iNjg2IiBjeT0iMjAiIGZpbGw9IiMyMjIyMjIiIHJ4PSIxMCIgcnk9IjEwIiBzdHlsZT0ic3Ryb2tlOiMyMjIyMjI7c3Ryb2tlLXdpZHRoOjEuMDsiLz48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMjkyIiB4PSI1NDAiIHk9IjUwIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjcyIiB4PSI1NTAiIHk9IjcxLjEzODciPnN1YnNjcmliZSBkZXRlY3RlZCB0cmFmZmljIHNpZ25hbHMgJmFtcDsgSERNYXA8L3RleHQ+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjI2MyIgeD0iNTU0LjUiIHk9IjEwMy45Njg4Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjQzIiB4PSI1NjQuNSIgeT0iMTI1LjEwNzQiPmV4dHJhY3QgY3Jvc3N3YWxrIGxhbmVsZXRzIGZyb20gSERNYXA8L3RleHQ+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjMwMiIgeD0iNTM1IiB5PSIxNTcuOTM3NSIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjI4MiIgeD0iNTQ1IiB5PSIxNzkuMDc2MiI+ZXh0cmFjdCByb2FkIGxhbmVsZXRzIHRoYXQgY29uZmxpY3RzIGNyb3Nzd2FsazwvdGV4dD48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMzMwIiB4PSI1MjEiIHk9IjIxMS45MDYzIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMzEwIiB4PSI1MzEiIHk9IjIzMy4wNDQ5Ij5pbml0aWFsaXplIG5vbl9yZWRfbGFuZWxldHMobGFuZWxldDo6Q29uc3RMYW5lbGV0cyk8L3RleHQ+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSI1NTcsMjY1Ljg3NSw4MTUsMjY1Ljg3NSw4MjcsMjc3Ljg3NSw4MTUsMjg5Ljg3NSw1NTcsMjg5Ljg3NSw1NDUsMjc3Ljg3NSw1NTcsMjY1Ljg3NSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTQyIiB4PSI1NTciIHk9IjI4MS42ODMxIj5MYXRlc3QgZGV0ZWN0aW9uIHJlc3VsdCBpczwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNDIiIHg9IjcwMyIgeT0iMjgxLjY4MzEiPkdSRUVOPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjEyIiB4PSI3NDkiIHk9IjI4MS42ODMxIj5vcjwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNDQiIHg9Ijc2NSIgeT0iMjgxLjY4MzEiPkFNQkVSPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjYiIHg9IjgwOSIgeT0iMjgxLjY4MzEiPj88L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjAiIHg9IjUyNSIgeT0iMjc1LjI4MDgiPnllczwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNCIgeD0iODI3IiB5PSIyNzUuMjgwOCI+bm88L3RleHQ+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjE5NiIgeD0iMzk2LjI1IiB5PSIyOTkuODc1Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTc2IiB4PSI0MDYuMjUiIHk9IjMyMS4wMTM3Ij5wdXNoIGJhY2sgbm9uX3JlZF9sYW5lbGV0czwvdGV4dD48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMTk2IiB4PSI3NzkuNzUiIHk9IjM5Ni42Nzk3Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTc2IiB4PSI3ODkuNzUiIHk9IjQxNy44MTg0Ij5wdXNoIGJhY2sgbm9uX3JlZF9sYW5lbGV0czwvdGV4dD48cG9seWdvbiBmaWxsPSIjRjFGMUYxIiBwb2ludHM9IjYzNC4yNSwzNDguMjc3MywxMTIxLjI1LDM0OC4yNzczLDExMzMuMjUsMzYwLjI3NzMsMTEyMS4yNSwzNzIuMjc3Myw2MzQuMjUsMzcyLjI3NzMsNjIyLjI1LDM2MC4yNzczLDYzNC4yNSwzNDguMjc3MyIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjAiIHg9Ijg4MS43NSIgeT0iMzgyLjQ4NzgiPnllczwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNDIiIHg9IjYzNC4yNSIgeT0iMzY0LjA4NTQiPkxhdGVzdCBkZXRlY3Rpb24gcmVzdWx0IGlzPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iYm9sZCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI2OCIgeD0iNzgwLjI1IiB5PSIzNjQuMDg1NCI+VU5LTk9XTjwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNTMiIHg9Ijg1Mi4yNSIgeT0iMzY0LjA4NTQiPmFuZCBsYXN0IGRldGVjdGlvbiByZXN1bHQgaXM8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSJib2xkIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjQyIiB4PSIxMDA5LjI1IiB5PSIzNjQuMDg1NCI+R1JFRU48L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTIiIHg9IjEwNTUuMjUiIHk9IjM2NC4wODU0Ij5vcjwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNDQiIHg9IjEwNzEuMjUiIHk9IjM2NC4wODU0Ij5BTUJFUjwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI2IiB4PSIxMTE1LjI1IiB5PSIzNjQuMDg1NCI+PzwvdGV4dD48cG9seWdvbiBmaWxsPSIjRjFGMUYxIiBwb2ludHM9Ijg3Ny43NSw0NTAuNjQ4NCw4ODkuNzUsNDYyLjY0ODQsODc3Ljc1LDQ3NC42NDg0LDg2NS43NSw0NjIuNjQ4NCw4NzcuNzUsNDUwLjY0ODQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjxwb2x5Z29uIGZpbGw9IiNGMUYxRjEiIHBvaW50cz0iNzkxLjI1LDI5OS44NzUsOTY0LjI1LDI5OS44NzUsOTc2LjI1LDMxMS44NzUsOTY0LjI1LDMyMy44NzUsNzkxLjI1LDMyMy44NzUsNzc5LjI1LDMxMS44NzUsNzkxLjI1LDI5OS44NzUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjIwIiB4PSI4ODEuNzUiIHk9IjMzNC4wODU0Ij55ZXM8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTM3IiB4PSI3OTEuMjUiIHk9IjMxNS42ODMxIj51c2VfbGFzdF9kZXRlY3RfY29sb3IgaXM8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSJib2xkIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjI2IiB4PSI5MzIuMjUiIHk9IjMxNS42ODMxIj50cnVlPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjYiIHg9Ijk1OC4yNSIgeT0iMzE1LjY4MzEiPj88L3RleHQ+PHBvbHlnb24gZmlsbD0iI0YxRjFGMSIgcG9pbnRzPSI4NzcuNzUsNDk0LjY0ODQsODg5Ljc1LDUwNi42NDg0LDg3Ny43NSw1MTguNjQ4NCw4NjUuNzUsNTA2LjY0ODQsODc3Ljc1LDQ5NC42NDg0IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48cG9seWdvbiBmaWxsPSIjRjFGMUYxIiBwb2ludHM9IjY4Niw1MjQuNjQ4NCw2OTgsNTM2LjY0ODQsNjg2LDU0OC42NDg0LDY3NCw1MzYuNjQ4NCw2ODYsNTI0LjY0ODQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjxwb2x5Z29uIGZpbGw9IiNGMUYxRjEiIHBvaW50cz0iMzIsNTY4LjY0ODQsMzk4LDU2OC42NDg0LDQxMCw1ODAuNjQ4NCwzOTgsNTkyLjY0ODQsMzIsNTkyLjY0ODQsMjAsNTgwLjY0ODQsMzIsNTY4LjY0ODQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjIwIiB4PSIyMTkiIHk9IjYwMi44NTg5Ij55ZXM8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNDQiIHg9IjMyIiB5PSI1ODQuNDU2NSI+SXMgdGhlcmU8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSJib2xkIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjEyNSIgeD0iODAiIHk9IjU4NC40NTY1Ij5TVFJBSUdIVC1OT04tUkVEPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE4OSIgeD0iMjA5IiB5PSI1ODQuNDU2NSI+cm9hZCBsYW5lbGV0IGluIG5vbl9yZWRfbGFuZWxldHM/PC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIzMzciIHg9IjQ2LjUiIHk9IjYyNS40NTMxIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjg2IiB4PSI1Ni41IiB5PSI2NDYuNTkxOCI+ZXN0aW1hdGUgcmVsYXRlZCBwZWRlc3RyaWFuJ3MgdHJhZmZpYyBzaWduYWwgYXM8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSJib2xkIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjI3IiB4PSIzNDYuNSIgeT0iNjQ2LjU5MTgiPlJFRDwvdGV4dD48cG9seWdvbiBmaWxsPSIjRjFGMUYxIiBwb2ludHM9IjQ0Miw1NjguNjQ4NCw5MzYsNTY4LjY0ODQsOTQ4LDU4MC42NDg0LDkzNiw1OTIuNjQ4NCw0NDIsNTkyLjY0ODQsNDMwLDU4MC42NDg0LDQ0Miw1NjguNjQ4NCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjAiIHg9IjY5MyIgeT0iNjAyLjg1ODkiPnllczwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI3MyIgeD0iNDQyIiB5PSI1ODQuNDU2NSI+SXMgdGhlcmUgYm90aDwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iOTQiIHg9IjUxOSIgeT0iNTg0LjQ1NjUiPkxFRlQtTk9OLVJFRDwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIyMSIgeD0iNjE3IiB5PSI1ODQuNDU2NSI+YW5kPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iYm9sZCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxMDEiIHg9IjY0MiIgeT0iNTg0LjQ1NjUiPlJJR0hULU5PTi1SRUQ8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTg5IiB4PSI3NDciIHk9IjU4NC40NTY1Ij5yb2FkIGxhbmVsZXQgaW4gbm9uX3JlZF9sYW5lbGV0cz88L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTQiIHg9Ijk0OCIgeT0iNTc4LjA1NDIiPm5vPC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIzMzciIHg9IjUyMC41IiB5PSI2MjUuNDUzMSIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjI4NiIgeD0iNTMwLjUiIHk9IjY0Ni41OTE4Ij5lc3RpbWF0ZSByZWxhdGVkIHBlZGVzdHJpYW4ncyB0cmFmZmljIHNpZ25hbCBhczwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjciIHg9IjgyMC41IiB5PSI2NDYuNTkxOCI+UkVEPC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIzODQiIHg9Ijk2OCIgeT0iNjIyLjA1MDgiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIyODYiIHg9Ijk3OCIgeT0iNjQzLjE4OTUiPmVzdGltYXRlIHJlbGF0ZWQgcGVkZXN0cmlhbidzIHRyYWZmaWMgc2lnbmFsIGFzPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iYm9sZCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI3NCIgeD0iMTI2OCIgeT0iNjQzLjE4OTUiPlVOS05PV048L3RleHQ+PGVsbGlwc2UgY3g9IjY4NiIgY3k9IjcwOS40MjE5IiBmaWxsPSJub25lIiByeD0iMTAiIHJ5PSIxMCIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjU7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoyLjU7IiB4MT0iNjc5LjgxMjgiIHgyPSI2OTIuMTg3MiIgeTE9IjcwMy4yMzQ3IiB5Mj0iNzE1LjYwOTEiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMyMjIyMjI7c3Ryb2tlLXdpZHRoOjIuNTsiIHgxPSI2OTIuMTg3MiIgeDI9IjY3OS44MTI4IiB5MT0iNzAzLjIzNDciIHkyPSI3MTUuNjA5MSIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjY4NiIgeDI9IjY4NiIgeTE9IjMwIiB5Mj0iNTAiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjY4Miw0MCw2ODYsNTAsNjkwLDQwLDY4Niw0NCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNjg2IiB4Mj0iNjg2IiB5MT0iODMuOTY4OCIgeTI9IjEwMy45Njg4Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI2ODIsOTMuOTY4OCw2ODYsMTAzLjk2ODgsNjkwLDkzLjk2ODgsNjg2LDk3Ljk2ODgiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjY4NiIgeDI9IjY4NiIgeTE9IjEzNy45Mzc1IiB5Mj0iMTU3LjkzNzUiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjY4MiwxNDcuOTM3NSw2ODYsMTU3LjkzNzUsNjkwLDE0Ny45Mzc1LDY4NiwxNTEuOTM3NSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNjg2IiB4Mj0iNjg2IiB5MT0iMTkxLjkwNjMiIHkyPSIyMTEuOTA2MyIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iNjgyLDIwMS45MDYzLDY4NiwyMTEuOTA2Myw2OTAsMjAxLjkwNjMsNjg2LDIwNS45MDYzIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI4NzcuNzUiIHgyPSI4NzcuNzUiIHkxPSIzNzIuMjc3MyIgeTI9IjM5Ni42Nzk3Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI4NzMuNzUsMzg2LjY3OTcsODc3Ljc1LDM5Ni42Nzk3LDg4MS43NSwzODYuNjc5Nyw4NzcuNzUsMzkwLjY3OTciIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjExMzMuMjUiIHgyPSIxMTQ1LjI1IiB5MT0iMzYwLjI3NzMiIHkyPSIzNjAuMjc3MyIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMTE0MS4yNSw0MDMuNjY0MSwxMTQ1LjI1LDQxMy42NjQxLDExNDkuMjUsNDAzLjY2NDEsMTE0NS4yNSw0MDcuNjY0MSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMTE0NS4yNSIgeDI9IjExNDUuMjUiIHkxPSIzNjAuMjc3MyIgeTI9IjQ2Mi42NDg0Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMTE0NS4yNSIgeDI9Ijg4OS43NSIgeTE9IjQ2Mi42NDg0IiB5Mj0iNDYyLjY0ODQiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9Ijg5OS43NSw0NTguNjQ4NCw4ODkuNzUsNDYyLjY0ODQsODk5Ljc1LDQ2Ni42NDg0LDg5NS43NSw0NjIuNjQ4NCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iODc3Ljc1IiB4Mj0iODc3Ljc1IiB5MT0iNDMwLjY0ODQiIHkyPSI0NTAuNjQ4NCIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iODczLjc1LDQ0MC42NDg0LDg3Ny43NSw0NTAuNjQ4NCw4ODEuNzUsNDQwLjY0ODQsODc3Ljc1LDQ0NC42NDg0IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI4NzcuNzUiIHgyPSI4NzcuNzUiIHkxPSIzMjMuODc1IiB5Mj0iMzQ4LjI3NzMiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9Ijg3My43NSwzMzguMjc3Myw4NzcuNzUsMzQ4LjI3NzMsODgxLjc1LDMzOC4yNzczLDg3Ny43NSwzNDIuMjc3MyIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iOTc2LjI1IiB4Mj0iMTE1NS4yNSIgeTE9IjMxMS44NzUiIHkyPSIzMTEuODc1Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIxMTUxLjI1LDQwMy42NjQxLDExNTUuMjUsNDEzLjY2NDEsMTE1OS4yNSw0MDMuNjY0MSwxMTU1LjI1LDQwNy42NjQxIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxMTU1LjI1IiB4Mj0iMTE1NS4yNSIgeTE9IjMxMS44NzUiIHkyPSI1MDYuNjQ4NCIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjExNTUuMjUiIHgyPSI4ODkuNzUiIHkxPSI1MDYuNjQ4NCIgeTI9IjUwNi42NDg0Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI4OTkuNzUsNTAyLjY0ODQsODg5Ljc1LDUwNi42NDg0LDg5OS43NSw1MTAuNjQ4NCw4OTUuNzUsNTA2LjY0ODQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9Ijg3Ny43NSIgeDI9Ijg3Ny43NSIgeTE9IjQ3NC42NDg0IiB5Mj0iNDk0LjY0ODQiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9Ijg3My43NSw0ODQuNjQ4NCw4NzcuNzUsNDk0LjY0ODQsODgxLjc1LDQ4NC42NDg0LDg3Ny43NSw0ODguNjQ4NCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNTQ1IiB4Mj0iNDk0LjI1IiB5MT0iMjc3Ljg3NSIgeTI9IjI3Ny44NzUiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI0OTQuMjUiIHgyPSI0OTQuMjUiIHkxPSIyNzcuODc1IiB5Mj0iMjk5Ljg3NSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iNDkwLjI1LDI4OS44NzUsNDk0LjI1LDI5OS44NzUsNDk4LjI1LDI4OS44NzUsNDk0LjI1LDI5My44NzUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjgyNyIgeDI9Ijg3Ny43NSIgeTE9IjI3Ny44NzUiIHkyPSIyNzcuODc1Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iODc3Ljc1IiB4Mj0iODc3Ljc1IiB5MT0iMjc3Ljg3NSIgeTI9IjI5OS44NzUiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9Ijg3My43NSwyODkuODc1LDg3Ny43NSwyOTkuODc1LDg4MS43NSwyODkuODc1LDg3Ny43NSwyOTMuODc1IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI0OTQuMjUiIHgyPSI0OTQuMjUiIHkxPSIzMzMuODQzOCIgeTI9IjUzNi42NDg0Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNDk0LjI1IiB4Mj0iNjc0IiB5MT0iNTM2LjY0ODQiIHkyPSI1MzYuNjQ4NCIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iNjY0LDUzMi42NDg0LDY3NCw1MzYuNjQ4NCw2NjQsNTQwLjY0ODQsNjY4LDUzNi42NDg0IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI4NzcuNzUiIHgyPSI4NzcuNzUiIHkxPSI1MTguNjQ4NCIgeTI9IjUzNi42NDg0Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iODc3Ljc1IiB4Mj0iNjk4IiB5MT0iNTM2LjY0ODQiIHkyPSI1MzYuNjQ4NCIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iNzA4LDUzMi42NDg0LDY5OCw1MzYuNjQ4NCw3MDgsNTQwLjY0ODQsNzA0LDUzNi42NDg0IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI2ODYiIHgyPSI2ODYiIHkxPSIyNDUuODc1IiB5Mj0iMjY1Ljg3NSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iNjgyLDI1NS44NzUsNjg2LDI2NS44NzUsNjkwLDI1NS44NzUsNjg2LDI1OS44NzUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjIxNSIgeDI9IjIxNSIgeTE9IjU5Mi42NDg0IiB5Mj0iNjI1LjQ1MzEiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjIxMSw2MTUuNDUzMSwyMTUsNjI1LjQ1MzEsMjE5LDYxNS40NTMxLDIxNSw2MTkuNDUzMSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjE1IiB4Mj0iMjE1IiB5MT0iNjU5LjQyMTkiIHkyPSI2NzkuNDIxOSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMjExLDY2OS40MjE5LDIxNSw2NzkuNDIxOSwyMTksNjY5LjQyMTksMjE1LDY3My40MjE5IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI2ODkiIHgyPSI2ODkiIHkxPSI1OTIuNjQ4NCIgeTI9IjYyNS40NTMxIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI2ODUsNjE1LjQ1MzEsNjg5LDYyNS40NTMxLDY5Myw2MTUuNDUzMSw2ODksNjE5LjQ1MzEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjY4OSIgeDI9IjY4OSIgeTE9IjY1OS40MjE5IiB5Mj0iNjc5LjQyMTkiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjY4NSw2NjkuNDIxOSw2ODksNjc5LjQyMTksNjkzLDY2OS40MjE5LDY4OSw2NzMuNDIxOSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNDEwIiB4Mj0iNDMwIiB5MT0iNTgwLjY0ODQiIHkyPSI1ODAuNjQ4NCIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iNDIwLDU3Ni42NDg0LDQzMCw1ODAuNjQ4NCw0MjAsNTg0LjY0ODQsNDI0LDU4MC42NDg0IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI2ODYiIHgyPSI2ODYiIHkxPSI1NDguNjQ4NCIgeTI9IjU1My42NDg0Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNjg2IiB4Mj0iMjE1IiB5MT0iNTUzLjY0ODQiIHkyPSI1NTMuNjQ4NCIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjIxNSIgeDI9IjIxNSIgeTE9IjU1My42NDg0IiB5Mj0iNTY4LjY0ODQiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjIxMSw1NTguNjQ4NCwyMTUsNTY4LjY0ODQsMjE5LDU1OC42NDg0LDIxNSw1NjIuNjQ4NCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iOTQ4IiB4Mj0iMTE2MCIgeTE9IjU4MC42NDg0IiB5Mj0iNTgwLjY0ODQiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxMTYwIiB4Mj0iMTE2MCIgeTE9IjU4MC42NDg0IiB5Mj0iNjIyLjA1MDgiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjExNTYsNjEyLjA1MDgsMTE2MCw2MjIuMDUwOCwxMTY0LDYxMi4wNTA4LDExNjAsNjE2LjA1MDgiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjExNjAiIHgyPSIxMTYwIiB5MT0iNjU2LjAxOTUiIHkyPSI2NzkuNDIxOSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMTE1Niw2NjkuNDIxOSwxMTYwLDY3OS40MjE5LDExNjQsNjY5LjQyMTksMTE2MCw2NzMuNDIxOSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjE1IiB4Mj0iMTE2MCIgeTE9IjY3OS40MjE5IiB5Mj0iNjc5LjQyMTkiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI2ODYiIHgyPSI2ODYiIHkxPSI2NzkuNDIxOSIgeTI9IjY5OS40MjE5Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI2ODIsNjg5LjQyMTksNjg2LDY5OS40MjE5LDY5MCw2ODkuNDIxOSw2ODYsNjkzLjQyMTkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjwhLS1TUkM9W25QQkJKaUNtNDROdC1PZlBHSEFmRnYwa0s4N0dMaElmTDhmT0hhdW9lTFBUa185Q25FRmhjT0hHLWJXVzhJNHNLVXBudDdsY0dRbXkxbWFyMVBMVTVtV0xDZlFDNVIxTlRRckI4RnJpYkk2dVdDZGpORXM2R09BbDRZaVBJay04TmZKUFc1NE0zSjkxeFR0c3g5cnRnbGYtbWNpYmdTeE1IZlRvdDhqOFdoUVFqSkJ3N1M0d2N0a2l5Zy1xaUZ6OWFYamRZTVZ6VEpHQ1QwdFhKMzRJei1wUU1WMThaTTdHMTc0eU5nUGY1aVZXbDFuNnktanE2U1ROYU4yV1hWMERBR2dJTktEaEE1SXZFVkNUMWNXODhSR2t3Zm1RR2VhSHZ2elVVVWNDdzdPLXgxaXlMVnVIeFo2eHBuUEZCUHdvUlBGLWgwZlJ3Vmhlc3c5RHN0NldIdjV5TTJyN3FfNWFEU1dNc00yUHRlaEx1VG4wc3BGTDR0aWZLYy1iTGk0c2dqc1c3TFBvdnhNb2J0SW9KZzNRY1pnUmxpRDdFOE5aalNIZHdUcVhKemlYSVZmRm9jdUZWZzZuN19GMTkzdTBdLS0+PC9nPjwvc3ZnPg==" class="uml" alt="uml diagram" title=""></p>
-<p>If traffic between pedestrians and vehicles is controlled by traffic signals, the crosswalk traffic signal maybe <strong>RED</strong> in order to prevent pedestrian from crossing when the following conditions are satisfied.</p>
-<h3 id="situation1">Situation1<a class="headerlink" href="#situation1" title="Permanent link">#</a></h3>
-<ul>
-<li>crosswalk conflicts <strong>STRAIGHT</strong> lanelet</li>
-<li>the lanelet refers <strong>GREEN</strong> or <strong>AMBER</strong> traffic signal (The following pictures show only <strong>GREEN</strong> case)</li>
-</ul>
-<div align="center">
-  <img src="images/straight.drawio.svg" width="80%">
-</div>
-<div align="center">
-  <img src="images/intersection1.svg" width="80%">
-</div>
-
-<h3 id="situation2">Situation2<a class="headerlink" href="#situation2" title="Permanent link">#</a></h3>
-<ul>
-<li>crosswalk conflicts different turn direction lanelets (STRAIGHT and LEFT, LEFT and RIGHT, RIGHT and STRAIGHT)</li>
-<li>the lanelets refer <strong>GREEN</strong> or <strong>AMBER</strong> traffic signal (The following pictures show only <strong>GREEN</strong> case)</li>
-</ul>
-<div align="center">
-  <img src="images/intersection2.svg" width="80%">
-</div>
-
+<p>none.</p>
 <h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
-<h2 id="future-extensions-unimplemented-parts">Future extensions / Unimplemented parts<a class="headerlink" href="#future-extensions-unimplemented-parts" title="Permanent link">#</a></h2></div>
+<p>TBD.</p></div>
 
 
 
@@ -13294,7 +13234,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../compare_map_segmentation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: compare_map_segmentation" rel="prev">
+          <a href="../autoware_pid_longitudinal_controller/" class="md-footer__link md-footer__link--prev" aria-label="Previous: PID Longitudinal Controller" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -13303,20 +13243,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                compare_map_segmentation
+                PID Longitudinal Controller
               </div>
             </div>
           </a>
         
         
           
-          <a href="../detected_object_feature_remover/" class="md-footer__link md-footer__link--next" aria-label="Next: detected_object_feature_remover" rel="next">
+          <a href="../autoware_smart_mpc_trajectory_follower/" class="md-footer__link md-footer__link--next" aria-label="Next: Index" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                detected_object_feature_remover
+                Index
               </div>
             </div>
             <div class="md-footer__button md-icon">
