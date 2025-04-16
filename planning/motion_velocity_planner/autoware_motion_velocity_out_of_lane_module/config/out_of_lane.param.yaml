@@ -9,7 +9,9 @@
       threshold:
         time_threshold: 5.0  # [s] consider objects that will reach an overlap within this time
       ttc:
-        threshold: 1.0 # [s] consider objects with an estimated time to collision bellow this value while on the overlap
+        threshold: 1.0 # [s] threshold for difference in time to overlap region between ego and target object to trigger stop decision
+        release_threshold: 2.0 # [s] threshold for difference in time to the overlap region between ego and target object to release stop decision
+
 
       objects:
         minimum_velocity: 0.5  # [m/s] objects lower than this velocity will be ignored
@@ -23,6 +25,7 @@
         longitudinal_distance_buffer: 1.5  # [m] safety distance buffer to keep in front of the ego vehicle
         lateral_distance_buffer: 1.0  # [m] safety distance buffer to keep on the side of the ego vehicle
         min_duration: 1.0  # [s] minimum duration needed before a decision can be canceled
+        update_distance_th: 5.0 # [m] distance threshold for updating previous stop pose position
         slowdown:
           distance_threshold: 30.0 # [m] insert a slowdown when closer than this distance from an overlap
           velocity: 2.0  # [m/s] slowdown velocity
