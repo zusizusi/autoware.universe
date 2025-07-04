@@ -52,6 +52,11 @@ struct BehaviorPathPlannerParameters
   double turn_signal_shift_length_threshold;
   double turn_signal_remaining_shift_length_threshold;
   bool turn_signal_on_swerving;
+  std::string turn_signal_roundabout_on_entry;
+  std::string turn_signal_roundabout_on_exit;
+  std::vector<double> turn_signal_roundabout_towards_exit_th;
+  bool turn_signal_roundabout_enable_indicator_only_first_exit;
+  bool turn_signal_roundabout_entry_indicator_persistence;
 
   bool enable_akima_spline_first;
   bool enable_cog_on_centerline;
