@@ -56,7 +56,6 @@ const std::map<std::string, uint8_t> g_signal_map = {
   {"straight", TurnIndicatorsCommand::DISABLE},
   {"none", TurnIndicatorsCommand::DISABLE}};
 
-
 struct TurnSignalInfo
 {
   TurnSignalInfo()
@@ -103,8 +102,9 @@ public:
 
   TurnIndicatorsCommand resolve_turn_signal(
     const PathWithLaneId & path, const Pose & current_pose, const size_t current_seg_idx,
-    const TurnSignalInfo & intersection_signal_info, const TurnSignalInfo & behavior_signal_info,
-    const double nearest_dist_threshold, const double nearest_yaw_threshold);
+    const TurnSignalInfo & intersection_signal_info, const TurnSignalInfo & roundabout_signal_info,
+    const TurnSignalInfo & behavior_signal_info, const double nearest_dist_threshold,
+    const double nearest_yaw_threshold);
 
   TurnSignalInfo overwrite_turn_signal(
     const PathWithLaneId & path, const Pose & current_pose, const size_t current_seg_idx,
@@ -199,6 +199,21 @@ private:
     const double nearest_yaw_threshold);
 
   void initialize_roundabout_info();
+
+  struct SignalCandidate
+  {
+    TurnSignalInfo signal_info;
+    double desired_start_distance;
+    double required_start_distance;
+    double required_end_distance;
+    double desired_end_distance;
+    std::string signal_type;
+
+    inline bool isValid() const
+    {
+      return (desired_start_distance <= 0.0 && desired_end_distance > 0.0);
+    }
+  };
 
   inline bool isAvoidShift(
     const double start_shift_length, const double end_shift_length, const double threshold) const

@@ -109,36 +109,37 @@ TurnIndicatorsCommand TurnSignalDecider::getTurnSignal(
     debug_data.intersection_turn_signal_info = *intersection_turn_signal_info;
   }
 
-  if (roundabout_turn_signal_info) {
+  if (!intersection_turn_signal_info && !roundabout_turn_signal_info) {
+    initialize_intersection_info();
+    const auto & desired_end_point = turn_signal_info.desired_end_point;
+    const double dist_to_end_point = calc_distance(
+      extended_path, current_pose, ego_seg_idx, desired_end_point, nearest_dist_threshold,
+      nearest_yaw_threshold);
+    if (dist_to_end_point < 0.0) {
+      TurnIndicatorsCommand updated_turn_signal;
+      updated_turn_signal.stamp = turn_signal_info.turn_signal.stamp;
+      updated_turn_signal.command = TurnIndicatorsCommand::NO_COMMAND;
+      return updated_turn_signal;
+    }
+    return turn_signal_info.turn_signal;
+  } else if (
+    (turn_signal_info.turn_signal.command == TurnIndicatorsCommand::NO_COMMAND ||
+     turn_signal_info.turn_signal.command == TurnIndicatorsCommand::DISABLE) &&
+    !roundabout_turn_signal_info) {
+    set_intersection_info(
+      extended_path, current_pose, ego_seg_idx, *intersection_turn_signal_info,
+      nearest_dist_threshold, nearest_yaw_threshold);
+    return intersection_turn_signal_info->turn_signal;
+  } else if (
+    (turn_signal_info.turn_signal.command == TurnIndicatorsCommand::NO_COMMAND ||
+     turn_signal_info.turn_signal.command == TurnIndicatorsCommand::DISABLE) &&
+    roundabout_turn_signal_info) {
     return roundabout_turn_signal_info->turn_signal;
   }
 
-  // if (!intersection_turn_signal_info) {
-  //   initialize_intersection_info();
-  //   const auto & desired_end_point = turn_signal_info.desired_end_point;
-  //   const double dist_to_end_point = calc_distance(
-  //     extended_path, current_pose, ego_seg_idx, desired_end_point, nearest_dist_threshold,
-  //     nearest_yaw_threshold);
-  //   if (dist_to_end_point < 0.0) {
-  //     TurnIndicatorsCommand updated_turn_signal;
-  //     updated_turn_signal.stamp = turn_signal_info.turn_signal.stamp;
-  //     updated_turn_signal.command = TurnIndicatorsCommand::NO_COMMAND;
-  //     return updated_turn_signal;
-  //   }
-  //   return turn_signal_info.turn_signal;
-  // } else if (
-  //   turn_signal_info.turn_signal.command == TurnIndicatorsCommand::NO_COMMAND ||
-  //   turn_signal_info.turn_signal.command == TurnIndicatorsCommand::DISABLE) {
-  //   set_intersection_info(
-  //     extended_path, current_pose, ego_seg_idx, *intersection_turn_signal_info,
-  //     nearest_dist_threshold, nearest_yaw_threshold);
-  //   return intersection_turn_signal_info->turn_signal;
-  // }
-
-  // return resolve_turn_signal(
-  //   extended_path, current_pose, ego_seg_idx, *intersection_turn_signal_info, turn_signal_info,
-  //   nearest_dist_threshold, nearest_yaw_threshold);
-  return turn_signal_info.turn_signal;
+  return resolve_turn_signal(
+    extended_path, current_pose, ego_seg_idx, *intersection_turn_signal_info,
+    *roundabout_turn_signal_info, turn_signal_info, nearest_dist_threshold, nearest_yaw_threshold);
 }
 
 std::pair<bool, bool> TurnSignalDecider::getIntersectionTurnSignalFlag()
@@ -510,7 +511,8 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
       }
       lanelet::ConstLanelet current_lanelet = front_lanelet;
 
-      // Get the lanelet before the ego's exit and search for the one with the attribute "enable_exit_turn_signal" set to true
+      // Get the lanelet before the ego's exit and search for the one with the attribute
+      // "enable_exit_turn_signal" set to true
       bool found_enable_exit_turn_signal = false;
       while (true) {
         lanelet::ConstLanelets prev_lanelets;
@@ -553,9 +555,11 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
         autoware::motion_utils::findFirstNearestSegmentIndexWithSoftConstraints(
           path.points, iter->second, nearest_dist_threshold, nearest_yaw_threshold);
 
-      const double dist_to_desired_start_point = autoware::motion_utils::calcSignedArcLength(
-        path.points, current_pose.position, current_seg_idx, iter->second.position,
-        front_nearest_seg_idx);
+      const double dist_to_desired_start_point =
+        autoware::motion_utils::calcSignedArcLength(
+          path.points, current_pose.position, current_seg_idx, iter->second.position,
+          front_nearest_seg_idx) -
+        base_link2front_;
       if (dist_to_desired_start_point >= 0.0) {
         // We haven't reached the desired start point yet
         continue;
@@ -599,8 +603,9 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
 
 TurnIndicatorsCommand TurnSignalDecider::resolve_turn_signal(
   const PathWithLaneId & path, const Pose & current_pose, const size_t current_seg_idx,
-  const TurnSignalInfo & intersection_signal_info, const TurnSignalInfo & behavior_signal_info,
-  const double nearest_dist_threshold, const double nearest_yaw_threshold)
+  const TurnSignalInfo & intersection_signal_info, const TurnSignalInfo & roundabout_signal_info,
+  const TurnSignalInfo & behavior_signal_info, const double nearest_dist_threshold,
+  const double nearest_yaw_threshold)
 {
   const auto get_distance = [&](const Pose & input_point) {
     return calc_distance(
@@ -608,88 +613,100 @@ TurnIndicatorsCommand TurnSignalDecider::resolve_turn_signal(
       nearest_yaw_threshold);
   };
 
-  const auto & inter_desired_start_point = intersection_signal_info.desired_start_point;
-  const auto & inter_desired_end_point = intersection_signal_info.desired_end_point;
-  const auto & inter_required_start_point = intersection_signal_info.required_start_point;
-  const auto & inter_required_end_point = intersection_signal_info.required_end_point;
-  const auto & behavior_desired_start_point = behavior_signal_info.desired_start_point;
-  const auto & behavior_desired_end_point = behavior_signal_info.desired_end_point;
-  const auto & behavior_required_start_point = behavior_signal_info.required_start_point;
-  const auto & behavior_required_end_point = behavior_signal_info.required_end_point;
+  auto is_valid_signal_info = [](const TurnSignalInfo & signal_info) {
+    return signal_info.turn_signal.command != TurnIndicatorsCommand::NO_COMMAND;
+  };
 
-  const double dist_to_intersection_desired_start =
-    get_distance(inter_desired_start_point) - base_link2front_;
-  const double dist_to_intersection_desired_end = get_distance(inter_desired_end_point);
-  const double dist_to_intersection_required_start =
-    get_distance(inter_required_start_point) - base_link2front_;
-  const double dist_to_intersection_required_end = get_distance(inter_required_end_point);
-  const double dist_to_behavior_desired_start =
-    get_distance(behavior_desired_start_point) - base_link2front_;
-  const double dist_to_behavior_desired_end = get_distance(behavior_desired_end_point);
-  const double dist_to_behavior_required_start =
-    get_distance(behavior_required_start_point) - base_link2front_;
-  const double dist_to_behavior_required_end = get_distance(behavior_required_end_point);
-
-  // If we still do not reach the desired front point we ignore it
-  if (dist_to_intersection_desired_start > 0.0 && dist_to_behavior_desired_start > 0.0) {
-    TurnIndicatorsCommand empty_signal_command;
-    empty_signal_command.command = TurnIndicatorsCommand::DISABLE;
-    initialize_intersection_info();
-    return empty_signal_command;
-  } else if (dist_to_intersection_desired_start > 0.0) {
-    initialize_intersection_info();
-    return behavior_signal_info.turn_signal;
-  } else if (dist_to_behavior_desired_start > 0.0) {
-    set_intersection_info(
-      path, current_pose, current_seg_idx, intersection_signal_info, nearest_dist_threshold,
-      nearest_yaw_threshold);
-    return intersection_signal_info.turn_signal;
-  }
-
-  // If we already passed the desired end point, return the other signal
-  if (dist_to_intersection_desired_end < 0.0 && dist_to_behavior_desired_end < 0.0) {
-    TurnIndicatorsCommand empty_signal_command;
-    empty_signal_command.command = TurnIndicatorsCommand::DISABLE;
-    initialize_intersection_info();
-    return empty_signal_command;
-  } else if (dist_to_intersection_desired_end < 0.0) {
-    initialize_intersection_info();
-    return behavior_signal_info.turn_signal;
-  } else if (dist_to_behavior_desired_end < 0.0) {
-    set_intersection_info(
-      path, current_pose, current_seg_idx, intersection_signal_info, nearest_dist_threshold,
-      nearest_yaw_threshold);
-    return intersection_signal_info.turn_signal;
-  }
-
-  if (dist_to_intersection_desired_start <= dist_to_behavior_desired_start) {
-    // intersection signal is prior than behavior signal
-    const auto enable_prior = use_prior_turn_signal(
-      dist_to_intersection_required_start, dist_to_intersection_required_end,
-      dist_to_behavior_required_start, dist_to_behavior_required_end);
-
-    if (enable_prior) {
-      set_intersection_info(
-        path, current_pose, current_seg_idx, intersection_signal_info, nearest_dist_threshold,
-        nearest_yaw_threshold);
-      return intersection_signal_info.turn_signal;
+  auto create_candidate = [&](
+                            const TurnSignalInfo & signal_info,
+                            const std::string & type) -> std::optional<SignalCandidate> {
+    if (!is_valid_signal_info(signal_info)) {
+      return std::nullopt;
     }
-    initialize_intersection_info();
-    return behavior_signal_info.turn_signal;
+
+    return SignalCandidate{
+      signal_info,
+      get_distance(signal_info.desired_start_point) - base_link2front_,
+      get_distance(signal_info.required_start_point) - base_link2front_,
+      get_distance(signal_info.required_end_point),
+      get_distance(signal_info.desired_end_point),
+      type};
+  };
+  std::vector<SignalCandidate> candidates;
+  candidates.reserve(3);
+
+  if (auto candidate = create_candidate(intersection_signal_info, "intersection")) {
+    candidates.push_back(*candidate);
+  }
+  if (auto candidate = create_candidate(roundabout_signal_info, "roundabout")) {
+    candidates.push_back(*candidate);
+  }
+  if (auto candidate = create_candidate(behavior_signal_info, "behavior")) {
+    candidates.push_back(*candidate);
   }
 
-  // behavior signal is prior than intersection signal
-  const auto enable_prior = use_prior_turn_signal(
-    dist_to_behavior_required_start, dist_to_behavior_required_end,
-    dist_to_intersection_required_start, dist_to_intersection_required_end);
-  if (enable_prior) {
+  //  Remove invalid candidates
+  candidates.erase(
+    std::remove_if(
+      candidates.begin(), candidates.end(),
+      [](const SignalCandidate & candidate) { return !candidate.isValid(); }),
+    candidates.end());
+
+  if (candidates.empty()) {
+    TurnIndicatorsCommand empty_signal_command;
+    empty_signal_command.command = TurnIndicatorsCommand::DISABLE;
     initialize_intersection_info();
-    return behavior_signal_info.turn_signal;
+    return empty_signal_command;
   }
-  set_intersection_info(
-    path, current_pose, current_seg_idx, intersection_signal_info, nearest_dist_threshold,
-    nearest_yaw_threshold);
-  return intersection_signal_info.turn_signal;
+  // If there is only one candidate, return it directly
+  if (candidates.size() == 1) {
+    const auto & winner = candidates[0];
+    if (winner.signal_type == "intersection") {
+      set_intersection_info(
+        path, current_pose, current_seg_idx, winner.signal_info, nearest_dist_threshold,
+        nearest_yaw_threshold);
+    } else {
+      initialize_intersection_info();
+    }
+    return winner.signal_info.turn_signal;
+  }
+  
+  //  Sort candidates by desired start distance
+  std::sort(
+    candidates.begin(), candidates.end(), [](const SignalCandidate & a, const SignalCandidate & b) {
+      return a.desired_start_distance < b.desired_start_distance;
+    });
+
+  // Helper function to compare two signal candidates
+  auto compare_signals = [&](const SignalCandidate & a, const SignalCandidate & b) -> const SignalCandidate & {
+    if (a.desired_start_distance <= b.desired_start_distance) {
+      const bool use_a = use_prior_turn_signal(
+        a.required_start_distance, a.required_end_distance, b.required_start_distance,
+        b.required_end_distance);
+      return use_a ? a : b;
+    } else {
+      const bool use_b = use_prior_turn_signal(
+        b.required_start_distance, b.required_end_distance, a.required_start_distance,
+        a.required_end_distance);
+      return use_b ? b : a;
+    }
+  };
+
+  // Compare all candidates
+  const SignalCandidate* winner = &candidates[0];
+  for (size_t i = 1; i < candidates.size(); ++i) {
+    winner = &compare_signals(*winner, candidates[i]);
+  }
+
+  if (winner->signal_type == "intersection") {
+    set_intersection_info(
+      path, current_pose, current_seg_idx, winner->signal_info, nearest_dist_threshold,
+      nearest_yaw_threshold);
+  } else {
+    initialize_intersection_info();
+  }
+
+  return winner->signal_info.turn_signal;
 }
 
 TurnSignalInfo TurnSignalDecider::overwrite_turn_signal(
