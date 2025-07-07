@@ -247,10 +247,6 @@ struct PlannerData
       node.declare_parameter<std::string>("turn_signal_roundabout.on_exit");
       parameters.turn_signal_roundabout_entry_indicator_persistence = 
       node.declare_parameter<bool>("turn_signal_roundabout.entry_indicator_persistence");
-    parameters.turn_signal_roundabout_towards_exit_th = 
-      node.declare_parameter<std::vector<double>>("turn_signal_roundabout.towards_exit.straight_angle_th");
-    parameters.turn_signal_roundabout_enable_indicator_only_first_exit =
-      node.declare_parameter<bool>("turn_signal_roundabout.towards_exit.enable_left_turn_indicator_only_first_exit");
 
     parameters.enable_akima_spline_first =
       node.declare_parameter<bool>("enable_akima_spline_first");

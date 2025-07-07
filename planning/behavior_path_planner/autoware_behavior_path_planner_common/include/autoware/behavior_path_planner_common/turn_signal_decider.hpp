@@ -120,8 +120,6 @@ public:
     const double base_link2front, const double intersection_search_distance,
     const double intersection_search_time, const double intersection_angle_threshold_deg,
     const std::string roundabout_on_entry, const std::string roundabout_on_exit,
-    const std::vector<double> roundabout_towards_exit_th,
-    const bool roundabout_enable_left_turn_indicator_only_first_exit,
     const bool roundabout_entry_indicator_persistence)
   {
     base_link2front_ = base_link2front;
@@ -142,9 +140,6 @@ public:
     } else {
       roundabout_on_exit_ = TurnIndicatorsCommand::DISABLE;
     }
-    roundabout_towards_exit_thresholds_ = roundabout_towards_exit_th;
-    roundabout_enable_left_turn_indicator_only_first_exit_ =
-      roundabout_enable_left_turn_indicator_only_first_exit;
     roundabout_entry_indicator_persistence_ = roundabout_entry_indicator_persistence;
   }
   void setParameters(
@@ -171,6 +166,20 @@ public:
     const bool is_pull_over = false) const;
 
 private:
+  struct SignalCandidate
+  {
+    TurnSignalInfo signal_info;
+    double desired_start_distance;
+    double required_start_distance;
+    double required_end_distance;
+    double desired_end_distance;
+    std::string signal_type;
+
+    inline bool isValid() const
+    {
+      return (desired_start_distance <= 0.0 && desired_end_distance > 0.0);
+    }
+  };
   std::optional<TurnSignalInfo> getIntersectionTurnSignalInfo(
     const PathWithLaneId & path, const Pose & current_pose, const double current_vel,
     const size_t current_seg_idx, const RouteHandler & route_handler,
@@ -192,28 +201,6 @@ private:
     const TurnSignalInfo & intersection_turn_signal_info, const double nearest_dist_threshold,
     const double nearest_yaw_threshold);
   void initialize_intersection_info();
-
-  void set_roundabout_info(
-    const PathWithLaneId & path, const Pose & current_pose, const size_t current_seg_idx,
-    const TurnSignalInfo & roundabout_turn_signal_info, const double nearest_dist_threshold,
-    const double nearest_yaw_threshold);
-
-  void initialize_roundabout_info();
-
-  struct SignalCandidate
-  {
-    TurnSignalInfo signal_info;
-    double desired_start_distance;
-    double required_start_distance;
-    double required_end_distance;
-    double desired_end_distance;
-    std::string signal_type;
-
-    inline bool isValid() const
-    {
-      return (desired_start_distance <= 0.0 && desired_end_distance > 0.0);
-    }
-  };
 
   inline bool isAvoidShift(
     const double start_shift_length, const double end_shift_length, const double threshold) const
@@ -357,14 +344,8 @@ private:
   mutable bool approaching_intersection_turn_signal_ = false;
   mutable double intersection_distance_ = std::numeric_limits<double>::max();
   mutable Pose intersection_pose_point_ = Pose();
-  mutable bool roundabout_turn_signal_ = false;
-  mutable bool approaching_roundabout_turn_signal_ = false;
-  mutable double roundabout_distance_ = std::numeric_limits<double>::max();
-  mutable Pose roundabout_pose_point_ = Pose();
   uint8_t roundabout_on_entry_{TurnIndicatorsCommand::NO_COMMAND};
   uint8_t roundabout_on_exit_{TurnIndicatorsCommand::NO_COMMAND};
-  std::vector<double> roundabout_towards_exit_thresholds_ = {0.0, 0.0};
-  bool roundabout_enable_left_turn_indicator_only_first_exit_{false};
   bool roundabout_entry_indicator_persistence_{false};
 };
 }  // namespace autoware::behavior_path_planner

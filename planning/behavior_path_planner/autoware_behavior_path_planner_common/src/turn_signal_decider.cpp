@@ -184,8 +184,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getIntersectionTurnSignalInfo(
   for (const auto & lane_id : unique_lane_ids) {
     const auto lanelet = route_handler.getLaneletsFromId(lane_id);
     const std::string turn_direction = lanelet.attributeOr("turn_direction", "none");
-    const std::string roundabout = lanelet.attributeOr("roundabout", "none");
-    if ((turn_direction == "left" || turn_direction == "right") && roundabout == "none") {
+    if (turn_direction == "left" || turn_direction == "right") {
       const auto & position = current_pose.position;
       const lanelet::BasicPoint2d point(position.x, position.y);
       if (lanelet::geometry::inside(lanelet, point)) {
@@ -670,7 +669,7 @@ TurnIndicatorsCommand TurnSignalDecider::resolve_turn_signal(
     }
     return winner.signal_info.turn_signal;
   }
-  
+
   //  Sort candidates by desired start distance
   std::sort(
     candidates.begin(), candidates.end(), [](const SignalCandidate & a, const SignalCandidate & b) {
@@ -678,7 +677,8 @@ TurnIndicatorsCommand TurnSignalDecider::resolve_turn_signal(
     });
 
   // Helper function to compare two signal candidates
-  auto compare_signals = [&](const SignalCandidate & a, const SignalCandidate & b) -> const SignalCandidate & {
+  auto compare_signals =
+    [&](const SignalCandidate & a, const SignalCandidate & b) -> const SignalCandidate & {
     if (a.desired_start_distance <= b.desired_start_distance) {
       const bool use_a = use_prior_turn_signal(
         a.required_start_distance, a.required_end_distance, b.required_start_distance,
@@ -693,7 +693,7 @@ TurnIndicatorsCommand TurnSignalDecider::resolve_turn_signal(
   };
 
   // Compare all candidates
-  const SignalCandidate* winner = &candidates[0];
+  const SignalCandidate * winner = &candidates[0];
   for (size_t i = 1; i < candidates.size(); ++i) {
     winner = &compare_signals(*winner, candidates[i]);
   }
@@ -830,8 +830,7 @@ bool TurnSignalDecider::use_prior_turn_signal(
     dist_to_prior_required_start < 0.0 && 0.0 <= dist_to_prior_required_end;
 
   if (dist_to_prior_required_start < dist_to_subsequent_required_start) {
-    // subsequent signal required section is completely overlapped the prior signal required
-    // section
+    // subsequent signal required section is completely overlapped the prior signal required section
     if (dist_to_subsequent_required_end < dist_to_prior_required_end) {
       return true;
     }
@@ -906,50 +905,6 @@ geometry_msgs::msg::Pose TurnSignalDecider::get_required_end_point(
   }
 
   return resampled_centerline.back();
-}
-
-void TurnSignalDecider::set_roundabout_info(
-  const PathWithLaneId & path, const Pose & current_pose, const size_t current_seg_idx,
-  const TurnSignalInfo & roundabout_turn_signal_info, const double nearest_dist_threshold,
-  const double nearest_yaw_threshold)
-{
-  const auto get_distance = [&](const Pose & input_point) {
-    const size_t nearest_seg_idx =
-      autoware::motion_utils::findFirstNearestSegmentIndexWithSoftConstraints(
-        path.points, input_point, nearest_dist_threshold, nearest_yaw_threshold);
-    return autoware::motion_utils::calcSignedArcLength(
-      path.points, current_pose.position, current_seg_idx, input_point.position, nearest_seg_idx);
-  };
-
-  const auto & desired_start_point = roundabout_turn_signal_info.desired_start_point;
-  const auto & desired_end_point = roundabout_turn_signal_info.desired_end_point;
-  const auto & required_start_point = roundabout_turn_signal_info.required_start_point;
-
-  const double dist_to_desired_start = get_distance(desired_start_point) - base_link2front_;
-  const double dist_to_desired_end = get_distance(desired_end_point);
-  const double dist_to_required_start = get_distance(required_start_point) - base_link2front_;
-
-  if (dist_to_desired_start < 0.0 && dist_to_desired_end > 0.0) {
-    if (dist_to_required_start > 0.0) {
-      roundabout_turn_signal_ = false;
-      approaching_roundabout_turn_signal_ = true;
-    } else {
-      roundabout_turn_signal_ = true;
-      approaching_roundabout_turn_signal_ = false;
-    }
-    roundabout_distance_ = dist_to_required_start;
-    roundabout_pose_point_ = required_start_point;
-  } else {
-    initialize_roundabout_info();
-  }
-}
-
-void TurnSignalDecider::initialize_roundabout_info()
-{
-  roundabout_turn_signal_ = false;
-  approaching_roundabout_turn_signal_ = false;
-  roundabout_pose_point_ = Pose();
-  roundabout_distance_ = std::numeric_limits<double>::max();
 }
 
 void TurnSignalDecider::set_intersection_info(
