@@ -118,22 +118,13 @@ BehaviorPathPlannerNode::BehaviorPathPlannerNode(const rclcpp::NodeOptions & nod
     const double turn_signal_search_time = planner_data_->parameters.turn_signal_search_time;
     const std::string roundabout_on_entry = planner_data_->parameters.turn_signal_roundabout_on_entry;
     const std::string roundabout_on_exit = planner_data_->parameters.turn_signal_roundabout_on_exit;
-    const std::vector<double> roundabout_towards_exit_th =
-      planner_data_->parameters.turn_signal_roundabout_towards_exit_th;
-    const bool roundabout_enable_left_turn_indicator_only_first_exit =
-      planner_data_->parameters.turn_signal_roundabout_enable_indicator_only_first_exit;
     const bool roundabout_entry_indicator_persistence =
       planner_data_->parameters.turn_signal_roundabout_entry_indicator_persistence;
     planner_data_->turn_signal_decider.setParameters(
       planner_data_->parameters.base_link2front, turn_signal_intersection_search_distance,
       turn_signal_search_time, turn_signal_intersection_angle_threshold_deg, roundabout_on_entry,
-      roundabout_on_exit, roundabout_towards_exit_th,
-      roundabout_enable_left_turn_indicator_only_first_exit, roundabout_entry_indicator_persistence);
+      roundabout_on_exit, roundabout_entry_indicator_persistence);
   }
-  // planner_data_->turn_signal_decider.setParameters(
-  //   planner_data_->parameters.base_link2front, turn_signal_intersection_search_distance,
-  //   turn_signal_search_time, turn_signal_intersection_angle_threshold_deg);
-  // }
 
   // Start timer
   {
