@@ -345,13 +345,14 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
 
   // unique lane ids
   std::vector<lanelet::Id> unique_lane_ids;
-  for (size_t i = 0; i < path.points.size(); ++i) {
-    for (const auto & lane_id : path.points.at(i).lane_ids) {
+
+  for (const auto & point : path.points) {
+    for (const auto & lane_id : point.lane_ids) {
       if (
         std::find(unique_lane_ids.begin(), unique_lane_ids.end(), lane_id) ==
         unique_lane_ids.end()) {
         const auto lanelet = route_handler.getLaneletsFromId(lane_id);
-        const std::string roundabout_tag = lanelet.attributeOr("roundabout", "none");
+        const std::string roundabout_tag = lanelet.attributeOr("roundabout", std::string("none"));
         if (roundabout_tag == "entry" || roundabout_tag == "exit") {
           unique_lane_ids.push_back(lane_id);
         }
@@ -363,44 +364,44 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     return {};
   }
 
-  // combine consevutive lanes of the same roundabout_tag
+  // combine consecutive lanes of the same roundabout_tag
   // stores lanes that have already been combined
   std::set<int> processed_lanes;
   // since combined_lane does not inherit id and attribute,
   // and ConstantLanelet does not rewrite the value,
   // we keep front_lane together as a representative.
-  std::vector<std::pair<lanelet::ConstLanelet, lanelet::ConstLanelet>> combined_and_front_vec{};
+  std::vector<std::pair<lanelet::ConstLanelet, lanelet::ConstLanelet>> combined_and_front_vec;
   for (const auto & lane_id : unique_lane_ids) {
     // Skip if already processed
-    if (processed_lanes.find(lane_id) != processed_lanes.end()) continue;
-    auto current_processing_lane = route_handler.getLaneletsFromId(lane_id);
-    const std::string roundabout_tag = current_processing_lane.attributeOr("roundabout", "none");
+    if (processed_lanes.count(lane_id)) continue;
 
-    lanelet::ConstLanelets combined_lane_elems{};
+    auto current_processing_lane = route_handler.getLaneletsFromId(lane_id);
+    const std::string roundabout_tag = current_processing_lane.attributeOr("roundabout", std::string("none"));
+
+    lanelet::ConstLanelets combined_lane_elems;
     do {
       processed_lanes.insert(current_processing_lane.id());
       combined_lane_elems.push_back(current_processing_lane);
-      lanelet::ConstLanelet next_lane{};
+      lanelet::ConstLanelet next_lane;
       current_processing_lane = next_lane;
     } while (
       route_handler.getNextLaneletWithinRoute(current_processing_lane, &current_processing_lane) &&
       current_processing_lane.attributeOr("roundabout", std::string("none")) == roundabout_tag);
 
     // store combined lane and its front lane
-    const auto & combined_and_first = std::pair<lanelet::ConstLanelet, lanelet::ConstLanelet>(
+    combined_and_front_vec.emplace_back(
       lanelet::utils::combineLaneletsShape(combined_lane_elems), combined_lane_elems.front());
-    combined_and_front_vec.push_back(combined_and_first);
   }
+
   std::queue<TurnSignalInfo> signal_queue;
-  for (const auto & combined_and_front : combined_and_front_vec) {
-    const auto & combined_lanelet = combined_and_front.first;
-    const auto & front_lanelet = combined_and_front.second;
+  for (const auto & [combined_lanelet, front_lanelet] : combined_and_front_vec) {
     // use combined_lane's centerline
     const auto & centerline = combined_lanelet.centerline3d();
     if (centerline.size() < 2) continue;
 
     // lane front and back pose
-    Pose lane_front_pose, lane_back_pose;
+    Pose lane_front_pose;
+    Pose lane_back_pose;
     lane_front_pose.position = lanelet::utils::conversion::toGeomMsgPt(centerline.front());
     lane_back_pose.position = lanelet::utils::conversion::toGeomMsgPt(centerline.back());
 
@@ -435,17 +436,19 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
       continue;
     }
 
-    const std::string roundabout_tag = front_lanelet.attributeOr("roundabout", "none");
+    const std::string roundabout_tag = front_lanelet.attributeOr("roundabout", std::string("none"));
     if (roundabout_tag == "entry") {
       // update map if necessary
       auto [iter, inserted] =
         roundabout_desired_start_point_map_.try_emplace(front_lanelet.id(), current_pose);
-      TurnSignalInfo turn_signal_info{};
+
+      TurnSignalInfo turn_signal_info;
       turn_signal_info.desired_start_point = iter->second;
       turn_signal_info.required_start_point = lane_front_pose;
       turn_signal_info.required_end_point = get_required_end_point(centerline);
       turn_signal_info.desired_end_point = lane_back_pose;
       turn_signal_info.turn_signal.command = roundabout_on_entry_;
+
       // Get the corresponding exit lanelet
       lanelet::ConstLanelet roundabout_exit_lanelet;
       lanelet::ConstLanelet entry_lane = front_lanelet;
@@ -457,8 +460,9 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
         }
         roundabout_exit_lanelet = entry_lane;
       }
+
       const std::string exit_turn_signal_tag =
-        front_lanelet.attributeOr(std::to_string(roundabout_exit_lanelet.id()), "none");
+        front_lanelet.attributeOr(std::to_string(roundabout_exit_lanelet.id()), std::string("none"));
 
       // Change the entry turn signal based on the exit lanelet
       if (exit_turn_signal_tag == "turn_signal_left") {
@@ -469,6 +473,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
         exit_turn_signal_tag == "none" && roundabout_on_entry_ == TurnIndicatorsCommand::DISABLE) {
         continue;
       }
+
       // If the roundabout entry indicator persistence is enabled, keep the indicator on until the
       // vehicle exits the roundabout.
       if (roundabout_entry_indicator_persistence_) {
@@ -480,9 +485,10 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
           const auto & exit_lane_point = lanelet::utils::conversion::toGeomMsgPt(
             roundabout_exit_lanelet
               .centerline3d()[roundabout_exit_lanelet.centerline3d().size() - 2]);
-          const auto & next_point = exit_lane_back_pose.position;
-          exit_lane_back_pose.orientation = calc_orientation(exit_lane_point, next_point);
+          exit_lane_back_pose.orientation =
+            calc_orientation(exit_lane_point, exit_lane_back_pose.position);
         }
+
         turn_signal_info.desired_end_point = exit_lane_back_pose;
 
         const size_t exit_lane_back_nearest_seg_idx =
@@ -536,16 +542,16 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
           lanelet::utils::conversion::toGeomMsgPt(current_lanelet.centerline3d().front());
         const auto & next_point =
           lanelet::utils::conversion::toGeomMsgPt(current_lanelet.centerline3d()[1]);
-        desired_start_point.orientation = calc_orientation(lane_front_pose.position, next_point);
-
+        desired_start_point.orientation =
+          calc_orientation(desired_start_point.position, next_point);
       } else {
         // If no previous lanelet with enable_exit_turn_signal is found, use the combined
-        // lanelet's front pose calulate desired_start_point
+        // lanelet's front pose calculate desired_start_point
         desired_start_point.position = lanelet::utils::conversion::toGeomMsgPt(centerline.front());
         desired_start_point.orientation = calc_orientation(
-          lanelet::utils::conversion::toGeomMsgPt(centerline.front()),
-          lanelet::utils::conversion::toGeomMsgPt(centerline[1]));
+          desired_start_point.position, lanelet::utils::conversion::toGeomMsgPt(centerline[1]));
       }
+
       auto [iter, inserted] =
         roundabout_desired_start_point_map_.try_emplace(front_lanelet.id(), desired_start_point);
 
@@ -559,12 +565,13 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
           path.points, current_pose.position, current_seg_idx, iter->second.position,
           front_nearest_seg_idx) -
         base_link2front_;
+
       if (dist_to_desired_start_point >= 0.0) {
         // We haven't reached the desired start point yet
         continue;
       }
 
-      TurnSignalInfo turn_signal_info{};
+      TurnSignalInfo turn_signal_info;
       turn_signal_info.desired_start_point = iter->second;
       turn_signal_info.required_start_point = lane_front_pose;
       turn_signal_info.required_end_point = get_required_end_point(centerline);
@@ -612,7 +619,7 @@ TurnIndicatorsCommand TurnSignalDecider::resolve_turn_signal(
       nearest_yaw_threshold);
   };
 
-  auto is_valid_signal_info = [](const TurnSignalInfo & signal_info) {
+  const auto is_valid_signal_info = [](const TurnSignalInfo & signal_info) {
     return signal_info.turn_signal.command != TurnIndicatorsCommand::NO_COMMAND;
   };
 
@@ -631,6 +638,7 @@ TurnIndicatorsCommand TurnSignalDecider::resolve_turn_signal(
       get_distance(signal_info.desired_end_point),
       type};
   };
+
   std::vector<SignalCandidate> candidates;
   candidates.reserve(3);
 
@@ -657,17 +665,18 @@ TurnIndicatorsCommand TurnSignalDecider::resolve_turn_signal(
     initialize_intersection_info();
     return empty_signal_command;
   }
+
   // If there is only one candidate, return it directly
   if (candidates.size() == 1) {
-    const auto & winner = candidates[0];
-    if (winner.signal_type == "intersection") {
+    const auto & candidate = candidates[0];
+    if (candidate.signal_type == "intersection") {
       set_intersection_info(
-        path, current_pose, current_seg_idx, winner.signal_info, nearest_dist_threshold,
+        path, current_pose, current_seg_idx, candidate.signal_info, nearest_dist_threshold,
         nearest_yaw_threshold);
     } else {
       initialize_intersection_info();
     }
-    return winner.signal_info.turn_signal;
+    return candidate.signal_info.turn_signal;
   }
 
   //  Sort candidates by desired start distance
@@ -693,20 +702,20 @@ TurnIndicatorsCommand TurnSignalDecider::resolve_turn_signal(
   };
 
   // Compare all candidates
-  const SignalCandidate * winner = &candidates[0];
+  const SignalCandidate * candidate = &candidates[0];
   for (size_t i = 1; i < candidates.size(); ++i) {
-    winner = &compare_signals(*winner, candidates[i]);
+    candidate = &compare_signals(*candidate, candidates[i]);
   }
 
-  if (winner->signal_type == "intersection") {
+  if (candidate->signal_type == "intersection") {
     set_intersection_info(
-      path, current_pose, current_seg_idx, winner->signal_info, nearest_dist_threshold,
+      path, current_pose, current_seg_idx, candidate->signal_info, nearest_dist_threshold,
       nearest_yaw_threshold);
   } else {
     initialize_intersection_info();
   }
 
-  return winner->signal_info.turn_signal;
+  return candidate->signal_info.turn_signal;
 }
 
 TurnSignalInfo TurnSignalDecider::overwrite_turn_signal(
