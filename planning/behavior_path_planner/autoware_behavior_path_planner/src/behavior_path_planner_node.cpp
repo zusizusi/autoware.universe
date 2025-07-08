@@ -116,7 +116,8 @@ BehaviorPathPlannerNode::BehaviorPathPlannerNode(const rclcpp::NodeOptions & nod
     const double turn_signal_intersection_angle_threshold_deg =
       planner_data_->parameters.turn_signal_intersection_angle_threshold_deg;
     const double turn_signal_search_time = planner_data_->parameters.turn_signal_search_time;
-    const std::string roundabout_on_entry = planner_data_->parameters.turn_signal_roundabout_on_entry;
+    const std::string roundabout_on_entry =
+      planner_data_->parameters.turn_signal_roundabout_on_entry;
     const std::string roundabout_on_exit = planner_data_->parameters.turn_signal_roundabout_on_exit;
     const bool roundabout_entry_indicator_persistence =
       planner_data_->parameters.turn_signal_roundabout_entry_indicator_persistence;

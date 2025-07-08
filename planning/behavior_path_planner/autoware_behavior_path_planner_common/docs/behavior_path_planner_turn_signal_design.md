@@ -166,23 +166,27 @@ Second section
 For roundabout scenarios, the turn signal decider handles both entry and exit turn signals based on the `roundabout` attribute in the lanelet map. The roundabout functionality supports the following configurations:
 
 Entry Turn Signal:
+
 - **desired start point**: `v * turn_signal_search_time` meters before the start point of the roundabout entry lanelet.
 - **desired end point**: Terminal point of the roundabout entry lanelet (or exit lanelet if `roundabout_entry_indicator_persistence` is enabled).
 - **required start point**: Initial point of the roundabout entry lanelet.
 - **required end point**: The earliest point that satisfies the following condition. $\theta - \theta_{\textrm{end}} < \delta$, where $\theta_{\textrm{end}}$ is yaw angle of the terminal point of the lanelet, $\theta$ is the angle of a required end point and $\delta$ is the threshold defined by the user. (This is the same as the right/left turn signal logic.)
 
 Exit Turn Signal:
+
 - **desired start point**: Start point of the roundabout exit lanelet (or from a lanelet with `enable_exit_turn_signal` attribute if found).
 - **desired end point**: Terminal point of the roundabout exit lanelet.
 - **required start point**: Initial point of the roundabout exit lanelet.
 - **required end point**: The earliest point that satisfies the following condition. $\theta - \theta_{\textrm{end}} < \delta$, where $\theta_{\textrm{end}}$ is yaw angle of the terminal point of the lanelet, $\theta$ is the angle of a required end point and $\delta$ is the threshold defined by the user.(This is the same as the right/left turn signal logic.)
 
 Special Features:
+
 - **Exit-based entry signal**: If a specific exit lanelet ID is defined as an attribute in the entry lanelet (e.g., `turn_signal_left` or `turn_signal_right`), the entry turn signal will be overridden accordingly.
 - **Indicator persistence**: When `roundabout_entry_indicator_persistence` is enabled, the entry turn signal remains active until the vehicle exits the roundabout.
 - **Enable exit turn signal**: Lanelets with the `enable_exit_turn_signal` attribute allow early activation of exit turn signals.
 
 ### Blinker conflicts
+
 When ego vehicle has to activate several blinkers, it uses the following rules to decide which blinker to activate. Note that this algorithm is based on the Japanese Road Traffic Law, so it may not be suitable for other countries.
 When it comes to handle several blinkers, it gives priority to the first blinker that comes first. However, this rule sometimes activate unnatural blinkers, so turn signal decider uses the following five rules to decide the necessary turn signal.
 
