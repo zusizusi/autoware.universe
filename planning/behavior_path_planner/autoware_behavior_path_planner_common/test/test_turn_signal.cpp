@@ -91,7 +91,7 @@ TEST(BehaviorPathPlanningTurnSignal, Condition1)
   intersection_signal_info.required_end_point.position = create_point(48.0, 0.0, 0.0);
   intersection_signal_info.required_end_point.orientation = create_quaternion_from_yaw(0.0);
 
-  TurnSignalInfo roundabout_signal_info = {}
+  TurnSignalInfo roundabout_signal_info = {};
 
   TurnSignalInfo behavior_signal_info;
   behavior_signal_info.turn_signal.command = TurnIndicatorsCommand::ENABLE_RIGHT;
