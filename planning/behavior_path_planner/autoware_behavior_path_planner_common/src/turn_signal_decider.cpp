@@ -524,10 +524,9 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
       if (found_enable_exit_turn_signal) {
         desired_start_point.position =
           lanelet::utils::conversion::toGeomMsgPt(current_lanelet.centerline3d().front());
-        const auto & next_point =
-          lanelet::utils::conversion::toGeomMsgPt(current_lanelet.centerline3d()[1]);
-        desired_start_point.orientation =
-          calc_orientation(desired_start_point.position, next_point);
+        desired_start_point.orientation = calc_orientation(
+          desired_start_point.position,
+          lanelet::utils::conversion::toGeomMsgPt(current_lanelet.centerline3d()[1]));
       } else {
         desired_start_point = lane_front_pose;
       }
@@ -536,13 +535,13 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
         roundabout_desired_start_point_map_.try_emplace(front_lanelet.id(), desired_start_point);
 
       // calculate distance from ego vehicle front pose to desired start point
-      const size_t front_nearest_seg_idx =
+      const size_t nearest_seg_idx =
         autoware::motion_utils::findFirstNearestSegmentIndexWithSoftConstraints(
           path.points, iter->second, nearest_dist_threshold, nearest_yaw_threshold);
       const double dist_to_desired_start_point =
         autoware::motion_utils::calcSignedArcLength(
           path.points, current_pose.position, current_seg_idx, iter->second.position,
-          front_nearest_seg_idx) -
+          nearest_seg_idx) -
         base_link2front_;
 
       if (dist_to_desired_start_point >= 0.0) {
