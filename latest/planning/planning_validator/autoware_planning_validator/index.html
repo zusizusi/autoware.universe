@@ -14361,7 +14361,11 @@ j_{lat} = v_{lon}^3 * \frac{d\kappa}{ds} + 3 * v_{lon}^2 * a_{lon} * \kappa
 <td align="left">true</td>
 </tr>
 </tbody>
-</table></div>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When a validity check with <code>is_critical = true</code> is triggered, AND <code>handling_type.critical</code> is set to apply soft stop on last valid trajectory, THEN any other validity check triggered simultaneously will publish a WARN level diagnostic instead of ERROR level. This is to avoid contradictory behavior for different types of checks.</p>
+</div></div>
 
 
 
