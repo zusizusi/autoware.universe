@@ -17,6 +17,8 @@
 
 #include <autoware_vehicle_info_utils/vehicle_info_utils.hpp>
 
+#include <string>
+
 struct ModuleConfigParameters
 {
   bool enable_module{false};
