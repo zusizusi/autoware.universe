@@ -246,46 +246,19 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getIntersectionTurnSignalInfo(
     const std::string lane_attribute =
       front_lane.attributeOr("turn_direction", std::string("none"));
 
-    // lane front and back pose
-    Pose lane_front_pose;
-    Pose lane_back_pose;
-    lane_front_pose.position =
-      lanelet::utils::conversion::toGeomMsgPt(combined_lane.centerline3d().front());
-    lane_back_pose.position =
-      lanelet::utils::conversion::toGeomMsgPt(combined_lane.centerline3d().back());
-
-    {
-      const auto & current_point = lane_front_pose.position;
-      const auto & next_point =
-        lanelet::utils::conversion::toGeomMsgPt(combined_lane.centerline3d()[1]);
-      lane_front_pose.orientation = calc_orientation(current_point, next_point);
-    }
-
-    {
-      const auto & current_point = lanelet::utils::conversion::toGeomMsgPt(
-        combined_lane.centerline3d()[combined_lane.centerline3d().size() - 2]);
-      const auto & next_point = lane_back_pose.position;
-      lane_back_pose.orientation = calc_orientation(current_point, next_point);
-    }
-
-    const size_t front_nearest_seg_idx =
-      autoware::motion_utils::findFirstNearestSegmentIndexWithSoftConstraints(
-        path.points, lane_front_pose, nearest_dist_threshold, nearest_yaw_threshold);
-    const size_t back_nearest_seg_idx =
-      autoware::motion_utils::findFirstNearestSegmentIndexWithSoftConstraints(
-        path.points, lane_back_pose, nearest_dist_threshold, nearest_yaw_threshold);
+    const auto front_pose = calculateLaneFrontPose(combined_lane.centerline3d());
+    const auto back_pose = calculateLaneBackPose(combined_lane.centerline3d());
 
     // Distance from ego vehicle front pose to front point of the lane
-    const double dist_to_front_point = autoware::motion_utils::calcSignedArcLength(
-                                         path.points, current_pose.position, current_seg_idx,
-                                         lane_front_pose.position, front_nearest_seg_idx) -
+    const double dist_to_front_point = calc_distance(
+                                         path, current_pose, current_seg_idx, front_pose,
+                                         nearest_dist_threshold, nearest_yaw_threshold) -
                                        base_link2front_;
 
     // Distance from ego vehicle base link to the terminal point of the lane
-    const double dist_to_back_point = autoware::motion_utils::calcSignedArcLength(
-      path.points, current_pose.position, current_seg_idx, lane_back_pose.position,
-      back_nearest_seg_idx);
-
+    const double dist_to_back_point = calc_distance(
+      path, current_pose, current_seg_idx, back_pose, nearest_dist_threshold,
+      nearest_yaw_threshold);
     if (dist_to_back_point < 0.0) {
       // Vehicle is already passed this lane
       desired_start_point_map_.erase(lane_id);
@@ -301,38 +274,17 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getIntersectionTurnSignalInfo(
 
       TurnSignalInfo turn_signal_info{};
       turn_signal_info.desired_start_point = desired_start_point_map_.at(lane_id);
-      turn_signal_info.required_start_point = lane_front_pose;
+      turn_signal_info.required_start_point = front_pose;
       turn_signal_info.required_end_point = get_required_end_point(combined_lane.centerline3d());
-      turn_signal_info.desired_end_point = lane_back_pose;
+      turn_signal_info.desired_end_point = back_pose;
       turn_signal_info.turn_signal.command = g_signal_map.at(lane_attribute);
       signal_queue.push(turn_signal_info);
     }
   }
 
-  // Resolve the conflict between several turn signal requirements
-  while (!signal_queue.empty()) {
-    if (signal_queue.size() == 1) {
-      return signal_queue.front();
-    }
-
-    const auto & turn_signal_info = signal_queue.front();
-    const auto & required_end_point = turn_signal_info.required_end_point;
-    const size_t nearest_seg_idx =
-      autoware::motion_utils::findFirstNearestSegmentIndexWithSoftConstraints(
-        path.points, required_end_point, nearest_dist_threshold, nearest_yaw_threshold);
-    const double dist_to_end_point = autoware::motion_utils::calcSignedArcLength(
-      path.points, current_pose.position, current_seg_idx, required_end_point.position,
-      nearest_seg_idx);
-
-    if (dist_to_end_point >= 0.0) {
-      // we haven't finished the current mandatory turn signal
-      return turn_signal_info;
-    }
-
-    signal_queue.pop();
-  }
-
-  return {};
+  return resolveSignalQueue(
+    signal_queue, path, current_pose, current_seg_idx, nearest_dist_threshold,
+    nearest_yaw_threshold);
 }
 
 std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
@@ -345,38 +297,24 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
   std::set<int> processed_lanes;
   std::vector<std::pair<lanelet::ConstLanelet, lanelet::ConstLanelet>> combined_and_front_vec_entry;
   std::vector<std::pair<lanelet::ConstLanelet, lanelet::ConstLanelet>> combined_and_front_vec_exit;
+  // Process roundabout lanes
   for (const auto & point : path.points) {
     for (const auto & lane_id : point.lane_ids) {
       const auto lanelet = route_handler.getLaneletsFromId(lane_id);
       const std::string roundabout_tag = lanelet.attributeOr("roundabout", std::string("none"));
       lanelet::ConstLanelet current_lanelet = lanelet;
-      if (roundabout_tag == "entry") {
+
+      if (roundabout_tag == "entry" || roundabout_tag == "exit") {
         if (processed_lanes.count(current_lanelet.id())) continue;
         lanelet::ConstLanelets combined_lane_elems;
         do {
           processed_lanes.insert(current_lanelet.id());
           combined_lane_elems.push_back(current_lanelet);
-        } while (route_handler.getNextLaneletWithinRoute(
-                   current_lanelet, &current_lanelet) &&
-                 lanelet.attributeOr("roundabout", std::string("none")) ==
-                   roundabout_tag);
-
-        // store combined lane and its front lane
-        combined_and_front_vec_entry.emplace_back(
-          lanelet::utils::combineLaneletsShape(combined_lane_elems), combined_lane_elems.front());
-      } else if (roundabout_tag == "exit") {
-        if (processed_lanes.count(current_lanelet.id())) continue;
-        lanelet::ConstLanelets combined_lane_elems;
-        do {
-          processed_lanes.insert(current_lanelet.id());
-          combined_lane_elems.push_back(current_lanelet);
-        } while (route_handler.getNextLaneletWithinRoute(
-                   current_lanelet, &current_lanelet) &&
-                 lanelet.attributeOr("roundabout", std::string("none")) ==
-                   roundabout_tag);
-
-        // store combined lane and its front lane
-        combined_and_front_vec_exit.emplace_back(
+        } while (route_handler.getNextLaneletWithinRoute(current_lanelet, &current_lanelet) &&
+                 current_lanelet.attributeOr("roundabout", std::string("none")) == roundabout_tag);
+        auto & target_vec =
+          (roundabout_tag == "entry") ? combined_and_front_vec_entry : combined_and_front_vec_exit;
+        target_vec.emplace_back(
           lanelet::utils::combineLaneletsShape(combined_lane_elems), combined_lane_elems.front());
       }
     }
@@ -390,62 +328,35 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     intersection_search_time_ * current_vel + intersection_search_distance_;
   std::queue<TurnSignalInfo> signal_queue;
 
+  // Process entry lanes
   for (const auto & [combined_lanelet, front_lanelet] : combined_and_front_vec_entry) {
     const auto & centerline = combined_lanelet.centerline3d();
     if (centerline.size() < 2) continue;
 
-    // lane front and back pose
-    Pose lane_front_pose;
-    Pose lane_back_pose;
-    lane_front_pose.position = lanelet::utils::conversion::toGeomMsgPt(centerline.front());
-    lane_back_pose.position = lanelet::utils::conversion::toGeomMsgPt(centerline.back());
-
-    const auto & next_point = lanelet::utils::conversion::toGeomMsgPt(centerline[1]);
-    lane_front_pose.orientation = calc_orientation(lane_front_pose.position, next_point);
-    const auto & prev_point =
-      lanelet::utils::conversion::toGeomMsgPt(centerline[centerline.size() - 2]);
-    lane_back_pose.orientation = calc_orientation(prev_point, lane_back_pose.position);
-
-    const size_t front_nearest_seg_idx =
-      autoware::motion_utils::findFirstNearestSegmentIndexWithSoftConstraints(
-        path.points, lane_front_pose, nearest_dist_threshold, nearest_yaw_threshold);
-    const size_t back_nearest_seg_idx =
-      autoware::motion_utils::findFirstNearestSegmentIndexWithSoftConstraints(
-        path.points, lane_back_pose, nearest_dist_threshold, nearest_yaw_threshold);
-
-    // Distance from ego vehicle front pose to front point of the lane
-    const double dist_to_front_point = autoware::motion_utils::calcSignedArcLength(
-                                         path.points, current_pose.position, current_seg_idx,
-                                         lane_front_pose.position, front_nearest_seg_idx) -
-                                       base_link2front_;
-    // Distance from ego vehicle base link to the terminal point of the lane
-    double dist_to_back_point = autoware::motion_utils::calcSignedArcLength(
-      path.points, current_pose.position, current_seg_idx, lane_back_pose.position,
-      back_nearest_seg_idx);
-
+    const auto front_pose = calculateLaneFrontPose(centerline);
+    const auto dist_to_front_pose = calc_distance(
+                                      path, current_pose, current_seg_idx, front_pose,
+                                      nearest_dist_threshold, nearest_yaw_threshold) -
+                                    base_link2front_;
     const double search_distance =
       front_lanelet.attributeOr("turn_signal_distance", base_search_distance);
-    if (search_distance <= dist_to_front_point) {
-      continue;
-    }
-    // update map if necessary
+    if (search_distance <= dist_to_front_pose) continue;  // Skip if the front point is too far
+
+    const auto back_pose = calculateLaneBackPose(centerline);
     auto [iter, inserted] =
       roundabout_desired_start_point_map_.try_emplace(front_lanelet.id(), current_pose);
-
     TurnSignalInfo turn_signal_info;
     turn_signal_info.desired_start_point = iter->second;
-    turn_signal_info.required_start_point = lane_front_pose;
+    turn_signal_info.required_start_point = front_pose;
     turn_signal_info.required_end_point = get_required_end_point(centerline);
-    turn_signal_info.desired_end_point = lane_back_pose;
+    turn_signal_info.desired_end_point = back_pose;
     turn_signal_info.turn_signal.command = roundabout_on_entry_;
 
     // If defined in the lanelet map, change the turn signal based on the exit lanelet
     lanelet::ConstLanelet roundabout_exit_lanelet;
     lanelet::ConstLanelet entry_lane = front_lanelet;
     while (route_handler.getNextLaneletWithinRoute(entry_lane, &entry_lane)) {
-      if (entry_lane.attributeOr("roundabout", std::string("none")) == "none") {
-        break;
-      }
+      if (entry_lane.attributeOr("roundabout", std::string("none")) == "none") break;
       roundabout_exit_lanelet = entry_lane;
     }
     const std::string exit_turn_signal_tag =
@@ -461,141 +372,122 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
       continue;
     }
 
-    // If the roundabout entry indicator persistence is enabled, keep the indicator on until the
-    // vehicle exits the roundabout.
-    if (roundabout_entry_indicator_persistence_) {
-      Pose exit_lane_back_pose;
-      exit_lane_back_pose.position =
-        lanelet::utils::conversion::toGeomMsgPt(roundabout_exit_lanelet.centerline3d().back());
-      {
-        const auto & exit_lane_point = lanelet::utils::conversion::toGeomMsgPt(
-          roundabout_exit_lanelet
-            .centerline3d()[roundabout_exit_lanelet.centerline3d().size() - 2]);
-        exit_lane_back_pose.orientation =
-          calc_orientation(exit_lane_point, exit_lane_back_pose.position);
-      }
+    // If the roundabout entry indicator persistence is enabled, keep the indicator on until the vehicle exits the roundabout.
+    if (roundabout_entry_indicator_persistence_ && roundabout_exit_lanelet.id()) {
+      const auto exit_lane_back_pose =
+        calculateLaneBackPose(roundabout_exit_lanelet.centerline3d());
       turn_signal_info.desired_end_point = exit_lane_back_pose;
-      const size_t exit_lane_back_nearest_seg_idx =
-        autoware::motion_utils::findFirstNearestSegmentIndexWithSoftConstraints(
-          path.points, exit_lane_back_pose, nearest_dist_threshold, nearest_yaw_threshold);
-      // Distance from ego vehicle base link to the terminal point of the lane
-      dist_to_back_point = autoware::motion_utils::calcSignedArcLength(
-        path.points, current_pose.position, current_seg_idx, exit_lane_back_pose.position,
-        exit_lane_back_nearest_seg_idx);
     }
-
-    if (dist_to_back_point < 0.0) {
-      // Vehicle is already passed this lane
+    const auto dist_to_desired_end_point = calc_distance(
+      path, current_pose, current_seg_idx, turn_signal_info.desired_end_point,
+      nearest_dist_threshold, nearest_yaw_threshold);
+    if (dist_to_desired_end_point < 0.0) { // Vehicle is already passed this lane
       roundabout_desired_start_point_map_.erase(front_lanelet.id());
       continue;
     }
     signal_queue.push(turn_signal_info);
   }
 
+  // Process exit lanes
   for (const auto & [combined_lanelet, front_lanelet] : combined_and_front_vec_exit) {
     // use combined_lane's centerline
     const auto & centerline = combined_lanelet.centerline3d();
     if (centerline.size() < 2) continue;
-
-    // lane front and back pose
-    Pose lane_front_pose;
-    Pose lane_back_pose;
-    lane_front_pose.position = lanelet::utils::conversion::toGeomMsgPt(centerline.front());
-    lane_back_pose.position = lanelet::utils::conversion::toGeomMsgPt(centerline.back());
-
-    const auto & next_point = lanelet::utils::conversion::toGeomMsgPt(centerline[1]);
-    lane_front_pose.orientation = calc_orientation(lane_front_pose.position, next_point);
-    const auto & prev_point =
-      lanelet::utils::conversion::toGeomMsgPt(centerline[centerline.size() - 2]);
-    lane_back_pose.orientation = calc_orientation(prev_point, lane_back_pose.position);
-
-    const size_t front_nearest_seg_idx =
-      autoware::motion_utils::findFirstNearestSegmentIndexWithSoftConstraints(
-        path.points, lane_front_pose, nearest_dist_threshold, nearest_yaw_threshold);
-    const size_t back_nearest_seg_idx =
-      autoware::motion_utils::findFirstNearestSegmentIndexWithSoftConstraints(
-        path.points, lane_back_pose, nearest_dist_threshold, nearest_yaw_threshold);
-
-    // Distance from ego vehicle front pose to front point of the lane
-    const double dist_to_front_point = autoware::motion_utils::calcSignedArcLength(
-                                         path.points, current_pose.position, current_seg_idx,
-                                         lane_front_pose.position, front_nearest_seg_idx) -
-                                       base_link2front_;
-    // Distance from ego vehicle base link to the terminal point of the lane
-    double dist_to_back_point = autoware::motion_utils::calcSignedArcLength(
-      path.points, current_pose.position, current_seg_idx, lane_back_pose.position,
-      back_nearest_seg_idx);
-
-    const double search_distance =
-      front_lanelet.attributeOr("turn_signal_distance", base_search_distance);
-    if (search_distance <= dist_to_front_point) {
-      continue;
-    }
-
-    const std::string roundabout_tag = front_lanelet.attributeOr("roundabout", std::string("none"));
-    if (dist_to_back_point < 0.0) {
-      // Vehicle is already passed this lane
+    
+    // calculate back pose and distance to back pose
+    const auto back_pose = calculateLaneBackPose(centerline);
+    const auto dist_to_back_pose = calc_distance(
+      path, current_pose, current_seg_idx, back_pose, nearest_dist_threshold,
+      nearest_yaw_threshold);
+    if (dist_to_back_pose < 0.0) { // Vehicle is already passed this lane
       roundabout_desired_start_point_map_.erase(front_lanelet.id());
       continue;
     }
 
-    // Check if there is a lanelet with the "enable_exit_turn_signal" attribute
-    lanelet::ConstLanelet current_lanelet = front_lanelet;
+    // Find enable_exit_turn_signal lanelet
     bool found_enable_exit_turn_signal = false;
-    while (true) {
-      lanelet::ConstLanelets prev_lanelets;
-      if (!route_handler.getPreviousLaneletsWithinRoute(current_lanelet, &prev_lanelets)) {
-        break;
-      }
-      const auto it =
-        std::find_if(prev_lanelets.cbegin(), prev_lanelets.cend(), [](const auto & lanelet) {
-          return lanelet.attributeOr("enable_exit_turn_signal", std::string("none")) == "true";
-        });
-
-      if (it != prev_lanelets.cend()) {
-        current_lanelet = *it;
-        found_enable_exit_turn_signal = true;
-      } else {
-        break;
-      }
-    }
+    lanelet::ConstLanelet EnableExitTurnSignalLanelet =
+      findEnableExitTurnSignalLanelet(front_lanelet, route_handler, found_enable_exit_turn_signal);
+    // If no enable_exit_turn_signal lanelet is found, use the front pose of exit lanelet as the desired start point.
+    const auto required_start_point = calculateLaneFrontPose(centerline);
     Pose desired_start_point;
     if (found_enable_exit_turn_signal) {
-      desired_start_point.position =
-        lanelet::utils::conversion::toGeomMsgPt(current_lanelet.centerline3d().front());
-      desired_start_point.orientation = calc_orientation(
-        desired_start_point.position,
-        lanelet::utils::conversion::toGeomMsgPt(current_lanelet.centerline3d()[1]));
+      desired_start_point = calculateLaneFrontPose(EnableExitTurnSignalLanelet.centerline3d());
     } else {
-      desired_start_point = lane_front_pose;
+      desired_start_point = required_start_point;
     }
+    const auto dist_to_desired_start_point = calc_distance(
+                                      path, current_pose, current_seg_idx, desired_start_point,
+                                      nearest_dist_threshold, nearest_yaw_threshold) -
+                                    base_link2front_;
+    if (dist_to_desired_start_point >= 0.0) continue;  // Skip if the front point is too far
     // update map if necessary
     auto [iter, inserted] =
       roundabout_desired_start_point_map_.try_emplace(front_lanelet.id(), desired_start_point);
 
-    // calculate distance from ego vehicle front pose to desired start point
-    const size_t nearest_seg_idx =
-      autoware::motion_utils::findFirstNearestSegmentIndexWithSoftConstraints(
-        path.points, iter->second, nearest_dist_threshold, nearest_yaw_threshold);
-    const double dist_to_desired_start_point =
-      autoware::motion_utils::calcSignedArcLength(
-        path.points, current_pose.position, current_seg_idx, iter->second.position,
-        nearest_seg_idx) -
-      base_link2front_;
-
-    if (dist_to_desired_start_point >= 0.0) {
-      continue;
-    }
     TurnSignalInfo turn_signal_info;
     turn_signal_info.desired_start_point = iter->second;
-    turn_signal_info.required_start_point = lane_front_pose;
+    turn_signal_info.required_start_point = required_start_point;
     turn_signal_info.required_end_point = get_required_end_point(centerline);
-    turn_signal_info.desired_end_point = lane_back_pose;
+    turn_signal_info.desired_end_point = back_pose;
     turn_signal_info.turn_signal.command = roundabout_on_exit_;
     signal_queue.push(turn_signal_info);
   }
 
-    // Resolve the conflict between several turn signal requirements
+  return resolveSignalQueue(
+    signal_queue, path, current_pose, current_seg_idx, nearest_dist_threshold,
+    nearest_yaw_threshold);
+}
+
+lanelet::ConstLanelet TurnSignalDecider::findEnableExitTurnSignalLanelet(
+  const lanelet::ConstLanelet & start_lanelet, const RouteHandler & route_handler,
+  bool & found_enable_exit_turn_signal)
+{
+  lanelet::ConstLanelet current_lanelet = start_lanelet;
+  found_enable_exit_turn_signal = false;
+  while (true) {
+    lanelet::ConstLanelets prev_lanelets;
+    if (!route_handler.getPreviousLaneletsWithinRoute(current_lanelet, &prev_lanelets)) break;
+
+    const auto it =
+      std::find_if(prev_lanelets.cbegin(), prev_lanelets.cend(), [](const auto & lanelet) {
+        return lanelet.attributeOr("enable_exit_turn_signal", std::string("none")) == "true";
+      });
+
+    if (it != prev_lanelets.cend()) {
+      current_lanelet = *it;
+      found_enable_exit_turn_signal = true;
+    } else {
+      break;
+    }
+  }
+  return current_lanelet;
+}
+
+Pose TurnSignalDecider::calculateLaneFrontPose(const lanelet::ConstLineString3d & centerline)
+{
+  Pose front_pose;
+  front_pose.position = lanelet::utils::conversion::toGeomMsgPt(centerline.front());
+  front_pose.orientation =
+    calc_orientation(front_pose.position, lanelet::utils::conversion::toGeomMsgPt(centerline[1]));
+  return front_pose;
+}
+
+Pose TurnSignalDecider::calculateLaneBackPose(const lanelet::ConstLineString3d & centerline)
+{
+  Pose back_pose;
+  back_pose.position = lanelet::utils::conversion::toGeomMsgPt(centerline.back());
+  const auto & prev_point =
+    lanelet::utils::conversion::toGeomMsgPt(centerline[centerline.size() - 2]);
+  back_pose.orientation = calc_orientation(prev_point, back_pose.position);
+  return back_pose;
+}
+
+std::optional<TurnSignalInfo> TurnSignalDecider::resolveSignalQueue(
+  std::queue<TurnSignalInfo> & signal_queue, const PathWithLaneId & path, const Pose & current_pose,
+  const size_t current_seg_idx, const double nearest_dist_threshold,
+  const double nearest_yaw_threshold)
+{
   while (!signal_queue.empty()) {
     if (signal_queue.size() == 1) {
       return signal_queue.front();
@@ -611,7 +503,6 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
       nearest_seg_idx);
 
     if (dist_to_end_point >= 0.0) {
-      // we haven't finished the current mandatory turn signal
       return turn_signal_info;
     }
 
@@ -620,9 +511,6 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
 
   return {};
 }
-
-
-
 
 TurnIndicatorsCommand TurnSignalDecider::resolve_turn_signal(
   const PathWithLaneId & path, const Pose & current_pose, const size_t current_seg_idx,

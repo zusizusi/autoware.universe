@@ -190,6 +190,19 @@ private:
     const size_t current_seg_idx, const RouteHandler & route_handler,
     const double nearest_dist_threshold, const double nearest_yaw_threshold);
 
+  lanelet::ConstLanelet findEnableExitTurnSignalLanelet(
+    const lanelet::ConstLanelet & start_lanelet, const RouteHandler & route_handler,
+    bool & found_enable_exit_turn_signal);
+
+  Pose calculateLaneFrontPose(const lanelet::ConstLineString3d & centerline);
+
+  Pose calculateLaneBackPose(const lanelet::ConstLineString3d & centerline);
+
+  std::optional<TurnSignalInfo> resolveSignalQueue(
+    std::queue<TurnSignalInfo> & signal_queue, const PathWithLaneId & path,
+    const Pose & current_pose, const size_t current_seg_idx, const double nearest_dist_threshold,
+    const double nearest_yaw_threshold);
+
   geometry_msgs::msg::Pose get_required_end_point(const lanelet::ConstLineString3d & centerline);
 
   bool use_prior_turn_signal(
