@@ -246,18 +246,18 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getIntersectionTurnSignalInfo(
     const std::string lane_attribute =
       front_lane.attributeOr("turn_direction", std::string("none"));
 
-    const auto front_pose = calculateLaneFrontPose(combined_lane.centerline3d());
-    const auto back_pose = calculateLaneBackPose(combined_lane.centerline3d());
+    const auto lane_front_pose = calculateLaneFrontPose(combined_lane.centerline3d());
+    const auto lane_back_pose = calculateLaneBackPose(combined_lane.centerline3d());
 
     // Distance from ego vehicle front pose to front point of the lane
     const double dist_to_front_point = calc_distance(
-                                         path, current_pose, current_seg_idx, front_pose,
+                                         path, current_pose, current_seg_idx, lane_front_pose,
                                          nearest_dist_threshold, nearest_yaw_threshold) -
                                        base_link2front_;
 
     // Distance from ego vehicle base link to the terminal point of the lane
     const double dist_to_back_point = calc_distance(
-      path, current_pose, current_seg_idx, back_pose, nearest_dist_threshold,
+      path, current_pose, current_seg_idx, lane_back_pose, nearest_dist_threshold,
       nearest_yaw_threshold);
     if (dist_to_back_point < 0.0) {
       // Vehicle is already passed this lane
@@ -274,9 +274,9 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getIntersectionTurnSignalInfo(
 
       TurnSignalInfo turn_signal_info{};
       turn_signal_info.desired_start_point = desired_start_point_map_.at(lane_id);
-      turn_signal_info.required_start_point = front_pose;
+      turn_signal_info.required_start_point = lane_front_pose;
       turn_signal_info.required_end_point = get_required_end_point(combined_lane.centerline3d());
-      turn_signal_info.desired_end_point = back_pose;
+      turn_signal_info.desired_end_point = lane_back_pose;
       turn_signal_info.turn_signal.command = g_signal_map.at(lane_attribute);
       signal_queue.push(turn_signal_info);
     }
