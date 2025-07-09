@@ -39,6 +39,7 @@
 #include <memory>
 #include <string>
 #include <utility>
+#include <queue>
 
 namespace autoware::behavior_path_planner
 {
