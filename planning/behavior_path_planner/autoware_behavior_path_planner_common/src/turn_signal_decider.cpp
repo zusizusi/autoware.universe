@@ -372,7 +372,8 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
       continue;
     }
 
-    // If the roundabout entry indicator persistence is enabled, keep the indicator on until the vehicle exits the roundabout.
+    // If the roundabout entry indicator persistence is enabled, keep the indicator on until the
+    // vehicle exits the roundabout.
     if (roundabout_entry_indicator_persistence_ && roundabout_exit_lanelet.id()) {
       const auto exit_lane_back_pose =
         calculateLaneBackPose(roundabout_exit_lanelet.centerline3d());
@@ -381,7 +382,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     const auto dist_to_desired_end_point = calc_distance(
       path, current_pose, current_seg_idx, turn_signal_info.desired_end_point,
       nearest_dist_threshold, nearest_yaw_threshold);
-    if (dist_to_desired_end_point < 0.0) { // Vehicle is already passed this lane
+    if (dist_to_desired_end_point < 0.0) {  // Vehicle is already passed this lane
       roundabout_desired_start_point_map_.erase(front_lanelet.id());
       continue;
     }
@@ -393,13 +394,13 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     // use combined_lane's centerline
     const auto & centerline = combined_lanelet.centerline3d();
     if (centerline.size() < 2) continue;
-    
+
     // calculate back pose and distance to back pose
     const auto back_pose = calculateLaneBackPose(centerline);
     const auto dist_to_back_pose = calc_distance(
       path, current_pose, current_seg_idx, back_pose, nearest_dist_threshold,
       nearest_yaw_threshold);
-    if (dist_to_back_pose < 0.0) { // Vehicle is already passed this lane
+    if (dist_to_back_pose < 0.0) {  // Vehicle is already passed this lane
       roundabout_desired_start_point_map_.erase(front_lanelet.id());
       continue;
     }
@@ -408,7 +409,8 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     bool found_enable_exit_turn_signal = false;
     lanelet::ConstLanelet EnableExitTurnSignalLanelet =
       findEnableExitTurnSignalLanelet(front_lanelet, route_handler, found_enable_exit_turn_signal);
-    // If no enable_exit_turn_signal lanelet is found, use the front pose of exit lanelet as the desired start point.
+    // If no enable_exit_turn_signal lanelet is found, use the front pose of exit lanelet as the
+    // desired start point.
     const auto required_start_point = calculateLaneFrontPose(centerline);
     Pose desired_start_point;
     if (found_enable_exit_turn_signal) {
@@ -416,10 +418,11 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     } else {
       desired_start_point = required_start_point;
     }
-    const auto dist_to_desired_start_point = calc_distance(
-                                      path, current_pose, current_seg_idx, desired_start_point,
-                                      nearest_dist_threshold, nearest_yaw_threshold) -
-                                    base_link2front_;
+    const auto dist_to_desired_start_point =
+      calc_distance(
+        path, current_pose, current_seg_idx, desired_start_point, nearest_dist_threshold,
+        nearest_yaw_threshold) -
+      base_link2front_;
     if (dist_to_desired_start_point >= 0.0) continue;  // Skip if the front point is too far
     // update map if necessary
     auto [iter, inserted] =
