@@ -116,15 +116,22 @@ BehaviorPathPlannerNode::BehaviorPathPlannerNode(const rclcpp::NodeOptions & nod
     const double turn_signal_intersection_angle_threshold_deg =
       planner_data_->parameters.turn_signal_intersection_angle_threshold_deg;
     const double turn_signal_search_time = planner_data_->parameters.turn_signal_search_time;
-    const std::string roundabout_on_entry =
+    const std::string turn_signal_roundabout_on_entry =
       planner_data_->parameters.turn_signal_roundabout_on_entry;
-    const std::string roundabout_on_exit = planner_data_->parameters.turn_signal_roundabout_on_exit;
-    const bool roundabout_entry_indicator_persistence =
+    const std::string turn_signal_roundabout_on_exit =
+      planner_data_->parameters.turn_signal_roundabout_on_exit;
+    const bool turn_signal_roundabout_entry_indicator_persistence =
       planner_data_->parameters.turn_signal_roundabout_entry_indicator_persistence;
+    const double turn_signal_roundabout_search_distance =
+      planner_data_->parameters.turn_signal_roundabout_search_distance;
+    const double turn_signal_roundabout_angle_threshold_deg =
+      planner_data_->parameters.turn_signal_roundabout_angle_threshold_deg;
     planner_data_->turn_signal_decider.setParameters(
       planner_data_->parameters.base_link2front, turn_signal_intersection_search_distance,
-      turn_signal_search_time, turn_signal_intersection_angle_threshold_deg, roundabout_on_entry,
-      roundabout_on_exit, roundabout_entry_indicator_persistence);
+      turn_signal_search_time, turn_signal_intersection_angle_threshold_deg,
+      turn_signal_roundabout_on_entry, turn_signal_roundabout_on_exit,
+      turn_signal_roundabout_entry_indicator_persistence, turn_signal_roundabout_search_distance,
+      turn_signal_roundabout_angle_threshold_deg);
   }
 
   // Start timer

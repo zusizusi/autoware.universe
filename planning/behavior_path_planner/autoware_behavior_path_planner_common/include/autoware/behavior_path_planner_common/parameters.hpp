@@ -57,6 +57,8 @@ struct BehaviorPathPlannerParameters
   std::string turn_signal_roundabout_on_entry;
   std::string turn_signal_roundabout_on_exit;
   bool turn_signal_roundabout_entry_indicator_persistence;
+  double turn_signal_roundabout_search_distance;
+  double turn_signal_roundabout_angle_threshold_deg;
 
   bool enable_akima_spline_first;
   bool enable_cog_on_centerline;

@@ -167,7 +167,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getIntersectionTurnSignalInfo(
   };
   // base search distance
   const double base_search_distance =
-    intersection_search_time_ * current_vel + intersection_search_distance_;
+    turn_signal_search_time_ * current_vel + intersection_search_distance_;
 
   // unique lane ids
   std::vector<lanelet::Id> unique_lane_ids;
@@ -275,7 +275,8 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getIntersectionTurnSignalInfo(
       TurnSignalInfo turn_signal_info{};
       turn_signal_info.desired_start_point = desired_start_point_map_.at(lane_id);
       turn_signal_info.required_start_point = lane_front_pose;
-      turn_signal_info.required_end_point = get_required_end_point(combined_lane.centerline3d());
+      turn_signal_info.required_end_point = get_required_end_point(combined_lane.centerline3d(), 
+                                                                 intersection_angle_threshold_deg_);
       turn_signal_info.desired_end_point = lane_back_pose;
       turn_signal_info.turn_signal.command = g_signal_map.at(lane_attribute);
       signal_queue.push(turn_signal_info);
@@ -325,7 +326,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
 
   // base search distance
   const double base_search_distance =
-    intersection_search_time_ * current_vel + intersection_search_distance_;
+    turn_signal_search_time_ * current_vel + roundabout_search_distance_;
   std::queue<TurnSignalInfo> signal_queue;
 
   // Process entry lanes
@@ -348,7 +349,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     TurnSignalInfo turn_signal_info;
     turn_signal_info.desired_start_point = iter->second;
     turn_signal_info.required_start_point = front_pose;
-    turn_signal_info.required_end_point = get_required_end_point(centerline);
+    turn_signal_info.required_end_point = get_required_end_point(centerline, roundabout_angle_threshold_deg_);
     turn_signal_info.desired_end_point = back_pose;
     turn_signal_info.turn_signal.command = roundabout_on_entry_;
 
@@ -431,7 +432,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     TurnSignalInfo turn_signal_info;
     turn_signal_info.desired_start_point = iter->second;
     turn_signal_info.required_start_point = required_start_point;
-    turn_signal_info.required_end_point = get_required_end_point(centerline);
+    turn_signal_info.required_end_point = get_required_end_point(centerline, roundabout_angle_threshold_deg_);
     turn_signal_info.desired_end_point = back_pose;
     turn_signal_info.turn_signal.command = roundabout_on_exit_;
     signal_queue.push(turn_signal_info);
@@ -786,7 +787,7 @@ bool TurnSignalDecider::use_prior_turn_signal(
 }
 
 geometry_msgs::msg::Pose TurnSignalDecider::get_required_end_point(
-  const lanelet::ConstLineString3d & centerline)
+  const lanelet::ConstLineString3d & centerline, const double angle_threshold_deg)
 {
   std::vector<geometry_msgs::msg::Pose> converted_centerline(centerline.size());
   for (size_t i = 0; i < centerline.size(); ++i) {
@@ -817,7 +818,7 @@ geometry_msgs::msg::Pose TurnSignalDecider::get_required_end_point(
   for (size_t i = 0; i < resampled_centerline.size(); ++i) {
     const double yaw = tf2::getYaw(resampled_centerline.at(i).orientation);
     const double yaw_diff = autoware_utils::normalize_radian(yaw - terminal_yaw);
-    if (std::fabs(yaw_diff) < autoware_utils::deg2rad(intersection_angle_threshold_deg_)) {
+    if (std::fabs(yaw_diff) < autoware_utils::deg2rad(angle_threshold_deg)) {
       return resampled_centerline.at(i);
     }
   }
