@@ -589,19 +589,19 @@ void BehaviorPathPlannerNode::publish_turn_signal_debug_data(const TurnSignalDeb
     const auto & turn_signal_info = debug_data.roundabout_turn_signal_info;
 
     auto desired_start_marker = autoware_utils::create_default_marker(
-      "map", current_time, "roundabout_turn_signal_desired_start", 0L, Marker::CUBE, scale,
+      "map", current_time, "roundabout_turn_signal_desired_start", 0L, Marker::SPHERE, scale,
       desired_section_color);
     auto desired_end_marker = autoware_utils::create_default_marker(
-      "map", current_time, "roundabout_turn_signal_desired_end", 0L, Marker::CUBE, scale,
+      "map", current_time, "roundabout_turn_signal_desired_end", 0L, Marker::SPHERE, scale,
       desired_section_color);
     desired_start_marker.pose = turn_signal_info.desired_start_point;
     desired_end_marker.pose = turn_signal_info.desired_end_point;
 
     auto required_start_marker = autoware_utils::create_default_marker(
-      "map", current_time, "roundabout_turn_signal_required_start", 0L, Marker::CUBE, scale,
+      "map", current_time, "roundabout_turn_signal_required_start", 0L, Marker::SPHERE, scale,
       required_section_color);
     auto required_end_marker = autoware_utils::create_default_marker(
-      "map", current_time, "roundabout_turn_signal_required_end", 0L, Marker::CUBE, scale,
+      "map", current_time, "roundabout_turn_signal_required_end", 0L, Marker::SPHERE, scale,
       required_section_color);
     required_start_marker.pose = turn_signal_info.required_start_point;
     required_end_marker.pose = turn_signal_info.required_end_point;
