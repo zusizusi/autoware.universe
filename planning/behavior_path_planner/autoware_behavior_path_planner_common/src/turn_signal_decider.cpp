@@ -275,8 +275,8 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getIntersectionTurnSignalInfo(
       TurnSignalInfo turn_signal_info{};
       turn_signal_info.desired_start_point = desired_start_point_map_.at(lane_id);
       turn_signal_info.required_start_point = lane_front_pose;
-      turn_signal_info.required_end_point = get_required_end_point(combined_lane.centerline3d(), 
-                                                                 intersection_angle_threshold_deg_);
+      turn_signal_info.required_end_point =
+        get_required_end_point(combined_lane.centerline3d(), intersection_angle_threshold_deg_);
       turn_signal_info.desired_end_point = lane_back_pose;
       turn_signal_info.turn_signal.command = g_signal_map.at(lane_attribute);
       signal_queue.push(turn_signal_info);
@@ -338,7 +338,8 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     TurnSignalInfo turn_signal_info;
     turn_signal_info.desired_start_point = iter->second;
     turn_signal_info.required_start_point = front_pose;
-    turn_signal_info.required_end_point = get_required_end_point(centerline, roundabout_angle_threshold_deg_);
+    turn_signal_info.required_end_point =
+      get_required_end_point(centerline, roundabout_angle_threshold_deg_);
     turn_signal_info.desired_end_point = back_pose;
     turn_signal_info.turn_signal.command = roundabout_on_entry_;
 
@@ -421,7 +422,8 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     TurnSignalInfo turn_signal_info;
     turn_signal_info.desired_start_point = iter->second;
     turn_signal_info.required_start_point = required_start_point;
-    turn_signal_info.required_end_point = get_required_end_point(centerline, roundabout_angle_threshold_deg_);
+    turn_signal_info.required_end_point =
+      get_required_end_point(centerline, roundabout_angle_threshold_deg_);
     turn_signal_info.desired_end_point = back_pose;
     turn_signal_info.turn_signal.command = roundabout_on_exit_;
     signal_queue.push(turn_signal_info);
