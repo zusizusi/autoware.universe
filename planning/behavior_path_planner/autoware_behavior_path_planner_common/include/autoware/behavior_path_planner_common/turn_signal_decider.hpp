@@ -181,7 +181,7 @@ private:
 
     inline bool isValid() const
     {
-      return (desired_start_distance <= 0.0 && desired_end_distance > 0.0);
+      return (desired_start_distance <= 0.0 && desired_end_distance >= 0.0);
     }
   };
   std::optional<TurnSignalInfo> getIntersectionTurnSignalInfo(
