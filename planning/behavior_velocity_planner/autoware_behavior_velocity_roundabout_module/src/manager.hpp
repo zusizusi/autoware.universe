@@ -1,4 +1,4 @@
-// Copyright 2023 TIER IV, Inc.
+// Copyright 2020 Tier IV, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,83 +15,72 @@
 #ifndef MANAGER_HPP_
 #define MANAGER_HPP_
 
-#include "scene.hpp"
+#include "scene_roundabout.hpp"
 
 #include <autoware/behavior_velocity_planner_common/plugin_interface.hpp>
 #include <autoware/behavior_velocity_planner_common/plugin_wrapper.hpp>
 #include <autoware/behavior_velocity_planner_common/scene_module_interface.hpp>
+#include <autoware/behavior_velocity_rtc_interface/scene_module_interface_with_rtc.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 #include <autoware_internal_planning_msgs/msg/path_with_lane_id.hpp>
+#include <std_msgs/msg/string.hpp>
+#include <lanelet2_routing/RoutingGraph.h>
 
 #include <functional>
 #include <memory>
+#include <string>
+#include <unordered_map>
 
 namespace autoware::behavior_velocity_planner
 {
-/**
- * @brief Constructor for the RoundaboutModuleManager class.
- *
- * Initializes a RoundaboutModuleManager instance with the provided ROS node, setting up essential
- * parameters.
- *
- * @param node A reference to the ROS node.
- */
-class RoundaboutModuleManager
-: public autoware::behavior_velocity_planner::SceneModuleManagerInterface<>
+class RoundaboutModuleManager : public SceneModuleManagerInterfaceWithRTC
 {
 public:
   explicit RoundaboutModuleManager(rclcpp::Node & node);
 
-  /**
-   * @brief Get the name of the module.
-   *
-   * This method returns a constant character string representing the name of the module, which in
-   * this case is "roundabout."
-   *
-   * @return A pointer to a constant character string containing the module name.
-   */
   const char * getModuleName() override { return "roundabout"; }
 
   RequiredSubscriptionInfo getRequiredSubscriptions() const override
   {
-    return RequiredSubscriptionInfo{};
+    RequiredSubscriptionInfo required_subscription_info;
+    required_subscription_info.traffic_signals = true;
+    required_subscription_info.predicted_objects = true;
+    required_subscription_info.occupancy_grid_map = true;
+    return required_subscription_info;
   }
 
 private:
-  double dummy_parameter_{0.0};
+  RoundaboutModule::PlannerParam roundabout_param_;
 
-  /**
-   * @brief Launch new modules based on the provided path.
-   *
-   * This method is responsible for launching new modules based on the information provided in the
-   * given path.
-   *
-   * @param path The path with lane ID information to determine module launch.
-   */
   void launchNewModules(const autoware_internal_planning_msgs::msg::PathWithLaneId & path) override;
 
-  /**
-   * @brief Get a function to check module expiration.
-   *
-   * This method returns a function that can be used to determine whether a specific module has
-   * expired based on the given path information.
-   *
-   * @param path The path with lane ID information for module expiration check.
-   * @return A function for checking module expiration.
-   */
-  std::function<bool(const std::shared_ptr<SceneModuleInterface> &)> getModuleExpiredFunction(
+  std::function<bool(const std::shared_ptr<SceneModuleInterfaceWithRTC> &)>
+  getModuleExpiredFunction(
     const autoware_internal_planning_msgs::msg::PathWithLaneId & path) override;
+
+  // std::set<lanelet::Id> getAssociativeRoundaboutEntryLanelets(
+  //   const lanelet::ConstLanelet & lane, const lanelet::LaneletMapPtr lanelet_map,
+  //   const lanelet::routing::RoutingGraphPtr routing_graph);
+  std::set<lanelet::Id> getAssociativeRoundaboutEntryLanelets(
+  const lanelet::ConstLanelet & lane, const lanelet::LaneletMapPtr lanelet_map,
+  const lanelet::routing::RoutingGraphPtr routing_graph);
+
+    bool hasSameParentLaneletAndTurnDirectionWithRegistered(
+      const lanelet::ConstLanelet & lane) const;
+
+  /* called from SceneModuleInterfaceWithRTC::plan */
+  void sendRTC(const Time & stamp) override;
+  void setActivation() override;
+  void modifyPathVelocity(autoware_internal_planning_msgs::msg::PathWithLaneId * path) override;
+  /* called from SceneModuleInterface::updateSceneModuleInstances */
+  void deleteExpiredModules(
+    const autoware_internal_planning_msgs::msg::PathWithLaneId & path) override;
+
+  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr decision_state_pub_;
 };
 
-/**
- * @brief Plugin class for RoundaboutModuleManager.
- *
- * The RoundaboutModulePlugin class is used to integrate the RoundaboutModuleManager into the Behavior
- * Velocity Planner.
- */
-class RoundaboutModulePlugin
-: public autoware::behavior_velocity_planner::PluginWrapper<RoundaboutModuleManager>
+class RoundaboutModulePlugin : public PluginWrapper<RoundaboutModuleManager>
 {
 };
 
