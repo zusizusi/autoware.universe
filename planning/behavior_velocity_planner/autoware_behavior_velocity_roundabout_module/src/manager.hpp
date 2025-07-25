@@ -59,9 +59,6 @@ private:
   getModuleExpiredFunction(
     const autoware_internal_planning_msgs::msg::PathWithLaneId & path) override;
 
-  // std::set<lanelet::Id> getAssociativeRoundaboutEntryLanelets(
-  //   const lanelet::ConstLanelet & lane, const lanelet::LaneletMapPtr lanelet_map,
-  //   const lanelet::routing::RoutingGraphPtr routing_graph);
   std::set<lanelet::Id> getAssociativeRoundaboutEntryLanelets(
   const lanelet::ConstLanelet & lane, const lanelet::LaneletMapPtr lanelet_map,
   const lanelet::routing::RoutingGraphPtr routing_graph);

@@ -148,21 +148,6 @@ std::optional<std::pair<size_t, const lanelet::CompoundPolygon3d &>> getFirstPoi
   return std::nullopt;
 }
 
-// double getHighestCurvature(const lanelet::ConstLineString3d & centerline)
-// {
-//   std::vector<lanelet::ConstPoint3d> points;
-//   for (auto point = centerline.begin(); point != centerline.end(); point++) {
-//     points.push_back(*point);
-//   }
-
-//   autoware::interpolation::SplineInterpolationPoints2d interpolation(points);
-//   const std::vector<double> curvatures = interpolation.getSplineInterpolatedCurvatures();
-//   std::vector<double> curvatures_positive;
-//   for (const auto & curvature : curvatures) {
-//     curvatures_positive.push_back(std::fabs(curvature));
-//   }
-//   return *std::max_element(curvatures_positive.begin(), curvatures_positive.end());
-// }
 
 }  // namespace
 
@@ -498,50 +483,12 @@ static std::vector<std::deque<lanelet::ConstLanelet>> getPrecedingLaneletsUptoRo
   return preceding_lanelet_sequences;
 }
 
-// static std::vector<lanelet::ConstLanelets> getPrecedingLaneletsUptoRoundabout(
-//   const lanelet::routing::RoutingGraphPtr & graph, const lanelet::ConstLanelet & lanelet,
-//   const double length, const lanelet::ConstLanelets & exclude_lanelets)
-// {
-//   std::vector<lanelet::ConstLanelets> lanelet_sequences_vec;
-//   const auto prev_lanelets = graph->previous(lanelet);
-//   for (const auto & prev_lanelet : prev_lanelets) {
-//     if (lanelet::utils::contains(exclude_lanelets, prev_lanelet)) {
-//       // if prev_lanelet is included in exclude_lanelets,
-//       // remove prev_lanelet from preceding_lanelet_sequences
-//       continue;
-//     }
-//     if (const std::string turn_direction = prev_lanelet.attributeOr("turn_direction", "else");
-//         turn_direction == "left" || turn_direction == "right") {
-//       continue;
-//     }
-//     // convert deque into vector
-//     const auto lanelet_sequences_deq =
-//       getPrecedingLaneletsUptoRoundaboutRecursive(graph, prev_lanelet, length, exclude_lanelets);
-//     for (const auto & lanelet_sequence : lanelet_sequences_deq) {
-//       lanelet_sequences_vec.emplace_back(lanelet_sequence.begin(), lanelet_sequence.end());
-//     }
-//   }
-//   return lanelet_sequences_vec;
-// }
 
 RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
   lanelet::LaneletMapConstPtr lanelet_map_ptr, lanelet::routing::RoutingGraphPtr routing_graph_ptr,
   const lanelet::ConstLanelet assigned_lanelet) const
 {
   const double detection_area_length = planner_param_.common.attention_area_length;
-  // const double occlusion_detection_area_length =
-  //   planner_param_.occlusion.occlusion_attention_area_length;
-  // const bool consider_wrong_direction_vehicle =
-  //   planner_param_.collision_detection.consider_wrong_direction_vehicle;
-
-  // retrieve a stopline associated with a traffic light
-  // bool has_traffic_light = false;
-  // if (const auto tl_reg_elems = assigned_lanelet.regulatoryElementsAs<lanelet::TrafficLight>();
-  //     tl_reg_elems.size() != 0) {
-  //   const auto tl_reg_elem = tl_reg_elems.front();
-  //   const auto stopline_opt = tl_reg_elem->stopLine();
-  //   if (!!stopline_opt) has_traffic_light = true;
-  // }
 
   // for low priority lane
   // if ego_lane has right of way (i.e. is high priority),
@@ -720,69 +667,5 @@ std::optional<PathLanelets> RoundaboutModule::generatePathLanelets(
   return path_lanelets;
 }
 
-// std::vector<lanelet::ConstLineString3d> RoundaboutModule::generateDetectionLaneDivisions(
-//   const lanelet::ConstLanelets & occlusion_detection_lanelets,
-//   const lanelet::ConstLanelets & conflicting_detection_lanelets,
-//   const lanelet::routing::RoutingGraphPtr routing_graph_ptr, const double resolution) const
-// {
-//   const double curvature_threshold =
-//     planner_param_.occlusion.attention_lane_crop_curvature_threshold;
-//   const double curvature_calculation_ds =
-//     planner_param_.occlusion.attention_lane_curvature_calculation_ds;
-
-//   using lanelet::utils::getCenterlineWithOffset;
-
-//   // (0) remove curved
-//   lanelet::ConstLanelets detection_lanelets;
-//   for (const auto & detection_lanelet : occlusion_detection_lanelets) {
-//     // TODO(Mamoru Sobue): instead of ignoring, only trim straight part of lanelet
-//     const auto fine_centerline =
-//       lanelet::utils::generateFineCenterline(detection_lanelet, curvature_calculation_ds);
-//     const double highest_curvature = ::getHighestCurvature(fine_centerline);
-//     if (highest_curvature > curvature_threshold) {
-//       continue;
-//     }
-//     detection_lanelets.push_back(detection_lanelet);
-//   }
-
-//   std::vector<lanelet::ConstLineString3d> detection_divisions;
-//   if (detection_lanelets.empty()) {
-//     // NOTE(soblin): due to the above filtering detection_lanelets may be empty or do not contain
-//     // conflicting_detection_lanelets
-//     // OK to return empty detection_divisions
-//     return detection_divisions;
-//   }
-
-//   // (1) tsort detection_lanelets
-//   const auto [merged_detection_lanelets, originals] = util::mergeLaneletsByTopologicalSort(
-//     detection_lanelets, conflicting_detection_lanelets, routing_graph_ptr);
-
-//   // (2) merge each branch to one lanelet
-//   // NOTE: somehow bg::area() for merged lanelet does not work, so calculate it here
-//   std::vector<std::pair<lanelet::ConstLanelet, double>> merged_lanelet_with_area;
-//   for (unsigned i = 0; i < merged_detection_lanelets.size(); ++i) {
-//     const auto & merged_detection_lanelet = merged_detection_lanelets.at(i);
-//     const auto & original = originals.at(i);
-//     double area = 0;
-//     for (const auto & partition : original) {
-//       area += bg::area(partition.polygon2d().basicPolygon());
-//     }
-//     merged_lanelet_with_area.emplace_back(merged_detection_lanelet, area);
-//   }
-
-//   // (3) discretize each merged lanelet
-//   for (const auto & [merged_lanelet, area] : merged_lanelet_with_area) {
-//     const double length = bg::length(merged_lanelet.centerline());
-//     const double width = area / length;
-//     for (int i = 0; i < static_cast<int>(width / resolution); ++i) {
-//       const double offset = resolution * i - width / 2;
-//       detection_divisions.push_back(
-//         getCenterlineWithOffset(merged_lanelet, offset, resolution).invert());
-//     }
-//     detection_divisions.push_back(
-//       getCenterlineWithOffset(merged_lanelet, width / 2, resolution).invert());
-//   }
-//   return detection_divisions;
-// }
 
 }  // namespace autoware::behavior_velocity_planner

@@ -48,12 +48,8 @@ RoundaboutModuleManager::RoundaboutModuleManager(rclcpp::Node & node)
       get_or_declare_parameter<double>(node, ns + ".common.attention_area_margin");
     rp.common.attention_area_angle_threshold =
       get_or_declare_parameter<double>(node, ns + ".common.attention_area_angle_threshold");
-    rp.common.use_roundabout_area =
-      get_or_declare_parameter<bool>(node, ns + ".common.use_roundabout_area");
     rp.common.default_stopline_margin =
       get_or_declare_parameter<double>(node, ns + ".common.default_stopline_margin");
-    rp.common.stopline_overshoot_margin =
-      get_or_declare_parameter<double>(node, ns + ".common.stopline_overshoot_margin");
     rp.common.path_interpolation_ds =
       get_or_declare_parameter<double>(node, ns + ".common.path_interpolation_ds");
     rp.common.max_accel = get_or_declare_parameter<double>(node, ns + ".common.max_accel");
@@ -72,6 +68,10 @@ RoundaboutModuleManager::RoundaboutModuleManager(rclcpp::Node & node)
       node, ns + ".collision_detection.collision_detection_hold_time");
     rp.collision_detection.min_predicted_path_confidence = get_or_declare_parameter<double>(
       node, ns + ".collision_detection.min_predicted_path_confidence");
+    rp.collision_detection.collision_start_margin_time = get_or_declare_parameter<double>(
+      node, ns + ".collision_detection.collision_start_margin_time");
+    rp.collision_detection.collision_end_margin_time = get_or_declare_parameter<double>(
+      node, ns + ".collision_detection.collision_end_margin_time");
 
     // target_type
     {
@@ -103,36 +103,6 @@ RoundaboutModuleManager::RoundaboutModuleManager(rclcpp::Node & node)
       rp.collision_detection.velocity_profile.minimum_default_velocity =
         get_or_declare_parameter<double>(
           node, ns + ".collision_detection.velocity_profile.minimum_default_velocity");
-    }
-
-    // fully_prioritized
-    {
-      rp.collision_detection.fully_prioritized.collision_start_margin_time =
-        get_or_declare_parameter<double>(
-          node, ns + ".collision_detection.fully_prioritized.collision_start_margin_time");
-      rp.collision_detection.fully_prioritized.collision_end_margin_time =
-        get_or_declare_parameter<double>(
-          node, ns + ".collision_detection.fully_prioritized.collision_end_margin_time");
-    }
-
-    // partially_prioritized
-    {
-      rp.collision_detection.partially_prioritized.collision_start_margin_time =
-        get_or_declare_parameter<double>(
-          node, ns + ".collision_detection.partially_prioritized.collision_start_margin_time");
-      rp.collision_detection.partially_prioritized.collision_end_margin_time =
-        get_or_declare_parameter<double>(
-          node, ns + ".collision_detection.partially_prioritized.collision_end_margin_time");
-    }
-
-    // not_prioritized
-    {
-      rp.collision_detection.not_prioritized.collision_start_margin_time =
-        get_or_declare_parameter<double>(
-          node, ns + ".collision_detection.not_prioritized.collision_start_margin_time");
-      rp.collision_detection.not_prioritized.collision_end_margin_time =
-        get_or_declare_parameter<double>(
-          node, ns + ".collision_detection.not_prioritized.collision_end_margin_time");
     }
 
     rp.collision_detection.avoid_collision_by_acceleration.object_time_margin_to_collision_point =
@@ -214,7 +184,7 @@ RoundaboutModuleManager::getModuleExpiredFunction(
   };
 }
 
-// TODO(zusizusi): Refactor this function to use regulatory elements
+// TODO(iwasawa): Refactor this function to use regulatory elements
 std::set<lanelet::Id> RoundaboutModuleManager::getAssociativeRoundaboutEntryLanelets(
   const lanelet::ConstLanelet & lane, const lanelet::LaneletMapPtr lanelet_map,
   const lanelet::routing::RoutingGraphPtr routing_graph)
@@ -273,7 +243,6 @@ bool RoundaboutModuleManager::hasSameParentLaneletAndTurnDirectionWithRegistered
 void RoundaboutModuleManager::sendRTC(const Time & stamp)
 {
   double min_distance = std::numeric_limits<double>::infinity();
-  std::optional<TrafficSignalStamped> nearest_tl_observation{std::nullopt};
   std_msgs::msg::String decision_type;
 
   for (const auto & scene_module : scene_modules_) {
@@ -288,7 +257,6 @@ void RoundaboutModuleManager::sendRTC(const Time & stamp)
     const auto internal_debug_data = roundabout_module->getInternalDebugData();
     if (internal_debug_data.distance < min_distance) {
       min_distance = internal_debug_data.distance;
-      nearest_tl_observation = internal_debug_data.tl_observation;
     }
     decision_type.data += (internal_debug_data.decision_type + "\n");
   }

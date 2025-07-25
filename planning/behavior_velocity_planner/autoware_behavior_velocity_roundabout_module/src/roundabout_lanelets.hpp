@@ -85,14 +85,6 @@ public:
   {
     return first_attention_area_;
   }
-  // const std::optional<lanelet::ConstLanelet> & second_attention_lane() const
-  // {
-  //   return second_attention_lane_;
-  // }
-  // const std::optional<lanelet::CompoundPolygon3d> & second_attention_area() const
-  // {
-  //   return second_attention_area_;
-  // }
 
   /**
    * the set of attention lanelets which is topologically merged
@@ -142,18 +134,6 @@ public:
   std::optional<lanelet::ConstLanelet> first_attention_lane_{std::nullopt};
   std::optional<lanelet::CompoundPolygon3d> first_attention_area_{std::nullopt};
 
-  /**
-   * the second attention lanelet which ego path points intersect next to the
-   * first_attention_lanelet
-   */
-  // bool second_attention_lane_empty_{false};
-  // std::optional<lanelet::ConstLanelet> second_attention_lane_{std::nullopt};
-  // std::optional<lanelet::CompoundPolygon3d> second_attention_area_{std::nullopt};
-
-  /**
-   * flag if the roundabout is prioritized by the traffic light
-   */
-  // bool is_prioritized_{false};
 };
 
 /**

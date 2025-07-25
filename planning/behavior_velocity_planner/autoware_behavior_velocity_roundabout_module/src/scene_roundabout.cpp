@@ -446,113 +446,6 @@ void RoundaboutModule::reactRTCApproval(
   return;
 }
 
-bool RoundaboutModule::isGreenSolidOn() const
-{
-  using TrafficSignalElement = autoware_perception_msgs::msg::TrafficLightElement;
-
-  if (!last_tl_valid_observation_) {
-    return false;
-  }
-  const auto & tl_info = last_tl_valid_observation_.value();
-  for (auto && tl_light : tl_info.signal.elements) {
-    if (
-      tl_light.color == TrafficSignalElement::GREEN &&
-      tl_light.shape == TrafficSignalElement::CIRCLE) {
-      return true;
-    }
-  }
-  return false;
-}
-
-// RoundaboutModule::TrafficPrioritizedLevel RoundaboutModule::getTrafficPrioritizedLevel() const
-// {
-//   using TrafficSignalElement = autoware_perception_msgs::msg::TrafficLightElement;
-
-//   auto corresponding_arrow = [&](const TrafficSignalElement & element) {
-//     if (turn_direction_ == "straight" && element.shape == TrafficSignalElement::UP_ARROW) {
-//       return true;
-//     }
-//     if (turn_direction_ == "left" && element.shape == TrafficSignalElement::LEFT_ARROW) {
-//       return true;
-//     }
-//     if (turn_direction_ == "right" && element.shape == TrafficSignalElement::RIGHT_ARROW) {
-//       return true;
-//     }
-//     return false;
-//   };
-
-//   // ==========================================================================================
-//   // if no traffic light information has been available, it is UNKNOWN state which is treated as
-//   // NOT_PRIORITIZED
-//   //
-//   // if there has been any information available in the past more than once, the last valid
-//   // information is kept and used for planning
-//   // ==========================================================================================
-//   auto level = TrafficPrioritizedLevel::NOT_PRIORITIZED;
-//   if (last_tl_valid_observation_) {
-//     auto color = TrafficSignalElement::GREEN;
-//     const auto & tl_info = last_tl_valid_observation_.value();
-//     bool has_amber_signal{false};
-//     for (auto && tl_light : tl_info.signal.elements) {
-//       if (
-//         tl_light.color == TrafficSignalElement::AMBER &&
-//         tl_light.shape == TrafficSignalElement::CIRCLE) {
-//         has_amber_signal = true;
-//       }
-//       if (
-//         (tl_light.color == TrafficSignalElement::RED &&
-//          tl_light.shape == TrafficSignalElement::CIRCLE) ||
-//         (tl_light.color == TrafficSignalElement::GREEN && corresponding_arrow(tl_light))) {
-//         // NOTE: Return here since the red signal has the highest priority.
-//         level = TrafficPrioritizedLevel::FULLY_PRIORITIZED;
-//         color = TrafficSignalElement::RED;
-//         break;
-//       }
-//     }
-//     if (has_amber_signal) {
-//       level = TrafficPrioritizedLevel::PARTIALLY_PRIORITIZED;
-//       color = TrafficSignalElement::AMBER;
-//     }
-//     if (tl_id_and_point_) {
-//       const auto [tl_id, point] = tl_id_and_point_.value();
-//       debug_data_.traffic_light_observation =
-//         std::make_tuple(planner_data_->current_odometry->pose, point, tl_id, color);
-//     }
-//   }
-//   return level;
-// }
-
-// void RoundaboutModule::updateTrafficSignalObservation()
-// {
-//   const auto lanelet_map_ptr = planner_data_->route_handler_->getLaneletMapPtr();
-//   const auto & lane = lanelet_map_ptr->laneletLayer.get(lane_id_);
-
-//   if (!tl_id_and_point_) {
-//     for (auto && tl_reg_elem :
-//          lane.regulatoryElementsAs<lanelet::autoware::AutowareTrafficLight>()) {
-//       for (const auto & ls : tl_reg_elem->lightBulbs()) {
-//         if (ls.hasAttribute("traffic_light_id")) {
-//           tl_id_and_point_ = std::make_pair(tl_reg_elem->id(), ls.front());
-//           break;
-//         }
-//       }
-//     }
-//   }
-//   if (!tl_id_and_point_) {
-//     // this lane has no traffic light
-//     return;
-//   }
-//   const auto [tl_id, point] = tl_id_and_point_.value();
-//   const auto tl_info_opt =
-//     planner_data_->getTrafficSignal(tl_id, true /* traffic light module keeps last
-//     observation*/);
-//   if (!tl_info_opt) {
-//     // the info of this traffic light is not available
-//     return;
-//   }
-//   last_tl_valid_observation_ = tl_info_opt.value();
-//   internal_debug_data_.tl_observation = tl_info_opt.value();
-// }
 
 RoundaboutModule::PassJudgeStatus RoundaboutModule::isOverPassJudgeLinesStatus(
   const autoware_internal_planning_msgs::msg::PathWithLaneId & path,
@@ -572,14 +465,6 @@ RoundaboutModule::PassJudgeStatus RoundaboutModule::isOverPassJudgeLinesStatus(
     if (std::holds_alternative<Safe>(prev_decision_result_)) {
       return true;
     }
-    // if (std::holds_alternative<FullyPrioritized>(prev_decision_result_)) {
-    //   const auto & prev_decision = std::get<FullyPrioritized>(prev_decision_result_);
-    //   return !prev_decision.collision_detected;
-    // }
-    // if (std::holds_alternative<OccludedAbsenceTrafficLight>(prev_decision_result_)) {
-    //   const auto & state = std::get<OccludedAbsenceTrafficLight>(prev_decision_result_);
-    //   return !state.collision_detected;
-    // }
     return false;
   }();
 
@@ -594,34 +479,12 @@ RoundaboutModule::PassJudgeStatus RoundaboutModule::isOverPassJudgeLinesStatus(
   debug_data_.first_pass_judge_wall_pose =
     planning_utils::getAheadPose(pass_judge_line_idx, baselink2front, path);
   debug_data_.passed_first_pass_judge = safely_passed_1st_judge_line_time_.has_value();
-  // const auto second_pass_judge_line_idx_opt = roundabout_stoplines.second_pass_judge_line;
-  // const std::optional<bool> is_over_2nd_pass_judge_line =
-  //   second_pass_judge_line_idx_opt
-  //     ? std::make_optional(
-  //         util::isOverTargetIndex(
-  //           path, closest_idx, current_pose, second_pass_judge_line_idx_opt.value()))
-  //     : std::nullopt;
-  // bool safely_passed_2nd_judge_line_first_time = false;
-  // if (
-  //   is_over_2nd_pass_judge_line && is_over_2nd_pass_judge_line.value() && was_safe &&
-  //   !safely_passed_2nd_judge_line_time_) {
-  //   safely_passed_2nd_judge_line_time_ = std::make_pair(clock_->now(), current_pose);
-  //   safely_passed_2nd_judge_line_first_time = true;
-  // }
-  // if (second_pass_judge_line_idx_opt) {
-  //   debug_data_.second_pass_judge_wall_pose =
-  //     planning_utils::getAheadPose(second_pass_judge_line_idx_opt.value(), baselink2front, path);
-  // }
-  // debug_data_.passed_second_pass_judge = safely_passed_2nd_judge_line_time_.has_value();
 
   const bool is_over_default_stopline =
     util::isOverTargetIndex(path, closest_idx, current_pose, default_stopline_idx);
 
   const bool over_default_stopline_for_pass_judge =
     is_over_default_stopline || planner_param_.common.enable_pass_judge_before_default_stopline;
-  // const bool over_pass_judge_line_overall =
-  //   is_over_2nd_pass_judge_line ? is_over_2nd_pass_judge_line.value() :
-  //   is_over_1st_pass_judge_line;
   if (
     (over_default_stopline_for_pass_judge && is_over_1st_pass_judge_line && was_safe) ||
     is_permanent_go_) {

@@ -164,25 +164,11 @@ void RoundaboutModule::updateObjectInfoManagerCollision(
   debug_data_.ego_lane = ego_lane.polygon3d();
   const auto ego_poly = ego_lane.polygon2d().basicPolygon();
 
-  // ==========================================================================================
-  // dynamically change TTC margin according to traffic light color to gradually relax from green to
-  // red
-  // ==========================================================================================
-  const auto [collision_start_margin_time, collision_end_margin_time] = [&]() {
-    // if (traffic_prioritized_level == TrafficPrioritizedLevel::FULLY_PRIORITIZED) {
-    //   return std::make_pair(
-    //     planner_param_.collision_detection.fully_prioritized.collision_start_margin_time,
-    //     planner_param_.collision_detection.fully_prioritized.collision_end_margin_time);
-    // }
-    // if (traffic_prioritized_level == TrafficPrioritizedLevel::PARTIALLY_PRIORITIZED) {
-    //   return std::make_pair(
-    //     planner_param_.collision_detection.partially_prioritized.collision_start_margin_time,
-    //     planner_param_.collision_detection.partially_prioritized.collision_end_margin_time);
-    // }
-    return std::make_pair(
-      planner_param_.collision_detection.not_prioritized.collision_start_margin_time,
-      planner_param_.collision_detection.not_prioritized.collision_end_margin_time);
-  }();
+
+  const auto collision_start_margin_time =
+    planner_param_.collision_detection.collision_start_margin_time;
+  const auto collision_end_margin_time =
+    planner_param_.collision_detection.collision_end_margin_time;
 
   constexpr size_t object_debug_size = 57;
   {
@@ -205,29 +191,6 @@ void RoundaboutModule::updateObjectInfoManagerCollision(
 
   for (auto & object_info : object_info_manager_.attentionObjects()) {
     const auto & predicted_object = object_info->predicted_object();
-    // bool safe_under_traffic_control = false;
-    // const auto label = predicted_object.classification.at(0).label;
-    // const auto expected_deceleration =
-    //   (label == autoware_perception_msgs::msg::ObjectClassification::MOTORCYCLE ||
-    //    label == autoware_perception_msgs::msg::ObjectClassification::BICYCLE)
-    //     ? planner_param_.collision_detection.ignore_on_amber_traffic_light
-    //         .object_expected_deceleration.bike
-    //     : planner_param_.collision_detection.ignore_on_amber_traffic_light
-    //         .object_expected_deceleration.car;
-    // if (
-    //   traffic_prioritized_level == TrafficPrioritizedLevel::PARTIALLY_PRIORITIZED &&
-    //   object_info->can_stop_before_stopline(expected_deceleration)) {
-    //   safe_under_traffic_control = true;
-    // }
-    // if (
-    //   traffic_prioritized_level == TrafficPrioritizedLevel::FULLY_PRIORITIZED &&
-    //   object_info->can_stop_before_ego_lane(
-    //     expected_deceleration,
-    //     planner_param_.collision_detection.ignore_on_red_traffic_light.object_margin_to_path,
-    //     ego_lane)) {
-    //   safe_under_traffic_control = true;
-    // }
-
     // ==========================================================================================
     // check the PredictedPath in the ascending order of its confidence to save the safe/unsafe
     // CollisionKnowledge for most probable path
@@ -389,18 +352,6 @@ void RoundaboutModule::updateObjectInfoManagerCollision(
             .x  // observed_velocity
         });
     }
-    // if (passed_2nd_judge_line_first_time) {
-    //   object_info->setDecisionAt2ndPassJudgeLinePassage(
-    //     CollisionKnowledge{
-    //       clock_->now(),  // stamp
-    //       unsafe_interval
-    //         ? CollisionKnowledge::SafeType::UNSAFE
-    //         :  CollisionKnowledge::SafeType::SAFE,  // safe
-    //       unsafe_interval ? unsafe_interval : safe_interval,                      // interval
-    //       predicted_object.kinematics.initial_twist_with_covariance.twist.linear
-    //         .x  // observed_velocity
-    //     });
-    // }
 
     // debug
     if (object_debug_info) {
@@ -429,34 +380,6 @@ void RoundaboutModule::cutPredictPathWithinDuration(
   }
 }
 
-std::optional<CollisionStop> RoundaboutModule::isGreenPseudoCollisionStatus(
-  const size_t closest_idx, const size_t collision_stopline_idx,
-  [[maybe_unused]] const RoundaboutStopLines & roundabout_stoplines) const
-{
-  // ==========================================================================================
-  // if there are any vehicles on the attention area when ego entered the roundabout on green
-  // light, do pseudo collision detection because collision is likely to happen.
-  // ==========================================================================================
-  if (initial_green_light_observed_time_) {
-    const auto now = clock_->now();
-    const bool still_wait =
-      (rclcpp::Duration((now - initial_green_light_observed_time_.value())).seconds() <
-       planner_param_.collision_detection.yield_on_green_traffic_light.duration);
-    if (!still_wait) {
-      return std::nullopt;
-    }
-    const auto & attention_objects = object_info_manager_.attentionObjects();
-    const bool exist_close_vehicles = std::any_of(
-      attention_objects.begin(), attention_objects.end(), [&](const auto & object_info) {
-        return object_info->before_stopline_by(
-          planner_param_.collision_detection.yield_on_green_traffic_light.object_dist_to_stopline);
-      });
-    if (exist_close_vehicles) {
-      return CollisionStop{closest_idx, collision_stopline_idx};
-    }
-  }
-  return std::nullopt;
-}
 
 std::string RoundaboutModule::generateDetectionBlameDiagnosis(
   const std::vector<
@@ -578,30 +501,6 @@ std::string RoundaboutModule::generateDetectionBlameDiagnosis(
         object_info->observed_velocity()                                   // 8
       );
     }
-    // if (
-    //   blame_type == CollisionStatus::BLAME_AT_SECOND_PASS_JUDGE && object_info->unsafe_interval()
-    //   && object_info->decision_at_2nd_pass_judge_line_passage()) { const auto &
-    //   decision_at_2nd_pass_judge_line =
-    //     object_info->decision_at_2nd_pass_judge_line_passage().value();
-    //   const auto decision_at_2nd_pass_judge_line_time =
-    //     static_cast<double>(decision_at_2nd_pass_judge_line.stamp.nanoseconds()) / 1e+9;
-    //   const auto & unsafe_interval = object_info->unsafe_interval().value();
-    //   diag += fmt::format(
-    //     "object {0} was judged as {1} when ego passed the 2nd pass judge line at time {2} "
-    //     "previously with the estimated velocity {3}[m/s], but now at {4} collision is detected "
-    //     "after {5}~{6} seconds on the lanelet of type {7} with the estimated current velocity "
-    //     "{8}[m/s]\n",
-    //     object_info->uuid_str,                                             // 0
-    //     magic_enum::enum_name(decision_at_2nd_pass_judge_line.safe_type),  // 1
-    //     decision_at_2nd_pass_judge_line_time,                              // 2
-    //     decision_at_2nd_pass_judge_line.observed_velocity,                 // 3
-    //     now_double,                                                        // 4
-    //     unsafe_interval.interval_time.first,                               // 5
-    //     unsafe_interval.interval_time.second,                              // 6
-    //     magic_enum::enum_name(unsafe_interval.lane_position),              // 7
-    //     object_info->observed_velocity()                                   // 8
-    //   );
-    // }
   }
   return diag;
 }

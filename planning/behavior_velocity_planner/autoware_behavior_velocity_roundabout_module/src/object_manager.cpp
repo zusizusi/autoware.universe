@@ -276,13 +276,6 @@ std::optional<CollisionInterval> findPassageInterval(
         return CollisionInterval::LanePosition::FIRST;
       }
     }
-    // if (second_attention_lane_opt) {
-    //   if (lanelet::geometry::inside(
-    //         second_attention_lane_opt.value(),
-    //         lanelet::BasicPoint2d(first_itr->position.x, first_itr->position.y))) {
-    //     return CollisionInterval::LanePosition::SECOND;
-    //   }
-    // }
     return CollisionInterval::LanePosition::ELSE;
   }();
 

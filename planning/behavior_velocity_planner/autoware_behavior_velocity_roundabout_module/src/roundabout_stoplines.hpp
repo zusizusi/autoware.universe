@@ -48,11 +48,6 @@ struct RoundaboutStopLines
    */
   std::optional<size_t> first_attention_stopline{std::nullopt};
 
-  /**
-   * second_attention_stopline is null if ego footprint along the path does not intersect with
-   * second_attention_lane. if path[0] satisfies the condition, it is 0
-   */
-  // std::optional<size_t> second_attention_stopline{std::nullopt};
 
   /**
    * first_pass_judge_line is before first_attention_stopline by the braking distance. if its value
@@ -60,24 +55,6 @@ struct RoundaboutStopLines
    */
   size_t first_pass_judge_line{0};
 
-  /**
-   * second_pass_judge_line is before second_attention_stopline by the braking distance. if
-   * second_attention_lane is null, it is null
-   */
-  // std::optional<size_t> second_pass_judge_line{std::nullopt};
-
-  /**
-   * occlusion_wo_tl_pass_judge_line is null if ego footprint along the path does not intersect with
-   * the centerline of the first_attention_lane
-   */
-  // size_t occlusion_wo_tl_pass_judge_line{0};
-
-  /**
-   * maximum_footprint_overshoot_line is the place after first_attention_stopline where ego's
-   * footprint most gets close to the left/right boundary of assigned_lane when ego is turning
-   * right/left respectively
-   */
-  // std::optional<size_t> maximum_footprint_overshoot_line{std::nullopt};
 };
 }  // namespace autoware::behavior_velocity_planner
 

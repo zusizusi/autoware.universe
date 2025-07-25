@@ -56,9 +56,7 @@ public:
       double attention_area_length;
       double attention_area_margin;
       double attention_area_angle_threshold;
-      bool use_roundabout_area;
       double default_stopline_margin;
-      double stopline_overshoot_margin;
       double path_interpolation_ds;
       double max_accel;
       double max_jerk;
@@ -73,13 +71,6 @@ public:
       double distance_from_roundabout;
     } slow_down_before_roundabout;
 
-    struct TurnDirection
-    {
-      bool left;
-      bool right;
-      bool straight;
-    };
-
     struct TargetType
     {
       bool car;
@@ -91,28 +82,13 @@ public:
       bool unknown;
     };
 
-    struct StuckVehicle
-    {
-      TargetType target_type;
-      TurnDirection turn_direction;
-      bool use_stuck_stopline;
-      double stuck_vehicle_detect_dist;
-      double stuck_vehicle_velocity_threshold;
-      bool disable_against_private_lane;
-    } stuck_vehicle;
-
-    struct YieldStuck
-    {
-      TargetType target_type;
-      TurnDirection turn_direction;
-      double distance_threshold;
-    } yield_stuck;
-
     struct CollisionDetection
     {
       bool consider_wrong_direction_vehicle;
       double collision_detection_hold_time;
       double min_predicted_path_confidence;
+      double collision_start_margin_time;
+      double collision_end_margin_time;
       TargetType target_type;
       struct VelocityProfile
       {
@@ -121,51 +97,11 @@ public:
         double default_velocity;
         double minimum_default_velocity;
       } velocity_profile;
-      struct FullyPrioritized
-      {
-        double collision_start_margin_time;
-        double collision_end_margin_time;
-      } fully_prioritized;
-      struct PartiallyPrioritized
-      {
-        double collision_start_margin_time;
-        double collision_end_margin_time;
-      } partially_prioritized;
-      struct NotPrioritized
-      {
-        double collision_start_margin_time;
-        double collision_end_margin_time;
-      } not_prioritized;
-      struct YieldOnGreeTrafficLight
-      {
-        double distance_to_assigned_lanelet_start;
-        double duration;
-        double object_dist_to_stopline;
-      } yield_on_green_traffic_light;
-      struct IgnoreOnAmberTrafficLight
-      {
-        struct ObjectExpectedDeceleration
-        {
-          double car;
-          double bike;
-        } object_expected_deceleration;
-      } ignore_on_amber_traffic_light;
-      struct IgnoreOnRedTrafficLight
-      {
-        double object_margin_to_path;
-      } ignore_on_red_traffic_light;
       struct AvoidCollisionByAcceleration
       {
         double object_time_margin_to_collision_point;
       } avoid_collision_by_acceleration;
     } collision_detection;
-
-    struct ConservativeMerging
-    {
-      bool enable_yield;
-      double minimum_lateral_distance_threshold;
-      double merging_judge_angle_threshold;
-    } conservative_merging;
 
     struct Debug
     {
@@ -177,20 +113,15 @@ public:
   {
     std::optional<geometry_msgs::msg::Pose> collision_stop_wall_pose{std::nullopt};
     std::optional<geometry_msgs::msg::Pose> first_pass_judge_wall_pose{std::nullopt};
-    std::optional<geometry_msgs::msg::Pose> second_pass_judge_wall_pose{std::nullopt};
     std::optional<geometry_msgs::msg::Pose> slow_down_wall_pose{std::nullopt};
     bool passed_first_pass_judge{false};
-    // bool passed_second_pass_judge{false};
     std::optional<geometry_msgs::msg::Pose> absence_traffic_light_creep_wall{std::nullopt};
     std::optional<geometry_msgs::msg::Pose> too_late_stop_wall_pose{std::nullopt};
 
     std::optional<std::vector<lanelet::CompoundPolygon3d>> attention_area{std::nullopt};
     std::optional<std::vector<lanelet::CompoundPolygon3d>> adjacent_area{std::nullopt};
     std::optional<lanelet::CompoundPolygon3d> first_attention_area{std::nullopt};
-    // std::optional<lanelet::CompoundPolygon3d> second_attention_area{std::nullopt};
     std::optional<lanelet::CompoundPolygon3d> ego_lane{std::nullopt};
-    std::optional<geometry_msgs::msg::Polygon> stuck_vehicle_detect_area{std::nullopt};
-    std::optional<std::vector<lanelet::CompoundPolygon3d>> yield_stuck_detect_area{std::nullopt};
 
     std::optional<geometry_msgs::msg::Polygon> candidate_collision_ego_lane_polygon{std::nullopt};
     std::optional<geometry_msgs::msg::Polygon> candidate_collision_object_polygon{std::nullopt};
@@ -198,35 +129,17 @@ public:
     autoware_perception_msgs::msg::PredictedObjects unsafe_targets;
     autoware_perception_msgs::msg::PredictedObjects misjudge_targets;
     autoware_perception_msgs::msg::PredictedObjects too_late_detect_targets;
-    autoware_perception_msgs::msg::PredictedObjects stuck_targets;
-    autoware_perception_msgs::msg::PredictedObjects yield_stuck_targets;
-    autoware_perception_msgs::msg::PredictedObjects parked_targets;
 
-    std::optional<std::tuple<geometry_msgs::msg::Pose, lanelet::ConstPoint3d, lanelet::Id, uint8_t>>
-      traffic_light_observation{std::nullopt};
   };
 
   struct InternalDebugData
   {
     double distance{0.0};
     std::string decision_type{};
-    std::optional<TrafficSignalStamped> tl_observation{std::nullopt};
   };
 
   using TimeDistanceArray = std::vector<std::pair<double /* time*/, double /* distance*/>>;
 
-  /**
-   * @brief categorize traffic light priority
-   */
-  enum class TrafficPrioritizedLevel {
-    //! The target lane's traffic signal is red or the ego's traffic signal has an arrow.
-    FULLY_PRIORITIZED = 0,
-    //! The target lane's traffic signal is amber
-    PARTIALLY_PRIORITIZED,
-    //! The target lane's traffic signal is green
-    NOT_PRIORITIZED
-  };
-  /** @} */
 
   /**
    * @brief
@@ -386,24 +299,6 @@ private:
   //! container for storing safety status of objects on the attention area
   ObjectInfoManager object_info_manager_;
   /** @} */
-
-private:
-  /**
-   ***********************************************************
-   ***********************************************************
-   ***********************************************************
-   * @defgroup collision-variables [var] collision detection
-   * @{
-   */
-  //! save the last UNKNOWN traffic light information of this roundabout(keep even if the info got
-  //! unavailable)
-  std::optional<std::pair<lanelet::Id, lanelet::ConstPoint3d>> tl_id_and_point_;
-  std::optional<TrafficSignalStamped> last_tl_valid_observation_{std::nullopt};
-
-  //! save previous priority level to detect change from NotPrioritized to Prioritized
-  TrafficPrioritizedLevel previous_prioritized_level_{TrafficPrioritizedLevel::NOT_PRIORITIZED};
-  /** @} */
-
 private:
   /**
    ***********************************************************
@@ -526,87 +421,6 @@ private:
    ***********************************************************
    ***********************************************************
    ***********************************************************
-   * @defgroup get-traffic-light [fn] traffic light
-   * @{
-   */
-  /**
-   * @brief check if associated traffic light is green
-   */
-  bool isGreenSolidOn() const;
-
-  /**
-   * @brief find TrafficPrioritizedLevel
-   */
-  TrafficPrioritizedLevel getTrafficPrioritizedLevel() const;
-
-  /**
-   * @brief update the valid traffic signal information if still available, otherwise keep last
-   * observation
-   */
-  void updateTrafficSignalObservation();
-
-  /** @} */
-
-// private:
-//   /**
-//    ***********************************************************
-//    ***********************************************************
-//    ***********************************************************
-//    * @defgroup yield [fn] check stuck
-//    * @{
-//    */
-//   /**
-//    * @brief check stuck status
-//    * @attention this function has access to value() of roundabout_lanelets_,
-//    * roundabout_lanelets.first_conflicting_lane(). They are ensured in prepareRoundaboutData()
-//    */
-//   // std::optional<StuckStop> isStuckStatus(
-//   //   const autoware_internal_planning_msgs::msg::PathWithLaneId & path,
-//   //   const RoundaboutStopLines & roundabout_stoplines, const PathLanelets & path_lanelets) const;
-
-//   // bool isTargetStuckVehicleType(
-//   //   const autoware_perception_msgs::msg::PredictedObject & object) const;
-
-//   // bool isTargetYieldStuckVehicleType(
-//   //   const autoware_perception_msgs::msg::PredictedObject & object) const;
-
-//   /**
-//    * @brief check stuck
-//    */
-//   bool checkStuckVehicleInRoundabout(const PathLanelets & path_lanelets) const;
-//   /** @} */
-
-// private:
-//   /**
-//    ***********************************************************
-//    ***********************************************************
-//    ***********************************************************
-//    * @defgroup yield [fn] check yield stuck
-//    * @{
-//    */
-//   /**
-//    * @brief check yield stuck status
-//    * @attention this function has access to value() of roundabout_lanelets_,
-//    * roundabout_stoplines.default_stopline, roundabout_stoplines.first_attention_stopline
-//    */
-//   std::optional<YieldStuckStop> isYieldStuckStatus(
-//     const autoware_internal_planning_msgs::msg::PathWithLaneId & path,
-//     const InterpolatedPathInfo & interpolated_path_info,
-//     const RoundaboutStopLines & roundabout_stoplines) const;
-
-//   // /**
-//   //  * @brief check yield stuck
-//   //  */
-//   // bool checkYieldStuckVehicleInRoundabout(
-//   //   const InterpolatedPathInfo & interpolated_path_info,
-//   //   const lanelet::ConstLanelets & attention_lanelets) const;
-//   // /** @} */
-
-private:
-  /**
-   ***********************************************************
-   ***********************************************************
-   ***********************************************************
    * @defgroup pass-judge-decision [fn] pass judge decision
    * @{
    */
@@ -653,18 +467,6 @@ private:
     autoware_perception_msgs::msg::PredictedPath * path) const;
 
   /**
-   * @brief check if there are any objects around the stoplines on the attention areas when ego
-   * entered the roundabout on green light
-   * @return return CollisionStop if there are vehicle within the margin for some
-   * duration from ego's entry to yield
-   * @attention this function has access to value() of
-   * roundabout_stoplines.occlusion_peeking_stopline
-   */
-  std::optional<CollisionStop> isGreenPseudoCollisionStatus(
-    const size_t closest_idx, const size_t collision_stopline_idx,
-    const RoundaboutStopLines & roundabout_stoplines) const;
-
-  /**
    * @brief generate the message explaining why too_late_detect_objects/misjudge_objects exist and
    * blame past perception fault
    */
@@ -689,10 +491,6 @@ private:
   /**
    * @brief return if collision is detected and the collision position
    */
-  // CollisionStatus detectCollision(
-  //   const bool is_over_1st_pass_judge_line,
-  //   const std::optional<bool> is_over_2nd_pass_judge_line) const;
-
   CollisionStatus detectCollision(
     const bool is_over_1st_pass_judge_line) const;
 

@@ -112,27 +112,6 @@ visualization_msgs::msg::MarkerArray createPoseMarkerArray(
   return msg;
 }
 
-visualization_msgs::msg::MarkerArray createLineMarkerArray(
-  const geometry_msgs::msg::Point & point_start, const geometry_msgs::msg::Point & point_end,
-  const std::string & ns, const int64_t id, const double r, const double g, const double b)
-{
-  visualization_msgs::msg::MarkerArray msg;
-
-  visualization_msgs::msg::Marker marker;
-  marker.header.frame_id = "map";
-  marker.ns = ns + "_line";
-  marker.id = id;
-  marker.lifetime = rclcpp::Duration::from_seconds(0.3);
-  marker.type = visualization_msgs::msg::Marker::LINE_STRIP;
-  marker.action = visualization_msgs::msg::Marker::ADD;
-  marker.scale.x = 0.1;
-  marker.color = create_marker_color(r, g, b, 0.999);
-  marker.points.push_back(point_start);
-  marker.points.push_back(point_end);
-
-  msg.markers.push_back(marker);
-  return msg;
-}
 
 constexpr std::tuple<float, float, float> white()
 {
@@ -215,29 +194,6 @@ visualization_msgs::msg::MarkerArray RoundaboutModule::createDebugMarkerArray()
       &debug_marker_array, now);
   }
 
-  // if (debug_data_.second_attention_area) {
-  //   append_marker_array(
-  //     ::createLaneletPolygonsMarkerArray(
-  //       {debug_data_.second_attention_area.value()}, "second_attention_area", lane_id_, 1, 0.647,
-  //       0.0),
-  //     &debug_marker_array, now);
-  // }
-
-  if (debug_data_.stuck_vehicle_detect_area) {
-    append_marker_array(
-      debug::createPolygonMarkerArray(
-        debug_data_.stuck_vehicle_detect_area.value(), "stuck_vehicle_detect_area", lane_id_, now,
-        0.3, 0.0, 0.0, 0.0, 0.5, 0.5),
-      &debug_marker_array, now);
-  }
-
-  if (debug_data_.yield_stuck_detect_area) {
-    append_marker_array(
-      ::createLaneletPolygonsMarkerArray(
-        debug_data_.yield_stuck_detect_area.value(), "yield_stuck_detect_area", lane_id_, 0.6588235,
-        0.34509, 0.6588235),
-      &debug_marker_array);
-  }
 
   if (debug_data_.ego_lane) {
     append_marker_array(
@@ -262,16 +218,10 @@ visualization_msgs::msg::MarkerArray RoundaboutModule::createDebugMarkerArray()
       &debug_marker_array, now);
   }
 
-  static constexpr auto white = ::white();
+
   static constexpr auto green = ::green();
   static constexpr auto yellow = ::yellow();
   static constexpr auto red = ::red();
-  // static constexpr auto light_blue = ::light_blue();
-  // append_marker_array(
-    // debug::createObjectsMarkerArray(
-    //   debug_data_.safe_under_traffic_control_targets, "safe_under_traffic_control_targets",
-    //   module_id_, now, std::get<0>(light_blue), std::get<1>(light_blue), std::get<2>(light_blue)),
-    // &debug_marker_array, now);
 
   append_marker_array(
     debug::createObjectsMarkerArray(
@@ -291,23 +241,6 @@ visualization_msgs::msg::MarkerArray RoundaboutModule::createDebugMarkerArray()
       std::get<0>(red), std::get<1>(red), std::get<2>(red)),
     &debug_marker_array, now);
 
-  append_marker_array(
-    debug::createObjectsMarkerArray(
-      debug_data_.parked_targets, "parked_targets", module_id_, now, std::get<0>(white),
-      std::get<1>(white), std::get<2>(white)),
-    &debug_marker_array, now);
-
-  append_marker_array(
-    debug::createObjectsMarkerArray(
-      debug_data_.stuck_targets, "stuck_targets", module_id_, now, std::get<0>(white),
-      std::get<1>(white), std::get<2>(white)),
-    &debug_marker_array, now);
-
-  append_marker_array(
-    debug::createObjectsMarkerArray(
-      debug_data_.yield_stuck_targets, "yield_stuck_targets", module_id_, now, std::get<0>(white),
-      std::get<1>(white), std::get<2>(white)),
-    &debug_marker_array, now);
 
   if (debug_data_.first_pass_judge_wall_pose) {
     const double r = debug_data_.passed_first_pass_judge ? 1.0 : 0.0;
@@ -319,32 +252,6 @@ visualization_msgs::msg::MarkerArray RoundaboutModule::createDebugMarkerArray()
       &debug_marker_array, now);
   }
 
-  // if (debug_data_.second_pass_judge_wall_pose) {
-  //   const double r = debug_data_.passed_second_pass_judge ? 1.0 : 0.0;
-  //   const double g = debug_data_.passed_second_pass_judge ? 0.0 : 1.0;
-  //   append_marker_array(
-  //     ::createPoseMarkerArray(
-  //       debug_data_.second_pass_judge_wall_pose.value(), "second_pass_judge_wall_pose", module_id_,
-  //       r, g, 0.0),
-  //     &debug_marker_array, now);
-  // }
-
-  if (debug_data_.traffic_light_observation) {
-    const auto GREEN = autoware_perception_msgs::msg::TrafficLightElement::GREEN;
-    const auto YELLOW = autoware_perception_msgs::msg::TrafficLightElement::AMBER;
-
-    const auto [ego, tl_point, id, color] = debug_data_.traffic_light_observation.value();
-    geometry_msgs::msg::Point tl_point_point;
-    tl_point_point.x = tl_point.x();
-    tl_point_point.y = tl_point.y();
-    tl_point_point.z = tl_point.z();
-    const auto tl_color = (color == GREEN) ? green : (color == YELLOW ? yellow : red);
-    const auto [r, g, b] = tl_color;
-    append_marker_array(
-      ::createLineMarkerArray(
-        ego.position, tl_point_point, "roundabout_traffic_light", lane_id_, r, g, b),
-      &debug_marker_array, now);
-  }
   return debug_marker_array;
 }
 
@@ -371,34 +278,4 @@ autoware::motion_utils::VirtualWalls RoundaboutModule::createVirtualWalls()
   return virtual_walls;
 }
 
-// visualization_msgs::msg::MarkerArray MergeFromPrivateRoadModule::createDebugMarkerArray()
-// {
-//   visualization_msgs::msg::MarkerArray debug_marker_array;
-
-//   const auto state = state_machine_.getState();
-
-//   int32_t uid = autoware::behavior_velocity_planner::planning_utils::bitShift(module_id_);
-//   const auto now = this->clock_->now();
-//   if (state == StateMachine::State::STOP) {
-//     append_marker_array(
-//       ::createPoseMarkerArray(debug_data_.stop_point_pose, "stop_point_pose", uid, 1.0, 0.0, 0.0),
-//       &debug_marker_array, now);
-//   }
-
-//   return debug_marker_array;
-// }
-
-// autoware::motion_utils::VirtualWalls MergeFromPrivateRoadModule::createVirtualWalls()
-// {
-//   autoware::motion_utils::VirtualWalls virtual_walls;
-//   const auto state = state_machine_.getState();
-//   if (state == StateMachine::State::STOP) {
-//     autoware::motion_utils::VirtualWall wall;
-//     wall.style = autoware::motion_utils::VirtualWallType::stop;
-//     wall.pose = debug_data_.virtual_wall_pose;
-//     wall.text = "merge_from_private_road";
-//     virtual_walls.push_back(wall);
-//   }
-//   return virtual_walls;
-// }
 }  // namespace autoware::behavior_velocity_planner
