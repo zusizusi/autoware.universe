@@ -301,9 +301,6 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
       const auto lanelet = route_handler.getLaneletsFromId(lane_id);
       const auto roundabouts = lanelet.regulatoryElementsAs<lanelet::autoware::Roundabout>();
       for (const auto & roundabout : roundabouts) {
-        RCLCPP_WARN(
-          rclcpp::get_logger("TurnSignalDecider"), "Roundabout id=%ld, lanelet id=%ld",
-          roundabout->id(), lanelet.id());
         if (roundabout->isEntryLanelet(lanelet)) {
           roundabout_entry_lanelets.push_back(lanelet);
         }
