@@ -209,9 +209,6 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getIntersectionTurnSignalInfo(
     // Get the lane and its attribute
     const std::string lane_attribute =
       current_lane.attributeOr("turn_direction", std::string("none"));
-    const std::string roundabout_attribute =
-      current_lane.attributeOr("roundabout", std::string("none"));
-    if (roundabout_attribute != "none") continue;
     if (!requires_turn_signal(lane_attribute, is_in_turn_lane)) continue;
 
     do {
@@ -293,20 +290,28 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
   const size_t current_seg_idx, const RouteHandler & route_handler,
   const double nearest_dist_threshold, const double nearest_yaw_threshold)
 {
-  std::set<int> processed_lanes;
+  std::set<lanelet::Id> processed_lanes;
   lanelet::ConstLanelets roundabout_entry_lanelets;
   lanelet::ConstLanelets roundabout_exit_lanelets;
+  // std::vector<std::pair<std::optional<lanelet::ConstLanelet>,
+  // std::optional<lanelet::ConstLanelet>>> roundabout_entry_exit_pars;
   for (const auto & point : path.points) {
     for (const auto & lane_id : point.lane_ids) {
+      if (processed_lanes.count(lane_id)) continue;
       const auto lanelet = route_handler.getLaneletsFromId(lane_id);
-      const std::string roundabout_tag = lanelet.attributeOr("roundabout", std::string("none"));
-      if (roundabout_tag == "entry" || roundabout_tag == "exit") {
-        if (processed_lanes.count(lanelet.id())) continue;
-        processed_lanes.insert(lanelet.id());
-        auto & target_lanelets =
-          (roundabout_tag == "entry") ? roundabout_entry_lanelets : roundabout_exit_lanelets;
-        target_lanelets.push_back(lanelet);
+      const auto roundabouts = lanelet.regulatoryElementsAs<lanelet::autoware::Roundabout>();
+      for (const auto & roundabout : roundabouts) {
+        RCLCPP_WARN(
+          rclcpp::get_logger("TurnSignalDecider"), "Roundabout id=%ld, lanelet id=%ld",
+          roundabout->id(), lanelet.id());
+        if (roundabout->isEntryLanelet(lanelet)) {
+          roundabout_entry_lanelets.push_back(lanelet);
+        }
+        if (roundabout->isExitLanelet(lanelet)) {
+          roundabout_exit_lanelets.push_back(lanelet);
+        }
       }
+      processed_lanes.insert(lane_id);
     }
   }
   if (roundabout_entry_lanelets.empty() && roundabout_exit_lanelets.empty()) {
@@ -346,8 +351,9 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     // If defined in the lanelet map, change the turn signal based on the exit lanelet
     lanelet::ConstLanelet roundabout_exit_lanelet;
     lanelet::ConstLanelet next_lanelet = entry_lanelet;
-    while (route_handler.getNextLaneletWithinRoute(next_lanelet, &next_lanelet)) {
-      if (next_lanelet.attributeOr("roundabout", std::string("none")) == "none") break;
+    const auto & roundabouts = entry_lanelet.regulatoryElementsAs<lanelet::autoware::Roundabout>();
+    while (route_handler.getNextLaneletWithinRoute(next_lanelet, &next_lanelet) && !roundabouts.empty()) {
+      if (!roundabouts.front()->isRoundaboutLanelet(next_lanelet)) break;
       roundabout_exit_lanelet = next_lanelet;
     }
     const std::string exit_turn_signal_tag =

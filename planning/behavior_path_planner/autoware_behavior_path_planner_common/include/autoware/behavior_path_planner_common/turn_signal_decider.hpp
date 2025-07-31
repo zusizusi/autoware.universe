@@ -20,6 +20,7 @@
 #include <autoware/behavior_path_planner_common/parameters.hpp>
 #include <autoware/behavior_path_planner_common/utils/path_shifter/path_shifter.hpp>
 #include <autoware/route_handler/route_handler.hpp>
+#include <autoware_lanelet2_extension/regulatory_elements/roundabout.hpp>
 #include <autoware_lanelet2_extension/utility/message_conversion.hpp>
 #include <autoware_utils/geometry/boost_geometry.hpp>
 #include <autoware_utils/geometry/geometry.hpp>
@@ -50,6 +51,7 @@ using autoware_vehicle_msgs::msg::TurnIndicatorsCommand;
 using geometry_msgs::msg::Point;
 using geometry_msgs::msg::Pose;
 using nav_msgs::msg::Odometry;
+using lanelet::autoware::Roundabout;
 
 const std::map<std::string, uint8_t> g_signal_map = {
   {"left", TurnIndicatorsCommand::ENABLE_LEFT},
