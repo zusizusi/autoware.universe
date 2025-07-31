@@ -50,8 +50,8 @@ using autoware_vehicle_msgs::msg::HazardLightsCommand;
 using autoware_vehicle_msgs::msg::TurnIndicatorsCommand;
 using geometry_msgs::msg::Point;
 using geometry_msgs::msg::Pose;
-using nav_msgs::msg::Odometry;
 using lanelet::autoware::Roundabout;
+using nav_msgs::msg::Odometry;
 
 const std::map<std::string, uint8_t> g_signal_map = {
   {"left", TurnIndicatorsCommand::ENABLE_LEFT},

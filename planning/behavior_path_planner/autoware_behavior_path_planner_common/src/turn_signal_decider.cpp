@@ -352,7 +352,8 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     lanelet::ConstLanelet roundabout_exit_lanelet;
     lanelet::ConstLanelet next_lanelet = entry_lanelet;
     const auto & roundabouts = entry_lanelet.regulatoryElementsAs<lanelet::autoware::Roundabout>();
-    while (route_handler.getNextLaneletWithinRoute(next_lanelet, &next_lanelet) && !roundabouts.empty()) {
+    while (route_handler.getNextLaneletWithinRoute(next_lanelet, &next_lanelet) &&
+           !roundabouts.empty()) {
       if (!roundabouts.front()->isRoundaboutLanelet(next_lanelet)) break;
       roundabout_exit_lanelet = next_lanelet;
     }
