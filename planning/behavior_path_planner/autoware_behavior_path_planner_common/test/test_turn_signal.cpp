@@ -1014,7 +1014,7 @@ TEST(BehaviorPathPlanningTurnSignal, Condition6)
       behavior_signal_info, nearest_dist_threshold, nearest_yaw_threshold);
     EXPECT_EQ(result_signal.command, TurnIndicatorsCommand::ENABLE_RIGHT);
   }
-    // current pose is on the intersection desired end
+  // current pose is on the intersection desired end
   {
     Pose current_pose = generateEgoSamplePose(40.00f, 0.0f, 0.0);
     const size_t current_seg_idx =
@@ -1025,7 +1025,7 @@ TEST(BehaviorPathPlanningTurnSignal, Condition6)
       behavior_signal_info, nearest_dist_threshold, nearest_yaw_threshold);
     EXPECT_EQ(result_signal.command, TurnIndicatorsCommand::ENABLE_RIGHT);
   }
-    // current pose is right after the intersection desired end
+  // current pose is right after the intersection desired end
   {
     Pose current_pose = generateEgoSamplePose(40.1f, 0.0f, 0.0);
     const size_t current_seg_idx =
@@ -1047,7 +1047,7 @@ TEST(BehaviorPathPlanningTurnSignal, Condition6)
       behavior_signal_info, nearest_dist_threshold, nearest_yaw_threshold);
     EXPECT_EQ(result_signal.command, TurnIndicatorsCommand::ENABLE_RIGHT);
   }
-    // current pose is right after the roundabout required end
+  // current pose is right after the roundabout required end
   {
     Pose current_pose = generateEgoSamplePose(51.0f, 0.0f, 0.0);
     const size_t current_seg_idx =
