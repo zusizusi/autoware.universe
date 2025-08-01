@@ -205,6 +205,10 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getIntersectionTurnSignalInfo(
     // Skip if already processed
     if (processed_lanes.find(lane_id) != processed_lanes.end()) continue;
     auto current_lane = route_handler.getLaneletsFromId(lane_id);
+    // Skip if lanelet is part of a roundabout regulatory element
+    const auto regulatory_elements = current_lane.regulatoryElementsAs<lanelet::autoware::Roundabout>();
+    if (!regulatory_elements.empty()) continue;
+
     lanelet::ConstLanelets combined_lane_elems{};
     // Get the lane and its attribute
     const std::string lane_attribute =
