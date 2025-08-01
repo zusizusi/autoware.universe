@@ -293,18 +293,16 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
   std::set<lanelet::Id> processed_lanes;
   lanelet::ConstLanelets roundabout_entry_lanelets;
   lanelet::ConstLanelets roundabout_exit_lanelets;
-  // std::vector<std::pair<std::optional<lanelet::ConstLanelet>,
-  // std::optional<lanelet::ConstLanelet>>> roundabout_entry_exit_pars;
   for (const auto & point : path.points) {
     for (const auto & lane_id : point.lane_ids) {
       if (processed_lanes.count(lane_id)) continue;
       const auto lanelet = route_handler.getLaneletsFromId(lane_id);
       const auto roundabouts = lanelet.regulatoryElementsAs<lanelet::autoware::Roundabout>();
       for (const auto & roundabout : roundabouts) {
-        if (roundabout->isEntryLanelet(lanelet)) {
+        if (roundabout->isEntryLanelet(lanelet.id())) {
           roundabout_entry_lanelets.push_back(lanelet);
         }
-        if (roundabout->isExitLanelet(lanelet)) {
+        if (roundabout->isExitLanelet(lanelet.id())) {
           roundabout_exit_lanelets.push_back(lanelet);
         }
       }
@@ -351,7 +349,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     const auto & roundabouts = entry_lanelet.regulatoryElementsAs<lanelet::autoware::Roundabout>();
     while (route_handler.getNextLaneletWithinRoute(next_lanelet, &next_lanelet) &&
            !roundabouts.empty()) {
-      if (!roundabouts.front()->isRoundaboutLanelet(next_lanelet)) break;
+      if (!roundabouts.front()->isRoundaboutLanelet(next_lanelet.id())) break;
       roundabout_exit_lanelet = next_lanelet;
     }
     const std::string exit_turn_signal_tag =
