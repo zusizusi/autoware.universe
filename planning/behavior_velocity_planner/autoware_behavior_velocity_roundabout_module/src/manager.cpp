@@ -31,6 +31,7 @@
 namespace autoware::behavior_velocity_planner
 {
 using autoware_utils::get_or_declare_parameter;
+using lanelet::autoware::Roundabout;
 
 RoundaboutModuleManager::RoundaboutModuleManager(rclcpp::Node & node)
 : SceneModuleManagerInterfaceWithRTC(
@@ -70,8 +71,8 @@ RoundaboutModuleManager::RoundaboutModuleManager(rclcpp::Node & node)
       node, ns + ".collision_detection.min_predicted_path_confidence");
     rp.collision_detection.collision_start_margin_time = get_or_declare_parameter<double>(
       node, ns + ".collision_detection.collision_start_margin_time");
-    rp.collision_detection.collision_end_margin_time = get_or_declare_parameter<double>(
-      node, ns + ".collision_detection.collision_end_margin_time");
+    rp.collision_detection.collision_end_margin_time =
+      get_or_declare_parameter<double>(node, ns + ".collision_detection.collision_end_margin_time");
 
     // target_type
     {
@@ -124,29 +125,25 @@ void RoundaboutModuleManager::launchNewModules(
   const auto routing_graph = planner_data_->route_handler_->getRoutingGraphPtr();
   const auto lanelet_map = planner_data_->route_handler_->getLaneletMapPtr();
 
-  const auto lanelets =
-    planning_utils::getLaneletsOnPath(path, lanelet_map, planner_data_->current_odometry->pose);
+  const auto roundabout_reg_elem_map = planning_utils::getRegElemMapOnPath<Roundabout>(
+    path, lanelet_map, planner_data_->current_odometry->pose);
 
-  for (size_t i = 0; i < lanelets.size(); i++) {
-    const auto ll = lanelets.at(i);
-    const auto lane_id = ll.id();
-    const auto module_id = lane_id;
-
-    // Is roundabout?
-    const std::string roundabout_attr = ll.attributeOr("roundabout", "else");
-    const auto is_roundabout = roundabout_attr == "entry";
-    if (!is_roundabout) {
+  for (const auto & roundabout : roundabout_reg_elem_map) {
+    const auto module_id = roundabout.first->id();
+    // Is roundabout entry?
+    if (!roundabout.first || !roundabout.first->isEntryLanelet(roundabout.second.id())) {
       continue;
     }
 
-    if (hasSameParentLaneletAndTurnDirectionWithRegistered(ll)) {
+    if (isRegElemRegistered(*roundabout.first)) {
       continue;
     }
+
     const auto associative_ids =
-      getAssociativeRoundaboutEntryLanelets(ll, lanelet_map, routing_graph);
+      getAssociativeRoundaboutEntryLanelets(roundabout.second, *roundabout.first);
 
     const auto new_module = std::make_shared<RoundaboutModule>(
-      module_id, lane_id, planner_data_, roundabout_param_, associative_ids, node_,
+      module_id, roundabout.second.id(), planner_data_, roundabout_param_, associative_ids, node_,
       logger_.get_child("roundabout_module"), clock_, time_keeper_, planning_factor_interface_);
     generate_uuid(module_id);
     /* set RTC status as non_occluded status initially */
@@ -169,13 +166,6 @@ RoundaboutModuleManager::getModuleExpiredFunction(
     const auto roundabout_module = std::dynamic_pointer_cast<RoundaboutModule>(scene_module);
     const auto & associative_ids = roundabout_module->getAssociativeIds();
     for (const auto & lane : lane_set) {
-      const std::string roundabout_attr = lane.attributeOr("roundabout", "else");
-      const auto is_roundabout =
-        roundabout_attr == "entry" || roundabout_attr == "internal" || roundabout_attr == "exit";
-      if (!is_roundabout) {
-        continue;
-      }
-
       if (associative_ids.find(lane.id()) != associative_ids.end() /* contains */) {
         return false;
       }
@@ -184,59 +174,39 @@ RoundaboutModuleManager::getModuleExpiredFunction(
   };
 }
 
-// TODO(iwasawa): Refactor this function to use regulatory elements
 std::set<lanelet::Id> RoundaboutModuleManager::getAssociativeRoundaboutEntryLanelets(
-  const lanelet::ConstLanelet & lane, const lanelet::LaneletMapPtr lanelet_map,
-  const lanelet::routing::RoutingGraphPtr routing_graph)
+  const lanelet::ConstLanelet & lane, const lanelet::autoware::Roundabout & roundabout)
 {
-  const std::string roundabout_attr = lane.attributeOr("roundabout", "else");
-  if (roundabout_attr != "entry") {
-    return {};
-  }
+  std::set<lanelet::Id> associative_lanelets;
 
-  const auto parents = routing_graph->previous(lane);
-  std::set<lanelet::Id> parent_neighbors;
-  for (const auto & parent : parents) {
-    RCLCPP_WARN(
-      rclcpp::get_logger("behavior_velocity_planner"),
-      "Parent lanelet found: %ld", parent.id());
-    const auto neighbors = routing_graph->besides(parent); // TODO(zusizusiz): can not get next lanelets 
-    // check the size
-    RCLCPP_WARN(
-      rclcpp::get_logger("behavior_velocity_planner"),
-      "Parent lanelet %ld has %zu neighbors", parent.id(), neighbors.size());
-    for (const auto & neighbor : neighbors) parent_neighbors.insert(neighbor.id());
-  }
-  std::set<lanelet::Id> associative_roundabout_lanelets;
-  associative_roundabout_lanelets.insert(lane.id());
-  for (const auto & parent_neighbor_id : parent_neighbors) {
-    RCLCPP_WARN(
-      rclcpp::get_logger("behavior_velocity_planner"),
-      "Parent neighbor lanelet found: %ld", parent_neighbor_id);
-    const auto parent_neighbor = lanelet_map->laneletLayer.get(parent_neighbor_id);
-    const auto followings = routing_graph->following(parent_neighbor);
-    for (const auto & following : followings) {
-      if (following.attributeOr("roundabout", "else") == roundabout_attr) {
-        associative_roundabout_lanelets.insert(following.id());
-        RCLCPP_WARN(
-          rclcpp::get_logger("behavior_velocity_planner"),
-          "Associative roundabout lanelet found: %ld", following.id());
-      }
+  const auto roundabouts = lane.regulatoryElementsAs<lanelet::autoware::Roundabout>();
+  const auto right_lanelet = planner_data_->route_handler_->getRightLanelet(lane);
+  const auto left_lanelet = planner_data_->route_handler_->getLeftLanelet(lane);
+
+  const auto entry_lanelets = roundabout.roundaboutEntryLanelets();
+
+  associative_lanelets.insert(lane.id());
+
+  for (const auto & entry_lanelet : entry_lanelets) {
+    if (
+      (right_lanelet && right_lanelet->id() == entry_lanelet.id()) ||
+      (left_lanelet && left_lanelet->id() == entry_lanelet.id())) {
+      associative_lanelets.insert(entry_lanelet.id());
     }
   }
-  return associative_roundabout_lanelets;
+
+  return associative_lanelets;
 }
 
-bool RoundaboutModuleManager::hasSameParentLaneletAndTurnDirectionWithRegistered(
-  const lanelet::ConstLanelet & lane) const
+bool RoundaboutModuleManager::isRegElemRegistered(
+  const lanelet::autoware::Roundabout & roundabout) const
 {
   for (const auto & scene_module : scene_modules_) {
-    const auto roundabout_module = std::dynamic_pointer_cast<RoundaboutModule>(scene_module);
-    const auto & associative_ids = roundabout_module->getAssociativeIds();
-    if (associative_ids.find(lane.id()) != associative_ids.end()) {
+    if (scene_module->getModuleId() == roundabout.id()) {
       return true;
     }
   }
+
   return false;
 }
 

@@ -21,6 +21,7 @@
 #include <autoware/behavior_velocity_planner_common/plugin_wrapper.hpp>
 #include <autoware/behavior_velocity_planner_common/scene_module_interface.hpp>
 #include <autoware/behavior_velocity_rtc_interface/scene_module_interface_with_rtc.hpp>
+#include <autoware_lanelet2_extension/regulatory_elements/roundabout.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 #include <autoware_internal_planning_msgs/msg/path_with_lane_id.hpp>
@@ -60,11 +61,9 @@ private:
     const autoware_internal_planning_msgs::msg::PathWithLaneId & path) override;
 
   std::set<lanelet::Id> getAssociativeRoundaboutEntryLanelets(
-  const lanelet::ConstLanelet & lane, const lanelet::LaneletMapPtr lanelet_map,
-  const lanelet::routing::RoutingGraphPtr routing_graph);
+    const lanelet::ConstLanelet & lane, const lanelet::autoware::Roundabout & roundabout);
 
-    bool hasSameParentLaneletAndTurnDirectionWithRegistered(
-      const lanelet::ConstLanelet & lane) const;
+  bool isRegElemRegistered(const lanelet::autoware::Roundabout & roundabout) const;
 
   /* called from SceneModuleInterfaceWithRTC::plan */
   void sendRTC(const Time & stamp) override;
