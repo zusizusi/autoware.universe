@@ -148,7 +148,6 @@ std::optional<std::pair<size_t, const lanelet::CompoundPolygon3d &>> getFirstPoi
   return std::nullopt;
 }
 
-
 }  // namespace
 
 namespace autoware::behavior_velocity_planner
@@ -164,8 +163,6 @@ Result<RoundaboutModule::BasicData, InternalError> RoundaboutModule::prepareRoun
   const double baselink2front = planner_data_->vehicle_info_.max_longitudinal_offset_m;
   const auto footprint = planner_data_->vehicle_info_.createFootprint(0.0, 0.0);
   const auto & current_pose = planner_data_->current_odometry->pose;
-
-  
 
   // spline interpolation
   const auto interpolated_path_info_opt = util::generateInterpolatedPath(
@@ -211,7 +208,8 @@ Result<RoundaboutModule::BasicData, InternalError> RoundaboutModule::prepareRoun
   }
   const auto & first_conflicting_lane = first_conflicting_lane_opt.value();
   const auto & first_conflicting_area = first_conflicting_area_opt.value();
-  // const auto & second_attention_area_opt = roundabout_lanelets.second_attention_area(); // may be nullopt
+  // const auto & second_attention_area_opt = roundabout_lanelets.second_attention_area(); // may be
+  // nullopt
 
   // ==========================================================================================
   // even if the attention area is null, stuck vehicle stop line needs to be generated from
@@ -220,11 +218,12 @@ Result<RoundaboutModule::BasicData, InternalError> RoundaboutModule::prepareRoun
   const auto & dummy_first_attention_lane = roundabout_lanelets.first_attention_lane()
                                               ? roundabout_lanelets.first_attention_lane().value()
                                               : first_conflicting_lane;
-  // const auto & dummy_first_attention_lane = roundabout_lanelets.first_attention_lane().value(); //TODO(zusizusi): いらないかもしれない
+  // const auto & dummy_first_attention_lane = roundabout_lanelets.first_attention_lane().value();
+  // //TODO(zusizusi): いらないかもしれない
 
   const auto roundabout_stoplines_opt = generateRoundaboutStopLines(
-    assigned_lanelet, first_conflicting_area, dummy_first_attention_lane,
-    interpolated_path_info, path);
+    assigned_lanelet, first_conflicting_area, dummy_first_attention_lane, interpolated_path_info,
+    path);
   if (!roundabout_stoplines_opt) {
     return make_err<RoundaboutModule::BasicData, InternalError>(
       "failed to generate roundabout_stoplines");
@@ -247,7 +246,6 @@ Result<RoundaboutModule::BasicData, InternalError> RoundaboutModule::prepareRoun
     return make_err<RoundaboutModule::BasicData, InternalError>("failed to generate PathLanelets");
   }
   const auto & path_lanelets = path_lanelets_opt.value();
-
 
   return make_ok<RoundaboutModule::BasicData, InternalError>(
     interpolated_path_info, roundabout_stoplines, path_lanelets);
@@ -304,9 +302,9 @@ std::optional<size_t> RoundaboutModule::getStopLineIndexFromMap(
     planner_data_->ego_nearest_yaw_threshold);
 }
 
-
 std::optional<RoundaboutStopLines> RoundaboutModule::generateRoundaboutStopLines(
-   [[maybe_unused]] lanelet::ConstLanelet assigned_lanelet, [[maybe_unused]] const lanelet::CompoundPolygon3d & first_conflicting_area,
+  [[maybe_unused]] lanelet::ConstLanelet assigned_lanelet,
+  [[maybe_unused]] const lanelet::CompoundPolygon3d & first_conflicting_area,
   const lanelet::ConstLanelet & first_attention_lane,
   const InterpolatedPathInfo & interpolated_path_info,
   autoware_internal_planning_msgs::msg::PathWithLaneId * original_path) const
@@ -342,7 +340,8 @@ std::optional<RoundaboutStopLines> RoundaboutModule::generateRoundaboutStopLines
   // for (auto i = std::get<0>(lane_interval_ip); i < std::get<1>(lane_interval_ip); ++i) {
   //   const auto & base_pose = path_ip.points.at(i).point.pose;
   //   const auto path_footprint =
-  //     autoware_utils::transform_vector(local_footprint, autoware_utils::pose2transform(base_pose));
+  //     autoware_utils::transform_vector(local_footprint,
+  //     autoware_utils::pose2transform(base_pose));
   //   if (bg::intersects(path_footprint, first_attention_lane_centerline.basicLineString())) {
   //     // NOTE: maybe consideration of braking dist is necessary
   //     first_footprint_attention_centerline_ip_opt = i;
@@ -384,7 +383,6 @@ std::optional<RoundaboutStopLines> RoundaboutModule::generateRoundaboutStopLines
 
   // collision_stopline
   const size_t collision_stopline_ip = closest_idx_ip + std::ceil(braking_dist / ds);
-
 
   // (4) first attention stopline position on interpolated path
   const auto first_attention_stopline_ip = first_footprint_inside_1st_attention_ip;
@@ -440,8 +438,6 @@ std::optional<RoundaboutStopLines> RoundaboutModule::generateRoundaboutStopLines
   return roundabout_stoplines;
 }
 
-
-
 static std::vector<std::deque<lanelet::ConstLanelet>> getPrecedingLaneletsUptoRoundaboutRecursive(
   const lanelet::routing::RoutingGraphPtr & graph, const lanelet::ConstLanelet & lanelet,
   const double length, const lanelet::ConstLanelets & exclude_lanelets)
@@ -483,7 +479,6 @@ static std::vector<std::deque<lanelet::ConstLanelet>> getPrecedingLaneletsUptoRo
   return preceding_lanelet_sequences;
 }
 
-
 RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
   lanelet::LaneletMapConstPtr lanelet_map_ptr, lanelet::routing::RoutingGraphPtr routing_graph_ptr,
   const lanelet::ConstLanelet assigned_lanelet) const
@@ -518,13 +513,18 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
       ego_lanelets.push_back(following_lanelet);
     }
   }
+  for (const auto & id : associative_ids_) {
+    const auto lanelet = planner_data_->route_handler_->getLaneletsFromId(id);
+    ego_lanelets.push_back(lanelet);
+  }
 
   // get conflicting lanes on assigned lanelet
   // assigned_laneletと競合するレーンを取得します（交差点で交錯する他車線）。
   const auto & conflicting_lanelets =
     lanelet::utils::getConflictingLanelets(routing_graph_ptr, assigned_lanelet);
-  std::vector<lanelet::ConstLanelet> adjacent_followings;  // 競合レーンから派生する後続レーンや直前レーンを
-                                                           // adjacent_followings に格納します。
+  std::vector<lanelet::ConstLanelet>
+    adjacent_followings;  // 競合レーンから派生する後続レーンや直前レーンを
+                          // adjacent_followings に格納します。
 
   for (const auto & conflicting_lanelet : conflicting_lanelets) {
     for (const auto & following_lanelet : routing_graph_ptr->following(conflicting_lanelet)) {
@@ -536,7 +536,8 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
   }
 
   // final objective lanelets
-  lanelet::ConstLanelets conflicting_ex_ego_yield_lanelets;  // 主に競合レーンから自車関連レーンや yield lanelet を除外したもの。
+  lanelet::ConstLanelets conflicting_ex_ego_yield_lanelets;  // 主に競合レーンから自車関連レーンや
+                                                             // yield lanelet を除外したもの。
   lanelet::ConstLanelets conflicting_ex_ego_lanelets;  //  ego_lanelets に含まれない競合レーン。
   // conflicting lanes is necessary to get stopline for stuck vehicle
   for (auto && conflicting_lanelet : conflicting_lanelets) {
@@ -546,7 +547,7 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
 
   // exclude yield lanelets and ego lanelets from confliction_ex_ego_yield_lanelets
   for (const auto & conflicting_lanelet : conflicting_lanelets) {
-        if (
+    if (
       lanelet::utils::contains(yield_lanelets, conflicting_lanelet) ||
       lanelet::utils::contains(ego_lanelets, conflicting_lanelet)) {
       continue;
@@ -666,6 +667,5 @@ std::optional<PathLanelets> RoundaboutModule::generatePathLanelets(
   }
   return path_lanelets;
 }
-
 
 }  // namespace autoware::behavior_velocity_planner
