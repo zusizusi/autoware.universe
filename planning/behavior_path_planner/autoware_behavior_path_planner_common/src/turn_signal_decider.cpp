@@ -270,12 +270,15 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getIntersectionTurnSignalInfo(
     }
     if (requires_turn_signal(lane_attribute, is_in_turn_lane)) {
       // update map if necessary
-      if (intersection_desired_start_point_association_.find(lane_id) == intersection_desired_start_point_association_.end()) {
+      if (
+        intersection_desired_start_point_association_.find(lane_id) ==
+        intersection_desired_start_point_association_.end()) {
         intersection_desired_start_point_association_.emplace(lane_id, current_pose);
       }
 
       TurnSignalInfo turn_signal_info{};
-      turn_signal_info.desired_start_point = intersection_desired_start_point_association_.at(lane_id);
+      turn_signal_info.desired_start_point =
+        intersection_desired_start_point_association_.at(lane_id);
       turn_signal_info.required_start_point = lane_front_pose;
       turn_signal_info.required_end_point =
         get_required_end_point(combined_lane.centerline3d(), intersection_angle_threshold_deg_);
@@ -423,8 +426,8 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
       base_link2front_;
     if (dist_to_desired_start_point >= 0.0) continue;  // Skip if the front point is too far
     // update map if necessary
-    auto [iter, inserted] =
-      roundabout_desired_start_point_association_.try_emplace(exit_lanelet.id(), desired_start_point);
+    auto [iter, inserted] = roundabout_desired_start_point_association_.try_emplace(
+      exit_lanelet.id(), desired_start_point);
 
     TurnSignalInfo turn_signal_info;
     turn_signal_info.desired_start_point = iter->second;
