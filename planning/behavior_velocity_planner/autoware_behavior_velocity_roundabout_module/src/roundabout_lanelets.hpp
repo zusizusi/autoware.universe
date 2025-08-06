@@ -15,7 +15,7 @@
 #ifndef ROUNDABOUT_LANELETS_HPP_
 #define ROUNDABOUT_LANELETS_HPP_
 
-#include "interpolated_path_info.hpp"
+#include <autoware/behavior_velocity_intersection_module/interpolated_path_info.hpp>
 
 #include <autoware_utils/geometry/boost_geometry.hpp>
 
