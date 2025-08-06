@@ -13,8 +13,6 @@
 // limitations under the License.
 
 #include "roundabout_lanelets.hpp"
-
-#include "util.hpp"
 #include <autoware/behavior_velocity_intersection_module/util.hpp>
 
 #include <lanelet2_core/LaneletMap.h>

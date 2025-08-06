@@ -16,7 +16,7 @@
 #define SCENE_ROUNDABOUT_HPP_
 
 #include "decision_result.hpp"
-#include "interpolated_path_info.hpp"
+#include <autoware/behavior_velocity_intersection_module/interpolated_path_info.hpp>
 #include "object_manager.hpp"
 #include "result.hpp"
 #include "roundabout_lanelets.hpp"
