@@ -18,7 +18,7 @@
 #include "decision_result.hpp"
 #include <autoware/behavior_velocity_intersection_module/interpolated_path_info.hpp>
 #include "object_manager.hpp"
-#include "result.hpp"
+#include <autoware/behavior_velocity_intersection_module/result.hpp>
 #include "roundabout_lanelets.hpp"
 #include "roundabout_stoplines.hpp"
 
