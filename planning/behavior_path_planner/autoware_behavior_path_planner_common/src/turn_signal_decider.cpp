@@ -263,19 +263,19 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getIntersectionTurnSignalInfo(
       nearest_yaw_threshold);
     if (dist_to_back_point < 0.0) {
       // Vehicle is already passed this lane
-      desired_start_point_map_.erase(lane_id);
+      intersection_desired_start_point_association_.erase(lane_id);
       continue;
     } else if (search_distance <= dist_to_front_point) {
       continue;
     }
     if (requires_turn_signal(lane_attribute, is_in_turn_lane)) {
       // update map if necessary
-      if (desired_start_point_map_.find(lane_id) == desired_start_point_map_.end()) {
-        desired_start_point_map_.emplace(lane_id, current_pose);
+      if (intersection_desired_start_point_association_.find(lane_id) == intersection_desired_start_point_association_.end()) {
+        intersection_desired_start_point_association_.emplace(lane_id, current_pose);
       }
 
       TurnSignalInfo turn_signal_info{};
-      turn_signal_info.desired_start_point = desired_start_point_map_.at(lane_id);
+      turn_signal_info.desired_start_point = intersection_desired_start_point_association_.at(lane_id);
       turn_signal_info.required_start_point = lane_front_pose;
       turn_signal_info.required_end_point =
         get_required_end_point(combined_lane.centerline3d(), intersection_angle_threshold_deg_);
@@ -339,7 +339,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
 
     const auto back_pose = calculateLaneBackPose(centerline);
     auto [iter, inserted] =
-      roundabout_desired_start_point_map_.try_emplace(entry_lanelet.id(), current_pose);
+      roundabout_desired_start_point_association_.try_emplace(entry_lanelet.id(), current_pose);
     TurnSignalInfo turn_signal_info;
     turn_signal_info.desired_start_point = iter->second;
     turn_signal_info.required_start_point = front_pose;
@@ -366,7 +366,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
       turn_signal_info.turn_signal.command = TurnIndicatorsCommand::ENABLE_RIGHT;
     } else if (
       exit_turn_signal_tag == "none" && roundabout_on_entry_ == TurnIndicatorsCommand::DISABLE) {
-      roundabout_desired_start_point_map_.erase(entry_lanelet.id());
+      roundabout_desired_start_point_association_.erase(entry_lanelet.id());
       continue;
     }
 
@@ -381,7 +381,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
       path, current_pose, current_seg_idx, turn_signal_info.desired_end_point,
       nearest_dist_threshold, nearest_yaw_threshold);
     if (dist_to_desired_end_point < 0.0) {  // Vehicle is already passed this lane
-      roundabout_desired_start_point_map_.erase(entry_lanelet.id());
+      roundabout_desired_start_point_association_.erase(entry_lanelet.id());
       continue;
     }
     signal_queue.push(turn_signal_info);
@@ -399,7 +399,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
       path, current_pose, current_seg_idx, back_pose, nearest_dist_threshold,
       nearest_yaw_threshold);
     if (dist_to_back_pose < 0.0) {  // Vehicle is already passed this lane
-      roundabout_desired_start_point_map_.erase(exit_lanelet.id());
+      roundabout_desired_start_point_association_.erase(exit_lanelet.id());
       continue;
     }
 
@@ -424,7 +424,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
     if (dist_to_desired_start_point >= 0.0) continue;  // Skip if the front point is too far
     // update map if necessary
     auto [iter, inserted] =
-      roundabout_desired_start_point_map_.try_emplace(exit_lanelet.id(), desired_start_point);
+      roundabout_desired_start_point_association_.try_emplace(exit_lanelet.id(), desired_start_point);
 
     TurnSignalInfo turn_signal_info;
     turn_signal_info.desired_start_point = iter->second;

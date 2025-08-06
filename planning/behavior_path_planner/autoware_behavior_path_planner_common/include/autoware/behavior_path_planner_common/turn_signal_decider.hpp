@@ -362,8 +362,8 @@ private:
   double intersection_search_distance_{0.0};
   double turn_signal_search_time_{0.0};
   double intersection_angle_threshold_deg_{0.0};
-  std::map<lanelet::Id, geometry_msgs::msg::Pose> desired_start_point_map_;
-  std::map<lanelet::Id, geometry_msgs::msg::Pose> roundabout_desired_start_point_map_;
+  std::map<lanelet::Id, geometry_msgs::msg::Pose> intersection_desired_start_point_association_;
+  std::map<lanelet::Id, geometry_msgs::msg::Pose> roundabout_desired_start_point_association_;
   mutable bool intersection_turn_signal_ = false;
   mutable bool approaching_intersection_turn_signal_ = false;
   mutable double intersection_distance_ = std::numeric_limits<double>::max();
