@@ -110,16 +110,12 @@ public:
 
   std::optional<CollisionInterval> unsafe_info() const
   {
-    // if (safe_under_traffic_control_) {
-    //   return std::nullopt;
-    // }
     if (!unsafe_interval_) {
       return std::nullopt;
     }
     return unsafe_interval_;
   }
 
-  // bool is_safe_under_traffic_control() const { return safe_under_traffic_control_; }
 
   /**
    * @brief update predicted_object_, attention_lanelet, stopline, dist_to_stopline
@@ -132,10 +128,6 @@ public:
   /**
    * @brief update unsafe_knowledge
    */
-  // void update_safety(
-  //   const std::optional<CollisionInterval> & unsafe_interval,
-  //   const std::optional<CollisionInterval> & safe_interval, const bool safe_under_traffic_control);
-
   void update_safety(
     const std::optional<CollisionInterval> & unsafe_interval,
     const std::optional<CollisionInterval> & safe_interval);
@@ -170,11 +162,6 @@ public:
     decision_at_1st_pass_judge_line_passage_ = knowledge;
   }
 
-  // void setDecisionAt2ndPassJudgeLinePassage(const CollisionKnowledge & knowledge)
-  // {
-  //   decision_at_2nd_pass_judge_line_passage_ = knowledge;
-  // }
-
   const std::optional<CollisionInterval> & unsafe_interval() const { return unsafe_interval_; }
 
   double observed_velocity() const
@@ -186,11 +173,6 @@ public:
   {
     return decision_at_1st_pass_judge_line_passage_;
   }
-
-  // const std::optional<CollisionKnowledge> & decision_at_2nd_pass_judge_line_passage() const
-  // {
-  //   return decision_at_2nd_pass_judge_line_passage_;
-  // }
 
   const std::string uuid_str;
 
@@ -212,11 +194,7 @@ private:
   //! store the information if judged as SAFE
   std::optional<CollisionInterval> safe_interval_{std::nullopt};
 
-  //! true if the object is judged as negligible given traffic light color
-  // bool safe_under_traffic_control_{false};
-
   std::optional<CollisionKnowledge> decision_at_1st_pass_judge_line_passage_{std::nullopt};
-  // std::optional<CollisionKnowledge> decision_at_2nd_pass_judge_line_passage_{std::nullopt};
 
   /**
    * @brief calculate/update the distance to corresponding stopline
@@ -231,12 +209,10 @@ class ObjectInfoManager
 {
 public:
   std::shared_ptr<ObjectInfo> registerObject(
-    const unique_identifier_msgs::msg::UUID & uuid, const bool belong_attention_area,
-    const bool belong_roundabout_area);
+    const unique_identifier_msgs::msg::UUID & uuid, const bool belong_attention_area);
 
   void registerExistingObject(
     const unique_identifier_msgs::msg::UUID & uuid, const bool belong_attention_area,
-    const bool belong_roundabout_area,
     std::shared_ptr<ObjectInfo> object);
 
   void clearObjects();
@@ -258,10 +234,6 @@ public:
   {
     passed_1st_judge_line_first_time_ = time;
   }
-  // void setPassed2ndPassJudgeLineFirstTime(const rclcpp::Time & time)
-  // {
-  //   passed_2nd_judge_line_first_time_ = time;
-  // }
 
 private:
   std::unordered_map<unique_identifier_msgs::msg::UUID, std::shared_ptr<ObjectInfo>> objects_info_;
@@ -269,11 +241,7 @@ private:
   //! belong to attention area
   std::vector<std::shared_ptr<ObjectInfo>> attention_area_objects_;
 
-  //! does not belong to attention area but to roundabout area
-  std::vector<std::shared_ptr<ObjectInfo>> roundabout_area_objects_;
-
   std::optional<rclcpp::Time> passed_1st_judge_line_first_time_{std::nullopt};
-  // std::optional<rclcpp::Time> passed_2nd_judge_line_first_time_{std::nullopt};
 };
 
 /**

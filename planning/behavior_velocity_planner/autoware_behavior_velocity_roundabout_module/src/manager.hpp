@@ -60,10 +60,16 @@ private:
   getModuleExpiredFunction(
     const autoware_internal_planning_msgs::msg::PathWithLaneId & path) override;
 
+  /* * @brief Get the lanelets that are associated with the roundabout entry lanelets.
+   * This function retrieves the lanelets that are associated with the roundabout entry lanelets.
+   * @param lane The lanelet to check.
+   * @param roundabout The roundabout to check.
+   * @return A set of lanelet IDs that are associated with the roundabout entry lanelets.
+   * If the lanelet is not a roundabout entry lanelet, an empty set is returned.
+   */
   std::set<lanelet::Id> getAssociativeRoundaboutEntryLanelets(
     const lanelet::ConstLanelet & lane, const lanelet::autoware::Roundabout & roundabout);
-
-  bool isRegElemRegistered(const lanelet::autoware::Roundabout & roundabout) const;
+  bool isRegisteredModule(const lanelet::ConstLanelet & entry_lanelet) const;
 
   /* called from SceneModuleInterfaceWithRTC::plan */
   void sendRTC(const Time & stamp) override;

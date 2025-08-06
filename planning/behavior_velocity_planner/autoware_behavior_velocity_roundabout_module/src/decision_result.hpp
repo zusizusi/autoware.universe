@@ -66,32 +66,6 @@ struct CollisionStop
   size_t collision_stopline_idx{0};
 };
 
-// /**
-//  * @brief both collision and occlusion are detected in the presence of traffic light
-//  */
-// struct OccludedCollisionStop
-// {
-//   bool is_actually_occlusion_cleared{false};
-//   size_t closest_idx{0};
-//   size_t collision_stopline_idx{0};
-//   size_t occlusion_stopline_idx{0};
-//   //! if null, it is dynamic occlusion and shows up roundabout_occlusion(dyn). if valid, it
-//   //! contains the remaining time to release the static occlusion stuck
-// };
-
-// /**
-//  * @brief at least occlusion is detected in the absence of traffic light
-//  */
-// struct OccludedAbsenceTrafficLight
-// {
-//   bool is_actually_occlusion_cleared{false};
-//   bool collision_detected{false};
-//   bool temporal_stop_before_attention_required{false};
-//   size_t closest_idx{0};
-//   size_t occlusion_stopline_idx{0};
-//   size_t peeking_limit_line_idx{0};
-//   std::string occlusion_report;
-// };
 
 /**
  * @brief both collision and occlusion are not detected
@@ -117,15 +91,8 @@ struct FullyPrioritized
 using DecisionResult = std::variant<
   InternalError,                //! internal process error
   OverPassJudge,                //! over the pass judge lines
-  // StuckStop                   //! detected stuck vehicle
-  // YieldStuckStop               //! detected yield stuck vehicle
   CollisionStop,     //! detected collision while FOV is clear
-  // FirstWaitBeforeOcclusion     //! stop for a while before peeking to occlusion
-  // PeekingTowardOcclusion       //! peeking into occlusion while collision is not detected
-  // OccludedCollisionStop       //! occlusion and collision are both detected
-  // OccludedAbsenceTrafficLight  //! occlusion is detected in the absence of traffic light
   Safe                        //! judge as safe
-  // FullyPrioritized              //! only detect vehicles violating traffic rules
   >;
 
 std::string formatDecisionResult(

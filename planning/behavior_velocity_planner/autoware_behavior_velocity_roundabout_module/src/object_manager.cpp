@@ -195,8 +195,7 @@ bool ObjectInfo::before_stopline_by(const double margin) const
 }
 
 std::shared_ptr<ObjectInfo> ObjectInfoManager::registerObject(
-  const unique_identifier_msgs::msg::UUID & uuid, const bool belong_attention_area,
-  const bool belong_roundabout_area)
+  const unique_identifier_msgs::msg::UUID & uuid, const bool belong_attention_area)
 {
   if (objects_info_.count(uuid) == 0) {
     auto object = std::make_shared<ObjectInfo>(uuid);
@@ -205,22 +204,17 @@ std::shared_ptr<ObjectInfo> ObjectInfoManager::registerObject(
   auto object = objects_info_[uuid];
   if (belong_attention_area) {
     attention_area_objects_.push_back(object);
-  } else if (belong_roundabout_area) {
-    roundabout_area_objects_.push_back(object);
   }
   return object;
 }
 
 void ObjectInfoManager::registerExistingObject(
   const unique_identifier_msgs::msg::UUID & uuid, const bool belong_attention_area,
-  const bool belong_roundabout_area,
   std::shared_ptr<ObjectInfo> object)
 {
   objects_info_[uuid] = object;
   if (belong_attention_area) {
     attention_area_objects_.push_back(object);
-  } else if (belong_roundabout_area) {
-    roundabout_area_objects_.push_back(object);
   }
 }
 
@@ -228,14 +222,11 @@ void ObjectInfoManager::clearObjects()
 {
   objects_info_.clear();
   attention_area_objects_.clear();
-  roundabout_area_objects_.clear();
 };
 
 std::vector<std::shared_ptr<ObjectInfo>> ObjectInfoManager::allObjects() const
 {
   std::vector<std::shared_ptr<ObjectInfo>> all_objects = attention_area_objects_;
-  all_objects.insert(
-    all_objects.end(), roundabout_area_objects_.begin(), roundabout_area_objects_.end());
   return all_objects;
 }
 
