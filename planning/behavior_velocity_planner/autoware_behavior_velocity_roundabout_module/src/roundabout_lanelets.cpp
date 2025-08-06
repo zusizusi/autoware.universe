@@ -15,6 +15,7 @@
 #include "roundabout_lanelets.hpp"
 
 #include "util.hpp"
+#include <autoware/behavior_velocity_intersection_module/util.hpp>
 
 #include <lanelet2_core/LaneletMap.h>
 #include <lanelet2_routing/RoutingGraph.h>
