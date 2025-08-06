@@ -246,7 +246,7 @@ struct PlannerData
     parameters.turn_signal_roundabout_on_exit =
       node.declare_parameter<std::string>("turn_signal_roundabout_on_exit");
     parameters.turn_signal_roundabout_entry_indicator_persistence =
-      node.declare_parameter<bool>("turn_signal_roundabout_entry_persist");
+      node.declare_parameter<bool>("turn_signal_roundabout_entry_indicator_persistence");
     parameters.turn_signal_roundabout_search_distance =
       node.declare_parameter<double>("turn_signal_roundabout_search_distance");
     parameters.turn_signal_roundabout_angle_threshold_deg =

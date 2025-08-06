@@ -176,11 +176,14 @@ private:
   {
     TurnSignalInfo signal_info;
     double desired_start_distance;
+    double desired_end_distance;
     double required_start_distance;
     double required_end_distance;
-    double desired_end_distance;
     std::string signal_type;
 
+    // The signal is valid only when the ego is between the desired start and end points.
+    // desired_start_distance <= 0.0: ego has passed the desired start point
+    // desired_end_distance >= 0.0: ego has not yet passed the desired end point
     inline bool isValid() const
     {
       return (desired_start_distance <= 0.0 && desired_end_distance >= 0.0);
