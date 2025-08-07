@@ -150,14 +150,9 @@ public:
     //! true if ego is over the 1st pass judge line
     const bool is_over_1st_pass_judge;
 
-    //! true if second_attention_lane exists and ego is over the 2nd pass judge line
-    // const std::optional<bool> is_over_2nd_pass_judge;
-
     //! true only when ego passed 1st pass judge line safely for the first time
     const bool safely_passed_1st_judge_line;
 
-    //! true only when ego passed 2nd pass judge line safely for the first time
-    // const bool safely_passed_2nd_judge_line;
   };
 
   /**
@@ -277,13 +272,11 @@ private:
   //! is treated as the same position as occlusion_peeking_stopline
   bool passed_1st_judge_line_while_peeking_{false};
 
-  //! save the time and ego position when ego passed the 1st/2nd_pass_judge_line with safe
+  //! save the time and ego position when ego passed the 1st_pass_judge_line with safe
   //! decision. If collision is expected after these variables are non-null, then it is the fault of
   //! past perception failure at these time.
   std::optional<std::pair<rclcpp::Time, geometry_msgs::msg::Pose>>
     safely_passed_1st_judge_line_time_{std::nullopt};
-  std::optional<std::pair<rclcpp::Time, geometry_msgs::msg::Pose>>
-    safely_passed_2nd_judge_line_time_{std::nullopt};
   /** @}*/
 
 private:
@@ -418,8 +411,8 @@ private:
    */
   /**
    * @brief check if ego is already over the pass judge line
-   * @return if ego is over both 1st/2nd pass judge lines, return InternalError, else return
-   * (is_over_1st_pass_judge, is_over_2nd_pass_judge)
+   * @return if ego is over 1st pass judge lines, return InternalError, else return
+   * is_over_1st_pass_judge
    * @attention this function has access to value() of roundabout_stoplines.default_stopline,
    * roundabout_stoplines.occlusion_stopline
    */

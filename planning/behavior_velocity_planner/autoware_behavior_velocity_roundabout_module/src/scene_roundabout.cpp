@@ -147,9 +147,6 @@ DecisionResult RoundaboutModule::modifyPathVelocityDetail(PathWithLaneId * path)
   // ==========================================================================================
   updateObjectInfoManagerArea();
 
-  // const auto
-  //   [is_over_1st_pass_judge_line, is_over_2nd_pass_judge_line, safely_passed_1st_judge_line,
-  //    safely_passed_2nd_judge_line] = isOverPassJudgeLinesStatus(*path, roundabout_stoplines);
   const auto [is_over_1st_pass_judge_line, safely_passed_1st_judge_line] =
     isOverPassJudgeLinesStatus(*path, roundabout_stoplines);
 
@@ -167,9 +164,6 @@ DecisionResult RoundaboutModule::modifyPathVelocityDetail(PathWithLaneId * path)
   // diagnosis
   // ==========================================================================================
   autoware_internal_debug_msgs::msg::Float64MultiArrayStamped object_ttc_time_array;
-  // updateObjectInfoManagerCollision(
-  //   path_lanelets, time_distance_array, safely_passed_1st_judge_line,
-  //   safely_passed_2nd_judge_line, &object_ttc_time_array);
   updateObjectInfoManagerCollision(
     path_lanelets, time_distance_array, safely_passed_1st_judge_line, &object_ttc_time_array);
   {
@@ -491,12 +485,11 @@ RoundaboutModule::PassJudgeStatus RoundaboutModule::isOverPassJudgeLinesStatus(
     // ==========================================================================================
     // this body is active if ego is
     // - over the default stopline AND
-    // - over the 1st && 2nd pass judge line AND
+    // - over the 1st pass judge line AND
     // - previously safe
     // ,
     // which means ego can stop even if it is over the 1st pass judge line but
     // - before default stopline OR
-    // - before the 2nd pass judge line OR
     // - or previously unsafe
     // .
     // ==========================================================================================

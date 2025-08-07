@@ -422,44 +422,6 @@ std::string RoundaboutModule::generateDetectionBlameDiagnosis(
         );
       }
     }
-    if (
-      safely_passed_2nd_judge_line_time_ &&
-      blame_type == CollisionStatus::BLAME_AT_SECOND_PASS_JUDGE && object_info->unsafe_interval()) {
-      const auto [passed_2nd_judge_line_time, passed_2nd_judge_line_pose] =
-        safely_passed_2nd_judge_line_time_.value();
-      const auto passed_2nd_judge_line_time_double =
-        static_cast<double>(passed_2nd_judge_line_time.nanoseconds()) / 1e+9;
-
-      const auto & unsafe_interval = object_info->unsafe_interval().value();
-      const double time_diff = now_double - passed_2nd_judge_line_time_double;
-      diag += fmt::format(
-        "object {0} was not detected when ego passed the 2nd pass judge line at {1}, but now at "
-        "{2}, collision is detected after {3}~{4} seconds on the lanelet of type {5}.\n",
-        object_info->uuid_str,                                // 0
-        passed_2nd_judge_line_time_double,                    // 1
-        now_double,                                           // 2
-        unsafe_interval.interval_time.first,                  // 3
-        unsafe_interval.interval_time.second,                 // 4
-        magic_enum::enum_name(unsafe_interval.lane_position)  // 5
-      );
-      const auto past_position_opt = object_info->estimated_past_position(time_diff);
-      if (past_position_opt) {
-        const auto & past_position = past_position_opt.value();
-        diag += fmt::format(
-          "this object is estimated to have been at x = {0}, y = {1} when ego passed the 2nd pass "
-          "judge line({2} seconds before from now) given the estimated current velocity {3}[m/s]. "
-          "ego was at x = {4}, y = {5} when it passed the 2nd pass judge line so it is the fault "
-          "of detection side that failed to detect around {6}[m] range at that time.\n",
-          past_position.x,                                                            // 0
-          past_position.y,                                                            // 1
-          time_diff,                                                                  // 2
-          object_info->observed_velocity(),                                           // 3
-          passed_2nd_judge_line_pose.position.x,                                      // 4
-          passed_2nd_judge_line_pose.position.y,                                      // 5
-          autoware_utils::calc_distance2d(passed_2nd_judge_line_pose, past_position)  // 6
-        );
-      }
-    }
   }
   for (const auto & [blame_type, object_info] : misjudge_objects) {
     if (
