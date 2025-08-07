@@ -116,14 +116,12 @@ public:
     return unsafe_interval_;
   }
 
-
   /**
    * @brief update predicted_object_, attention_lanelet, stopline, dist_to_stopline
    */
   void initialize(
     const autoware_perception_msgs::msg::PredictedObject & object,
-    std::optional<lanelet::ConstLanelet> attention_lanelet_opt,
-    std::optional<lanelet::ConstLineString3d> stopline_opt);
+    std::optional<lanelet::ConstLanelet> attention_lanelet_opt);
 
   /**
    * @brief update unsafe_knowledge
@@ -137,25 +135,6 @@ public:
    */
   std::optional<geometry_msgs::msg::Point> estimated_past_position(
     const double past_duration) const;
-
-  /**
-   * @brief check if object can stop before stopline under the deceleration. return false if
-   * stopline is null for conservative collision  checking
-   */
-  bool can_stop_before_stopline(const double brake_deceleration) const;
-
-  /**
-   * @brief check if object can stop before stopline within the overshoot margin. return false if
-   * stopline is null for conservative collision checking
-   */
-  bool can_stop_before_ego_lane(
-    const double brake_deceleration, const double tolerable_overshoot,
-    lanelet::ConstLanelet ego_lane) const;
-
-  /**
-   * @brief check if the object is before the stopline within the specified margin
-   */
-  bool before_stopline_by(const double margin) const;
 
   void setDecisionAt1stPassJudgeLinePassage(const CollisionKnowledge & knowledge)
   {
@@ -182,12 +161,6 @@ private:
   //! null if the object in roundabout_area but not in attention_area
   std::optional<lanelet::ConstLanelet> attention_lanelet_opt_{std::nullopt};
 
-  //! null if the object in roundabout_area but not in attention_area
-  std::optional<lanelet::ConstLineString3d> stopline_opt_{std::nullopt};
-
-  //! null if the object in roundabout_area but not in attention_area
-  std::optional<double> dist_to_stopline_opt_{std::nullopt};
-
   //! store the information if judged as UNSAFE
   std::optional<CollisionInterval> unsafe_interval_{std::nullopt};
 
@@ -195,11 +168,6 @@ private:
   std::optional<CollisionInterval> safe_interval_{std::nullopt};
 
   std::optional<CollisionKnowledge> decision_at_1st_pass_judge_line_passage_{std::nullopt};
-
-  /**
-   * @brief calculate/update the distance to corresponding stopline
-   */
-  void calc_dist_to_stopline();
 };
 
 /**

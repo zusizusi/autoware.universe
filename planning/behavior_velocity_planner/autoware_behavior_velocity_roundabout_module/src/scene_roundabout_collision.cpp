@@ -108,14 +108,11 @@ void RoundaboutModule::updateObjectInfoManagerArea()
       checkAngleForTargetLanelets(object_direction, attention_lanelets);
 
     std::optional<lanelet::ConstLanelet> attention_lanelet{std::nullopt};
-    std::optional<lanelet::ConstLineString3d> stopline{std::nullopt};
     if (!belong_attention_lanelet_id) {
       continue;
     } else if (belong_attention_lanelet_id) {
       const auto idx = belong_attention_lanelet_id.value();
       attention_lanelet = attention_lanelets.at(idx);
-      stopline = std::nullopt;  // TODO(zusizusi): implement stopline retrieval
-      // stopline = attention_lanelet_stoplines.at(idx);
     }
 
     const auto object_it = old_map.find(predicted_object.object_id);
@@ -123,11 +120,11 @@ void RoundaboutModule::updateObjectInfoManagerArea()
       auto object_info = object_it->second;
       object_info_manager_.registerExistingObject(
         predicted_object.object_id, belong_attention_lanelet_id.has_value(), object_info);
-      object_info->initialize(predicted_object, attention_lanelet, stopline);
+      object_info->initialize(predicted_object, attention_lanelet);
     } else {
       auto object_info = object_info_manager_.registerObject(
         predicted_object.object_id, belong_attention_lanelet_id.has_value());
-      object_info->initialize(predicted_object, attention_lanelet, stopline);
+      object_info->initialize(predicted_object, attention_lanelet);
     }
   }
 }
