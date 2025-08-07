@@ -13,8 +13,8 @@
 // limitations under the License.
 
 #include "scene_roundabout.hpp"
-#include <autoware/behavior_velocity_intersection_module/util.hpp>
 
+#include <autoware/behavior_velocity_intersection_module/util.hpp>
 #include <autoware/behavior_velocity_planner_common/utilization/boost_geometry_helper.hpp>  // for toGeomPoly
 #include <autoware/behavior_velocity_planner_common/utilization/trajectory_utils.hpp>  // for smoothPath
 #include <autoware/motion_utils/trajectory/trajectory.hpp>
@@ -149,7 +149,6 @@ void RoundaboutModule::updateObjectInfoManagerCollision(
   debug_data_.ego_lane = ego_lane.polygon3d();
   const auto ego_poly = ego_lane.polygon2d().basicPolygon();
 
-
   const auto collision_start_margin_time =
     planner_param_.collision_detection.collision_start_margin_time;
   const auto collision_end_margin_time =
@@ -234,9 +233,9 @@ void RoundaboutModule::updateObjectInfoManagerCollision(
       if (ego_start_itr == time_distance_array.end()) {
         // ==========================================================================================
         // this is the case where at time "object_enter_time - collision_start_margin_time", ego is
-        // arriving at the exit of the roundabout, which means even if we assume that the object
+        // arriving at the internal of the roundabout, which means even if we assume that the object
         // accelerates and the first collision happens faster by the TTC margin, ego will be already
-        // arriving at the exist of the roundabout.
+        // arriving at the internal of the roundabout.
         // ==========================================================================================
         continue;
       }
@@ -364,7 +363,6 @@ void RoundaboutModule::cutPredictPathWithinDuration(
     }
   }
 }
-
 
 std::string RoundaboutModule::generateDetectionBlameDiagnosis(
   const std::vector<
@@ -554,10 +552,10 @@ RoundaboutModule::CollisionStatus RoundaboutModule::detectCollision(
     // "misjudge_objects" is more important than that for "unsafe"
     //
     // NOTE: consider a vehicle which was not detected at 1st_pass_judge_passage, and now collision
-    // detected on the 1st lane, which is "too_late" for 1st lane passage, but once it decelerated
-    // or yielded, so it turned safe, and ego passed the 2nd pass judge line, but at the same it
-    // accelerated again, which is "misjudge" for 2nd lane passage. In this case this vehicle is
-    // visualized as "misjudge"
+    // detected on the 1st lane, which is "too_late" for 1st lane passage.
+    // When the ego vehicle passed the 1st_pass_judge_line, the other vehicle was initially judged
+    // as "safe". Subsequently, however, it either accelerated or changed course, and is now judged
+    // as "collision". This situation is classified as a "misjudge".
     // ==========================================================================================
     auto * debug_container = &debug_data_.unsafe_targets.objects;
     if (unsafe_info.lane_position == CollisionInterval::LanePosition::FIRST) {
@@ -596,7 +594,6 @@ RoundaboutModule::CollisionStatus RoundaboutModule::detectCollision(
   }
   return {false, CollisionInterval::ELSE, too_late_detect_objects, misjudge_objects};
 }
-
 
 std::optional<size_t> RoundaboutModule::checkAngleForTargetLanelets(
 
@@ -665,19 +662,9 @@ RoundaboutModule::TimeDistanceArray RoundaboutModule::calcRoundaboutPassingTime(
   // closest_idx for example, ego is almost "fixed" at current position for the entire
   // spatiotemporal profile, which is judged as SAFE because that profile does not collide
   // with the predicted paths of objects.
-  //
-  // if second_attention_lane exists, second_attention_stopline_idx is used. if not,
-  // max(occlusion_stopline_idx, first_attention_stopline_idx) is used because
-  // occlusion_stopline_idx varies depending on the peeking offset parameter
   // ==========================================================================================
-  // const auto second_attention_stopline_idx = roundabout_stoplines.second_attention_stopline;
-  // const auto occlusion_stopline_idx = roundabout_stoplines.occlusion_peeking_stopline.value();
-  const auto first_attention_stopline_idx = roundabout_stoplines.first_attention_stopline.value();
+  const auto last_roundabout_stopline_candidate_idx = roundabout_stoplines.first_attention_stopline.value();
   const auto closest_idx = roundabout_stoplines.closest_idx;
-  // const auto last_roundabout_stopline_candidate_idx = second_attention_stopline_idx
-  //                                                       ? second_attention_stopline_idx.value()
-  //                                                       : first_attention_stopline_idx;
-  const auto last_roundabout_stopline_candidate_idx = first_attention_stopline_idx;
 
   bool assigned_lane_found = false;
   // crop roundabout part of the path, and set the reference velocity to roundabout_velocity

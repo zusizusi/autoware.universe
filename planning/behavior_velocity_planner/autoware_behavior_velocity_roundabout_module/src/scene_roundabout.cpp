@@ -450,11 +450,6 @@ RoundaboutModule::PassJudgeStatus RoundaboutModule::isOverPassJudgeLinesStatus(
   const auto default_stopline_idx = roundabout_stoplines.default_stopline.value();
   const size_t pass_judge_line_idx = roundabout_stoplines.first_pass_judge_line;
 
-  // ==========================================================================================
-  // at roundabout without traffic light, this module ignores occlusion even if occlusion is
-  // detected for real, so if collision is not detected in that context, that should be interpreted
-  // as "was_safe"
-  // ==========================================================================================
   const bool was_safe = [&]() {
     if (std::holds_alternative<Safe>(prev_decision_result_)) {
       return true;

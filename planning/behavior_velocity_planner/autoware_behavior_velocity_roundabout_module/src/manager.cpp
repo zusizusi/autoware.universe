@@ -183,9 +183,6 @@ std::set<lanelet::Id> RoundaboutModuleManager::getAssociativeRoundaboutEntryLane
   const auto right_lanelets = planner_data_->route_handler_->getAllRightSharedLinestringLanelets(lane, false);
   const auto left_lanelets = planner_data_->route_handler_->getAllLeftSharedLinestringLanelets(lane, false);
 
-  RCLCPP_ERROR(logger_, "right_lanelets size: %zu, left_lanelets size: %zu",
-                right_lanelets.size(), left_lanelets.size());
-
   associative_lanelets.insert(lane.id());
   for (const auto & right_lanelet : right_lanelets) {
     if (roundabout.isEntryLanelet(right_lanelet.id())) {

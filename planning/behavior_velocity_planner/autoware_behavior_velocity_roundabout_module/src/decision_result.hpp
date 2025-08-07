@@ -49,7 +49,7 @@ struct CollisionStop
 };
 
 /**
- * @brief both collision and occlusion are not detected
+ * @brief both collision is not detected
  */
 struct Safe
 {

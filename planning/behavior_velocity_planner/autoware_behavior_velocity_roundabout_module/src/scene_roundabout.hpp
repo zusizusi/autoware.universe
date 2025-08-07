@@ -188,9 +188,8 @@ public:
    * approval may not be based on the latest decision of this module depending on the auto-mode
    * configuration. For module side it is not visible if the module is operating in auto-mode or
    * manual-module. At first, initializeRTCStatus() is called to reset the safety value of
-   * ROUNDABOUT and ROUNDABOUT_OCCLUSION. Then modifyPathVelocityDetail() is called to analyze
-   * the context. Then prepareRTCStatus() is called to set the safety value of ROUNDABOUT and
-   * ROUNDABOUT_OCCLUSION.
+   * ROUNDABOUT. Then modifyPathVelocityDetail() is called to analyze
+   * the context. Then prepareRTCStatus() is called to set the safety value of ROUNDABOUT.
    * @{
    */
   bool modifyPathVelocity(PathWithLaneId * path) override;
@@ -267,10 +266,6 @@ private:
 
   //! for checking if ego is over the pass judge lines because previously the situation was SAFE
   DecisionResult prev_decision_result_{InternalError{""}};
-
-  //! flag if ego passed the 1st_pass_judge_line while peeking. If this is true, 1st_pass_judge_line
-  //! is treated as the same position as occlusion_peeking_stopline
-  bool passed_1st_judge_line_while_peeking_{false};
 
   //! save the time and ego position when ego passed the 1st_pass_judge_line with safe
   //! decision. If collision is expected after these variables are non-null, then it is the fault of
@@ -413,8 +408,7 @@ private:
    * @brief check if ego is already over the pass judge line
    * @return if ego is over 1st pass judge lines, return InternalError, else return
    * is_over_1st_pass_judge
-   * @attention this function has access to value() of roundabout_stoplines.default_stopline,
-   * roundabout_stoplines.occlusion_stopline
+   * @attention this function has access to value() of roundabout_stoplines.default_stopline
    */
   PassJudgeStatus isOverPassJudgeLinesStatus(
     const autoware_internal_planning_msgs::msg::PathWithLaneId & path,
@@ -486,7 +480,6 @@ private:
    * @brief calculate ego vehicle profile along the path inside the roundabout as the sequence of
    * (time of arrival, traveled distance) from current ego position
    * @attention this function has access to value() of
-   * roundabout_stoplines.occlusion_peeking_stopline,
    * roundabout_stoplines.first_attention_stopline
    */
   TimeDistanceArray calcRoundaboutPassingTime(
