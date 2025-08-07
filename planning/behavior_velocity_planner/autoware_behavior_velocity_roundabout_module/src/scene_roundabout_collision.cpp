@@ -106,18 +106,9 @@ void RoundaboutModule::updateObjectInfoManagerArea()
     }
     const auto belong_attention_lanelet_id =
       checkAngleForTargetLanelets(object_direction, attention_lanelets);
-    // const auto & obj_pos =
-    // predicted_object.kinematics.initial_pose_with_covariance.pose.position; const bool
-    // in_roundabout_area = [&]() {
-    //   if (!roundabout_area) {
-    //     return false;
-    //   }
-    //   return bg::within(autoware_utils::Point2d{obj_pos.x, obj_pos.y}, roundabout_area.value());
-    // }();
-    const bool in_roundabout_area = true;  // TODO(zusizusi): implement roundabout area check
+
     std::optional<lanelet::ConstLanelet> attention_lanelet{std::nullopt};
     std::optional<lanelet::ConstLineString3d> stopline{std::nullopt};
-    // if (!belong_attention_lanelet_id && !in_roundabout_area) {
     if (!belong_attention_lanelet_id) {
       continue;
     } else if (belong_attention_lanelet_id) {
@@ -131,11 +122,11 @@ void RoundaboutModule::updateObjectInfoManagerArea()
     if (object_it != old_map.end()) {
       auto object_info = object_it->second;
       object_info_manager_.registerExistingObject(
-        predicted_object.object_id, belong_attention_lanelet_id.has_value(), in_roundabout_area, object_info);
+        predicted_object.object_id, belong_attention_lanelet_id.has_value(), object_info);
       object_info->initialize(predicted_object, attention_lanelet, stopline);
     } else {
       auto object_info = object_info_manager_.registerObject(
-        predicted_object.object_id, belong_attention_lanelet_id.has_value(), in_roundabout_area);
+        predicted_object.object_id, belong_attention_lanelet_id.has_value());
       object_info->initialize(predicted_object, attention_lanelet, stopline);
     }
   }
@@ -152,9 +143,6 @@ void RoundaboutModule::updateObjectInfoManagerCollision(
   if (passed_1st_judge_line_first_time) {
     object_info_manager_.setPassed1stPassJudgeLineFirstTime(clock_->now());
   }
-  // if (passed_2nd_judge_line_first_time) {
-  //   object_info_manager_.setPassed2ndPassJudgeLineFirstTime(clock_->now());
-  // }
 
   const double passing_time = time_distance_array.back().first;
   const auto & concat_lanelets = lanelet::utils::combineLaneletsShape(path_lanelets.all);

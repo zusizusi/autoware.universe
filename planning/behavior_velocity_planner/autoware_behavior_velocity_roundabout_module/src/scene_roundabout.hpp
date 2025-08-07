@@ -25,6 +25,7 @@
 #include <autoware/behavior_velocity_planner_common/utilization/state_machine.hpp>
 #include <autoware/behavior_velocity_rtc_interface/scene_module_interface_with_rtc.hpp>
 #include <autoware/motion_utils/marker/virtual_wall_marker_creator.hpp>
+#include <autoware_lanelet2_extension/regulatory_elements/roundabout.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 #include <autoware_internal_debug_msgs/msg/float64_multi_array_stamped.hpp>
@@ -372,18 +373,9 @@ private:
   Result<BasicData, InternalError> prepareRoundaboutData(PathWithLaneId * path);
 
   /**
-   * @brief find the associated stopline road marking of assigned lanelet
-   */
-  std::optional<size_t> getStopLineIndexFromMap(
-    const InterpolatedPathInfo & interpolated_path_info,
-    lanelet::ConstLanelet assigned_lanelet) const;
-
-  /**
    * @brief generate RoundaboutStopLines
    */
   std::optional<RoundaboutStopLines> generateRoundaboutStopLines(
-    lanelet::ConstLanelet assigned_lanelet,
-    const lanelet::CompoundPolygon3d & first_conflicting_area,
     const lanelet::ConstLanelet & first_attention_lane,
     const InterpolatedPathInfo & interpolated_path_info,
     autoware_internal_planning_msgs::msg::PathWithLaneId * original_path) const;

@@ -26,12 +26,7 @@ namespace autoware::behavior_velocity_planner
 struct RoundaboutStopLines
 {
   size_t closest_idx{0};
-
-  /**
-   * stuck_stopline is null if ego path does not intersect with first_conflicting_area
-   */
-  // std::optional<size_t> stuck_stopline{std::nullopt};
-
+  
   /**
    * default_stopline is null if it is calculated negative from first_attention_stopline
    */

@@ -39,18 +39,14 @@ public:
   /**
    * update conflicting lanelets and traffic priority information
    */
-  void update( const InterpolatedPathInfo & interpolated_path_info,
+  void update(
+    const InterpolatedPathInfo & interpolated_path_info,
     const autoware_utils::LinearRing2d & footprint, const double vehicle_length,
     [[maybe_unused]] lanelet::routing::RoutingGraphPtr routing_graph_ptr);
 
-  const lanelet::ConstLanelets & attention() const
-  {
-    // return is_prioritized_ ? attention_non_preceding_ : attention_;
-    return attention_;
-  }
+  const lanelet::ConstLanelets & attention() const { return attention_; }
   const std::vector<std::optional<lanelet::ConstLineString3d>> & attention_stoplines() const
   {
-    // return is_prioritized_ ? attention_non_preceding_stoplines_ : attention_stoplines_;
     return attention_stoplines_;
   }
   const lanelet::ConstLanelets & conflicting() const { return conflicting_; }
@@ -59,11 +55,7 @@ public:
   {
     return attention_non_preceding_;
   }
-  const std::vector<lanelet::CompoundPolygon3d> & attention_area() const
-  {
-    // return is_prioritized_ ? attention_non_preceding_area_ : attention_area_;
-    return attention_area_;
-  }
+  const std::vector<lanelet::CompoundPolygon3d> & attention_area() const { return attention_area_; }
   const std::vector<lanelet::CompoundPolygon3d> & conflicting_area() const
   {
     return conflicting_area_;
@@ -116,11 +108,10 @@ public:
   std::vector<lanelet::CompoundPolygon3d> conflicting_area_;
 
   /**
-   *
+   * the adjacent lanelets of the objective roundabout lanelet
    */
   lanelet::ConstLanelets adjacent_;
   std::vector<lanelet::CompoundPolygon3d> adjacent_area_;
-
 
   /**
    * the first conflicting lanelet which ego path points intersect for the first time
@@ -133,11 +124,10 @@ public:
    */
   std::optional<lanelet::ConstLanelet> first_attention_lane_{std::nullopt};
   std::optional<lanelet::CompoundPolygon3d> first_attention_area_{std::nullopt};
-
 };
 
 /**
- * @brief see the document for more details of PathLanelets
+ * @brief Struct representing the lanelets along a path
  */
 struct PathLanelets
 {
@@ -147,7 +137,7 @@ struct PathLanelets
     ego_or_entry2exit;  // this is `assigned lane` part of the path(not from
                         // ego) if ego is before the roundabout, otherwise from ego to exit
   std::optional<lanelet::ConstLanelet> next =
-    std::nullopt;  // this is nullopt is the goal is inside roundabout
+    std::nullopt;  // this is nullopt if the goal is inside roundabout
   lanelet::ConstLanelets all;
   lanelet::ConstLanelets
     conflicting_interval_and_remaining;  // the left/right-most interval of path conflicting with

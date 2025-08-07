@@ -190,7 +190,6 @@ Result<RoundaboutModule::BasicData, InternalError> RoundaboutModule::prepareRoun
   auto & roundabout_lanelets = roundabout_lanelets_.value();
   debug_data_.attention_area = roundabout_lanelets.attention_area();
   debug_data_.first_attention_area = roundabout_lanelets.first_attention_area();
-  // debug_data_.second_attention_area = roundabout_lanelets.second_attention_area();
   debug_data_.adjacent_area = roundabout_lanelets.adjacent_area();
 
   // ==========================================================================================
@@ -201,35 +200,24 @@ Result<RoundaboutModule::BasicData, InternalError> RoundaboutModule::prepareRoun
 
   const auto & conflicting_lanelets = roundabout_lanelets.conflicting();
   const auto & first_conflicting_area_opt = roundabout_lanelets.first_conflicting_area();
-  const auto & first_conflicting_lane_opt = roundabout_lanelets.first_conflicting_lane();
-  if (conflicting_lanelets.empty() || !first_conflicting_area_opt || !first_conflicting_lane_opt) {
+  if (conflicting_lanelets.empty() ) {
     // this is abnormal
     return make_err<RoundaboutModule::BasicData, InternalError>("conflicting area is empty");
   }
-  const auto & first_conflicting_lane = first_conflicting_lane_opt.value();
+  if (!roundabout_lanelets.first_attention_lane()) {
+    // this is abnormal
+    return make_err<RoundaboutModule::BasicData, InternalError>(
+      "first attention area is null");
+  }
   const auto & first_conflicting_area = first_conflicting_area_opt.value();
-  // const auto & second_attention_area_opt = roundabout_lanelets.second_attention_area(); // may be
-  // nullopt
-
-  // ==========================================================================================
-  // even if the attention area is null, stuck vehicle stop line needs to be generated from
-  // conflicting lanes, so dummy_first_attention_lane is used
-  // ==========================================================================================
-  const auto & dummy_first_attention_lane = roundabout_lanelets.first_attention_lane()
-                                              ? roundabout_lanelets.first_attention_lane().value()
-                                              : first_conflicting_lane;
-  // const auto & dummy_first_attention_lane = roundabout_lanelets.first_attention_lane().value();
-  // //TODO(zusizusi): いらないかもしれない
-
-  const auto roundabout_stoplines_opt = generateRoundaboutStopLines(
-    assigned_lanelet, first_conflicting_area, dummy_first_attention_lane, interpolated_path_info,
+  
+  const auto roundabout_stoplines_opt = generateRoundaboutStopLines(roundabout_lanelets.first_attention_lane().value(), interpolated_path_info,
     path);
   if (!roundabout_stoplines_opt) {
     return make_err<RoundaboutModule::BasicData, InternalError>(
       "failed to generate roundabout_stoplines");
   }
   const auto & roundabout_stoplines = roundabout_stoplines_opt.value();
-  // const auto closest_idx = roundabout_stoplines.closest_idx;
 
   const auto & first_attention_area_opt = roundabout_lanelets.first_attention_area();
   const auto & conflicting_area = roundabout_lanelets.conflicting_area();
@@ -251,65 +239,11 @@ Result<RoundaboutModule::BasicData, InternalError> RoundaboutModule::prepareRoun
     interpolated_path_info, roundabout_stoplines, path_lanelets);
 }
 
-std::optional<size_t> RoundaboutModule::getStopLineIndexFromMap(
-  const InterpolatedPathInfo & interpolated_path_info, lanelet::ConstLanelet assigned_lanelet) const
-{
-  const auto & path = interpolated_path_info.path;
-  const auto & lane_interval = interpolated_path_info.lane_id_interval.value();
-
-  const auto road_markings =
-    assigned_lanelet.regulatoryElementsAs<lanelet::autoware::RoadMarking>();
-  lanelet::ConstLineStrings3d stopline;
-  for (const auto & road_marking : road_markings) {
-    const std::string type =
-      road_marking->roadMarking().attributeOr(lanelet::AttributeName::Type, "none");
-    if (type == lanelet::AttributeValueString::StopLine) {
-      stopline.push_back(road_marking->roadMarking());
-      break;  // only one stopline exists.
-    }
-  }
-  if (stopline.empty()) {
-    return std::nullopt;
-  }
-
-  const auto p_start = stopline.front().front();
-  const auto p_end = stopline.front().back();
-  const LineString2d extended_stopline = planning_utils::extendSegmentToBounds(
-    {p_start.basicPoint2d(), p_end.basicPoint2d()}, path.left_bound, path.right_bound);
-
-  for (size_t i = lane_interval.first; i < lane_interval.second; i++) {
-    const auto & p_front = path.points.at(i).point.pose.position;
-    const auto & p_back = path.points.at(i + 1).point.pose.position;
-
-    const LineString2d path_segment = {{p_front.x, p_front.y}, {p_back.x, p_back.y}};
-    std::vector<Point2d> collision_points;
-    bg::intersection(extended_stopline, path_segment, collision_points);
-
-    if (collision_points.empty()) {
-      continue;
-    }
-
-    return i;
-  }
-
-  geometry_msgs::msg::Pose stop_point_from_map;
-  stop_point_from_map.position.x = 0.5 * (p_start.x() + p_end.x());
-  stop_point_from_map.position.y = 0.5 * (p_start.y() + p_end.y());
-  stop_point_from_map.position.z = 0.5 * (p_start.z() + p_end.z());
-
-  return autoware::motion_utils::findFirstNearestIndexWithSoftConstraints(
-    path.points, stop_point_from_map, planner_data_->ego_nearest_dist_threshold,
-    planner_data_->ego_nearest_yaw_threshold);
-}
-
 std::optional<RoundaboutStopLines> RoundaboutModule::generateRoundaboutStopLines(
-  [[maybe_unused]] lanelet::ConstLanelet assigned_lanelet,
-  [[maybe_unused]] const lanelet::CompoundPolygon3d & first_conflicting_area,
   const lanelet::ConstLanelet & first_attention_lane,
   const InterpolatedPathInfo & interpolated_path_info,
   autoware_internal_planning_msgs::msg::PathWithLaneId * original_path) const
 {
-  // const bool use_stuck_stopline = planner_param_.stuck_vehicle.use_stuck_stopline;
   const double stopline_margin = planner_param_.common.default_stopline_margin;
   const double max_accel = planner_param_.common.max_accel;
   const double max_jerk = planner_param_.common.max_jerk;
@@ -319,11 +253,9 @@ std::optional<RoundaboutStopLines> RoundaboutModule::generateRoundaboutStopLines
   const auto first_attention_lane_centerline = first_attention_lane.centerline2d();
   const auto & path_ip = interpolated_path_info.path;
   const double ds = interpolated_path_info.ds;
-  // const auto & lane_interval_ip = interpolated_path_info.lane_id_interval.value();
   const double baselink2front = planner_data_->vehicle_info_.max_longitudinal_offset_m;
 
   const int stopline_margin_idx_dist = std::ceil(stopline_margin / ds);
-  // const int base2front_idx_dist = std::ceil(baselink2front / ds);
 
   // find the index of the first point whose vehicle footprint on it intersects with attention_area
   const auto local_footprint = planner_data_->vehicle_info_.createFootprint(0.0, 0.0);
@@ -336,35 +268,9 @@ std::optional<RoundaboutStopLines> RoundaboutModule::generateRoundaboutStopLines
   const auto first_footprint_inside_1st_attention_ip =
     first_footprint_inside_1st_attention_ip_opt.value();
 
-  // std::optional<size_t> first_footprint_attention_centerline_ip_opt = std::nullopt;
-  // for (auto i = std::get<0>(lane_interval_ip); i < std::get<1>(lane_interval_ip); ++i) {
-  //   const auto & base_pose = path_ip.points.at(i).point.pose;
-  //   const auto path_footprint =
-  //     autoware_utils::transform_vector(local_footprint,
-  //     autoware_utils::pose2transform(base_pose));
-  //   if (bg::intersects(path_footprint, first_attention_lane_centerline.basicLineString())) {
-  //     // NOTE: maybe consideration of braking dist is necessary
-  //     first_footprint_attention_centerline_ip_opt = i;
-  //     break;
-  //   }
-  // }
-  // if (!first_footprint_attention_centerline_ip_opt) {
-  //   return std::nullopt;
-  // }
-  // const size_t first_footprint_attention_centerline_ip =
-  //   first_footprint_attention_centerline_ip_opt.value();
-
   // (1) default stop line position on interpolated path
   bool default_stopline_valid = true;
-  int stop_idx_ip_int = -1;
-  // if (const auto map_stop_idx_ip =
-  //       getStopLineIndexFromMap(interpolated_path_info, assigned_lanelet);
-  //     map_stop_idx_ip) {
-  //   stop_idx_ip_int = static_cast<int>(map_stop_idx_ip.value()) - base2front_idx_dist;
-  // } TODO(zusizusi): we will use this in the future
-  if (stop_idx_ip_int < 0) {
-    stop_idx_ip_int = first_footprint_inside_1st_attention_ip - stopline_margin_idx_dist;
-  }
+  int stop_idx_ip_int = first_footprint_inside_1st_attention_ip - stopline_margin_idx_dist;
   if (stop_idx_ip_int < 0) {
     default_stopline_valid = false;
   }
@@ -438,57 +344,16 @@ std::optional<RoundaboutStopLines> RoundaboutModule::generateRoundaboutStopLines
   return roundabout_stoplines;
 }
 
-static std::vector<std::deque<lanelet::ConstLanelet>> getPrecedingLaneletsUptoRoundaboutRecursive(
-  const lanelet::routing::RoutingGraphPtr & graph, const lanelet::ConstLanelet & lanelet,
-  const double length, const lanelet::ConstLanelets & exclude_lanelets)
-{
-  std::vector<std::deque<lanelet::ConstLanelet>> preceding_lanelet_sequences;
-
-  const auto prev_lanelets = graph->previous(lanelet);
-  const double lanelet_length = lanelet::utils::getLaneletLength3d(lanelet);
-
-  // end condition of the recursive function
-  if (prev_lanelets.empty() || lanelet_length >= length) {
-    preceding_lanelet_sequences.push_back({lanelet});
-    return preceding_lanelet_sequences;
-  }
-
-  for (const auto & prev_lanelet : prev_lanelets) {
-    if (lanelet::utils::contains(exclude_lanelets, prev_lanelet)) {
-      // if prev_lanelet is included in exclude_lanelets,
-      // remove prev_lanelet from preceding_lanelet_sequences
-      continue;
-    }
-    if (const std::string turn_direction = prev_lanelet.attributeOr("turn_direction", "else");
-        turn_direction == "left" || turn_direction == "right") {
-      continue;
-    }
-
-    // get lanelet sequence after prev_lanelet
-    auto tmp_lanelet_sequences = getPrecedingLaneletsUptoRoundaboutRecursive(
-      graph, prev_lanelet, length - lanelet_length, exclude_lanelets);
-    for (auto & tmp_lanelet_sequence : tmp_lanelet_sequences) {
-      tmp_lanelet_sequence.push_back(lanelet);
-      preceding_lanelet_sequences.push_back(tmp_lanelet_sequence);
-    }
-  }
-
-  if (preceding_lanelet_sequences.empty()) {
-    preceding_lanelet_sequences.push_back({lanelet});
-  }
-  return preceding_lanelet_sequences;
-}
-
 RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
   lanelet::LaneletMapConstPtr lanelet_map_ptr, lanelet::routing::RoutingGraphPtr routing_graph_ptr,
   const lanelet::ConstLanelet assigned_lanelet) const
 {
   const double detection_area_length = planner_param_.common.attention_area_length;
+  const auto roundabout_regulatory_elements =
+    assigned_lanelet.regulatoryElementsAs<lanelet::autoware::Roundabout>();
 
-  // for low priority lane
   // if ego_lane has right of way (i.e. is high priority),
   // ignore yieldLanelets (i.e. low priority lanes)
-  // RightOfWay（通行優先権）が設定されている場合、yieldLanelets（優先を譲る相手のレーン）を取得し、さらにそれらの直前のレーンも収集します。
   lanelet::ConstLanelets yield_lanelets{};
   const auto right_of_ways = assigned_lanelet.regulatoryElementsAs<lanelet::RightOfWay>();
   for (const auto & right_of_way : right_of_ways) {
@@ -513,18 +378,15 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
       ego_lanelets.push_back(following_lanelet);
     }
   }
-  for (const auto & id : associative_ids_) {
-    const auto lanelet = planner_data_->route_handler_->getLaneletsFromId(id);
-    ego_lanelets.push_back(lanelet);
-  }
+  // for (const auto & id : associative_ids_) {
+  //   const auto lanelet = planner_data_->route_handler_->getLaneletsFromId(id);
+  //   ego_lanelets.push_back(lanelet);
+  // }
 
   // get conflicting lanes on assigned lanelet
-  // assigned_laneletと競合するレーンを取得します（交差点で交錯する他車線）。
   const auto & conflicting_lanelets =
     lanelet::utils::getConflictingLanelets(routing_graph_ptr, assigned_lanelet);
-  std::vector<lanelet::ConstLanelet>
-    adjacent_followings;  // 競合レーンから派生する後続レーンや直前レーンを
-                          // adjacent_followings に格納します。
+  std::vector<lanelet::ConstLanelet> adjacent_followings;
 
   for (const auto & conflicting_lanelet : conflicting_lanelets) {
     for (const auto & following_lanelet : routing_graph_ptr->following(conflicting_lanelet)) {
@@ -536,9 +398,8 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
   }
 
   // final objective lanelets
-  lanelet::ConstLanelets conflicting_ex_ego_yield_lanelets;  // 主に競合レーンから自車関連レーンや
-                                                             // yield lanelet を除外したもの。
-  lanelet::ConstLanelets conflicting_ex_ego_lanelets;  //  ego_lanelets に含まれない競合レーン。
+  lanelet::ConstLanelets conflicting_ex_ego_yield_lanelets;
+  lanelet::ConstLanelets conflicting_ex_ego_lanelets;
   // conflicting lanes is necessary to get stopline for stuck vehicle
   for (auto && conflicting_lanelet : conflicting_lanelets) {
     if (!lanelet::utils::contains(ego_lanelets, conflicting_lanelet))
@@ -570,7 +431,14 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
       for (const auto & ls : lanelet_sequences) {
         for (const auto & l : ls) {
           const auto & inner_inserted = detection_ids.insert(l.id());
-          if (inner_inserted.second) detection_and_preceding_lanelets.push_back(l);
+          for (const auto & roundabout : roundabout_regulatory_elements) {
+            if (inner_inserted.second && roundabout->isRoundaboutLanelet(l.id()))
+              detection_and_preceding_lanelets.push_back(l);
+          } 
+          // TODO(zusizusi): i will check if this is necessary
+          // if (inner_inserted.second) {
+          //   associative_ids_.insert(l.id());
+          // }
         }
       }
     }

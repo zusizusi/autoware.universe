@@ -31,30 +31,12 @@ struct InternalError
 };
 
 /**
- * @brief
+ * @brief over the pass judge lines
  */
 struct OverPassJudge
 {
   std::string safety_report;
   std::string evasive_report;
-};
-
-/**
- * @brief detected stuck vehicle
- */
-struct StuckStop
-{
-  size_t closest_idx{0};
-  size_t stuck_stopline_idx{0};
-};
-
-/**
- * @brief yielded by vehicle on the attention area
- */
-struct YieldStuckStop
-{
-  size_t closest_idx{0};
-  size_t stuck_stopline_idx{0};
 };
 
 /**
@@ -66,7 +48,6 @@ struct CollisionStop
   size_t collision_stopline_idx{0};
 };
 
-
 /**
  * @brief both collision and occlusion are not detected
  */
@@ -74,18 +55,6 @@ struct Safe
 {
   size_t closest_idx{0};
   size_t collision_stopline_idx{0};
-};
-
-
-/**
- * @brief traffic light is red or arrow signal
- */
-struct FullyPrioritized
-{
-  bool collision_detected{false};
-  size_t closest_idx{0};
-  size_t collision_stopline_idx{0};
-  std::string safety_report;
 };
 
 using DecisionResult = std::variant<
