@@ -15,7 +15,6 @@
 #include "scene_roundabout.hpp"
 
 #include <autoware/behavior_velocity_intersection_module/util.hpp>
-
 #include <autoware/behavior_velocity_planner_common/utilization/boost_geometry_helper.hpp>  // for toGeomPoly
 #include <autoware/behavior_velocity_planner_common/utilization/util.hpp>
 #include <autoware/motion_utils/trajectory/trajectory.hpp>
@@ -57,10 +56,8 @@ RoundaboutModule::RoundaboutModule(
   lane_id_(lane_id),
   associative_ids_(associative_ids)
 {
-  {
-    collision_state_machine_.setMarginTime(
-      planner_param_.collision_detection.collision_detection_hold_time);
-  }
+  collision_state_machine_.setMarginTime(
+    planner_param_.collision_detection.collision_detection_hold_time);
   ego_ttc_pub_ = node.create_publisher<autoware_internal_debug_msgs::msg::Float64MultiArrayStamped>(
     "~/debug/roundabout/ego_ttc", 1);
   object_ttc_pub_ =
@@ -106,7 +103,7 @@ DecisionResult RoundaboutModule::modifyPathVelocityDetail(PathWithLaneId * path)
   const auto & roundabout_lanelets = roundabout_lanelets_.value();
 
   const auto closest_idx = roundabout_stoplines.closest_idx;
-  auto can_smoothly_stop_at = [&](const auto & stop_line_idx) {
+  const auto can_smoothly_stop_at = [&](const auto & stop_line_idx) {
     const double max_accel = planner_param_.common.max_accel;
     const double max_jerk = planner_param_.common.max_jerk;
     const double delay_response_time = planner_param_.common.delay_response_time;
@@ -130,7 +127,7 @@ DecisionResult RoundaboutModule::modifyPathVelocityDetail(PathWithLaneId * path)
   if (!roundabout_lanelets.first_attention_area()) {
     return InternalError{"attention area is empty"};
   }
-  const auto first_attention_area = roundabout_lanelets.first_attention_area().value();
+
   const auto default_stopline_idx_opt = roundabout_stoplines.default_stopline;
   if (!default_stopline_idx_opt) {
     return InternalError{"default stop line is null"};
@@ -218,8 +215,7 @@ DecisionResult RoundaboutModule::modifyPathVelocityDetail(PathWithLaneId * path)
   if (is_permanent_go_) {
     if (has_collision_with_margin) {
       if (can_smoothly_stop_at(roundabout_stoplines.first_attention_stopline.value())) {
-        // NOTE(zusizusi): roundabout_stoplines.first_attention_stopline.value() is not used
-        // as stop line. in this case, ego tries to stop at current position
+        // NOTE: in this case, ego tries to stop at current position
         const auto stop_line_idx = closest_idx;
         return CollisionStop{closest_idx, stop_line_idx};
       }
@@ -267,11 +263,7 @@ void prepareRTCByDecisionResult(
   [[maybe_unused]] bool * default_safety, [[maybe_unused]] double * default_distance)
 {
   RCLCPP_DEBUG(rclcpp::get_logger("prepareRTCByDecisionResult"), "InternalError");
-  // const auto closest_idx = result.closest_idx;
-  // const auto collision_stopline_idx = result.collision_stopline_idx;
   *default_safety = false;
-  // *default_distance =
-  //   autoware::motion_utils::calcSignedArcLength(path.points, closest_idx, collision_stopline_idx);
   return;
 }
 
@@ -387,14 +379,14 @@ void reactRTCApprovalByDecisionResult(
     debug_data->collision_stop_wall_pose =
       planning_utils::getAheadPose(stopline_idx, baselink2front, *path);
     {
-      planning_factor_interface->add(
-        path->points, path->points.at(decision_result.closest_idx).point.pose,
-        path->points.at(stopline_idx).point.pose,
-        autoware_internal_planning_msgs::msg::PlanningFactor::STOP, safety_factor_array,
-        true /*is_driving_forward*/, 0.0, 0.0 /*shift distance*/, "collision stop");
+    planning_factor_interface->add(
+      path->points, path->points.at(decision_result.closest_idx).point.pose,
+      path->points.at(stopline_idx).point.pose,
+      autoware_internal_planning_msgs::msg::PlanningFactor::STOP, safety_factor_array,
+      true /*is_driving_forward*/, 0.0, 0.0 /*shift distance*/, "collision stop");
     }
   }
-  return;
+    return;
 }
 
 template <>
@@ -415,12 +407,12 @@ void reactRTCApprovalByDecisionResult(
     debug_data->collision_stop_wall_pose =
       planning_utils::getAheadPose(stopline_idx, baselink2front, *path);
     {
-      planning_factor_interface->add(
-        path->points, path->points.at(decision_result.closest_idx).point.pose,
-        path->points.at(stopline_idx).point.pose,
-        autoware_internal_planning_msgs::msg::PlanningFactor::STOP, safety_factor_array,
-        true /*is_driving_forward*/, 0.0, 0.0 /*shift distance*/, "");
-    }
+    planning_factor_interface->add(
+      path->points, path->points.at(decision_result.closest_idx).point.pose,
+      path->points.at(stopline_idx).point.pose,
+      autoware_internal_planning_msgs::msg::PlanningFactor::STOP, safety_factor_array,
+      true /*is_driving_forward*/, 0.0, 0.0 /*shift distance*/, "");
+  }
   }
   return;
 }
@@ -440,7 +432,6 @@ void RoundaboutModule::reactRTCApproval(
   return;
 }
 
-
 RoundaboutModule::PassJudgeStatus RoundaboutModule::isOverPassJudgeLinesStatus(
   const autoware_internal_planning_msgs::msg::PathWithLaneId & path,
   const RoundaboutStopLines & roundabout_stoplines)
@@ -450,12 +441,7 @@ RoundaboutModule::PassJudgeStatus RoundaboutModule::isOverPassJudgeLinesStatus(
   const auto default_stopline_idx = roundabout_stoplines.default_stopline.value();
   const size_t pass_judge_line_idx = roundabout_stoplines.first_pass_judge_line;
 
-  const bool was_safe = [&]() {
-    if (std::holds_alternative<Safe>(prev_decision_result_)) {
-      return true;
-    }
-    return false;
-  }();
+  const bool was_safe = std::holds_alternative<Safe>(prev_decision_result_);
 
   const bool is_over_1st_pass_judge_line =
     util::isOverTargetIndex(path, closest_idx, current_pose, pass_judge_line_idx);

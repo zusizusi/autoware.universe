@@ -144,8 +144,7 @@ void ObjectInfoManager::clearObjects()
 
 std::vector<std::shared_ptr<ObjectInfo>> ObjectInfoManager::allObjects() const
 {
-  std::vector<std::shared_ptr<ObjectInfo>> all_objects = attention_area_objects_;
-  return all_objects;
+  return attention_area_objects_;
 }
 
 std::optional<CollisionInterval> findPassageInterval(

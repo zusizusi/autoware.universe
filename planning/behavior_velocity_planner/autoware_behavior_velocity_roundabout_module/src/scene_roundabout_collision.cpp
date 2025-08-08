@@ -107,13 +107,11 @@ void RoundaboutModule::updateObjectInfoManagerArea()
     const auto belong_attention_lanelet_id =
       checkAngleForTargetLanelets(object_direction, attention_lanelets);
 
-    std::optional<lanelet::ConstLanelet> attention_lanelet{std::nullopt};
     if (!belong_attention_lanelet_id) {
       continue;
-    } else if (belong_attention_lanelet_id) {
-      const auto idx = belong_attention_lanelet_id.value();
-      attention_lanelet = attention_lanelets.at(idx);
     }
+    const auto idx = belong_attention_lanelet_id.value();
+    const std::optional<lanelet::ConstLanelet> attention_lanelet{attention_lanelets.at(idx)};
 
     const auto object_it = old_map.find(predicted_object.object_id);
     if (object_it != old_map.end()) {
@@ -179,12 +177,14 @@ void RoundaboutModule::updateObjectInfoManagerCollision(
     // check the PredictedPath in the ascending order of its confidence to save the safe/unsafe
     // CollisionKnowledge for most probable path
     // ==========================================================================================
-    std::list<const autoware_perception_msgs::msg::PredictedPath *> sorted_predicted_paths;
-    for (unsigned i = 0; i < predicted_object.kinematics.predicted_paths.size(); ++i) {
-      sorted_predicted_paths.push_back(&predicted_object.kinematics.predicted_paths.at(i));
+    std::vector<const autoware_perception_msgs::msg::PredictedPath *> sorted_predicted_paths;
+    sorted_predicted_paths.reserve(predicted_object.kinematics.predicted_paths.size());
+    for (const auto & path : predicted_object.kinematics.predicted_paths) {
+      sorted_predicted_paths.push_back(&path);
     }
-    sorted_predicted_paths.sort(
-      [](const auto path1, const auto path2) { return path1->confidence > path2->confidence; });
+    std::sort(
+      sorted_predicted_paths.begin(), sorted_predicted_paths.end(),
+      [](const auto * lhs, const auto * rhs) { return lhs->confidence > rhs->confidence; });
 
     // ==========================================================================================
     // if all of the predicted path is lower confidence/geometrically does not intersect with ego
@@ -207,8 +207,7 @@ void RoundaboutModule::updateObjectInfoManagerCollision(
       if (predicted_path.path.size() < 2) {
         continue;
       }
-      const double time_step =
-        predicted_path.time_step.sec + predicted_path.time_step.nanosec * 1e-9;
+      const double time_step = rclcpp::Duration(predicted_path.time_step).seconds();
       const double horizon = time_step * static_cast<double>(predicted_path.path.size());
       predicted_path =
         autoware::object_recognition_utils::resamplePredictedPath(predicted_path, 0.1, horizon);
@@ -717,9 +716,8 @@ RoundaboutModule::TimeDistanceArray RoundaboutModule::calcRoundaboutPassingTime(
       return autoware::motion_utils::findFirstNearestIndexWithSoftConstraints(
         smoothed_reference_path.points, upstream_stopline_point,
         planner_data_->ego_nearest_dist_threshold, planner_data_->ego_nearest_yaw_threshold);
-    } else {
-      return std::nullopt;
     }
+    return std::nullopt;
   }();
 
   for (size_t i = smoothed_path_closest_idx; i + 1 < smoothed_reference_path.points.size(); ++i) {
@@ -738,9 +736,8 @@ RoundaboutModule::TimeDistanceArray RoundaboutModule::calcRoundaboutPassingTime(
           return minimum_upstream_velocity;
         }
         return std::max<double>(average_velocity, minimum_ego_velocity);
-      } else {
-        return std::max<double>(average_velocity, minimum_ego_velocity);
       }
+      return std::max<double>(average_velocity, minimum_ego_velocity);
     }();
     passing_time += (dist / passing_velocity);
 

@@ -423,8 +423,9 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
     }
   }
 
-  auto [attention_lanelets, ] = util::mergeLaneletsByTopologicalSort(
-    detection_and_preceding_lanelets, conflicting_ex_ego_yield_lanelets, routing_graph_ptr);
+  auto [attention_lanelets, original_attention_lanelet_sequences] =
+    util::mergeLaneletsByTopologicalSort(
+      detection_and_preceding_lanelets, conflicting_ex_ego_yield_lanelets, routing_graph_ptr);
 
   RoundaboutLanelets result;
   result.attention_ = std::move(attention_lanelets);
