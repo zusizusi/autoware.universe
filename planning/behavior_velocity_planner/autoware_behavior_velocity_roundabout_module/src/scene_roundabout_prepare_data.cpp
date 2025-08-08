@@ -410,7 +410,7 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
       for (const auto & ls : lanelet_sequences) {
         for (const auto & l : ls) {
           const auto & inner_inserted = detection_ids.insert(l.id());
-          if(lanelet::utils::contains(associative_ids_, l.id())) {
+          if (lanelet::utils::contains(associative_ids_, l.id())) {
             break;
           }
           if (inner_inserted.second) detection_and_preceding_lanelets.push_back(l);
