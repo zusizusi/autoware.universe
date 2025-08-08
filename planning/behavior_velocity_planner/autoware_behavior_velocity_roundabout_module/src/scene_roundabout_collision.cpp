@@ -600,8 +600,6 @@ std::optional<size_t> RoundaboutModule::checkAngleForTargetLanelets(
   const geometry_msgs::msg::Pose & pose, const lanelet::ConstLanelets & target_lanelets) const
 {
   const double detection_area_angle_thr = planner_param_.common.attention_area_angle_threshold;
-  const bool consider_wrong_direction_vehicle =
-    planner_param_.collision_detection.consider_wrong_direction_vehicle;
   const double dist_margin = planner_param_.common.attention_area_margin;
 
   for (unsigned i = 0; i < target_lanelets.size(); ++i) {
@@ -612,14 +610,8 @@ std::optional<size_t> RoundaboutModule::checkAngleForTargetLanelets(
     const double ll_angle = lanelet::utils::getLaneletAngle(ll, pose.position);
     const double pose_angle = tf2::getYaw(pose.orientation);
     const double angle_diff = autoware_utils::normalize_radian(ll_angle - pose_angle, -M_PI);
-    if (consider_wrong_direction_vehicle) {
-      if (std::fabs(angle_diff) > 1.57 || std::fabs(angle_diff) < detection_area_angle_thr) {
-        return std::make_optional<size_t>(i);
-      }
-    } else {
-      if (std::fabs(angle_diff) < detection_area_angle_thr) {
-        return std::make_optional<size_t>(i);
-      }
+    if (std::fabs(angle_diff) < detection_area_angle_thr) {
+      return std::make_optional<size_t>(i);
     }
   }
   return std::nullopt;
@@ -663,7 +655,8 @@ RoundaboutModule::TimeDistanceArray RoundaboutModule::calcRoundaboutPassingTime(
   // spatiotemporal profile, which is judged as SAFE because that profile does not collide
   // with the predicted paths of objects.
   // ==========================================================================================
-  const auto last_roundabout_stopline_candidate_idx = roundabout_stoplines.first_attention_stopline.value();
+  const auto last_roundabout_stopline_candidate_idx =
+    roundabout_stoplines.first_attention_stopline.value();
   const auto closest_idx = roundabout_stoplines.closest_idx;
 
   bool assigned_lane_found = false;

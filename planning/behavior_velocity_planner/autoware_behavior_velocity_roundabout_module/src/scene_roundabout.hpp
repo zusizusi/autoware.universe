@@ -85,7 +85,6 @@ public:
 
     struct CollisionDetection
     {
-      bool consider_wrong_direction_vehicle;
       double collision_detection_hold_time;
       double min_predicted_path_confidence;
       double collision_start_margin_time;

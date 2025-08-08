@@ -63,8 +63,6 @@ RoundaboutModuleManager::RoundaboutModuleManager(rclcpp::Node & node)
 
   // collision_detection
   {
-    rp.collision_detection.consider_wrong_direction_vehicle = get_or_declare_parameter<bool>(
-      node, ns + ".collision_detection.consider_wrong_direction_vehicle");
     rp.collision_detection.collision_detection_hold_time = get_or_declare_parameter<double>(
       node, ns + ".collision_detection.collision_detection_hold_time");
     rp.collision_detection.min_predicted_path_confidence = get_or_declare_parameter<double>(
