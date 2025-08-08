@@ -543,9 +543,9 @@ TurnIndicatorsCommand TurnSignalDecider::resolve_turn_signal(
     return SignalCandidate{
       signal_info,
       get_distance(signal_info.desired_start_point) - base_link2front_,
+      get_distance(signal_info.desired_end_point),
       get_distance(signal_info.required_start_point) - base_link2front_,
       get_distance(signal_info.required_end_point),
-      get_distance(signal_info.desired_end_point),
       type};
   };
 
