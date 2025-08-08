@@ -1,27 +1,30 @@
 # Roundabout Behavior Velocity Module
 
 ## Role
+
 This module is responsible for safely managing entry into roundabouts by performing collision checks against vehicles in the attention area just before entry. Currently, it is designed to work with single-lane roundabouts due to the complexity of multi-lane scenarios.
 
 ## Activation
 
 - A module instance is launched on a lane that is an entry lanelet of a Roundabout regulatory element on the path.
 
-
 ## Requirements/Limitations
+
 - The HDMap needs to have the roundabout regulatory element defined with correct lanelet topology (entry/exit/inner lanes).
 - WIP(perception requirements/limitations)
 - WIP(sensor visibility requirements/limitations)
 
 ## Attention area
+
 The attention area in the roundabout is defined as the set of lanes that are conflicting with ego path and their preceding lanes up to `common.attention_area_length` meters.
 
 ## Stoplines
+
 The module computes the following stoplines:
+
 - **default_stopline**: A stopline placed before the first attention area, with a margin defined by `default_stopline_margin`. This is used to stop the vehicle before entering the roundabout, if necessary.
 - **first_attention_stopline**: A stopline placed at the first attention area boundary, which is used to judge whether the vehicle can safely pass through the roundabout.
-- **first_pass_judge_line**: A line placed one braking distance before the first attention boundary. The module records whether the ego vehicle has safely passed this line for the first time. If a collision is detected after passing this line, the module categorizes the object as `too_late_detect` or `misjudge` for diagnostics. 
-
+- **first_pass_judge_line**: A line placed one braking distance before the first attention boundary. The module records whether the ego vehicle has safely passed this line for the first time. If a collision is detected after passing this line, the module categorizes the object as `too_late_detect` or `misjudge` for diagnostics.
 
 ## Entry Collision Checking Logic
 
@@ -47,10 +50,10 @@ Currently, the roundabout module uses `motion_velocity_smoother` feature to prec
 ```bash
 ros2 run behavior_velocity_roundabout_module ttc.py --lane_id <lane_id>
 ```
+
 ## Module Parameters
 
-
-### common 
+### common
 
 | Parameter                                  | Type   | Description                                                                               |
 | ------------------------------------------ | ------ | ----------------------------------------------------------------------------------------- |
