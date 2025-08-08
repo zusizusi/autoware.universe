@@ -387,7 +387,7 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
       conflicting_ex_ego_lanelets.push_back(conflicting_lanelet);
   }
 
-  // exclude yield lanelets and ego lanelets from confliction_ex_ego_yield_lanelets
+  // exclude yield lanelets and ego lanelets from conflicting_lanelet
   for (const auto & conflicting_lanelet : conflicting_lanelets) {
     if (
       lanelet::utils::contains(yield_lanelets, conflicting_lanelet) ||

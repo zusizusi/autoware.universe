@@ -466,7 +466,7 @@ private:
   /**
    * @brief return if collision is detected and the collision position
    */
-  CollisionStatus detectCollision(const bool is_over_1st_pass_judge_line) const;
+  CollisionStatus detectCollision(const bool is_over_pass_judge_line) const;
 
   std::optional<size_t> checkAngleForTargetLanelets(
     const geometry_msgs::msg::Pose & pose, const lanelet::ConstLanelets & target_lanelets) const;
