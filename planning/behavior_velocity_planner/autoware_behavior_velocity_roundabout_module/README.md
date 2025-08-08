@@ -14,7 +14,7 @@ This module is responsible for safely managing entry into roundabouts by perform
 - WIP(sensor visibility requirements/limitations)
 
 ## Attention area
-The attention area in the intersection is defined as the set of lanes that are conflicting with ego path and their preceding lanes up to `common.attention_area_length` meters.
+The attention area in the roundabout is defined as the set of lanes that are conflicting with ego path and their preceding lanes up to `common.attention_area_length` meters.
 
 ## Stoplines
 The module computes the following stoplines:
