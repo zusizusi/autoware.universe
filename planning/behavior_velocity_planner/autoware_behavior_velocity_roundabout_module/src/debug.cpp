@@ -112,7 +112,6 @@ visualization_msgs::msg::MarkerArray createPoseMarkerArray(
   return msg;
 }
 
-
 constexpr std::tuple<float, float, float> white()
 {
   constexpr uint64_t code = 0xfdfdfd;
@@ -194,7 +193,6 @@ visualization_msgs::msg::MarkerArray RoundaboutModule::createDebugMarkerArray()
       &debug_marker_array, now);
   }
 
-
   if (debug_data_.ego_lane) {
     append_marker_array(
       ::createLaneletPolygonsMarkerArray(
@@ -218,7 +216,6 @@ visualization_msgs::msg::MarkerArray RoundaboutModule::createDebugMarkerArray()
       &debug_marker_array, now);
   }
 
-
   static constexpr auto green = ::green();
   static constexpr auto yellow = ::yellow();
   static constexpr auto red = ::red();
@@ -240,7 +237,6 @@ visualization_msgs::msg::MarkerArray RoundaboutModule::createDebugMarkerArray()
       debug_data_.too_late_detect_targets, "too_late_detect_targets", module_id_, now,
       std::get<0>(red), std::get<1>(red), std::get<2>(red)),
     &debug_marker_array, now);
-
 
   if (debug_data_.first_pass_judge_wall_pose) {
     const double r = debug_data_.passed_first_pass_judge ? 1.0 : 0.0;

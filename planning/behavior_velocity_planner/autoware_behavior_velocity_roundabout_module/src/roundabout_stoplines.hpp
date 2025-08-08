@@ -26,7 +26,7 @@ namespace autoware::behavior_velocity_planner
 struct RoundaboutStopLines
 {
   size_t closest_idx{0};
-  
+
   /**
    * default_stopline is null if it is calculated negative from first_attention_stopline
    */
@@ -43,13 +43,11 @@ struct RoundaboutStopLines
    */
   std::optional<size_t> first_attention_stopline{std::nullopt};
 
-
   /**
    * first_pass_judge_line is before first_attention_stopline by the braking distance. if its value
    * is calculated negative, it is 0
    */
   size_t first_pass_judge_line{0};
-
 };
 }  // namespace autoware::behavior_velocity_planner
 

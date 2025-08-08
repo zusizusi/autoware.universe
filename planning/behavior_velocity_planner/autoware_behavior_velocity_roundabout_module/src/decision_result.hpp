@@ -58,14 +58,13 @@ struct Safe
 };
 
 using DecisionResult = std::variant<
-  InternalError,                //! internal process error
-  OverPassJudge,                //! over the pass judge lines
-  CollisionStop,     //! detected collision while FOV is clear
-  Safe                        //! judge as safe
+  InternalError,  //! internal process error
+  OverPassJudge,  //! over the pass judge lines
+  CollisionStop,  //! detected collision while FOV is clear
+  Safe            //! judge as safe
   >;
 
-std::string formatDecisionResult(
-  const DecisionResult & decision_result, const bool int_activated);
+std::string formatDecisionResult(const DecisionResult & decision_result, const bool int_activated);
 
 }  // namespace autoware::behavior_velocity_planner
 

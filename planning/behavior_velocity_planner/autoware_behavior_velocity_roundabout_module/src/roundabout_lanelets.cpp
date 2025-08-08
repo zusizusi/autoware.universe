@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "roundabout_lanelets.hpp"
+
 #include <autoware/behavior_velocity_intersection_module/util.hpp>
 
 #include <lanelet2_core/LaneletMap.h>
@@ -23,7 +24,8 @@
 namespace autoware::behavior_velocity_planner
 {
 
-void RoundaboutLanelets::update(const InterpolatedPathInfo & interpolated_path_info,
+void RoundaboutLanelets::update(
+  const InterpolatedPathInfo & interpolated_path_info,
   const autoware_utils::LinearRing2d & footprint, const double vehicle_length,
   [[maybe_unused]] lanelet::routing::RoutingGraphPtr routing_graph_ptr)
 {

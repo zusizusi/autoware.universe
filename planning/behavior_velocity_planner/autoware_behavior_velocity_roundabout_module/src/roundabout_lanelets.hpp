@@ -16,7 +16,6 @@
 #define ROUNDABOUT_LANELETS_HPP_
 
 #include <autoware/behavior_velocity_intersection_module/interpolated_path_info.hpp>
-
 #include <autoware_utils/geometry/boost_geometry.hpp>
 
 #include <lanelet2_core/primitives/CompoundPolygon.h>

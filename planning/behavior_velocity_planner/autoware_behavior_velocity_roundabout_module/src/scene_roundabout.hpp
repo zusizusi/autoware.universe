@@ -16,12 +16,12 @@
 #define SCENE_ROUNDABOUT_HPP_
 
 #include "decision_result.hpp"
-#include <autoware/behavior_velocity_intersection_module/interpolated_path_info.hpp>
 #include "object_manager.hpp"
-#include <autoware/behavior_velocity_intersection_module/result.hpp>
 #include "roundabout_lanelets.hpp"
 #include "roundabout_stoplines.hpp"
 
+#include <autoware/behavior_velocity_intersection_module/interpolated_path_info.hpp>
+#include <autoware/behavior_velocity_intersection_module/result.hpp>
 #include <autoware/behavior_velocity_planner_common/utilization/state_machine.hpp>
 #include <autoware/behavior_velocity_rtc_interface/scene_module_interface_with_rtc.hpp>
 #include <autoware/motion_utils/marker/virtual_wall_marker_creator.hpp>
@@ -129,7 +129,6 @@ public:
     autoware_perception_msgs::msg::PredictedObjects unsafe_targets;
     autoware_perception_msgs::msg::PredictedObjects misjudge_targets;
     autoware_perception_msgs::msg::PredictedObjects too_late_detect_targets;
-
   };
 
   struct InternalDebugData
@@ -139,7 +138,6 @@ public:
   };
 
   using TimeDistanceArray = std::vector<std::pair<double /* time*/, double /* distance*/>>;
-
 
   /**
    * @brief
@@ -151,7 +149,6 @@ public:
 
     //! true only when ego passed 1st pass judge line safely for the first time
     const bool safely_passed_1st_judge_line;
-
   };
 
   /**
@@ -469,8 +466,7 @@ private:
   /**
    * @brief return if collision is detected and the collision position
    */
-  CollisionStatus detectCollision(
-    const bool is_over_1st_pass_judge_line) const;
+  CollisionStatus detectCollision(const bool is_over_1st_pass_judge_line) const;
 
   std::optional<size_t> checkAngleForTargetLanelets(
     const geometry_msgs::msg::Pose & pose, const lanelet::ConstLanelets & target_lanelets) const;

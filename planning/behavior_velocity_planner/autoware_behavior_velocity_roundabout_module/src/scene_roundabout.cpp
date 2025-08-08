@@ -379,14 +379,14 @@ void reactRTCApprovalByDecisionResult(
     debug_data->collision_stop_wall_pose =
       planning_utils::getAheadPose(stopline_idx, baselink2front, *path);
     {
-    planning_factor_interface->add(
-      path->points, path->points.at(decision_result.closest_idx).point.pose,
-      path->points.at(stopline_idx).point.pose,
-      autoware_internal_planning_msgs::msg::PlanningFactor::STOP, safety_factor_array,
-      true /*is_driving_forward*/, 0.0, 0.0 /*shift distance*/, "collision stop");
+      planning_factor_interface->add(
+        path->points, path->points.at(decision_result.closest_idx).point.pose,
+        path->points.at(stopline_idx).point.pose,
+        autoware_internal_planning_msgs::msg::PlanningFactor::STOP, safety_factor_array,
+        true /*is_driving_forward*/, 0.0, 0.0 /*shift distance*/, "collision stop");
     }
   }
-    return;
+  return;
 }
 
 template <>
@@ -407,12 +407,12 @@ void reactRTCApprovalByDecisionResult(
     debug_data->collision_stop_wall_pose =
       planning_utils::getAheadPose(stopline_idx, baselink2front, *path);
     {
-    planning_factor_interface->add(
-      path->points, path->points.at(decision_result.closest_idx).point.pose,
-      path->points.at(stopline_idx).point.pose,
-      autoware_internal_planning_msgs::msg::PlanningFactor::STOP, safety_factor_array,
-      true /*is_driving_forward*/, 0.0, 0.0 /*shift distance*/, "");
-  }
+      planning_factor_interface->add(
+        path->points, path->points.at(decision_result.closest_idx).point.pose,
+        path->points.at(stopline_idx).point.pose,
+        autoware_internal_planning_msgs::msg::PlanningFactor::STOP, safety_factor_array,
+        true /*is_driving_forward*/, 0.0, 0.0 /*shift distance*/, "");
+    }
   }
   return;
 }

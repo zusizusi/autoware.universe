@@ -127,7 +127,7 @@
   />
   <let
     name="behavior_velocity_planner_launch_modules"
-  value="$(eval &quot;'$(var behavior_velocity_planner_launch_modules)' + 'autoware::behavior_velocity_planner::RoundaboutModulePlugin, '&quot;)"
+    value="$(eval &quot;'$(var behavior_velocity_planner_launch_modules)' + 'autoware::behavior_velocity_planner::RoundaboutModulePlugin, '&quot;)"
     if="$(var launch_roundabout_module)"
   />
   <let

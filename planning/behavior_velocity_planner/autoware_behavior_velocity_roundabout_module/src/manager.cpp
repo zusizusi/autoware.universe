@@ -178,8 +178,10 @@ std::set<lanelet::Id> RoundaboutModuleManager::getAssociativeRoundaboutEntryLane
   std::set<lanelet::Id> associative_lanelets;
 
   const auto roundabouts = lane.regulatoryElementsAs<lanelet::autoware::Roundabout>();
-  const auto right_lanelets = planner_data_->route_handler_->getAllRightSharedLinestringLanelets(lane, false);
-  const auto left_lanelets = planner_data_->route_handler_->getAllLeftSharedLinestringLanelets(lane, false);
+  const auto right_lanelets =
+    planner_data_->route_handler_->getAllRightSharedLinestringLanelets(lane, false);
+  const auto left_lanelets =
+    planner_data_->route_handler_->getAllLeftSharedLinestringLanelets(lane, false);
 
   associative_lanelets.insert(lane.id());
   for (const auto & right_lanelet : right_lanelets) {
@@ -195,8 +197,7 @@ std::set<lanelet::Id> RoundaboutModuleManager::getAssociativeRoundaboutEntryLane
   return associative_lanelets;
 }
 
-bool RoundaboutModuleManager::isRegisteredModule(
-  const lanelet::ConstLanelet & entry_lanelet ) const
+bool RoundaboutModuleManager::isRegisteredModule(const lanelet::ConstLanelet & entry_lanelet) const
 {
   for (const auto & scene_module : scene_modules_) {
     if (scene_module->getModuleId() == entry_lanelet.id()) {
