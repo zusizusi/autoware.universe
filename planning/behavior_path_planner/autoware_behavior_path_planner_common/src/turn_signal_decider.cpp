@@ -408,14 +408,14 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
 
     // Find enable_exit_turn_signal lanelet
     bool found_enable_exit_turn_signal = false;
-    lanelet::ConstLanelet EnableExitTurnSignalLanelet =
+    lanelet::ConstLanelet enable_exit_turn_signal_lanelet =
       findEnableExitTurnSignalLanelet(exit_lanelet, route_handler, found_enable_exit_turn_signal);
     // If no enable_exit_turn_signal lanelet is found, use the front pose of exit lanelet as the
     // desired start point.
     const auto required_start_point = calculateLaneFrontPose(centerline);
     Pose desired_start_point;
     if (found_enable_exit_turn_signal) {
-      desired_start_point = calculateLaneFrontPose(EnableExitTurnSignalLanelet.centerline3d());
+      desired_start_point = calculateLaneFrontPose(enable_exit_turn_signal_lanelet.centerline3d());
     } else {
       desired_start_point = required_start_point;
     }
