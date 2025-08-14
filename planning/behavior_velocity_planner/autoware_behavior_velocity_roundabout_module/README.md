@@ -65,7 +65,7 @@ ros2 run behavior_velocity_roundabout_module ttc.py --lane_id <lane_id>
 | .max_accel                                 | double | [m/s^2] Acceleration limit (usually negative decel) used for braking distance computation |
 | .max_jerk                                  | double | [m/s^3] Jerk limit used for braking distance computation                                  |
 | .delay_response_time                       | double | [s] Reaction delay before braking considered in pass-judge/stopline computation           |
-| .enable_pass_judge_before_default_stopline | bool   | [-] If true, allow pass-judge before reaching the default stopline   |
+| .enable_pass_judge_before_default_stopline | bool   | [-] If true, allow pass-judge before reaching the default stopline                        |
 
 ### collision_detection
 
