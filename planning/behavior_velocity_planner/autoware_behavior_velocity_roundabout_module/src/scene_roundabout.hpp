@@ -370,19 +370,14 @@ private:
   RoundaboutLanelets generateObjectiveLanelets(
     lanelet::LaneletMapConstPtr lanelet_map_ptr,
     lanelet::routing::RoutingGraphPtr routing_graph_ptr,
-    const lanelet::ConstLanelet assigned_lanelet) const;
+    const lanelet::ConstLanelet & assigned_lanelet) const;
 
   /**
    * @brief generate PathLanelets
    */
   std::optional<PathLanelets> generatePathLanelets(
     const lanelet::ConstLanelets & lanelets_on_path,
-    const InterpolatedPathInfo & interpolated_path_info,
-    const lanelet::CompoundPolygon3d & first_conflicting_area,
-    const std::vector<lanelet::CompoundPolygon3d> & conflicting_areas,
-    const std::optional<lanelet::CompoundPolygon3d> & first_attention_area,
-    const std::vector<lanelet::CompoundPolygon3d> & attention_areas,
-    const size_t closest_idx) const;
+    const InterpolatedPathInfo & interpolated_path_info, const size_t closest_idx) const;
 
   /**
    * @brief generate discretized detection lane linestring.

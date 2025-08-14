@@ -41,7 +41,6 @@
 
 namespace autoware::behavior_velocity_planner
 {
-namespace bg = boost::geometry;
 
 RoundaboutModule::RoundaboutModule(
   const int64_t module_id, const int64_t lane_id,

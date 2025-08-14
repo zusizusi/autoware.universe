@@ -149,7 +149,7 @@ void RoundaboutModuleManager::launchNewModules(
     rtc_interface_.updateCooperateStatus(
       uuid, true, State::WAITING_FOR_EXECUTION, std::numeric_limits<double>::lowest(),
       std::numeric_limits<double>::lowest(), clock_->now());
-    registerModule(std::move(new_module));
+    registerModule(new_module);
   }
 }
 

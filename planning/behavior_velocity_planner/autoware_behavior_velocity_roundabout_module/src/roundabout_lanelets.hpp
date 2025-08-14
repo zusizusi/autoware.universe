@@ -130,18 +130,10 @@ public:
  */
 struct PathLanelets
 {
-  lanelet::ConstLanelets prev;
-  // lanelet::ConstLanelet entry2ego; this is included in `all` if exists
   lanelet::ConstLanelet
     ego_or_entry2exit;  // this is `assigned lane` part of the path(not from
                         // ego) if ego is before the roundabout, otherwise from ego to exit
-  std::optional<lanelet::ConstLanelet> next =
-    std::nullopt;  // this is nullopt if the goal is inside roundabout
   lanelet::ConstLanelets all;
-  lanelet::ConstLanelets
-    conflicting_interval_and_remaining;  // the left/right-most interval of path conflicting with
-                                         // conflicting lanelets plus the next lane part of the
-                                         // path
 };
 }  // namespace autoware::behavior_velocity_planner
 

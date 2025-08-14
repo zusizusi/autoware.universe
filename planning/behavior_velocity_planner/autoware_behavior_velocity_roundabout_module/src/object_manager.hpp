@@ -62,7 +62,6 @@ struct CollisionInterval
 {
   enum LanePosition {
     FIRST,
-    SECOND,
     ELSE,
   };
   LanePosition lane_position{LanePosition::ELSE};
