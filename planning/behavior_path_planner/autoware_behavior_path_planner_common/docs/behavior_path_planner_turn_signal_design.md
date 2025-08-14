@@ -187,6 +187,15 @@ Special Features:
 - **Indicator persistence**: When `turn_signal_roundabout_entry_indicator_persistence` is enabled, the entry turn signal remains active until the vehicle exits the roundabout.
 - **Enable exit turn signal**: Lanelets with the `enable_exit_turn_signal` attribute allow early activation of exit turn signals.
 
+##### Example parameter settings based on country-specific rules
+
+| Country        | Entry (`turn_signal_roundabout_on_entry`) | Exit (`turn_signal_roundabout_on_exit`) | Entry indicator persistence (`turn_signal_roundabout_entry_indicator_persistence`) | Notes                                       |
+| :------------- | :---------------------------------------- | :-------------------------------------- | :--------------------------------------------------------------------------------- | :------------------------------------------ |
+| Japan          | "None"                                    | "Left"                                  | false                                                                              |                                             |
+| United Kingdom | "None"                                    | "Left"                                  | true                                                                               | Turn signal direction is defined in the map |
+| Germany        | "None"                                    | "Right"                                 | false                                                                              |                                             |
+| South Korea    | "Left"                                    | "Right"                                 | false                                                                              |                                             |
+
 ### Blinker conflicts
 
 When ego vehicle has to activate several blinkers, it uses the following rules to decide which blinker to activate. Note that this algorithm is based on the Japanese Road Traffic Law, so it may not be suitable for other countries.
