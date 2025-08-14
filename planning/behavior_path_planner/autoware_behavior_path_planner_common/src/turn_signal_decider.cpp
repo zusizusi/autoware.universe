@@ -600,34 +600,27 @@ TurnIndicatorsCommand TurnSignalDecider::resolve_turn_signal(
   // Helper function to compare two signal candidates
   auto compare_signals =
     [&](const SignalCandidate & a, const SignalCandidate & b) -> const SignalCandidate & {
-    if (a.desired_start_distance <= b.desired_start_distance) {
-      const bool use_a = use_prior_turn_signal(
-        a.required_start_distance, a.required_end_distance, b.required_start_distance,
-        b.required_end_distance);
-      return use_a ? a : b;
-    } else {
-      const bool use_b = use_prior_turn_signal(
-        b.required_start_distance, b.required_end_distance, a.required_start_distance,
-        a.required_end_distance);
-      return use_b ? b : a;
-    }
+    const bool use_a = use_prior_turn_signal(
+      a.required_start_distance, a.required_end_distance, b.required_start_distance,
+      b.required_end_distance);
+    return use_a ? a : b;
   };
 
   // Compare all candidates
-  const SignalCandidate * candidate = &candidates[0];
+  SignalCandidate candidate = candidates[0];
   for (size_t i = 1; i < candidates.size(); ++i) {
-    candidate = &compare_signals(*candidate, candidates[i]);
+    candidate = compare_signals(candidate, candidates[i]);
   }
 
-  if (candidate->signal_type == "intersection") {
+  if (candidate.signal_type == "intersection") {
     set_intersection_info(
-      path, current_pose, current_seg_idx, candidate->signal_info, nearest_dist_threshold,
+      path, current_pose, current_seg_idx, candidate.signal_info, nearest_dist_threshold,
       nearest_yaw_threshold);
   } else {
     initialize_intersection_info();
   }
 
-  return candidate->signal_info.turn_signal;
+  return candidate.signal_info.turn_signal;
 }
 
 TurnSignalInfo TurnSignalDecider::overwrite_turn_signal(
@@ -775,10 +768,7 @@ bool TurnSignalDecider::use_prior_turn_signal(
 
   // If the prior section is inside of the subsequent required section
   if (dist_to_prior_required_end < dist_to_subsequent_required_end) {
-    if (before_prior_required || inside_prior_required) {
-      return true;
-    }
-    return false;
+    return before_prior_required || inside_prior_required;
   }
 
   // inside or passed the intersection required
