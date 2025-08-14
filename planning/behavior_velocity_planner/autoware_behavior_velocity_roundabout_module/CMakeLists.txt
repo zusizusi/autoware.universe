@@ -16,3 +16,9 @@ ament_auto_add_library(${PROJECT_NAME} SHARED
   src/scene_roundabout_collision.cpp
 )
 ament_auto_package(INSTALL_TO_SHARE config)
+
+
+install(PROGRAMS
+  scripts/ttc.py
+  DESTINATION lib/${PROJECT_NAME}
+)
