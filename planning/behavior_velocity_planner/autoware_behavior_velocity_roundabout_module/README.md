@@ -16,7 +16,7 @@ This module is responsible for safely managing entry into roundabouts by perform
 
 ## Attention area
 
-The attention area in the roundabout is defined as the set of lanes that are conflicting with ego path and their preceding lanes up to `common.attention_area_length` meters.
+The attention area for a roundabout is defined as the lanelets within the Roundabout regulatory element that conflict with the ego path, together with their preceding lanelets up to common.attention_area_length meters upstream. The attention area is used to determine which objects are relevant for collision checking when ego is about to enter the roundabout.
 
 ## Stoplines
 
@@ -65,7 +65,7 @@ ros2 run behavior_velocity_roundabout_module ttc.py --lane_id <lane_id>
 | .max_accel                                 | double | [m/s^2] Acceleration limit (usually negative decel) used for braking distance computation |
 | .max_jerk                                  | double | [m/s^3] Jerk limit used for braking distance computation                                  |
 | .delay_response_time                       | double | [s] Reaction delay before braking considered in pass-judge/stopline computation           |
-| .enable_pass_judge_before_default_stopline | bool   | [-] If true, judge passability before reaching default stopline without forcing a stop    |
+| .enable_pass_judge_before_default_stopline | bool   | [-] If true, allow pass-judge before reaching the default stopline   |
 
 ### collision_detection
 
