@@ -228,6 +228,8 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
   const lanelet::ConstLanelet & assigned_lanelet) const
 {
   const double detection_area_length = planner_param_.common.attention_area_length;
+  const auto roundabout_regulatory_elements =
+    assigned_lanelet.regulatoryElementsAs<lanelet::autoware::Roundabout>();
 
   // if ego_lane has right of way (i.e. is high priority),
   // ignore yieldLanelets (i.e. low priority lanes)
@@ -304,10 +306,12 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
       for (const auto & ls : lanelet_sequences) {
         for (const auto & l : ls) {
           const auto & inner_inserted = detection_ids.insert(l.id());
-          if (lanelet::utils::contains(associative_ids_, l.id())) {
-            break;
+          for (const auto & roundabout : roundabout_regulatory_elements) {
+            if (
+              inner_inserted.second && roundabout->isRoundaboutLanelet(l.id()) &&
+              !lanelet::utils::contains(associative_ids_, l.id()))
+              detection_and_preceding_lanelets.push_back(l);
           }
-          if (inner_inserted.second) detection_and_preceding_lanelets.push_back(l);
         }
       }
     }
