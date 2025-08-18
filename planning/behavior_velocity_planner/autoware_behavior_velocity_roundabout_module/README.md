@@ -118,7 +118,7 @@ stateDiagram-v2
             has_collision_with_margin_2 --> Safe: false
         }
 
-        Safe 
+        Safe
         Collision_stop
         OverPassJudge
 
