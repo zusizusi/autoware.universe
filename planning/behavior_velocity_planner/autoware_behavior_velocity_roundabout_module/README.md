@@ -51,6 +51,84 @@ Currently, the roundabout module uses `motion_velocity_smoother` feature to prec
 ros2 run behavior_velocity_roundabout_module ttc.py --lane_id <lane_id>
 ```
 
+## Flowchart
+
+```mermaid
+stateDiagram-v2
+    [*] --> modifyPathVelocity
+    modifyPathVelocity: modifyPathVelocity
+
+    modifyPathVelocity --> initializeRTCStatus
+    initializeRTCStatus: initializeRTCStatus
+
+    initializeRTCStatus --> modifyPathVelocityDetail
+    modifyPathVelocityDetail: modifyPathVelocityDetail
+
+    modifyPathVelocityDetail --> prepareRoundaboutData
+    prepareRoundaboutData: prepareRoundaboutData
+
+    state prepare_data_check <<choice>>
+    prepareRoundaboutData --> prepare_data_check
+
+    prepare_data_check --> InternalError: prepare data failed
+    prepare_data_check --> updateObjectInfoManagerArea: prepare data success
+
+    updateObjectInfoManagerArea: updateObjectInfoManagerArea
+
+    updateObjectInfoManagerArea --> isOverPassJudgeLinesStatus
+    isOverPassJudgeLinesStatus: isOverPassJudgeLinesStatus
+
+    isOverPassJudgeLinesStatus --> calcRoundaboutPassingTime
+
+    calcRoundaboutPassingTime --> updateObjectInfoManagerCollision
+
+    updateObjectInfoManagerCollision --> detectCollision
+    detectCollision: detectCollision
+
+    detectCollision --> decision_logic
+
+    state "Decision Logic" as decision_logic {
+        [*] --> is_permanent_go_check
+
+        state is_permanent_go_check <<choice>>
+        is_permanent_go_check --> permanent_go_logic: true
+        is_permanent_go_check --> normal_logic: false
+
+        state "Permanent Go Logic" as permanent_go_logic {
+            [*] --> has_collision_with_margin_1
+
+            state has_collision_with_margin_1 <<choice>>
+            has_collision_with_margin_1 --> can_smoothly_stop_check: true
+            has_collision_with_margin_1 --> has_collision: false
+
+            state can_smoothly_stop_check <<choice>>
+            can_smoothly_stop_check --> Collision_stop: true
+            can_smoothly_stop_check --> has_collision: false
+
+            state has_collision <<choice>>
+            has_collision --> OverPassJudge: OverPassJudge_with_risk
+            has_collision --> OverPassJudge: OverPassJudge_safe
+        }
+
+        state "Normal Logic" as normal_logic {
+            [*] --> has_collision_with_margin_2
+
+            state has_collision_with_margin_2 <<choice>>
+            has_collision_with_margin_2 --> Collision_stop: true
+            has_collision_with_margin_2 --> Safe: false
+        }
+
+        Safe 
+        Collision_stop
+        OverPassJudge
+
+    }
+    decision_logic --> prepareRTCStatus
+
+    prepareRTCStatus --> reactRTCApproval
+
+```
+
 ## Module Parameters
 
 ### common
