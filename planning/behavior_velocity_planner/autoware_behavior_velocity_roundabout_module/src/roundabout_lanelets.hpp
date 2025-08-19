@@ -36,7 +36,7 @@ struct RoundaboutLanelets
 {
 public:
   /**
-   * update conflicting lanelets and traffic priority information
+   * update attention lanelets information
    */
   void update(
     const InterpolatedPathInfo & interpolated_path_info,
@@ -71,8 +71,7 @@ public:
   std::vector<lanelet::CompoundPolygon3d> attention_area_;
 
   /**
-   * the stop lines for each attention_lanelets associated with traffic lights. At roundabout
-   * without traffic lights, each value is null
+   * the stop lines for each attention_lanelets associated.
    */
   std::vector<std::optional<lanelet::ConstLineString3d>> attention_stoplines_;
 

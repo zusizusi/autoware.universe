@@ -241,7 +241,6 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
     lanelet::utils::getConflictingLanelets(routing_graph_ptr, assigned_lanelet);
   // final objective lanelets
   lanelet::ConstLanelets conflicting_ex_ego_lanelets;
-  // conflicting lanes is necessary to get stopline for stuck vehicle
   for (auto && conflicting_lanelet : conflicting_lanelets) {
     if (!lanelet::utils::contains(ego_lanelets, conflicting_lanelet))
       conflicting_ex_ego_lanelets.push_back(conflicting_lanelet);
@@ -281,7 +280,7 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
   result.attention_non_preceding_ = std::move(conflicting_ex_ego_lanelets);
   result.adjacent_ = planning_utils::getConstLaneletsFromIds(lanelet_map_ptr, associative_ids_);
 
-  // NOTE: to properly update(), each element inattention_non_preceding_/attention_non_preceding_area_ need to be matched
+  // NOTE: to properly update(), each element in attention_non_preceding_/attention_non_preceding_area_ need to be matched
   result.attention_area_ = util::getPolygon3dFromLanelets(result.attention_);
   result.attention_non_preceding_area_ =
     util::getPolygon3dFromLanelets(result.attention_non_preceding_);

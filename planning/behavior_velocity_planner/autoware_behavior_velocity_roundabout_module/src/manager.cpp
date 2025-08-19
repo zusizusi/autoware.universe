@@ -145,7 +145,6 @@ void RoundaboutModuleManager::launchNewModules(
       associative_ids, node_, logger_.get_child("roundabout_module"), clock_, time_keeper_,
       planning_factor_interface_);
     generate_uuid(module_id);
-    /* set RTC status as non_occluded status initially */
     const UUID uuid = getUUID(new_module->getModuleId());
     rtc_interface_.updateCooperateStatus(
       uuid, true, State::WAITING_FOR_EXECUTION, std::numeric_limits<double>::lowest(),

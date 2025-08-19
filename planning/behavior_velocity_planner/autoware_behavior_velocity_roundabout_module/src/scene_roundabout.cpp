@@ -18,7 +18,6 @@
 #include <autoware/behavior_velocity_planner_common/utilization/boost_geometry_helper.hpp>  // for toGeomPoly
 #include <autoware/behavior_velocity_planner_common/utilization/util.hpp>
 #include <autoware/motion_utils/trajectory/trajectory.hpp>
-#include <autoware_lanelet2_extension/regulatory_elements/autoware_traffic_light.hpp>
 #include <autoware_lanelet2_extension/utility/utilities.hpp>
 #include <autoware_utils/geometry/boost_polygon_utils.hpp>  // for toPolygon2d
 #include <autoware_utils/geometry/geometry.hpp>
@@ -156,7 +155,7 @@ DecisionResult RoundaboutModule::modifyPathVelocityDetail(PathWithLaneId * path)
     calcRoundaboutPassingTime(*path, roundabout_stoplines, &ego_ttc_time_array);
 
   // ==========================================================================================
-  // run collision checking for each objects considering traffic light level. Also if ego just
+  // run collision checking for each objects. Also if ego just
   // passed each pass judge line for the first time, save current collision status for late
   // diagnosis
   // ==========================================================================================

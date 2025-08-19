@@ -65,13 +65,6 @@ public:
       bool enable_pass_judge_before_default_stopline;
     } common;
 
-    struct SlowDownBeforeRoundabout
-    {
-      bool enable;
-      double maximum_speed;
-      double distance_from_roundabout;
-    } slow_down_before_roundabout;
-
     struct TargetType
     {
       bool car;
@@ -113,9 +106,7 @@ public:
   {
     std::optional<geometry_msgs::msg::Pose> collision_stop_wall_pose{std::nullopt};
     std::optional<geometry_msgs::msg::Pose> first_pass_judge_wall_pose{std::nullopt};
-    std::optional<geometry_msgs::msg::Pose> slow_down_wall_pose{std::nullopt};
     bool passed_first_pass_judge{false};
-    std::optional<geometry_msgs::msg::Pose> absence_traffic_light_creep_wall{std::nullopt};
     std::optional<geometry_msgs::msg::Pose> too_late_stop_wall_pose{std::nullopt};
 
     std::optional<std::vector<lanelet::CompoundPolygon3d>> attention_area{std::nullopt};
@@ -125,7 +116,6 @@ public:
 
     std::optional<geometry_msgs::msg::Polygon> candidate_collision_ego_lane_polygon{std::nullopt};
     std::optional<geometry_msgs::msg::Polygon> candidate_collision_object_polygon{std::nullopt};
-    autoware_perception_msgs::msg::PredictedObjects safe_under_traffic_control_targets;
     autoware_perception_msgs::msg::PredictedObjects unsafe_targets;
     autoware_perception_msgs::msg::PredictedObjects misjudge_targets;
     autoware_perception_msgs::msg::PredictedObjects too_late_detect_targets;
@@ -247,9 +237,6 @@ private:
 
   //! cache RoundaboutLanelets struct
   std::optional<RoundaboutLanelets> roundabout_lanelets_{std::nullopt};
-
-  //! save the time when ego observed green traffic light before entering the roundabout
-  std::optional<rclcpp::Time> initial_green_light_observed_time_{std::nullopt};
   /** @}*/
 
 private:
@@ -288,17 +275,6 @@ private:
   //! container for storing safety status of objects on the attention area
   ObjectInfoManager object_info_manager_;
   /** @} */
-private:
-  /**
-   ***********************************************************
-   ***********************************************************
-   ***********************************************************
-   * @defgroup stuck-variables [var] stuck detection
-   * @{
-   */
-  //! indicate whether ego was trying to stop for stuck vehicle(for debouncing)
-  bool was_stopping_for_stuck_{false};
-  /** @} */
 
 private:
   /**
@@ -314,7 +290,7 @@ private:
   void initializeRTCStatus();
 
   /**
-   * @brief analyze traffic_light/occupancy/objects context and return DecisionResult
+   * @brief analyze collision objects context and return DecisionResult
    */
   DecisionResult modifyPathVelocityDetail(PathWithLaneId * path);
 
