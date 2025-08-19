@@ -186,7 +186,11 @@ private:
     // desired_end_distance >= 0.0: ego has not yet passed the desired end point
     inline bool isValid() const
     {
-      return (desired_start_distance <= 0.0 && desired_end_distance >= 0.0);
+      const auto cmd = signal_info.turn_signal.command;
+      // Command must be active (not NO_COMMAND / DISABLE) and ego must be between desired start/end
+      return (
+        cmd != TurnIndicatorsCommand::NO_COMMAND && cmd != TurnIndicatorsCommand::DISABLE &&
+        desired_start_distance <= 0.0 && desired_end_distance >= 0.0);
     }
   };
   std::optional<TurnSignalInfo> getIntersectionTurnSignalInfo(
