@@ -167,7 +167,8 @@ public:
   };
 
   RoundaboutModule(
-    const int64_t module_id, const int64_t lane_id, std::shared_ptr<const PlannerData> planner_data,
+    const int64_t module_id, std::shared_ptr<const lanelet::autoware::Roundabout> roundabout,
+    const int64_t lane_id, std::shared_ptr<const PlannerData> planner_data,
     const PlannerParam & planner_param, const std::set<lanelet::Id> & associative_ids,
     rclcpp::Node & node, const rclcpp::Logger logger, const rclcpp::Clock::SharedPtr clock,
     const std::shared_ptr<autoware_utils::TimeKeeper> time_keeper,
@@ -220,6 +221,9 @@ private:
    * following variables are unique to this roundabout lanelet or to this module
    * @{
    */
+
+  //! roundabout lanelet element
+  const std::shared_ptr<const lanelet::autoware::Roundabout> roundabout_reg_elem_;
 
   const PlannerParam planner_param_;
 

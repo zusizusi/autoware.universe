@@ -43,7 +43,7 @@ namespace autoware::behavior_velocity_planner
 {
 
 RoundaboutModule::RoundaboutModule(
-  const int64_t module_id, const int64_t lane_id,
+  const int64_t module_id, std::shared_ptr<const lanelet::autoware::Roundabout> roundabout, const int64_t lane_id,
   [[maybe_unused]] std::shared_ptr<const PlannerData> planner_data,
   const PlannerParam & planner_param, const std::set<lanelet::Id> & associative_ids,
   rclcpp::Node & node, const rclcpp::Logger logger, const rclcpp::Clock::SharedPtr clock,
@@ -51,6 +51,7 @@ RoundaboutModule::RoundaboutModule(
   const std::shared_ptr<planning_factor_interface::PlanningFactorInterface>
     planning_factor_interface)
 : SceneModuleInterfaceWithRTC(module_id, logger, clock, time_keeper, planning_factor_interface),
+  roundabout_reg_elem_(roundabout),
   planner_param_(planner_param),
   lane_id_(lane_id),
   associative_ids_(associative_ids)

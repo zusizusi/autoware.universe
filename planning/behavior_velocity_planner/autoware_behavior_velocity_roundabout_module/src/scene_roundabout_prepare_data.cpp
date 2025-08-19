@@ -87,11 +87,6 @@ Result<RoundaboutModule::BasicData, InternalError> RoundaboutModule::prepareRoun
   // ==========================================================================================
   roundabout_lanelets.update(interpolated_path_info, footprint, baselink2front, routing_graph_ptr);
 
-  const auto & conflicting_lanelets = roundabout_lanelets.conflicting();
-  if (conflicting_lanelets.empty()) {
-    // this is abnormal
-    return make_err<RoundaboutModule::BasicData, InternalError>("conflicting area is empty");
-  }
   if (!roundabout_lanelets.first_attention_lane()) {
     // this is abnormal
     return make_err<RoundaboutModule::BasicData, InternalError>("first attention area is null");
@@ -228,23 +223,6 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
   const lanelet::ConstLanelet & assigned_lanelet) const
 {
   const double detection_area_length = planner_param_.common.attention_area_length;
-  const auto roundabout_regulatory_elements =
-    assigned_lanelet.regulatoryElementsAs<lanelet::autoware::Roundabout>();
-
-  // if ego_lane has right of way (i.e. is high priority),
-  // ignore yieldLanelets (i.e. low priority lanes)
-  lanelet::ConstLanelets yield_lanelets{};
-  const auto right_of_ways = assigned_lanelet.regulatoryElementsAs<lanelet::RightOfWay>();
-  for (const auto & right_of_way : right_of_ways) {
-    if (lanelet::utils::contains(right_of_way->rightOfWayLanelets(), assigned_lanelet)) {
-      for (const auto & yield_lanelet : right_of_way->yieldLanelets()) {
-        yield_lanelets.push_back(yield_lanelet);
-        for (const auto & previous_lanelet : routing_graph_ptr->previous(yield_lanelet)) {
-          yield_lanelets.push_back(previous_lanelet);
-        }
-      }
-    }
-  }
 
   // get all following lanes of previous lane
   lanelet::ConstLanelets ego_lanelets{};
@@ -261,19 +239,7 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
   // get conflicting lanes on assigned lanelet
   const auto & conflicting_lanelets =
     lanelet::utils::getConflictingLanelets(routing_graph_ptr, assigned_lanelet);
-  std::vector<lanelet::ConstLanelet> adjacent_followings;
-
-  for (const auto & conflicting_lanelet : conflicting_lanelets) {
-    for (const auto & following_lanelet : routing_graph_ptr->following(conflicting_lanelet)) {
-      adjacent_followings.push_back(following_lanelet);
-    }
-    for (const auto & following_lanelet : routing_graph_ptr->previous(conflicting_lanelet)) {
-      adjacent_followings.push_back(following_lanelet);
-    }
-  }
-
   // final objective lanelets
-  lanelet::ConstLanelets conflicting_ex_ego_yield_lanelets;
   lanelet::ConstLanelets conflicting_ex_ego_lanelets;
   // conflicting lanes is necessary to get stopline for stuck vehicle
   for (auto && conflicting_lanelet : conflicting_lanelets) {
@@ -281,21 +247,12 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
       conflicting_ex_ego_lanelets.push_back(conflicting_lanelet);
   }
 
-  // exclude yield lanelets and ego lanelets from conflicting_lanelet
-  for (const auto & conflicting_lanelet : conflicting_lanelets) {
-    if (
-      lanelet::utils::contains(yield_lanelets, conflicting_lanelet) ||
-      lanelet::utils::contains(ego_lanelets, conflicting_lanelet)) {
-      continue;
-    }
-    conflicting_ex_ego_yield_lanelets.push_back(conflicting_lanelet);
-  }
 
   // get possible lanelet path that reaches conflicting_lane longer than given length
   lanelet::ConstLanelets detection_and_preceding_lanelets;
   {
     std::set<lanelet::Id> detection_ids;
-    for (const auto & ll : conflicting_ex_ego_yield_lanelets) {
+    for (const auto & ll : conflicting_ex_ego_lanelets) {
       // Preceding lanes does not include detection_lane so add them at the end
       const auto & inserted = detection_ids.insert(ll.id());
       if (inserted.second) detection_and_preceding_lanelets.push_back(ll);
@@ -306,12 +263,10 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
       for (const auto & ls : lanelet_sequences) {
         for (const auto & l : ls) {
           const auto & inner_inserted = detection_ids.insert(l.id());
-          for (const auto & roundabout : roundabout_regulatory_elements) {
-            if (
-              inner_inserted.second && roundabout->isRoundaboutLanelet(l.id()) &&
-              !lanelet::utils::contains(associative_ids_, l.id()))
-              detection_and_preceding_lanelets.push_back(l);
-          }
+          if (
+            inner_inserted.second && roundabout_reg_elem_->isRoundaboutLanelet(l.id()) &&
+            !lanelet::utils::contains(associative_ids_, l.id()))
+            detection_and_preceding_lanelets.push_back(l);
         }
       }
     }
@@ -319,20 +274,17 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
 
   auto [attention_lanelets, original_attention_lanelet_sequences] =
     util::mergeLaneletsByTopologicalSort(
-      detection_and_preceding_lanelets, conflicting_ex_ego_yield_lanelets, routing_graph_ptr);
+      detection_and_preceding_lanelets, conflicting_ex_ego_lanelets, routing_graph_ptr);
 
   RoundaboutLanelets result;
   result.attention_ = std::move(attention_lanelets);
-  result.attention_non_preceding_ = std::move(conflicting_ex_ego_yield_lanelets);
-  result.conflicting_ = std::move(conflicting_ex_ego_lanelets);
+  result.attention_non_preceding_ = std::move(conflicting_ex_ego_lanelets);
   result.adjacent_ = planning_utils::getConstLaneletsFromIds(lanelet_map_ptr, associative_ids_);
 
-  // NOTE: to properly update(), each element in conflicting_/conflicting_area_,
-  // attention_non_preceding_/attention_non_preceding_area_ need to be matched
+  // NOTE: to properly update(), each element inattention_non_preceding_/attention_non_preceding_area_ need to be matched
   result.attention_area_ = util::getPolygon3dFromLanelets(result.attention_);
   result.attention_non_preceding_area_ =
     util::getPolygon3dFromLanelets(result.attention_non_preceding_);
-  result.conflicting_area_ = util::getPolygon3dFromLanelets(result.conflicting_);
   result.adjacent_area_ = util::getPolygon3dFromLanelets(result.adjacent_);
   return result;
 }

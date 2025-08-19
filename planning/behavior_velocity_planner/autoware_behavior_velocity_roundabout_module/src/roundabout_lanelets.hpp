@@ -48,26 +48,13 @@ public:
   {
     return attention_stoplines_;
   }
-  const lanelet::ConstLanelets & conflicting() const { return conflicting_; }
   const lanelet::ConstLanelets & adjacent() const { return adjacent_; }
   const lanelet::ConstLanelets & attention_non_preceding() const
   {
     return attention_non_preceding_;
   }
   const std::vector<lanelet::CompoundPolygon3d> & attention_area() const { return attention_area_; }
-  const std::vector<lanelet::CompoundPolygon3d> & conflicting_area() const
-  {
-    return conflicting_area_;
-  }
   const std::vector<lanelet::CompoundPolygon3d> & adjacent_area() const { return adjacent_area_; }
-  const std::optional<lanelet::ConstLanelet> & first_conflicting_lane() const
-  {
-    return first_conflicting_lane_;
-  }
-  const std::optional<lanelet::CompoundPolygon3d> & first_conflicting_area() const
-  {
-    return first_conflicting_area_;
-  }
   const std::optional<lanelet::ConstLanelet> & first_attention_lane() const
   {
     return first_attention_lane_;
@@ -100,23 +87,12 @@ public:
    */
   std::vector<std::optional<lanelet::ConstLineString3d>> attention_non_preceding_stoplines_;
 
-  /**
-   * the conflicting lanelets of the objective roundabout lanelet
-   */
-  lanelet::ConstLanelets conflicting_;
-  std::vector<lanelet::CompoundPolygon3d> conflicting_area_;
 
   /**
    * the adjacent lanelets of the objective roundabout lanelet
    */
   lanelet::ConstLanelets adjacent_;
   std::vector<lanelet::CompoundPolygon3d> adjacent_area_;
-
-  /**
-   * the first conflicting lanelet which ego path points intersect for the first time
-   */
-  std::optional<lanelet::ConstLanelet> first_conflicting_lane_{std::nullopt};
-  std::optional<lanelet::CompoundPolygon3d> first_conflicting_area_{std::nullopt};
 
   /**
    * the first attention lanelet which ego path points intersect for the first time

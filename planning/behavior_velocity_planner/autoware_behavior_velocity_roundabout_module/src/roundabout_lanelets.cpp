@@ -29,15 +29,6 @@ void RoundaboutLanelets::update(
   const autoware_utils::LinearRing2d & footprint, const double vehicle_length,
   [[maybe_unused]] lanelet::routing::RoutingGraphPtr routing_graph_ptr)
 {
-  // find the first conflicting/detection area polygon intersecting the path
-  if (!first_conflicting_area_) {
-    auto first = util::getFirstPointInsidePolygonsByFootprint(
-      conflicting_area_, interpolated_path_info, footprint, vehicle_length);
-    if (first) {
-      first_conflicting_lane_ = conflicting_.at(first.value().second);
-      first_conflicting_area_ = conflicting_area_.at(first.value().second);
-    }
-  }
   if (!first_attention_area_) {
     const auto first = util::getFirstPointInsidePolygonsByFootprint(
       attention_non_preceding_area_, interpolated_path_info, footprint, vehicle_length);

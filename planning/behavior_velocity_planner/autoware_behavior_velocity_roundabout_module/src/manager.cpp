@@ -141,8 +141,9 @@ void RoundaboutModuleManager::launchNewModules(
       getAssociativeRoundaboutEntryLanelets(roundabout.second, *roundabout.first);
 
     const auto new_module = std::make_shared<RoundaboutModule>(
-      module_id, roundabout.second.id(), planner_data_, roundabout_param_, associative_ids, node_,
-      logger_.get_child("roundabout_module"), clock_, time_keeper_, planning_factor_interface_);
+      module_id, roundabout.first, roundabout.second.id(), planner_data_, roundabout_param_,
+      associative_ids, node_, logger_.get_child("roundabout_module"), clock_, time_keeper_,
+      planning_factor_interface_);
     generate_uuid(module_id);
     /* set RTC status as non_occluded status initially */
     const UUID uuid = getUUID(new_module->getModuleId());
