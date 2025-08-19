@@ -709,7 +709,7 @@ bool TurnSignalDecider::use_prior_turn_signal(
   const double dist_to_prior_required_start, const double dist_to_prior_required_end,
   const double dist_to_subsequent_required_start, const double dist_to_subsequent_required_end)
 {
-  const bool before_prior_required = dist_to_prior_required_start > 0.0; 
+  const bool before_prior_required = dist_to_prior_required_start > 0.0;
   const bool before_subsequent_required = dist_to_subsequent_required_start > 0.0;
   const bool inside_prior_required =
     dist_to_prior_required_start < 0.0 && 0.0 <= dist_to_prior_required_end;
