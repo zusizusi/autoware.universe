@@ -290,8 +290,10 @@ lanelet::ConstLanelets RoundaboutModule::getPrecedingLanelets(
 
     const auto prevs = graph->previous(current);
     for (const auto & prev : prevs) {
-      if (!roundabout_reg_elem_->isRoundaboutLanelet(prev.id())) continue;     // excluded outside roundabout
-      if (lanelet::utils::contains(associative_ids_, prev.id())) continue;  // excluded associative lanelets
+      if (!roundabout_reg_elem_->isRoundaboutLanelet(prev.id()))
+        continue;  // excluded outside roundabout
+      if (lanelet::utils::contains(associative_ids_, prev.id()))
+        continue;                                              // excluded associative lanelets
       if (visited.find(prev.id()) != visited.end()) continue;  // already visited in this path
       visited.insert(prev.id());
       queue.push(prev);
