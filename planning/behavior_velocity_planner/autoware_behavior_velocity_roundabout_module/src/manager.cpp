@@ -171,13 +171,14 @@ RoundaboutModuleManager::getModuleExpiredFunction(
 }
 
 std::set<lanelet::Id> RoundaboutModuleManager::getAssociativeRoundaboutEntryLanelets(
-  const lanelet::ConstLanelet & lane, const lanelet::autoware::Roundabout & roundabout,  const lanelet::routing::RoutingGraphPtr routing_graph)
+  const lanelet::ConstLanelet & lane, const lanelet::autoware::Roundabout & roundabout,
+  const lanelet::routing::RoutingGraphPtr routing_graph)
 {
   std::set<lanelet::Id> associative_lanelets;
   associative_lanelets.insert(lane.id());
 
   // get same parents lanelets
-    const auto parents = routing_graph->previous(lane);
+  const auto parents = routing_graph->previous(lane);
   for (const auto & parent : parents) {
     const auto followings = routing_graph->following(parent);
     for (const auto & following : followings) {
