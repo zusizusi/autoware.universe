@@ -40,6 +40,23 @@ namespace autoware::behavior_path_planner
 {
 using autoware::motion_utils::calcSignedArcLength;
 
+// Helper: parse optional exit turn signal attribute and check if it contains the exit lanelet id.
+// Returns true if (a) exit lanelet id is valid, (b) attribute exists (not "none"),
+// and (c) the parsed list contains the exit lanelet id.
+static bool has_exit_turn_signal_tag(
+  const lanelet::ConstLanelet & entry_lanelet, const lanelet::ConstLanelet & exit_lanelet,
+  const std::string & attribute_key)
+{
+  if (!exit_lanelet.id()) return false;
+  const std::string tag = entry_lanelet.attributeOr(attribute_key, std::string("none"));
+  if (tag == "none") return false;
+
+  std::vector<std::string> tokens;
+  boost::split(tokens, tag, boost::is_any_of(", []"), boost::token_compress_on);
+  const std::string exit_id_str = std::to_string(exit_lanelet.id());
+  return std::find(tokens.begin(), tokens.end(), exit_id_str) != tokens.end();
+}
+
 double calc_distance(
   const PathWithLaneId & path, const Pose & current_pose, const size_t current_seg_idx,
   const Pose & input_point, const double nearest_dist_threshold, const double nearest_yaw_threshold)
@@ -339,15 +356,20 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
       if (!roundabouts.front()->isRoundaboutLanelet(next_lanelet.id())) break;
       roundabout_exit_lanelet = next_lanelet;
     }
-    const std::string exit_turn_signal_tag =
-      entry_lanelet.attributeOr(std::to_string(roundabout_exit_lanelet.id()), std::string("none"));
+    // if entry lanelets has optional tags
+    const bool has_exit_turn_signal_left =
+      has_exit_turn_signal_tag(entry_lanelet, roundabout_exit_lanelet, "exit_turn_signal_left");
+    const bool has_exit_turn_signal_right =
+      has_exit_turn_signal_tag(entry_lanelet, roundabout_exit_lanelet, "exit_turn_signal_right");
+
     // Change the entry turn signal based on the exit lanelet
-    if (exit_turn_signal_tag == "turn_signal_left") {
+    if (has_exit_turn_signal_left) {
       turn_signal_info.turn_signal.command = TurnIndicatorsCommand::ENABLE_LEFT;
-    } else if (exit_turn_signal_tag == "turn_signal_right") {
+    } else if (has_exit_turn_signal_right) {
       turn_signal_info.turn_signal.command = TurnIndicatorsCommand::ENABLE_RIGHT;
     } else if (
-      exit_turn_signal_tag == "none" && roundabout_on_entry_ == TurnIndicatorsCommand::DISABLE) {
+      !has_exit_turn_signal_left && !has_exit_turn_signal_right &&
+      roundabout_on_entry_ == TurnIndicatorsCommand::DISABLE) {
       roundabout_desired_start_point_association_.erase(entry_lanelet.id());
       continue;
     }
@@ -709,7 +731,7 @@ bool TurnSignalDecider::use_prior_turn_signal(
   const double dist_to_prior_required_start, const double dist_to_prior_required_end,
   const double dist_to_subsequent_required_start, const double dist_to_subsequent_required_end)
 {
-  const bool before_prior_required = dist_to_prior_required_start > 0.0; 
+  const bool before_prior_required = dist_to_prior_required_start > 0.0;
   const bool before_subsequent_required = dist_to_subsequent_required_start > 0.0;
   const bool inside_prior_required =
     dist_to_prior_required_start < 0.0 && 0.0 <= dist_to_prior_required_end;
