@@ -367,9 +367,7 @@ std::optional<TurnSignalInfo> TurnSignalDecider::getRoundaboutTurnSignalInfo(
       turn_signal_info.turn_signal.command = TurnIndicatorsCommand::ENABLE_LEFT;
     } else if (has_exit_turn_signal_right) {
       turn_signal_info.turn_signal.command = TurnIndicatorsCommand::ENABLE_RIGHT;
-    } else if (
-      !has_exit_turn_signal_left && !has_exit_turn_signal_right &&
-      roundabout_on_entry_ == TurnIndicatorsCommand::DISABLE) {
+    } else if (roundabout_on_entry_ == TurnIndicatorsCommand::DISABLE) {
       roundabout_desired_start_point_association_.erase(entry_lanelet.id());
       continue;
     }
