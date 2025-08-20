@@ -182,15 +182,16 @@ Exit Turn Signal:
 - **required end point**: The earliest point that satisfies the following condition. $\theta - \theta_{\textrm{end}} < \delta$, where $\theta_{\textrm{end}}$ is yaw angle of the terminal point of the lanelet, $\theta$ is the angle of a required end point and $\delta$ is the threshold defined by the user.(This is the same as the right/left turn signal logic.)
 
 Special Features:
+
 - **Indicator persistence**: When `turn_signal_roundabout_entry_indicator_persistence` is enabled, the entry turn signal remains active until the vehicle exits the roundabout.
 
 ##### Example parameter settings based on country-specific rules
 
-| Country        | Entry (`turn_signal_roundabout_on_entry`) | Exit (`turn_signal_roundabout_on_exit`) | Entry indicator persistence (`turn_signal_roundabout_entry_indicator_persistence`) | Notes                                       |
-| :------------- | :---------------------------------------- | :-------------------------------------- | :--------------------------------------------------------------------------------- | :------------------------------------------ |
-| Japan          | "None"                                    | "Left"                                  | false                                                                              |                                             |
-| Germany        | "None"                                    | "Right"                                 | false                                                                              |                                             |
-| South Korea    | "Left"                                    | "Right"                                 | false                                                                              |                                             |
+| Country     | Entry (`turn_signal_roundabout_on_entry`) | Exit (`turn_signal_roundabout_on_exit`) | Entry indicator persistence (`turn_signal_roundabout_entry_indicator_persistence`) | Notes |
+| :---------- | :---------------------------------------- | :-------------------------------------- | :--------------------------------------------------------------------------------- | :---- |
+| Japan       | "None"                                    | "Left"                                  | false                                                                              |       |
+| Germany     | "None"                                    | "Right"                                 | false                                                                              |       |
+| South Korea | "Left"                                    | "Right"                                 | false                                                                              |       |
 
 ### Blinker conflicts
 
