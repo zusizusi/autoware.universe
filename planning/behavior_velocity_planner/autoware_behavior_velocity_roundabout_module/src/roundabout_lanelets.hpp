@@ -86,7 +86,6 @@ public:
    */
   std::vector<std::optional<lanelet::ConstLineString3d>> attention_non_preceding_stoplines_;
 
-
   /**
    * the adjacent lanelets of the objective roundabout lanelet
    */
