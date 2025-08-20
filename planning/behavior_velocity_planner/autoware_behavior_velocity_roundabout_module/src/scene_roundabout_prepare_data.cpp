@@ -246,7 +246,6 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
       conflicting_ex_ego_lanelets.push_back(conflicting_lanelet);
   }
 
-
   // get possible lanelet path that reaches conflicting_lane longer than given length
   lanelet::ConstLanelets conflicting_and_preceding_lanelets;
   {
@@ -280,7 +279,8 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
   result.attention_non_preceding_ = std::move(conflicting_ex_ego_lanelets);
   result.adjacent_ = planning_utils::getConstLaneletsFromIds(lanelet_map_ptr, associative_ids_);
 
-  // NOTE: to properly update(), each element in attention_non_preceding_/attention_non_preceding_area_ need to be matched
+  // NOTE: to properly update(), each element in
+  // attention_non_preceding_/attention_non_preceding_area_ need to be matched
   result.attention_area_ = util::getPolygon3dFromLanelets(result.attention_);
   result.attention_non_preceding_area_ =
     util::getPolygon3dFromLanelets(result.attention_non_preceding_);
