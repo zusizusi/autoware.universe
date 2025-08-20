@@ -222,7 +222,7 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
   lanelet::LaneletMapConstPtr lanelet_map_ptr, lanelet::routing::RoutingGraphPtr routing_graph_ptr,
   const lanelet::ConstLanelet & assigned_lanelet) const
 {
-  const double detection_area_length = planner_param_.common.attention_area_length;
+  const double attention_area_length = planner_param_.common.attention_area_length;
 
   // get all following lanes of previous lane
   lanelet::ConstLanelets ego_lanelets{};
@@ -248,24 +248,24 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
 
 
   // get possible lanelet path that reaches conflicting_lane longer than given length
-  lanelet::ConstLanelets detection_and_preceding_lanelets;
+  lanelet::ConstLanelets conflicting_and_preceding_lanelets;
   {
-    std::set<lanelet::Id> detection_ids;
+    std::set<lanelet::Id> attention_lanelet_ids;
     for (const auto & ll : conflicting_ex_ego_lanelets) {
-      // Preceding lanes does not include detection_lane so add them at the end
-      const auto & inserted = detection_ids.insert(ll.id());
-      if (inserted.second) detection_and_preceding_lanelets.push_back(ll);
+      // Preceding lanes does not include attention_lanelet_ids so add them at the end
+      const auto & inserted = attention_lanelet_ids.insert(ll.id());
+      if (inserted.second) conflicting_and_preceding_lanelets.push_back(ll);
       // get preceding lanelets without ego_lanelets
-      // to prevent the detection area from including the ego lanes and its' preceding lanes.
+      // to prevent the attention area from including the ego lanes and its' preceding lanes.
       const auto lanelet_sequences = lanelet::utils::query::getPrecedingLaneletSequences(
-        routing_graph_ptr, ll, detection_area_length, ego_lanelets);
+        routing_graph_ptr, ll, attention_area_length, ego_lanelets);
       for (const auto & ls : lanelet_sequences) {
         for (const auto & l : ls) {
-          const auto & inner_inserted = detection_ids.insert(l.id());
+          const auto & inner_inserted = attention_lanelet_ids.insert(l.id());
           if (
             inner_inserted.second && roundabout_reg_elem_->isRoundaboutLanelet(l.id()) &&
             !lanelet::utils::contains(associative_ids_, l.id()))
-            detection_and_preceding_lanelets.push_back(l);
+            conflicting_and_preceding_lanelets.push_back(l);
         }
       }
     }
@@ -273,7 +273,7 @@ RoundaboutLanelets RoundaboutModule::generateObjectiveLanelets(
 
   auto [attention_lanelets, original_attention_lanelet_sequences] =
     util::mergeLaneletsByTopologicalSort(
-      detection_and_preceding_lanelets, conflicting_ex_ego_lanelets, routing_graph_ptr);
+      conflicting_and_preceding_lanelets, conflicting_ex_ego_lanelets, routing_graph_ptr);
 
   RoundaboutLanelets result;
   result.attention_ = std::move(attention_lanelets);
