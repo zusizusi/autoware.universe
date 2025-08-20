@@ -43,8 +43,6 @@ RoundaboutModuleManager::RoundaboutModuleManager(rclcpp::Node & node)
 
   // common
   {
-    rp.common.attention_area_length =
-      get_or_declare_parameter<double>(node, ns + ".common.attention_area_length");
     rp.common.attention_area_margin =
       get_or_declare_parameter<double>(node, ns + ".common.attention_area_margin");
     rp.common.attention_area_angle_threshold =
@@ -138,7 +136,7 @@ void RoundaboutModuleManager::launchNewModules(
     }
 
     const auto associative_ids =
-      getAssociativeRoundaboutEntryLanelets(roundabout.second, *roundabout.first);
+      getAssociativeRoundaboutEntryLanelets(roundabout.second, *roundabout.first, routing_graph);
 
     const auto new_module = std::make_shared<RoundaboutModule>(
       module_id, roundabout.first, roundabout.second.id(), planner_data_, roundabout_param_,
@@ -173,11 +171,22 @@ RoundaboutModuleManager::getModuleExpiredFunction(
 }
 
 std::set<lanelet::Id> RoundaboutModuleManager::getAssociativeRoundaboutEntryLanelets(
-  const lanelet::ConstLanelet & lane, const lanelet::autoware::Roundabout & roundabout)
+  const lanelet::ConstLanelet & lane, const lanelet::autoware::Roundabout & roundabout,  const lanelet::routing::RoutingGraphPtr routing_graph)
 {
   std::set<lanelet::Id> associative_lanelets;
+  associative_lanelets.insert(lane.id());
 
-  const auto roundabouts = lane.regulatoryElementsAs<lanelet::autoware::Roundabout>();
+  // get same parents lanelets
+    const auto parents = routing_graph->previous(lane);
+  for (const auto & parent : parents) {
+    const auto followings = routing_graph->following(parent);
+    for (const auto & following : followings) {
+      if (roundabout.isEntryLanelet(following.id())) {
+        associative_lanelets.insert(following.id());
+      }
+    }
+  }
+  // get adjacent entry lanelets
   const auto right_lanelets =
     planner_data_->route_handler_->getAllRightSharedLinestringLanelets(lane, false);
   const auto left_lanelets =

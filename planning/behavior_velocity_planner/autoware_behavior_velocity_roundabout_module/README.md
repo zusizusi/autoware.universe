@@ -16,7 +16,7 @@ This module is responsible for safely managing entry into roundabouts by perform
 
 ## Attention area
 
-The attention area for a roundabout is defined as the lanelets within the Roundabout regulatory element that conflict with the ego path, together with their preceding lanelets up to common.attention_area_length meters upstream. The attention area is used to determine which objects are relevant for collision checking when ego is about to enter the roundabout.
+The attention area for a roundabout is defined as the lanelets within the Roundabout regulatory element that conflict with the ego path. The attention area is used to determine which objects are relevant for collision checking when ego is about to enter the roundabout.
 
 ## Stoplines
 
@@ -135,7 +135,6 @@ stateDiagram-v2
 
 | Parameter                                  | Type   | Description                                                                               |
 | ------------------------------------------ | ------ | ----------------------------------------------------------------------------------------- |
-| .attention_area_length                     | double | [m] Upstream length to include preceding lanes of conflicting lanes in attention area     |
 | .attention_area_margin                     | double | [m] Lateral distance margin for lane membership/object-in-lane checks                     |
 | .attention_area_angle_threshold            | double | [rad] Absolute heading difference threshold between object direction and lane direction   |
 | .default_stopline_margin                   | double | [m] Margin to place default stopline behind the first attention boundary                  |

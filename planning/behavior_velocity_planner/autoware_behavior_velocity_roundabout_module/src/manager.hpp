@@ -68,7 +68,8 @@ private:
    * If the lanelet is not a roundabout entry lanelet, an empty set is returned.
    */
   std::set<lanelet::Id> getAssociativeRoundaboutEntryLanelets(
-    const lanelet::ConstLanelet & lane, const lanelet::autoware::Roundabout & roundabout);
+    const lanelet::ConstLanelet & lane, const lanelet::autoware::Roundabout & roundabout,
+    const lanelet::routing::RoutingGraphPtr routing_graph);
   bool isRegisteredModule(const lanelet::ConstLanelet & entry_lanelet) const;
 
   /* called from SceneModuleInterfaceWithRTC::plan */

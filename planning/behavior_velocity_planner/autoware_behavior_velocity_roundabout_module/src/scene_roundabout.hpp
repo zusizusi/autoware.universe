@@ -54,7 +54,6 @@ public:
   {
     struct Common
     {
-      double attention_area_length;
       double attention_area_margin;
       double attention_area_angle_threshold;
       double default_stopline_margin;
@@ -365,6 +364,13 @@ private:
   std::vector<lanelet::ConstLineString3d> generateDetectionLaneDivisions(
     const lanelet::ConstLanelets & conflicting_detection_lanelets,
     const lanelet::routing::RoutingGraphPtr routing_graph_ptr, const double resolution) const;
+
+  /**
+   * @brief get preceding lanelets
+   */
+
+  lanelet::ConstLanelets getPrecedingLanelets(
+    const lanelet::routing::RoutingGraphPtr & graph, const lanelet::ConstLanelet & lanelet) const;
   /** @} */
 
 private:
