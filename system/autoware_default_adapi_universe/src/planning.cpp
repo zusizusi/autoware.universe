@@ -56,8 +56,7 @@ const std::map<std::string, std::string> conversion_map = {
   {"traffic_light", PlanningBehavior::TRAFFIC_SIGNAL},
   {"detection_area", PlanningBehavior::USER_DEFINED_DETECTION_AREA},
   {"virtual_traffic_light", PlanningBehavior::VIRTUAL_TRAFFIC_LIGHT},
-  {"run_out", PlanningBehavior::RUN_OUT},
-  {"roundabout", PlanningBehavior::ROUNDABOUT}};
+  {"run_out", PlanningBehavior::RUN_OUT}};
 
 template <class T>
 void concat(std::vector<T> & v1, const std::vector<T> & v2)
@@ -238,8 +237,7 @@ PlanningNode::PlanningNode(const rclcpp::NodeOptions & options) : Node("planning
     "/planning/planning_factors/lane_change_left",
     "/planning/planning_factors/lane_change_right",
     "/planning/planning_factors/start_planner",
-    "/planning/planning_factors/goal_planner",
-    "/planning/planning_factors/roundabout"};
+    "/planning/planning_factors/goal_planner"};
 
   sub_factors_ = init_factors<PlanningFactorArray>(this, factors_, factor_topics);
 
