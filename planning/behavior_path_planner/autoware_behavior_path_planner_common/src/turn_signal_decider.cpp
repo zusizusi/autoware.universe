@@ -813,11 +813,11 @@ geometry_msgs::msg::Pose TurnSignalDecider::get_required_end_point(
     autoware::motion_utils::resamplePoseVector(converted_centerline, resampling_arclength);
 
   const double terminal_yaw = tf2::getYaw(resampled_centerline.back().orientation);
-  for (size_t i = 0; i < resampled_centerline.size(); ++i) {
-    const double yaw = tf2::getYaw(resampled_centerline.at(i).orientation);
+  for (auto itr = resampled_centerline.rbegin(); itr != resampled_centerline.rend(); ++itr) {
+    const double yaw = tf2::getYaw(itr->orientation);
     const double yaw_diff = autoware_utils::normalize_radian(yaw - terminal_yaw);
-    if (std::fabs(yaw_diff) < autoware_utils::deg2rad(angle_threshold_deg)) {
-      return resampled_centerline.at(i);
+    if (std::fabs(yaw_diff) >= autoware_utils::deg2rad(angle_threshold_deg)) {
+      return *itr;
     }
   }
 
