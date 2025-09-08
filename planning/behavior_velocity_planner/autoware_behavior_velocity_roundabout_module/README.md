@@ -133,13 +133,13 @@ stateDiagram-v2
 
 ### common
 
-| Parameter                                  | Type   | Description                                                                               |
-| ------------------------------------------ | ------ | ----------------------------------------------------------------------------------------- |
-| .attention_area_margin                     | double | [m] Lateral distance margin for lane membership/object-in-lane checks                     |
-| .attention_area_angle_threshold            | double | [rad] Absolute heading difference threshold between object direction and lane direction   |
-| .default_stopline_margin                   | double | [m] Margin to place default stopline behind the first attention boundary                  |
-| .path_interpolation_ds                     | double | [m] Path interpolation step for geometric checks and stopline insertion                   |
-| .enable_pass_judge_before_default_stopline | bool   | [-] If true, allow pass-judge before reaching the default stopline                        |
+| Parameter                                  | Type   | Description                                                                             |
+| ------------------------------------------ | ------ | --------------------------------------------------------------------------------------- |
+| .attention_area_margin                     | double | [m] Lateral distance margin for lane membership/object-in-lane checks                   |
+| .attention_area_angle_threshold            | double | [rad] Absolute heading difference threshold between object direction and lane direction |
+| .default_stopline_margin                   | double | [m] Margin to place default stopline behind the first attention boundary                |
+| .path_interpolation_ds                     | double | [m] Path interpolation step for geometric checks and stopline insertion                 |
+| .enable_pass_judge_before_default_stopline | bool   | [-] If true, allow pass-judge before reaching the default stopline                      |
 
 ### collision_detection
 
